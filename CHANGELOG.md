@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+- Publish Draft 2020-12 schemas for `bundle@1`, `model@1`, and `report@1` inside the
+  installed package.
+- Separate source normalization from profile interpretation, with dimensional
+  completeness, stable ordering, unknown-enum preservation, and source references.
+- Reject malformed bundle manifests, duplicate JSON keys, non-finite numbers, unsafe or
+  duplicate members, and byte-count or digest mismatches before replay.
+- Add sanitized success and partial-failure MolSysMT Conda fixtures and deterministic,
+  official-conclusion parity tests.
+
 ## 0.1.1 - 2026-09-04
 
 - Add the first read-only `inspect`, `capture`, and `replay` vertical slice.

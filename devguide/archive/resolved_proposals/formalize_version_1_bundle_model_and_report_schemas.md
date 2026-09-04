@@ -1,13 +1,13 @@
 ---
 summary: Formalize version 1 bundle, model, and report schemas
 issue: uibcdf/gh-run-receptor#2
-status: active
+status: resolved
 opened: 2026-09-04
-closed:
+closed: 2026-09-04
 verification: measured
 area: ['reports', 'tests']
-guard:
-normative:
+guard: tests/test_contracts.py
+normative: data_contracts.md
 blocked_by: []
 supersedes: []
 ---
@@ -15,8 +15,8 @@ supersedes: []
 # Formalize version 1 bundle, model, and report schemas
 
 **Reported:** 2026-09-04, while selecting the reliability gate for routine MolSysMT use.
-**Status:** Active; schemas, normalization, sanitization, and corpus tests are implemented
-and undergoing final artifact validation.
+**Status:** Resolved in `ed24fa8`; schemas, normalization, sanitization, corpus tests, and
+installed artifact contents are verified.
 
 ## What
 
@@ -85,4 +85,7 @@ coverage; the roadmap and scope explicitly retain that work.
 ## Provenance
 
 Captured from GitHub on 2026-09-04 and tested locally with Python 3.13 and `jsonschema
-4.26.0`. Run identities and sanitization notes are in `tests/fixtures/corpus.json`.
+4.26.0`. Run identities and sanitization notes are in `tests/fixtures/corpus.json`. Ruff
+passed and the full suite reported 44 passing tests. An isolated sdist-to-wheel build from
+clean commit `ed24fa8` produced version `0.1.1+4.ged24fa8`; a clean virtual environment
+confirmed that the installed package contained all three schema resources.
