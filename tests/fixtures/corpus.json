@@ -2,6 +2,19 @@
   "schema": "gh-run-receptor.test-corpus@1",
   "captures": [
     {
+      "path": "bundles/molsysviewer_ci_failure",
+      "repository": "uibcdf/molsysviewer",
+      "run_id": 33923020037,
+      "run_attempt": 1,
+      "captured_at": "2026-09-04",
+      "reason": "A seven-job MolSysViewer CI matrix with failures in Qt and every Python/platform test job.",
+      "sanitization": "Retained only run identity, official state, workflow path, job timing and conclusions, and failed-step state. Removed actors, commits beyond the subject SHA, runner details, labels, pull requests, checks, and API payload fields not used by the report.",
+      "profile": "ci",
+      "expected_github_conclusion": "failure",
+      "expected_assessment": "FAIL",
+      "upstream_retention": "The public GitHub run is subject to GitHub retention; this fixture is self-contained metadata."
+    },
+    {
       "path": "bundles/molsysmt_conda_partial",
       "repository": "uibcdf/molsysmt",
       "run_id": 33863426589,

@@ -115,3 +115,28 @@ must not claim savings for that narrower question. Its extra tokens establish pl
 coverage, artifact availability, profile, repository, and run identity. A future brief or
 transition-only monitoring mode should be compared separately; users needing only a
 one-time binary status should continue to use the native query.
+
+## MolSysViewer CI failure case
+
+Public MolSysViewer run `33923020037`, attempt 1, reported failure for the Qt job and all
+six operating-system/Python test jobs. The reviewed native baseline retained status,
+conclusion, every job name and conclusion, and every unsuccessful step name:
+
+```text
+gh run view 33923020037 --repo uibcdf/molsysviewer \
+  --json status,conclusion,jobs \
+  --jq '{status,conclusion,jobs:[.jobs[]|{name,conclusion,failed_steps:[.steps[]|select(.conclusion != "success" and .conclusion != "skipped" and .conclusion != null)|.name]}]}'
+```
+
+The native result measured 871 bytes and 223 `cl100k_base` tokens. The first CI-profile
+draft expanded every job, measured 994 bytes and 310 tokens, and was rejected. The revised
+renderer grouped jobs only when their official conclusion and ordered failed-step names
+were identical. It produced three groups for seven jobs, 644 bytes, and 198 tokens: an
+11.2% reduction against the already filtered baseline.
+
+This is deliberately not presented as a large savings result. The receptor output also
+includes CI role counts, artifact absence, repository/run/attempt identity, and the run
+URL, while the replayable bundle and JSON retain all seven jobs. The case demonstrates a
+measured improvement over a competent compact query and, more importantly, records that
+the simpler ungrouped design failed its economy goal. Broader successful, mixed-result,
+cancelled, and incomplete CI cases remain necessary before claiming a general CI rate.

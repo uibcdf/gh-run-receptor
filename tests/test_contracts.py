@@ -38,7 +38,7 @@ def _corpus():
 def test_sanitized_bundle_crosses_all_three_schema_boundaries(case):
     manifest, evidence = load_bundle(FIXTURES / case["path"])
     model = normalize_evidence(manifest, evidence)
-    report = build_report(manifest, evidence, profile="auto")
+    report = build_report(manifest, evidence, profile=case.get("profile", "auto"))
 
     _validator("bundle-v1.schema.json").validate(manifest)
     _validator("model-v1.schema.json").validate(model)
@@ -52,8 +52,9 @@ def test_sanitized_bundle_crosses_all_three_schema_boundaries(case):
 def test_replay_is_byte_deterministic_for_fixed_evidence(case):
     manifest, evidence = load_bundle(FIXTURES / case["path"])
 
-    first = render_json(build_report(manifest, evidence, profile="auto"))
-    second = render_json(build_report(manifest, evidence, profile="auto"))
+    profile = case.get("profile", "auto")
+    first = render_json(build_report(manifest, evidence, profile=profile))
+    second = render_json(build_report(manifest, evidence, profile=profile))
 
     assert first.encode() == second.encode()
 

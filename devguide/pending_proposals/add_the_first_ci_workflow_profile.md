@@ -1,0 +1,99 @@
+---
+summary: Add the first CI workflow profile
+issue: uibcdf/gh-run-receptor#6
+status: open
+opened: 2026-09-04
+closed:
+verification: asserted
+area: ['profiles', 'tests']
+guard:
+normative:
+blocked_by: []
+supersedes: []
+---
+
+# Adding the first CI workflow profile
+
+**Reported:** 2026-09-04, after trusted client rules shipped in 0.3.0.
+**Status:** Open; implementation and client validation are in progress.
+
+## What
+
+Add `ci` as the next truth-preserving profile and validate it first against MolSysViewer
+and MolSysMT. The profile must make repeated CI failures more compact than a competent
+native filtered view while retaining every normalized job in JSON and the evidence bundle.
+
+## How
+
+Assign each job one conservative presentation role: `publish`, `docs`, `lint`, `coverage`,
+`test`, `build`, or `other`. Matching uses normalized whole words and a fixed priority;
+every job appears exactly once, and `other` is never discarded. The role is presentation
+metadata and cannot alter GitHub status, conclusions, or exit codes.
+
+For LLM failure output, group jobs only when their official conclusion and ordered failed
+step names are identical. Each group reports its size and one deterministic sample. All
+member names, IDs, outcomes, timings, and failed steps remain in report JSON. A successful
+CI report remains one line.
+
+## Why
+
+MolSysMT and MolSysViewer CI matrices are inspected repeatedly during stabilization. Their
+job output contains the same failure phase across several Python/platform jobs, making
+per-job text repetitive. Exact repository rules also avoid relying on name-based profile
+auto-detection.
+
+## What is measured and what is assumed
+
+Public MolSysViewer run `33923020037` contains seven failed jobs. A native JSON view
+filtered to status, conclusion, job name, job conclusion, and failed-step names measured
+223 `cl100k_base` tokens. The first ungrouped CI renderer measured 310 tokens and was
+rejected. Grouping identical failed-step signatures reduced the receptor output to 198
+tokens (11.2%) while additionally reporting CI roles, artifact absence, run identity, and
+URL.
+
+The sanitized fixture and unit tests use:
+
+```text
+python -m pytest --receptor=llm
+```
+
+## What was refuted
+
+- Merely changing `profile=generic` to `profile=ci` was rejected: measurement showed that
+  role labels alone increased output by 39% against the filtered baseline.
+- Substring matching was rejected after `test` matched the runner suffix `latest`; role
+  keywords now match normalized whole words.
+- Grouping by a generic failure conclusion alone was rejected because unrelated failure
+  phases would collapse together.
+- Turning an official CI failure into `PARTIAL` was rejected. Reusable-artifact semantics
+  remain specific to profiles that can prove them.
+
+## Scope and exclusions
+
+This slice does not define configurable job roles, required job names, CI matrix
+expectations, coverage thresholds, annotation parsing, structured producer events, or
+minimal rerun commands. It does not implement the documentation or release profiles.
+
+## Acceptance criteria
+
+- `ci` is accepted by CLI and trusted repository configuration.
+- Every job receives exactly one role and unknown names remain under `other`.
+- Whole-word matching cannot mistake `latest` for `test`.
+- Only identical conclusion/failed-step signatures group in LLM text.
+- JSON retains every job even when LLM text uses a representative sample.
+- Official failure, nonterminal, cancellation, incompleteness, and exit behavior remain
+  unchanged.
+- A reviewed MolSysViewer CI fixture crosses bundle, model, and report schema gates.
+- MolSysMT and MolSysViewer adopt exact rules only after the implementing tag is released.
+
+## Dependencies and risks
+
+No tracked dependency blocks this slice. Role inference from display names is intentionally
+limited and remains presentation-only. Renamed or unknown jobs fall into `other` rather
+than disappearing or changing the assessment.
+
+## Provenance
+
+Measured on 2026-09-04 on the local Linux development host with Python 3.13, tiktoken
+0.13.0 `cl100k_base`, GitHub CLI authenticated against the public MolSysViewer repository,
+and run attempt 1 of `33923020037`.

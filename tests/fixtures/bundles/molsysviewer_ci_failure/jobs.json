@@ -1,0 +1,672 @@
+{
+  "jobs": [
+    {
+      "completed_at": "2026-09-04T21:52:35Z",
+      "conclusion": "failure",
+      "html_url": "https://github.com/uibcdf/molsysviewer/actions/runs/33923020037/job/101185322088",
+      "id": 101185322088,
+      "name": "Qt pipeline completes (Xvfb, software WebGL)",
+      "started_at": "2026-09-04T21:51:59Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2
+        },
+        {
+          "conclusion": "failure",
+          "name": "Setup conda env with the Qt stack",
+          "number": 3
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Install package",
+          "number": 4
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Xvfb and the software GL stack",
+          "number": 5
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Qt transport round-trip in a real Qt process",
+          "number": 6
+        },
+        {
+          "conclusion": "skipped",
+          "name": "The structure finishes loading through WebGL",
+          "number": 7
+        },
+        {
+          "conclusion": "failure",
+          "name": "Post Setup conda env with the Qt stack",
+          "number": 13
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 14
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 15
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-09-04T21:58:43Z",
+      "conclusion": "failure",
+      "html_url": "https://github.com/uibcdf/molsysviewer/actions/runs/33923020037/job/101185322239",
+      "id": 101185322239,
+      "name": "Test on macos-latest, Python 3.12",
+      "started_at": "2026-09-04T21:52:04Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2
+        },
+        {
+          "conclusion": "success",
+          "name": "Additional info about the build",
+          "number": 3
+        },
+        {
+          "conclusion": "success",
+          "name": "Set up Python",
+          "number": 4
+        },
+        {
+          "conclusion": "success",
+          "name": "Setup conda env",
+          "number": 5
+        },
+        {
+          "conclusion": "success",
+          "name": "Info conda",
+          "number": 6
+        },
+        {
+          "conclusion": "success",
+          "name": "Install package",
+          "number": 7
+        },
+        {
+          "conclusion": "success",
+          "name": "Test import module",
+          "number": 8
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Resolve documented Python API calls",
+          "number": 9
+        },
+        {
+          "conclusion": "failure",
+          "name": "Run tests",
+          "number": 10
+        },
+        {
+          "conclusion": "skipped",
+          "name": "JS unit tests (Node)",
+          "number": 11
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Check coverage",
+          "number": 12
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Upload coverage reports to Codecov",
+          "number": 13
+        },
+        {
+          "conclusion": "success",
+          "name": "Upload test results to Codecov",
+          "number": 14
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Setup conda env",
+          "number": 26
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Post Set up Python",
+          "number": 27
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 28
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 29
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-09-04T21:58:37Z",
+      "conclusion": "failure",
+      "html_url": "https://github.com/uibcdf/molsysviewer/actions/runs/33923020037/job/101185322366",
+      "id": 101185322366,
+      "name": "Test on macos-latest, Python 3.11",
+      "started_at": "2026-09-04T21:52:05Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2
+        },
+        {
+          "conclusion": "success",
+          "name": "Additional info about the build",
+          "number": 3
+        },
+        {
+          "conclusion": "success",
+          "name": "Set up Python",
+          "number": 4
+        },
+        {
+          "conclusion": "success",
+          "name": "Setup conda env",
+          "number": 5
+        },
+        {
+          "conclusion": "success",
+          "name": "Info conda",
+          "number": 6
+        },
+        {
+          "conclusion": "success",
+          "name": "Install package",
+          "number": 7
+        },
+        {
+          "conclusion": "success",
+          "name": "Test import module",
+          "number": 8
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Resolve documented Python API calls",
+          "number": 9
+        },
+        {
+          "conclusion": "failure",
+          "name": "Run tests",
+          "number": 10
+        },
+        {
+          "conclusion": "skipped",
+          "name": "JS unit tests (Node)",
+          "number": 11
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Check coverage",
+          "number": 12
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Upload coverage reports to Codecov",
+          "number": 13
+        },
+        {
+          "conclusion": "success",
+          "name": "Upload test results to Codecov",
+          "number": 14
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Setup conda env",
+          "number": 26
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Post Set up Python",
+          "number": 27
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 28
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 29
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-09-04T21:52:52Z",
+      "conclusion": "failure",
+      "html_url": "https://github.com/uibcdf/molsysviewer/actions/runs/33923020037/job/101185322402",
+      "id": 101185322402,
+      "name": "Test on macos-latest, Python 3.13",
+      "started_at": "2026-09-04T21:52:05Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2
+        },
+        {
+          "conclusion": "success",
+          "name": "Additional info about the build",
+          "number": 3
+        },
+        {
+          "conclusion": "success",
+          "name": "Set up Python",
+          "number": 4
+        },
+        {
+          "conclusion": "failure",
+          "name": "Setup conda env",
+          "number": 5
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Info conda",
+          "number": 6
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Install package",
+          "number": 7
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Test import module",
+          "number": 8
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Resolve documented Python API calls",
+          "number": 9
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Run tests",
+          "number": 10
+        },
+        {
+          "conclusion": "skipped",
+          "name": "JS unit tests (Node)",
+          "number": 11
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Check coverage",
+          "number": 12
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Upload coverage reports to Codecov",
+          "number": 13
+        },
+        {
+          "conclusion": "success",
+          "name": "Upload test results to Codecov",
+          "number": 14
+        },
+        {
+          "conclusion": "failure",
+          "name": "Post Setup conda env",
+          "number": 26
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Post Set up Python",
+          "number": 27
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 28
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 29
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-09-04T21:57:01Z",
+      "conclusion": "failure",
+      "html_url": "https://github.com/uibcdf/molsysviewer/actions/runs/33923020037/job/101185322403",
+      "id": 101185322403,
+      "name": "Test on ubuntu-latest, Python 3.11",
+      "started_at": "2026-09-04T21:51:59Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2
+        },
+        {
+          "conclusion": "success",
+          "name": "Additional info about the build",
+          "number": 3
+        },
+        {
+          "conclusion": "success",
+          "name": "Set up Python",
+          "number": 4
+        },
+        {
+          "conclusion": "success",
+          "name": "Setup conda env",
+          "number": 5
+        },
+        {
+          "conclusion": "success",
+          "name": "Info conda",
+          "number": 6
+        },
+        {
+          "conclusion": "success",
+          "name": "Install package",
+          "number": 7
+        },
+        {
+          "conclusion": "success",
+          "name": "Test import module",
+          "number": 8
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Resolve documented Python API calls",
+          "number": 9
+        },
+        {
+          "conclusion": "failure",
+          "name": "Run tests",
+          "number": 10
+        },
+        {
+          "conclusion": "skipped",
+          "name": "JS unit tests (Node)",
+          "number": 11
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Check coverage",
+          "number": 12
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Upload coverage reports to Codecov",
+          "number": 13
+        },
+        {
+          "conclusion": "success",
+          "name": "Upload test results to Codecov",
+          "number": 14
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Setup conda env",
+          "number": 26
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Post Set up Python",
+          "number": 27
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 28
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 29
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-09-04T21:57:32Z",
+      "conclusion": "failure",
+      "html_url": "https://github.com/uibcdf/molsysviewer/actions/runs/33923020037/job/101185322416",
+      "id": 101185322416,
+      "name": "Test on ubuntu-latest, Python 3.12",
+      "started_at": "2026-09-04T21:52:07Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2
+        },
+        {
+          "conclusion": "success",
+          "name": "Additional info about the build",
+          "number": 3
+        },
+        {
+          "conclusion": "success",
+          "name": "Set up Python",
+          "number": 4
+        },
+        {
+          "conclusion": "success",
+          "name": "Setup conda env",
+          "number": 5
+        },
+        {
+          "conclusion": "success",
+          "name": "Info conda",
+          "number": 6
+        },
+        {
+          "conclusion": "success",
+          "name": "Install package",
+          "number": 7
+        },
+        {
+          "conclusion": "success",
+          "name": "Test import module",
+          "number": 8
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Resolve documented Python API calls",
+          "number": 9
+        },
+        {
+          "conclusion": "failure",
+          "name": "Run tests",
+          "number": 10
+        },
+        {
+          "conclusion": "skipped",
+          "name": "JS unit tests (Node)",
+          "number": 11
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Check coverage",
+          "number": 12
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Upload coverage reports to Codecov",
+          "number": 13
+        },
+        {
+          "conclusion": "success",
+          "name": "Upload test results to Codecov",
+          "number": 14
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Setup conda env",
+          "number": 26
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Post Set up Python",
+          "number": 27
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 28
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 29
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-09-04T21:52:36Z",
+      "conclusion": "failure",
+      "html_url": "https://github.com/uibcdf/molsysviewer/actions/runs/33923020037/job/101185322437",
+      "id": 101185322437,
+      "name": "Test on ubuntu-latest, Python 3.13",
+      "started_at": "2026-09-04T21:51:59Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2
+        },
+        {
+          "conclusion": "success",
+          "name": "Additional info about the build",
+          "number": 3
+        },
+        {
+          "conclusion": "success",
+          "name": "Set up Python",
+          "number": 4
+        },
+        {
+          "conclusion": "failure",
+          "name": "Setup conda env",
+          "number": 5
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Info conda",
+          "number": 6
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Install package",
+          "number": 7
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Test import module",
+          "number": 8
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Resolve documented Python API calls",
+          "number": 9
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Run tests",
+          "number": 10
+        },
+        {
+          "conclusion": "skipped",
+          "name": "JS unit tests (Node)",
+          "number": 11
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Check coverage",
+          "number": 12
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Upload coverage reports to Codecov",
+          "number": 13
+        },
+        {
+          "conclusion": "success",
+          "name": "Upload test results to Codecov",
+          "number": 14
+        },
+        {
+          "conclusion": "failure",
+          "name": "Post Setup conda env",
+          "number": 26
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Post Set up Python",
+          "number": 27
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 28
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 29
+        }
+      ]
+    }
+  ],
+  "total_count": 7
+}

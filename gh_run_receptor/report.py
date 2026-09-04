@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import unicodedata
 from pathlib import Path
 from typing import Any
@@ -19,6 +20,14 @@ _BIDI_CONTROLS = frozenset(
     "\u061c\u200e\u200f\u202a\u202b\u202c\u202d\u202e\u2066\u2067\u2068\u2069"
 )
 _CONDA_PLATFORMS = ("linux-64", "linux-aarch64", "osx-64", "osx-arm64", "win-64")
+_CI_ROLES = (
+    ("publish", ("publish", "publishing", "release", "deploy", "upload")),
+    ("docs", ("documentation", "docs", "sphinx", "notebook", "notebooks")),
+    ("lint", ("ruff", "lint", "format", "clippy", "type check")),
+    ("coverage", ("coverage", "codecov")),
+    ("test", ("test", "tests", "testing", "pytest", "smoke", "matrix", "e2e", "qt")),
+    ("build", ("build", "wheel", "wheels", "package", "packages", "artifact")),
+)
 
 
 def _safe_text(value: Any) -> str:
@@ -97,6 +106,62 @@ def _conda_matrix(
     return {"kind": "conda", "platforms": platforms}
 
 
+def _ci_role(name: Any) -> str:
+    normalized = re.sub(r"[^a-z0-9]+", " ", str(name or "").lower()).strip()
+    words = set(normalized.split())
+    for role, keywords in _CI_ROLES:
+        matched = any(
+            keyword in normalized if " " in keyword else keyword in words
+            for keyword in keywords
+        )
+        if matched:
+            return role
+    return "other"
+
+
+def _ci_matrix(jobs: list[dict[str, Any]]) -> dict[str, Any]:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for job in jobs:
+        grouped.setdefault(_ci_role(job.get("name")), []).append(job)
+    roles = []
+    for role in (*[name for name, _ in _CI_ROLES], "other"):
+        role_jobs = grouped.get(role, [])
+        if not role_jobs:
+            continue
+        counts: dict[str, int] = {}
+        for job in role_jobs:
+            state = str(job.get("conclusion") or job.get("status") or "unknown")
+            counts[state] = counts.get(state, 0) + 1
+        roles.append(
+            {
+                "name": role,
+                "job_ids": [job.get("id") for job in role_jobs],
+                "counts": dict(sorted(counts.items())),
+            }
+        )
+    return {"kind": "ci", "roles": roles}
+
+
+def _ci_failure_groups(jobs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    grouped: dict[tuple[Any, tuple[str, ...]], list[dict[str, Any]]] = {}
+    for job in jobs:
+        if job["conclusion"] in (None, "success", "skipped", "neutral"):
+            continue
+        steps = tuple(str(step["name"] or "unnamed") for step in job["failed_steps"])
+        grouped.setdefault((job["conclusion"], steps), []).append(job)
+    groups = []
+    for (conclusion, steps), members in grouped.items():
+        groups.append(
+            {
+                "conclusion": conclusion,
+                "steps": steps,
+                "jobs": members,
+            }
+        )
+    groups.sort(key=lambda item: (-len(item["jobs"]), str(item["steps"]), str(item["conclusion"])))
+    return groups
+
+
 def build_report(
     manifest: dict[str, Any],
     evidence: dict[str, Any],
@@ -147,14 +212,15 @@ def build_report(
         }
         cause_evidence = "complete" if len(diagnosed_jobs) == len(failed_jobs) else "partial"
 
-    matrix = (
-        _conda_matrix(jobs, artifacts, expected_platforms)
-        if selected_profile == "conda"
-        else {}
-    )
+    if selected_profile == "conda":
+        matrix = _conda_matrix(jobs, artifacts, expected_platforms)
+    elif selected_profile == "ci":
+        matrix = _ci_matrix(jobs)
+    else:
+        matrix = {}
     missing_platforms = (
         [item["name"] for item in matrix["platforms"] if item["status"] == "missing"]
-        if matrix
+        if matrix.get("kind") == "conda"
         else []
     )
     assessment = _assessment(model["github"]["status"], model["github"]["conclusion"])
@@ -222,10 +288,15 @@ def render_llm(report: dict[str, Any]) -> str:
     if receptor["assessment"] == "PASS":
         successful_jobs = sum(job["conclusion"] == "success" for job in report["jobs"])
         fields = ["PASS conclusion=success", f"profile={receptor['profile']}"]
-        if report["matrix"]:
+        if report["matrix"].get("kind") == "conda":
             platforms = report["matrix"]["platforms"]
             successful_platforms = sum(item["status"] == "success" for item in platforms)
             fields.append(f"platforms={successful_platforms}/{len(platforms)}")
+        elif report["matrix"].get("kind") == "ci":
+            roles = ",".join(
+                f"{role['name']}:{len(role['job_ids'])}" for role in report["matrix"]["roles"]
+            )
+            fields.append(f"roles={roles or 'none'}")
         if report["expectations"]["missing_platforms"]:
             fields.append(
                 "missing=" + ",".join(report["expectations"]["missing_platforms"])
@@ -255,7 +326,27 @@ def render_llm(report: dict[str, Any]) -> str:
         for job in report["jobs"]
         if job["conclusion"] not in (None, "success", "skipped", "neutral")
     ]
-    if failed:
+    if failed and receptor["profile"] == "ci":
+        groups = _ci_failure_groups(report["jobs"])
+        lines.append(f"failed groups ({len(groups)}, {len(failed)} jobs):")
+        for group in groups[:MAX_FAILURES]:
+            members = group["jobs"]
+            steps = ", ".join(_safe_text(step) for step in group["steps"])
+            step_suffix = f" | steps: {steps}" if steps else ""
+            if len(members) == 1:
+                member = members[0]
+                lines.append(
+                    f"- {_safe_text(member['name'])} | {_safe_text(group['conclusion'])}"
+                    f"{step_suffix}"
+                )
+            else:
+                lines.append(
+                    f"- {len(members)} jobs | {_safe_text(group['conclusion'])}{step_suffix} | "
+                    f"sample: {_safe_text(members[0]['name'])} (+{len(members) - 1})"
+                )
+        if len(groups) > MAX_FAILURES:
+            lines.append(f"- ... {len(groups) - MAX_FAILURES} more groups in JSON report")
+    elif failed:
         lines.append(f"failed jobs ({len(failed)}):")
         for job in failed[:MAX_FAILURES]:
             steps = ", ".join(_safe_text(step["name"] or "unnamed") for step in job["failed_steps"])
@@ -267,7 +358,7 @@ def render_llm(report: dict[str, Any]) -> str:
         if len(failed) > MAX_FAILURES:
             lines.append(f"- ... {len(failed) - MAX_FAILURES} more failed jobs in JSON report")
 
-    if report["matrix"]:
+    if report["matrix"].get("kind") == "conda":
         platforms = report["matrix"]["platforms"]
         reusable = [item["name"] for item in platforms if item["reusable"]]
         successful = [item["name"] for item in platforms if item["status"] == "success"]
@@ -282,6 +373,12 @@ def render_llm(report: dict[str, Any]) -> str:
             lines.append(f"missing expected: {', '.join(missing_platforms)}")
         if reusable:
             lines.append(f"reusable: {', '.join(reusable)}")
+    elif report["matrix"].get("kind") == "ci":
+        summaries = []
+        for role in report["matrix"]["roles"]:
+            counts = ",".join(f"{key}:{value}" for key, value in role["counts"].items())
+            summaries.append(f"{role['name']}={len(role['job_ids'])}({counts})")
+        lines.append("ci roles: " + "; ".join(summaries))
 
     if report["causes"]:
         lines.append(f"root causes ({len(report['causes'])}):")
@@ -354,11 +451,16 @@ def render_human(report: dict[str, Any]) -> str:
             f"  ... {len(report['artifacts']) - MAX_ARTIFACTS} additional artifacts in JSON output"
         )
 
-    if report["matrix"]:
+    if report["matrix"].get("kind") == "conda":
         lines.extend(["", "Conda platforms"])
         for platform in report["matrix"]["platforms"]:
             reusable = ", reusable artifact" if platform["reusable"] else ""
             lines.append(f"  {platform['status']:<8} {platform['name']}{reusable}")
+    elif report["matrix"].get("kind") == "ci":
+        lines.extend(["", "CI roles"])
+        for role in report["matrix"]["roles"]:
+            counts = ", ".join(f"{key}={value}" for key, value in role["counts"].items())
+            lines.append(f"  {role['name']:<10} {len(role['job_ids']):>3} jobs ({counts})")
 
     if report["configuration"]["matched"]:
         source = report["configuration"]["source"] or {}

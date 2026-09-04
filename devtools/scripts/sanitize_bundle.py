@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from gh_run_receptor.bundle import STRUCTURED_MEMBERS, load_bundle
+from gh_run_receptor.bundle import load_bundle
 
 
 def _canonical(value: Any) -> bytes:
@@ -74,10 +74,8 @@ def sanitize(source: Path, destination: Path) -> None:
     destination.mkdir(parents=True)
     members = []
     selected = _selected_evidence(evidence)
-    for name in STRUCTURED_MEMBERS:
-        if name not in evidence:
-            continue
-        data = _canonical(selected[name])
+    for name, value in selected.items():
+        data = _canonical(value)
         (destination / name).write_bytes(data)
         source_member = next(item for item in manifest["members"] if item["path"] == name)
         members.append(

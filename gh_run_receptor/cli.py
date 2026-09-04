@@ -75,7 +75,7 @@ def _add_common_options(
     parser.add_argument(
         "--format", choices=("text", "json"), default=default or "text"
     )
-    parser.add_argument("--profile", choices=("generic", "conda"), default=default)
+    parser.add_argument("--profile", choices=("generic", "ci", "conda"), default=default)
 
 
 def _parser() -> argparse.ArgumentParser:

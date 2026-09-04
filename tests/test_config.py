@@ -59,6 +59,23 @@ def test_normalized_configuration_conforms_to_published_schema():
     Draft202012Validator(schema).validate(parse_config(CONFIG))
 
 
+def test_ci_is_a_supported_profile_without_conda_settings():
+    config = parse_config(
+        b"""schema_version: 1
+workflows:
+  - match:
+      path: .github/workflows/CI.yaml
+    profile: ci
+"""
+    )
+
+    assert config["workflows"][0] == {
+        "match": {"path": ".github/workflows/CI.yaml"},
+        "profile": "ci",
+        "settings": {},
+    }
+
+
 @pytest.mark.parametrize(
     ("text", "message"),
     [

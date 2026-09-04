@@ -137,6 +137,12 @@ def test_common_options_are_accepted_after_subcommand():
     assert args.format == "text"
 
 
+def test_ci_profile_is_an_explicit_cli_choice():
+    args = _parser().parse_args(["replay", "bundle", "--profile", "ci"])
+
+    assert args.profile == "ci"
+
+
 def test_config_check_and_explain(tmp_path, capsys):
     config = tmp_path / "rules.yaml"
     config.write_text(

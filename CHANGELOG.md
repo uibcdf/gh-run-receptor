@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.4.0 - 2026-09-04
+
+- Add the first CI profile with conservative whole-word job roles and a visible `other`
+  remainder.
+- Group LLM failure output only when jobs share an official conclusion and the same
+  ordered failed-step signature, while retaining every job in JSON.
+- Add a sanitized seven-job MolSysViewer failure fixture and measured filtered-native
+  comparison.
+- Allow trusted repository rules and explicit CLI selection to choose `ci`.
+- Correct fixture sanitization so optional captured configuration cannot select a member
+  absent from the reviewed allow-list.
+
 ## 0.3.0 - 2026-09-04
 
 - Load `.github/gh-run-receptor.yaml` only from the target repository's default branch

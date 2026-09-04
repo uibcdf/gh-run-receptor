@@ -5,11 +5,11 @@ repetitive run output into a compact, truth-preserving report while retaining a 
 path to the captured evidence.
 
 The project is in pre-1.0 development; no package has been published to a package index and
-the public contract may still evolve. The `0.3.0` source release can inspect, watch, and
+the public contract may still evolve. The `0.4.0` source release can inspect, watch, and
 replay structured run evidence. Install the GitHub CLI extension at the exact preview tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 0.3.0
+gh extension install uibcdf/gh-run-receptor --pin 0.4.0
 gh run-receptor --version
 ```
 
@@ -30,8 +30,9 @@ The ordinary native GitHub presentation remains available through `gh run view`.
 
 The current MVP recognizes clear Conda matrices automatically. When failure logs were
 captured, it reports independently reusable platform artifacts and groups repeated causes
-with member-and-line provenance. `--profile=generic` disables auto-detection; an explicit
-`--profile=conda` enables the Conda interpretation.
+with member-and-line provenance. The `ci` profile groups jobs into presentation roles and
+collapses repeated failed-step signatures without removing any job from JSON. Use
+`--profile=generic`, `--profile=ci`, or `--profile=conda` to select explicitly.
 
 A client repository can assign those profiles and declare required Conda platforms in a
 trusted `.github/gh-run-receptor.yaml` file:
@@ -55,7 +56,7 @@ gh run-receptor config explain .github/workflows/build_conda.yaml
 
 Live capture reads policy only from the repository's default branch, stores its revision
 and digest in the evidence bundle, and fails if required platforms are absent. Version
-`0.3.0` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
+`0.4.0` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
 patterns and unknown settings rather than silently ignoring them.
 
 ## Measured token reduction
@@ -67,6 +68,7 @@ filtered native workflow, not against deliberately dumping every log line:
 | --- | ---: | ---: | ---: |
 | Diagnose a partial five-platform failure | 5,138 tokens | 296 tokens | 94.2% |
 | Verify a successful five-platform matrix | 143 tokens | 39 tokens | 72.7% |
+| Diagnose seven failed MolSysViewer CI jobs | 223 tokens | 198 tokens | 11.2% |
 
 For the failed run, the receptor retained the official failure, identified both failed
 macOS jobs, and reported the Linux, Linux ARM, and Windows artifacts as reusable. These are
@@ -77,6 +79,11 @@ If the only question is whether one completed run succeeded, native GitHub JSON 
 smaller in the measured green case: 10 tokens versus the receptor's 39. Use the receptor
 when job, platform, artifact, failure, or evidence completeness matters—not to replace an
 already minimal status query.
+
+The CI measurement uses an already filtered native JSON baseline and therefore shows a
+modest saving. The receptor additionally retains CI role counts, artifact state, run URL,
+and a replayable bundle. Its first ungrouped implementation was larger than the baseline
+and was rejected before release.
 
 Long-running workflows can be observed without redrawing their complete job tree:
 

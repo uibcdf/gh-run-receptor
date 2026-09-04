@@ -247,3 +247,102 @@ def test_explicit_profile_overrides_repository_profile_but_preserves_settings():
     assert report["receptor"]["profile"] == "generic"
     assert report["matrix"] == {}
     assert report["expectations"]["satisfied"] is True
+
+
+def test_ci_profile_groups_every_job_and_preserves_official_failure():
+    evidence = _evidence()
+    evidence["workflow.json"]["path"] = ".github/workflows/CI.yaml"
+    evidence["jobs.json"]["jobs"][0]["name"] = "Test on Windows, Python 3.13"
+    evidence["jobs.json"]["jobs"][1]["name"] = "Test on Linux, Python 3.13"
+    evidence["jobs.json"]["jobs"].extend(
+        [
+            {
+                "id": 30,
+                "name": "Ruff lint checks",
+                "status": "completed",
+                "conclusion": "success",
+                "steps": [],
+            },
+            {
+                "id": 40,
+                "name": "Build controlled wheel",
+                "status": "completed",
+                "conclusion": "success",
+                "steps": [],
+            },
+            {
+                "id": 50,
+                "name": "Unrecognized gate",
+                "status": "completed",
+                "conclusion": "skipped",
+                "steps": [],
+            },
+        ]
+    )
+
+    report = build_report(_manifest(), evidence, profile="ci")
+
+    assert report["github"]["conclusion"] == "failure"
+    assert report["receptor"]["assessment"] == "FAIL"
+    roles = {role["name"]: role for role in report["matrix"]["roles"]}
+    assert roles["test"]["counts"] == {"failure": 1, "success": 1}
+    assert roles["lint"]["job_ids"] == [30]
+    assert roles["build"]["job_ids"] == [40]
+    assert roles["other"]["counts"] == {"skipped": 1}
+    assert sum(len(role["job_ids"]) for role in roles.values()) == len(report["jobs"])
+    rendered = render_llm(report)
+    assert "failed groups (1, 1 jobs):" in rendered
+    assert "ci roles:" in rendered
+    assert "CI roles" in render_human(report)
+    assert exit_code(report) == 1
+
+
+def test_successful_ci_report_remains_one_line_and_summarizes_roles():
+    evidence = _evidence(conclusion="success")
+    evidence["jobs.json"]["jobs"][0]["name"] = "Test on Windows, Python 3.13"
+    evidence["jobs.json"]["jobs"][1]["name"] = "Test on Linux, Python 3.13"
+    for job in evidence["jobs.json"]["jobs"]:
+        job["conclusion"] = "success"
+        job["steps"] = []
+
+    report = build_report(_manifest(), evidence, profile="ci")
+    rendered = render_llm(report)
+
+    assert report["receptor"]["assessment"] == "PASS"
+    assert rendered.count("\n") == 1
+    assert "profile=ci" in rendered
+    assert "roles=test:2" in rendered
+
+
+def test_ci_role_matching_does_not_read_test_inside_latest():
+    evidence = _evidence(conclusion="success")
+    evidence["jobs.json"]["jobs"] = [
+        {
+            "id": 1,
+            "name": "Build wheel on ubuntu-latest",
+            "status": "completed",
+            "conclusion": "success",
+            "steps": [],
+        }
+    ]
+
+    report = build_report(_manifest(), evidence, profile="ci")
+
+    assert report["matrix"]["roles"] == [
+        {"name": "build", "job_ids": [1], "counts": {"success": 1}}
+    ]
+
+
+def test_ci_llm_output_groups_jobs_with_the_same_failed_steps():
+    evidence = _evidence()
+    evidence["jobs.json"]["jobs"][0]["name"] = "Test on Windows"
+    evidence["jobs.json"]["jobs"][1]["name"] = "Test on Linux"
+    for job in evidence["jobs.json"]["jobs"]:
+        job["conclusion"] = "failure"
+        job["steps"] = [{"number": 1, "name": "Run tests", "conclusion": "failure"}]
+
+    rendered = render_llm(build_report(_manifest(), evidence, profile="ci"))
+
+    assert "failed groups (1, 2 jobs):" in rendered
+    assert "- 2 jobs | failure | steps: Run tests | sample: Test on Linux (+1)" in rendered
+    assert "Test on Windows" not in rendered

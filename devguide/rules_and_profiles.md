@@ -34,8 +34,12 @@ artifact inventory without workflow-specific assumptions.
 
 ### CI
 
-Understands test, lint, coverage, optional-dependency, and matrix roles. It groups shared
-causes and preserves skipped, blocked, cancelled, and incomplete work.
+The first implemented slice assigns every job exactly one presentation role: `publish`,
+`docs`, `lint`, `coverage`, `test`, `build`, or `other`. Keywords match normalized whole
+words, and `other` preserves names the profile does not understand. LLM output groups
+failed jobs only when their official conclusion and ordered failed-step names agree. JSON
+retains every job. Required jobs, coverage thresholds, annotations, optional-dependency
+semantics, and structured matrix dimensions remain future work.
 
 ### Documentation
 
@@ -71,7 +75,7 @@ schema_version: 1
 workflows:
   - match:
       path: .github/workflows/CI.yaml
-    profile: generic
+    profile: ci
 
   - match:
       path: .github/workflows/build_and_upload_conda_packages.yaml
@@ -86,7 +90,7 @@ workflows:
 ```
 
 The CLI provides `config check [PATH]` and `config explain WORKFLOW_PATH`. Discovery and
-`init` remain future work. Version 1 accepts only the `generic` and `conda` profiles and
+`init` remain future work. Version 1 accepts `generic`, `ci`, and `conda` profiles and
 the Conda `expected_platforms` setting. Unknown fields fail validation instead of being
 ignored.
 
