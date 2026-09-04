@@ -107,13 +107,31 @@ external CLI remains the universal fallback.
   granted authority over reporting behavior.
 - Network, parser, and profile failures are explicit and never collapse to success.
 
-## Open architectural questions
+## Dependency direction
 
-- Whether the shared core should initially be distributed as Python or as a standalone
-  cross-platform executable.
-- Whether check-run annotations add enough value to justify write permissions.
-- How much log evidence can be normalized portably when GitHub cannot associate a line
-  with a specific step.
-- Whether embedded producers should emit a standard `gh-run-receptor.events@1` stream
-  in addition to the final report.
+The implementation dependency graph is one-way:
 
+```text
+transport adapters -> captured source records -> normalized model
+                                              -> profile interpretation -> report
+                                                                        -> renderers
+entry points ----------------------------------------------------------> shared core
+```
+
+Transport-specific objects do not leak into profiles or renderers. Renderers do not
+fetch evidence. Profiles cannot mutate normalized source facts. The CLI, Action, and
+reusable workflow orchestrate these layers but do not implement a second interpretation
+path.
+
+## Architectural decision gates
+
+The initial core is Python 3.11 through 3.13 and uses an installed `gh` command behind a
+transport adapter. Distribution of the stable Action, adaptive log-fetch thresholds,
+pattern engine, and watch polling policy remain evidence-dependent. Their defaults,
+owners, and gates are recorded in
+[decisions_and_open_questions.md](decisions_and_open_questions.md).
+
+Check-run annotations are read evidence and do not justify write permissions. Portable
+step/log association is treated as incomplete when GitHub cannot prove it. The versioned
+`gh-run-receptor.events@1` producer format is an accepted optional contract, not a
+requirement for generic reporting.
