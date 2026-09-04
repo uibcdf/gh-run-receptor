@@ -8,4 +8,6 @@ except PackageNotFoundError:
     try:
         from gh_run_receptor._version import __version__
     except ImportError:
-        __version__ = "0+unknown"
+        from gh_run_receptor.source_version import version_from_source_checkout
+
+        __version__ = version_from_source_checkout() or "0+unknown"

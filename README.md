@@ -5,11 +5,11 @@ repetitive run output into a compact, truth-preserving report while retaining a 
 path to the captured evidence.
 
 The project is in pre-1.0 development; no package has been published to a package index and
-the public contract may still evolve. The `0.2.0` source release can inspect, watch, and
+the public contract may still evolve. The `0.2.1` source release can inspect, watch, and
 replay structured run evidence. Install the GitHub CLI extension at the exact preview tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 0.2.0
+gh extension install uibcdf/gh-run-receptor --pin 0.2.1
 gh run-receptor --version
 ```
 

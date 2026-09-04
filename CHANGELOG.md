@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.2.1 - 2026-09-04
+
+- Resolve the package version from the nearest numeric Git tag when running directly as a
+  GitHub CLI script extension without installed metadata or a generated build file.
+
 ## 0.2.0 - 2026-09-04
 
 - Adopt the flat MolSysSuite package layout and derive versions from three-component Git

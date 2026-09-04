@@ -13,7 +13,8 @@ fallback.
 
 The existing `0.1.1` tag remains attached to its original commit. It predates this dynamic
 configuration and must not be moved or recreated. Release `0.2.0` is the first tag governed
-by this dynamic configuration.
+by this dynamic configuration. Release `0.2.1` adds the equivalent Git-tag fallback needed
+when GitHub CLI executes a script-extension clone without building the Python package.
 
 Before creating a release tag:
 
