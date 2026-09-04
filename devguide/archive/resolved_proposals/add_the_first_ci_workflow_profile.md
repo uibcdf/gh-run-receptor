@@ -1,13 +1,13 @@
 ---
 summary: Add the first CI workflow profile
 issue: uibcdf/gh-run-receptor#6
-status: open
+status: resolved
 opened: 2026-09-04
-closed:
-verification: asserted
+closed: 2026-09-04
+verification: measured
 area: ['profiles', 'tests']
-guard:
-normative:
+guard: tests/test_report.py
+normative: rules_and_profiles.md
 blocked_by: []
 supersedes: []
 ---
@@ -15,7 +15,7 @@ supersedes: []
 # Adding the first CI workflow profile
 
 **Reported:** 2026-09-04, after trusted client rules shipped in 0.3.0.
-**Status:** Open; implementation and client validation are in progress.
+**Status:** Resolved in `gh-run-receptor` 0.4.0 and validated from both client repositories.
 
 ## What
 
@@ -97,3 +97,30 @@ than disappearing or changing the assessment.
 Measured on 2026-09-04 on the local Linux development host with Python 3.13, tiktoken
 0.13.0 `cl100k_base`, GitHub CLI authenticated against the public MolSysViewer repository,
 and run attempt 1 of `33923020037`.
+
+## Delivered and verified
+
+The implementation shipped in commit `2909376` and tag `0.4.0`. The local release gate
+passed 81 tests, Ruff, both developer-report validators, source distribution and wheel
+builds, and an isolated wheel replay smoke test.
+
+Client adoption followed the tag, as required:
+
+- MolSysMT commit `00fa4dd66` assigns the CI profile to eight exact workflow paths while
+  retaining its four Conda rules.
+- MolSysViewer commit `2750785d` assigns the CI profile to `CI`, `CI_e2e`, and Ruff, and
+  the Conda profile to its noarch package workflow without native platform expectations.
+
+Default-branch configuration was then exercised against public runs, rather than only
+checked offline:
+
+- MolSysViewer CI run `33923020037` matched `.github/workflows/CI.yaml` from `main`, kept
+  the official `failure`, classified all seven jobs as `test`, and rendered them as three
+  failure-signature groups.
+- MolSysViewer Conda run `20548716947` selected `profile=conda`, reported the official
+  success, and correctly used a `0/0` platform expectation for its noarch artifact.
+- MolSysMT CI smoke run `32004333411` selected `profile=ci`, reported the official success,
+  and classified its single job as `test`.
+
+This closes only the bounded first CI slice. Configurable roles, required jobs,
+documentation and release profiles, and embedded Action output remain later work.
