@@ -45,14 +45,19 @@ slice, not its complete stable contract.
 9. [Security](security.md)
 10. [Testing strategy](testing_strategy.md)
 11. [Development workflow](development_workflow.md)
-12. [Decisions and open questions](decisions_and_open_questions.md)
-13. [MVP validation checkpoint](mvp_validation.md)
-14. [MolSysMT Conda pilot benchmark](benchmark_2026-09-04.md)
-15. [Development roadmap](development_roadmap.md)
+12. [Reporting protocol](reporting_protocol.md)
+13. [Versioning and releases](versioning_and_releases.md)
+14. [Pending bugs](pending_bugs/README.md)
+15. [Pending proposals](pending_proposals/README.md)
+16. [Decisions and open questions](decisions_and_open_questions.md)
+17. [MVP validation checkpoint](mvp_validation.md)
+18. [MolSysMT Conda pilot benchmark](benchmark_2026-09-04.md)
+19. [Development roadmap](development_roadmap.md)
 
-These documents are the current checkpoint. There is no historical archive yet.
-When an archive is introduced, routine onboarding should require only its generated
-summary or index unless a concrete question requires the underlying historical record.
+These documents and the pending queue indexes are the current checkpoint. The
+[archive summary](archive/README.md) is the normal historical entry point. Routine
+onboarding does not require reading archived reports; inspect one only when a current
+question or document gives a concrete reason.
 
 ## Checkpoint coverage
 
@@ -73,6 +78,8 @@ known design question; it does not mean that unimplemented behavior has been val
 | Threat model and resource limits | `security.md` |
 | Corpus, fixtures, differential tests, and token measurement | `testing_strategy.md` |
 | Environment, layout, contribution, and validation | `development_workflow.md` |
+| Issue/report lifecycle | `reporting_protocol.md` |
+| Package versions, tags, and release gate | `versioning_and_releases.md` |
 | Settled decisions and unresolved choices | `decisions_and_open_questions.md` |
 | Implemented surface and real-run validation | `mvp_validation.md` |
 | Measured native baseline and token reduction | `benchmark_2026-09-04.md` |

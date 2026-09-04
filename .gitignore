@@ -6,5 +6,6 @@ __pycache__/
 build/
 dist/
 *.egg-info/
+gh_run_receptor/_version.py
 .gh-run-receptor-cache/
 evidence-private/

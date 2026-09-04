@@ -16,6 +16,9 @@ more local `AGENTS.md` may refine these rules within its directory.
   threat boundary, or roadmap state changes.
 - Mark proposals and unverified behavior as provisional. Do not present design intent as
   measured behavior.
+- Read `devguide/reporting_protocol.md` before filing or closing a substantial defect or
+  proposal. Every pending developer report must be backed by a GitHub issue; the report
+  carries analysis while the issue carries public state and settled facts.
 
 ## Product invariants
 
@@ -37,6 +40,8 @@ more local `AGENTS.md` may refine these rules within its directory.
 ## Implementation baseline
 
 - The Phase 0 and Phase 1 prototype is a Python 3.11--3.13 package and CLI.
+- Keep the import package at repository root, matching the flat MolSysSuite layout; do not
+  reintroduce a `src/` directory without a measured packaging reason.
 - Use the installed `gh` command for authentication and GitHub API transport. Do not add
   a second authentication system or expose tokens through command arguments or output.
 - Keep GitHub response acquisition behind an adapter so a future standalone executable
@@ -71,6 +76,8 @@ more local `AGENTS.md` may refine these rules within its directory.
 - Preserve unrelated user changes in a dirty worktree.
 - Do not commit raw evidence bundles, credentials, caches, downloaded logs, or private
   repository data. Only reviewed and sanitized fixtures belong in the repository.
+- Derive versions from three-component Git tags through `versioningit`; do not maintain a
+  static package version or move an existing release tag.
 
 ## Required design references
 
@@ -84,6 +91,8 @@ more local `AGENTS.md` may refine these rules within its directory.
 - `devguide/security.md`
 - `devguide/testing_strategy.md`
 - `devguide/development_workflow.md`
+- `devguide/reporting_protocol.md`
+- `devguide/versioning_and_releases.md`
 - `devguide/decisions_and_open_questions.md`
 - `devguide/mvp_validation.md`
 - `devguide/benchmark_2026-09-04.md`

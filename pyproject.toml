@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=77.0"]
+requires = ["setuptools>=77.0", "versioningit>=3.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "gh-run-receptor"
-version = "0.1.1"
+dynamic = ["version"]
 description = "Compact, truth-preserving reports for GitHub Actions runs"
 readme = "README.md"
 requires-python = ">=3.11,<3.14"
@@ -35,7 +35,23 @@ test = ["pytest", "pytest-receptor"]
 dev = ["pytest", "pytest-receptor", "ruff"]
 
 [tool.setuptools.packages.find]
-where = ["src"]
+include = ["gh_run_receptor*"]
+
+[tool.versioningit]
+default-version = "0+unknown"
+
+[tool.versioningit.format]
+distance = "{base_version}+{distance}.{vcs}{rev}"
+dirty = "{base_version}+{distance}.{vcs}{rev}.dirty"
+distance-dirty = "{base_version}+{distance}.{vcs}{rev}.dirty"
+
+[tool.versioningit.vcs]
+method = "git"
+match = ["*"]
+default-tag = "0.0.0"
+
+[tool.versioningit.write]
+file = "gh_run_receptor/_version.py"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

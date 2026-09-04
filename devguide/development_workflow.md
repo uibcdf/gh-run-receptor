@@ -19,8 +19,9 @@ dependencies. In a disposable environment, install it with:
 python -m pip install -e '.[dev]'
 ```
 
-Without installation, commands and tests can run with `PYTHONPATH=src`. The expected local
-tools are Git, an authenticated GitHub CLI, Python 3.11 or newer, Ruff, pytest, and
+The package uses the same flat repository layout as MolSysMT and MolSysViewer, so commands
+and tests run from the checkout without a `PYTHONPATH` override. The expected local tools
+are Git, an authenticated GitHub CLI, Python 3.11 or newer, Ruff, pytest, and
 `pytest-receptor`.
 
 GitHub-dependent tests use a dedicated fixture repository and an explicitly authenticated
@@ -43,13 +44,22 @@ must have a bound or pagination strategy.
 
 For each focused change:
 
-1. identify the applicable contract and decision record;
+1. identify the applicable contract and decision record; for substantial bugs or
+   proposals, follow [the reporting protocol](reporting_protocol.md) and open the issue
+   before writing its report;
 2. add or update a semantic test that would fail if the intended property regressed;
 3. implement the smallest compatible vertical change;
 4. update user and developer documentation in the same change;
 5. run focused tests, then the full applicable local gate;
 6. inspect `git diff --check`, repository status, and staged content;
 7. commit one coherent change and report exactly what was and was not tested.
+
+When developer reports change, regenerate and validate their indexes:
+
+```text
+python devtools/scripts/devguide_index.py
+python devtools/scripts/validate_devguide.py
+```
 
 Tests and validators check intent, not merely output shape. A fixture or golden file that
 copies the expected label without establishing its source state is not a valid gate.
@@ -64,6 +74,10 @@ use destructive Git commands in automated workflows.
 Small branches and reviewable commits are preferred. Generated captures, credentials,
 caches, and private evidence never enter version control. If a schema or public CLI
 contract changes, the commit includes migration and compatibility notes.
+
+Package versions come from lightweight, three-component Git tags through `versioningit`.
+The full release procedure and the bootstrap status of tag `0.1.1` are recorded in
+[Versioning and releases](versioning_and_releases.md).
 
 ## Definition of done
 

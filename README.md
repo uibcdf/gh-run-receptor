@@ -9,7 +9,7 @@ index and no stable contract exists. The `0.1.1` source release can inspect, wat
 replay structured run evidence:
 
 ```text
-PYTHONPATH=src python -m gh_run_receptor --repo OWNER/REPO \
+python -m gh_run_receptor --repo OWNER/REPO \
   --receptor=llm inspect RUN_ID --capture metadata
 ```
 
