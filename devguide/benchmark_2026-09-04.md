@@ -10,7 +10,7 @@ This is a single-run pilot, not an aggregate product claim.
 | Workflow | `.github/workflows/test_conda_rattler.yaml` |
 | Run and attempt | `33863426589`, attempt 1 |
 | GitHub conclusion | `failure` |
-| Receptor source | commit `9acd4bb`, version `0.1.0a1` |
+| Receptor source | commit `9acd4bb`, development snapshot included in `0.1.1` |
 | GitHub CLI | 2.93.0 |
 | GitHub API version | `2022-11-28` |
 | Capture | adaptive, complete; logs and artifact inventory fetched |

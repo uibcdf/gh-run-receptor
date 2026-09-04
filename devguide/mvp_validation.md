@@ -2,8 +2,8 @@
 
 ## Scope under test
 
-Version `0.1.0a1` is an unreleased source-tree MVP. It is not the complete Phase 1
-contract. This checkpoint records what has actually run, separately from planned behavior.
+Version `0.1.1` is the first tagged source MVP. It is not the complete Phase 1 contract.
+This checkpoint records what has actually run, separately from planned behavior.
 
 ## Local validation
 
@@ -21,12 +21,21 @@ escaping.
 
 The first causal-analysis and Conda increment raised this to 26 tests. CLI ergonomics,
 successful-run compression, and incomplete-evidence semantics subsequently raised the
-suite to 28 tests. The added cases
+suite to 28 tests. Transition-only monitoring subsequently raised it to 33 tests. The
+added cases
 cover cross-job cause normalization, bounded huge-line handling, malicious ZIP traversal,
 Conda partial-success semantics, reusable artifacts, conservative profile detection, and
 bundle-to-report cause integration.
 
-A `0.1.0a1` wheel was built without dependency download, installed into a fresh temporary
+The watch tests use scripted API snapshots and an injected clock. They establish that
+unchanged snapshots produce no output, polling backs off, a state change resets the delay,
+transient failures are bounded, untrusted names are escaped, and completed runs do not emit
+a redundant transition. Three consecutive acquisition failures terminate the watch instead
+of retrying forever. A live completed Conda run produced only its one-line final
+report. No active UIBCDF run was available, so live transition behavior is still an
+explicit validation gap.
+
+A `0.1.1` wheel was built without dependency download, installed into a fresh temporary
 virtual environment, and invoked through its installed console entry point. The wheel
 included the MIT license and the complete `gh_run_receptor` package.
 

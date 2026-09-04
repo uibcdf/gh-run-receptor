@@ -99,6 +99,13 @@ new failure, run completed, or evidence acquisition degraded. It never redraws t
 whole status tree. Polling backs off for long unchanged intervals. A final report is
 rendered once.
 
+The MVP accepts `--interval`, `--max-interval`, `--attempt`, and the final capture policy.
+It polls only run and paginated job metadata until terminal state, emits transitions to
+stderr, retries at most two consecutive transient acquisition failures, and performs one
+ordinary capture/report operation after completion. An already completed run skips the
+initial snapshot and transitions. Cancellation by the user returns 130. Live active-run
+behavior remains unclaimed until observed outside the simulated clock suite.
+
 ### `compare`
 
 ```text

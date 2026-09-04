@@ -15,6 +15,7 @@ from gh_run_receptor.bundle import capture_bundle, default_bundle_path, load_bun
 from gh_run_receptor.errors import BundleError, ReceptorError
 from gh_run_receptor.github import GitHubClient
 from gh_run_receptor.report import build_report, exit_code, render_human, render_json, render_llm
+from gh_run_receptor.watch import watch_run
 
 
 @dataclass(frozen=True)
@@ -45,6 +46,16 @@ def _cache_root(value: str | None) -> Path:
         return Path(value).expanduser()
     base = os.environ.get("XDG_CACHE_HOME")
     return (Path(base) if base else Path.home() / ".cache") / "gh-run-receptor"
+
+
+def _positive_interval(value: str) -> float:
+    try:
+        interval = float(value)
+    except ValueError as error:
+        raise argparse.ArgumentTypeError("interval must be a number") from error
+    if interval < 1:
+        raise argparse.ArgumentTypeError("interval must be at least one second")
+    return interval
 
 
 def _add_common_options(
@@ -89,6 +100,14 @@ def _parser() -> argparse.ArgumentParser:
     replay = subparsers.add_parser("replay", help="render a saved evidence bundle")
     _add_common_options(replay, suppress_defaults=True)
     replay.add_argument("bundle", type=Path)
+    watch = subparsers.add_parser("watch", help="print transitions and one final report")
+    _add_common_options(watch, suppress_defaults=True)
+    watch.add_argument("run", type=_run_reference)
+    watch.add_argument("--attempt", type=int)
+    watch.add_argument("--interval", type=_positive_interval, default=10.0)
+    watch.add_argument("--max-interval", type=_positive_interval, default=60.0)
+    watch.add_argument("--capture", choices=("full", "adaptive", "metadata"), default="adaptive")
+    watch.add_argument("--output", type=Path)
     return parser
 
 
@@ -167,6 +186,24 @@ def main(arguments: list[str] | None = None) -> int:
             return _capture(args, render=True)
         if args.command == "capture":
             return _capture(args, render=False)
+        if args.command == "watch":
+            hostname = args.hostname or args.run.hostname or "github.com"
+            if args.hostname and args.run.hostname and args.hostname != args.run.hostname:
+                raise BundleError("run URL hostname conflicts with --hostname")
+            if args.repo and args.run.repository and args.repo != args.run.repository:
+                raise BundleError("run URL repository conflicts with --repo")
+            client = GitHubClient(hostname)
+            repository = client.repository(args.repo or args.run.repository)
+            watch_run(
+                client,
+                repository,
+                args.run.run_id,
+                attempt=args.attempt,
+                interval=args.interval,
+                max_interval=max(args.interval, args.max_interval),
+                emit=lambda message: print(message, file=sys.stderr),
+            )
+            return _capture(args, render=True)
         manifest, evidence = load_bundle(args.bundle)
         report = build_report(
             manifest,
@@ -179,6 +216,9 @@ def main(arguments: list[str] | None = None) -> int:
     except ReceptorError as error:
         print(f"RECEPTOR_ERROR: {error}", file=sys.stderr)
         return 5
+    except KeyboardInterrupt:
+        print("watch interrupted", file=sys.stderr)
+        return 130
 
 
 if __name__ == "__main__":

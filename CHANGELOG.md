@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 0.1.0a1 - Unreleased
+## 0.1.1 - 2026-09-04
 
 - Add the first read-only `inspect`, `capture`, and `replay` vertical slice.
 - Acquire run, workflow, paginated job, check-run, artifact, and optional log evidence
@@ -23,3 +23,5 @@ All notable changes to this project will be documented in this file.
   detail.
 - Report incomplete evidence as `INCOMPLETE` even when GitHub's source conclusion is
   successful.
+- Add transition-only `watch` with unchanged-state backoff, bounded transient-error retry,
+  terminal-safe job names, and one final adaptive report.

@@ -7,12 +7,12 @@ evidence.
 
 ## Current state
 
-The project has a first source-tree MVP but no released package or stable public contract;
+The project has a `0.1.1` source release but no published package or stable public contract;
 the contracts in this guide are explicit but provisional unless marked settled. The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
 human, LLM, or JSON reports without changing the run or hiding its authoritative GitHub
-state. Log interpretation, formal schemas, profiles, packaging, and broader corpus
-validation remain open.
+state. Broader log interpretation, formal schemas, the remaining profiles, published
+packaging, and wider corpus validation remain open.
 
 The current MVP implements:
 
@@ -22,14 +22,15 @@ The current MVP implements:
 - SHA-256-validated bundles separated by repository, attempt, and capture policy;
 - a shared generic report rendered for `human`, `llm`, or JSON;
 - numeric IDs and HTTPS run URLs, including repository and hostname extraction;
-- authoritative outcome exit codes and bounded terminal-safe text.
+- authoritative outcome exit codes and bounded terminal-safe text;
 - bounded log-cause extraction with archive and line limits;
 - conservative Conda auto-detection, reusable-platform classification, and cross-job
-  cause grouping.
+  cause grouping;
+- transition-only `watch` with polling backoff and a single final adaptive report.
 
 It does not yet provide declarative configuration, CI/docs/release profiles, formal JSON
-Schemas, active transition monitoring, run comparison, or the embedded Action. The Conda
-profile is an initial vertical slice, not its complete stable contract.
+Schemas, run comparison, or the embedded Action. The Conda profile is an initial vertical
+slice, not its complete stable contract.
 
 ## Reading order
 

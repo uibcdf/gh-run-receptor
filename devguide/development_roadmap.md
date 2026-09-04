@@ -109,7 +109,7 @@ its exit condition and deliverables are satisfied:
 | Phase 1: generic CLI | 30% | First structured-evidence vertical slice implemented locally |
 | Phase 2: rules and profiles | 20% | First Conda interpretation slice implemented locally |
 | Phase 3: embedded Action | 15% | Contract designed; distribution open |
-| Phase 4: aggregation and comparison | 10% | Designed; not implemented |
+| Phase 4: aggregation and comparison | 10% | Transition-only watch slice implemented locally |
 | Cross-cutting release gate | 10% | Requirements documented; not validated |
 
 Design completion is reported separately from implementation progress. At this checkpoint
