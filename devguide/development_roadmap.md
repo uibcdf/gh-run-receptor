@@ -105,7 +105,7 @@ its exit condition and deliverables are satisfied:
 
 | Phase | Weight toward 1.0 | Current state |
 | --- | ---: | --- |
-| Phase 0: corpus and feasibility | 15% | In progress; one MolSysMT capture and native baseline validated |
+| Phase 0: corpus and feasibility | 15% | In progress; failing and successful MolSysMT Conda cases measured |
 | Phase 1: generic CLI | 30% | First structured-evidence vertical slice implemented locally |
 | Phase 2: rules and profiles | 20% | First Conda interpretation slice implemented locally |
 | Phase 3: embedded Action | 15% | Contract designed; distribution open |

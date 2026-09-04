@@ -68,6 +68,11 @@ five Conda platforms succeeded, while no GitHub artifact remained available. The
 therefore states platform success and `artifacts=0` without claiming reusable artifacts.
 Its LLM projection is one line; human and JSON projections retain all jobs.
 
+Against a native verification baseline that also included jobs and artifact inventory,
+the one-line report reduced input by 72.2% to 73.1% across the measured tokenizers. A
+minimal native status-only query remained smaller than the richer receptor report; this
+negative boundary is documented alongside the benchmark rather than hidden.
+
 The measured comparison with a locally filtered native baseline is recorded in
 [benchmark_2026-09-04.md](benchmark_2026-09-04.md). The pilot reduced reader input by
 93.9% to 94.7% across four tokenizers, while the unfiltered native failed log remained on

@@ -83,3 +83,35 @@ The next benchmark set must include successful runs, independent failures, non-C
 documentation, cancellation, incomplete evidence, rerun attempts, and cases where generic
 filtering is already very small. Commands should move into a reproducible harness before
 aggregate numbers are published.
+
+## Successful Conda sensitivity case
+
+Commit `7446bca` was also replayed against MolSysMT run `33849332945`, attempt 1. GitHub
+reported success for all six jobs and all five native Conda platforms. No GitHub artifacts
+were retained. The complete adaptive bundle manifest has SHA-256
+`63906d73852aeac6bbf602e3c3f45f7fa9dd23b4b6e9d010fab1d14875f47d89`.
+
+For a consumer verifying workflow, job/platform coverage, and artifact inventory, the
+native baseline used the same structured jobs query and artifact query as above, with no
+log query. It produced 609 bytes. The one-line receptor report produced 115 bytes:
+
+| Tokenizer | Native verification baseline | Receptor | Reduction |
+| --- | ---: | ---: | ---: |
+| `cl100k_base` | 143 | 39 | 72.7% |
+| `o200k_base` | 144 | 40 | 72.2% |
+| `p50k_base` | 160 | 43 | 73.1% |
+| `r50k_base` | 160 | 43 | 73.1% |
+
+There is an important counterpoint. If the consumer asks only whether the run succeeded,
+this native query is already smaller:
+
+```text
+gh run view 33849332945 --repo uibcdf/molsysmt \
+  --json status,conclusion --jq '{status,conclusion}'
+```
+
+It produced 46 bytes and 10 `cl100k_base` tokens, versus the receptor's 39. The receptor
+must not claim savings for that narrower question. Its extra tokens establish platform/job
+coverage, artifact availability, profile, repository, and run identity. A future brief or
+transition-only monitoring mode should be compared separately; users needing only a
+one-time binary status should continue to use the native query.
