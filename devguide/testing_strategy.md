@@ -64,6 +64,12 @@ and release coordination. The MolSysMT run identifiers listed in
 [motivation_and_evidence.md](motivation_and_evidence.md) are starting research evidence,
 not automatically safe fixtures.
 
+The first reviewed corpus entries are catalogued in `tests/fixtures/corpus.json`. They are
+metadata-only reductions of public MolSysMT Conda runs `33863426589` and `33849332945`.
+The catalog records why each run is retained, exactly what sanitization removed, expected
+official and receptor outcomes, and the upstream-retention caveat. The committed bundles
+contain no actors, commit messages, runner details, pull-request data, or API URLs.
+
 ## Quality metrics
 
 Evaluation records both correctness and economy:

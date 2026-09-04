@@ -25,13 +25,26 @@ def _bundle(path, conclusion="success"):
     for name, value in values.items():
         data = (json.dumps(value, sort_keys=True) + "\n").encode()
         (path / name).write_bytes(data)
-        members.append({"path": name, "sha256": hashlib.sha256(data).hexdigest()})
+        members.append(
+            {
+                "path": name,
+                "kind": f"test.{name}",
+                "sha256": hashlib.sha256(data).hexdigest(),
+                "bytes": len(data),
+                "complete": True,
+            }
+        )
     manifest = {
         "schema": "gh-run-receptor.bundle@1",
         "repository": "uibcdf/example",
+        "hostname": "github.com",
         "run_id": 1,
         "run_attempt": 1,
         "head_sha": "abc",
+        "api_version": "2022-11-28",
+        "receptor_version": "test",
+        "capture_policy": "metadata",
+        "captured_at": "2026-09-04T10:00:00+00:00",
         "complete": True,
         "members": members,
         "warnings": [],

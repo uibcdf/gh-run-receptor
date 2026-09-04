@@ -1,0 +1,3 @@
+{
+  "path": ".github/workflows/build_and_upload_conda_packages.yaml"
+}

@@ -21,13 +21,25 @@ def _write_bundle(path):
         data = (json.dumps(values[name], sort_keys=True) + "\n").encode()
         (path / name).write_bytes(data)
         members.append(
-            {"path": name, "sha256": hashlib.sha256(data).hexdigest(), "bytes": len(data)}
+            {
+                "path": name,
+                "kind": f"test.{name}",
+                "sha256": hashlib.sha256(data).hexdigest(),
+                "bytes": len(data),
+                "complete": True,
+            }
         )
     manifest = {
         "schema": "gh-run-receptor.bundle@1",
         "repository": "uibcdf/molsysmt",
+        "hostname": "github.com",
         "run_id": 42,
         "run_attempt": 1,
+        "head_sha": "abc",
+        "api_version": "2022-11-28",
+        "receptor_version": "test",
+        "capture_policy": "metadata",
+        "captured_at": "2026-09-04T10:00:00+00:00",
         "complete": True,
         "members": members,
         "warnings": [],
@@ -50,7 +62,7 @@ def test_load_bundle_rejects_changed_member(tmp_path):
     _write_bundle(bundle)
     (bundle / "run.json").write_text('{"conclusion": "failure"}\n')
 
-    with pytest.raises(BundleError, match="digest mismatch"):
+    with pytest.raises(BundleError, match="byte-count mismatch"):
         load_bundle(bundle)
 
 
@@ -59,7 +71,15 @@ def test_load_bundle_rejects_traversal_member(tmp_path):
     _write_bundle(bundle)
     manifest_path = bundle / "manifest.json"
     manifest = json.loads(manifest_path.read_text())
-    manifest["members"].append({"path": "../secret", "sha256": "unused"})
+    manifest["members"].append(
+        {
+            "path": "../secret",
+            "kind": "untrusted",
+            "bytes": 0,
+            "sha256": "0" * 64,
+            "complete": True,
+        }
+    )
     manifest_path.write_text(json.dumps(manifest))
 
     with pytest.raises(BundleError, match="unsafe or duplicate"):
@@ -74,3 +94,26 @@ def test_default_bundle_path_separates_capture_policies(tmp_path):
 
     assert metadata != full
     assert metadata.parts[-5:] == ("uibcdf", "molsysmt", "42", "2", "metadata")
+
+
+def test_load_bundle_rejects_duplicate_json_keys(tmp_path):
+    bundle = tmp_path / "bundle"
+    _write_bundle(bundle)
+    manifest = (bundle / "manifest.json").read_text()
+    manifest = manifest.replace('"schema":', '"schema": "duplicate", "schema":', 1)
+    (bundle / "manifest.json").write_text(manifest)
+
+    with pytest.raises(BundleError, match="duplicate JSON key"):
+        load_bundle(bundle)
+
+
+def test_load_bundle_rejects_member_byte_count_mismatch(tmp_path):
+    bundle = tmp_path / "bundle"
+    _write_bundle(bundle)
+    manifest_path = bundle / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["members"][0]["bytes"] += 1
+    manifest_path.write_text(json.dumps(manifest))
+
+    with pytest.raises(BundleError, match="byte-count mismatch"):
+        load_bundle(bundle)

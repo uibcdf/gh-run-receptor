@@ -1,0 +1,26 @@
+{
+  "artifacts": [
+    {
+      "digest": "sha256:166e757011739e7cfc80e7c150a70f2b36920bf7d33b37ad5d053710c1e6b896",
+      "expired": false,
+      "id": 9933215024,
+      "name": "molsysmt-conda-rattler-win-64-lto-true",
+      "size_in_bytes": 57220215
+    },
+    {
+      "digest": "sha256:07cf65f332f0b869977ffb4e823d6ad459a6db281395a61a3f1c6e08e167cca2",
+      "expired": false,
+      "id": 9933104699,
+      "name": "molsysmt-conda-rattler-linux-64-lto-true",
+      "size_in_bytes": 57303706
+    },
+    {
+      "digest": "sha256:df191cb76dfeedcc6e667a00c223b838cf3a570e0ecb4a36ea53679be61133d0",
+      "expired": false,
+      "id": 9933091655,
+      "name": "molsysmt-conda-rattler-linux-aarch64-lto-true",
+      "size_in_bytes": 57066793
+    }
+  ],
+  "total_count": 3
+}

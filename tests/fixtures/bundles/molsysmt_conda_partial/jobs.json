@@ -1,0 +1,336 @@
+{
+  "jobs": [
+    {
+      "completed_at": "2026-09-04T10:28:56Z",
+      "conclusion": "success",
+      "html_url": "https://github.com/uibcdf/molsysmt/actions/runs/33863426589/job/100992797353",
+      "id": 100992797353,
+      "name": "Select the requested native platform matrix",
+      "started_at": "2026-09-04T10:28:53Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Build the target matrix",
+          "number": 2
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 3
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-09-04T10:39:50Z",
+      "conclusion": "failure",
+      "html_url": "https://github.com/uibcdf/molsysmt/actions/runs/33863426589/job/100992823185",
+      "id": 100992823185,
+      "name": "osx-arm64 · Rattler · LTO true",
+      "started_at": "2026-09-04T10:36:13Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v7",
+          "number": 2
+        },
+        {
+          "conclusion": "success",
+          "name": "Create an ephemeral candidate version",
+          "number": 3
+        },
+        {
+          "conclusion": "success",
+          "name": "Set up Rattler Build and Conda clients",
+          "number": 4
+        },
+        {
+          "conclusion": "success",
+          "name": "Build one platform-specific ABI3 artifact",
+          "number": 5
+        },
+        {
+          "conclusion": "failure",
+          "name": "Inspect metadata and test the exact artifact on every Python",
+          "number": 6
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Run actions/upload-artifact@v7",
+          "number": 7
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Set up Rattler Build and Conda clients",
+          "number": 13
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v7",
+          "number": 14
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 15
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-09-04T10:36:06Z",
+      "conclusion": "failure",
+      "html_url": "https://github.com/uibcdf/molsysmt/actions/runs/33863426589/job/100992823189",
+      "id": 100992823189,
+      "name": "osx-64 · Rattler · LTO true",
+      "started_at": "2026-09-04T10:29:00Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v7",
+          "number": 2
+        },
+        {
+          "conclusion": "success",
+          "name": "Create an ephemeral candidate version",
+          "number": 3
+        },
+        {
+          "conclusion": "success",
+          "name": "Set up Rattler Build and Conda clients",
+          "number": 4
+        },
+        {
+          "conclusion": "success",
+          "name": "Build one platform-specific ABI3 artifact",
+          "number": 5
+        },
+        {
+          "conclusion": "failure",
+          "name": "Inspect metadata and test the exact artifact on every Python",
+          "number": 6
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Run actions/upload-artifact@v7",
+          "number": 7
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Set up Rattler Build and Conda clients",
+          "number": 13
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v7",
+          "number": 14
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 15
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-09-04T10:36:26Z",
+      "conclusion": "success",
+      "html_url": "https://github.com/uibcdf/molsysmt/actions/runs/33863426589/job/100992823201",
+      "id": 100992823201,
+      "name": "win-64 · Rattler · LTO true",
+      "started_at": "2026-09-04T10:28:59Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v7",
+          "number": 2
+        },
+        {
+          "conclusion": "success",
+          "name": "Create an ephemeral candidate version",
+          "number": 3
+        },
+        {
+          "conclusion": "success",
+          "name": "Set up Rattler Build and Conda clients",
+          "number": 4
+        },
+        {
+          "conclusion": "success",
+          "name": "Build one platform-specific ABI3 artifact",
+          "number": 5
+        },
+        {
+          "conclusion": "success",
+          "name": "Inspect metadata and test the exact artifact on every Python",
+          "number": 6
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v7",
+          "number": 7
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Set up Rattler Build and Conda clients",
+          "number": 13
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v7",
+          "number": 14
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 15
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-09-04T10:32:39Z",
+      "conclusion": "success",
+      "html_url": "https://github.com/uibcdf/molsysmt/actions/runs/33863426589/job/100992823210",
+      "id": 100992823210,
+      "name": "linux-64 · Rattler · LTO true",
+      "started_at": "2026-09-04T10:29:00Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v7",
+          "number": 2
+        },
+        {
+          "conclusion": "success",
+          "name": "Create an ephemeral candidate version",
+          "number": 3
+        },
+        {
+          "conclusion": "success",
+          "name": "Set up Rattler Build and Conda clients",
+          "number": 4
+        },
+        {
+          "conclusion": "success",
+          "name": "Build one platform-specific ABI3 artifact",
+          "number": 5
+        },
+        {
+          "conclusion": "success",
+          "name": "Inspect metadata and test the exact artifact on every Python",
+          "number": 6
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v7",
+          "number": 7
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Set up Rattler Build and Conda clients",
+          "number": 13
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v7",
+          "number": 14
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 15
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-09-04T10:32:10Z",
+      "conclusion": "success",
+      "html_url": "https://github.com/uibcdf/molsysmt/actions/runs/33863426589/job/100992823215",
+      "id": 100992823215,
+      "name": "linux-aarch64 · Rattler · LTO true",
+      "started_at": "2026-09-04T10:29:01Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v7",
+          "number": 2
+        },
+        {
+          "conclusion": "success",
+          "name": "Create an ephemeral candidate version",
+          "number": 3
+        },
+        {
+          "conclusion": "success",
+          "name": "Set up Rattler Build and Conda clients",
+          "number": 4
+        },
+        {
+          "conclusion": "success",
+          "name": "Build one platform-specific ABI3 artifact",
+          "number": 5
+        },
+        {
+          "conclusion": "success",
+          "name": "Inspect metadata and test the exact artifact on every Python",
+          "number": 6
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/upload-artifact@v7",
+          "number": 7
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Set up Rattler Build and Conda clients",
+          "number": 13
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v7",
+          "number": 14
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 15
+        }
+      ]
+    }
+  ],
+  "total_count": 6
+}

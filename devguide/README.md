@@ -27,10 +27,14 @@ The current MVP implements:
 - conservative Conda auto-detection, reusable-platform classification, and cross-job
   cause grouping;
 - transition-only `watch` with polling backoff and a single final adaptive report.
+- machine-readable `bundle@1`, `model@1`, and `report@1` schemas, with strict bundle
+  validation and source-referenced normalization;
+- sanitized success and partial-failure MolSysMT Conda fixtures with deterministic replay
+  and official-conclusion parity tests.
 
-It does not yet provide declarative configuration, CI/docs/release profiles, formal JSON
-Schemas, run comparison, or the embedded Action. The Conda profile is an initial vertical
-slice, not its complete stable contract.
+It does not yet provide declarative configuration, CI/docs/release profiles, a broad
+cross-workflow corpus, run comparison, or the embedded Action. The Conda profile is an
+initial vertical slice, not its complete stable contract.
 
 ## Reading order
 

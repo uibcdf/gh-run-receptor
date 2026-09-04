@@ -4,11 +4,11 @@ from __future__ import annotations
 
 import json
 import unicodedata
-from datetime import datetime
 from pathlib import Path
 from typing import Any
 
 from gh_run_receptor.logs import extract_causes
+from gh_run_receptor.model import normalize_evidence
 
 MAX_FAILURES = 10
 MAX_ARTIFACTS = 10
@@ -31,18 +31,6 @@ def _safe_text(value: Any) -> str:
     if len(cleaned) > MAX_TEXT_FIELD:
         return cleaned[: MAX_TEXT_FIELD - 1] + "…"
     return cleaned
-
-
-def _duration_seconds(started: str | None, completed: str | None) -> int | None:
-    if not started or not completed:
-        return None
-    try:
-        start = datetime.fromisoformat(started.replace("Z", "+00:00"))
-        end = datetime.fromisoformat(completed.replace("Z", "+00:00"))
-    except ValueError:
-        return None
-    seconds = round((end - start).total_seconds())
-    return seconds if seconds >= 0 else None
 
 
 def _assessment(status: Any, conclusion: Any) -> str:
@@ -102,58 +90,16 @@ def build_report(
     bundle_directory: Path | None = None,
 ) -> dict[str, Any]:
     """Building a generic report without changing source conclusions."""
-    run = evidence["run.json"]
-    workflow = evidence["workflow.json"]
-    jobs = evidence["jobs.json"].get("jobs", [])
-    artifacts = evidence["artifacts.json"].get("artifacts", [])
+    model = normalize_evidence(manifest, evidence)
+    jobs = model["jobs"]
+    artifacts = model["artifacts"]
     selected_profile = (
-        _detect_profile(workflow.get("path") or run.get("name"), jobs)
+        _detect_profile(model["subject"]["workflow"], jobs)
         if profile == "auto"
         else profile
     )
 
-    normalized_jobs = []
-    counts: dict[str, int] = {}
-    for job in jobs:
-        conclusion = job.get("conclusion") or job.get("status") or "unknown"
-        counts[conclusion] = counts.get(conclusion, 0) + 1
-        failed_steps = [
-            {
-                "number": step.get("number"),
-                "name": step.get("name"),
-                "conclusion": step.get("conclusion"),
-            }
-            for step in job.get("steps", [])
-            if step.get("conclusion") not in (None, "success", "skipped")
-        ]
-        normalized_jobs.append(
-            {
-                "id": job.get("id"),
-                "name": job.get("name"),
-                "status": job.get("status"),
-                "conclusion": job.get("conclusion"),
-                "duration_seconds": _duration_seconds(
-                    job.get("started_at"), job.get("completed_at")
-                ),
-                "failed_steps": failed_steps,
-                "url": job.get("html_url"),
-            }
-        )
-
-    normalized_jobs.sort(key=lambda item: (str(item["name"]), int(item["id"] or 0)))
-    normalized_artifacts = [
-        {
-            "id": artifact.get("id"),
-            "name": artifact.get("name"),
-            "size_bytes": artifact.get("size_in_bytes"),
-            "expired": artifact.get("expired"),
-            "digest": artifact.get("digest"),
-        }
-        for artifact in artifacts
-    ]
-    normalized_artifacts.sort(key=lambda item: (str(item["name"]), int(item["id"] or 0)))
-
-    failed_jobs = [job for job in normalized_jobs if job["conclusion"] == "failure"]
+    failed_jobs = [job for job in jobs if job["conclusion"] == "failure"]
     log_member = next(
         (member for member in manifest.get("members", []) if member.get("path") == "logs.zip"), None
     )
@@ -170,12 +116,12 @@ def build_report(
         cause_evidence = "complete" if len(diagnosed_jobs) == len(failed_jobs) else "partial"
 
     matrix = (
-        _conda_matrix(normalized_jobs, normalized_artifacts)
+        _conda_matrix(jobs, artifacts)
         if selected_profile == "conda"
         else {}
     )
-    assessment = _assessment(run.get("status"), run.get("conclusion"))
-    if not manifest.get("complete"):
+    assessment = _assessment(model["github"]["status"], model["github"]["conclusion"])
+    if not model["bundle_complete"]:
         assessment = "INCOMPLETE"
     if (
         selected_profile == "conda"
@@ -186,27 +132,23 @@ def build_report(
 
     return {
         "schema": "gh-run-receptor.report@1",
-        "subject": {
-            "repository": manifest["repository"],
-            "workflow": workflow.get("path") or run.get("name"),
-            "run_id": manifest["run_id"],
-            "run_attempt": manifest["run_attempt"],
-            "head_sha": manifest.get("head_sha"),
-            "url": run.get("html_url"),
-        },
-        "github": {"status": run.get("status"), "conclusion": run.get("conclusion")},
+        "subject": model["subject"],
+        "github": model["github"],
         "receptor": {
             "assessment": assessment,
             "profile": selected_profile,
-            "evidence_sufficient": bool(manifest.get("complete")),
+            "profile_version": 1,
+            "evidence_sufficient": model["bundle_complete"],
             "cause_evidence": cause_evidence,
         },
-        "jobs": normalized_jobs,
-        "job_counts": dict(sorted(counts.items())),
-        "artifacts": normalized_artifacts,
+        "completeness": model["completeness"],
+        "jobs": jobs,
+        "job_counts": model["job_counts"],
+        "artifacts": artifacts,
         "matrix": matrix,
         "causes": causes,
-        "warnings": [*manifest.get("warnings", []), *analysis_warnings],
+        "unknowns": model["unknowns"],
+        "warnings": [*model["warnings"], *analysis_warnings],
     }
 
 

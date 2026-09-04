@@ -1,0 +1,336 @@
+{
+  "jobs": [
+    {
+      "completed_at": "2026-09-04T07:34:21Z",
+      "conclusion": "success",
+      "html_url": "https://github.com/uibcdf/molsysmt/actions/runs/33849332945/job/100948301615",
+      "id": 100948301615,
+      "name": "Validate the immutable candidate identity",
+      "started_at": "2026-09-04T07:34:17Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Validate staging inputs or the release tag",
+          "number": 2
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 3
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-09-04T07:45:13Z",
+      "conclusion": "success",
+      "html_url": "https://github.com/uibcdf/molsysmt/actions/runs/33849332945/job/100948330658",
+      "id": 100948330658,
+      "name": "win-64 · one ABI3 artifact",
+      "started_at": "2026-09-04T07:34:24Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Check out the exact candidate",
+          "number": 2
+        },
+        {
+          "conclusion": "success",
+          "name": "Verify the staging candidate and create an ephemeral version tag",
+          "number": 3
+        },
+        {
+          "conclusion": "success",
+          "name": "Set up the conda build environment",
+          "number": 4
+        },
+        {
+          "conclusion": "success",
+          "name": "Verify the derived package version",
+          "number": 5
+        },
+        {
+          "conclusion": "success",
+          "name": "Build and publish the staging platform",
+          "number": 6
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Build, test, and publish the release platform",
+          "number": 7
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Set up the conda build environment",
+          "number": 13
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Check out the exact candidate",
+          "number": 14
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 15
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-09-04T07:42:35Z",
+      "conclusion": "success",
+      "html_url": "https://github.com/uibcdf/molsysmt/actions/runs/33849332945/job/100948330678",
+      "id": 100948330678,
+      "name": "osx-arm64 · one ABI3 artifact",
+      "started_at": "2026-09-04T07:34:30Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Check out the exact candidate",
+          "number": 2
+        },
+        {
+          "conclusion": "success",
+          "name": "Verify the staging candidate and create an ephemeral version tag",
+          "number": 3
+        },
+        {
+          "conclusion": "success",
+          "name": "Set up the conda build environment",
+          "number": 4
+        },
+        {
+          "conclusion": "success",
+          "name": "Verify the derived package version",
+          "number": 5
+        },
+        {
+          "conclusion": "success",
+          "name": "Build and publish the staging platform",
+          "number": 6
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Build, test, and publish the release platform",
+          "number": 7
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Set up the conda build environment",
+          "number": 13
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Check out the exact candidate",
+          "number": 14
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 15
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-09-04T07:54:22Z",
+      "conclusion": "success",
+      "html_url": "https://github.com/uibcdf/molsysmt/actions/runs/33849332945/job/100948330713",
+      "id": 100948330713,
+      "name": "osx-64 · one ABI3 artifact",
+      "started_at": "2026-09-04T07:34:26Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Check out the exact candidate",
+          "number": 2
+        },
+        {
+          "conclusion": "success",
+          "name": "Verify the staging candidate and create an ephemeral version tag",
+          "number": 3
+        },
+        {
+          "conclusion": "success",
+          "name": "Set up the conda build environment",
+          "number": 4
+        },
+        {
+          "conclusion": "success",
+          "name": "Verify the derived package version",
+          "number": 5
+        },
+        {
+          "conclusion": "success",
+          "name": "Build and publish the staging platform",
+          "number": 6
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Build, test, and publish the release platform",
+          "number": 7
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Set up the conda build environment",
+          "number": 13
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Check out the exact candidate",
+          "number": 14
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 15
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-09-04T07:38:58Z",
+      "conclusion": "success",
+      "html_url": "https://github.com/uibcdf/molsysmt/actions/runs/33849332945/job/100948330760",
+      "id": 100948330760,
+      "name": "linux-64 · one ABI3 artifact",
+      "started_at": "2026-09-04T07:34:24Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Check out the exact candidate",
+          "number": 2
+        },
+        {
+          "conclusion": "success",
+          "name": "Verify the staging candidate and create an ephemeral version tag",
+          "number": 3
+        },
+        {
+          "conclusion": "success",
+          "name": "Set up the conda build environment",
+          "number": 4
+        },
+        {
+          "conclusion": "success",
+          "name": "Verify the derived package version",
+          "number": 5
+        },
+        {
+          "conclusion": "success",
+          "name": "Build and publish the staging platform",
+          "number": 6
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Build, test, and publish the release platform",
+          "number": 7
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Set up the conda build environment",
+          "number": 13
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Check out the exact candidate",
+          "number": 14
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 15
+        }
+      ]
+    },
+    {
+      "completed_at": "2026-09-04T07:38:39Z",
+      "conclusion": "success",
+      "html_url": "https://github.com/uibcdf/molsysmt/actions/runs/33849332945/job/100948330763",
+      "id": 100948330763,
+      "name": "linux-aarch64 · one ABI3 artifact",
+      "started_at": "2026-09-04T07:34:27Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Check out the exact candidate",
+          "number": 2
+        },
+        {
+          "conclusion": "success",
+          "name": "Verify the staging candidate and create an ephemeral version tag",
+          "number": 3
+        },
+        {
+          "conclusion": "success",
+          "name": "Set up the conda build environment",
+          "number": 4
+        },
+        {
+          "conclusion": "success",
+          "name": "Verify the derived package version",
+          "number": 5
+        },
+        {
+          "conclusion": "success",
+          "name": "Build and publish the staging platform",
+          "number": 6
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Build, test, and publish the release platform",
+          "number": 7
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Set up the conda build environment",
+          "number": 13
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Check out the exact candidate",
+          "number": 14
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 15
+        }
+      ]
+    }
+  ],
+  "total_count": 6
+}

@@ -15,6 +15,7 @@ from gh_run_receptor.errors import AcquisitionError, BundleError
 from gh_run_receptor.github import API_VERSION, GitHubClient, merge_pages
 
 STRUCTURED_MEMBERS = ("run.json", "workflow.json", "jobs.json", "checks.json", "artifacts.json")
+_CAPTURE_POLICIES = {"full", "adaptive", "metadata"}
 
 
 def _canonical_json(value: Any) -> bytes:
@@ -23,6 +24,65 @@ def _canonical_json(value: Any) -> bytes:
 
 def _sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+def _strict_json(data: str | bytes, context: str) -> Any:
+    def object_without_duplicates(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
+        value: dict[str, Any] = {}
+        for key, item in pairs:
+            if key in value:
+                raise BundleError(f"duplicate JSON key in {context}: {key!r}")
+            value[key] = item
+        return value
+
+    def reject_constant(value: str) -> None:
+        raise BundleError(f"non-finite JSON number in {context}: {value}")
+
+    try:
+        return json.loads(
+            data,
+            object_pairs_hook=object_without_duplicates,
+            parse_constant=reject_constant,
+        )
+    except (UnicodeDecodeError, json.JSONDecodeError) as error:
+        raise BundleError(f"invalid JSON in {context}: {error}") from error
+
+
+def _validate_manifest(manifest: Any) -> dict[str, Any]:
+    if not isinstance(manifest, dict):
+        raise BundleError("bundle manifest is not a JSON object")
+    if manifest.get("schema") != "gh-run-receptor.bundle@1":
+        raise BundleError(f"unsupported bundle schema: {manifest.get('schema')!r}")
+    required_types = {
+        "repository": str,
+        "hostname": str,
+        "run_id": int,
+        "run_attempt": int,
+        "api_version": str,
+        "receptor_version": str,
+        "capture_policy": str,
+        "captured_at": str,
+        "complete": bool,
+        "members": list,
+        "warnings": list,
+    }
+    for key, expected in required_types.items():
+        value = manifest.get(key)
+        if not isinstance(value, expected) or (expected is int and isinstance(value, bool)):
+            raise BundleError(f"bundle manifest field {key!r} has invalid type")
+    if manifest["repository"].count("/") != 1 or not all(manifest["repository"].split("/")):
+        raise BundleError("bundle manifest repository must have OWNER/REPO form")
+    if not manifest["hostname"] or "/" in manifest["hostname"]:
+        raise BundleError("bundle manifest hostname is invalid")
+    if manifest["run_id"] < 1 or manifest["run_attempt"] < 1:
+        raise BundleError("bundle run and attempt identifiers must be positive")
+    if manifest["capture_policy"] not in _CAPTURE_POLICIES:
+        raise BundleError(f"unsupported capture policy: {manifest['capture_policy']!r}")
+    if not all(isinstance(item, str) for item in manifest["warnings"]):
+        raise BundleError("bundle warnings must be strings")
+    if manifest.get("head_sha") is not None and not isinstance(manifest["head_sha"], str):
+        raise BundleError("bundle head_sha must be a string or null")
+    return manifest
 
 
 def _write_member(directory: Path, name: str, value: Any, kind: str) -> dict[str, Any]:
@@ -168,31 +228,44 @@ def capture_bundle(
 def load_bundle(directory: Path) -> tuple[dict[str, Any], dict[str, Any]]:
     """Validating a bundle and returning its manifest and structured evidence."""
     try:
-        manifest = json.loads((directory / "manifest.json").read_text())
-    except (OSError, json.JSONDecodeError) as error:
+        manifest_data = (directory / "manifest.json").read_bytes()
+    except OSError as error:
         raise BundleError(f"cannot read bundle manifest: {error}") from error
-    if manifest.get("schema") != "gh-run-receptor.bundle@1":
-        raise BundleError(f"unsupported bundle schema: {manifest.get('schema')!r}")
+    manifest = _validate_manifest(_strict_json(manifest_data, "manifest.json"))
 
     evidence: dict[str, Any] = {}
     seen: set[str] = set()
-    for member in manifest.get("members", []):
+    for member in manifest["members"]:
+        if not isinstance(member, dict):
+            raise BundleError("bundle member record is not an object")
         name = member.get("path")
         if not isinstance(name, str) or name in seen or Path(name).name != name:
             raise BundleError(f"unsafe or duplicate bundle member: {name!r}")
+        if not isinstance(member.get("kind"), str) or not member["kind"]:
+            raise BundleError(f"bundle member has invalid kind: {name}")
+        if (
+            not isinstance(member.get("bytes"), int)
+            or isinstance(member["bytes"], bool)
+            or member["bytes"] < 0
+        ):
+            raise BundleError(f"bundle member has invalid byte count: {name}")
+        if not isinstance(member.get("complete"), bool):
+            raise BundleError(f"bundle member has invalid completeness: {name}")
+        digest = member.get("sha256")
+        if not isinstance(digest, str) or len(digest) != 64:
+            raise BundleError(f"bundle member has invalid digest: {name}")
         seen.add(name)
         path = directory / name
         try:
             data = path.read_bytes()
         except OSError as error:
             raise BundleError(f"missing bundle member: {name}") from error
-        if _sha256(data) != member.get("sha256"):
+        if len(data) != member["bytes"]:
+            raise BundleError(f"byte-count mismatch for bundle member: {name}")
+        if _sha256(data) != digest:
             raise BundleError(f"digest mismatch for bundle member: {name}")
         if name in STRUCTURED_MEMBERS:
-            try:
-                evidence[name] = json.loads(data)
-            except json.JSONDecodeError as error:
-                raise BundleError(f"invalid JSON bundle member: {name}") from error
+            evidence[name] = _strict_json(data, name)
 
     required = set(STRUCTURED_MEMBERS)
     if missing := sorted(required - evidence.keys()):

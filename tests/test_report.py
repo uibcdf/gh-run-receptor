@@ -58,7 +58,9 @@ def _manifest(complete=True):
         "run_id": 42,
         "run_attempt": 2,
         "head_sha": "abc",
+        "capture_policy": "metadata",
         "complete": complete,
+        "members": [],
         "warnings": [],
     }
 

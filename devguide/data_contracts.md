@@ -40,6 +40,7 @@ The first manifest shape is:
   "run_attempt": 1,
   "head_sha": "0123456789abcdef",
   "api_version": "explicit-version-string",
+  "receptor_version": "0.2.0",
   "capture_policy": "full",
   "captured_at": "2026-09-04T10:40:00Z",
   "complete": true,
@@ -47,8 +48,6 @@ The first manifest shape is:
     {
       "path": "run.json",
       "kind": "github.workflow_run",
-      "source_url": "https://api.github.com/...",
-      "status": 200,
       "bytes": 12345,
       "sha256": "...",
       "complete": true
@@ -58,9 +57,10 @@ The first manifest shape is:
 }
 ```
 
-The manifest itself has a canonical digest calculated without a self-referential digest
-field. A member is immutable after capture. Refreshing active evidence creates a new
-generation or atomically replaces the bundle only after all new members and the
+The manifest and structured members use canonical, sorted JSON encoding. Every member has
+an exact byte count and SHA-256 digest; both are checked before replay. The manifest is not
+self-digested. A member is immutable after capture. Refreshing active evidence creates a
+new generation or atomically replaces the bundle only after all new members and the
 manifest validate.
 
 The default cache identity includes hostname, repository, run ID, attempt, and capture
@@ -83,6 +83,10 @@ Log evidence adds archive member, normalized line range, and original line range
 reference never relies solely on a temporary local absolute path.
 
 ## Normalized identities
+
+Normalization produces `gh-run-receptor.model@1`. Every normalized job, failed step, and
+artifact carries a source member and JSON Pointer. Profile interpretation consumes this
+model rather than the original GitHub dictionaries.
 
 - Repository: normalized hostname plus case-preserving `owner/name` display and a
   comparison-safe form.
@@ -143,14 +147,17 @@ The report preserves official and derived state:
     "assessment": "PARTIAL",
     "profile": "conda",
     "profile_version": 1,
-    "evidence_sufficient": true
+    "evidence_sufficient": true,
+    "cause_evidence": "complete"
   },
+  "completeness": {},
+  "jobs": [],
+  "job_counts": {},
   "matrix": {},
   "causes": [],
   "artifacts": [],
-  "metrics": {},
   "unknowns": [],
-  "suggestions": []
+  "warnings": []
 }
 ```
 
@@ -209,5 +216,15 @@ count, line size, total bytes, nesting, and string lengths.
 - Readers support every non-retired schema version and produce an explicit incompatibility
   error for future major versions.
 
-Formal JSON Schemas are a Phase 1 deliverable. The examples in this document define the
-minimum semantic boundary, not yet the final property spelling.
+The machine-readable Draft 2020-12 schemas ship inside `gh_run_receptor.schemas` as
+`bundle-v1.schema.json`, `model-v1.schema.json`, and `report-v1.schema.json`. They are the
+formal spelling of the version 1 boundaries. The runtime validates untrusted bundle JSON,
+critical manifest types, member paths, byte counts, digests, source collection shapes,
+duplicate keys, and non-finite numbers without adding a validation dependency. The test
+gate uses `jsonschema` to prove that real normalized models and reports conform to the
+published files; `jsonschema` is a test/development dependency, not a runtime dependency.
+
+Unknown GitHub enum values remain valid strings in normalized facts and also appear in
+`unknowns` with their source reference. Additional fields are allowed at contract
+boundaries so additive evidence survives older readers. A reader must still reject an
+unknown schema identifier rather than guessing compatibility.

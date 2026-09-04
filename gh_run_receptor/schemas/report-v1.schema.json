@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://uibcdf.org/gh-run-receptor/schemas/report-v1.schema.json",
+  "title": "gh-run-receptor.report@1",
+  "type": "object",
+  "required": [
+    "schema", "subject", "github", "receptor", "completeness", "jobs", "job_counts",
+    "artifacts", "matrix", "causes", "unknowns", "warnings"
+  ],
+  "properties": {
+    "schema": {"const": "gh-run-receptor.report@1"},
+    "subject": {"$ref": "model-v1.schema.json#/$defs/subject"},
+    "github": {"$ref": "model-v1.schema.json#/$defs/githubState"},
+    "receptor": {
+      "type": "object",
+      "required": ["assessment", "profile", "profile_version", "evidence_sufficient", "cause_evidence"],
+      "properties": {
+        "assessment": {
+          "enum": [
+            "PASS", "FAIL", "PARTIAL", "PENDING", "CANCELLED", "TIMED_OUT",
+            "ACTION_REQUIRED", "STALE", "UNKNOWN", "INCOMPLETE"
+          ]
+        },
+        "profile": {"type": "string"},
+        "profile_version": {"type": "integer", "minimum": 1},
+        "evidence_sufficient": {"type": "boolean"},
+        "cause_evidence": {"enum": ["complete", "partial", "not_captured"]}
+      }
+    },
+    "completeness": {"$ref": "model-v1.schema.json#/$defs/completeness"},
+    "jobs": {
+      "type": "array",
+      "items": {"$ref": "model-v1.schema.json#/$defs/job"}
+    },
+    "job_counts": {
+      "type": "object",
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {"$ref": "model-v1.schema.json#/$defs/artifact"}
+    },
+    "matrix": {"type": "object"},
+    "causes": {"type": "array", "items": {"$ref": "#/$defs/cause"}},
+    "unknowns": {
+      "type": "array",
+      "items": {"$ref": "model-v1.schema.json#/$defs/unknown"}
+    },
+    "warnings": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "occurrence": {
+      "type": "object",
+      "required": ["job_id", "job_name", "member", "line", "kind", "message", "normalized"],
+      "properties": {
+        "job_id": {"type": ["integer", "null"]},
+        "job_name": {"type": "string"},
+        "member": {"type": "string"},
+        "line": {"type": "integer", "minimum": 1},
+        "kind": {"type": "string"},
+        "message": {"type": "string"},
+        "normalized": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "cause": {
+      "type": "object",
+      "required": ["fingerprint", "kind", "message", "occurrences"],
+      "properties": {
+        "fingerprint": {"type": "string", "pattern": "^[0-9a-f]{16}$"},
+        "kind": {"type": "string"},
+        "message": {"type": "string"},
+        "occurrences": {"type": "array", "items": {"$ref": "#/$defs/occurrence"}}
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

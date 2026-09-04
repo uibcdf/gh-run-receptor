@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://uibcdf.org/gh-run-receptor/schemas/model-v1.schema.json",
+  "title": "gh-run-receptor.model@1",
+  "type": "object",
+  "required": [
+    "schema", "subject", "github", "bundle_complete", "completeness", "jobs",
+    "job_counts", "artifacts", "unknowns", "warnings"
+  ],
+  "properties": {
+    "schema": {"const": "gh-run-receptor.model@1"},
+    "subject": {"$ref": "#/$defs/subject"},
+    "github": {"$ref": "#/$defs/githubState"},
+    "bundle_complete": {"type": "boolean"},
+    "completeness": {"$ref": "#/$defs/completeness"},
+    "jobs": {"type": "array", "items": {"$ref": "#/$defs/job"}},
+    "job_counts": {
+      "type": "object",
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    },
+    "artifacts": {"type": "array", "items": {"$ref": "#/$defs/artifact"}},
+    "unknowns": {"type": "array", "items": {"$ref": "#/$defs/unknown"}},
+    "warnings": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "source": {
+      "type": "object",
+      "required": ["member", "json_pointer"],
+      "properties": {
+        "member": {"type": "string", "minLength": 1},
+        "json_pointer": {"type": "string", "pattern": "^/"}
+      },
+      "additionalProperties": false
+    },
+    "subject": {
+      "type": "object",
+      "required": ["repository", "workflow", "run_id", "run_attempt", "head_sha", "url"],
+      "properties": {
+        "repository": {"type": "string", "pattern": "^[^/]+/[^/]+$"},
+        "workflow": {"type": ["string", "null"]},
+        "run_id": {"type": "integer", "minimum": 1},
+        "run_attempt": {"type": "integer", "minimum": 1},
+        "head_sha": {"type": ["string", "null"]},
+        "url": {"type": ["string", "null"]}
+      },
+      "additionalProperties": true
+    },
+    "githubState": {
+      "type": "object",
+      "required": ["status", "conclusion"],
+      "properties": {
+        "status": {"type": ["string", "null"]},
+        "conclusion": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "completeness": {
+      "type": "object",
+      "required": [
+        "metadata", "workflow", "jobs", "checks", "artifact_inventory",
+        "artifact_content", "logs"
+      ],
+      "additionalProperties": {
+        "enum": [
+          "complete", "partial", "unavailable", "expired", "not_permitted",
+          "not_requested", "invalid"
+        ]
+      }
+    },
+    "failedStep": {
+      "type": "object",
+      "required": ["number", "name", "conclusion", "source"],
+      "properties": {
+        "number": {"type": ["integer", "null"]},
+        "name": {"type": ["string", "null"]},
+        "conclusion": {"type": ["string", "null"]},
+        "source": {"$ref": "#/$defs/source"}
+      },
+      "additionalProperties": true
+    },
+    "job": {
+      "type": "object",
+      "required": [
+        "id", "name", "status", "conclusion", "duration_seconds", "failed_steps",
+        "url", "source"
+      ],
+      "properties": {
+        "id": {"type": ["integer", "null"]},
+        "name": {"type": ["string", "null"]},
+        "status": {"type": ["string", "null"]},
+        "conclusion": {"type": ["string", "null"]},
+        "duration_seconds": {"type": ["integer", "null"], "minimum": 0},
+        "failed_steps": {"type": "array", "items": {"$ref": "#/$defs/failedStep"}},
+        "url": {"type": ["string", "null"]},
+        "source": {"$ref": "#/$defs/source"}
+      },
+      "additionalProperties": true
+    },
+    "artifact": {
+      "type": "object",
+      "required": ["id", "name", "size_bytes", "expired", "digest", "source"],
+      "properties": {
+        "id": {"type": ["integer", "null"]},
+        "name": {"type": ["string", "null"]},
+        "size_bytes": {"type": ["integer", "null"], "minimum": 0},
+        "expired": {"type": ["boolean", "null"]},
+        "digest": {"type": ["string", "null"]},
+        "source": {"$ref": "#/$defs/source"}
+      },
+      "additionalProperties": true
+    },
+    "unknown": {
+      "type": "object",
+      "required": ["kind", "value", "source"],
+      "properties": {
+        "kind": {"type": "string"},
+        "value": {"type": "string"},
+        "source": {"$ref": "#/$defs/source"}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

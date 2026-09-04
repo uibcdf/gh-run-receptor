@@ -1,0 +1,29 @@
+{
+  "schema": "gh-run-receptor.test-corpus@1",
+  "captures": [
+    {
+      "path": "bundles/molsysmt_conda_partial",
+      "repository": "uibcdf/molsysmt",
+      "run_id": 33863426589,
+      "run_attempt": 1,
+      "captured_at": "2026-09-04",
+      "reason": "A five-platform Conda matrix with successful reusable artifacts and two failed macOS jobs.",
+      "sanitization": "Retained only run identity, official state, workflow path, job timing and conclusions, failed-step state, and artifact identity metadata. Removed actors, commits, runner details, labels, pull requests, and API URLs.",
+      "expected_github_conclusion": "failure",
+      "expected_assessment": "PARTIAL",
+      "upstream_retention": "The public GitHub run and logs are subject to GitHub retention; this fixture is self-contained metadata."
+    },
+    {
+      "path": "bundles/molsysmt_conda_success",
+      "repository": "uibcdf/molsysmt",
+      "run_id": 33849332945,
+      "run_attempt": 1,
+      "captured_at": "2026-09-04",
+      "reason": "A successful five-platform Conda matrix used as the compact green-run benchmark.",
+      "sanitization": "Retained only run identity, official state, workflow path, job timing and conclusions, and artifact identity metadata. Removed actors, commits, runner details, labels, pull requests, and API URLs.",
+      "expected_github_conclusion": "success",
+      "expected_assessment": "PASS",
+      "upstream_retention": "The public GitHub run and logs are subject to GitHub retention; this fixture is self-contained metadata."
+    }
+  ]
+}

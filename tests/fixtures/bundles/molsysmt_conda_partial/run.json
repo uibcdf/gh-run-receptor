@@ -1,0 +1,7 @@
+{
+  "conclusion": "failure",
+  "head_sha": "19e01130c358b51dccabde01e7650e8925025623",
+  "html_url": "https://github.com/uibcdf/molsysmt/actions/runs/33863426589",
+  "name": "Test Conda ABI3 artifacts with Rattler Build",
+  "status": "completed"
+}
