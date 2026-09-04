@@ -12,6 +12,8 @@ All notable changes to this project will be documented in this file.
 - Enforce configured Conda platform expectations without changing GitHub's authoritative
   conclusion, and report missing platforms explicitly.
 - Publish the `config@1` JSON Schema and reject unknown or ambiguous configuration.
+- Resolve the version of a source extension from its own checkout before consulting an
+  unrelated installed distribution.
 
 ## 0.2.1 - 2026-09-04
 
