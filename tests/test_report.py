@@ -82,6 +82,7 @@ def test_incomplete_evidence_has_precedence_in_exit_code():
     report = build_report(_manifest(complete=False), _evidence())
 
     assert report["github"]["conclusion"] == "failure"
+    assert report["receptor"]["assessment"] == "INCOMPLETE"
     assert report["receptor"]["evidence_sufficient"] is False
     assert exit_code(report) == 4
 
@@ -125,6 +126,7 @@ def test_conda_profile_preserves_failure_and_marks_reusable_platforms():
     platforms = {item["name"]: item for item in report["matrix"]["platforms"]}
     assert platforms["linux-64"]["reusable"] is True
     assert platforms["win-64"]["status"] == "failed"
+    assert "conda platforms: successful=1 failed=1 artifacts=1 observed=2" in render_llm(report)
 
 
 def test_auto_profile_requires_conda_workflow_and_multiple_platforms():
@@ -153,3 +155,21 @@ def test_report_integrates_cause_from_captured_log_archive(tmp_path):
     assert report["receptor"]["cause_evidence"] == "complete"
     assert report["causes"][0]["message"] == "tool: command not found"
     assert "root causes (1):" in render_llm(report)
+
+
+def test_successful_conda_jobs_are_not_called_reusable_without_artifacts():
+    evidence = _evidence(conclusion="success")
+    for job in evidence["jobs.json"]["jobs"]:
+        job["conclusion"] = "success"
+        job["steps"] = []
+    evidence["artifacts.json"]["artifacts"] = []
+
+    report = build_report(_manifest(), evidence, profile="conda")
+    rendered = render_llm(report)
+
+    assert report["receptor"]["assessment"] == "PASS"
+    assert rendered.count("\n") == 1
+    assert "platforms=2/2" in rendered
+    assert "jobs=2/2" in rendered
+    assert "artifacts=0" in rendered
+    assert "reusable:" not in rendered

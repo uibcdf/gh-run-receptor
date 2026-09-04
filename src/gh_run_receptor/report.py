@@ -175,6 +175,8 @@ def build_report(
         else {}
     )
     assessment = _assessment(run.get("status"), run.get("conclusion"))
+    if not manifest.get("complete"):
+        assessment = "INCOMPLETE"
     if (
         selected_profile == "conda"
         and assessment == "FAIL"
@@ -225,6 +227,22 @@ def render_llm(report: dict[str, Any]) -> str:
     subject = report["subject"]
     github = report["github"]
     receptor = report["receptor"]
+    if receptor["assessment"] == "PASS":
+        successful_jobs = sum(job["conclusion"] == "success" for job in report["jobs"])
+        fields = ["PASS conclusion=success", f"profile={receptor['profile']}"]
+        if report["matrix"]:
+            platforms = report["matrix"]["platforms"]
+            successful_platforms = sum(item["status"] == "success" for item in platforms)
+            fields.append(f"platforms={successful_platforms}/{len(platforms)}")
+        fields.extend(
+            [
+                f"jobs={successful_jobs}/{len(report['jobs'])}",
+                f"artifacts={len(report['artifacts'])}",
+                f"{_safe_text(subject['repository'])} run={subject['run_id']}",
+            ]
+        )
+        return " | ".join(fields) + "\n"
+
     counts = ", ".join(f"{key}={value}" for key, value in report["job_counts"].items()) or "none"
     lines = [
         (
@@ -256,10 +274,11 @@ def render_llm(report: dict[str, Any]) -> str:
     if report["matrix"]:
         platforms = report["matrix"]["platforms"]
         reusable = [item["name"] for item in platforms if item["reusable"]]
+        successful = [item["name"] for item in platforms if item["status"] == "success"]
         failed_platforms = [item["name"] for item in platforms if item["status"] == "failed"]
         lines.append(
-            f"conda platforms: reusable={len(reusable)} failed={len(failed_platforms)} "
-            f"observed={len(platforms)}"
+            f"conda platforms: successful={len(successful)} failed={len(failed_platforms)} "
+            f"artifacts={len(report['artifacts'])} observed={len(platforms)}"
         )
         if reusable:
             lines.append(f"reusable: {', '.join(reusable)}")
@@ -374,4 +393,6 @@ def exit_code(report: dict[str, Any]) -> int:
         return 3
     if assessment in {"CANCELLED", "TIMED_OUT", "ACTION_REQUIRED", "STALE", "UNKNOWN"}:
         return 2
+    if assessment == "INCOMPLETE":
+        return 4
     return 5

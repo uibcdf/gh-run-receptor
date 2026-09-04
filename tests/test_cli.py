@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from gh_run_receptor.cli import _run_reference, main
+from gh_run_receptor.cli import _parser, _run_reference, main
 
 
 def _bundle(path, conclusion="success"):
@@ -48,7 +48,7 @@ def test_replay_success_is_compact(tmp_path, capsys):
     captured = capsys.readouterr()
     assert result == 0
     assert captured.err == ""
-    assert len(captured.out.splitlines()) == 4
+    assert len(captured.out.splitlines()) == 1
     assert captured.out.startswith("PASS conclusion=success")
 
 
@@ -112,3 +112,13 @@ def test_run_url_carries_repository_and_hostname():
 def test_invalid_run_reference_is_rejected(value):
     with pytest.raises(argparse.ArgumentTypeError, match="numeric ID or GitHub Actions run URL"):
         _run_reference(value)
+
+
+def test_common_options_are_accepted_after_subcommand():
+    args = _parser().parse_args(
+        ["inspect", "42", "--repo", "uibcdf/molsysmt", "--receptor", "llm"]
+    )
+
+    assert args.repo == "uibcdf/molsysmt"
+    assert args.receptor == "llm"
+    assert args.format == "text"

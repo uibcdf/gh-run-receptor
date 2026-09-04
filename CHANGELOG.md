@@ -18,3 +18,8 @@ All notable changes to this project will be documented in this file.
 - Add conservative Conda-profile detection, reusable-platform reporting, and grouping of
   repeated cross-platform causes.
 - Record the first reproducible MolSysMT pilot against a competent native filtered baseline.
+- Accept common options before or after the selected subcommand.
+- Collapse successful LLM reports to one semantic line while retaining full human and JSON
+  detail.
+- Report incomplete evidence as `INCOMPLETE` even when GitHub's source conclusion is
+  successful.

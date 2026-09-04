@@ -35,6 +35,10 @@ Environment variables may provide non-secret defaults. Command arguments take
 precedence. Authentication tokens are not accepted as ordinary command-line options;
 GitHub CLI owns authentication.
 
+Common options are accepted before or after the subcommand. This makes both
+`--receptor=llm inspect RUN_ID` and `inspect RUN_ID --receptor=llm` valid without changing
+precedence.
+
 For text output, the inferred receptor is `human` when stdout is a terminal and `llm`
 otherwise. An explicit `--receptor` always wins. `--format=json` serializes the shared
 report and does not change facts according to the selected receptor. `human` is a receptor
@@ -132,6 +136,12 @@ Human text includes explanatory labels, all jobs up to a documented bound, faile
 and artifact details. LLM text includes the verdict, compact job counts, failed jobs and
 steps, a bounded artifact inventory, warnings, and the run link. Both are projections of
 the same report and return the same exit status.
+
+A complete successful LLM report collapses to one line containing conclusion, profile,
+job and platform coverage where available, artifact count, repository, and run ID. Human
+and JSON output retain the full inventory. If requested evidence is incomplete, the
+assessment is `INCOMPLETE`, never `PASS`, even though the separate GitHub conclusion may
+be `success`.
 
 ## Official facts and receptor assessment
 

@@ -47,34 +47,47 @@ def _cache_root(value: str | None) -> Path:
     return (Path(base) if base else Path.home() / ".cache") / "gh-run-receptor"
 
 
-def _parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="gh-run-receptor")
-    parser.add_argument("--version", action="version", version=__version__)
-    parser.add_argument("--repo", help="GitHub repository in OWNER/REPO form")
-    parser.add_argument("--hostname")
-    parser.add_argument("--cache-dir")
+def _add_common_options(
+    parser: argparse.ArgumentParser, *, suppress_defaults: bool = False
+) -> None:
+    default = argparse.SUPPRESS if suppress_defaults else None
+    parser.add_argument("--repo", default=default, help="GitHub repository in OWNER/REPO form")
+    parser.add_argument("--hostname", default=default)
+    parser.add_argument("--cache-dir", default=default)
     parser.add_argument(
         "--receptor",
         choices=("human", "llm"),
+        default=default,
         help="target reader; inferred from whether stdout is a terminal by default",
     )
-    parser.add_argument("--format", choices=("text", "json"), default="text")
-    parser.add_argument("--profile", choices=("generic", "conda"))
+    parser.add_argument(
+        "--format", choices=("text", "json"), default=default or "text"
+    )
+    parser.add_argument("--profile", choices=("generic", "conda"), default=default)
+
+
+def _parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(prog="gh-run-receptor")
+    parser.add_argument("--version", action="version", version=__version__)
+    _add_common_options(parser)
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     inspect = subparsers.add_parser("inspect", help="capture and report one workflow run")
+    _add_common_options(inspect, suppress_defaults=True)
     inspect.add_argument("run", type=_run_reference)
     inspect.add_argument("--attempt", type=int)
     inspect.add_argument("--capture", choices=("full", "adaptive", "metadata"), default="adaptive")
     inspect.add_argument("--output", type=Path)
 
     capture = subparsers.add_parser("capture", help="capture one workflow run")
+    _add_common_options(capture, suppress_defaults=True)
     capture.add_argument("run", type=_run_reference)
     capture.add_argument("--attempt", type=int)
     capture.add_argument("--capture", choices=("full", "adaptive", "metadata"), default="full")
     capture.add_argument("--output", type=Path)
 
     replay = subparsers.add_parser("replay", help="render a saved evidence bundle")
+    _add_common_options(replay, suppress_defaults=True)
     replay.add_argument("bundle", type=Path)
     return parser
 

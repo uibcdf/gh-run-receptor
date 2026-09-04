@@ -19,7 +19,9 @@ human/LLM selection, TTY inference, JSON output, URL parsing, pagination merging
 digests, traversal rejection, capture-policy cache separation, and terminal-control
 escaping.
 
-The first causal-analysis and Conda increment raised this to 26 tests. The added cases
+The first causal-analysis and Conda increment raised this to 26 tests. CLI ergonomics,
+successful-run compression, and incomplete-evidence semantics subsequently raised the
+suite to 28 tests. The added cases
 cover cross-job cause normalization, bounded huge-line handling, malicious ZIP traversal,
 Conda partial-success semantics, reusable artifacts, conservative profile detection, and
 bundle-to-report cause integration.
@@ -60,6 +62,11 @@ $RUNNER_TEMP/script: line 2: mapfile: command not found
 
 The report points to line 4157 of the `osx-64` member as its deterministic displayed
 sample and retains both occurrences in JSON.
+
+Run `33849332945` provided the first complete-success counterexample. All six jobs and all
+five Conda platforms succeeded, while no GitHub artifact remained available. The report
+therefore states platform success and `artifacts=0` without claiming reusable artifacts.
+Its LLM projection is one line; human and JSON projections retain all jobs.
 
 The measured comparison with a locally filtered native baseline is recorded in
 [benchmark_2026-09-04.md](benchmark_2026-09-04.md). The pilot reduced reader input by
