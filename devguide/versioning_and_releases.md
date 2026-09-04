@@ -12,8 +12,8 @@ Git. Installed metadata is preferred at runtime, with the generated file as the 
 fallback.
 
 The existing `0.1.1` tag remains attached to its original commit. It predates this dynamic
-configuration and must not be moved or recreated. The next release is cut from a later,
-clean commit and receives its own three-component tag.
+configuration and must not be moved or recreated. Release `0.2.0` is the first tag governed
+by this dynamic configuration.
 
 Before creating a release tag:
 

@@ -1,15 +1,22 @@
 # gh-run-receptor
 
-`gh-run-receptor` is a planned read-only GitHub Actions evidence receptor. It will turn
-large, repetitive run output into a compact, truth-preserving report while retaining a
-replayable path to the complete evidence.
+`gh-run-receptor` is a read-only GitHub Actions evidence receptor. It turns large,
+repetitive run output into a compact, truth-preserving report while retaining a replayable
+path to the captured evidence.
 
-The project is currently in alpha development; no package has been published to a package
-index and no stable contract exists. The `0.1.1` source release can inspect, watch, and
-replay structured run evidence:
+The project is in pre-1.0 development; no package has been published to a package index and
+the public contract may still evolve. The `0.2.0` source release can inspect, watch, and
+replay structured run evidence. Install the GitHub CLI extension at the exact preview tag:
 
 ```text
-python -m gh_run_receptor --repo OWNER/REPO \
+gh extension install uibcdf/gh-run-receptor --pin 0.2.0
+gh run-receptor --version
+```
+
+Then inspect a run:
+
+```text
+gh run-receptor --repo OWNER/REPO \
   --receptor=llm inspect RUN_ID --capture metadata
 ```
 
@@ -33,10 +40,10 @@ gh-run-receptor watch RUN_ID --repo OWNER/REPO --receptor=llm
 When the run completes, stdout receives exactly one ordinary adaptive report. Calling it
 on an already completed successful run produces only the one-line final report.
 
-The root `gh-run-receptor` launcher also satisfies the GitHub CLI extension naming
-contract. Until a release is published, a local checkout can be exercised directly with
-`./gh-run-receptor --help`; installation instructions will be finalized with the first
-published artifact.
+The root `gh-run-receptor` launcher satisfies the GitHub CLI script-extension naming
+contract. A local checkout can also be installed with `gh extension install .` or exercised
+directly with `./gh-run-receptor --help`. The tag installs source; Python-index and binary
+artifacts remain future distribution modes.
 
 Product contracts, contributor onboarding, security boundaries, open decisions, and the
 implementation route are maintained in the

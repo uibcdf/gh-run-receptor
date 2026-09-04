@@ -7,7 +7,8 @@ evidence.
 
 ## Current state
 
-The project has a `0.1.1` source release but no published package or stable public contract;
+The project has a `0.2.0` tagged source preview but no published package-index artifact or
+stable public contract;
 the contracts in this guide are explicit but provisional unless marked settled. The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
 human, LLM, or JSON reports without changing the run or hiding its authoritative GitHub

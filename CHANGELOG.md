@@ -2,8 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-## Unreleased
+## 0.2.0 - 2026-09-04
 
+- Adopt the flat MolSysSuite package layout and derive versions from three-component Git
+  tags with `versioningit`.
+- Add issue-backed developer reports with validated lifecycle metadata and generated queue
+  indexes.
 - Publish Draft 2020-12 schemas for `bundle@1`, `model@1`, and `report@1` inside the
   installed package.
 - Separate source normalization from profile interpretation, with dimensional
