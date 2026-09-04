@@ -13,6 +13,9 @@ gh extension install uibcdf/gh-run-receptor --pin 0.2.1
 gh run-receptor --version
 ```
 
+A pinned script extension intentionally stays on that revision. To move an existing pinned
+installation to a later tag, remove it and install again with the new `--pin` value.
+
 Then inspect a run:
 
 ```text

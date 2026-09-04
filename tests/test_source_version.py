@@ -1,5 +1,7 @@
 """Testing source-checkout version fallback for the GitHub CLI extension."""
 
+import re
+
 from gh_run_receptor.source_version import parse_git_describe, version_from_source_checkout
 
 
@@ -20,4 +22,4 @@ def test_repository_checkout_has_a_source_version():
     version = version_from_source_checkout()
 
     assert version is not None
-    assert version.startswith("0.2.0")
+    assert re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+(?:\+[0-9]+\.g[0-9a-f]+(?:\.dirty)?)?", version)

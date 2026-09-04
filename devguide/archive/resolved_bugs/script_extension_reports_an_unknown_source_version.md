@@ -1,14 +1,14 @@
 ---
 summary: Script extension reports an unknown source version
 issue: uibcdf/gh-run-receptor#3
-status: active
+status: resolved
 opened: 2026-09-04
-closed:
+closed: 2026-09-04
 severity: medium
 verification: reproduced
 area: ['packaging', 'cli']
-guard:
-normative:
+guard: tests/test_source_version.py
+normative: versioning_and_releases.md
 blocked_by: []
 supersedes: []
 ---
@@ -16,7 +16,8 @@ supersedes: []
 # Script extension reports an unknown source version
 
 **Reported:** 2026-09-04, during the remote installation smoke test for tag `0.2.0`.
-**Status:** Active; reproduced from the pinned GitHub extension clone and fixed locally.
+**Status:** Resolved in `f77cf3f` and released as `0.2.1`; reproduced from `0.2.0` and
+verified through a fresh remote extension installation pinned to the corrective tag.
 
 ## What
 
@@ -81,4 +82,8 @@ two-second timeout prevents version display from hanging on a damaged checkout.
 
 ## Provenance
 
-Reproduced on 2026-09-04 with Python 3.13 and the installed GitHub CLI.
+Reproduced on 2026-09-04 with Python 3.13 and the installed GitHub CLI. Ruff passed and the
+full suite reported 48 passing tests. The isolated sdist-to-wheel build and installed-wheel
+smoke test both reported exactly `0.2.1`. A fresh
+`gh extension install uibcdf/gh-run-receptor --pin 0.2.1` clone then reported `0.2.1`, with
+Git describing its checkout as `0.2.1-0-gf77cf3f`.

@@ -1,5 +1,5 @@
 # Resolved bugs
 
 <!-- generated: devguide_index -->
-*No entries.*
+- [#3 — Script extension reports an unknown source version](script_extension_reports_an_unknown_source_version.md) (`resolved`)
 <!-- /generated -->
