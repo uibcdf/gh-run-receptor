@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.3.0 - 2026-09-04
+
+- Load `.github/gh-run-receptor.yaml` only from the target repository's default branch
+  and preserve its revision and digest in replayable bundles.
+- Add strict dependency-free parsing for exact workflow path, ID, or name rules selecting
+  the generic or Conda profile.
+- Add `config check` and `config explain` for safe local validation.
+- Enforce configured Conda platform expectations without changing GitHub's authoritative
+  conclusion, and report missing platforms explicitly.
+- Publish the `config@1` JSON Schema and reject unknown or ambiguous configuration.
+
 ## 0.2.1 - 2026-09-04
 
 - Resolve the package version from the nearest numeric Git tag when running directly as a

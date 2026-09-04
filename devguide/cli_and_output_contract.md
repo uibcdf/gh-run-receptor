@@ -125,9 +125,10 @@ gh run-receptor config check [PATH]
 gh run-receptor config explain RUN_OR_WORKFLOW
 ```
 
-`init` proposes but does not silently write configuration. `check` validates schema,
-overlaps, unused values, patterns, and trust policy. `explain` shows profile selection,
-configuration sources, precedence, and every applied override.
+The current interface implements `config check [PATH]` and
+`config explain WORKFLOW_PATH [--config PATH]`. `check` validates the strict version 1
+subset, duplicate identities, and bounds. `explain` shows the winning exact rule and
+active settings. `init`, pattern analysis, and a full override trace remain future work.
 
 ## Output channels
 

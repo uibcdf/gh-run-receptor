@@ -135,3 +135,46 @@ def test_common_options_are_accepted_after_subcommand():
     assert args.repo == "uibcdf/molsysmt"
     assert args.receptor == "llm"
     assert args.format == "text"
+
+
+def test_config_check_and_explain(tmp_path, capsys):
+    config = tmp_path / "rules.yaml"
+    config.write_text(
+        """schema_version: 1
+workflows:
+  - match:
+      path: .github/workflows/conda.yaml
+    profile: conda
+    settings:
+      expected_platforms: [linux-64, win-64]
+"""
+    )
+
+    assert main(["config", "check", str(config)]) == 0
+    assert capsys.readouterr().out == "configuration valid: schema=1 rules=1\n"
+    assert (
+        main(
+            [
+                "config",
+                "explain",
+                ".github/workflows/conda.yaml",
+                "--config",
+                str(config),
+            ]
+        )
+        == 0
+    )
+    assert capsys.readouterr().out == (
+        "match=path:.github/workflows/conda.yaml profile=conda "
+        "expected_platforms=linux-64,win-64\n"
+    )
+
+
+def test_config_check_returns_bounded_receptor_error(tmp_path, capsys):
+    config = tmp_path / "rules.yaml"
+    config.write_text("schema_version: 9\n")
+
+    assert main(["config", "check", str(config)]) == 5
+    captured = capsys.readouterr()
+    assert captured.out == ""
+    assert captured.err.startswith("RECEPTOR_ERROR: line 1: unsupported schema_version")

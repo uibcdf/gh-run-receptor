@@ -88,6 +88,15 @@ class GitHubClient:
         except json.JSONDecodeError as error:
             raise AcquisitionError(f"GitHub returned invalid JSON for {endpoint}") from error
 
+    def optional_json(self, endpoint: str) -> Any | None:
+        """Fetching JSON while treating an HTTP 404 as an absent optional resource."""
+        try:
+            return self.json(endpoint)
+        except AcquisitionError as error:
+            if "HTTP 404" in str(error):
+                return None
+            raise
+
     def download(self, endpoint: str, destination: Path) -> None:
         """Downloading a binary API response without sending it to stdout."""
         command = [

@@ -12,6 +12,7 @@ from urllib.parse import urlparse
 
 from gh_run_receptor import __version__
 from gh_run_receptor.bundle import capture_bundle, default_bundle_path, load_bundle
+from gh_run_receptor.config import CONFIG_PATH, load_config, select_rule
 from gh_run_receptor.errors import BundleError, ReceptorError
 from gh_run_receptor.github import GitHubClient
 from gh_run_receptor.report import build_report, exit_code, render_human, render_json, render_llm
@@ -108,6 +109,16 @@ def _parser() -> argparse.ArgumentParser:
     watch.add_argument("--max-interval", type=_positive_interval, default=60.0)
     watch.add_argument("--capture", choices=("full", "adaptive", "metadata"), default="adaptive")
     watch.add_argument("--output", type=Path)
+
+    config = subparsers.add_parser("config", help="validate or explain repository rules")
+    config_commands = config.add_subparsers(dest="config_command", required=True)
+    check = config_commands.add_parser("check", help="validate a configuration file")
+    check.add_argument("path", type=Path, nargs="?", default=Path(CONFIG_PATH))
+    explain = config_commands.add_parser("explain", help="explain the rule selected for a workflow")
+    explain.add_argument("workflow", help="exact workflow path")
+    explain.add_argument("--config", type=Path, default=Path(CONFIG_PATH))
+    explain.add_argument("--workflow-id", type=int)
+    explain.add_argument("--workflow-name")
     return parser
 
 
@@ -182,6 +193,31 @@ def main(arguments: list[str] | None = None) -> int:
     parser = _parser()
     args = parser.parse_args(arguments)
     try:
+        if args.command == "config":
+            config = load_config(args.path if args.config_command == "check" else args.config)
+            if args.config_command == "check":
+                print(
+                    f"configuration valid: schema={config['schema_version']} "
+                    f"rules={len(config['workflows'])}"
+                )
+                return 0
+            rule = select_rule(
+                config,
+                path=args.workflow,
+                workflow_id=args.workflow_id,
+                name=args.workflow_name,
+            )
+            if rule is None:
+                print("no matching rule; profile=auto")
+                return 0
+            key, value = next(iter(rule["match"].items()))
+            platforms = rule["settings"].get("expected_platforms", [])
+            settings = ",".join(platforms) if platforms else "none"
+            print(
+                f"match={key}:{value} profile={rule['profile']} "
+                f"expected_platforms={settings}"
+            )
+            return 0
         if args.command == "inspect":
             return _capture(args, render=True)
         if args.command == "capture":

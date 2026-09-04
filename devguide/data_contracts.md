@@ -2,11 +2,12 @@
 
 ## Contract family
 
-The project uses four related, independently versioned documents:
+The project uses five related, independently versioned documents:
 
 - `gh-run-receptor.bundle@1`: captured source resources and manifest;
 - `gh-run-receptor.model@1`: normalized internal/source model serialized for testing;
 - `gh-run-receptor.report@1`: profile assessment and rendered-report inputs;
+- `gh-run-receptor.config@1`: normalized trusted repository workflow rules;
 - `gh-run-receptor.events@1`: optional evidence emitted by an instrumented workflow.
 
 Version identifiers are explicit strings, not inferred from package version. Additive
@@ -62,6 +63,12 @@ an exact byte count and SHA-256 digest; both are checked before replay. The mani
 self-digested. A member is immutable after capture. Refreshing active evidence creates a
 new generation or atomically replaces the bundle only after all new members and the
 manifest validate.
+
+`config.json` is an optional structured member. When present, it contains
+`gh-run-receptor.config-capture@1`: the normalized `config@1` document plus the canonical
+repository path, default-branch name, Git blob SHA when supplied, and SHA-256 of the exact
+source bytes. Old bundles without this member remain valid and use conservative profile
+auto-detection during replay.
 
 The default cache identity includes hostname, repository, run ID, attempt, and capture
 policy. A metadata-only bundle is never reused as though it satisfied an adaptive or full
@@ -151,6 +158,22 @@ The report preserves official and derived state:
     "cause_evidence": "complete"
   },
   "completeness": {},
+  "configuration": {
+    "matched": true,
+    "source": {
+      "path": ".github/gh-run-receptor.yaml",
+      "ref": "main",
+      "blob_sha": "abcdef",
+      "sha256": "..."
+    },
+    "match": {"path": ".github/workflows/build_conda.yaml"},
+    "profile": "conda",
+    "settings": {"expected_platforms": ["linux-64", "win-64"]}
+  },
+  "expectations": {
+    "satisfied": true,
+    "missing_platforms": []
+  },
   "jobs": [],
   "job_counts": {},
   "matrix": {},
@@ -217,7 +240,8 @@ count, line size, total bytes, nesting, and string lengths.
   error for future major versions.
 
 The machine-readable Draft 2020-12 schemas ship inside `gh_run_receptor.schemas` as
-`bundle-v1.schema.json`, `model-v1.schema.json`, and `report-v1.schema.json`. They are the
+`bundle-v1.schema.json`, `model-v1.schema.json`, `report-v1.schema.json`, and
+`config-v1.schema.json`. They are the
 formal spelling of the version 1 boundaries. The runtime validates untrusted bundle JSON,
 critical manifest types, member paths, byte counts, digests, source collection shapes,
 duplicate keys, and non-finite numbers without adding a validation dependency. The test

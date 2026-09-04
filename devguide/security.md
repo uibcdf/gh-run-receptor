@@ -22,15 +22,16 @@ material.
 
 ## Configuration trust
 
-Repository rules are loaded from the default branch or an explicitly trusted revision.
-Pull-request head configuration is data, not policy, unless a user deliberately opts in
-outside an automated gate. Reports include the policy revision and digest. Inline Action
-rules are trusted only as part of the already trusted workflow definition that invokes
-the reporter.
+The implemented repository loader reads rules only from the target repository's default
+branch. Support for another explicitly trusted revision remains future work. Pull-request
+head configuration is data, not policy. Reports include the policy path, default-branch
+revision, and digest. Inline Action rules are not yet implemented.
 
-The rule language is declarative. It has no shell commands, imports, arbitrary templates,
-network requests, filesystem paths outside the evidence workspace, or dynamic evaluation.
-Rules cannot downgrade official failure, cancellation, or missing evidence to success.
+The rule language is declarative. The dependency-free parser accepts a narrow YAML subset
+and rejects tags, anchors, flow mappings, multiline scalars, patterns, unknown fields, and
+oversized input. It has no shell commands, imports, arbitrary templates, network requests,
+filesystem paths outside the evidence workspace, or dynamic evaluation. Rules cannot
+downgrade official failure, cancellation, or missing evidence to success.
 
 ## Log and text handling
 

@@ -75,6 +75,8 @@ def sanitize(source: Path, destination: Path) -> None:
     members = []
     selected = _selected_evidence(evidence)
     for name in STRUCTURED_MEMBERS:
+        if name not in evidence:
+            continue
         data = _canonical(selected[name])
         (destination / name).write_bytes(data)
         source_member = next(item for item in manifest["members"] if item["path"] == name)

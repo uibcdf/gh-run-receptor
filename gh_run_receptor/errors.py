@@ -11,3 +11,7 @@ class AcquisitionError(ReceptorError):
 
 class BundleError(ReceptorError):
     """Representing an invalid or incomplete evidence bundle."""
+
+
+class ConfigError(ReceptorError):
+    """Representing invalid or conflicting declarative configuration."""

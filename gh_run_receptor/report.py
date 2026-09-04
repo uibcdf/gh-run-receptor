@@ -7,6 +7,7 @@ import unicodedata
 from pathlib import Path
 from typing import Any
 
+from gh_run_receptor.config import select_rule
 from gh_run_receptor.logs import extract_causes
 from gh_run_receptor.model import normalize_evidence
 
@@ -59,14 +60,19 @@ def _detect_profile(workflow: Any, jobs: list[dict[str, Any]]) -> str:
     return "generic"
 
 
-def _conda_matrix(jobs: list[dict[str, Any]], artifacts: list[dict[str, Any]]) -> dict[str, Any]:
+def _conda_matrix(
+    jobs: list[dict[str, Any]],
+    artifacts: list[dict[str, Any]],
+    expected_platforms: list[str] | None = None,
+) -> dict[str, Any]:
     platforms = []
+    expected = set(expected_platforms or [])
     for platform in _CONDA_PLATFORMS:
         platform_jobs = [job for job in jobs if platform in str(job.get("name", "")).lower()]
         platform_artifacts = [
             artifact for artifact in artifacts if platform in str(artifact.get("name", "")).lower()
         ]
-        if not platform_jobs and not platform_artifacts:
+        if not platform_jobs and not platform_artifacts and platform not in expected:
             continue
         failed = any(job.get("conclusion") == "failure" for job in platform_jobs)
         successful = any(job.get("conclusion") == "success" for job in platform_jobs)
@@ -75,8 +81,17 @@ def _conda_matrix(jobs: list[dict[str, Any]], artifacts: list[dict[str, Any]]) -
                 "name": platform,
                 "job_ids": [job.get("id") for job in platform_jobs],
                 "artifact_ids": [artifact.get("id") for artifact in platform_artifacts],
-                "status": "failed" if failed else "success" if successful else "unknown",
+                "status": (
+                    "failed"
+                    if failed
+                    else "success"
+                    if successful
+                    else "missing"
+                    if platform in expected and not platform_artifacts
+                    else "unknown"
+                ),
                 "reusable": successful and bool(platform_artifacts),
+                "expected": platform in expected,
             }
         )
     return {"kind": "conda", "platforms": platforms}
@@ -93,11 +108,28 @@ def build_report(
     model = normalize_evidence(manifest, evidence)
     jobs = model["jobs"]
     artifacts = model["artifacts"]
-    selected_profile = (
-        _detect_profile(model["subject"]["workflow"], jobs)
-        if profile == "auto"
-        else profile
-    )
+    workflow = evidence["workflow.json"]
+    config_capture = evidence.get("config.json")
+    selected_rule = None
+    config_source = None
+    if isinstance(config_capture, dict):
+        config_source = config_capture.get("source")
+        config = config_capture.get("config")
+        if isinstance(config, dict):
+            selected_rule = select_rule(
+                config,
+                path=workflow.get("path"),
+                workflow_id=workflow.get("id"),
+                name=workflow.get("name") or evidence["run.json"].get("name"),
+            )
+    if profile != "auto":
+        selected_profile = profile
+    elif selected_rule is not None:
+        selected_profile = selected_rule["profile"]
+    else:
+        selected_profile = _detect_profile(model["subject"]["workflow"], jobs)
+    settings = selected_rule.get("settings", {}) if selected_rule else {}
+    expected_platforms = settings.get("expected_platforms")
 
     failed_jobs = [job for job in jobs if job["conclusion"] == "failure"]
     log_member = next(
@@ -116,9 +148,14 @@ def build_report(
         cause_evidence = "complete" if len(diagnosed_jobs) == len(failed_jobs) else "partial"
 
     matrix = (
-        _conda_matrix(jobs, artifacts)
+        _conda_matrix(jobs, artifacts, expected_platforms)
         if selected_profile == "conda"
         else {}
+    )
+    missing_platforms = (
+        [item["name"] for item in matrix["platforms"] if item["status"] == "missing"]
+        if matrix
+        else []
     )
     assessment = _assessment(model["github"]["status"], model["github"]["conclusion"])
     if not model["bundle_complete"]:
@@ -129,6 +166,8 @@ def build_report(
         and any(platform["reusable"] for platform in matrix["platforms"])
     ):
         assessment = "PARTIAL"
+    if missing_platforms and assessment == "PASS":
+        assessment = "FAIL"
 
     return {
         "schema": "gh-run-receptor.report@1",
@@ -142,6 +181,17 @@ def build_report(
             "cause_evidence": cause_evidence,
         },
         "completeness": model["completeness"],
+        "configuration": {
+            "matched": selected_rule is not None,
+            "source": config_source,
+            "match": selected_rule.get("match") if selected_rule else None,
+            "profile": selected_rule.get("profile") if selected_rule else None,
+            "settings": settings,
+        },
+        "expectations": {
+            "satisfied": not missing_platforms,
+            "missing_platforms": missing_platforms,
+        },
         "jobs": jobs,
         "job_counts": model["job_counts"],
         "artifacts": artifacts,
@@ -176,6 +226,10 @@ def render_llm(report: dict[str, Any]) -> str:
             platforms = report["matrix"]["platforms"]
             successful_platforms = sum(item["status"] == "success" for item in platforms)
             fields.append(f"platforms={successful_platforms}/{len(platforms)}")
+        if report["expectations"]["missing_platforms"]:
+            fields.append(
+                "missing=" + ",".join(report["expectations"]["missing_platforms"])
+            )
         fields.extend(
             [
                 f"jobs={successful_jobs}/{len(report['jobs'])}",
@@ -218,10 +272,14 @@ def render_llm(report: dict[str, Any]) -> str:
         reusable = [item["name"] for item in platforms if item["reusable"]]
         successful = [item["name"] for item in platforms if item["status"] == "success"]
         failed_platforms = [item["name"] for item in platforms if item["status"] == "failed"]
+        missing_platforms = [item["name"] for item in platforms if item["status"] == "missing"]
         lines.append(
             f"conda platforms: successful={len(successful)} failed={len(failed_platforms)} "
-            f"artifacts={len(report['artifacts'])} observed={len(platforms)}"
+            f"missing={len(missing_platforms)} artifacts={len(report['artifacts'])} "
+            f"observed={len(platforms) - len(missing_platforms)}"
         )
+        if missing_platforms:
+            lines.append(f"missing expected: {', '.join(missing_platforms)}")
         if reusable:
             lines.append(f"reusable: {', '.join(reusable)}")
 
@@ -301,6 +359,19 @@ def render_human(report: dict[str, Any]) -> str:
         for platform in report["matrix"]["platforms"]:
             reusable = ", reusable artifact" if platform["reusable"] else ""
             lines.append(f"  {platform['status']:<8} {platform['name']}{reusable}")
+
+    if report["configuration"]["matched"]:
+        source = report["configuration"]["source"] or {}
+        match = report["configuration"]["match"] or {}
+        match_key, match_value = next(iter(match.items()))
+        lines.extend(
+            [
+                "",
+                "Repository configuration",
+                f"  Source: {source.get('path', '?')} at {source.get('ref', '?')}",
+                f"  Rule:   {match_key}={_safe_text(match_value)}",
+            ]
+        )
 
     if report["causes"]:
         lines.extend(["", f"Root causes ({len(report['causes'])})"])

@@ -107,13 +107,13 @@ its exit condition and deliverables are satisfied:
 | --- | ---: | ---: | --- |
 | Phase 0: corpus and feasibility | 15% | 7% | Failing and successful MolSysMT Conda runs measured and committed as sanitized fixtures; representative non-Conda corpus still incomplete |
 | Phase 1: generic CLI | 30% | 25% | Capture, strict validated replay, formal bundle/model/report schemas, source-referenced normalization, bounded reports, official-state parity, and degraded log analysis tested; broader corpus parity remains |
-| Phase 2: rules and profiles | 20% | 4% | Initial Conda interpretation and repeated-cause grouping tested; configuration and other profiles remain |
+| Phase 2: rules and profiles | 20% | 8% | Initial Conda interpretation, repeated-cause grouping, and strict trusted exact-match configuration tested; other profiles and richer rules remain |
 | Phase 3: embedded Action | 15% | 0% | Contract designed; no distributed Action implementation yet |
 | Phase 4: aggregation and comparison | 10% | 2% | Transition-only watch tested; aggregation and comparison remain |
 | Cross-cutting release gate | 10% | 2% | Flat installable package, tag-derived version, local tests, and wheel smoke test verified on Linux; platform and release gates remain |
 
 Design completion is reported separately from implementation progress. The evidenced
-implementation credit at this checkpoint is **40% toward 1.0**. This is not a schedule
+implementation credit at this checkpoint is **44% toward 1.0**. This is not a schedule
 estimate: credit is deliberately withheld where a phase's required corpus, schema,
 platform, or distribution evidence is absent. Percentages change only with linked tests,
 builds, or benchmark evidence, not by subjective confidence.

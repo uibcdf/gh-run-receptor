@@ -11,10 +11,18 @@ from pathlib import Path
 from typing import Any
 
 from gh_run_receptor import __version__
-from gh_run_receptor.errors import AcquisitionError, BundleError
+from gh_run_receptor.config import capture_repository_config, validate_config_capture
+from gh_run_receptor.errors import AcquisitionError, BundleError, ConfigError
 from gh_run_receptor.github import API_VERSION, GitHubClient, merge_pages
 
-STRUCTURED_MEMBERS = ("run.json", "workflow.json", "jobs.json", "checks.json", "artifacts.json")
+REQUIRED_STRUCTURED_MEMBERS = (
+    "run.json",
+    "workflow.json",
+    "jobs.json",
+    "checks.json",
+    "artifacts.json",
+)
+STRUCTURED_MEMBERS = (*REQUIRED_STRUCTURED_MEMBERS, "config.json")
 _CAPTURE_POLICIES = {"full", "adaptive", "metadata"}
 
 
@@ -171,6 +179,17 @@ def capture_bundle(
             checks = merge_pages(checks_payload, "check_runs")
         members.append(_write_member(temporary, "checks.json", checks, "github.check_runs"))
 
+        config_capture = capture_repository_config(client, repository)
+        if config_capture is not None:
+            members.append(
+                _write_member(
+                    temporary,
+                    "config.json",
+                    config_capture,
+                    "gh-run-receptor.repository_config",
+                )
+            )
+
         fetch_logs = policy == "full" or (
             policy == "adaptive"
             and run.get("status") == "completed"
@@ -267,7 +286,12 @@ def load_bundle(directory: Path) -> tuple[dict[str, Any], dict[str, Any]]:
         if name in STRUCTURED_MEMBERS:
             evidence[name] = _strict_json(data, name)
 
-    required = set(STRUCTURED_MEMBERS)
+    required = set(REQUIRED_STRUCTURED_MEMBERS)
     if missing := sorted(required - evidence.keys()):
         raise BundleError(f"missing structured bundle members: {', '.join(missing)}")
+    if "config.json" in evidence:
+        try:
+            validate_config_capture(evidence["config.json"])
+        except ConfigError as error:
+            raise BundleError(f"invalid config.json: {error}") from error
     return manifest, evidence

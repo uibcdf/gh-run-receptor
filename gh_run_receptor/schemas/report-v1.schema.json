@@ -5,7 +5,7 @@
   "type": "object",
   "required": [
     "schema", "subject", "github", "receptor", "completeness", "jobs", "job_counts",
-    "artifacts", "matrix", "causes", "unknowns", "warnings"
+    "artifacts", "configuration", "expectations", "matrix", "causes", "unknowns", "warnings"
   ],
   "properties": {
     "schema": {"const": "gh-run-receptor.report@1"},
@@ -39,6 +39,27 @@
     "artifacts": {
       "type": "array",
       "items": {"$ref": "model-v1.schema.json#/$defs/artifact"}
+    },
+    "configuration": {
+      "type": "object",
+      "required": ["matched", "source", "match", "profile", "settings"],
+      "properties": {
+        "matched": {"type": "boolean"},
+        "source": {"type": ["object", "null"]},
+        "match": {"type": ["object", "null"]},
+        "profile": {"type": ["string", "null"]},
+        "settings": {"type": "object"}
+      },
+      "additionalProperties": false
+    },
+    "expectations": {
+      "type": "object",
+      "required": ["satisfied", "missing_platforms"],
+      "properties": {
+        "satisfied": {"type": "boolean"},
+        "missing_platforms": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": false
     },
     "matrix": {"type": "object"},
     "causes": {"type": "array", "items": {"$ref": "#/$defs/cause"}},

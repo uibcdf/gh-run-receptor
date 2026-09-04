@@ -3,7 +3,7 @@ import json
 
 import pytest
 
-from gh_run_receptor.bundle import STRUCTURED_MEMBERS, default_bundle_path, load_bundle
+from gh_run_receptor.bundle import REQUIRED_STRUCTURED_MEMBERS, default_bundle_path, load_bundle
 from gh_run_receptor.errors import BundleError
 
 
@@ -17,7 +17,7 @@ def _write_bundle(path):
         "artifacts.json": {"total_count": 0, "artifacts": []},
     }
     members = []
-    for name in STRUCTURED_MEMBERS:
+    for name in REQUIRED_STRUCTURED_MEMBERS:
         data = (json.dumps(values[name], sort_keys=True) + "\n").encode()
         (path / name).write_bytes(data)
         members.append(

@@ -5,11 +5,11 @@ repetitive run output into a compact, truth-preserving report while retaining a 
 path to the captured evidence.
 
 The project is in pre-1.0 development; no package has been published to a package index and
-the public contract may still evolve. The `0.2.1` source release can inspect, watch, and
+the public contract may still evolve. The `0.3.0` source release can inspect, watch, and
 replay structured run evidence. Install the GitHub CLI extension at the exact preview tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 0.2.1
+gh extension install uibcdf/gh-run-receptor --pin 0.3.0
 gh run-receptor --version
 ```
 
@@ -32,6 +32,31 @@ The current MVP recognizes clear Conda matrices automatically. When failure logs
 captured, it reports independently reusable platform artifacts and groups repeated causes
 with member-and-line provenance. `--profile=generic` disables auto-detection; an explicit
 `--profile=conda` enables the Conda interpretation.
+
+A client repository can assign those profiles and declare required Conda platforms in a
+trusted `.github/gh-run-receptor.yaml` file:
+
+```yaml
+schema_version: 1
+workflows:
+  - match:
+      path: .github/workflows/build_conda.yaml
+    profile: conda
+    settings:
+      expected_platforms: [linux-64, osx-arm64, win-64]
+```
+
+Validate and explain the rule locally before committing it:
+
+```text
+gh run-receptor config check
+gh run-receptor config explain .github/workflows/build_conda.yaml
+```
+
+Live capture reads policy only from the repository's default branch, stores its revision
+and digest in the evidence bundle, and fails if required platforms are absent. Version
+`0.3.0` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
+patterns and unknown settings rather than silently ignoring them.
 
 ## Measured token reduction
 

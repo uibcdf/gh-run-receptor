@@ -22,8 +22,8 @@ An exact workflow path is the preferred portable identity:
 ```
 
 Numeric workflow IDs are stable within a repository but not portable. Display names may
-be duplicated or changed. Name and path globs are supported as lower-priority matching
-mechanisms.
+be duplicated or changed. Version 1 configuration supports only exact path, ID, or name
+matches. Patterns remain a future capability.
 
 ## Built-in profiles
 
@@ -49,11 +49,12 @@ Separates native platform build, package contract validation, Python compatibili
 artifact identity, upload, and channel verification. It reports independently reusable
 platform successes and identifies the smallest rerun target.
 
-The first implemented slice recognizes the canonical Conda subdirectories from job and
+The implemented slice recognizes the canonical Conda subdirectories from job and
 artifact names, requires at least two observed platforms plus a workflow path containing
 `conda` or `rattler` for auto-detection, preserves failed platforms, and marks a platform
 reusable only when it has both a successful job and an artifact. ABI validation, upload,
-channel verification, configuration-driven expectations, and rerun targeting remain open.
+channel verification, and rerun targeting remain open. Repository rules can assign the
+profile explicitly and require named native platforms.
 
 ### Release
 
@@ -70,7 +71,7 @@ schema_version: 1
 workflows:
   - match:
       path: .github/workflows/CI.yaml
-    profile: ci
+    profile: generic
 
   - match:
       path: .github/workflows/build_and_upload_conda_packages.yaml
@@ -82,22 +83,21 @@ workflows:
         - osx-64
         - osx-arm64
         - win-64
-      expected_python: ["3.11", "3.12", "3.13"]
-      artifact_pattern: "*.conda"
 ```
 
-The CLI should provide `init`, `config check`, and `config explain` commands. `init`
-discovers workflows and proposes profiles; `explain` identifies the matching rule and
-each applied override.
+The CLI provides `config check [PATH]` and `config explain WORKFLOW_PATH`. Discovery and
+`init` remain future work. Version 1 accepts only the `generic` and `conda` profiles and
+the Conda `expected_platforms` setting. Unknown fields fail validation instead of being
+ignored.
 
-Repository configuration is trusted only when read from the repository's default branch
-or from an explicitly trusted revision. A pull request must not be allowed to supply its
-own receptor rules and then use those rules to classify the same pull request. The report
-records the configuration source, revision, schema version, and digest.
+Repository configuration is trusted only when read from the repository's default branch.
+A pull request cannot supply its own receptor rules and then use those rules to classify
+the same pull request. The report records the configuration source, revision, schema
+version, and digest. Explicit alternative trusted revisions remain future work.
 
-## Inline Action rules
+## Future inline Action rules
 
-GitHub Action inputs can carry a small multiline rules document:
+A future GitHub Action may carry a small multiline rules document:
 
 ```yaml
 - if: always()
@@ -109,33 +109,30 @@ GitHub Action inputs can carry a small multiline rules document:
       artifact_pattern: "*.conda"
 ```
 
-Inline rules avoid an extra file for simple workflows. Repository configuration is
-preferred when rules are shared, extensive, or need independent validation. Inline
-settings override built-in defaults but cannot rewrite source conclusions.
+This syntax is design intent, not an implemented interface. If delivered, inline rules
+will avoid an extra file for simple workflows. Repository configuration is preferred when
+rules are shared, extensive, or need independent validation. Inline settings will never
+be allowed to rewrite source conclusions.
 
 ## Matching and precedence
 
-Workflow matching proceeds from most to least specific:
+The implemented workflow matching order is:
 
 1. an explicit CLI selection and profile;
-2. inline Action inputs in the workflow that invokes the reporter;
-3. an exact workflow path;
-4. a numeric workflow ID;
-5. a workflow-path pattern;
-6. an exact display name;
-7. a display-name pattern;
-8. conservative auto-detection;
-9. the generic profile.
+2. an exact workflow path from trusted repository configuration;
+3. a numeric workflow ID from trusted repository configuration;
+4. an exact display name from trusted repository configuration;
+5. conservative auto-detection;
+6. the generic profile.
 
-Settings are layered in this order: built-in defaults, explicitly enabled organization
-configuration, trusted repository configuration, inline Action settings, and explicit
-CLI flags. Later layers may refine interpretation but cannot alter GitHub's authoritative
-states. Two rules at equal specificity that assign incompatible values are a configuration
-error; list order is not an implicit tie-breaker.
+Future organization configuration and inline Action settings require their own explicit
+trust and precedence gate. Later layers may refine interpretation but cannot alter
+GitHub's authoritative states. Duplicate identities are a configuration error; list
+order is not an implicit tie-breaker.
 
-Exact matching is preferred. Patterns are anchored, length-bounded, validated before use,
-and never interpreted as code. `config explain` must show the winning match, overridden
-values, ignored candidates, and trust source.
+`config explain` shows the winning exact match and active values. A captured report shows
+the trusted source path and revision. More detailed explanations of ignored candidates
+remain future work.
 
 ## Roles and profile contracts
 

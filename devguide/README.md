@@ -7,7 +7,7 @@ evidence.
 
 ## Current state
 
-The project has a `0.2.1` tagged source preview but no published package-index artifact or
+The project has a `0.3.0` tagged source preview but no published package-index artifact or
 stable public contract;
 the contracts in this guide are explicit but provisional unless marked settled. The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
@@ -27,15 +27,18 @@ The current MVP implements:
 - bounded log-cause extraction with archive and line limits;
 - conservative Conda auto-detection, reusable-platform classification, and cross-job
   cause grouping;
-- transition-only `watch` with polling backoff and a single final adaptive report.
+- transition-only `watch` with polling backoff and a single final adaptive report;
 - machine-readable `bundle@1`, `model@1`, and `report@1` schemas, with strict bundle
   validation and source-referenced normalization;
 - sanitized success and partial-failure MolSysMT Conda fixtures with deterministic replay
-  and official-conclusion parity tests.
+  and official-conclusion parity tests;
+- strict `config@1` repository rules captured only from the default branch, with exact
+  workflow matching, provenance, local validation, and Conda platform expectations.
 
-It does not yet provide declarative configuration, CI/docs/release profiles, a broad
-cross-workflow corpus, run comparison, or the embedded Action. The Conda profile is an
-initial vertical slice, not its complete stable contract.
+It does not yet provide CI, documentation, or release profiles; a broad cross-workflow
+corpus; run comparison; workflow discovery; pattern rules; or the embedded Action. The
+Conda profile and configuration language are initial vertical slices, not their complete
+stable contracts.
 
 ## Reading order
 
@@ -107,15 +110,12 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The first milestone is an evidence-capture spike against real archived runs from the
-UIBCDF repositories. It must answer three questions before the public interface is
-frozen:
+The next milestone broadens the corpus beyond MolSysMT Conda runs and implements the
+first CI profile without changing the normalized evidence model. It must establish exact
+conclusion parity on successful, failed, cancelled, and incomplete CI matrices; measure
+the compact output against a competent native baseline; and identify which CI facts need
+structured producer evidence rather than log inference.
 
-1. Which GitHub API responses are sufficient for reliable generic reporting?
-2. When are full logs required, and when can job, step, check, and artifact metadata
-   provide the answer?
-3. Can the same stored evidence be replayed deterministically across receptor versions?
-
-The executable task list and exit criteria for this milestone are in
-[development_roadmap.md](development_roadmap.md). No public API should be frozen before
-the evidence spike is complete.
+The executable task list and exit criteria remain in
+[development_roadmap.md](development_roadmap.md). The configuration and report contracts
+remain provisional until this broader evidence gate is complete.

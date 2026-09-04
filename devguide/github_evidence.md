@@ -24,6 +24,7 @@ run JSON document:
 | `jobs.json` | jobs for the selected run attempt | Jobs, runner labels, timestamps, conclusions, and step metadata |
 | `checks.json` | check runs for the run's exact check-suite ID | Check output and annotations not represented in job logs without mixing runs for the same commit |
 | `artifacts.json` | artifacts for the workflow run | Names, sizes, digests, expiry, and download availability |
+| `config.json` | configuration content from the repository default branch | Trusted normalized workflow rules plus branch and digest provenance; optional |
 | `logs.zip` | log archive for the run attempt | Full textual evidence and step fragments when structured facts are insufficient |
 
 The exact request URL, response status, pagination state, ETag when available, content

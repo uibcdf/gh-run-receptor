@@ -128,7 +128,10 @@ def test_conda_profile_preserves_failure_and_marks_reusable_platforms():
     platforms = {item["name"]: item for item in report["matrix"]["platforms"]}
     assert platforms["linux-64"]["reusable"] is True
     assert platforms["win-64"]["status"] == "failed"
-    assert "conda platforms: successful=1 failed=1 artifacts=1 observed=2" in render_llm(report)
+    assert (
+        "conda platforms: successful=1 failed=1 missing=0 artifacts=1 observed=2"
+        in render_llm(report)
+    )
 
 
 def test_auto_profile_requires_conda_workflow_and_multiple_platforms():
@@ -175,3 +178,72 @@ def test_successful_conda_jobs_are_not_called_reusable_without_artifacts():
     assert "jobs=2/2" in rendered
     assert "artifacts=0" in rendered
     assert "reusable:" not in rendered
+
+
+def test_repository_rule_selects_profile_and_enforces_expected_platforms():
+    evidence = _evidence(conclusion="success")
+    for job in evidence["jobs.json"]["jobs"]:
+        job["conclusion"] = "success"
+        job["steps"] = []
+    evidence["config.json"] = {
+        "schema": "gh-run-receptor.config-capture@1",
+        "source": {
+            "path": ".github/gh-run-receptor.yaml",
+            "ref": "main",
+            "blob_sha": "abc",
+            "sha256": "0" * 64,
+        },
+        "config": {
+            "schema": "gh-run-receptor.config@1",
+            "schema_version": 1,
+            "workflows": [
+                {
+                    "match": {"path": ".github/workflows/conda.yaml"},
+                    "profile": "conda",
+                    "settings": {
+                        "expected_platforms": ["linux-64", "win-64", "osx-arm64"]
+                    },
+                }
+            ],
+        },
+    }
+
+    report = build_report(_manifest(), evidence, profile="auto")
+
+    assert report["github"]["conclusion"] == "success"
+    assert report["receptor"]["profile"] == "conda"
+    assert report["receptor"]["assessment"] == "FAIL"
+    assert report["receptor"]["evidence_sufficient"] is True
+    assert report["configuration"]["matched"] is True
+    assert report["expectations"] == {
+        "satisfied": False,
+        "missing_platforms": ["osx-arm64"],
+    }
+    assert exit_code(report) == 1
+    assert "missing expected: osx-arm64" in render_llm(report)
+    assert "Source: .github/gh-run-receptor.yaml at main" in render_human(report)
+
+
+def test_explicit_profile_overrides_repository_profile_but_preserves_settings():
+    evidence = _evidence(conclusion="success")
+    evidence["config.json"] = {
+        "schema": "gh-run-receptor.config-capture@1",
+        "source": None,
+        "config": {
+            "schema": "gh-run-receptor.config@1",
+            "schema_version": 1,
+            "workflows": [
+                {
+                    "match": {"path": ".github/workflows/conda.yaml"},
+                    "profile": "conda",
+                    "settings": {"expected_platforms": ["osx-arm64"]},
+                }
+            ],
+        },
+    }
+
+    report = build_report(_manifest(), evidence, profile="generic")
+
+    assert report["receptor"]["profile"] == "generic"
+    assert report["matrix"] == {}
+    assert report["expectations"]["satisfied"] is True

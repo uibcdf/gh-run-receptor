@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://uibcdf.org/gh-run-receptor/schemas/config-v1.schema.json",
+  "title": "gh-run-receptor.config@1",
+  "type": "object",
+  "required": ["schema", "schema_version", "workflows"],
+  "properties": {
+    "schema": {"const": "gh-run-receptor.config@1"},
+    "schema_version": {"const": 1},
+    "workflows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/rule"}
+    }
+  },
+  "$defs": {
+    "match": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["path"],
+          "properties": {"path": {"type": "string", "minLength": 1}},
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["id"],
+          "properties": {"id": {"type": "integer", "minimum": 1}},
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": ["name"],
+          "properties": {"name": {"type": "string", "minLength": 1}},
+          "additionalProperties": false
+        }
+      ]
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "expected_platforms": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": ["linux-64", "linux-aarch64", "osx-64", "osx-arm64", "win-64"]
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "rule": {
+      "type": "object",
+      "required": ["match", "profile", "settings"],
+      "properties": {
+        "match": {"$ref": "#/$defs/match"},
+        "profile": {"enum": ["generic", "conda"]},
+        "settings": {"$ref": "#/$defs/settings"}
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {"settings": {"required": ["expected_platforms"]}},
+            "required": ["settings"]
+          },
+          "then": {"properties": {"profile": {"const": "conda"}}}
+        }
+      ],
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
