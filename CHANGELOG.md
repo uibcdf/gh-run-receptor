@@ -13,3 +13,7 @@ All notable changes to this project will be documented in this file.
 - Preserve authoritative GitHub conclusions and provisional exit-code semantics.
 - Build an installable, dependency-free Python wheel and a GitHub CLI extension launcher.
 - Validate the MVP against a real MolSysMT Conda workflow capture.
+- Add bounded, traversal-safe log analysis with terminal-control removal and causal-line
+  provenance.
+- Add conservative Conda-profile detection, reusable-platform reporting, and grouping of
+  repeated cross-platform causes.

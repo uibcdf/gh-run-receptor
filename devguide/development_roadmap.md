@@ -107,7 +107,7 @@ its exit condition and deliverables are satisfied:
 | --- | ---: | --- |
 | Phase 0: corpus and feasibility | 15% | In progress; one private MolSysMT capture validated |
 | Phase 1: generic CLI | 30% | First structured-evidence vertical slice implemented locally |
-| Phase 2: rules and profiles | 20% | Contract designed; not implemented |
+| Phase 2: rules and profiles | 20% | First Conda interpretation slice implemented locally |
 | Phase 3: embedded Action | 15% | Contract designed; distribution open |
 | Phase 4: aggregation and comparison | 10% | Designed; not implemented |
 | Cross-cutting release gate | 10% | Requirements documented; not validated |

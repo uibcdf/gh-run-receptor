@@ -5,7 +5,10 @@ from __future__ import annotations
 import json
 import unicodedata
 from datetime import datetime
+from pathlib import Path
 from typing import Any
+
+from gh_run_receptor.logs import extract_causes
 
 MAX_FAILURES = 10
 MAX_ARTIFACTS = 10
@@ -14,6 +17,7 @@ MAX_TEXT_FIELD = 300
 _BIDI_CONTROLS = frozenset(
     "\u061c\u200e\u200f\u202a\u202b\u202c\u202d\u202e\u2066\u2067\u2068\u2069"
 )
+_CONDA_PLATFORMS = ("linux-64", "linux-aarch64", "osx-64", "osx-arm64", "win-64")
 
 
 def _safe_text(value: Any) -> str:
@@ -55,12 +59,58 @@ def _assessment(status: Any, conclusion: Any) -> str:
     return mapping.get(conclusion, "UNKNOWN")
 
 
-def build_report(manifest: dict[str, Any], evidence: dict[str, Any]) -> dict[str, Any]:
+def _detect_profile(workflow: Any, jobs: list[dict[str, Any]]) -> str:
+    workflow_text = str(workflow).lower()
+    observed = {
+        platform
+        for platform in _CONDA_PLATFORMS
+        if any(platform in str(job.get("name", "")).lower() for job in jobs)
+    }
+    if len(observed) >= 2 and ("conda" in workflow_text or "rattler" in workflow_text):
+        return "conda"
+    return "generic"
+
+
+def _conda_matrix(jobs: list[dict[str, Any]], artifacts: list[dict[str, Any]]) -> dict[str, Any]:
+    platforms = []
+    for platform in _CONDA_PLATFORMS:
+        platform_jobs = [job for job in jobs if platform in str(job.get("name", "")).lower()]
+        platform_artifacts = [
+            artifact for artifact in artifacts if platform in str(artifact.get("name", "")).lower()
+        ]
+        if not platform_jobs and not platform_artifacts:
+            continue
+        failed = any(job.get("conclusion") == "failure" for job in platform_jobs)
+        successful = any(job.get("conclusion") == "success" for job in platform_jobs)
+        platforms.append(
+            {
+                "name": platform,
+                "job_ids": [job.get("id") for job in platform_jobs],
+                "artifact_ids": [artifact.get("id") for artifact in platform_artifacts],
+                "status": "failed" if failed else "success" if successful else "unknown",
+                "reusable": successful and bool(platform_artifacts),
+            }
+        )
+    return {"kind": "conda", "platforms": platforms}
+
+
+def build_report(
+    manifest: dict[str, Any],
+    evidence: dict[str, Any],
+    *,
+    profile: str = "generic",
+    bundle_directory: Path | None = None,
+) -> dict[str, Any]:
     """Building a generic report without changing source conclusions."""
     run = evidence["run.json"]
     workflow = evidence["workflow.json"]
     jobs = evidence["jobs.json"].get("jobs", [])
     artifacts = evidence["artifacts.json"].get("artifacts", [])
+    selected_profile = (
+        _detect_profile(workflow.get("path") or run.get("name"), jobs)
+        if profile == "auto"
+        else profile
+    )
 
     normalized_jobs = []
     counts: dict[str, int] = {}
@@ -103,6 +153,35 @@ def build_report(manifest: dict[str, Any], evidence: dict[str, Any]) -> dict[str
     ]
     normalized_artifacts.sort(key=lambda item: (str(item["name"]), int(item["id"] or 0)))
 
+    failed_jobs = [job for job in normalized_jobs if job["conclusion"] == "failure"]
+    log_member = next(
+        (member for member in manifest.get("members", []) if member.get("path") == "logs.zip"), None
+    )
+    causes: list[dict[str, Any]] = []
+    analysis_warnings: list[str] = []
+    cause_evidence = "not_captured"
+    if log_member and bundle_directory is not None:
+        causes, analysis_warnings = extract_causes(bundle_directory / "logs.zip", failed_jobs)
+        diagnosed_jobs = {
+            occurrence["job_id"]
+            for cause in causes
+            for occurrence in cause["occurrences"]
+        }
+        cause_evidence = "complete" if len(diagnosed_jobs) == len(failed_jobs) else "partial"
+
+    matrix = (
+        _conda_matrix(normalized_jobs, normalized_artifacts)
+        if selected_profile == "conda"
+        else {}
+    )
+    assessment = _assessment(run.get("status"), run.get("conclusion"))
+    if (
+        selected_profile == "conda"
+        and assessment == "FAIL"
+        and any(platform["reusable"] for platform in matrix["platforms"])
+    ):
+        assessment = "PARTIAL"
+
     return {
         "schema": "gh-run-receptor.report@1",
         "subject": {
@@ -115,14 +194,17 @@ def build_report(manifest: dict[str, Any], evidence: dict[str, Any]) -> dict[str
         },
         "github": {"status": run.get("status"), "conclusion": run.get("conclusion")},
         "receptor": {
-            "assessment": _assessment(run.get("status"), run.get("conclusion")),
-            "profile": "generic",
+            "assessment": assessment,
+            "profile": selected_profile,
             "evidence_sufficient": bool(manifest.get("complete")),
+            "cause_evidence": cause_evidence,
         },
         "jobs": normalized_jobs,
         "job_counts": dict(sorted(counts.items())),
         "artifacts": normalized_artifacts,
-        "warnings": list(manifest.get("warnings", [])),
+        "matrix": matrix,
+        "causes": causes,
+        "warnings": [*manifest.get("warnings", []), *analysis_warnings],
     }
 
 
@@ -148,7 +230,8 @@ def render_llm(report: dict[str, Any]) -> str:
         (
             f"{receptor['assessment']} conclusion={_safe_text(github['conclusion'])} "
             f"status={_safe_text(github['status'])} | {_safe_text(subject['repository'])} | "
-            f"run={subject['run_id']} attempt={subject['run_attempt']}"
+            f"run={subject['run_id']} attempt={subject['run_attempt']} | "
+            f"profile={receptor['profile']}"
         ),
         f"workflow: {_safe_text(subject['workflow'])} | jobs: {len(report['jobs'])} ({counts})",
     ]
@@ -169,6 +252,26 @@ def render_llm(report: dict[str, Any]) -> str:
             lines.append(f"- {name} | {conclusion} | {duration}{suffix}")
         if len(failed) > MAX_FAILURES:
             lines.append(f"- ... {len(failed) - MAX_FAILURES} more failed jobs in JSON report")
+
+    if report["matrix"]:
+        platforms = report["matrix"]["platforms"]
+        reusable = [item["name"] for item in platforms if item["reusable"]]
+        failed_platforms = [item["name"] for item in platforms if item["status"] == "failed"]
+        lines.append(
+            f"conda platforms: reusable={len(reusable)} failed={len(failed_platforms)} "
+            f"observed={len(platforms)}"
+        )
+        if reusable:
+            lines.append(f"reusable: {', '.join(reusable)}")
+
+    if report["causes"]:
+        lines.append(f"root causes ({len(report['causes'])}):")
+        for index, cause in enumerate(report["causes"][:MAX_FAILURES], start=1):
+            lines.append(
+                f"[{index}] {_safe_text(cause['message'])} | jobs={len(cause['occurrences'])}"
+            )
+            sample = cause["occurrences"][0]
+            lines.append(f"    evidence: {_safe_text(sample['member'])}:{sample['line']}")
 
     artifacts = report["artifacts"]
     if artifacts:
@@ -206,6 +309,7 @@ def render_human(report: dict[str, Any]) -> str:
         f"Run:         {subject['run_id']} (attempt {subject['run_attempt']})",
         f"GitHub:      {github_state}",
         f"Evidence:    {'complete' if receptor['evidence_sufficient'] else 'incomplete'}",
+        f"Profile:     {receptor['profile']}",
         "",
         f"Jobs ({len(report['jobs'])})",
     ]
@@ -231,6 +335,24 @@ def render_human(report: dict[str, Any]) -> str:
             f"  ... {len(report['artifacts']) - MAX_ARTIFACTS} additional artifacts in JSON output"
         )
 
+    if report["matrix"]:
+        lines.extend(["", "Conda platforms"])
+        for platform in report["matrix"]["platforms"]:
+            reusable = ", reusable artifact" if platform["reusable"] else ""
+            lines.append(f"  {platform['status']:<8} {platform['name']}{reusable}")
+
+    if report["causes"]:
+        lines.extend(["", f"Root causes ({len(report['causes'])})"])
+        for cause in report["causes"][:MAX_FAILURES]:
+            lines.append(
+                f"  {_safe_text(cause['message'])} ({len(cause['occurrences'])} jobs)"
+            )
+            for occurrence in cause["occurrences"][:5]:
+                lines.append(
+                    f"    {_safe_text(occurrence['job_name'])}: "
+                    f"{_safe_text(occurrence['member'])}:{occurrence['line']}"
+                )
+
     if report["warnings"]:
         lines.extend(["", "Warnings"])
         lines.extend(f"  {_safe_text(warning)}" for warning in report["warnings"][:5])
@@ -246,7 +368,7 @@ def exit_code(report: dict[str, Any]) -> int:
     assessment = report["receptor"]["assessment"]
     if assessment == "PASS":
         return 0
-    if assessment == "FAIL":
+    if assessment in {"FAIL", "PARTIAL"}:
         return 1
     if assessment == "PENDING":
         return 3

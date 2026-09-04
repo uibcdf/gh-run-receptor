@@ -18,6 +18,11 @@ selects `human` for an interactive terminal and `llm` when stdout is redirected.
 `--format=json` for the versioned structured report; JSON is a format, not a receptor.
 The ordinary native GitHub presentation remains available through `gh run view`.
 
+The current MVP recognizes clear Conda matrices automatically. When failure logs were
+captured, it reports independently reusable platform artifacts and groups repeated causes
+with member-and-line provenance. `--profile=generic` disables auto-detection; an explicit
+`--profile=conda` enables the Conda interpretation.
+
 The root `gh-run-receptor` launcher also satisfies the GitHub CLI extension naming
 contract. Until a release is published, a local checkout can be exercised directly with
 `./gh-run-receptor --help`; installation instructions will be finalized with the first

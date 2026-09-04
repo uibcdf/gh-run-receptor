@@ -14,10 +14,14 @@ ruff check .
 pytest --receptor=llm
 ```
 
-The suite contained 20 deterministic tests covering report truth, outcome exit codes,
+The suite initially contained 20 deterministic tests covering report truth, outcome exit codes,
 human/LLM selection, TTY inference, JSON output, URL parsing, pagination merging, bundle
 digests, traversal rejection, capture-policy cache separation, and terminal-control
 escaping.
+
+The first causal-analysis and Conda increment raised this to 25 tests. The added cases
+cover cross-job cause normalization, bounded huge-line handling, malicious ZIP traversal,
+Conda partial-success semantics, reusable artifacts, and conservative profile detection.
 
 A `0.1.0a1` wheel was built without dependency download, installed into a fresh temporary
 virtual environment, and invoked through its installed console entry point. The wheel
@@ -44,6 +48,18 @@ The bundle was complete and contained 425,372 bytes of structured and log eviden
 log archive itself was 362,561 bytes. These values come from the captured manifest and
 must be regenerated rather than hand-maintained in future benchmark reports.
 
+After bounded log analysis and the first Conda profile were added, replay classified the
+same run as `PARTIAL` while retaining `conclusion=failure` and exit status 1. It identified
+three reusable platforms (`linux-64`, `linux-aarch64`, and `win-64`), two failed macOS
+platforms, and one cause shared by both failures:
+
+```text
+$RUNNER_TEMP/script: line 2: mapfile: command not found
+```
+
+The report points to line 4157 of the `osx-64` member as its deterministic displayed
+sample and retains both occurrences in JSON.
+
 ## What this proves
 
 - Complete remote evidence can be acquired without entering the language-model output
@@ -57,7 +73,8 @@ must be regenerated rather than hand-maintained in future benchmark reports.
 
 - No formal token-reduction percentage has been measured against the competent native
   baseline yet.
-- Downloaded logs are stored but not parsed into root causes.
+- Log analysis currently recognizes a deliberately small generic signature set and is not
+  yet a complete diagnosis engine.
 - Only one real MolSysMT workflow has been checked; no platform support claim follows.
 - The live capture is private temporary evidence, not a reviewed committed fixture.
 - Full schema, malformed-API, archive-limit, active-run, rerun-attempt, and restricted-token

@@ -48,6 +48,11 @@ parent traversal, unsafe links, duplicate-confusion paths, or unsupported types.
 occurs in a dedicated evidence directory without executing contents. Digests are checked
 when GitHub supplies them and recorded otherwise.
 
+The MVP enforces fixed limits on API output, binary download size, ZIP members, expanded
+bytes, individual members, and individual log lines. It reads ZIP members in place without
+extracting them. Configurable limits, elapsed-time enforcement, and broader archive-format
+coverage remain release work and must not be claimed as implemented.
+
 ## Pattern safety
 
 Exact matching is the default. User patterns have length and count limits, are compiled

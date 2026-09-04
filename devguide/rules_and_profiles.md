@@ -49,6 +49,12 @@ Separates native platform build, package contract validation, Python compatibili
 artifact identity, upload, and channel verification. It reports independently reusable
 platform successes and identifies the smallest rerun target.
 
+The first implemented slice recognizes the canonical Conda subdirectories from job and
+artifact names, requires at least two observed platforms plus a workflow path containing
+`conda` or `rattler` for auto-detection, preserves failed platforms, and marks a platform
+reusable only when it has both a successful job and an artifact. ABI validation, upload,
+channel verification, configuration-driven expectations, and rerun targeting remain open.
+
 ### Release
 
 Relates the exact commit, tag, gates, built artifacts, registries, GitHub Release, and

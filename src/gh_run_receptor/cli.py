@@ -59,6 +59,7 @@ def _parser() -> argparse.ArgumentParser:
         help="target reader; inferred from whether stdout is a terminal by default",
     )
     parser.add_argument("--format", choices=("text", "json"), default="text")
+    parser.add_argument("--profile", choices=("generic", "conda"))
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     inspect = subparsers.add_parser("inspect", help="capture and report one workflow run")
@@ -134,7 +135,12 @@ def _capture(args: argparse.Namespace, *, render: bool) -> int:
         )
         return 0 if manifest["complete"] else 4
 
-    report = build_report(manifest, evidence)
+    report = build_report(
+        manifest,
+        evidence,
+        profile=args.profile or "auto",
+        bundle_directory=destination,
+    )
     print(_render(report, args.format, args.receptor), end="")
     return exit_code(report)
 
@@ -149,7 +155,12 @@ def main(arguments: list[str] | None = None) -> int:
         if args.command == "capture":
             return _capture(args, render=False)
         manifest, evidence = load_bundle(args.bundle)
-        report = build_report(manifest, evidence)
+        report = build_report(
+            manifest,
+            evidence,
+            profile=args.profile or "auto",
+            bundle_directory=args.bundle,
+        )
         print(_render(report, args.format, args.receptor), end="")
         return exit_code(report)
     except ReceptorError as error:

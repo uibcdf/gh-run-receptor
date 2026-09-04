@@ -23,9 +23,13 @@ The current MVP implements:
 - a shared generic report rendered for `human`, `llm`, or JSON;
 - numeric IDs and HTTPS run URLs, including repository and hostname extraction;
 - authoritative outcome exit codes and bounded terminal-safe text.
+- bounded log-cause extraction with archive and line limits;
+- conservative Conda auto-detection, reusable-platform classification, and cross-job
+  cause grouping.
 
-It does not yet interpret log causes, implement workflow profiles/configuration, formalize
-JSON Schemas, monitor active transitions, compare runs, or provide the embedded Action.
+It does not yet provide declarative configuration, CI/docs/release profiles, formal JSON
+Schemas, active transition monitoring, run comparison, or the embedded Action. The Conda
+profile is an initial vertical slice, not its complete stable contract.
 
 ## Reading order
 

@@ -168,6 +168,11 @@ Every group stores all occurrence identities even when rendering only a sample. 
 rules may label a known signature but cannot replace the original normalized message or
 evidence reference.
 
+The MVP log analyzer records cause kind, normalized message, stable fingerprint, and every
+job/member/line occurrence. It chooses the most specific bounded causal candidate rather
+than treating a generic final exit-code marker as root cause. Normalization may remove a
+volatile temporary script path but retains the original message in each occurrence.
+
 ## Producer events
 
 Instrumented workflows may emit newline-delimited events or a final document. A minimal

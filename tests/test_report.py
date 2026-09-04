@@ -1,3 +1,5 @@
+import zipfile
+
 from gh_run_receptor.report import build_report, exit_code, render_human, render_llm
 
 
@@ -112,3 +114,42 @@ def test_text_renderers_escape_terminal_and_bidirectional_controls():
         assert "\u202e" not in rendered
         assert "\\u001b" in rendered
         assert "\\u202e" in rendered
+
+
+def test_conda_profile_preserves_failure_and_marks_reusable_platforms():
+    report = build_report(_manifest(), _evidence(), profile="conda")
+
+    assert report["github"]["conclusion"] == "failure"
+    assert report["receptor"]["assessment"] == "PARTIAL"
+    assert exit_code(report) == 1
+    platforms = {item["name"]: item for item in report["matrix"]["platforms"]}
+    assert platforms["linux-64"]["reusable"] is True
+    assert platforms["win-64"]["status"] == "failed"
+
+
+def test_auto_profile_requires_conda_workflow_and_multiple_platforms():
+    conda = build_report(_manifest(), _evidence(), profile="auto")
+    evidence = _evidence()
+    evidence["workflow.json"]["path"] = ".github/workflows/ci.yaml"
+    generic = build_report(_manifest(), evidence, profile="auto")
+
+    assert conda["receptor"]["profile"] == "conda"
+    assert generic["receptor"]["profile"] == "generic"
+
+
+def test_report_integrates_cause_from_captured_log_archive(tmp_path):
+    with zipfile.ZipFile(tmp_path / "logs.zip", "w") as zipped:
+        zipped.writestr("1_build (win-64).txt", "tool: command not found\n")
+    manifest = _manifest()
+    manifest["members"] = [{"path": "logs.zip"}]
+
+    report = build_report(
+        manifest,
+        _evidence(),
+        profile="conda",
+        bundle_directory=tmp_path,
+    )
+
+    assert report["receptor"]["cause_evidence"] == "complete"
+    assert report["causes"][0]["message"] == "tool: command not found"
+    assert "root causes (1):" in render_llm(report)
