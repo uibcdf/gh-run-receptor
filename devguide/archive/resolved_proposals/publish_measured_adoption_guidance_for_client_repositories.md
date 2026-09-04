@@ -1,13 +1,13 @@
 ---
 summary: Publish measured adoption guidance for client repositories
 issue: uibcdf/gh-run-receptor#4
-status: active
+status: resolved
 opened: 2026-09-04
-closed:
+closed: 2026-09-04
 verification: measured
 area: ['documentation', 'governance']
-guard:
-normative:
+guard: tests/test_sync_guide.py
+normative: ../standards/GH_RUN_RECEPTOR_GUIDE.md
 blocked_by: []
 supersedes: []
 ---
@@ -15,8 +15,8 @@ supersedes: []
 # Publish measured adoption guidance for client repositories
 
 **Reported:** 2026-09-04, before beginning configuration work and MolSysMT adoption.
-**Status:** Active; the README evidence, canonical guide, synchronization tool, and tests
-are implemented and undergoing validation.
+**Status:** Resolved in `d2f321a`; the guide was synchronized into MolSysMT in
+`uibcdf/molsysmt@7e8af130e`.
 
 ## What
 
@@ -78,5 +78,6 @@ No dependency. The guide must be resynchronized whenever its integration contrac
 
 ## Provenance
 
-Benchmark provenance remains in `devguide/benchmark_2026-09-04.md`. Synchronization tests
-run locally with Python 3.13 on 2026-09-04.
+Benchmark provenance remains in `devguide/benchmark_2026-09-04.md`. Ruff and all 51 tests
+passed locally with Python 3.13 on 2026-09-04. Exact synchronization was checked after the
+MolSysMT copy was written, and MolSysMT's Ruff gate also passed.
