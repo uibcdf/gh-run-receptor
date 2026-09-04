@@ -1,13 +1,13 @@
 ---
 summary: Adopt MolSysSuite repository lifecycle and packaging conventions
 issue: uibcdf/gh-run-receptor#1
-status: active
+status: resolved
 opened: 2026-09-04
-closed:
-verification: inspected
+closed: 2026-09-04
+verification: measured
 area: ['governance', 'packaging']
-guard:
-normative:
+guard: tests/test_repository_conventions.py
+normative: reporting_protocol.md
 blocked_by: []
 supersedes: []
 ---
@@ -16,7 +16,8 @@ supersedes: []
 
 **Reported:** 2026-09-04, while deciding whether the first functional release should
 receive another tag.
-**Status:** Active; the conventions have been implemented and are being validated.
+**Status:** Resolved in `198653b`; the conventions and their executable guards are on
+`main`.
 
 ## What
 
@@ -82,5 +83,8 @@ GitHub CLI; all local validation remains offline.
 
 ## Provenance
 
-Repository inspection on 2026-09-04. Runtime validation uses the active Python 3.13
-development environment; exact build outputs will be recorded at closure.
+Repository inspection and runtime validation on 2026-09-04 with Python 3.13 and
+`versioningit 3.3.0`. `ruff check --no-cache .` passed; the complete suite passed with 36
+tests through `pytest-receptor`; isolated sdist and wheel builds succeeded. The clean
+commit produced version `0.1.1+1.g198653b`, and a fresh virtual environment reported that
+same version from the installed wheel.
