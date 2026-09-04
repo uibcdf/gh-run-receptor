@@ -22,7 +22,7 @@ run JSON document:
 | `run.json` | workflow run and selected attempt | Authoritative run identity, status, conclusion, ref, SHA, event, actors, and resource URLs |
 | `workflow.json` | workflow by numeric ID | Stable repository-local ID, display name, file path, and state |
 | `jobs.json` | jobs for the selected run attempt | Jobs, runner labels, timestamps, conclusions, and step metadata |
-| `checks.json` | check suite and check runs where available | Check output and annotations not represented in job logs |
+| `checks.json` | check runs for the run's exact check-suite ID | Check output and annotations not represented in job logs without mixing runs for the same commit |
 | `artifacts.json` | artifacts for the workflow run | Names, sizes, digests, expiry, and download availability |
 | `logs.zip` | log archive for the run attempt | Full textual evidence and step fragments when structured facts are insufficient |
 
@@ -136,4 +136,3 @@ GitHub.com commonly retains logs and artifacts for a bounded repository-configur
 period; 90 days is a common default, not a receptor guarantee. A bundle records expiry
 metadata when provided. Missing historical logs or artifacts yield a valid but
 explicitly incomplete bundle.
-

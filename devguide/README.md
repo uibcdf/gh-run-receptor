@@ -7,11 +7,25 @@ evidence.
 
 ## Current state
 
-The project is in its inception phase. No implementation or stable public contract exists
-yet; the contracts in this guide are explicit but provisional unless marked settled.
-The immediate goal is a read-only prototype that can capture a GitHub Actions run,
-replay the captured evidence offline, and render a compact report without changing the
-run or hiding its authoritative GitHub state.
+The project has a first source-tree MVP but no released package or stable public contract;
+the contracts in this guide are explicit but provisional unless marked settled. The MVP
+can capture structured evidence for one GitHub Actions run, replay it offline, and render
+human, LLM, or JSON reports without changing the run or hiding its authoritative GitHub
+state. Log interpretation, formal schemas, profiles, packaging, and broader corpus
+validation remain open.
+
+The current MVP implements:
+
+- `inspect`, `capture`, and offline `replay` for one run attempt;
+- authenticated acquisition through `gh api` of run, workflow, paginated jobs, checks,
+  artifacts, and policy-selected logs;
+- SHA-256-validated bundles separated by repository, attempt, and capture policy;
+- a shared generic report rendered for `human`, `llm`, or JSON;
+- numeric IDs and HTTPS run URLs, including repository and hostname extraction;
+- authoritative outcome exit codes and bounded terminal-safe text.
+
+It does not yet interpret log causes, implement workflow profiles/configuration, formalize
+JSON Schemas, monitor active transitions, compare runs, or provide the embedded Action.
 
 ## Reading order
 
@@ -27,7 +41,8 @@ run or hiding its authoritative GitHub state.
 10. [Testing strategy](testing_strategy.md)
 11. [Development workflow](development_workflow.md)
 12. [Decisions and open questions](decisions_and_open_questions.md)
-13. [Development roadmap](development_roadmap.md)
+13. [MVP validation checkpoint](mvp_validation.md)
+14. [Development roadmap](development_roadmap.md)
 
 These documents are the current checkpoint. There is no historical archive yet.
 When an archive is introduced, routine onboarding should require only its generated
@@ -53,6 +68,7 @@ known design question; it does not mean that unimplemented behavior has been val
 | Corpus, fixtures, differential tests, and token measurement | `testing_strategy.md` |
 | Environment, layout, contribution, and validation | `development_workflow.md` |
 | Settled decisions and unresolved choices | `decisions_and_open_questions.md` |
+| Implemented surface and real-run validation | `mvp_validation.md` |
 | Ordered implementation plan and release gates | `development_roadmap.md` |
 
 ## Settled direction
@@ -64,6 +80,8 @@ known design question; it does not mean that unimplemented behavior has been val
   achieved by bounding stdout, not by discarding the evidence needed for diagnosis.
 - The command-line client, GitHub Action, and reusable reporting workflow share one
   normalized evidence model and renderer.
+- `human` and `llm` identify the intended reader; JSON is an orthogonal serialization
+  format. Interactive text defaults to `human`, redirected text to `llm`.
 - Built-in workflow profiles are complemented by safe declarative configuration.
 - Arbitrary commands or executable expressions are not part of the rule language.
 - Mutation such as rerunning, cancelling, or publishing is outside the initial scope.

@@ -76,7 +76,8 @@ overwritten by profile conclusions.
 
 The same report can be rendered to:
 
-- compact stdout for an agent;
+- explanatory stdout for a human receptor;
+- compact stdout for an LLM receptor;
 - JSON for automation and replay;
 - Markdown through `GITHUB_STEP_SUMMARY`;
 - a small `gh-run-receptor-report.json` workflow artifact.
@@ -84,6 +85,11 @@ The same report can be rendered to:
 The compact renderer prints one verdict, the minimum useful matrix summary, distinct
 causes, evidence locations, and suggested read-only follow-up or rerun commands. It does
 not stream unchanged polling snapshots.
+
+The human and LLM renderers consume the same report and therefore cannot disagree on
+source state. Human output favors labels and a bounded complete job inventory; LLM output
+favors distinct failures, decisions, and evidence pointers. JSON is not a third receptor:
+it serializes the shared report independently of text presentation.
 
 ## Embedded reporting
 

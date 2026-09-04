@@ -33,6 +33,11 @@ gh run-receptor inspect RUN_ID
 gh run-receptor replay PATH
 ```
 
+Text rendering selects a receptor: `human` provides a labeled, explanatory inventory;
+`llm` provides a much smaller decision-oriented report. The default is inferred from
+whether stdout is an interactive terminal. JSON is a structured format rather than a
+reader profile. Native GitHub output is still obtained directly with `gh run view`.
+
 ### GitHub Action
 
 An optional action publishes a compact per-job or run report. Rules can be supplied as
@@ -80,4 +85,3 @@ documentation deployment, and release workflows.
 - Validated built-in profiles for CI, documentation, Conda, and release workflows.
 - No unbounded output, credential disclosure, or forged verdict through untrusted log
   content.
-

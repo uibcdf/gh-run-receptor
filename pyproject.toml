@@ -1,0 +1,48 @@
+[build-system]
+requires = ["setuptools>=77.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gh-run-receptor"
+version = "0.1.0a1"
+description = "Compact, truth-preserving reports for GitHub Actions runs"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "UIBCDF Lab"}]
+keywords = ["github-actions", "github-cli", "llm", "workflow", "logs"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/uibcdf/gh-run-receptor"
+Repository = "https://github.com/uibcdf/gh-run-receptor"
+Issues = "https://github.com/uibcdf/gh-run-receptor/issues"
+
+[project.scripts]
+gh-run-receptor = "gh_run_receptor.cli:main"
+
+[project.optional-dependencies]
+test = ["pytest", "pytest-receptor"]
+dev = ["pytest", "pytest-receptor", "ruff"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]

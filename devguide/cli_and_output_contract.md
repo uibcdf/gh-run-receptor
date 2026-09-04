@@ -22,7 +22,8 @@ The preliminary global interface is:
 ```text
 --repo OWNER/REPO       repository when it cannot be inferred
 --hostname HOST         GitHub hostname, initially github.com
---format llm|human|json output renderer; default llm when non-interactive
+--receptor human|llm    intended text reader; inferred from stdout when omitted
+--format text|json      output encoding; default text
 --profile NAME          explicit profile, bypassing profile autodetection
 --config PATH           explicit trusted configuration path
 --cache-dir PATH        evidence-cache location
@@ -33,6 +34,12 @@ The preliminary global interface is:
 Environment variables may provide non-secret defaults. Command arguments take
 precedence. Authentication tokens are not accepted as ordinary command-line options;
 GitHub CLI owns authentication.
+
+For text output, the inferred receptor is `human` when stdout is a terminal and `llm`
+otherwise. An explicit `--receptor` always wins. `--format=json` serializes the shared
+report and does not change facts according to the selected receptor. `human` is a receptor
+report, not passthrough output; users who want GitHub CLI's native presentation invoke
+`gh run view` directly.
 
 ## Commands
 
@@ -121,6 +128,11 @@ configuration sources, precedence, and every applied override.
 
 Raw logs are never printed automatically. `--debug` does not change this rule.
 
+Human text includes explanatory labels, all jobs up to a documented bound, failed steps,
+and artifact details. LLM text includes the verdict, compact job counts, failed jobs and
+steps, a bounded artifact inventory, warnings, and the run link. Both are projections of
+the same report and return the same exit status.
+
 ## Official facts and receptor assessment
 
 Every report carries two distinct layers:
@@ -178,7 +190,7 @@ A successful matrix example:
 ```text
 PASS conclusion=success | Conda | 5/5 platforms | 5 artifacts | 15 ABI checks
 slowest: osx-64 8m42s | artifacts: 263.1 MiB
-evidence: ~/.cache/gh-run-receptor/uibcdf/molsysmt/33863426589/1
+evidence: ~/.cache/gh-run-receptor/github.com/uibcdf/molsysmt/33863426589/1/adaptive
 ```
 
 A partial example:
@@ -212,4 +224,3 @@ Suggested commands are inert text. They include the repository when the current 
 directory may not resolve it and use the database job ID required by GitHub CLI. A
 suggestion is emitted only when evidence identifies a valid target. The receptor never
 executes it in the read-only product.
-

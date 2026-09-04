@@ -12,10 +12,16 @@ without changing normalized evidence or reports.
 
 ## Development environment
 
-Until packaging is scaffolded, do not invent installation commands. The first vertical
-slice must add a `pyproject.toml`, development dependencies, console entry point, and exact
-environment instructions to this file in the same change. The expected local tools are
-Git, GitHub CLI, Python, Ruff, pytest, and `pytest-receptor`.
+The source-tree MVP has a `pyproject.toml`, console entry point, and optional development
+dependencies. In a disposable environment, install it with:
+
+```text
+python -m pip install -e '.[dev]'
+```
+
+Without installation, commands and tests can run with `PYTHONPATH=src`. The expected local
+tools are Git, an authenticated GitHub CLI, Python 3.11 or newer, Ruff, pytest, and
+`pytest-receptor`.
 
 GitHub-dependent tests use a dedicated fixture repository and an explicitly authenticated
 `gh` session. Unit, contract, replay, and adversarial tests remain offline. Never require a

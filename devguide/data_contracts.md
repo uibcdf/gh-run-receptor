@@ -63,6 +63,11 @@ field. A member is immutable after capture. Refreshing active evidence creates a
 generation or atomically replaces the bundle only after all new members and the
 manifest validate.
 
+The default cache identity includes hostname, repository, run ID, attempt, and capture
+policy. A metadata-only bundle is never reused as though it satisfied an adaptive or full
+request. An explicit output path is accepted only when its manifest identity exactly
+matches the request.
+
 ## Evidence references
 
 Every normalized or interpreted fact can cite an evidence reference:
@@ -201,4 +206,3 @@ count, line size, total bytes, nesting, and string lengths.
 
 Formal JSON Schemas are a Phase 1 deliverable. The examples in this document define the
 minimum semantic boundary, not yet the final property spelling.
-
