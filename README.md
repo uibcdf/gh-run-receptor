@@ -33,6 +33,26 @@ captured, it reports independently reusable platform artifacts and groups repeat
 with member-and-line provenance. `--profile=generic` disables auto-detection; an explicit
 `--profile=conda` enables the Conda interpretation.
 
+## Measured token reduction
+
+The first benchmark uses public MolSysMT Conda runs and compares against a competent
+filtered native workflow, not against deliberately dumping every log line:
+
+| Question | Native baseline | Receptor | Reduction (`cl100k_base`) |
+| --- | ---: | ---: | ---: |
+| Diagnose a partial five-platform failure | 5,138 tokens | 296 tokens | 94.2% |
+| Verify a successful five-platform matrix | 143 tokens | 39 tokens | 72.7% |
+
+For the failed run, the receptor retained the official failure, identified both failed
+macOS jobs, and reported the Linux, Linux ARM, and Windows artifacts as reusable. These are
+case measurements, not a general savings rate; see the
+[commands, tokenizer comparison, and limitations](devguide/benchmark_2026-09-04.md).
+
+If the only question is whether one completed run succeeded, native GitHub JSON is already
+smaller in the measured green case: 10 tokens versus the receptor's 39. Use the receptor
+when job, platform, artifact, failure, or evidence completeness matters—not to replace an
+already minimal status query.
+
 Long-running workflows can be observed without redrawing their complete job tree:
 
 ```text
@@ -51,4 +71,6 @@ artifacts remain future distribution modes.
 Product contracts, contributor onboarding, security boundaries, open decisions, and the
 implementation route are maintained in the
 [developer guide](devguide/README.md). See [CONTRIBUTING.md](CONTRIBUTING.md) before
-starting a change. Release behavior is summarized in [CHANGELOG.md](CHANGELOG.md).
+starting a change. Libraries and workflow repositories adopting the tool should use the
+[canonical consumer guide](standards/GH_RUN_RECEPTOR_GUIDE.md). Release behavior is
+summarized in [CHANGELOG.md](CHANGELOG.md).
