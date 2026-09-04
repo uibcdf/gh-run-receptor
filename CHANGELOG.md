@@ -17,3 +17,4 @@ All notable changes to this project will be documented in this file.
   provenance.
 - Add conservative Conda-profile detection, reusable-platform reporting, and grouping of
   repeated cross-platform causes.
+- Record the first reproducible MolSysMT pilot against a competent native filtered baseline.

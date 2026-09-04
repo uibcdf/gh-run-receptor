@@ -19,9 +19,10 @@ human/LLM selection, TTY inference, JSON output, URL parsing, pagination merging
 digests, traversal rejection, capture-policy cache separation, and terminal-control
 escaping.
 
-The first causal-analysis and Conda increment raised this to 25 tests. The added cases
+The first causal-analysis and Conda increment raised this to 26 tests. The added cases
 cover cross-job cause normalization, bounded huge-line handling, malicious ZIP traversal,
-Conda partial-success semantics, reusable artifacts, and conservative profile detection.
+Conda partial-success semantics, reusable artifacts, conservative profile detection, and
+bundle-to-report cause integration.
 
 A `0.1.0a1` wheel was built without dependency download, installed into a fresh temporary
 virtual environment, and invoked through its installed console entry point. The wheel
@@ -59,6 +60,11 @@ $RUNNER_TEMP/script: line 2: mapfile: command not found
 
 The report points to line 4157 of the `osx-64` member as its deterministic displayed
 sample and retains both occurrences in JSON.
+
+The measured comparison with a locally filtered native baseline is recorded in
+[benchmark_2026-09-04.md](benchmark_2026-09-04.md). The pilot reduced reader input by
+93.9% to 94.7% across four tokenizers, while the unfiltered native failed log remained on
+disk rather than entering the reader channel.
 
 ## What this proves
 

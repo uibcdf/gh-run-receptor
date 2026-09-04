@@ -86,4 +86,5 @@ more local `AGENTS.md` may refine these rules within its directory.
 - `devguide/development_workflow.md`
 - `devguide/decisions_and_open_questions.md`
 - `devguide/mvp_validation.md`
+- `devguide/benchmark_2026-09-04.md`
 - `devguide/development_roadmap.md`
