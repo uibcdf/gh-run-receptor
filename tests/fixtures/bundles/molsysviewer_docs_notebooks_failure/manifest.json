@@ -1,7 +1,7 @@
 {
   "api_version": "2022-11-28",
   "capture_policy": "metadata",
-  "captured_at": "2026-09-05T08:48:29.390491+00:00",
+  "captured_at": "2026-09-05T09:20:27.329046+00:00",
   "complete": true,
   "head_sha": "7ff59918a1794c83516c507667346b4b9fb43810",
   "hostname": "github.com",
@@ -40,9 +40,16 @@
       "kind": "github.artifacts",
       "path": "artifacts.json",
       "sha256": "e5c32e153e1afd1d8816fa3924f0bf29b480dd409db4cf4975e8060aa20e4fa2"
+    },
+    {
+      "bytes": 1349,
+      "complete": true,
+      "kind": "gh-run-receptor.repository_config",
+      "path": "config.json",
+      "sha256": "7b1351871ed09e2438d5fccc6fc8501bc1aaee585bc29b99ec356bc35da7fbc4"
     }
   ],
-  "receptor_version": "0.5.0",
+  "receptor_version": "0.6.1",
   "repository": "uibcdf/molsysviewer",
   "run_attempt": 1,
   "run_id": 33930667142,

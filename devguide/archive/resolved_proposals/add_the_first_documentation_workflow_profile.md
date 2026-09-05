@@ -1,12 +1,12 @@
 ---
 summary: Add the first documentation workflow profile
 issue: uibcdf/gh-run-receptor#8
-status: open
+status: resolved
 opened: 2026-09-05
-closed:
-verification: asserted
+closed: 2026-09-05
+verification: measured
 area: ['profiles', 'tests']
-guard:
+guard: tests/test_contracts.py
 normative:
 blocked_by: []
 supersedes: []
@@ -15,7 +15,8 @@ supersedes: []
 # Adding the first documentation workflow profile
 
 **Reported:** 2026-09-05, after the native/noarch Conda profile checkpoint.
-**Status:** Open; implementation and client validation are in progress.
+**Status:** Resolved in 0.6.0; client adoption and the corrected diagnostic surface ship
+in 0.6.1.
 
 Remove `severity` for proposals. The directory identifies the report kind.
 
@@ -108,9 +109,23 @@ No external dependency blocks this slice. Step-name roles are presentation metad
 therefore cannot rewrite official conclusions. Future required-phase enforcement needs
 explicit repository settings and is excluded here.
 
+## Delivered checkpoint
+
+Commit `a979590` and tag `0.6.0` delivered the documentation profile. During client
+adoption, `config explain` exposed an implicit native Conda package kind for a `docs` rule;
+commit `443a015` and tag `0.6.1` removed that unrelated setting from the explanation.
+MolSysMT adopted the exact Sphinx workflow rule in `bc10d7e02`, and MolSysViewer adopted
+the notebook and Sphinx rules in `d419aaf2`.
+
+The final local gate passed 106 tests, Ruff, developer-report validation, and diff safety.
+Both sanitized fixtures now include the reviewed default-branch configuration and prove
+automatic `docs` selection while retaining exact GitHub conclusion parity.
+
 ## Provenance
 
 Measured on 2026-09-05 on the local Linux development host with Python 3.13, GitHub CLI
 2.93.0, and tiktoken 0.13.0. Source evidence is from public run attempt 1 of MolSysViewer
 `33930667142` and MolSysMT `31781220979`; committed fixtures are reviewed metadata-only
-reductions and remain replayable after GitHub retention expires.
+reductions and remain replayable after GitHub retention expires. After client adoption,
+both runs were captured again with `gh-run-receptor` 0.6.1; their sanitized fixtures retain
+the reviewed default-branch policy and select `docs` without a CLI profile override.

@@ -112,18 +112,22 @@ def test_documentation_fixtures_preserve_distinct_phase_evidence():
         FIXTURES / "bundles/molsysmt_docs_success"
     )
 
-    failure = build_report(failure_manifest, failure_evidence, profile="docs")
-    success = build_report(success_manifest, success_evidence, profile="docs")
+    failure = build_report(failure_manifest, failure_evidence, profile="auto")
+    success = build_report(success_manifest, success_evidence, profile="auto")
     failure_phases = {item["name"]: item for item in failure["matrix"]["phases"]}
     success_phases = {item["name"]: item for item in success["matrix"]["phases"]}
 
     assert failure["github"]["conclusion"] == "failure"
     assert failure["receptor"]["assessment"] == "FAIL"
+    assert failure["receptor"]["profile"] == "docs"
+    assert failure["configuration"]["matched"] is True
     assert failure_phases["notebooks"]["counts"] == {"skipped": 1}
     assert failure_phases["artifact"]["counts"] == {"success": 1}
     assert failure_phases["setup"]["counts"]["failure"] == 2
     assert len(failure["jobs"][0]["steps"]) == 9
     assert success["github"]["conclusion"] == "success"
     assert success["receptor"]["assessment"] == "PASS"
+    assert success["receptor"]["profile"] == "docs"
+    assert success["configuration"]["matched"] is True
     assert success_phases["build_deploy"]["counts"] == {"success": 1}
     assert "build" not in success_phases
