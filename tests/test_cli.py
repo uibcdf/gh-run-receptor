@@ -213,6 +213,34 @@ workflows:
     )
 
 
+def test_config_explain_omits_conda_only_settings_for_docs(tmp_path, capsys):
+    config = tmp_path / "rules.yaml"
+    config.write_text(
+        """schema_version: 1
+workflows:
+  - match:
+      path: .github/workflows/docs.yaml
+    profile: docs
+"""
+    )
+
+    assert (
+        main(
+            [
+                "config",
+                "explain",
+                ".github/workflows/docs.yaml",
+                "--config",
+                str(config),
+            ]
+        )
+        == 0
+    )
+    assert capsys.readouterr().out == (
+        "match=path:.github/workflows/docs.yaml profile=docs\n"
+    )
+
+
 def test_config_check_returns_bounded_receptor_error(tmp_path, capsys):
     config = tmp_path / "rules.yaml"
     config.write_text("schema_version: 9\n")

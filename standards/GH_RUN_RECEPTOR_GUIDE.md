@@ -6,7 +6,7 @@ Metadata
 
 - Source repository: `gh-run-receptor`
 - Source document: `standards/GH_RUN_RECEPTOR_GUIDE.md`
-- Source version: `gh-run-receptor@0.6.0`
+- Source version: `gh-run-receptor@0.6.1`
 - Last synced: 2026-09-05
 
 ## What gh-run-receptor is
@@ -41,7 +41,7 @@ A failing MolSysViewer notebook case reduced a competent filtered baseline from 
 
 ## Supported integration level
 
-Version `0.6.0` is a source preview with:
+Version `0.6.1` is a source preview with:
 
 - `inspect`, `capture`, offline `replay`, and transition-only `watch`;
 - `human`, `llm`, and JSON rendering;
@@ -55,7 +55,7 @@ Version `0.6.0` is a source preview with:
 
 The release profile; configurable required jobs or documentation phases; pattern matching;
 arbitrary rule keys; workflow discovery; and the embedded GitHub Action are not implemented
-in `0.6.0`.
+in `0.6.1`.
 
 ## Installation
 
@@ -63,14 +63,14 @@ The client requires Git, Python 3.11 through 3.13, and an authenticated GitHub C
 Install the exact preview tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 0.6.0
+gh extension install uibcdf/gh-run-receptor --pin 0.6.1
 gh run-receptor --version
 ```
 
 Expected version output:
 
 ```text
-0.6.0
+0.6.1
 ```
 
 Pinning is deliberate. A pinned script extension does not advance through an ordinary
@@ -231,7 +231,7 @@ workflows:
         - win-64
 ```
 
-Version `0.6.0` supports exactly one identity per rule: an exact `path`, positive numeric
+Version `0.6.1` supports exactly one identity per rule: an exact `path`, positive numeric
 `id`, or exact display `name`. Path has precedence over ID, and ID over name, if more than
 one distinct rule matches the observed workflow. Rules select `generic`, `ci`, `docs`, or
 `conda`.

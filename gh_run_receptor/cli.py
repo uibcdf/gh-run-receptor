@@ -213,13 +213,18 @@ def main(arguments: list[str] | None = None) -> int:
                 print("no matching rule; profile=auto")
                 return 0
             key, value = next(iter(rule["match"].items()))
-            platforms = rule["settings"].get("expected_platforms", [])
-            settings = ",".join(platforms) if platforms else "none"
-            package_kind = rule["settings"].get("package_kind", "native")
-            print(
-                f"match={key}:{value} profile={rule['profile']} "
-                f"package_kind={package_kind} expected_platforms={settings}"
-            )
+            fields = [f"match={key}:{value}", f"profile={rule['profile']}"]
+            if rule["profile"] == "conda":
+                platforms = rule["settings"].get("expected_platforms", [])
+                expected_platforms = ",".join(platforms) if platforms else "none"
+                package_kind = rule["settings"].get("package_kind", "native")
+                fields.extend(
+                    [
+                        f"package_kind={package_kind}",
+                        f"expected_platforms={expected_platforms}",
+                    ]
+                )
+            print(" ".join(fields))
             return 0
         if args.command == "inspect":
             return _capture(args, render=True)

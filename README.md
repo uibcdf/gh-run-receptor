@@ -5,11 +5,11 @@ repetitive run output into a compact, truth-preserving report while retaining a 
 path to the captured evidence.
 
 The project is in pre-1.0 development; no package has been published to a package index and
-the public contract may still evolve. The `0.6.0` source release can inspect, watch, and
+the public contract may still evolve. The `0.6.1` source release can inspect, watch, and
 replay structured run evidence. Install the GitHub CLI extension at the exact preview tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 0.6.0
+gh extension install uibcdf/gh-run-receptor --pin 0.6.1
 gh run-receptor --version
 ```
 
@@ -68,7 +68,7 @@ gh run-receptor config explain .github/workflows/build_conda.yaml
 
 Live capture reads policy only from the repository's default branch, stores its revision
 and digest in the evidence bundle, and fails if required platforms are absent. Version
-`0.6.0` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
+`0.6.1` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
 patterns and unknown settings rather than silently ignoring them.
 
 ## Measured token reduction

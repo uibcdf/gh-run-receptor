@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.6.1 - 2026-09-05
+
+- Keep `config explain` focused on settings supported by the matched profile instead of
+  displaying an implicit native Conda package kind for documentation or CI rules.
+
 ## 0.6.0 - 2026-09-05
 
 - Add the first documentation profile with bounded build, notebook, link, warning,
