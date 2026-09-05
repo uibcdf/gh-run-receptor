@@ -2,6 +2,18 @@
   "schema": "gh-run-receptor.test-corpus@1",
   "captures": [
     {
+      "path": "bundles/molsysviewer_conda_noarch_success",
+      "repository": "uibcdf/molsysviewer",
+      "run_id": 20548716947,
+      "run_attempt": 1,
+      "captured_at": "2026-09-05",
+      "reason": "A successful MolSysViewer Conda workflow interpreted explicitly as one noarch package rather than an empty native-platform matrix.",
+      "sanitization": "Retained only run identity, official state, workflow path, job timing and conclusions, empty current artifact inventory, and the trusted default-branch receptor configuration with provenance. Removed actors, commits beyond the subject SHA, runner details, labels, pull requests, checks, and unrelated API fields.",
+      "expected_github_conclusion": "success",
+      "expected_assessment": "PASS",
+      "upstream_retention": "The public GitHub run is subject to retention. Its current artifact inventory is empty and cannot establish whether an artifact previously existed or whether channel publication occurred."
+    },
+    {
       "path": "bundles/molsysviewer_ci_failure",
       "repository": "uibcdf/molsysviewer",
       "run_id": 33923020037,

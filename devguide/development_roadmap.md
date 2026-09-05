@@ -105,15 +105,15 @@ its exit condition and deliverables are satisfied:
 
 | Phase | Weight toward 1.0 | Evidenced credit | Current state |
 | --- | ---: | ---: | --- |
-| Phase 0: corpus and feasibility | 15% | 8% | Failing and successful MolSysMT Conda runs plus a failing MolSysViewer CI run are measured and committed as sanitized fixtures; broader outcome corpus remains incomplete |
+| Phase 0: corpus and feasibility | 15% | 9% | Failing and successful native MolSysMT Conda runs, a successful MolSysViewer noarch run, and a failing MolSysViewer CI run are measured and committed as sanitized fixtures; broader outcome corpus remains incomplete |
 | Phase 1: generic CLI | 30% | 25% | Capture, strict validated replay, formal bundle/model/report schemas, source-referenced normalization, bounded reports, official-state parity, and degraded log analysis tested; broader corpus parity remains |
-| Phase 2: rules and profiles | 20% | 11% | Initial Conda and CI interpretations, repeated-failure grouping, and strict trusted exact-match configuration tested; documentation/release profiles and richer rules remain |
+| Phase 2: rules and profiles | 20% | 12% | Initial native/noarch Conda and CI interpretations, repeated-failure grouping, and strict trusted exact-match configuration tested; documentation/release profiles and richer rules remain |
 | Phase 3: embedded Action | 15% | 0% | Contract designed; no distributed Action implementation yet |
 | Phase 4: aggregation and comparison | 10% | 2% | Transition-only watch tested; aggregation and comparison remain |
 | Cross-cutting release gate | 10% | 2% | Flat installable package, tag-derived version, local tests, and wheel smoke test verified on Linux; platform and release gates remain |
 
 Design completion is reported separately from implementation progress. The evidenced
-implementation credit at this checkpoint is **48% toward 1.0**. This is not a schedule
+implementation credit at this checkpoint is **50% toward 1.0**. This is not a schedule
 estimate: credit is deliberately withheld where a phase's required corpus, schema,
 platform, or distribution evidence is absent. Percentages change only with linked tests,
 builds, or benchmark evidence, not by subjective confidence.

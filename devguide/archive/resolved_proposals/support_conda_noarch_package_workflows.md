@@ -1,13 +1,13 @@
 ---
 summary: Support Conda noarch package workflows
 issue: uibcdf/gh-run-receptor#7
-status: open
+status: resolved
 opened: 2026-09-04
-closed:
-verification: asserted
+closed: 2026-09-05
+verification: measured
 area: ['profiles', 'tests']
-guard:
-normative:
+guard: tests/test_contracts.py
+normative: rules_and_profiles.md
 blocked_by: []
 supersedes: []
 ---
@@ -16,7 +16,7 @@ supersedes: []
 
 **Reported:** 2026-09-04, while validating the first MolSysViewer client rule against a
 public package run.
-**Status:** Open; implementation and client validation are in progress.
+**Status:** Resolved in 0.5.0 and validated from MolSysViewer's default-branch rule.
 
 Remove `severity` for proposals. The directory identifies the report kind.
 
@@ -73,6 +73,10 @@ gh run-receptor --repo uibcdf/molsysviewer --format=json inspect 20548716947 \
 The empty inventory is measured. Whether the historical run once had a GitHub artifact is
 unknown; direct Anaconda publication is also not proven by current structured evidence.
 
+After 0.5.0 and client adoption, the replacement line measured 153 bytes and 45
+`cl100k_base` tokens. An equivalent native filtered run/jobs query plus artifact inventory
+measured 424 bytes and 101 tokens, a 55.4% reduction.
+
 ## What was refuted
 
 - Inferring noarch from zero observed native platforms is rejected because targeted native
@@ -116,3 +120,16 @@ Measured on 2026-09-04/05 on the local Linux development host with Python 3.13 a
 CLI 2.93.0, authenticated against the public `uibcdf/molsysviewer` repository. The source
 run is attempt 1 of `20548716947`; GitHub retention limits what can be concluded from its
 current artifact inventory.
+
+## Delivered checkpoint
+
+The implementation shipped in commit `bbcceb4` and tag `0.5.0`. Its pre-tag gate passed 90
+tests and Ruff; the exact tagged wheel and source distribution built successfully, and a
+fresh virtual environment reported version 0.5.0 and validated/explained a noarch rule.
+
+MolSysViewer adopted `package_kind: noarch` in commit `65d99e55`; MolSysMT synchronized
+the canonical 0.5.0 client guide in `42be63f07`. A new capture of public run `20548716947`
+loaded the MolSysViewer rule from `main` and rendered `package=noarch`,
+`artifact_evidence=not_observed`, three of three successful jobs, and zero current GitHub
+artifacts. The reviewed sanitized fixture raises the complete suite to 93 tests and crosses
+the bundle, model, report, configuration, and deterministic replay gates.

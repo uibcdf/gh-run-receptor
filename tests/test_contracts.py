@@ -85,3 +85,20 @@ def test_unknown_github_enum_is_preserved_with_source_reference():
             "source": {"member": "jobs.json", "json_pointer": "/jobs/0/conclusion"},
         }
     ]
+
+
+def test_molsysviewer_noarch_fixture_uses_the_trusted_package_kind():
+    manifest, evidence = load_bundle(
+        FIXTURES / "bundles/molsysviewer_conda_noarch_success"
+    )
+
+    report = build_report(manifest, evidence, profile="auto")
+    rendered = render_llm(report)
+
+    assert report["configuration"]["matched"] is True
+    assert report["configuration"]["settings"] == {"package_kind": "noarch"}
+    assert report["matrix"]["package_kind"] == "noarch"
+    assert report["matrix"]["package"]["job_counts"] == {"success": 3}
+    assert report["matrix"]["package"]["artifact_evidence"] == "not_observed"
+    assert "package=noarch" in rendered
+    assert "platforms=0/0" not in rendered

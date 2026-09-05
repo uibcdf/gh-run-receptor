@@ -1,0 +1,35 @@
+{
+  "jobs": [
+    {
+      "completed_at": "2025-12-28T04:21:46Z",
+      "conclusion": "success",
+      "html_url": "https://github.com/uibcdf/molsysviewer/actions/runs/20548716947/job/59023276846",
+      "id": 59023276846,
+      "name": "Conda deployment of package with Python 3.12",
+      "started_at": "2025-12-28T04:17:05Z",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "completed_at": "2025-12-28T04:21:47Z",
+      "conclusion": "success",
+      "html_url": "https://github.com/uibcdf/molsysviewer/actions/runs/20548716947/job/59023276847",
+      "id": 59023276847,
+      "name": "Conda deployment of package with Python 3.11",
+      "started_at": "2025-12-28T04:17:05Z",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "completed_at": "2025-12-28T04:21:56Z",
+      "conclusion": "success",
+      "html_url": "https://github.com/uibcdf/molsysviewer/actions/runs/20548716947/job/59023276854",
+      "id": 59023276854,
+      "name": "Conda deployment of package with Python 3.10",
+      "started_at": "2025-12-28T04:17:05Z",
+      "status": "completed",
+      "steps": []
+    }
+  ],
+  "total_count": 3
+}

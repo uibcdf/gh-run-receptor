@@ -82,6 +82,14 @@ the one-line report reduced input by 72.2% to 73.1% across the measured tokenize
 minimal native status-only query remained smaller than the richer receptor report; this
 negative boundary is documented alongside the benchmark rather than hidden.
 
+MolSysViewer run `20548716947` validates the explicit noarch branch introduced in 0.5.0.
+The trusted default-branch rule selects `package_kind: noarch`; the report preserves all
+three successful jobs, replaces `platforms=0/0` with `package=noarch`, and describes the
+empty complete GitHub artifact inventory as `not_observed`. A reviewed sanitized fixture
+preserves the run, job, configuration, and configuration-provenance fields needed to replay
+that interpretation offline. Against an equivalent filtered run/jobs plus artifact query,
+the compact line reduced `cl100k_base` input from 101 to 45 tokens (55.4%).
+
 The measured comparison with a locally filtered native baseline is recorded in
 [benchmark_2026-09-04.md](benchmark_2026-09-04.md). The pilot reduced reader input by
 93.9% to 94.7% across four tokenizers, while the unfiltered native failed log remained on

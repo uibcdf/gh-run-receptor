@@ -1,0 +1,45 @@
+{
+  "config": {
+    "schema": "gh-run-receptor.config@1",
+    "schema_version": 1,
+    "workflows": [
+      {
+        "match": {
+          "path": ".github/workflows/CI.yaml"
+        },
+        "profile": "ci",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/CI_e2e.yaml"
+        },
+        "profile": "ci",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/ruff.yaml"
+        },
+        "profile": "ci",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/build_and_upload_conda_packages.yaml"
+        },
+        "profile": "conda",
+        "settings": {
+          "package_kind": "noarch"
+        }
+      }
+    ]
+  },
+  "schema": "gh-run-receptor.config-capture@1",
+  "source": {
+    "blob_sha": "7372ac8e265bd93513003cad9e4b147ff9b4e3af",
+    "path": ".github/gh-run-receptor.yaml",
+    "ref": "main",
+    "sha256": "45b259d00ae13745dad8eb66c916c93a039f92379f75d0b9b7b39ace68a1676b"
+  }
+}

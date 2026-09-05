@@ -75,6 +75,7 @@ filtered native workflow, not against deliberately dumping every log line:
 | Diagnose a partial five-platform failure | 5,138 tokens | 296 tokens | 94.2% |
 | Verify a successful five-platform matrix | 143 tokens | 39 tokens | 72.7% |
 | Diagnose seven failed MolSysViewer CI jobs | 223 tokens | 198 tokens | 11.2% |
+| Verify a successful MolSysViewer noarch workflow | 101 tokens | 45 tokens | 55.4% |
 
 For the failed run, the receptor retained the official failure, identified both failed
 macOS jobs, and reported the Linux, Linux ARM, and Windows artifacts as reusable. These are
@@ -90,6 +91,10 @@ The CI measurement uses an already filtered native JSON baseline and therefore s
 modest saving. The receptor additionally retains CI role counts, artifact state, run URL,
 and a replayable bundle. Its first ungrouped implementation was larger than the baseline
 and was rejected before release.
+
+The noarch measurement combines a filtered native run/jobs query with the current GitHub
+artifact inventory. `not_observed` describes that inventory only; it does not claim that
+an artifact never existed or that the Conda channel was or was not updated.
 
 Long-running workflows can be observed without redrawing their complete job tree:
 

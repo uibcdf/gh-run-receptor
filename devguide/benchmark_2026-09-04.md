@@ -140,3 +140,32 @@ URL, while the replayable bundle and JSON retain all seven jobs. The case demons
 measured improvement over a competent compact query and, more importantly, records that
 the simpler ungrouped design failed its economy goal. Broader successful, mixed-result,
 cancelled, and incomplete CI cases remain necessary before claiming a general CI rate.
+
+## MolSysViewer successful noarch Conda case
+
+Public run `20548716947`, attempt 1, reported three successful jobs and official GitHub
+conclusion `success`. Its current GitHub Actions artifact inventory is empty. The trusted
+default-branch rule declares `package_kind: noarch`; noarch is not inferred from the lack
+of native platform names.
+
+The competent native baseline combined:
+
+```text
+gh run view 20548716947 --repo uibcdf/molsysviewer \
+  --json status,conclusion,jobs,name,url,workflowName \
+  --jq '{status,conclusion,workflow:.workflowName,jobs:[.jobs[]|{name,conclusion,failed_steps:[.steps[]|select(.conclusion=="failure")|.name]}]}'
+
+gh api /repos/uibcdf/molsysviewer/actions/runs/20548716947/artifacts \
+  --jq '{total_count,artifacts:[.artifacts[]|{name,size_in_bytes,expired}]}'
+```
+
+The two native components totalled 424 bytes and 101 `cl100k_base` tokens. The 0.5.0
+receptor output measured 153 bytes and 45 tokens, a 55.4% token reduction:
+
+```text
+PASS conclusion=success | profile=conda | package=noarch | artifact_evidence=not_observed | jobs=3/3 | artifacts=0 | uibcdf/molsysviewer run=20548716947
+```
+
+This output replaces the 0.4.0 `platforms=0/0` result with the correct package unit. The
+measurement verifies current job and artifact-inventory semantics, not package contents,
+historical artifact retention, or publication in an external Conda channel.

@@ -30,8 +30,9 @@ The current MVP implements:
 - transition-only `watch` with polling backoff and a single final adaptive report;
 - machine-readable `bundle@1`, `model@1`, and `report@1` schemas, with strict bundle
   validation and source-referenced normalization;
-- sanitized success and partial-failure MolSysMT Conda fixtures with deterministic replay
-  and official-conclusion parity tests;
+- sanitized success and partial-failure MolSysMT Conda fixtures plus a successful
+  MolSysViewer noarch fixture with deterministic replay and official-conclusion parity
+  tests;
 - strict `config@1` repository rules captured only from the default branch, with exact
   workflow matching, provenance, local validation, Conda platform expectations, and an
   explicit native/noarch package kind;
