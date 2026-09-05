@@ -5,11 +5,11 @@ repetitive run output into a compact, truth-preserving report while retaining a 
 path to the captured evidence.
 
 The project is in pre-1.0 development; no package has been published to a package index and
-the public contract may still evolve. The `0.7.0` source release can inspect, watch, and
+the public contract may still evolve. The `0.8.0` source release can inspect, watch, and
 replay structured run evidence. Install the GitHub CLI extension at the exact preview tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 0.7.0
+gh extension install uibcdf/gh-run-receptor --pin 0.8.0
 gh run-receptor --version
 ```
 
@@ -38,8 +38,22 @@ event/ref/SHA identity and separates packaging, publication, and archive verific
 without claiming external delivery. Use `--profile=generic`, `--profile=ci`,
 `--profile=conda`, `--profile=docs`, or `--profile=release` to select explicitly.
 
-A client repository can assign those profiles, declare required native Conda platforms,
-or identify a noarch package in a trusted `.github/gh-run-receptor.yaml` file:
+A client repository can generate a reviewable starting point without changing the
+checkout:
+
+```text
+gh run-receptor init > /tmp/gh-run-receptor.yaml
+gh run-receptor config check /tmp/gh-run-receptor.yaml
+```
+
+`init` scans only immediate `.yml` and `.yaml` files in `.github/workflows`, explains each
+conservative profile suggestion on stderr, and emits the configuration on stdout. Use
+`init --write` to create `.github/gh-run-receptor.yaml`; it refuses to overwrite an
+existing file. Review the result because discovery proposes profiles but deliberately
+does not infer required gates or native platforms.
+
+A client repository can then refine those profiles, declare required native Conda
+platforms, or identify a noarch package in the trusted configuration:
 
 ```yaml
 schema_version: 1
@@ -74,7 +88,7 @@ gh run-receptor config explain .github/workflows/build_conda.yaml
 
 Live capture reads policy only from the repository's default branch, stores its revision
 and digest in the evidence bundle, and fails if required platforms are absent. Version
-`0.7.0` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
+`0.8.0` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
 patterns and unknown settings rather than silently ignoring them.
 
 ## Measured token reduction

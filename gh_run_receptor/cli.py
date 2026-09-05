@@ -13,6 +13,7 @@ from urllib.parse import urlparse
 from gh_run_receptor import __version__
 from gh_run_receptor.bundle import capture_bundle, default_bundle_path, load_bundle
 from gh_run_receptor.config import CONFIG_PATH, load_config, select_rule
+from gh_run_receptor.discovery import discover_workflows, render_config, write_config
 from gh_run_receptor.errors import BundleError, ReceptorError
 from gh_run_receptor.github import GitHubClient
 from gh_run_receptor.report import build_report, exit_code, render_human, render_json, render_llm
@@ -114,6 +115,16 @@ def _parser() -> argparse.ArgumentParser:
     watch.add_argument("--capture", choices=("full", "adaptive", "metadata"), default="adaptive")
     watch.add_argument("--output", type=Path)
 
+    initialize = subparsers.add_parser(
+        "init", help="discover local workflows and propose repository rules"
+    )
+    initialize.add_argument("root", type=Path, nargs="?", default=Path("."))
+    initialize.add_argument(
+        "--write",
+        action="store_true",
+        help=f"create {CONFIG_PATH}; never replace an existing file",
+    )
+
     config = subparsers.add_parser("config", help="validate or explain repository rules")
     config_commands = config.add_subparsers(dest="config_command", required=True)
     check = config_commands.add_parser("check", help="validate a configuration file")
@@ -197,6 +208,22 @@ def main(arguments: list[str] | None = None) -> int:
     parser = _parser()
     args = parser.parse_args(arguments)
     try:
+        if args.command == "init":
+            workflows = discover_workflows(args.root)
+            data = render_config(workflows)
+            for workflow in workflows:
+                reasons = ",".join(workflow.reasons)
+                print(
+                    f"discovered path={workflow.path} profile={workflow.profile} "
+                    f"confidence={workflow.confidence} reason={reasons}",
+                    file=sys.stderr,
+                )
+            if args.write:
+                target = write_config(args.root, data)
+                print(f"configuration written: path={target} workflows={len(workflows)}")
+            else:
+                print(data.decode("utf-8"), end="")
+            return 0
         if args.command == "config":
             config = load_config(args.path if args.config_command == "check" else args.config)
             if args.config_command == "check":

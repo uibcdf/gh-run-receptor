@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.8.0 - 2026-09-05
+
+- Add dependency-free local workflow discovery and `init` configuration proposals.
+- Classify CI, documentation, Conda, and release workflows from bounded conservative
+  filename and source signals, with visible confidence and generic ambiguity fallback.
+- Scan only active immediate workflow files, reject symlinks and unsafe or oversized
+  sources, and validate generated output through the strict version 1 parser.
+- Keep preview mode read-only and require `--write` for atomic creation without replacing
+  an existing repository policy.
+- Validate discovery against all 15 active MolSysMT workflows and all 8 active
+  MolSysViewer workflows.
+
 ## 0.7.0 - 2026-09-05
 
 - Add the first release profile with observed trigger/ref/SHA identity and bounded

@@ -255,3 +255,41 @@ def test_config_check_returns_bounded_receptor_error(tmp_path, capsys):
     captured = capsys.readouterr()
     assert captured.out == ""
     assert captured.err.startswith("RECEPTOR_ERROR: line 1: unsupported schema_version")
+
+
+def test_init_previews_without_writing(tmp_path, capsys):
+    workflows = tmp_path / ".github" / "workflows"
+    workflows.mkdir(parents=True)
+    (workflows / "ci.yaml").write_text("name: CI\n")
+
+    assert main(["init", str(tmp_path)]) == 0
+
+    captured = capsys.readouterr()
+    assert captured.out == (
+        "schema_version: 1\n"
+        "workflows:\n"
+        "  - match:\n"
+        "      path: .github/workflows/ci.yaml\n"
+        "    profile: ci\n"
+    )
+    assert "profile=ci confidence=high" in captured.err
+    assert not (tmp_path / ".github" / "gh-run-receptor.yaml").exists()
+
+
+def test_init_write_creates_once_and_then_returns_a_receptor_error(tmp_path, capsys):
+    workflows = tmp_path / ".github" / "workflows"
+    workflows.mkdir(parents=True)
+    (workflows / "unknown.yml").write_text("name: Custom\n")
+
+    assert main(["init", str(tmp_path), "--write"]) == 0
+    first = capsys.readouterr()
+    target = tmp_path / ".github" / "gh-run-receptor.yaml"
+    original = target.read_bytes()
+    assert first.out == f"configuration written: path={target} workflows=1\n"
+    assert "profile=generic confidence=low reason=no-profile-signal" in first.err
+
+    assert main(["init", str(tmp_path), "--write"]) == 5
+    second = capsys.readouterr()
+    assert second.out == ""
+    assert "configuration already exists" in second.err
+    assert target.read_bytes() == original

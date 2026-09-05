@@ -125,10 +125,13 @@ gh run-receptor config check [PATH]
 gh run-receptor config explain RUN_OR_WORKFLOW
 ```
 
-The current interface implements `config check [PATH]` and
-`config explain WORKFLOW_PATH [--config PATH]`. `check` validates the strict version 1
-subset, duplicate identities, and bounds. `explain` shows the winning exact rule and
-active settings. `init`, pattern analysis, and a full override trace remain future work.
+The current interface implements `init [ROOT] [--write]`, `config check [PATH]`, and
+`config explain WORKFLOW_PATH [--config PATH]`. `init` discovers only immediate local
+workflow files and prints a deterministic proposal by default. `--write` atomically
+creates the default configuration and refuses an existing target. `check` validates the
+strict version 1 subset, duplicate identities, and bounds. `explain` shows the winning
+exact rule and active settings. Pattern analysis, remote discovery, and a full override
+trace remain future work.
 
 ## Output channels
 

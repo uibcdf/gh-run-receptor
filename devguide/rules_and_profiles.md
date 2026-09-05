@@ -118,11 +118,14 @@ workflows:
         - win-64
 ```
 
-The CLI provides `config check [PATH]` and `config explain WORKFLOW_PATH`. Discovery and
-`init` remain future work. Version 1 accepts `generic`, `ci`, `conda`, `docs`, and
-`release` profiles and the Conda `expected_platforms` and `package_kind` settings. Package
-kind is `native` or `noarch`; a noarch rule cannot require native platforms. Unknown
-fields fail validation instead of being ignored.
+The CLI provides local `init [ROOT] [--write]`, `config check [PATH]`, and
+`config explain WORKFLOW_PATH`. `init` scans only regular immediate workflow files,
+proposes profiles from bounded filename and source signals, exposes confidence and reasons
+on stderr, and retains ambiguous workflows as `generic`. Preview is the default;
+`--write` refuses to replace existing policy. Version 1 accepts `generic`, `ci`, `conda`,
+`docs`, and `release` profiles and the Conda `expected_platforms` and `package_kind`
+settings. Package kind is `native` or `noarch`; a noarch rule cannot require native
+platforms. Unknown fields fail validation instead of being ignored.
 
 Repository configuration is trusted only when read from the repository's default branch.
 A pull request cannot supply its own receptor rules and then use those rules to classify

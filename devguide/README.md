@@ -7,7 +7,7 @@ evidence.
 
 ## Current state
 
-The project has a `0.7.0` tagged source preview but no published package-index artifact or
+The project has a `0.8.0` tagged source preview but no published package-index artifact or
 stable public contract;
 the contracts in this guide are explicit but provisional unless marked settled. The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
@@ -44,9 +44,11 @@ The current MVP implements:
   phases, and keeps combined build/deploy evidence indivisible;
 - a release profile that preserves observed event/ref/SHA identity, keeps composite work
   indivisible, and distinguishes step success from external delivery verification.
+- deterministic local workflow discovery and a non-overwriting `init` command that emits
+  strict configuration proposals with visible confidence and ambiguity fallback.
 
-It does not yet provide a broad cross-workflow corpus; run comparison; workflow discovery;
-pattern rules; or the embedded Action. The CI, documentation, Conda, release, and
+It does not yet provide a broad cross-workflow corpus; run comparison; remote workflow
+discovery; pattern rules; or the embedded Action. The CI, documentation, Conda, release, and
 configuration contracts are initial vertical slices, not their complete stable forms.
 
 ## Reading order
@@ -119,8 +121,8 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The next milestone adds workflow discovery and `init` while broadening documentation, CI,
-and release evidence beyond their first real fixtures. It must establish exact conclusion
+The next milestone broadens documentation, CI, and release evidence beyond their first
+real fixtures. It must establish exact conclusion
 parity on successful, failed, cancelled, and incomplete runs and identify which release
 facts need structured producer evidence or new capture sources rather than name inference.
 

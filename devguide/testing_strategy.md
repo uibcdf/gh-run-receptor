@@ -12,7 +12,10 @@ merely because it is short.
 
 Unit tests cover schema validation, state normalization, rule matching and precedence,
 cause grouping, redaction, archive safety, truncation, rendering, exit codes, and stable
-ordering. They use small hand-written inputs and run without network access.
+ordering. Discovery tests cover non-recursion, deterministic ordering, conservative
+classification, ambiguity, strict-parser round trips, symlinks, invalid encoding, byte
+limits, preview behavior, and non-overwriting creation. They use small hand-written inputs
+and run without network access.
 
 ### Contract tests
 

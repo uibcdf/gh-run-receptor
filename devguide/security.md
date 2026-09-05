@@ -33,6 +33,13 @@ oversized input. It has no shell commands, imports, arbitrary templates, network
 filesystem paths outside the evidence workspace, or dynamic evaluation. Rules cannot
 downgrade official failure, cancellation, or missing evidence to success.
 
+Local `init` treats workflow source as untrusted text and never evaluates YAML. Discovery
+is non-recursive and bounded by file count, individual bytes, total bytes, and generated
+configuration size. It rejects symlinked discovery directories, symlinked workflow files,
+non-regular candidates, invalid UTF-8, and paths the strict configuration parser cannot
+represent. A suggested profile gains no authority until a maintainer reviews and commits
+the generated default-branch policy.
+
 ## Log and text handling
 
 All remote text is untrusted. Renderers strip or visibly escape terminal control codes,

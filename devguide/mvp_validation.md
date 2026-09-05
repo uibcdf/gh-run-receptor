@@ -111,6 +111,22 @@ because they exceeded the corresponding competent native baselines. No real run 
 new Zenodo verification workflows exists yet, so archive-role behavior is unit-tested but
 not real-run validated.
 
+## Workflow discovery validation
+
+The first `init` slice raised the local suite to 130 tests. Preview runs against the client
+checkouts discovered all 15 immediate MolSysMT workflows and all 8 immediate MolSysViewer
+workflows. Every existing manually reviewed profile assignment was reproduced; MolSysMT's
+previously unconfigured `benchmarks.yml` was conservatively proposed as `ci`. Nested
+MolSysMT backup workflows were not discovered. The MolSysViewer noarch package setting was
+recovered from explicit workflow text.
+
+Both generated documents passed `config check`. On this Linux host with Python 3.13.14,
+single preview runs took 0.11 seconds. The MolSysMT proposal was 1,213 bytes with peak RSS
+23,632 KiB; MolSysViewer was 703 bytes with peak RSS 23,432 KiB. These are local case
+measurements, not performance guarantees. Discovery deliberately did not reproduce the
+five required staging platforms because static mention is not evidence that a platform is
+a required gate.
+
 ## What this proves
 
 - Complete remote evidence can be acquired without entering the language-model output
