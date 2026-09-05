@@ -7,7 +7,7 @@ evidence.
 
 ## Current state
 
-The project has a `0.4.0` tagged source preview but no published package-index artifact or
+The project has a `0.5.0` tagged source preview but no published package-index artifact or
 stable public contract;
 the contracts in this guide are explicit but provisional unless marked settled. The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
@@ -33,9 +33,12 @@ The current MVP implements:
 - sanitized success and partial-failure MolSysMT Conda fixtures with deterministic replay
   and official-conclusion parity tests;
 - strict `config@1` repository rules captured only from the default branch, with exact
-  workflow matching, provenance, local validation, and Conda platform expectations.
+  workflow matching, provenance, local validation, Conda platform expectations, and an
+  explicit native/noarch package kind;
 - a first CI profile that preserves all jobs, assigns bounded presentation roles, and
-  groups identical failed-step signatures in LLM output.
+  groups identical failed-step signatures in LLM output;
+- noarch Conda summaries that retain job and artifact identity without inventing a native
+  matrix or claiming channel publication.
 
 It does not yet provide documentation or release profiles; a broad cross-workflow corpus;
 run comparison; workflow discovery; pattern rules; or the embedded Action. The CI, Conda,

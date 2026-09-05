@@ -172,7 +172,38 @@ workflows:
     )
     assert capsys.readouterr().out == (
         "match=path:.github/workflows/conda.yaml profile=conda "
-        "expected_platforms=linux-64,win-64\n"
+        "package_kind=native expected_platforms=linux-64,win-64\n"
+    )
+
+
+def test_config_explain_reports_explicit_noarch_package_kind(tmp_path, capsys):
+    config = tmp_path / "rules.yaml"
+    config.write_text(
+        """schema_version: 1
+workflows:
+  - match:
+      path: .github/workflows/conda.yaml
+    profile: conda
+    settings:
+      package_kind: noarch
+"""
+    )
+
+    assert (
+        main(
+            [
+                "config",
+                "explain",
+                ".github/workflows/conda.yaml",
+                "--config",
+                str(config),
+            ]
+        )
+        == 0
+    )
+    assert capsys.readouterr().out == (
+        "match=path:.github/workflows/conda.yaml profile=conda "
+        "package_kind=noarch expected_platforms=none\n"
     )
 
 

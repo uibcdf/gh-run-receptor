@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.5.0 - 2026-09-05
+
+- Add the explicit Conda `package_kind` rule setting with `native` and `noarch` values.
+- Represent noarch package jobs without inventing an empty native-platform matrix.
+- Distinguish available, expired, unknown-expiry, and currently unobserved GitHub artifact
+  evidence without claiming channel publication.
+- Reject contradictory noarch rules that also require native platforms.
+- Preserve trusted repository configuration in reviewed sanitized fixtures.
+
 ## 0.4.0 - 2026-09-04
 
 - Add the first CI profile with conservative whole-word job roles and a visible `other`

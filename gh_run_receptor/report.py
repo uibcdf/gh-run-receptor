@@ -73,7 +73,39 @@ def _conda_matrix(
     jobs: list[dict[str, Any]],
     artifacts: list[dict[str, Any]],
     expected_platforms: list[str] | None = None,
+    package_kind: str = "native",
+    artifact_inventory: str = "complete",
 ) -> dict[str, Any]:
+    if package_kind == "noarch":
+        available = [artifact for artifact in artifacts if artifact.get("expired") is False]
+        expired = [artifact for artifact in artifacts if artifact.get("expired") is True]
+        if available:
+            artifact_evidence = "available"
+        elif expired and len(expired) == len(artifacts):
+            artifact_evidence = "expired"
+        elif artifacts:
+            artifact_evidence = "observed"
+        elif artifact_inventory == "complete":
+            artifact_evidence = "not_observed"
+        else:
+            artifact_evidence = "unknown"
+        counts: dict[str, int] = {}
+        for job in jobs:
+            state = str(job.get("conclusion") or job.get("status") or "unknown")
+            counts[state] = counts.get(state, 0) + 1
+        return {
+            "kind": "conda",
+            "package_kind": "noarch",
+            "platforms": [],
+            "package": {
+                "job_ids": [job.get("id") for job in jobs],
+                "job_counts": dict(sorted(counts.items())),
+                "artifact_ids": [artifact.get("id") for artifact in artifacts],
+                "available_artifact_ids": [artifact.get("id") for artifact in available],
+                "expired_artifact_ids": [artifact.get("id") for artifact in expired],
+                "artifact_evidence": artifact_evidence,
+            },
+        }
     platforms = []
     expected = set(expected_platforms or [])
     for platform in _CONDA_PLATFORMS:
@@ -103,7 +135,7 @@ def _conda_matrix(
                 "expected": platform in expected,
             }
         )
-    return {"kind": "conda", "platforms": platforms}
+    return {"kind": "conda", "package_kind": "native", "platforms": platforms}
 
 
 def _ci_role(name: Any) -> str:
@@ -195,6 +227,7 @@ def build_report(
         selected_profile = _detect_profile(model["subject"]["workflow"], jobs)
     settings = selected_rule.get("settings", {}) if selected_rule else {}
     expected_platforms = settings.get("expected_platforms")
+    package_kind = settings.get("package_kind", "native")
 
     failed_jobs = [job for job in jobs if job["conclusion"] == "failure"]
     log_member = next(
@@ -213,7 +246,13 @@ def build_report(
         cause_evidence = "complete" if len(diagnosed_jobs) == len(failed_jobs) else "partial"
 
     if selected_profile == "conda":
-        matrix = _conda_matrix(jobs, artifacts, expected_platforms)
+        matrix = _conda_matrix(
+            jobs,
+            artifacts,
+            expected_platforms,
+            package_kind,
+            model["completeness"]["artifact_inventory"],
+        )
     elif selected_profile == "ci":
         matrix = _ci_matrix(jobs)
     else:
@@ -289,9 +328,18 @@ def render_llm(report: dict[str, Any]) -> str:
         successful_jobs = sum(job["conclusion"] == "success" for job in report["jobs"])
         fields = ["PASS conclusion=success", f"profile={receptor['profile']}"]
         if report["matrix"].get("kind") == "conda":
-            platforms = report["matrix"]["platforms"]
-            successful_platforms = sum(item["status"] == "success" for item in platforms)
-            fields.append(f"platforms={successful_platforms}/{len(platforms)}")
+            if report["matrix"].get("package_kind") == "noarch":
+                package = report["matrix"]["package"]
+                fields.extend(
+                    [
+                        "package=noarch",
+                        f"artifact_evidence={package['artifact_evidence']}",
+                    ]
+                )
+            else:
+                platforms = report["matrix"]["platforms"]
+                successful_platforms = sum(item["status"] == "success" for item in platforms)
+                fields.append(f"platforms={successful_platforms}/{len(platforms)}")
         elif report["matrix"].get("kind") == "ci":
             roles = ",".join(
                 f"{role['name']}:{len(role['job_ids'])}" for role in report["matrix"]["roles"]
@@ -359,20 +407,30 @@ def render_llm(report: dict[str, Any]) -> str:
             lines.append(f"- ... {len(failed) - MAX_FAILURES} more failed jobs in JSON report")
 
     if report["matrix"].get("kind") == "conda":
-        platforms = report["matrix"]["platforms"]
-        reusable = [item["name"] for item in platforms if item["reusable"]]
-        successful = [item["name"] for item in platforms if item["status"] == "success"]
-        failed_platforms = [item["name"] for item in platforms if item["status"] == "failed"]
-        missing_platforms = [item["name"] for item in platforms if item["status"] == "missing"]
-        lines.append(
-            f"conda platforms: successful={len(successful)} failed={len(failed_platforms)} "
-            f"missing={len(missing_platforms)} artifacts={len(report['artifacts'])} "
-            f"observed={len(platforms) - len(missing_platforms)}"
-        )
-        if missing_platforms:
-            lines.append(f"missing expected: {', '.join(missing_platforms)}")
-        if reusable:
-            lines.append(f"reusable: {', '.join(reusable)}")
+        if report["matrix"].get("package_kind") == "noarch":
+            package = report["matrix"]["package"]
+            job_counts = ",".join(
+                f"{key}:{value}" for key, value in package["job_counts"].items()
+            )
+            lines.append(
+                "conda package: kind=noarch "
+                f"jobs={job_counts or 'none'} artifact_evidence={package['artifact_evidence']}"
+            )
+        else:
+            platforms = report["matrix"]["platforms"]
+            reusable = [item["name"] for item in platforms if item["reusable"]]
+            successful = [item["name"] for item in platforms if item["status"] == "success"]
+            failed_platforms = [item["name"] for item in platforms if item["status"] == "failed"]
+            missing_platforms = [item["name"] for item in platforms if item["status"] == "missing"]
+            lines.append(
+                f"conda platforms: successful={len(successful)} failed={len(failed_platforms)} "
+                f"missing={len(missing_platforms)} artifacts={len(report['artifacts'])} "
+                f"observed={len(platforms) - len(missing_platforms)}"
+            )
+            if missing_platforms:
+                lines.append(f"missing expected: {', '.join(missing_platforms)}")
+            if reusable:
+                lines.append(f"reusable: {', '.join(reusable)}")
     elif report["matrix"].get("kind") == "ci":
         summaries = []
         for role in report["matrix"]["roles"]:
@@ -452,10 +510,25 @@ def render_human(report: dict[str, Any]) -> str:
         )
 
     if report["matrix"].get("kind") == "conda":
-        lines.extend(["", "Conda platforms"])
-        for platform in report["matrix"]["platforms"]:
-            reusable = ", reusable artifact" if platform["reusable"] else ""
-            lines.append(f"  {platform['status']:<8} {platform['name']}{reusable}")
+        if report["matrix"].get("package_kind") == "noarch":
+            package = report["matrix"]["package"]
+            counts = ", ".join(
+                f"{key}={value}" for key, value in package["job_counts"].items()
+            )
+            lines.extend(
+                [
+                    "",
+                    "Conda package",
+                    "  Kind:              noarch",
+                    f"  Jobs:              {counts or 'none'}",
+                    f"  Artifact evidence: {package['artifact_evidence']}",
+                ]
+            )
+        else:
+            lines.extend(["", "Conda platforms"])
+            for platform in report["matrix"]["platforms"]:
+                reusable = ", reusable artifact" if platform["reusable"] else ""
+                lines.append(f"  {platform['status']:<8} {platform['name']}{reusable}")
     elif report["matrix"].get("kind") == "ci":
         lines.extend(["", "CI roles"])
         for role in report["matrix"]["roles"]:

@@ -168,7 +168,7 @@ The report preserves official and derived state:
     },
     "match": {"path": ".github/workflows/build_conda.yaml"},
     "profile": "conda",
-    "settings": {"expected_platforms": ["linux-64", "win-64"]}
+    "settings": {"expected_platforms": ["linux-64", "win-64"], "package_kind": "native"}
   },
   "expectations": {
     "satisfied": true,

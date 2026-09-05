@@ -213,9 +213,10 @@ def main(arguments: list[str] | None = None) -> int:
             key, value = next(iter(rule["match"].items()))
             platforms = rule["settings"].get("expected_platforms", [])
             settings = ",".join(platforms) if platforms else "none"
+            package_kind = rule["settings"].get("package_kind", "native")
             print(
                 f"match={key}:{value} profile={rule['profile']} "
-                f"expected_platforms={settings}"
+                f"package_kind={package_kind} expected_platforms={settings}"
             )
             return 0
         if args.command == "inspect":

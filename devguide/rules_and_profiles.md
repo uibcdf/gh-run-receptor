@@ -60,6 +60,14 @@ reusable only when it has both a successful job and an artifact. ABI validation,
 channel verification, and rerun targeting remain open. Repository rules can assign the
 profile explicitly and require named native platforms.
 
+A repository rule can instead declare `package_kind: noarch`. This explicit setting is
+required because zero recognized platforms is also a valid targeted native retry and is
+not evidence of a noarch recipe. A noarch report retains all job and artifact identities,
+does not render `platforms=0/0`, and classifies current GitHub artifact evidence as
+`available`, `expired`, `observed` with unknown expiry, or `not_observed`. The last state
+means only that the complete current inventory is empty; it does not prove that an
+artifact never existed or that channel publication did or did not occur.
+
 ### Release
 
 Relates the exact commit, tag, gates, built artifacts, registries, GitHub Release, and
@@ -91,8 +99,9 @@ workflows:
 
 The CLI provides `config check [PATH]` and `config explain WORKFLOW_PATH`. Discovery and
 `init` remain future work. Version 1 accepts `generic`, `ci`, and `conda` profiles and
-the Conda `expected_platforms` setting. Unknown fields fail validation instead of being
-ignored.
+the Conda `expected_platforms` and `package_kind` settings. Package kind is `native` or
+`noarch`; a noarch rule cannot require native platforms. Unknown fields fail validation
+instead of being ignored.
 
 Repository configuration is trusted only when read from the repository's default branch.
 A pull request cannot supply its own receptor rules and then use those rules to classify

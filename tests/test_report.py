@@ -1,5 +1,7 @@
 import zipfile
 
+import pytest
+
 from gh_run_receptor.report import build_report, exit_code, render_human, render_llm
 
 
@@ -178,6 +180,109 @@ def test_successful_conda_jobs_are_not_called_reusable_without_artifacts():
     assert "jobs=2/2" in rendered
     assert "artifacts=0" in rendered
     assert "reusable:" not in rendered
+
+
+def test_noarch_conda_rule_does_not_render_an_empty_native_matrix():
+    evidence = _evidence(conclusion="success")
+    evidence["jobs.json"]["jobs"] = [
+        {
+            "id": 10,
+            "name": "Conda deployment of the noarch package",
+            "status": "completed",
+            "conclusion": "success",
+            "steps": [],
+        }
+    ]
+    evidence["artifacts.json"]["artifacts"] = []
+    evidence["config.json"] = {
+        "schema": "gh-run-receptor.config-capture@1",
+        "source": None,
+        "config": {
+            "schema": "gh-run-receptor.config@1",
+            "schema_version": 1,
+            "workflows": [
+                {
+                    "match": {"path": ".github/workflows/conda.yaml"},
+                    "profile": "conda",
+                    "settings": {"package_kind": "noarch"},
+                }
+            ],
+        },
+    }
+
+    report = build_report(_manifest(), evidence, profile="auto")
+    package = report["matrix"]["package"]
+    rendered = render_llm(report)
+
+    assert report["github"]["conclusion"] == "success"
+    assert report["receptor"]["assessment"] == "PASS"
+    assert report["matrix"]["package_kind"] == "noarch"
+    assert report["matrix"]["platforms"] == []
+    assert package["job_counts"] == {"success": 1}
+    assert package["artifact_evidence"] == "not_observed"
+    assert "package=noarch" in rendered
+    assert "artifact_evidence=not_observed" in rendered
+    assert "platforms=0/0" not in rendered
+
+
+@pytest.mark.parametrize(
+    ("artifacts", "expected"),
+    [
+        ([{"id": 7, "name": "package", "expired": False}], "available"),
+        ([{"id": 7, "name": "package", "expired": True}], "expired"),
+        ([{"id": 7, "name": "package", "expired": None}], "observed"),
+    ],
+)
+def test_noarch_artifact_evidence_distinguishes_availability(artifacts, expected):
+    evidence = _evidence(conclusion="success")
+    for job in evidence["jobs.json"]["jobs"]:
+        job["conclusion"] = "success"
+        job["steps"] = []
+    evidence["artifacts.json"]["artifacts"] = artifacts
+    evidence["config.json"] = {
+        "schema": "gh-run-receptor.config-capture@1",
+        "source": None,
+        "config": {
+            "schema": "gh-run-receptor.config@1",
+            "schema_version": 1,
+            "workflows": [
+                {
+                    "match": {"path": ".github/workflows/conda.yaml"},
+                    "profile": "conda",
+                    "settings": {"package_kind": "noarch"},
+                }
+            ],
+        },
+    }
+
+    report = build_report(_manifest(), evidence, profile="auto")
+
+    assert report["matrix"]["package"]["artifact_evidence"] == expected
+
+
+def test_failed_noarch_run_is_not_called_partial_from_an_available_artifact():
+    evidence = _evidence()
+    evidence["config.json"] = {
+        "schema": "gh-run-receptor.config-capture@1",
+        "source": None,
+        "config": {
+            "schema": "gh-run-receptor.config@1",
+            "schema_version": 1,
+            "workflows": [
+                {
+                    "match": {"path": ".github/workflows/conda.yaml"},
+                    "profile": "conda",
+                    "settings": {"package_kind": "noarch"},
+                }
+            ],
+        },
+    }
+
+    report = build_report(_manifest(), evidence, profile="auto")
+
+    assert report["github"]["conclusion"] == "failure"
+    assert report["receptor"]["assessment"] == "FAIL"
+    assert "conda package: kind=noarch" in render_llm(report)
 
 
 def test_repository_rule_selects_profile_and_enforces_expected_platforms():

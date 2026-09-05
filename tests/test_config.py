@@ -76,6 +76,40 @@ workflows:
     }
 
 
+def test_noarch_package_kind_is_explicit_and_cannot_require_native_platforms():
+    config = parse_config(
+        b"""schema_version: 1
+workflows:
+  - match:
+      path: .github/workflows/conda.yaml
+    profile: conda
+    settings:
+      package_kind: noarch
+"""
+    )
+
+    assert config["workflows"][0]["settings"] == {"package_kind": "noarch"}
+    schema = json.loads(
+        files("gh_run_receptor.schemas")
+        .joinpath("config-v1.schema.json")
+        .read_text(encoding="utf-8")
+    )
+    Draft202012Validator(schema).validate(config)
+
+    with pytest.raises(ConfigError, match="cannot require native platforms"):
+        parse_config(
+            b"""schema_version: 1
+workflows:
+  - match:
+      path: .github/workflows/conda.yaml
+    profile: conda
+    settings:
+      package_kind: noarch
+      expected_platforms: [linux-64]
+"""
+        )
+
+
 @pytest.mark.parametrize(
     ("text", "message"),
     [
@@ -92,7 +126,13 @@ workflows:
         (CONFIG.replace(b"Conda packages", b"{name: CI}"), "flow mappings"),
         (
             CONFIG.replace(b"profile: conda", b"profile: generic", 2),
-            "requires the conda profile",
+            "require the conda profile",
+        ),
+        (
+            CONFIG.replace(
+                b"expected_platforms:", b"package_kind: unsupported\n      #"
+            ),
+            "package_kind",
         ),
     ],
 )

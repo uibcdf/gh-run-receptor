@@ -46,7 +46,8 @@
           "items": {
             "enum": ["linux-64", "linux-aarch64", "osx-64", "osx-arm64", "win-64"]
           }
-        }
+        },
+        "package_kind": {"enum": ["native", "noarch"]}
       },
       "additionalProperties": false
     },
@@ -61,10 +62,32 @@
       "allOf": [
         {
           "if": {
-            "properties": {"settings": {"required": ["expected_platforms"]}},
+            "properties": {
+              "settings": {
+                "anyOf": [
+                  {"required": ["expected_platforms"]},
+                  {"required": ["package_kind"]}
+                ]
+              }
+            },
             "required": ["settings"]
           },
           "then": {"properties": {"profile": {"const": "conda"}}}
+        },
+        {
+          "if": {
+            "properties": {
+              "settings": {
+                "properties": {"package_kind": {"const": "noarch"}},
+                "required": ["package_kind"]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "settings": {"not": {"required": ["expected_platforms"]}}
+            }
+          }
         }
       ],
       "additionalProperties": false

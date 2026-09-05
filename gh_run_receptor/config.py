@@ -20,6 +20,7 @@ MAX_CONFIG_LINES = 1_000
 MAX_LINE_LENGTH = 2_048
 PROFILES = {"generic", "ci", "conda"}
 PLATFORMS = {"linux-64", "linux-aarch64", "osx-64", "osx-arm64", "win-64"}
+PACKAGE_KINDS = {"native", "noarch"}
 _KEY = re.compile(r"^[a-z_][a-z0-9_]*$")
 _PLAIN = re.compile(r"^[A-Za-z0-9_./ ()+-]+$")
 
@@ -97,8 +98,15 @@ def _settings(tokens: list[Token], index: int) -> tuple[dict[str, Any], int]:
         if token.indent != 6:
             raise ConfigError(f"line {token.line}: invalid settings indentation")
         key, value = _pair(token)
-        if key != "expected_platforms" or key in settings:
+        if key not in {"expected_platforms", "package_kind"} or key in settings:
             raise ConfigError(f"line {token.line}: unsupported or duplicate setting {key!r}")
+        if key == "package_kind":
+            package_kind = _scalar(value, line=token.line)
+            if package_kind not in PACKAGE_KINDS:
+                raise ConfigError(f"line {token.line}: unsupported package_kind {package_kind!r}")
+            settings[key] = package_kind
+            index += 1
+            continue
         if value:
             platforms = _inline_list(value, line=token.line)
             index += 1
@@ -164,8 +172,10 @@ def _workflows(tokens: list[Token], index: int) -> tuple[list[dict[str, Any]], i
         if profile is None:
             raise ConfigError(f"line {start.line}: workflow rule requires a profile")
         if settings and profile != "conda":
+            raise ConfigError(f"line {start.line}: settings require the conda profile")
+        if settings.get("package_kind") == "noarch" and "expected_platforms" in settings:
             raise ConfigError(
-                f"line {start.line}: expected_platforms requires the conda profile"
+                f"line {start.line}: noarch package rules cannot require native platforms"
             )
         workflows.append(
             {"match": {match_key: match_value}, "profile": profile, "settings": settings}
@@ -263,7 +273,10 @@ def validate_config_capture(value: Any) -> dict[str, Any]:
         if rule["profile"] not in PROFILES:
             raise ConfigError("captured configuration has an unsupported profile")
         settings = rule["settings"]
-        if not isinstance(settings, dict) or set(settings) - {"expected_platforms"}:
+        if not isinstance(settings, dict) or set(settings) - {
+            "expected_platforms",
+            "package_kind",
+        }:
             raise ConfigError("captured configuration has unsupported settings")
         if "expected_platforms" in settings:
             if rule["profile"] != "conda":
@@ -279,6 +292,12 @@ def validate_config_capture(value: Any) -> dict[str, Any]:
                 or set(platforms) - PLATFORMS
             ):
                 raise ConfigError("captured configuration has invalid expected platforms")
+        if "package_kind" in settings and (
+            rule["profile"] != "conda" or settings["package_kind"] not in PACKAGE_KINDS
+        ):
+            raise ConfigError("captured configuration has invalid package kind")
+        if settings.get("package_kind") == "noarch" and "expected_platforms" in settings:
+            raise ConfigError("captured noarch package rule requires native platforms")
         identities.append((key, match_value))
     if len(identities) != len(set(identities)):
         raise ConfigError("captured configuration contains duplicate workflow matches")

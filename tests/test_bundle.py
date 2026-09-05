@@ -3,6 +3,7 @@ import json
 
 import pytest
 
+from devtools.scripts.sanitize_bundle import _selected_evidence
 from gh_run_receptor.bundle import REQUIRED_STRUCTURED_MEMBERS, default_bundle_path, load_bundle
 from gh_run_receptor.errors import BundleError
 
@@ -117,3 +118,18 @@ def test_load_bundle_rejects_member_byte_count_mismatch(tmp_path):
 
     with pytest.raises(BundleError, match="byte-count mismatch"):
         load_bundle(bundle)
+
+
+def test_sanitizer_retains_optional_trusted_configuration():
+    evidence = {
+        "run.json": {},
+        "workflow.json": {},
+        "jobs.json": {"jobs": []},
+        "checks.json": {"check_runs": []},
+        "artifacts.json": {"artifacts": []},
+        "config.json": {"schema": "gh-run-receptor.config-capture@1"},
+    }
+
+    selected = _selected_evidence(evidence)
+
+    assert selected["config.json"] == evidence["config.json"]

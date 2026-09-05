@@ -21,7 +21,7 @@ def _selected_evidence(evidence: dict[str, Any]) -> dict[str, Any]:
     workflow = evidence["workflow.json"]
     jobs = evidence["jobs.json"]["jobs"]
     artifacts = evidence["artifacts.json"]["artifacts"]
-    return {
+    selected = {
         "run.json": {
             key: run.get(key)
             for key in ("status", "conclusion", "name", "html_url", "head_sha")
@@ -65,6 +65,9 @@ def _selected_evidence(evidence: dict[str, Any]) -> dict[str, Any]:
             ],
         },
     }
+    if "config.json" in evidence:
+        selected["config.json"] = evidence["config.json"]
+    return selected
 
 
 def sanitize(source: Path, destination: Path) -> None:
