@@ -13,7 +13,7 @@ from referencing import Registry, Resource
 
 from gh_run_receptor.bundle import load_bundle
 from gh_run_receptor.model import normalize_evidence
-from gh_run_receptor.report import build_report, render_json, render_llm
+from gh_run_receptor.report import build_report, exit_code, render_json, render_llm
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
@@ -46,6 +46,9 @@ def test_sanitized_bundle_crosses_all_three_schema_boundaries(case):
     assert report["github"]["conclusion"] == case["expected_github_conclusion"]
     assert report["receptor"]["assessment"] == case["expected_assessment"]
     assert report["subject"]["run_id"] == case["run_id"]
+    assert report["subject"]["run_attempt"] == case["run_attempt"]
+    if "expected_exit_code" in case:
+        assert exit_code(report) == case["expected_exit_code"]
 
 
 @pytest.mark.parametrize("case", list(_corpus()), ids=lambda case: case["path"])
@@ -85,6 +88,65 @@ def test_unknown_github_enum_is_preserved_with_source_reference():
             "source": {"member": "jobs.json", "json_pointer": "/jobs/0/conclusion"},
         }
     ]
+
+
+def test_real_rerun_fixtures_keep_attempts_and_conclusions_separate():
+    first_manifest, first_evidence = load_bundle(
+        FIXTURES / "bundles/argdigest_ci_rerun_attempt_1"
+    )
+    second_manifest, second_evidence = load_bundle(
+        FIXTURES / "bundles/argdigest_ci_rerun_attempt_2"
+    )
+    first = build_report(first_manifest, first_evidence, profile="generic")
+    second = build_report(second_manifest, second_evidence, profile="generic")
+
+    assert first["subject"]["run_id"] == second["subject"]["run_id"] == 22638022385
+    assert first["subject"]["head_sha"] == second["subject"]["head_sha"]
+    assert (first["subject"]["run_attempt"], first["github"]["conclusion"]) == (
+        1,
+        "failure",
+    )
+    assert (second["subject"]["run_attempt"], second["github"]["conclusion"]) == (
+        2,
+        "success",
+    )
+    assert first["receptor"]["assessment"] == "FAIL"
+    assert second["receptor"]["assessment"] == "PASS"
+
+
+def test_real_cancelled_conda_fixture_accounts_for_every_platform_state():
+    manifest, evidence = load_bundle(FIXTURES / "bundles/molsysmt_conda_cancelled")
+    report = build_report(manifest, evidence, profile="auto")
+    states = {item["name"]: item["status"] for item in report["matrix"]["platforms"]}
+    rendered = render_llm(report)
+
+    assert report["receptor"]["assessment"] == "CANCELLED"
+    assert states == {
+        "linux-64": "success",
+        "linux-aarch64": "success",
+        "osx-64": "cancelled",
+        "osx-arm64": "cancelled",
+        "win-64": "failed",
+    }
+    assert "non-success jobs (10):" in rendered
+    assert "successful=2 failed=1 cancelled=2 missing=0" in rendered
+
+
+def test_real_expired_log_fixture_fails_closed_as_incomplete():
+    manifest, evidence = load_bundle(
+        FIXTURES / "bundles/pyunitwizard_ci_incomplete_logs"
+    )
+    report = build_report(manifest, evidence, profile="generic")
+
+    assert manifest["complete"] is False
+    assert not any(member["path"] == "logs.zip" for member in manifest["members"])
+    assert report["github"]["conclusion"] == "failure"
+    assert report["receptor"]["assessment"] == "INCOMPLETE"
+    assert report["completeness"]["logs"] == "unavailable"
+    assert report["warnings"] == [
+        "logs unavailable: GitHub CLI download failed: gh: Server Error (HTTP 410)"
+    ]
+    assert exit_code(report) == 4
 
 
 def test_molsysviewer_noarch_fixture_uses_the_trusted_package_kind():

@@ -1,0 +1,128 @@
+{
+  "config": {
+    "schema": "gh-run-receptor.config@1",
+    "schema_version": 1,
+    "workflows": [
+      {
+        "match": {
+          "path": ".github/workflows/benchmarks.yml"
+        },
+        "profile": "ci",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/ci-smoke.yaml"
+        },
+        "profile": "ci",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/ci-full.yaml"
+        },
+        "profile": "ci",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/ci-weekly.yaml"
+        },
+        "profile": "ci",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/ci-devguide.yaml"
+        },
+        "profile": "ci",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/ci-data-integrity.yaml"
+        },
+        "profile": "ci",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/ci-rust-wheels.yaml"
+        },
+        "profile": "ci",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/ruff.yaml"
+        },
+        "profile": "ci",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/test_import.yaml"
+        },
+        "profile": "ci",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/sphinx_docs_to_gh_pages.yaml"
+        },
+        "profile": "docs",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/verify-zenodo-release.yaml"
+        },
+        "profile": "release",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/build_and_upload_conda_packages.yaml"
+        },
+        "profile": "conda",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/test_conda_abi3.yaml"
+        },
+        "profile": "conda",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/test_conda_rattler.yaml"
+        },
+        "profile": "conda",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/validate_conda_staging.yaml"
+        },
+        "profile": "conda",
+        "settings": {
+          "expected_platforms": [
+            "linux-64",
+            "linux-aarch64",
+            "osx-64",
+            "osx-arm64",
+            "win-64"
+          ]
+        }
+      }
+    ]
+  },
+  "schema": "gh-run-receptor.config-capture@1",
+  "source": {
+    "blob_sha": "8958f4aef48c0a1bba1fc6d91c174ffc4eb9c018",
+    "path": ".github/gh-run-receptor.yaml",
+    "ref": "main",
+    "sha256": "ebebb3f5ec5fe74c1e6936adc0186424df7858577f487e46addd7904ee9bc197"
+  }
+}

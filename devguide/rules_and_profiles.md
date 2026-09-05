@@ -64,10 +64,16 @@ platform successes and identifies the smallest rerun target.
 
 The implemented slice recognizes the canonical Conda subdirectories from job and
 artifact names, requires at least two observed platforms plus a workflow path containing
-`conda` or `rattler` for auto-detection, preserves failed platforms, and marks a platform
-reusable only when it has both a successful job and an artifact. ABI validation, upload,
-channel verification, and rerun targeting remain open. Repository rules can assign the
-profile explicitly and require named native platforms.
+`conda` or `rattler` for auto-detection, preserves non-success platform states, and marks
+a platform reusable only when it has both a successful job and an artifact. ABI
+validation, upload, channel verification, and rerun targeting remain open. Repository
+rules can assign the profile explicitly and require named native platforms.
+
+When several jobs map to one platform, aggregation uses deterministic conservative
+precedence: failure and timeout outrank cancellation, cancellation outranks active states,
+and success is reported only when all mapped jobs succeeded. Unknown future conclusions
+remain visible. Compact counts include every nonzero platform-state category rather than
+silently folding cancellation or activity into `unknown` or `failed`.
 
 A repository rule can instead declare `package_kind: noarch`. This explicit setting is
 required because zero recognized platforms is also a valid targeted native retry and is

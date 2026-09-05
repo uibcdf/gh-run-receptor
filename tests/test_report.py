@@ -136,6 +136,62 @@ def test_conda_profile_preserves_failure_and_marks_reusable_platforms():
     )
 
 
+def test_cancelled_conda_run_preserves_platform_and_job_states():
+    evidence = _evidence(conclusion="cancelled")
+    evidence["jobs.json"]["jobs"].append(
+        {
+            "id": 30,
+            "name": "build (osx-arm64)",
+            "status": "completed",
+            "conclusion": "cancelled",
+            "started_at": "2026-09-04T10:00:00Z",
+            "completed_at": "2026-09-04T10:01:00Z",
+            "steps": [],
+        }
+    )
+
+    report = build_report(_manifest(), evidence, profile="conda")
+    platforms = {item["name"]: item for item in report["matrix"]["platforms"]}
+    rendered = render_llm(report)
+
+    assert report["receptor"]["assessment"] == "CANCELLED"
+    assert exit_code(report) == 2
+    assert platforms["osx-arm64"]["status"] == "cancelled"
+    assert "non-success jobs (2):" in rendered
+    assert "failed jobs" not in rendered
+    assert "successful=1 failed=1 cancelled=1 missing=0" in rendered
+
+
+@pytest.mark.parametrize(
+    ("status", "conclusion", "expected"),
+    [
+        ("completed", "timed_out", "timed_out"),
+        ("completed", "cancelled", "cancelled"),
+        ("in_progress", None, "in_progress"),
+        ("completed", "future_state", "future_state"),
+    ],
+)
+def test_conda_platform_aggregation_preserves_non_failure_states(
+    status, conclusion, expected
+):
+    evidence = _evidence(conclusion=conclusion, status=status)
+    evidence["jobs.json"]["jobs"] = [
+        {
+            "id": 10,
+            "name": "build (linux-64)",
+            "status": status,
+            "conclusion": conclusion,
+            "steps": [],
+        }
+    ]
+    evidence["artifacts.json"]["artifacts"] = []
+
+    report = build_report(_manifest(), evidence, profile="conda")
+
+    assert report["matrix"]["platforms"][0]["status"] == expected
+    assert f"{expected}=1" in render_llm(report)
+
+
 def test_auto_profile_requires_conda_workflow_and_multiple_platforms():
     conda = build_report(_manifest(), _evidence(), profile="auto")
     evidence = _evidence()

@@ -45,7 +45,18 @@ def fetch_state(
     run = client.json(f"/repos/{repository}/actions/runs/{run_id}")
     if not isinstance(run, dict):
         raise AcquisitionError("workflow-run response is not an object")
-    selected_attempt = attempt or int(run.get("run_attempt") or 1)
+    current_attempt = int(run.get("run_attempt") or 1)
+    selected_attempt = attempt or current_attempt
+    if selected_attempt < 1 or selected_attempt > current_attempt:
+        raise AcquisitionError(
+            f"attempt {selected_attempt} is outside the available range 1..{current_attempt}"
+        )
+    if selected_attempt != current_attempt:
+        run = client.json(
+            f"/repos/{repository}/actions/runs/{run_id}/attempts/{selected_attempt}"
+        )
+        if not isinstance(run, dict) or run.get("run_attempt") != selected_attempt:
+            raise AcquisitionError("workflow-run attempt response has conflicting identity")
     payload = client.json(
         f"/repos/{repository}/actions/runs/{run_id}/attempts/{selected_attempt}/jobs?per_page=100",
         paginate=True,

@@ -129,15 +129,24 @@ def capture_bundle(
     run: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Capturing one run attempt atomically into ``destination``."""
-    run = run or client.json(f"/repos/{repository}/actions/runs/{run_id}")
-    if not isinstance(run, dict):
+    current_run = run or client.json(f"/repos/{repository}/actions/runs/{run_id}")
+    if not isinstance(current_run, dict):
         raise BundleError("workflow-run response is not an object")
-    current_attempt = int(run.get("run_attempt") or 1)
+    current_attempt = int(current_run.get("run_attempt") or 1)
     selected_attempt = attempt or current_attempt
     if selected_attempt < 1 or selected_attempt > current_attempt:
         raise BundleError(
             f"attempt {selected_attempt} is outside the available range 1..{current_attempt}"
         )
+    run = current_run
+    if selected_attempt != current_attempt:
+        run = client.json(
+            f"/repos/{repository}/actions/runs/{run_id}/attempts/{selected_attempt}"
+        )
+        if not isinstance(run, dict):
+            raise BundleError("workflow-run attempt response is not an object")
+        if run.get("run_attempt") != selected_attempt:
+            raise BundleError("workflow-run attempt response has conflicting identity")
 
     parent = destination.parent
     parent.mkdir(parents=True, exist_ok=True)
@@ -294,4 +303,28 @@ def load_bundle(directory: Path) -> tuple[dict[str, Any], dict[str, Any]]:
             validate_config_capture(evidence["config.json"])
         except ConfigError as error:
             raise BundleError(f"invalid config.json: {error}") from error
+    run = evidence["run.json"]
+    if not isinstance(run, dict):
+        raise BundleError("run.json is not a JSON object")
+    source_run_id = run.get("id")
+    if source_run_id is not None:
+        if isinstance(source_run_id, bool) or not isinstance(source_run_id, int):
+            raise BundleError("run.json run ID is invalid")
+        if source_run_id != manifest["run_id"]:
+            raise BundleError("run.json run ID conflicts with the bundle manifest")
+    source_attempt = run.get("run_attempt")
+    if source_attempt is not None:
+        if isinstance(source_attempt, bool) or not isinstance(source_attempt, int):
+            raise BundleError("run.json attempt is invalid")
+        if source_attempt != manifest["run_attempt"]:
+            raise BundleError("run.json attempt conflicts with the bundle manifest")
+    source_head_sha = run.get("head_sha")
+    if source_head_sha is not None and not isinstance(source_head_sha, str):
+        raise BundleError("run.json head SHA is invalid")
+    if (
+        source_head_sha is not None
+        and manifest.get("head_sha") is not None
+        and source_head_sha != manifest["head_sha"]
+    ):
+        raise BundleError("run.json head SHA conflicts with the bundle manifest")
     return manifest, evidence

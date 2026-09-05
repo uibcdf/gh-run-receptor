@@ -1,0 +1,65 @@
+{
+  "jobs": [
+    {
+      "completed_at": "2025-11-04T04:52:26Z",
+      "conclusion": "failure",
+      "html_url": "https://github.com/uibcdf/pyunitwizard/actions/runs/19058199598/job/54432683038",
+      "id": 54432683038,
+      "name": "Test on ubuntu-latest, Python 3.11",
+      "started_at": "2025-11-04T04:51:18Z",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "completed_at": "2025-11-04T04:53:48Z",
+      "conclusion": "failure",
+      "html_url": "https://github.com/uibcdf/pyunitwizard/actions/runs/19058199598/job/54432683045",
+      "id": 54432683045,
+      "name": "Test on macos-latest, Python 3.11",
+      "started_at": "2025-11-04T04:51:18Z",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "completed_at": "2025-11-04T04:52:22Z",
+      "conclusion": "failure",
+      "html_url": "https://github.com/uibcdf/pyunitwizard/actions/runs/19058199598/job/54432683048",
+      "id": 54432683048,
+      "name": "Test on ubuntu-latest, Python 3.12",
+      "started_at": "2025-11-04T04:51:18Z",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "completed_at": "2025-11-04T04:53:26Z",
+      "conclusion": "failure",
+      "html_url": "https://github.com/uibcdf/pyunitwizard/actions/runs/19058199598/job/54432683050",
+      "id": 54432683050,
+      "name": "Test on macos-latest, Python 3.10",
+      "started_at": "2025-11-04T04:51:18Z",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "completed_at": "2025-11-04T04:52:15Z",
+      "conclusion": "failure",
+      "html_url": "https://github.com/uibcdf/pyunitwizard/actions/runs/19058199598/job/54432683052",
+      "id": 54432683052,
+      "name": "Test on ubuntu-latest, Python 3.10",
+      "started_at": "2025-11-04T04:51:18Z",
+      "status": "completed",
+      "steps": []
+    },
+    {
+      "completed_at": "2025-11-04T04:54:16Z",
+      "conclusion": "failure",
+      "html_url": "https://github.com/uibcdf/pyunitwizard/actions/runs/19058199598/job/54432683056",
+      "id": 54432683056,
+      "name": "Test on macos-latest, Python 3.12",
+      "started_at": "2025-11-04T04:51:17Z",
+      "status": "completed",
+      "steps": []
+    }
+  ],
+  "total_count": 6
+}

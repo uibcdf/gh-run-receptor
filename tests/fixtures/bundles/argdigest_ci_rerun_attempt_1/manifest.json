@@ -1,0 +1,51 @@
+{
+  "api_version": "2022-11-28",
+  "capture_policy": "metadata",
+  "captured_at": "2026-09-05T22:19:16.861194+00:00",
+  "complete": true,
+  "head_sha": "536ae4f6f191ff5e9a4449c81d3847ca90daa460",
+  "hostname": "github.com",
+  "members": [
+    {
+      "bytes": 292,
+      "complete": true,
+      "kind": "github.workflow_run",
+      "path": "run.json",
+      "sha256": "6f97c8d17c6ccdb81a548407f4befe33706099ef1c7ca9dbc5aa9ed61806b466"
+    },
+    {
+      "bytes": 42,
+      "complete": true,
+      "kind": "github.workflow",
+      "path": "workflow.json",
+      "sha256": "02b6d44b9a920bb7c21a52762ad15f5c12f297f005e6af9371cee94503e21676"
+    },
+    {
+      "bytes": 395,
+      "complete": true,
+      "kind": "github.jobs",
+      "path": "jobs.json",
+      "sha256": "91f73359f5fa1c96ee75e76e2cae43c9fa7c09ac3f78bb4af0d623ecc7d66b2e"
+    },
+    {
+      "bytes": 43,
+      "complete": true,
+      "kind": "github.check_runs",
+      "path": "checks.json",
+      "sha256": "28cd5311a9d18008254c30a9fc641a07c1eb1d556010fc66509e91c06a93e9bb"
+    },
+    {
+      "bytes": 42,
+      "complete": true,
+      "kind": "github.artifacts",
+      "path": "artifacts.json",
+      "sha256": "733015529a249a421892ec83190af9d23593d1877609d3653ae94f945a220490"
+    }
+  ],
+  "receptor_version": "0.8.0+1.g2c6661e.dirty",
+  "repository": "uibcdf/argdigest",
+  "run_attempt": 1,
+  "run_id": 22638022385,
+  "schema": "gh-run-receptor.bundle@1",
+  "warnings": []
+}

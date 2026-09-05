@@ -64,6 +64,11 @@ self-digested. A member is immutable after capture. Refreshing active evidence c
 new generation or atomically replaces the bundle only after all new members and the
 manifest validate.
 
+New captures retain `id`, `run_attempt`, and `head_sha` in `run.json`. Loading compares
+each retained value with the manifest and rejects a contradiction before normalization.
+Older reviewed fixtures that predate the additive `id` and `run_attempt` retention remain
+readable when those fields are absent; absence never permits a present contradiction.
+
 `config.json` is an optional structured member. When present, it contains
 `gh-run-receptor.config-capture@1`: the normalized `config@1` document plus the canonical
 repository path, default-branch name, Git blob SHA when supplied, and SHA-256 of the exact

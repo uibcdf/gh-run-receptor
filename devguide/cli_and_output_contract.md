@@ -144,9 +144,13 @@ trace remain future work.
 Raw logs are never printed automatically. `--debug` does not change this rule.
 
 Human text includes explanatory labels, all jobs up to a documented bound, failed steps,
-and artifact details. LLM text includes the verdict, compact job counts, failed jobs and
+and artifact details. LLM text includes the verdict, compact job counts, non-success jobs and
 steps, a bounded artifact inventory, warnings, and the run link. Both are projections of
 the same report and return the same exit status.
+
+A collection is labelled `failed jobs` only when every selected job has GitHub conclusion
+`failure`; cancelled or mixed collections use `non-success jobs`. The heading never
+rewrites cancellation, timeout, or an unknown future conclusion as failure.
 
 A complete successful LLM report collapses to one line containing conclusion, profile,
 job and platform coverage where available, artifact count, repository, and run ID. Human

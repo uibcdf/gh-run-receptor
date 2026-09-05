@@ -1,13 +1,13 @@
 ---
 summary: Historical attempt capture mixes source facts and can report false PASS
 issue: uibcdf/gh-run-receptor#11
-status: active
+status: resolved
 opened: 2026-09-05
-closed:
+closed: 2026-09-05
 severity: critical
-verification: reproduced
+verification: measured
 area: ['github', 'reports', 'tests']
-guard:
+guard: tests/test_bundle.py
 normative:
 blocked_by: []
 supersedes: []
@@ -16,7 +16,7 @@ supersedes: []
 # Historical attempt capture mixes source facts and can report false PASS
 
 **Reported:** 2026-09-05, while adding real rerun-attempt evidence after 0.8.0.
-**Status:** Active; reproduced against a public ArgDigest rerun.
+**Status:** Resolved and verified against a public ArgDigest rerun.
 
 ## What
 
@@ -93,3 +93,10 @@ automatic deletion or silent repair would hide provenance and is out of scope.
 
 Linux host, Python 3.13.14, gh-run-receptor 0.8.0, GitHub API version `2022-11-28`,
 2026-09-05. Public evidence: `uibcdf/argdigest` run `22638022385`, attempts 1 and 2.
+
+## Resolution
+
+Historical capture and watch fetch the attempt-specific run response and validate the
+selected attempt before consuming it. Bundle loading validates retained run ID, attempt,
+and head SHA against the manifest. Paired real fixtures prove that attempt 1 remains
+`FAIL` and attempt 2 remains `PASS` at the shared run ID and SHA.

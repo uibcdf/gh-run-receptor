@@ -127,6 +127,20 @@ measurements, not performance guarantees. Discovery deliberately did not reprodu
 five required staging platforms because static mention is not evidence that a platform is
 a required gate.
 
+## Outcome parity validation
+
+The 0.9.0 increment adds four sanitized public attempts and raises the full local suite to
+149 tests. MolSysMT run `33636046706` validates `CANCELLED`, exit status 2, two successful
+Linux platforms, failed Windows, and cancelled Intel and Arm macOS platforms. PyUnitWizard
+run `19058199598` validates that an HTTP 410 while requesting expired logs retains GitHub's
+failure but yields receptor `INCOMPLETE` and exit status 4.
+
+ArgDigest run `22638022385` supplies a paired rerun: attempt 1 is `failure`/`FAIL` with
+exit status 1 and attempt 2 is `success`/`PASS` with exit status 0 at the same head SHA.
+This evidence exposed a critical 0.8.0 defect in which historical jobs were combined with
+the current run response. Capture and watch now request the attempt-specific run endpoint,
+and replay rejects a retained run ID, attempt, or head SHA that contradicts its manifest.
+
 ## What this proves
 
 - Complete remote evidence can be acquired without entering the language-model output
@@ -140,8 +154,8 @@ a required gate.
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not
   yet a complete diagnosis engine.
-- The committed real-run corpus remains narrow; cancelled, timed-out, incomplete,
-  restricted-token, active-transition, rerun-attempt, and real Zenodo cases remain gaps.
+- The committed real-run corpus remains narrow; timed-out, restricted-token,
+  active-transition, and real Zenodo cases remain gaps.
 - No cross-platform installation support claim follows from local Linux validation.
 - External registries, GitHub Releases, Git refs, and archive records are not queried by
   the first release profile.

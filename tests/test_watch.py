@@ -1,7 +1,7 @@
 import pytest
 
 from gh_run_receptor.errors import AcquisitionError
-from gh_run_receptor.watch import JobState, RunState, transitions, watch_run
+from gh_run_receptor.watch import JobState, RunState, fetch_state, transitions, watch_run
 
 
 def _state(status, job_status, conclusion=None, job_conclusion=None):
@@ -37,6 +37,31 @@ class FakeClient:
         state = self.states[min(self.index, len(self.states) - 1)]
         self.index += 1
         return [state["jobs"]] if paginate else state["jobs"]
+
+
+class HistoricalAttemptClient:
+    def json(self, endpoint, *, paginate=False):
+        if endpoint.endswith("/attempts/1"):
+            return {
+                "status": "completed",
+                "conclusion": "failure",
+                "run_attempt": 1,
+            }
+        if "/attempts/1/jobs?" in endpoint:
+            return [
+                {
+                    "total_count": 1,
+                    "jobs": [
+                        {
+                            "id": 7,
+                            "name": "test",
+                            "status": "completed",
+                            "conclusion": "failure",
+                        }
+                    ],
+                }
+            ]
+        return {"status": "completed", "conclusion": "success", "run_attempt": 2}
 
 
 def test_watch_emits_only_changes_and_backs_off_when_unchanged():
@@ -83,6 +108,14 @@ def test_watch_of_completed_run_emits_no_redundant_transition():
     assert final.conclusion == "failure"
     assert messages == []
     assert delays == []
+
+
+def test_watch_uses_attempt_specific_run_state_for_a_historical_attempt():
+    state = fetch_state(HistoricalAttemptClient(), "uibcdf/example", 42, attempt=1)
+
+    assert state.attempt == 1
+    assert state.conclusion == "failure"
+    assert state.jobs[0].conclusion == "failure"
 
 
 def test_watch_retries_transient_errors_without_repeating_state():

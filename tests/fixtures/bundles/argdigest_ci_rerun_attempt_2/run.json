@@ -1,0 +1,11 @@
+{
+  "conclusion": "success",
+  "event": "push",
+  "head_branch": "main",
+  "head_sha": "536ae4f6f191ff5e9a4449c81d3847ca90daa460",
+  "html_url": "https://github.com/uibcdf/argdigest/actions/runs/22638022385",
+  "id": 22638022385,
+  "name": "CI",
+  "run_attempt": 2,
+  "status": "completed"
+}

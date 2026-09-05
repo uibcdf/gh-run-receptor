@@ -1,0 +1,11 @@
+{
+  "conclusion": "failure",
+  "event": "push",
+  "head_branch": "main",
+  "head_sha": "cfd55509840476b6be94d2884d3b48f34bbb50e5",
+  "html_url": "https://github.com/uibcdf/pyunitwizard/actions/runs/19058199598",
+  "id": 19058199598,
+  "name": "CI",
+  "run_attempt": 1,
+  "status": "completed"
+}

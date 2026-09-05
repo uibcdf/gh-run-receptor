@@ -1,0 +1,53 @@
+{
+  "api_version": "2022-11-28",
+  "capture_policy": "metadata",
+  "captured_at": "2026-09-05T22:20:02.619068+00:00",
+  "complete": false,
+  "head_sha": "cfd55509840476b6be94d2884d3b48f34bbb50e5",
+  "hostname": "github.com",
+  "members": [
+    {
+      "bytes": 295,
+      "complete": true,
+      "kind": "github.workflow_run",
+      "path": "run.json",
+      "sha256": "2af366753cd90b173269cae0511483503a9f2827c09e14b058f83e388adac9d0"
+    },
+    {
+      "bytes": 42,
+      "complete": true,
+      "kind": "github.workflow",
+      "path": "workflow.json",
+      "sha256": "02b6d44b9a920bb7c21a52762ad15f5c12f297f005e6af9371cee94503e21676"
+    },
+    {
+      "bytes": 2190,
+      "complete": true,
+      "kind": "github.jobs",
+      "path": "jobs.json",
+      "sha256": "f96266afde4439457990099ca41529453789d0d30a338df7eba409f55872ed67"
+    },
+    {
+      "bytes": 43,
+      "complete": true,
+      "kind": "github.check_runs",
+      "path": "checks.json",
+      "sha256": "28cd5311a9d18008254c30a9fc641a07c1eb1d556010fc66509e91c06a93e9bb"
+    },
+    {
+      "bytes": 42,
+      "complete": true,
+      "kind": "github.artifacts",
+      "path": "artifacts.json",
+      "sha256": "733015529a249a421892ec83190af9d23593d1877609d3653ae94f945a220490"
+    }
+  ],
+  "receptor_version": "0.8.0+1.g2c6661e.dirty",
+  "repository": "uibcdf/pyunitwizard",
+  "run_attempt": 1,
+  "run_id": 19058199598,
+  "schema": "gh-run-receptor.bundle@1",
+  "warnings": [
+    "logs unavailable: GitHub CLI download failed: gh: Server Error (HTTP 410)"
+  ]
+}

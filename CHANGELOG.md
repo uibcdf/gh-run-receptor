@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.9.0 - 2026-09-05
+
+- Fetch and validate the attempt-specific workflow-run response when inspecting or
+  watching a historical rerun, preventing current-attempt conclusions from contaminating
+  historical evidence.
+- Reject bundles whose manifest identity contradicts the retained run ID, attempt, or
+  head SHA while keeping older sanitized bundles without those additive fields readable.
+- Preserve cancelled, timed-out, active, and future platform states in Conda aggregation,
+  and label mixed outcome inventories as non-success jobs rather than failures.
+- Add sanitized real cancelled, expired-log, and paired failed/successful rerun fixtures
+  with schema, assessment, exit-code, and cross-attempt contract tests.
+
 ## 0.8.0 - 2026-09-05
 
 - Add dependency-free local workflow discovery and `init` configuration proposals.

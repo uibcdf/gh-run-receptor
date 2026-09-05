@@ -1,0 +1,11 @@
+{
+  "conclusion": "cancelled",
+  "event": "workflow_dispatch",
+  "head_branch": "main",
+  "head_sha": "4f3311b52e8ef782562560070d8c78a534e037a4",
+  "html_url": "https://github.com/uibcdf/molsysmt/actions/runs/33636046706",
+  "id": 33636046706,
+  "name": "Build and upload conda packages",
+  "run_attempt": 1,
+  "status": "completed"
+}

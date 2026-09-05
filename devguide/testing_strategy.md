@@ -67,11 +67,13 @@ and release coordination. The MolSysMT run identifiers listed in
 [motivation_and_evidence.md](motivation_and_evidence.md) are starting research evidence,
 not automatically safe fixtures.
 
-The first reviewed corpus entries are catalogued in `tests/fixtures/corpus.json`. They are
-metadata-only reductions of public MolSysMT Conda runs `33863426589` and `33849332945`.
-The catalog records why each run is retained, exactly what sanitization removed, expected
-official and receptor outcomes, and the upstream-retention caveat. The committed bundles
-contain no actors, commit messages, runner details, pull-request data, or API URLs.
+The reviewed corpus entries are catalogued in `tests/fixtures/corpus.json`. In addition to
+the initial MolSysMT Conda runs, they include a cancelled MolSysMT matrix, an incomplete
+PyUnitWizard capture whose logs return HTTP 410, and failed/successful attempts of one
+ArgDigest rerun. The catalog records why each run is retained, exactly what sanitization
+removed, expected official and receptor outcomes, exit code where material, and the
+upstream-retention caveat. The committed bundles contain no actors, commit messages,
+runner details, pull-request data, or API URLs.
 
 ## Quality metrics
 

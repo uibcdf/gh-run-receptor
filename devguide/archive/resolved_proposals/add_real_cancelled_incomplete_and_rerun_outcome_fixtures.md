@@ -1,12 +1,12 @@
 ---
 summary: Add real cancelled incomplete and rerun outcome fixtures
 issue: uibcdf/gh-run-receptor#13
-status: active
+status: resolved
 opened: 2026-09-05
-closed:
-verification: reproduced
+closed: 2026-09-05
+verification: measured
 area: ['github', 'reports', 'tests']
-guard:
+guard: tests/test_contracts.py
 normative:
 blocked_by: []
 supersedes: []
@@ -15,7 +15,7 @@ supersedes: []
 # Add real cancelled, incomplete, and rerun outcome fixtures
 
 **Reported:** 2026-09-05, as the first post-0.8.0 corpus milestone.
-**Status:** Active; four public attempt captures have been selected and reviewed.
+**Status:** Resolved; four public attempt captures are sanitized, reviewed, and tested.
 
 ## What
 
@@ -96,3 +96,10 @@ external blocker.
 
 Linux host, Python 3.13.14, gh-run-receptor source after 0.8.0, GitHub API version
 `2022-11-28`, 2026-09-05. All selected runs are public UIBCDF repository evidence.
+
+## Resolution
+
+All four captures are catalogued with explicit sanitization and retention metadata. They
+cross the bundle, normalized-model, and report schemas and jointly assert assessments and
+exit statuses 0, 1, 2, and 4. The paired ArgDigest fixtures additionally enforce shared
+run/SHA identity with distinct attempt conclusions.

@@ -20,6 +20,19 @@ _BIDI_CONTROLS = frozenset(
     "\u061c\u200e\u200f\u202a\u202b\u202c\u202d\u202e\u2066\u2067\u2068\u2069"
 )
 _CONDA_PLATFORMS = ("linux-64", "linux-aarch64", "osx-64", "osx-arm64", "win-64")
+_PLATFORM_STATE_PRECEDENCE = (
+    "failure",
+    "timed_out",
+    "cancelled",
+    "action_required",
+    "stale",
+    "startup_failure",
+    "in_progress",
+    "pending",
+    "queued",
+    "requested",
+    "waiting",
+)
 _CI_ROLES = (
     ("publish", ("publish", "publishing", "release", "deploy", "upload")),
     ("docs", ("documentation", "docs", "sphinx", "notebook", "notebooks")),
@@ -190,22 +203,27 @@ def _conda_matrix(
         ]
         if not platform_jobs and not platform_artifacts and platform not in expected:
             continue
-        failed = any(job.get("conclusion") == "failure" for job in platform_jobs)
-        successful = any(job.get("conclusion") == "success" for job in platform_jobs)
+        states = [
+            str(job.get("conclusion") or job.get("status") or "unknown")
+            for job in platform_jobs
+        ]
+        status = "unknown"
+        for state in _PLATFORM_STATE_PRECEDENCE:
+            if state in states:
+                status = "failed" if state == "failure" else state
+                break
+        else:
+            if states and len(set(states)) == 1:
+                status = states[0]
+            elif platform in expected and not platform_artifacts and not states:
+                status = "missing"
+        successful = status == "success"
         platforms.append(
             {
                 "name": platform,
                 "job_ids": [job.get("id") for job in platform_jobs],
                 "artifact_ids": [artifact.get("id") for artifact in platform_artifacts],
-                "status": (
-                    "failed"
-                    if failed
-                    else "success"
-                    if successful
-                    else "missing"
-                    if platform in expected and not platform_artifacts
-                    else "unknown"
-                ),
+                "status": status,
                 "reusable": successful and bool(platform_artifacts),
                 "expected": platform in expected,
             }
@@ -416,6 +434,11 @@ def _ci_failure_groups(jobs: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return groups
 
 
+def _non_success_label(jobs: list[dict[str, Any]], noun: str) -> str:
+    prefix = "failed" if all(job.get("conclusion") == "failure" for job in jobs) else "non-success"
+    return f"{prefix} {noun}"
+
+
 def build_report(
     manifest: dict[str, Any],
     evidence: dict[str, Any],
@@ -584,13 +607,16 @@ def _render_docs_llm_failure(report: dict[str, Any]) -> str:
         if job["conclusion"] not in (None, "success", "skipped", "neutral")
     ]
     if failed:
-        lines.append("failed:")
+        lines.append(_non_success_label(failed, "jobs") + ":")
         for job in failed[:MAX_FAILURES]:
             steps = ", ".join(_safe_text(step["name"] or "unnamed") for step in job["failed_steps"])
             suffix = f" | steps={steps}" if steps else ""
             lines.append(f"- {_safe_text(job['name'])} | {_safe_text(job['conclusion'])}{suffix}")
         if len(failed) > MAX_FAILURES:
-            lines.append(f"- ... {len(failed) - MAX_FAILURES} more failed jobs in JSON report")
+            lines.append(
+                f"- ... {len(failed) - MAX_FAILURES} more "
+                f"{_non_success_label(failed, 'jobs')} in JSON report"
+            )
 
     phase_summaries = []
     for phase in report["matrix"]["phases"]:
@@ -683,8 +709,13 @@ def _render_release_llm_failure(report: dict[str, Any]) -> str:
     else:
         artifact_text = "0"
     workflow = Path(str(subject["workflow"])).name
+    state_field = (
+        "failed"
+        if all(job.get("conclusion") == "failure" for job in failed)
+        else "non_success"
+    )
     lines.append(
-        f"workflow={_safe_text(workflow)} | failed={'; '.join(failures) or 'none'} | "
+        f"workflow={_safe_text(workflow)} | {state_field}={'; '.join(failures) or 'none'} | "
         f"phases={','.join(summaries) or 'none'} | "
         f"external=not_observed artifacts={artifact_text}"
     )
@@ -792,7 +823,9 @@ def render_llm(report: dict[str, Any]) -> str:
     ]
     if failed and receptor["profile"] == "ci":
         groups = _ci_failure_groups(report["jobs"])
-        lines.append(f"failed groups ({len(groups)}, {len(failed)} jobs):")
+        lines.append(
+            f"{_non_success_label(failed, 'groups')} ({len(groups)}, {len(failed)} jobs):"
+        )
         for group in groups[:MAX_FAILURES]:
             members = group["jobs"]
             steps = ", ".join(_safe_text(step) for step in group["steps"])
@@ -811,7 +844,8 @@ def render_llm(report: dict[str, Any]) -> str:
         if len(groups) > MAX_FAILURES:
             lines.append(f"- ... {len(groups) - MAX_FAILURES} more groups in JSON report")
     elif failed:
-        lines.append(f"failed jobs ({len(failed)}):")
+        label = _non_success_label(failed, "jobs")
+        lines.append(f"{label} ({len(failed)}):")
         for job in failed[:MAX_FAILURES]:
             steps = ", ".join(_safe_text(step["name"] or "unnamed") for step in job["failed_steps"])
             suffix = f" | steps: {steps}" if steps else ""
@@ -820,7 +854,7 @@ def render_llm(report: dict[str, Any]) -> str:
             conclusion = _safe_text(job["conclusion"])
             lines.append(f"- {name} | {conclusion} | {duration}{suffix}")
         if len(failed) > MAX_FAILURES:
-            lines.append(f"- ... {len(failed) - MAX_FAILURES} more failed jobs in JSON report")
+            lines.append(f"- ... {len(failed) - MAX_FAILURES} more {label} in JSON report")
 
     if report["matrix"].get("kind") == "conda":
         if report["matrix"].get("package_kind") == "noarch":
@@ -838,11 +872,29 @@ def render_llm(report: dict[str, Any]) -> str:
             successful = [item["name"] for item in platforms if item["status"] == "success"]
             failed_platforms = [item["name"] for item in platforms if item["status"] == "failed"]
             missing_platforms = [item["name"] for item in platforms if item["status"] == "missing"]
-            lines.append(
-                f"conda platforms: successful={len(successful)} failed={len(failed_platforms)} "
-                f"missing={len(missing_platforms)} artifacts={len(report['artifacts'])} "
+            other_counts = []
+            other_states = {
+                item["status"]
+                for item in platforms
+                if item["status"] not in {"success", "failed", "missing"}
+            }
+            preferred_order = (*_PLATFORM_STATE_PRECEDENCE[1:], "skipped", "neutral", "unknown")
+            state_order = [state for state in preferred_order if state in other_states]
+            state_order.extend(sorted(other_states - set(state_order)))
+            for state in state_order:
+                count = sum(item["status"] == state for item in platforms)
+                other_counts.append(f"{state}={count}")
+            platform_summary = (
+                f"conda platforms: successful={len(successful)} "
+                f"failed={len(failed_platforms)}"
+            )
+            if other_counts:
+                platform_summary += " " + " ".join(other_counts)
+            platform_summary += (
+                f" missing={len(missing_platforms)} artifacts={len(report['artifacts'])} "
                 f"observed={len(platforms) - len(missing_platforms)}"
             )
+            lines.append(platform_summary)
             if missing_platforms:
                 lines.append(f"missing expected: {', '.join(missing_platforms)}")
             if reusable:

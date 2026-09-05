@@ -1,13 +1,13 @@
 ---
 summary: Conda summaries erase cancelled platform state
 issue: uibcdf/gh-run-receptor#12
-status: active
+status: resolved
 opened: 2026-09-05
-closed:
+closed: 2026-09-05
 severity: medium
-verification: reproduced
+verification: measured
 area: ['profiles', 'reports', 'tests']
-guard:
+guard: tests/test_contracts.py
 normative:
 blocked_by: []
 supersedes: []
@@ -16,7 +16,7 @@ supersedes: []
 # Conda summaries erase cancelled platform state
 
 **Reported:** 2026-09-05, while adding real cancelled-run evidence after 0.8.0.
-**Status:** Active; reproduced against a public MolSysMT Conda run.
+**Status:** Resolved and verified against a public MolSysMT Conda run.
 
 ## What
 
@@ -82,3 +82,10 @@ precedence that never upgrades the platform to success.
 
 Linux host, Python 3.13.14, gh-run-receptor 0.8.0, metadata capture on 2026-09-05.
 Public evidence: `uibcdf/molsysmt` run `33636046706`, attempt 1.
+
+## Resolution
+
+The Conda reducer now preserves cancellation, timeout, active, and future states with a
+deterministic conservative precedence. Compact summaries count every observed platform
+state, while mixed or cancelled job lists use the neutral `non-success jobs` heading. The
+real fixture retains `CANCELLED`, exit status 2, and both cancelled macOS platforms.

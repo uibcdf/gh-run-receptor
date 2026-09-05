@@ -1,0 +1,47 @@
+{
+  "artifacts": [
+    {
+      "digest": "sha256:8855cc420eef640edef812a4909cebb347e8dcd2efa335705413eeee5bf714e7",
+      "expired": false,
+      "id": 9849063750,
+      "name": "molsysmt-linux-64-py3.11",
+      "size_in_bytes": 57214220
+    },
+    {
+      "digest": "sha256:d53584f650cf5005e70d05339f6a07a6f4235e1b022700a831e23ff2496183c2",
+      "expired": false,
+      "id": 9849061380,
+      "name": "molsysmt-linux-64-py3.12",
+      "size_in_bytes": 57180864
+    },
+    {
+      "digest": "sha256:438d083ee048c7e5019f16e4a381a8036ed43f56c6475cba91a48bf575248474",
+      "expired": false,
+      "id": 9849042271,
+      "name": "molsysmt-linux-64-py3.13",
+      "size_in_bytes": 57263937
+    },
+    {
+      "digest": "sha256:d6ece5779da7099a9b943230d4f313b8aff2fd8d35ea7a9f31700cf0f72fe314",
+      "expired": false,
+      "id": 9849022882,
+      "name": "molsysmt-linux-aarch64-py3.11",
+      "size_in_bytes": 56995392
+    },
+    {
+      "digest": "sha256:f79209411664453ffba1e07c0cf7852b6275f7ad2c85efc74a135c1a5d68a049",
+      "expired": false,
+      "id": 9849010218,
+      "name": "molsysmt-linux-aarch64-py3.12",
+      "size_in_bytes": 56918049
+    },
+    {
+      "digest": "sha256:34cee3770d79a3534b962ff2ee2d5eeb1d1c70f156cd64827724221a7a90ef78",
+      "expired": false,
+      "id": 9849002908,
+      "name": "molsysmt-linux-aarch64-py3.13",
+      "size_in_bytes": 56899798
+    }
+  ],
+  "total_count": 6
+}

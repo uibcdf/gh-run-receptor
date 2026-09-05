@@ -27,6 +27,8 @@ def _selected_evidence(
         "run.json": {
             key: run.get(key)
             for key in (
+                "id",
+                "run_attempt",
                 "status",
                 "conclusion",
                 "name",

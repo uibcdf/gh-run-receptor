@@ -1,0 +1,15 @@
+{
+  "jobs": [
+    {
+      "completed_at": "2026-03-03T20:31:26Z",
+      "conclusion": "success",
+      "html_url": "https://github.com/uibcdf/argdigest/actions/runs/22638022385/job/65618048634",
+      "id": 65618048634,
+      "name": "Test on ubuntu-latest, Python 3.13",
+      "started_at": "2026-03-03T20:30:07Z",
+      "status": "completed",
+      "steps": []
+    }
+  ],
+  "total_count": 1
+}

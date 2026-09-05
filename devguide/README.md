@@ -7,7 +7,7 @@ evidence.
 
 ## Current state
 
-The project has a `0.8.0` tagged source preview but no published package-index artifact or
+The project has a `0.9.0` tagged source preview but no published package-index artifact or
 stable public contract;
 the contracts in this guide are explicit but provisional unless marked settled. The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
@@ -33,6 +33,8 @@ The current MVP implements:
 - sanitized success and partial-failure MolSysMT Conda fixtures plus a successful
   MolSysViewer noarch fixture with deterministic replay and official-conclusion parity
   tests;
+- sanitized real cancellation, expired-log incompleteness, and paired failed/successful
+  rerun fixtures, with attempt-consistent source validation and exit-code parity;
 - strict `config@1` repository rules captured only from the default branch, with exact
   workflow matching, provenance, local validation, Conda platform expectations, and an
   explicit native/noarch package kind;
@@ -121,10 +123,10 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The next milestone broadens documentation, CI, and release evidence beyond their first
-real fixtures. It must establish exact conclusion
-parity on successful, failed, cancelled, and incomplete runs and identify which release
-facts need structured producer evidence or new capture sources rather than name inference.
+The next milestone closes the remaining outcome and distribution gaps: real timed-out and
+restricted-permission evidence, active-run transitions, Zenodo verification, and supported
+platform installation. It must also identify which release facts need structured producer
+evidence or new capture sources rather than name inference.
 
 The executable task list and exit criteria remain in
 [development_roadmap.md](development_roadmap.md). The configuration and report contracts

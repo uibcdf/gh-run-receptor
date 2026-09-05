@@ -59,8 +59,11 @@ API paths. A run URL is normalized to hostname, owner, repository, and numeric r
 
 Run ID alone is not a complete evidence identity. Every bundle and report includes
 `run_attempt`. `inspect` defaults to the current attempt returned by GitHub; an explicit
-`--attempt` selects a historical attempt. Jobs and logs must be fetched from the same
-attempt endpoint. Evidence from different attempts is never merged implicitly.
+`--attempt` selects a historical attempt. For a historical selection, the run response,
+jobs, and logs are fetched from attempt-specific endpoints and their identity is validated
+before use. Evidence from different attempts is never merged implicitly. Artifact listing
+remains a run-level GitHub endpoint and therefore is not treated as proof that an artifact
+belongs to one particular attempt.
 
 `compare RUN_ID --attempt A --attempt B` may compare attempts, but preserves each source
 fact independently.
