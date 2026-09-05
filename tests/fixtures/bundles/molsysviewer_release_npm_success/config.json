@@ -1,0 +1,73 @@
+{
+  "config": {
+    "schema": "gh-run-receptor.config@1",
+    "schema_version": 1,
+    "workflows": [
+      {
+        "match": {
+          "path": ".github/workflows/CI.yaml"
+        },
+        "profile": "ci",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/CI_e2e.yaml"
+        },
+        "profile": "ci",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/ruff.yaml"
+        },
+        "profile": "ci",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/docs-notebooks.yaml"
+        },
+        "profile": "docs",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/sphinx_docs_to_gh_pages.yaml"
+        },
+        "profile": "docs",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/npm-publish.yaml"
+        },
+        "profile": "release",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/verify-zenodo-release.yaml"
+        },
+        "profile": "release",
+        "settings": {}
+      },
+      {
+        "match": {
+          "path": ".github/workflows/build_and_upload_conda_packages.yaml"
+        },
+        "profile": "conda",
+        "settings": {
+          "package_kind": "noarch"
+        }
+      }
+    ]
+  },
+  "schema": "gh-run-receptor.config-capture@1",
+  "source": {
+    "blob_sha": "40cb054e00ea20bd4fad81c12db51024f66ad9ff",
+    "path": ".github/gh-run-receptor.yaml",
+    "ref": "main",
+    "sha256": "d4f270af6f3a0f59c43bb108bb1cec7351a48e2abab762e1a98fc746b6f1f22a"
+  }
+}

@@ -141,19 +141,23 @@ def test_release_fixtures_preserve_identity_and_delivery_evidence():
         FIXTURES / "bundles/molsysviewer_release_npm_success"
     )
 
-    failure = build_report(failure_manifest, failure_evidence, profile="release")
-    success = build_report(success_manifest, success_evidence, profile="release")
+    failure = build_report(failure_manifest, failure_evidence, profile="auto")
+    success = build_report(success_manifest, success_evidence, profile="auto")
     failure_phases = {item["name"]: item for item in failure["matrix"]["phases"]}
     success_phases = {item["name"]: item for item in success["matrix"]["phases"]}
 
     assert failure["github"]["conclusion"] == "failure"
     assert failure["receptor"]["assessment"] == "FAIL"
+    assert failure["receptor"]["profile"] == "release"
+    assert failure["configuration"]["matched"] is True
     assert failure["subject"]["event"] == "push"
     assert failure["subject"]["head_ref"] == "0.20.1"
     assert failure_phases["package"]["counts"] == {"failure": 1}
     assert failure_phases["publish"]["counts"] == {"skipped": 1}
     assert success["github"]["conclusion"] == "success"
     assert success["receptor"]["assessment"] == "PASS"
+    assert success["receptor"]["profile"] == "release"
+    assert success["configuration"]["matched"] is True
     assert success["subject"]["event"] == "workflow_dispatch"
     assert success_phases["package"]["counts"] == {"success": 1}
     assert success_phases["publish"]["counts"] == {"success": 1}

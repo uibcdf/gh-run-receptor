@@ -1,12 +1,12 @@
 ---
 summary: Add the first release workflow profile
 issue: uibcdf/gh-run-receptor#9
-status: open
+status: resolved
 opened: 2026-09-05
-closed:
-verification: asserted
+closed: 2026-09-05
+verification: measured
 area: ['profiles', 'tests']
-guard:
+guard: tests/test_contracts.py
 normative:
 blocked_by: []
 supersedes: []
@@ -15,7 +15,7 @@ supersedes: []
 # Adding the first release workflow profile
 
 **Reported:** 2026-09-05, after closing the first documentation-profile slice.
-**Status:** Open; evidence capture and implementation are in progress.
+**Status:** Resolved in 0.7.0 and validated from MolSysViewer's default-branch rules.
 
 ## What
 
@@ -120,7 +120,21 @@ continues to use the Conda profile rather than being silently reinterpreted as r
 No tracked dependency blocks the npm slice. Real Zenodo validation depends on a future
 published release run but does not block this bounded profile.
 
+## Delivered checkpoint
+
+Commit `c901166` and tag `0.7.0` delivered the release profile, the additive event/ref
+identity fields, two real npm fixtures, and the measured compact renderer. MolSysMT
+adopted its Zenodo-verification rule in `aee6f904f`; MolSysViewer adopted npm and Zenodo
+rules in `ce3eb6a9`. Conda publication deliberately remains under the Conda profile.
+
+After client adoption, both npm runs were captured again without a CLI profile override.
+Their reviewed sanitized fixtures retain MolSysViewer's default-branch policy and select
+`release` automatically. The final local gate passed 119 tests, Ruff, developer-report
+validation, and diff safety. The real cases retain exact official conclusion parity and
+the measured 95→84 and 103→93 token reductions.
+
 ## Provenance
 
 Initial inspection was performed on 2026-09-05 from the local Linux development host
 with Python 3.13, GitHub CLI 2.93.0, `gh-run-receptor` 0.6.1, and tiktoken 0.13.0.
+Final client-policy capture used the released `gh-run-receptor` 0.7.0 extension.
