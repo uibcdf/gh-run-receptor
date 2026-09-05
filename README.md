@@ -5,11 +5,11 @@ repetitive run output into a compact, truth-preserving report while retaining a 
 path to the captured evidence.
 
 The project is in pre-1.0 development; no package has been published to a package index and
-the public contract may still evolve. The `0.5.0` source release can inspect, watch, and
+the public contract may still evolve. The `0.6.0` source release can inspect, watch, and
 replay structured run evidence. Install the GitHub CLI extension at the exact preview tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 0.5.0
+gh extension install uibcdf/gh-run-receptor --pin 0.6.0
 gh run-receptor --version
 ```
 
@@ -31,8 +31,10 @@ The ordinary native GitHub presentation remains available through `gh run view`.
 The current MVP recognizes clear Conda matrices automatically. When failure logs were
 captured, it reports independently reusable platform artifacts and groups repeated causes
 with member-and-line provenance. The `ci` profile groups jobs into presentation roles and
-collapses repeated failed-step signatures without removing any job from JSON. Use
-`--profile=generic`, `--profile=ci`, or `--profile=conda` to select explicitly.
+collapses repeated failed-step signatures without removing any job from JSON. The `docs`
+profile distinguishes setup, content, notebooks, links, artifacts, and deployment while
+keeping combined source evidence combined. Use `--profile=generic`, `--profile=ci`,
+`--profile=conda`, or `--profile=docs` to select explicitly.
 
 A client repository can assign those profiles, declare required native Conda platforms,
 or identify a noarch package in a trusted `.github/gh-run-receptor.yaml` file:
@@ -51,6 +53,10 @@ workflows:
     profile: conda
     settings:
       package_kind: noarch
+
+  - match:
+      path: .github/workflows/docs-notebooks.yaml
+    profile: docs
 ```
 
 Validate and explain the rule locally before committing it:
@@ -62,7 +68,7 @@ gh run-receptor config explain .github/workflows/build_conda.yaml
 
 Live capture reads policy only from the repository's default branch, stores its revision
 and digest in the evidence bundle, and fails if required platforms are absent. Version
-`0.5.0` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
+`0.6.0` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
 patterns and unknown settings rather than silently ignoring them.
 
 ## Measured token reduction
@@ -76,6 +82,8 @@ filtered native workflow, not against deliberately dumping every log line:
 | Verify a successful five-platform matrix | 143 tokens | 39 tokens | 72.7% |
 | Diagnose seven failed MolSysViewer CI jobs | 223 tokens | 198 tokens | 11.2% |
 | Verify a successful MolSysViewer noarch workflow | 101 tokens | 45 tokens | 55.4% |
+| Diagnose a failed MolSysViewer notebook workflow | 136 tokens | 113 tokens | 16.9% |
+| Verify a successful MolSysMT documentation workflow | 254 tokens | 48 tokens | 81.1% |
 
 For the failed run, the receptor retained the official failure, identified both failed
 macOS jobs, and reported the Linux, Linux ARM, and Windows artifacts as reusable. These are

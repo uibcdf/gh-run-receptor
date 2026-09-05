@@ -1,0 +1,91 @@
+{
+  "jobs": [
+    {
+      "completed_at": "2026-08-14T07:50:36Z",
+      "conclusion": "success",
+      "html_url": "https://github.com/uibcdf/molsysmt/actions/runs/31781220979/job/94707208625",
+      "id": 94707208625,
+      "name": "Sphinx docs to gh-pages",
+      "started_at": "2026-08-14T07:46:16Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v7",
+          "number": 2
+        },
+        {
+          "conclusion": "success",
+          "name": "Additional info about the build",
+          "number": 3
+        },
+        {
+          "conclusion": "success",
+          "name": "Set up Python",
+          "number": 4
+        },
+        {
+          "conclusion": "success",
+          "name": "Setup conda env",
+          "number": 5
+        },
+        {
+          "conclusion": "success",
+          "name": "Info conda",
+          "number": 6
+        },
+        {
+          "conclusion": "success",
+          "name": "Install molsysviewer",
+          "number": 7
+        },
+        {
+          "conclusion": "success",
+          "name": "Select the pinned minimal Rust toolchain",
+          "number": 8
+        },
+        {
+          "conclusion": "success",
+          "name": "Install package",
+          "number": 9
+        },
+        {
+          "conclusion": "success",
+          "name": "Test import module",
+          "number": 10
+        },
+        {
+          "conclusion": "success",
+          "name": "Running the Sphinx to gh-pages Action",
+          "number": 11
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Setup conda env",
+          "number": 20
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Set up Python",
+          "number": 21
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v7",
+          "number": 22
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 23
+        }
+      ]
+    }
+  ],
+  "total_count": 1
+}

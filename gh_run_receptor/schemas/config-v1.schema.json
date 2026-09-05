@@ -56,7 +56,7 @@
       "required": ["match", "profile", "settings"],
       "properties": {
         "match": {"$ref": "#/$defs/match"},
-        "profile": {"enum": ["generic", "ci", "conda"]},
+        "profile": {"enum": ["generic", "ci", "conda", "docs"]},
         "settings": {"$ref": "#/$defs/settings"}
       },
       "allOf": [

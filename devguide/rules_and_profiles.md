@@ -47,6 +47,15 @@ Separates content build, warnings, link checking, notebook execution, artifact c
 and deployment. A successful build with a failed deployment is partial, not a generic
 failure with lost progress.
 
+The first implemented slice assigns every retained step exactly one presentation phase:
+`build_deploy`, `notebooks`, `links`, `warnings`, `artifact`, `deploy`, `build`, `setup`,
+or `other`. Jobs whose retained API record has no steps become one fallback unit. A
+composite Sphinx-to-Pages step remains `build_deploy`; it is not duplicated into two
+independently successful claims. Only separate successful build and failed deployment
+evidence derives `PARTIAL`. JSON retains all steps and phase evidence, while compact
+failure output omits successful setup/other counts. Required phases, warning parsing,
+rendered-page validation, and deployment probing remain future work.
+
 ### Conda
 
 Separates native platform build, package contract validation, Python compatibility,
@@ -98,7 +107,7 @@ workflows:
 ```
 
 The CLI provides `config check [PATH]` and `config explain WORKFLOW_PATH`. Discovery and
-`init` remain future work. Version 1 accepts `generic`, `ci`, and `conda` profiles and
+`init` remain future work. Version 1 accepts `generic`, `ci`, `conda`, and `docs` profiles and
 the Conda `expected_platforms` and `package_kind` settings. Package kind is `native` or
 `noarch`; a noarch rule cannot require native platforms. Unknown fields fail validation
 instead of being ignored.

@@ -2,6 +2,32 @@
   "schema": "gh-run-receptor.test-corpus@1",
   "captures": [
     {
+      "path": "bundles/molsysviewer_docs_notebooks_failure",
+      "repository": "uibcdf/molsysviewer",
+      "run_id": 33930667142,
+      "run_attempt": 1,
+      "captured_at": "2026-09-05",
+      "reason": "A failing documentation-notebook workflow where environment setup fails, notebook execution is skipped, and a diagnostic artifact remains available.",
+      "sanitization": "Retained only run identity, official state, workflow path, job timing and conclusions, complete step state, and artifact identity metadata. Removed actors, commits beyond the subject SHA, runner details, labels, pull requests, checks, unrelated API fields, and repository configuration that did not yet select the docs profile.",
+      "profile": "docs",
+      "expected_github_conclusion": "failure",
+      "expected_assessment": "FAIL",
+      "upstream_retention": "The public GitHub run and artifact are subject to GitHub retention; this fixture is self-contained metadata."
+    },
+    {
+      "path": "bundles/molsysmt_docs_success",
+      "repository": "uibcdf/molsysmt",
+      "run_id": 31781220979,
+      "run_attempt": 1,
+      "captured_at": "2026-09-05",
+      "reason": "A successful documentation workflow whose Sphinx action combines content build and GitHub Pages deployment in one indivisible source step.",
+      "sanitization": "Retained only run identity, official state, workflow path, job timing and conclusions, and complete step state. Removed actors, commits beyond the subject SHA, runner details, labels, pull requests, checks, unrelated API fields, and repository configuration that did not yet select the docs profile.",
+      "profile": "docs",
+      "expected_github_conclusion": "success",
+      "expected_assessment": "PASS",
+      "upstream_retention": "The public GitHub run is subject to GitHub retention; this fixture is self-contained metadata."
+    },
+    {
       "path": "bundles/molsysviewer_conda_noarch_success",
       "repository": "uibcdf/molsysviewer",
       "run_id": 20548716947,

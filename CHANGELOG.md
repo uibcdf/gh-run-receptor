@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.6.0 - 2026-09-05
+
+- Add the first documentation profile with bounded build, notebook, link, warning,
+  artifact, deployment, setup, and visible `other` phases.
+- Preserve complete normalized step state and provenance in report JSON while retaining
+  the existing failed-step projection.
+- Keep composite build/deploy actions indivisible and derive `PARTIAL` only from separate
+  successful build and failed deployment evidence.
+- Add sanitized successful MolSysMT documentation and failing MolSysViewer notebook
+  fixtures with measured native comparisons.
+- Reject an over-broad build classifier and a failed renderer that was larger than a
+  competent filtered native baseline.
+
 ## 0.5.0 - 2026-09-05
 
 - Add the explicit Conda `package_kind` rule setting with `native` and `noarch` values.

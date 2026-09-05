@@ -143,6 +143,12 @@ def test_ci_profile_is_an_explicit_cli_choice():
     assert args.profile == "ci"
 
 
+def test_docs_profile_is_an_explicit_cli_choice():
+    args = _parser().parse_args(["replay", "bundle", "--profile", "docs"])
+
+    assert args.profile == "docs"
+
+
 def test_config_check_and_explain(tmp_path, capsys):
     config = tmp_path / "rules.yaml"
     config.write_text(

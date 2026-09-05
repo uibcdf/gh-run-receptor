@@ -110,23 +110,43 @@ def normalize_evidence(
                     },
                 }
             )
+        steps = []
         failed_steps = []
         for step_index, step in enumerate(job.get("steps") or []):
             if not isinstance(step, dict):
                 raise BundleError(f"job {index} contains a non-object step")
-            if step.get("conclusion") in (None, "success", "skipped"):
-                continue
-            failed_steps.append(
-                {
-                    "number": step.get("number"),
-                    "name": step.get("name"),
-                    "conclusion": step.get("conclusion"),
-                    "source": {
-                        "member": "jobs.json",
-                        "json_pointer": f"/jobs/{index}/steps/{step_index}",
-                    },
-                }
-            )
+            step_status = step.get("status")
+            step_conclusion = step.get("conclusion")
+            source = {
+                "member": "jobs.json",
+                "json_pointer": f"/jobs/{index}/steps/{step_index}",
+            }
+            normalized_step = {
+                "number": step.get("number"),
+                "name": step.get("name"),
+                "status": step_status,
+                "conclusion": step_conclusion,
+                "source": source,
+            }
+            steps.append(normalized_step)
+            if step_status is not None and step_status not in KNOWN_STATUSES:
+                unknowns.append(
+                    {
+                        "kind": "github.step.status",
+                        "value": str(step_status),
+                        "source": source,
+                    }
+                )
+            if step_conclusion is not None and step_conclusion not in KNOWN_CONCLUSIONS:
+                unknowns.append(
+                    {
+                        "kind": "github.step.conclusion",
+                        "value": str(step_conclusion),
+                        "source": source,
+                    }
+                )
+            if step_conclusion not in (None, "success", "skipped"):
+                failed_steps.append(normalized_step)
         jobs.append(
             {
                 "id": job.get("id"),
@@ -136,6 +156,7 @@ def normalize_evidence(
                 "duration_seconds": _duration_seconds(
                     job.get("started_at"), job.get("completed_at")
                 ),
+                "steps": steps,
                 "failed_steps": failed_steps,
                 "url": job.get("html_url"),
                 "source": {"member": "jobs.json", "json_pointer": f"/jobs/{index}"},

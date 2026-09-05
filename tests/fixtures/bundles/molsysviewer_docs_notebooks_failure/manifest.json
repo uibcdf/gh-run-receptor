@@ -1,0 +1,51 @@
+{
+  "api_version": "2022-11-28",
+  "capture_policy": "metadata",
+  "captured_at": "2026-09-05T08:48:29.390491+00:00",
+  "complete": true,
+  "head_sha": "7ff59918a1794c83516c507667346b4b9fb43810",
+  "hostname": "github.com",
+  "members": [
+    {
+      "bytes": 231,
+      "complete": true,
+      "kind": "github.workflow_run",
+      "path": "run.json",
+      "sha256": "49fc176f209700041ef11a3d605689c189767c83009f21976fca2eb140b17504"
+    },
+    {
+      "bytes": 54,
+      "complete": true,
+      "kind": "github.workflow",
+      "path": "workflow.json",
+      "sha256": "1590b8c5ef0cd3f29273d6c16301201a5d7831a2023fac391bcbff84245d0842"
+    },
+    {
+      "bytes": 1492,
+      "complete": true,
+      "kind": "github.jobs",
+      "path": "jobs.json",
+      "sha256": "7b1691a62de3f1a7b2df29700de73005fce710081973b4cf6347759955c46fa3"
+    },
+    {
+      "bytes": 43,
+      "complete": true,
+      "kind": "github.check_runs",
+      "path": "checks.json",
+      "sha256": "28cd5311a9d18008254c30a9fc641a07c1eb1d556010fc66509e91c06a93e9bb"
+    },
+    {
+      "bytes": 264,
+      "complete": true,
+      "kind": "github.artifacts",
+      "path": "artifacts.json",
+      "sha256": "e5c32e153e1afd1d8816fa3924f0bf29b480dd409db4cf4975e8060aa20e4fa2"
+    }
+  ],
+  "receptor_version": "0.5.0",
+  "repository": "uibcdf/molsysviewer",
+  "run_attempt": 1,
+  "run_id": 33930667142,
+  "schema": "gh-run-receptor.bundle@1",
+  "warnings": []
+}

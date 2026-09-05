@@ -16,7 +16,9 @@ def _canonical(value: Any) -> bytes:
     return (json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n").encode()
 
 
-def _selected_evidence(evidence: dict[str, Any]) -> dict[str, Any]:
+def _selected_evidence(
+    evidence: dict[str, Any], *, include_config: bool = True
+) -> dict[str, Any]:
     run = evidence["run.json"]
     workflow = evidence["workflow.json"]
     jobs = evidence["jobs.json"]["jobs"]
@@ -65,18 +67,18 @@ def _selected_evidence(evidence: dict[str, Any]) -> dict[str, Any]:
             ],
         },
     }
-    if "config.json" in evidence:
+    if include_config and "config.json" in evidence:
         selected["config.json"] = evidence["config.json"]
     return selected
 
 
-def sanitize(source: Path, destination: Path) -> None:
+def sanitize(source: Path, destination: Path, *, include_config: bool = True) -> None:
     manifest, evidence = load_bundle(source)
     if destination.exists():
         raise ValueError(f"destination already exists: {destination}")
     destination.mkdir(parents=True)
     members = []
-    selected = _selected_evidence(evidence)
+    selected = _selected_evidence(evidence, include_config=include_config)
     for name, value in selected.items():
         data = _canonical(value)
         (destination / name).write_bytes(data)
@@ -112,8 +114,13 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("source", type=Path)
     parser.add_argument("destination", type=Path)
+    parser.add_argument(
+        "--without-config",
+        action="store_true",
+        help="omit captured repository rules when they do not define the fixture behavior",
+    )
     args = parser.parse_args()
-    sanitize(args.source, args.destination)
+    sanitize(args.source, args.destination, include_config=not args.without_config)
     return 0
 
 

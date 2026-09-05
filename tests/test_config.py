@@ -76,6 +76,23 @@ workflows:
     }
 
 
+def test_docs_is_a_supported_profile_without_conda_settings():
+    config = parse_config(
+        b"""schema_version: 1
+workflows:
+  - match:
+      path: .github/workflows/docs.yaml
+    profile: docs
+"""
+    )
+
+    assert config["workflows"][0] == {
+        "match": {"path": ".github/workflows/docs.yaml"},
+        "profile": "docs",
+        "settings": {},
+    }
+
+
 def test_noarch_package_kind_is_explicit_and_cannot_require_native_platforms():
     config = parse_config(
         b"""schema_version: 1

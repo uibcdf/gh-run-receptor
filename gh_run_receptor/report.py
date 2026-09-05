@@ -28,6 +28,39 @@ _CI_ROLES = (
     ("test", ("test", "tests", "testing", "pytest", "smoke", "matrix", "e2e", "qt")),
     ("build", ("build", "wheel", "wheels", "package", "packages", "artifact")),
 )
+_DOCS_PHASES = (
+    ("notebooks", ("notebook", "notebooks")),
+    ("links", ("link check", "linkcheck", "links")),
+    ("warnings", ("warning", "warnings")),
+    ("artifact", ("artifact", "artifacts", "failure logs")),
+    ("deploy", ("deploy", "deployment", "publish", "publishing", "gh pages", "github pages")),
+    (
+        "build",
+        (
+            "sphinx",
+            "mkdocs",
+            "build docs",
+            "build documentation",
+            "build site",
+            "build html",
+            "generate docs",
+            "generate documentation",
+        ),
+    ),
+    (
+        "setup",
+        (
+            "setup",
+            "set up",
+            "checkout",
+            "install",
+            "environment",
+            "toolchain",
+            "conda",
+            "complete job",
+        ),
+    ),
+)
 
 
 def _safe_text(value: Any) -> str:
@@ -174,6 +207,68 @@ def _ci_matrix(jobs: list[dict[str, Any]]) -> dict[str, Any]:
     return {"kind": "ci", "roles": roles}
 
 
+def _matches_keywords(normalized: str, words: set[str], keywords: tuple[str, ...]) -> bool:
+    return any(
+        keyword in normalized if " " in keyword else keyword in words
+        for keyword in keywords
+    )
+
+
+def _docs_phase(name: Any) -> str:
+    normalized = re.sub(r"[^a-z0-9]+", " ", str(name or "").lower()).strip()
+    words = set(normalized.split())
+    matches = {
+        phase: _matches_keywords(normalized, words, keywords)
+        for phase, keywords in _DOCS_PHASES
+    }
+    if matches["build"] and matches["deploy"]:
+        return "build_deploy"
+    for phase, _ in _DOCS_PHASES:
+        if matches[phase]:
+            return phase
+    return "other"
+
+
+def _docs_matrix(jobs: list[dict[str, Any]]) -> dict[str, Any]:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for job in jobs:
+        units = job["steps"] or [job]
+        for unit in units:
+            phase = _docs_phase(unit.get("name"))
+            grouped.setdefault(phase, []).append(
+                {
+                    "job_id": job.get("id"),
+                    "step_number": unit.get("number") if unit is not job else None,
+                    "kind": "step" if unit is not job else "job",
+                    "state": str(unit.get("conclusion") or unit.get("status") or "unknown"),
+                }
+            )
+    phases = []
+    order = ("build_deploy", *[name for name, _ in _DOCS_PHASES], "other")
+    for phase in order:
+        evidence = grouped.get(phase, [])
+        if not evidence:
+            continue
+        counts: dict[str, int] = {}
+        for item in evidence:
+            counts[item["state"]] = counts.get(item["state"], 0) + 1
+        phases.append(
+            {
+                "name": phase,
+                "counts": dict(sorted(counts.items())),
+                "evidence": evidence,
+            }
+        )
+    return {"kind": "docs", "phases": phases}
+
+
+def _docs_has_state(matrix: dict[str, Any], phases: set[str], state: str) -> bool:
+    return any(
+        phase["name"] in phases and phase["counts"].get(state, 0) > 0
+        for phase in matrix["phases"]
+    )
+
+
 def _ci_failure_groups(jobs: list[dict[str, Any]]) -> list[dict[str, Any]]:
     grouped: dict[tuple[Any, tuple[str, ...]], list[dict[str, Any]]] = {}
     for job in jobs:
@@ -255,6 +350,8 @@ def build_report(
         )
     elif selected_profile == "ci":
         matrix = _ci_matrix(jobs)
+    elif selected_profile == "docs":
+        matrix = _docs_matrix(jobs)
     else:
         matrix = {}
     missing_platforms = (
@@ -269,6 +366,13 @@ def build_report(
         selected_profile == "conda"
         and assessment == "FAIL"
         and any(platform["reusable"] for platform in matrix["platforms"])
+    ):
+        assessment = "PARTIAL"
+    if (
+        selected_profile == "docs"
+        and assessment == "FAIL"
+        and _docs_has_state(matrix, {"build"}, "success")
+        and _docs_has_state(matrix, {"deploy"}, "failure")
     ):
         assessment = "PARTIAL"
     if missing_platforms and assessment == "PASS":
@@ -319,6 +423,74 @@ def _format_duration(seconds: int | None) -> str:
     return f"duration={minutes}m{remainder:02d}s" if minutes else f"duration={remainder}s"
 
 
+def _render_docs_llm_failure(report: dict[str, Any]) -> str:
+    subject = report["subject"]
+    github = report["github"]
+    receptor = report["receptor"]
+    identity = subject.get("url") or (
+        f"{_safe_text(subject['repository'])} run={subject['run_id']}"
+    )
+    counts = ",".join(f"{key}={value}" for key, value in report["job_counts"].items())
+    lines = [
+        (
+            f"{receptor['assessment']} conclusion={_safe_text(github['conclusion'])} "
+            f"status={_safe_text(github['status'])} | profile=docs | {_safe_text(identity)} "
+            f"| attempt={subject['run_attempt']}"
+        ),
+        (
+            f"workflow={_safe_text(subject['workflow'])} | "
+            f"jobs={len(report['jobs'])}({counts or 'none'})"
+        ),
+    ]
+    failed = [
+        job
+        for job in report["jobs"]
+        if job["conclusion"] not in (None, "success", "skipped", "neutral")
+    ]
+    if failed:
+        lines.append("failed:")
+        for job in failed[:MAX_FAILURES]:
+            steps = ", ".join(_safe_text(step["name"] or "unnamed") for step in job["failed_steps"])
+            suffix = f" | steps={steps}" if steps else ""
+            lines.append(f"- {_safe_text(job['name'])} | {_safe_text(job['conclusion'])}{suffix}")
+        if len(failed) > MAX_FAILURES:
+            lines.append(f"- ... {len(failed) - MAX_FAILURES} more failed jobs in JSON report")
+
+    phase_summaries = []
+    for phase in report["matrix"]["phases"]:
+        visible_counts = phase["counts"]
+        if phase["name"] in {"setup", "other"}:
+            visible_counts = {
+                key: value for key, value in visible_counts.items() if key != "success"
+            }
+        if visible_counts:
+            counts_text = ",".join(f"{key}:{value}" for key, value in visible_counts.items())
+            phase_summaries.append(f"{phase['name']}={counts_text}")
+    lines.append("phases: " + "; ".join(phase_summaries or ["none"]))
+
+    artifacts = report["artifacts"]
+    if artifacts:
+        shown = ", ".join(_safe_text(item["name"]) for item in artifacts[:MAX_ARTIFACTS])
+        remainder = (
+            f", ... +{len(artifacts) - MAX_ARTIFACTS}"
+            if len(artifacts) > MAX_ARTIFACTS
+            else ""
+        )
+        lines.append(f"artifacts: {shown}{remainder}")
+    else:
+        lines.append("artifacts: none")
+    if report["causes"]:
+        lines.append(f"root causes ({len(report['causes'])}):")
+        for index, cause in enumerate(report["causes"][:MAX_FAILURES], start=1):
+            lines.append(
+                f"[{index}] {_safe_text(cause['message'])} | "
+                f"jobs={len(cause['occurrences'])}"
+            )
+    for warning in report["warnings"][:5]:
+        lines.append(f"warning: {_safe_text(warning)}")
+    return "\n".join(lines) + "\n"
+
+
 def render_llm(report: dict[str, Any]) -> str:
     """Rendering a compact report intended for low-token inspection."""
     subject = report["subject"]
@@ -345,6 +517,12 @@ def render_llm(report: dict[str, Any]) -> str:
                 f"{role['name']}:{len(role['job_ids'])}" for role in report["matrix"]["roles"]
             )
             fields.append(f"roles={roles or 'none'}")
+        elif report["matrix"].get("kind") == "docs":
+            phases = ",".join(
+                f"{phase['name']}:{len(phase['evidence'])}"
+                for phase in report["matrix"]["phases"]
+            )
+            fields.append(f"phases={phases or 'none'}")
         if report["expectations"]["missing_platforms"]:
             fields.append(
                 "missing=" + ",".join(report["expectations"]["missing_platforms"])
@@ -357,6 +535,9 @@ def render_llm(report: dict[str, Any]) -> str:
             ]
         )
         return " | ".join(fields) + "\n"
+
+    if receptor["profile"] == "docs":
+        return _render_docs_llm_failure(report)
 
     counts = ", ".join(f"{key}={value}" for key, value in report["job_counts"].items()) or "none"
     lines = [
@@ -437,6 +618,12 @@ def render_llm(report: dict[str, Any]) -> str:
             counts = ",".join(f"{key}:{value}" for key, value in role["counts"].items())
             summaries.append(f"{role['name']}={len(role['job_ids'])}({counts})")
         lines.append("ci roles: " + "; ".join(summaries))
+    elif report["matrix"].get("kind") == "docs":
+        summaries = []
+        for phase in report["matrix"]["phases"]:
+            counts = ",".join(f"{key}:{value}" for key, value in phase["counts"].items())
+            summaries.append(f"{phase['name']}={len(phase['evidence'])}({counts})")
+        lines.append("docs phases: " + "; ".join(summaries))
 
     if report["causes"]:
         lines.append(f"root causes ({len(report['causes'])}):")
@@ -534,6 +721,13 @@ def render_human(report: dict[str, Any]) -> str:
         for role in report["matrix"]["roles"]:
             counts = ", ".join(f"{key}={value}" for key, value in role["counts"].items())
             lines.append(f"  {role['name']:<10} {len(role['job_ids']):>3} jobs ({counts})")
+    elif report["matrix"].get("kind") == "docs":
+        lines.extend(["", "Documentation phases"])
+        for phase in report["matrix"]["phases"]:
+            counts = ", ".join(f"{key}={value}" for key, value in phase["counts"].items())
+            lines.append(
+                f"  {phase['name']:<14} {len(phase['evidence']):>3} entries ({counts})"
+            )
 
     if report["configuration"]["matched"]:
         source = report["configuration"]["source"] or {}

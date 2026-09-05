@@ -1,0 +1,61 @@
+{
+  "jobs": [
+    {
+      "completed_at": "2026-09-04T23:45:49Z",
+      "conclusion": "failure",
+      "html_url": "https://github.com/uibcdf/molsysviewer/actions/runs/33930667142/job/101208422876",
+      "id": 101208422876,
+      "name": "Execute the documented notebooks",
+      "started_at": "2026-09-04T23:45:25Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1
+        },
+        {
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2
+        },
+        {
+          "conclusion": "failure",
+          "name": "Setup conda env",
+          "number": 3
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Install MolSysViewer",
+          "number": 4
+        },
+        {
+          "conclusion": "skipped",
+          "name": "Execute every documented notebook",
+          "number": 5
+        },
+        {
+          "conclusion": "success",
+          "name": "Collect the failure logs",
+          "number": 6
+        },
+        {
+          "conclusion": "failure",
+          "name": "Post Setup conda env",
+          "number": 11
+        },
+        {
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 12
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 13
+        }
+      ]
+    }
+  ],
+  "total_count": 1
+}

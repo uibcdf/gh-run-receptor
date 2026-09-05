@@ -7,7 +7,7 @@ evidence.
 
 ## Current state
 
-The project has a `0.5.0` tagged source preview but no published package-index artifact or
+The project has a `0.6.0` tagged source preview but no published package-index artifact or
 stable public contract;
 the contracts in this guide are explicit but provisional unless marked settled. The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
@@ -39,10 +39,12 @@ The current MVP implements:
 - a first CI profile that preserves all jobs, assigns bounded presentation roles, and
   groups identical failed-step signatures in LLM output;
 - noarch Conda summaries that retain job and artifact identity without inventing a native
-  matrix or claiming channel publication.
+  matrix or claiming channel publication;
+- a documentation profile that preserves complete step state, distinguishes bounded
+  phases, and keeps combined build/deploy evidence indivisible.
 
-It does not yet provide documentation or release profiles; a broad cross-workflow corpus;
-run comparison; workflow discovery; pattern rules; or the embedded Action. The CI, Conda,
+It does not yet provide a release profile; a broad cross-workflow corpus; run comparison;
+workflow discovery; pattern rules; or the embedded Action. The CI, documentation, Conda,
 and configuration contracts are initial vertical slices, not their complete stable forms.
 
 ## Reading order
@@ -115,10 +117,10 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The next milestone adds the documentation profile and broadens CI evidence beyond the
-first MolSysViewer failure fixture. It must establish exact conclusion parity on
-successful, failed, cancelled, and incomplete documentation/CI runs and identify which
-facts need structured producer evidence rather than log inference.
+The next milestone adds the release profile and broadens documentation and CI evidence
+beyond their first real fixtures. It must establish exact conclusion parity on
+successful, failed, cancelled, and incomplete documentation/CI/release runs and identify
+which facts need structured producer evidence rather than log inference.
 
 The executable task list and exit criteria remain in
 [development_roadmap.md](development_roadmap.md). The configuration and report contracts

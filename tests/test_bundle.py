@@ -133,3 +133,4 @@ def test_sanitizer_retains_optional_trusted_configuration():
     selected = _selected_evidence(evidence)
 
     assert selected["config.json"] == evidence["config.json"]
+    assert "config.json" not in _selected_evidence(evidence, include_config=False)

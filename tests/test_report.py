@@ -451,3 +451,180 @@ def test_ci_llm_output_groups_jobs_with_the_same_failed_steps():
     assert "failed groups (1, 2 jobs):" in rendered
     assert "- 2 jobs | failure | steps: Run tests | sample: Test on Linux (+1)" in rendered
     assert "Test on Windows" not in rendered
+
+
+def test_docs_profile_preserves_every_step_and_reports_skipped_notebooks():
+    evidence = _evidence()
+    evidence["workflow.json"]["path"] = ".github/workflows/docs-notebooks.yaml"
+    evidence["jobs.json"]["jobs"] = [
+        {
+            "id": 10,
+            "name": "Execute the documented notebooks",
+            "status": "completed",
+            "conclusion": "failure",
+            "steps": [
+                {
+                    "number": 1,
+                    "name": "Setup conda env",
+                    "status": "completed",
+                    "conclusion": "failure",
+                },
+                {
+                    "number": 2,
+                    "name": "Execute every documented notebook",
+                    "status": "completed",
+                    "conclusion": "skipped",
+                },
+                {
+                    "number": 3,
+                    "name": "Collect the failure logs",
+                    "status": "completed",
+                    "conclusion": "success",
+                },
+                {
+                    "number": 4,
+                    "name": "Unrecognized finalizer",
+                    "status": "completed",
+                    "conclusion": "success",
+                },
+                {
+                    "number": 5,
+                    "name": "Additional info about the build",
+                    "status": "completed",
+                    "conclusion": "success",
+                },
+            ],
+        }
+    ]
+
+    report = build_report(_manifest(), evidence, profile="docs")
+    phases = {phase["name"]: phase for phase in report["matrix"]["phases"]}
+
+    assert report["github"]["conclusion"] == "failure"
+    assert report["receptor"]["assessment"] == "FAIL"
+    assert len(report["jobs"][0]["steps"]) == 5
+    assert sum(len(phase["evidence"]) for phase in phases.values()) == 5
+    assert phases["setup"]["counts"] == {"failure": 1}
+    assert phases["notebooks"]["counts"] == {"skipped": 1}
+    assert phases["artifact"]["counts"] == {"success": 1}
+    assert phases["other"]["counts"] == {"success": 2}
+    assert "build" not in phases
+    rendered = render_llm(report)
+    assert "phases:" in rendered
+    assert "notebooks=skipped:1" in rendered
+
+
+def test_docs_profile_marks_separate_successful_build_and_failed_deploy_partial():
+    evidence = _evidence()
+    evidence["workflow.json"]["path"] = ".github/workflows/docs.yaml"
+    evidence["jobs.json"]["jobs"] = [
+        {
+            "id": 10,
+            "name": "Build documentation",
+            "status": "completed",
+            "conclusion": "success",
+            "steps": [],
+        },
+        {
+            "id": 20,
+            "name": "Deploy GitHub Pages",
+            "status": "completed",
+            "conclusion": "failure",
+            "steps": [],
+        },
+    ]
+
+    report = build_report(_manifest(), evidence, profile="docs")
+
+    assert report["github"]["conclusion"] == "failure"
+    assert report["receptor"]["assessment"] == "PARTIAL"
+    assert exit_code(report) == 1
+
+
+def test_docs_profile_keeps_combined_build_deploy_evidence_indivisible():
+    evidence = _evidence(conclusion="success")
+    evidence["workflow.json"]["path"] = ".github/workflows/docs.yaml"
+    evidence["jobs.json"]["jobs"] = [
+        {
+            "id": 10,
+            "name": "Documentation",
+            "status": "completed",
+            "conclusion": "success",
+            "steps": [
+                {
+                    "number": 1,
+                    "name": "Run Sphinx to gh-pages action",
+                    "status": "completed",
+                    "conclusion": "success",
+                }
+            ],
+        }
+    ]
+
+    report = build_report(_manifest(), evidence, profile="docs")
+    phases = report["matrix"]["phases"]
+    rendered = render_llm(report)
+
+    assert phases == [
+        {
+            "name": "build_deploy",
+            "counts": {"success": 1},
+            "evidence": [
+                {"job_id": 10, "step_number": 1, "kind": "step", "state": "success"}
+            ],
+        }
+    ]
+    assert "phases=build_deploy:1" in rendered
+    assert rendered.count("\n") == 1
+
+
+def test_docs_profile_does_not_treat_combined_build_deploy_as_independent_build():
+    evidence = _evidence()
+    evidence["workflow.json"]["path"] = ".github/workflows/docs.yaml"
+    evidence["jobs.json"]["jobs"] = [
+        {
+            "id": 10,
+            "name": "Documentation",
+            "status": "completed",
+            "conclusion": "failure",
+            "steps": [
+                {
+                    "number": 1,
+                    "name": "Run Sphinx to gh-pages action",
+                    "status": "completed",
+                    "conclusion": "success",
+                },
+                {
+                    "number": 2,
+                    "name": "Deploy GitHub Pages",
+                    "status": "completed",
+                    "conclusion": "failure",
+                },
+            ],
+        }
+    ]
+
+    report = build_report(_manifest(), evidence, profile="docs")
+
+    assert report["github"]["conclusion"] == "failure"
+    assert report["receptor"]["assessment"] == "FAIL"
+    assert exit_code(report) == 1
+
+
+def test_unknown_step_state_is_preserved_with_source_reference():
+    evidence = _evidence()
+    evidence["jobs.json"]["jobs"][0]["steps"] = [
+        {
+            "number": 1,
+            "name": "Future step",
+            "status": "future_status",
+            "conclusion": "future_conclusion",
+        }
+    ]
+
+    report = build_report(_manifest(), evidence, profile="docs")
+
+    assert [item["kind"] for item in report["unknowns"]] == [
+        "github.step.status",
+        "github.step.conclusion",
+    ]

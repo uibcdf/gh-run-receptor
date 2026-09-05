@@ -107,6 +107,11 @@ model rather than the original GitHub dictionaries.
 - Artifact: run identity plus artifact ID, with name treated as display/configuration
   data rather than a unique identity.
 
+Normalized jobs may include the additive `steps` field. Each step retains number, name,
+status, conclusion, and an evidence reference. `failed_steps` remains the bounded
+failure-oriented projection for compatibility; profiles that need successful or skipped
+phase evidence consume `steps` and never reconstruct it from prose logs.
+
 ## Time and duration
 
 Source timestamps are retained in UTC ISO 8601 form. Durations are integer milliseconds

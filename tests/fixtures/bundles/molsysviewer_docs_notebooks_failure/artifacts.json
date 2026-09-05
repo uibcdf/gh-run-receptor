@@ -1,0 +1,12 @@
+{
+  "artifacts": [
+    {
+      "digest": "sha256:14a0d315fe193687dd40f31bb2f219b69c7137d6bd9f6cce62ebb0d0311e47e1",
+      "expired": false,
+      "id": 9958413171,
+      "name": "notebook-failure-logs",
+      "size_in_bytes": 11750
+    }
+  ],
+  "total_count": 1
+}
