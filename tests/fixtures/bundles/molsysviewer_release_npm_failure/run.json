@@ -1,0 +1,9 @@
+{
+  "conclusion": "failure",
+  "event": "push",
+  "head_branch": "0.20.1",
+  "head_sha": "1a9b59b1081e6fe543f4713a9156669ab796b8a9",
+  "html_url": "https://github.com/uibcdf/molsysviewer/actions/runs/31278635513",
+  "name": "NPM Release",
+  "status": "completed"
+}

@@ -1,0 +1,9 @@
+{
+  "conclusion": "success",
+  "event": "workflow_dispatch",
+  "head_branch": "main",
+  "head_sha": "66385574b485e4549ef35f88ab8a299bc2d203eb",
+  "html_url": "https://github.com/uibcdf/molsysviewer/actions/runs/30998524379",
+  "name": "NPM Release",
+  "status": "completed"
+}

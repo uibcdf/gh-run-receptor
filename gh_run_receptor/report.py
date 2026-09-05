@@ -61,6 +61,48 @@ _DOCS_PHASES = (
         ),
     ),
 )
+_RELEASE_PHASES = (
+    (
+        "identity",
+        (
+            "candidate identity",
+            "release identity",
+            "inject version",
+            "derive version",
+            "package version",
+            "release tag",
+            "tag",
+            "ref",
+        ),
+    ),
+    ("gate", ("validate", "validation", "verify", "verification", "test", "check", "lint")),
+    ("package", ("build", "bundle", "wheel", "wheels", "sdist", "packaging", "compile")),
+    (
+        "publish",
+        (
+            "publish",
+            "publishing",
+            "upload package",
+            "upload packages",
+            "release platform",
+        ),
+    ),
+    ("archive", ("zenodo", "doi", "citation", "archive", "archived")),
+    ("artifact", ("artifact", "artifacts", "provenance")),
+    (
+        "setup",
+        (
+            "setup",
+            "set up",
+            "checkout",
+            "install",
+            "dependencies",
+            "environment",
+            "toolchain",
+            "complete job",
+        ),
+    ),
+)
 
 
 def _safe_text(value: Any) -> str:
@@ -269,6 +311,91 @@ def _docs_has_state(matrix: dict[str, Any], phases: set[str], state: str) -> boo
     )
 
 
+def _release_facets(name: Any) -> tuple[str, ...]:
+    normalized = re.sub(r"[^a-z0-9]+", " ", str(name or "").lower()).strip()
+    words = set(normalized.split())
+    facets = [
+        phase
+        for phase, keywords in _RELEASE_PHASES
+        if _matches_keywords(normalized, words, keywords)
+    ]
+    if "artifact" in facets and "publish" in facets:
+        facets.remove("publish")
+    if len(facets) > 1 and "setup" in facets:
+        facets.remove("setup")
+    return tuple(facets or ["other"])
+
+
+def _release_matrix(subject: dict[str, Any], jobs: list[dict[str, Any]]) -> dict[str, Any]:
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for job in jobs:
+        units = job["steps"] or [job]
+        for unit in units:
+            facets = _release_facets(unit.get("name"))
+            phase = "+".join(facets)
+            grouped.setdefault(phase, []).append(
+                {
+                    "job_id": job.get("id"),
+                    "step_number": unit.get("number") if unit is not job else None,
+                    "kind": "step" if unit is not job else "job",
+                    "facets": list(facets),
+                    "state": str(unit.get("conclusion") or unit.get("status") or "unknown"),
+                }
+            )
+    phases = []
+    simple_order = [name for name, _ in _RELEASE_PHASES]
+    order = [*simple_order, "other", *sorted(set(grouped) - {*simple_order, "other"})]
+    for phase in order:
+        evidence = grouped.get(phase, [])
+        if not evidence:
+            continue
+        counts: dict[str, int] = {}
+        for item in evidence:
+            counts[item["state"]] = counts.get(item["state"], 0) + 1
+        phases.append(
+            {
+                "name": phase,
+                "counts": dict(sorted(counts.items())),
+                "evidence": evidence,
+            }
+        )
+    successful_step_facets = {
+        facet
+        for phase in phases
+        for item in phase["evidence"]
+        if item["kind"] == "step" and item["state"] == "success"
+        for facet in item["facets"]
+    }
+    return {
+        "kind": "release",
+        "identity": {
+            "event": subject.get("event"),
+            "head_ref": subject.get("head_ref"),
+            "head_sha": subject.get("head_sha"),
+            "tag_verification": "not_observed",
+        },
+        "verification": {
+            "registry": (
+                "step_success" if "publish" in successful_step_facets else "not_observed"
+            ),
+            "archive": (
+                "step_success" if "archive" in successful_step_facets else "not_observed"
+            ),
+        },
+        "phases": phases,
+    }
+
+
+def _release_has_simple_state(
+    matrix: dict[str, Any], facet: str, states: set[str]
+) -> bool:
+    return any(
+        item["facets"] == [facet] and item["state"] in states
+        for phase in matrix["phases"]
+        for item in phase["evidence"]
+    )
+
+
 def _ci_failure_groups(jobs: list[dict[str, Any]]) -> list[dict[str, Any]]:
     grouped: dict[tuple[Any, tuple[str, ...]], list[dict[str, Any]]] = {}
     for job in jobs:
@@ -352,6 +479,8 @@ def build_report(
         matrix = _ci_matrix(jobs)
     elif selected_profile == "docs":
         matrix = _docs_matrix(jobs)
+    elif selected_profile == "release":
+        matrix = _release_matrix(model["subject"], jobs)
     else:
         matrix = {}
     missing_platforms = (
@@ -373,6 +502,13 @@ def build_report(
         and assessment == "FAIL"
         and _docs_has_state(matrix, {"build"}, "success")
         and _docs_has_state(matrix, {"deploy"}, "failure")
+    ):
+        assessment = "PARTIAL"
+    if (
+        selected_profile == "release"
+        and assessment == "FAIL"
+        and _release_has_simple_state(matrix, "package", {"success"})
+        and _release_has_simple_state(matrix, "publish", {"failure", "skipped"})
     ):
         assessment = "PARTIAL"
     if missing_platforms and assessment == "PASS":
@@ -491,6 +627,79 @@ def _render_docs_llm_failure(report: dict[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def _render_release_llm_failure(report: dict[str, Any]) -> str:
+    subject = report["subject"]
+    github = report["github"]
+    receptor = report["receptor"]
+    matrix = report["matrix"]
+    identity = matrix["identity"]
+    lines = [
+        (
+            f"{receptor['assessment']} conclusion={_safe_text(github['conclusion'])} | "
+            f"release event={_safe_text(identity['event'])} "
+            f"ref={_safe_text(identity['head_ref'])} "
+            f"sha={_safe_text(identity['head_sha'])} "
+            "tag=unverified | "
+            f"{_safe_text(subject['repository'])} run={subject['run_id']} "
+            f"attempt={subject['run_attempt']}"
+        ),
+    ]
+    failed = [
+        job
+        for job in report["jobs"]
+        if job["conclusion"] not in (None, "success", "skipped", "neutral")
+    ]
+    failures = []
+    for job in failed[:MAX_FAILURES]:
+        steps = ",".join(
+            _safe_text(step["name"] or "unnamed") for step in job["failed_steps"]
+        )
+        failures.append(steps or _safe_text(job["name"]))
+    if len(failed) > MAX_FAILURES:
+        failures.append(f"+{len(failed) - MAX_FAILURES} jobs in JSON")
+
+    summaries = []
+    for phase in matrix["phases"]:
+        if phase["name"] in {"identity", "setup", "other"}:
+            continue
+        visible_counts = {
+            key: value for key, value in phase["counts"].items() if key != "failure"
+        }
+        if visible_counts:
+            states = ",".join(
+                key if value == 1 else f"{key}:{value}"
+                for key, value in visible_counts.items()
+            )
+            summaries.append(f"{phase['name']}={states}")
+    artifacts = report["artifacts"]
+    if artifacts:
+        shown = ", ".join(_safe_text(item["name"]) for item in artifacts[:MAX_ARTIFACTS])
+        remainder = (
+            f", ... +{len(artifacts) - MAX_ARTIFACTS}"
+            if len(artifacts) > MAX_ARTIFACTS
+            else ""
+        )
+        artifact_text = f"{len(artifacts)}({shown}{remainder})"
+    else:
+        artifact_text = "0"
+    workflow = Path(str(subject["workflow"])).name
+    lines.append(
+        f"workflow={_safe_text(workflow)} | failed={'; '.join(failures) or 'none'} | "
+        f"phases={','.join(summaries) or 'none'} | "
+        f"external=not_observed artifacts={artifact_text}"
+    )
+    if report["causes"]:
+        lines.append(f"root causes ({len(report['causes'])}):")
+        for index, cause in enumerate(report["causes"][:MAX_FAILURES], start=1):
+            lines.append(
+                f"[{index}] {_safe_text(cause['message'])} | "
+                f"jobs={len(cause['occurrences'])}"
+            )
+    for warning in report["warnings"][:5]:
+        lines.append(f"warning: {_safe_text(warning)}")
+    return "\n".join(lines) + "\n"
+
+
 def render_llm(report: dict[str, Any]) -> str:
     """Rendering a compact report intended for low-token inspection."""
     subject = report["subject"]
@@ -498,7 +707,10 @@ def render_llm(report: dict[str, Any]) -> str:
     receptor = report["receptor"]
     if receptor["assessment"] == "PASS":
         successful_jobs = sum(job["conclusion"] == "success" for job in report["jobs"])
-        fields = ["PASS conclusion=success", f"profile={receptor['profile']}"]
+        fields = [
+            "PASS conclusion=success",
+            "release" if receptor["profile"] == "release" else f"profile={receptor['profile']}",
+        ]
         if report["matrix"].get("kind") == "conda":
             if report["matrix"].get("package_kind") == "noarch":
                 package = report["matrix"]["package"]
@@ -523,13 +735,34 @@ def render_llm(report: dict[str, Any]) -> str:
                 for phase in report["matrix"]["phases"]
             )
             fields.append(f"phases={phases or 'none'}")
+        elif report["matrix"].get("kind") == "release":
+            matrix = report["matrix"]
+            identity = matrix["identity"]
+            phases = ",".join(
+                f"{phase['name']}:{len(phase['evidence'])}"
+                for phase in matrix["phases"]
+                if phase["name"] not in {"identity", "setup"}
+            )
+            verification = matrix["verification"]
+            fields.extend(
+                [
+                    f"event={_safe_text(identity['event'])}",
+                    f"ref={_safe_text(identity['head_ref'])}",
+                    f"sha={_safe_text(identity['head_sha'])}",
+                    "tag=unverified",
+                    f"phases={phases or 'none'}",
+                    f"registry={verification['registry']}",
+                    f"archive={verification['archive']}",
+                ]
+            )
         if report["expectations"]["missing_platforms"]:
             fields.append(
                 "missing=" + ",".join(report["expectations"]["missing_platforms"])
             )
+        if receptor["profile"] != "release":
+            fields.append(f"jobs={successful_jobs}/{len(report['jobs'])}")
         fields.extend(
             [
-                f"jobs={successful_jobs}/{len(report['jobs'])}",
                 f"artifacts={len(report['artifacts'])}",
                 f"{_safe_text(subject['repository'])} run={subject['run_id']}",
             ]
@@ -538,6 +771,8 @@ def render_llm(report: dict[str, Any]) -> str:
 
     if receptor["profile"] == "docs":
         return _render_docs_llm_failure(report)
+    if receptor["profile"] == "release":
+        return _render_release_llm_failure(report)
 
     counts = ", ".join(f"{key}={value}" for key, value in report["job_counts"].items()) or "none"
     lines = [
@@ -624,6 +859,12 @@ def render_llm(report: dict[str, Any]) -> str:
             counts = ",".join(f"{key}:{value}" for key, value in phase["counts"].items())
             summaries.append(f"{phase['name']}={len(phase['evidence'])}({counts})")
         lines.append("docs phases: " + "; ".join(summaries))
+    elif report["matrix"].get("kind") == "release":
+        summaries = []
+        for phase in report["matrix"]["phases"]:
+            counts = ",".join(f"{key}:{value}" for key, value in phase["counts"].items())
+            summaries.append(f"{phase['name']}={len(phase['evidence'])}({counts})")
+        lines.append("release phases: " + "; ".join(summaries))
 
     if report["causes"]:
         lines.append(f"root causes ({len(report['causes'])}):")
@@ -728,6 +969,30 @@ def render_human(report: dict[str, Any]) -> str:
             lines.append(
                 f"  {phase['name']:<14} {len(phase['evidence']):>3} entries ({counts})"
             )
+    elif report["matrix"].get("kind") == "release":
+        identity = report["matrix"]["identity"]
+        verification = report["matrix"]["verification"]
+        lines.extend(
+            [
+                "",
+                "Release identity",
+                f"  event             {_safe_text(identity['event'])}",
+                f"  observed ref      {_safe_text(identity['head_ref'])}",
+                f"  head SHA          {_safe_text(identity['head_sha'])}",
+                f"  tag verification  {identity['tag_verification']}",
+                "",
+                "Release phases",
+            ]
+        )
+        for phase in report["matrix"]["phases"]:
+            counts = ", ".join(f"{key}={value}" for key, value in phase["counts"].items())
+            lines.append(
+                f"  {phase['name']:<24} {len(phase['evidence']):>3} entries ({counts})"
+            )
+        lines.append(
+            "  verification              "
+            f"registry={verification['registry']}, archive={verification['archive']}"
+        )
 
     if report["configuration"]["matched"]:
         source = report["configuration"]["source"] or {}

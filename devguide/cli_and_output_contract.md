@@ -168,8 +168,8 @@ replace or soften the official conclusion.
 | Assessment | Meaning |
 | --- | --- |
 | `PASS` | GitHub reports successful completion and every configured required expectation is satisfied |
-| `FAIL` | GitHub reports failure or a required expectation failed without independently reusable successes worth elevating |
-| `PARTIAL` | GitHub is unsuccessful, but the profile identifies completed, independently reusable work alongside the failure |
+| `FAIL` | GitHub reports failure or a required expectation failed without a separately evidenced completed phase that the selected profile defines as partial progress |
+| `PARTIAL` | GitHub is unsuccessful, but the profile identifies a meaningful completed phase separately from the failed or skipped phase; a profile may impose stronger reuse requirements |
 | `PENDING` | The run or required jobs have not reached a terminal state |
 | `CANCELLED` | GitHub reports cancellation |
 | `TIMED_OUT` | GitHub reports timeout |

@@ -62,8 +62,20 @@ found recent complete cases with retained steps:
 
 `gh run list` found no runs yet for either repository's new
 `verify-zenodo-release.yaml`; archive classification will therefore be unit-tested but
-will not be claimed as real-run validated in this slice. Token baselines and receptor
-measurements remain to be recorded after the first renderer exists.
+will not be claimed as real-run validated in this slice.
+
+The native baseline combines `gh run view` fields
+`status,conclusion,event,headBranch,headSha,name,url,jobs` with the run artifact inventory,
+retaining every identity field and every release-material step. With tiktoken 0.13.0
+`cl100k_base`:
+
+| Case | Native baseline | Accepted receptor | Reduction |
+| --- | ---: | ---: | ---: |
+| Successful npm workflow | 95 tokens | 84 tokens | 11.6% |
+| Failed build, skipped npm publication | 103 tokens | 93 tokens | 9.7% |
+
+The accepted failure report adds explicit unverified-tag and absent-external-evidence
+semantics while remaining shorter than the native projection.
 
 ## What was refuted
 
@@ -75,6 +87,13 @@ measurements remain to be recorded after the first renderer exists.
   rejected because one conclusion cannot prove separable reusable results.
 - Starting with Zenodo is rejected for this slice because neither client has a real run
   of its new verification workflow yet.
+- The first renderer is rejected because it used 101 tokens for the 95-token success
+  baseline and 151 tokens for the 103-token failure baseline. It repeated identity, job,
+  phase, and verification facts.
+- The second renderer is rejected because its failed projection still used 116 tokens;
+  it repeated the failed build as both an exact step and a phase and retained irrelevant
+  post-setup state. The accepted renderer keeps those facts once in text and all source
+  structure in JSON.
 
 ## Scope and exclusions
 
@@ -104,5 +123,4 @@ published release run but does not block this bounded profile.
 ## Provenance
 
 Initial inspection was performed on 2026-09-05 from the local Linux development host
-with GitHub CLI 2.93.0 and `gh-run-receptor` 0.6.1. Tokenizer versions will be recorded
-with the final measurements.
+with Python 3.13, GitHub CLI 2.93.0, `gh-run-receptor` 0.6.1, and tiktoken 0.13.0.

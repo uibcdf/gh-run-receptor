@@ -628,3 +628,147 @@ def test_unknown_step_state_is_preserved_with_source_reference():
         "github.step.status",
         "github.step.conclusion",
     ]
+
+
+def _release_evidence(*, conclusion="failure"):
+    evidence = _evidence(conclusion=conclusion)
+    evidence["run.json"].update({"event": "push", "head_branch": "0.20.1"})
+    evidence["workflow.json"]["path"] = ".github/workflows/npm-publish.yaml"
+    evidence["jobs.json"]["jobs"] = [
+        {
+            "id": 10,
+            "name": "publish",
+            "status": "completed",
+            "conclusion": conclusion,
+            "steps": [
+                {
+                    "number": 1,
+                    "name": "Checkout",
+                    "status": "completed",
+                    "conclusion": "success",
+                },
+                {
+                    "number": 2,
+                    "name": "Inject version and repo info",
+                    "status": "completed",
+                    "conclusion": "success",
+                },
+                {
+                    "number": 3,
+                    "name": "Build runtime bundle",
+                    "status": "completed",
+                    "conclusion": "failure" if conclusion == "failure" else "success",
+                },
+                {
+                    "number": 4,
+                    "name": "Publish to npm",
+                    "status": "completed",
+                    "conclusion": "skipped" if conclusion == "failure" else "success",
+                },
+            ],
+        }
+    ]
+    evidence["artifacts.json"]["artifacts"] = []
+    return evidence
+
+
+def test_release_profile_preserves_trigger_identity_and_phase_evidence():
+    report = build_report(_manifest(), _release_evidence(), profile="release")
+    phases = {phase["name"]: phase for phase in report["matrix"]["phases"]}
+
+    assert report["subject"]["event"] == "push"
+    assert report["subject"]["head_ref"] == "0.20.1"
+    assert report["subject"]["head_sha"] == "abc"
+    assert report["matrix"]["identity"]["tag_verification"] == "not_observed"
+    assert phases["identity"]["counts"] == {"success": 1}
+    assert phases["package"]["counts"] == {"failure": 1}
+    assert phases["publish"]["counts"] == {"skipped": 1}
+    assert phases["setup"]["counts"] == {"success": 1}
+    assert sum(len(phase["evidence"]) for phase in phases.values()) == 4
+    assert report["matrix"]["verification"] == {
+        "registry": "not_observed",
+        "archive": "not_observed",
+    }
+    assert report["receptor"]["assessment"] == "FAIL"
+    rendered = render_llm(report)
+    assert "event=push ref=0.20.1" in rendered
+    assert "failed=Build runtime bundle" in rendered
+    assert "publish=skipped" in rendered
+
+
+def test_release_profile_reports_successful_publish_as_step_evidence_only():
+    report = build_report(
+        _manifest(), _release_evidence(conclusion="success"), profile="release"
+    )
+    rendered = render_llm(report)
+
+    assert report["receptor"]["assessment"] == "PASS"
+    assert report["matrix"]["verification"]["registry"] == "step_success"
+    assert report["matrix"]["identity"]["tag_verification"] == "not_observed"
+    assert "registry=step_success" in rendered
+    assert "sha=abc" in rendered
+    assert "tag=unverified" in rendered
+
+
+def test_release_profile_marks_only_separate_package_and_publish_partial():
+    evidence = _release_evidence()
+    evidence["jobs.json"]["jobs"][0]["steps"][2]["conclusion"] = "success"
+    evidence["jobs.json"]["jobs"][0]["steps"][3]["conclusion"] = "failure"
+
+    report = build_report(_manifest(), evidence, profile="release")
+
+    assert report["github"]["conclusion"] == "failure"
+    assert report["receptor"]["assessment"] == "PARTIAL"
+    assert exit_code(report) == 1
+
+
+def test_release_profile_keeps_composite_delivery_evidence_indivisible():
+    evidence = _release_evidence()
+    evidence["jobs.json"]["jobs"][0]["steps"] = [
+        {
+            "number": 1,
+            "name": "Build, test, and publish the release platform",
+            "status": "completed",
+            "conclusion": "failure",
+        }
+    ]
+
+    report = build_report(_manifest(), evidence, profile="release")
+    phases = report["matrix"]["phases"]
+
+    assert report["receptor"]["assessment"] == "FAIL"
+    assert phases[0]["name"] == "gate+package+publish"
+    assert phases[0]["evidence"][0]["facets"] == ["gate", "package", "publish"]
+    assert sum(len(phase["evidence"]) for phase in phases) == 1
+
+
+def test_release_archive_verification_is_not_registry_or_tag_verification():
+    evidence = _release_evidence(conclusion="success")
+    evidence["jobs.json"]["jobs"][0]["steps"] = [
+        {
+            "number": 1,
+            "name": "Wait for and verify the Zenodo record",
+            "status": "completed",
+            "conclusion": "success",
+        }
+    ]
+
+    report = build_report(_manifest(), evidence, profile="release")
+
+    assert report["matrix"]["phases"][0]["name"] == "gate+archive"
+    assert report["matrix"]["verification"] == {
+        "registry": "not_observed",
+        "archive": "step_success",
+    }
+    assert report["matrix"]["identity"]["tag_verification"] == "not_observed"
+
+
+def test_release_job_fallback_does_not_invent_successful_publication_step():
+    evidence = _release_evidence(conclusion="success")
+    evidence["jobs.json"]["jobs"][0]["steps"] = []
+
+    report = build_report(_manifest(), evidence, profile="release")
+
+    assert report["matrix"]["phases"][0]["name"] == "publish"
+    assert report["matrix"]["phases"][0]["evidence"][0]["kind"] == "job"
+    assert report["matrix"]["verification"]["registry"] == "not_observed"

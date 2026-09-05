@@ -95,22 +95,37 @@ The measured comparison with a locally filtered native baseline is recorded in
 93.9% to 94.7% across four tokenizers, while the unfiltered native failed log remained on
 disk rather than entering the reader channel.
 
+## Later profile validation
+
+The 0.4.0 through 0.7.0 increments expanded the committed corpus and local suite to 119
+tests. A failing seven-job MolSysViewer run validates CI role assignment and repeated
+failed-step grouping. Successful and failing documentation fixtures validate skipped
+notebooks, diagnostic artifacts, and indivisible Sphinx/Pages evidence. Successful and
+failing MolSysViewer npm fixtures validate observed event/ref/SHA identity, separate
+package/publication phases, and explicit absence of external registry, tag, or archive
+verification.
+
+The accepted npm release projections reduced `cl100k_base` input from 95 to 84 tokens for
+success and from 103 to 93 for failure. Two earlier release renderers were rejected
+because they exceeded the corresponding competent native baselines. No real run of the
+new Zenodo verification workflows exists yet, so archive-role behavior is unit-tested but
+not real-run validated.
+
 ## What this proves
 
 - Complete remote evidence can be acquired without entering the language-model output
   channel.
-- Structured GitHub metadata alone already yields a useful, low-token triage report for
-  the Conda workflow.
+- Structured GitHub metadata alone already yields useful, low-token triage reports for
+  the measured Conda, CI, documentation, and npm workflow shapes.
 - Human and LLM presentations can differ without disagreeing on facts or exit status.
 - A captured run can be replayed without network access from an installed wheel.
 
 ## What this does not prove
 
-- No formal token-reduction percentage has been measured against the competent native
-  baseline yet.
 - Log analysis currently recognizes a deliberately small generic signature set and is not
   yet a complete diagnosis engine.
-- Only one real MolSysMT workflow has been checked; no platform support claim follows.
-- The live capture is private temporary evidence, not a reviewed committed fixture.
-- Full schema, malformed-API, archive-limit, active-run, rerun-attempt, and restricted-token
-  cases remain Phase 0 and Phase 1 work.
+- The committed real-run corpus remains narrow; cancelled, timed-out, incomplete,
+  restricted-token, active-transition, rerun-attempt, and real Zenodo cases remain gaps.
+- No cross-platform installation support claim follows from local Linux validation.
+- External registries, GitHub Releases, Git refs, and archive records are not queried by
+  the first release profile.

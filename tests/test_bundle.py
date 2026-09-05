@@ -122,9 +122,22 @@ def test_load_bundle_rejects_member_byte_count_mismatch(tmp_path):
 
 def test_sanitizer_retains_optional_trusted_configuration():
     evidence = {
-        "run.json": {},
+        "run.json": {"event": "push", "head_branch": "0.7.0"},
         "workflow.json": {},
-        "jobs.json": {"jobs": []},
+        "jobs.json": {
+            "jobs": [
+                {
+                    "steps": [
+                        {
+                            "number": 1,
+                            "name": "Publish",
+                            "status": "completed",
+                            "conclusion": "success",
+                        }
+                    ]
+                }
+            ]
+        },
         "checks.json": {"check_runs": []},
         "artifacts.json": {"artifacts": []},
         "config.json": {"schema": "gh-run-receptor.config-capture@1"},
@@ -133,4 +146,7 @@ def test_sanitizer_retains_optional_trusted_configuration():
     selected = _selected_evidence(evidence)
 
     assert selected["config.json"] == evidence["config.json"]
+    assert selected["run.json"]["event"] == "push"
+    assert selected["run.json"]["head_branch"] == "0.7.0"
+    assert selected["jobs.json"]["jobs"][0]["steps"][0]["status"] == "completed"
     assert "config.json" not in _selected_evidence(evidence, include_config=False)

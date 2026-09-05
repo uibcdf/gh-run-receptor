@@ -131,3 +131,31 @@ def test_documentation_fixtures_preserve_distinct_phase_evidence():
     assert success["configuration"]["matched"] is True
     assert success_phases["build_deploy"]["counts"] == {"success": 1}
     assert "build" not in success_phases
+
+
+def test_release_fixtures_preserve_identity_and_delivery_evidence():
+    failure_manifest, failure_evidence = load_bundle(
+        FIXTURES / "bundles/molsysviewer_release_npm_failure"
+    )
+    success_manifest, success_evidence = load_bundle(
+        FIXTURES / "bundles/molsysviewer_release_npm_success"
+    )
+
+    failure = build_report(failure_manifest, failure_evidence, profile="release")
+    success = build_report(success_manifest, success_evidence, profile="release")
+    failure_phases = {item["name"]: item for item in failure["matrix"]["phases"]}
+    success_phases = {item["name"]: item for item in success["matrix"]["phases"]}
+
+    assert failure["github"]["conclusion"] == "failure"
+    assert failure["receptor"]["assessment"] == "FAIL"
+    assert failure["subject"]["event"] == "push"
+    assert failure["subject"]["head_ref"] == "0.20.1"
+    assert failure_phases["package"]["counts"] == {"failure": 1}
+    assert failure_phases["publish"]["counts"] == {"skipped": 1}
+    assert success["github"]["conclusion"] == "success"
+    assert success["receptor"]["assessment"] == "PASS"
+    assert success["subject"]["event"] == "workflow_dispatch"
+    assert success_phases["package"]["counts"] == {"success": 1}
+    assert success_phases["publish"]["counts"] == {"success": 1}
+    assert success["matrix"]["verification"]["registry"] == "step_success"
+    assert success["matrix"]["identity"]["tag_verification"] == "not_observed"

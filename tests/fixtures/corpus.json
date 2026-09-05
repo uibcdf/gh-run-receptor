@@ -2,6 +2,32 @@
   "schema": "gh-run-receptor.test-corpus@1",
   "captures": [
     {
+      "path": "bundles/molsysviewer_release_npm_failure",
+      "repository": "uibcdf/molsysviewer",
+      "run_id": 31278635513,
+      "run_attempt": 1,
+      "captured_at": "2026-09-05",
+      "reason": "A failing tag-triggered npm workflow where the runtime bundle build fails and publication is skipped.",
+      "sanitization": "Retained only run identity, official state, observed event and head ref, workflow path, job timing and conclusions, and complete step state. Removed actors, commits beyond the subject SHA, runner details, labels, pull requests, checks, unrelated API fields, and repository configuration that did not yet select the release profile.",
+      "profile": "release",
+      "expected_github_conclusion": "failure",
+      "expected_assessment": "FAIL",
+      "upstream_retention": "The public GitHub run is subject to GitHub retention; this fixture is self-contained metadata."
+    },
+    {
+      "path": "bundles/molsysviewer_release_npm_success",
+      "repository": "uibcdf/molsysviewer",
+      "run_id": 30998524379,
+      "run_attempt": 1,
+      "captured_at": "2026-09-05",
+      "reason": "A successful manually dispatched npm workflow with separate version identity, runtime package build, and publication steps.",
+      "sanitization": "Retained only run identity, official state, observed event and head ref, workflow path, job timing and conclusions, and complete step state. Removed actors, commits beyond the subject SHA, runner details, labels, pull requests, checks, unrelated API fields, and repository configuration that did not yet select the release profile.",
+      "profile": "release",
+      "expected_github_conclusion": "success",
+      "expected_assessment": "PASS",
+      "upstream_retention": "The public GitHub run is subject to GitHub retention; this fixture is self-contained metadata."
+    },
+    {
       "path": "bundles/molsysviewer_docs_notebooks_failure",
       "repository": "uibcdf/molsysviewer",
       "run_id": 33930667142,

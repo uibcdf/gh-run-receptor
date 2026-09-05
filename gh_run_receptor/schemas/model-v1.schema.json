@@ -41,6 +41,8 @@
         "run_id": {"type": "integer", "minimum": 1},
         "run_attempt": {"type": "integer", "minimum": 1},
         "head_sha": {"type": ["string", "null"]},
+        "event": {"type": ["string", "null"]},
+        "head_ref": {"type": ["string", "null"]},
         "url": {"type": ["string", "null"]}
       },
       "additionalProperties": true

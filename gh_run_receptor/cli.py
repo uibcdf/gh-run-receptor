@@ -76,7 +76,9 @@ def _add_common_options(
         "--format", choices=("text", "json"), default=default or "text"
     )
     parser.add_argument(
-        "--profile", choices=("generic", "ci", "conda", "docs"), default=default
+        "--profile",
+        choices=("generic", "ci", "conda", "docs", "release"),
+        default=default,
     )
 
 

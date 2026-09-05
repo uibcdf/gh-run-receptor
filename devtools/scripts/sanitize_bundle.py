@@ -26,7 +26,15 @@ def _selected_evidence(
     selected = {
         "run.json": {
             key: run.get(key)
-            for key in ("status", "conclusion", "name", "html_url", "head_sha")
+            for key in (
+                "status",
+                "conclusion",
+                "name",
+                "html_url",
+                "head_sha",
+                "event",
+                "head_branch",
+            )
         },
         "workflow.json": {"path": workflow.get("path")},
         "jobs.json": {
@@ -44,6 +52,7 @@ def _selected_evidence(
                         {
                             "number": step.get("number"),
                             "name": step.get("name"),
+                            "status": step.get("status"),
                             "conclusion": step.get("conclusion"),
                         }
                         for step in job.get("steps") or []

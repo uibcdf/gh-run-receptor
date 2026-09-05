@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.7.0 - 2026-09-05
+
+- Add the first release profile with observed trigger/ref/SHA identity and bounded
+  identity, gate, package, publish, archive, artifact, setup, and `other` evidence.
+- Keep composite release steps indivisible and derive `PARTIAL` only from separate
+  successful package and unsuccessful publication units.
+- Distinguish workflow-step publication/archive evidence from external registry, tag, or
+  archive verification that the receptor did not perform.
+- Preserve run event, observed head ref, and complete step status in sanitized fixtures.
+- Add measured successful and failing MolSysViewer npm fixtures; reject two renderers that
+  exceeded competent filtered native baselines.
+
 ## 0.6.1 - 2026-09-05
 
 - Keep `config explain` focused on settings supported by the matched profile instead of

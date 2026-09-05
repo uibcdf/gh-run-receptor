@@ -5,11 +5,11 @@ repetitive run output into a compact, truth-preserving report while retaining a 
 path to the captured evidence.
 
 The project is in pre-1.0 development; no package has been published to a package index and
-the public contract may still evolve. The `0.6.1` source release can inspect, watch, and
+the public contract may still evolve. The `0.7.0` source release can inspect, watch, and
 replay structured run evidence. Install the GitHub CLI extension at the exact preview tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 0.6.1
+gh extension install uibcdf/gh-run-receptor --pin 0.7.0
 gh run-receptor --version
 ```
 
@@ -33,8 +33,10 @@ captured, it reports independently reusable platform artifacts and groups repeat
 with member-and-line provenance. The `ci` profile groups jobs into presentation roles and
 collapses repeated failed-step signatures without removing any job from JSON. The `docs`
 profile distinguishes setup, content, notebooks, links, artifacts, and deployment while
-keeping combined source evidence combined. Use `--profile=generic`, `--profile=ci`,
-`--profile=conda`, or `--profile=docs` to select explicitly.
+keeping combined source evidence combined. The `release` profile retains observed
+event/ref/SHA identity and separates packaging, publication, and archive verification
+without claiming external delivery. Use `--profile=generic`, `--profile=ci`,
+`--profile=conda`, `--profile=docs`, or `--profile=release` to select explicitly.
 
 A client repository can assign those profiles, declare required native Conda platforms,
 or identify a noarch package in a trusted `.github/gh-run-receptor.yaml` file:
@@ -57,6 +59,10 @@ workflows:
   - match:
       path: .github/workflows/docs-notebooks.yaml
     profile: docs
+
+  - match:
+      path: .github/workflows/npm-publish.yaml
+    profile: release
 ```
 
 Validate and explain the rule locally before committing it:
@@ -68,7 +74,7 @@ gh run-receptor config explain .github/workflows/build_conda.yaml
 
 Live capture reads policy only from the repository's default branch, stores its revision
 and digest in the evidence bundle, and fails if required platforms are absent. Version
-`0.6.1` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
+`0.7.0` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
 patterns and unknown settings rather than silently ignoring them.
 
 ## Measured token reduction
@@ -84,6 +90,8 @@ filtered native workflow, not against deliberately dumping every log line:
 | Verify a successful MolSysViewer noarch workflow | 101 tokens | 45 tokens | 55.4% |
 | Diagnose a failed MolSysViewer notebook workflow | 136 tokens | 113 tokens | 16.9% |
 | Verify a successful MolSysMT documentation workflow | 254 tokens | 48 tokens | 81.1% |
+| Diagnose a failed MolSysViewer npm release workflow | 103 tokens | 93 tokens | 9.7% |
+| Verify a successful MolSysViewer npm release workflow | 95 tokens | 84 tokens | 11.6% |
 
 For the failed run, the receptor retained the official failure, identified both failed
 macOS jobs, and reported the Linux, Linux ARM, and Windows artifacts as reusable. These are
@@ -103,6 +111,10 @@ and was rejected before release.
 The noarch measurement combines a filtered native run/jobs query with the current GitHub
 artifact inventory. `not_observed` describes that inventory only; it does not claim that
 an artifact never existed or that the Conda channel was or was not updated.
+
+The release measurements retain event, observed ref, exact SHA, material steps, artifact
+inventory, and run identity. `tag=unverified` and `archive=not_observed` are deliberate:
+the first release slice does not query Git refs, registries, GitHub Releases, or Zenodo.
 
 Long-running workflows can be observed without redrawing their complete job tree:
 

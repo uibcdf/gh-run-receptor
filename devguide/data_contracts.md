@@ -112,6 +112,11 @@ status, conclusion, and an evidence reference. `failed_steps` remains the bounde
 failure-oriented projection for compatibility; profiles that need successful or skipped
 phase evidence consume `steps` and never reconstruct it from prose logs.
 
+The normalized subject also carries the additive `event` and `head_ref` fields from the
+workflow-run record. `head_ref` is an observed GitHub value, not independently verified
+branch or tag identity. Profiles that require a real tag must record that verification
+separately rather than infer it from a version-shaped ref.
+
 ## Time and duration
 
 Source timestamps are retained in UTC ISO 8601 form. Durations are integer milliseconds

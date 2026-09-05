@@ -82,6 +82,18 @@ artifact never existed or that channel publication did or did not occur.
 Relates the exact commit, tag, gates, built artifacts, registries, GitHub Release, and
 citation/archive verification without treating a tag alone as publication.
 
+The first implemented slice preserves the observed event, head ref, and exact SHA, while
+marking tag verification as not observed. Every retained step becomes one evidence unit
+with bounded `identity`, `gate`, `package`, `publish`, `archive`, `artifact`, `setup`, or
+`other` facets. A step matching several material facets remains one combined unit. Only a
+separate successful package unit followed by failed or skipped publication may derive
+`PARTIAL`; the official failure and exit code remain unchanged.
+
+A successful publish or archive-verification step is reported as `step_success`, not as
+an independent registry or archive query. External npm, Anaconda, GitHub Release, Git-ref,
+and Zenodo verification; required gates; cross-workflow correlation; and package digest
+inspection remain future work.
+
 ## Repository configuration
 
 The default configuration path is `.github/gh-run-receptor.yaml`:
@@ -107,10 +119,10 @@ workflows:
 ```
 
 The CLI provides `config check [PATH]` and `config explain WORKFLOW_PATH`. Discovery and
-`init` remain future work. Version 1 accepts `generic`, `ci`, `conda`, and `docs` profiles and
-the Conda `expected_platforms` and `package_kind` settings. Package kind is `native` or
-`noarch`; a noarch rule cannot require native platforms. Unknown fields fail validation
-instead of being ignored.
+`init` remain future work. Version 1 accepts `generic`, `ci`, `conda`, `docs`, and
+`release` profiles and the Conda `expected_platforms` and `package_kind` settings. Package
+kind is `native` or `noarch`; a noarch rule cannot require native platforms. Unknown
+fields fail validation instead of being ignored.
 
 Repository configuration is trusted only when read from the repository's default branch.
 A pull request cannot supply its own receptor rules and then use those rules to classify

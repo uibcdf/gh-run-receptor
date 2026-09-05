@@ -185,6 +185,8 @@ def normalize_evidence(
             "run_id": manifest["run_id"],
             "run_attempt": manifest["run_attempt"],
             "head_sha": manifest.get("head_sha"),
+            "event": run.get("event"),
+            "head_ref": run.get("head_branch"),
             "url": run.get("html_url"),
         },
         "github": {"status": run.get("status"), "conclusion": run.get("conclusion")},
