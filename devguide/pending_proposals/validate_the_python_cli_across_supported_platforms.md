@@ -52,9 +52,12 @@ official tag refs resolved on 2026-09-06 to:
 - checkout: `3d3c42e5aac5ba805825da76410c181273ba90b1`;
 - setup-python: `5fda3b95a4ea91299a34e894583c3862153e4b97`.
 
-Remote duration, installed versions, platform failures, and runner behavior remain
-unmeasured until the manual workflow completes. Nine jobs are expected, not nine passing
-claims.
+The first remote run, `34037154711` at commit `cdb6559`, passed all six Ubuntu and macOS
+jobs and failed all three Windows jobs during pytest. The strict bundle loader found that
+Git checkout had changed fixture JSON from LF to CRLF, invalidating the byte counts stored
+in each fixture manifest. This is transport damage to byte-exact test data, not evidence
+that the CLI itself is incompatible with Windows. The repository now declares LF checkout
+for the fixture tree and guards that declaration before the matrix is rerun.
 
 ## What was refuted
 

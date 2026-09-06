@@ -33,3 +33,9 @@ def test_compatibility_workflow_pins_every_external_action():
         "uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7",
         "uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7",
     ]
+
+
+def test_byte_exact_fixtures_are_checked_out_with_lf_on_every_platform():
+    attributes = (ROOT / ".gitattributes").read_text(encoding="utf-8")
+
+    assert "tests/fixtures/** text eol=lf" in attributes.splitlines()
