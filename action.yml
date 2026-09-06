@@ -20,7 +20,7 @@ inputs:
     required: false
     default: adaptive
   report-name:
-    description: Safe artifact and report basename
+    description: Safe artifact prefix; source run ID and attempt are appended
     required: false
     default: gh-run-receptor-report
   strict-reporter:

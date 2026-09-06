@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Report a completed successful run from distributed source
         id: receptor
-        uses: uibcdf/gh-run-receptor@0.12.0
+        uses: uibcdf/gh-run-receptor@0.14.0
         with:
           run-id: "34037657805"
           repository: uibcdf/gh-run-receptor
@@ -46,5 +46,5 @@ jobs:
           assert report["publisher"] == {
               "kind": "github_action",
               "repository": "uibcdf/gh-run-receptor",
-              "ref": "0.12.0",
+              "ref": "0.14.0",
           }

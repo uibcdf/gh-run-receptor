@@ -2,6 +2,11 @@ name: Published report CLI validation
 
 on:
   workflow_dispatch:
+    inputs:
+      source-run:
+        description: Completed source run with a canonical 0.14 report
+        required: true
+        type: string
 
 permissions:
   actions: read
@@ -61,3 +66,37 @@ jobs:
           assert report["consumer_verification"]["source_facts"] == "verified"
           assert report["consumer_verification"]["reporter_run_id"] == 34045953527
           assert report["consumer_verification"]["artifact_name"] == "terminal-source-report"
+
+      - name: Discover and verify the current canonical report from its source
+        shell: python
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN_ID: ${{ inputs['source-run'] }}
+        run: |
+          import json
+          import os
+          import subprocess
+
+          result = subprocess.run(
+              [
+                  "gh",
+                  "run-receptor",
+                  "--repo",
+                  "uibcdf/gh-run-receptor",
+                  "--format=json",
+                  "published-source",
+                  os.environ["SOURCE_RUN_ID"],
+              ],
+              check=False,
+              capture_output=True,
+              text=True,
+          )
+          assert result.returncode == 0, result.stderr
+          report = json.loads(result.stdout)
+          assert report["subject"]["run_id"] == int(os.environ["SOURCE_RUN_ID"])
+          assert report["github"]["conclusion"] == "success"
+          assert report["receptor"]["assessment"] == "PASS"
+          assert report["consumer_verification"]["source_facts"] == "verified"
+          assert report["consumer_verification"]["artifact_name"].startswith(
+              f"gh-run-receptor-report-{os.environ['SOURCE_RUN_ID']}-"
+          )

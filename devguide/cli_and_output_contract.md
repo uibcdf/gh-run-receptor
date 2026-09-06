@@ -94,6 +94,25 @@ Artifact interpretations are not source authority. Output adds
 was published rather than independently recomputed. Impossible conclusion/assessment pairs
 fail closed, including any official non-success presented as `PASS`.
 
+### `published-source`
+
+```text
+gh run-receptor published-source SOURCE_RUN_OR_URL
+    [--artifact-prefix PREFIX] [--reporter-workflow EXACT_PATH]
+```
+
+Discovers the compact report for the current attempt of a completed source run. The
+artifact identity is `<prefix>-<source_run_id>-<source_run_attempt>`, so reruns do not
+collide. The defaults are prefix `gh-run-receptor-report` and workflow path
+`.github/workflows/gh-run-receptor-report.yml`.
+
+Discovery requires exactly one repository artifact with that name, obtains its publishing
+run ID from GitHub artifact metadata, and verifies that the completed publisher was a
+`workflow_run` execution of the exact expected reporter workflow. It then applies every
+archive, digest, source-fact, interpretation, rendering, and exit-code check from
+`published`. Duplicates, expiry, missing producer identity, or a workflow mismatch fail
+closed. It fetches neither source jobs nor logs.
+
 ### `list`
 
 ```text

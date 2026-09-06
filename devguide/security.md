@@ -84,6 +84,14 @@ duplicate-key JSON, invalid provenance, and digest mismatch. Fresh source-run me
 agree with the artifact. This verifies source facts, not arbitrary profile claims; output
 states that distinction explicitly and rejects any derived `PASS` over official non-success.
 
+Source-first discovery does not scan or download arbitrary artifacts. It derives an exact
+attempt-qualified name from fresh source metadata, requires one match, checks the artifact's
+publishing run identity, and verifies a completed `workflow_run` event plus the exact
+configured reporter workflow path before download. Duplicate matches and producer/path
+disagreement fail closed. The workflow path establishes which default-branch publication
+route the repository trusts; it does not promote the report's profile interpretation to an
+official GitHub conclusion.
+
 ## Pattern safety
 
 Exact matching is the default. User patterns have length and count limits, are compiled

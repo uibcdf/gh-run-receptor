@@ -89,6 +89,8 @@ def test_report_schema_accepts_additive_publisher_and_consumer_verification():
         "artifact_id": 7,
         "artifact_name": "gh-run-receptor-report",
         "artifact_digest": "sha256:" + "a" * 64,
+        "reporter_identity": "verified",
+        "reporter_workflow": ".github/workflows/gh-run-receptor-report.yml",
     }
 
     _validator("report-v1.schema.json").validate(report)

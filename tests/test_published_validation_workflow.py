@@ -14,6 +14,8 @@ def test_published_report_validation_is_manual_bounded_and_cross_platform():
     source = _source()
 
     assert source.count("workflow_dispatch:") == 1
+    assert "source-run:" in source
+    assert "required: true" in source
     assert "\n  push:" not in source
     assert "\n  pull_request:" not in source
     assert "permissions:\n  actions: read\n  contents: read" in source
@@ -25,6 +27,9 @@ def test_published_report_validation_is_manual_bounded_and_cross_platform():
     assert '"terminal-source-report"' in source
     assert 'report["subject"]["run_id"] == 34045930131' in source
     assert 'report["consumer_verification"]["source_facts"] == "verified"' in source
+    assert '"published-source"' in source
+    assert "SOURCE_RUN_ID: ${{ inputs['source-run'] }}" in source
+    assert 'report["subject"]["run_id"] == int(os.environ["SOURCE_RUN_ID"])' in source
 
 
 def test_published_report_validation_pins_external_actions():

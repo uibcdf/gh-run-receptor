@@ -14,9 +14,9 @@ def test_distributed_action_validation_is_manual_bounded_and_cross_platform():
     assert "timeout-minutes: 10" in source
     assert "fail-fast: false" in source
     assert "os: [ubuntu-latest, macos-latest, windows-latest]" in source
-    assert "uses: uibcdf/gh-run-receptor@0.12.0" in source
+    assert "uses: uibcdf/gh-run-receptor@0.14.0" in source
     assert 'assert os.environ["ASSESSMENT"] == "PASS"' in source
-    assert '"ref": "0.12.0"' in source
+    assert '"ref": "0.14.0"' in source
 
 
 def test_distributed_action_validation_uses_only_read_permissions():

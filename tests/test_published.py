@@ -9,7 +9,11 @@ import pytest
 from gh_run_receptor.cli import _parser
 from gh_run_receptor.errors import BundleError
 from gh_run_receptor.limits import MAX_PUBLISHED_ARTIFACT_BYTES, MAX_REPORT_BYTES
-from gh_run_receptor.published import consume_published_report
+from gh_run_receptor.published import (
+    consume_published_report,
+    consume_published_source,
+    published_artifact_name,
+)
 from gh_run_receptor.report import render_llm
 
 
@@ -132,6 +136,157 @@ def test_published_command_has_an_explicit_exact_artifact_selector():
     assert args.command == "published"
     assert args.run.run_id == 99
     assert args.artifact == "compact-report"
+
+
+def test_published_source_command_has_explicit_discovery_contract():
+    args = _parser().parse_args(
+        [
+            "published-source",
+            "42",
+            "--repo",
+            "uibcdf/example",
+            "--artifact-prefix",
+            "compact",
+            "--reporter-workflow",
+            ".github/workflows/reporter.yaml",
+        ]
+    )
+
+    assert args.command == "published-source"
+    assert args.run.run_id == 42
+    assert args.artifact_prefix == "compact"
+    assert args.reporter_workflow == ".github/workflows/reporter.yaml"
+
+
+def test_artifact_identity_includes_run_and_attempt():
+    assert published_artifact_name("compact", 42, 3) == "compact-42-3"
+
+
+class _DiscoveryClient(_Client):
+    def __init__(
+        self,
+        archive,
+        *,
+        report=None,
+        inventory_overrides=None,
+        reporter_overrides=None,
+        workflow_overrides=None,
+    ):
+        super().__init__(archive, report=report)
+        self.artifact["name"] = "compact-42-1"
+        self.artifact["workflow_run"] = {"id": 99, "head_sha": "reporter-sha"}
+        self.inventory = {
+            "total_count": 1,
+            "artifacts": [self.artifact],
+        }
+        self.inventory.update(inventory_overrides or {})
+        self.reporter = {
+            "id": 99,
+            "status": "completed",
+            "conclusion": "success",
+            "event": "workflow_run",
+            "workflow_id": 17,
+            "head_sha": "reporter-sha",
+            "path": ".github/workflows/reporter.yml@main",
+        }
+        self.reporter.update(reporter_overrides or {})
+        self.workflow = {
+            "id": 17,
+            "path": ".github/workflows/reporter.yml",
+        }
+        self.workflow.update(workflow_overrides or {})
+
+    def json(self, endpoint, *, paginate=False):
+        self.calls.append((endpoint, paginate))
+        if endpoint.endswith("/runs/42"):
+            return self.source
+        if endpoint.endswith("/actions/artifacts?name=compact-42-1&per_page=100"):
+            return self.inventory
+        if endpoint.endswith("/runs/99"):
+            return self.reporter
+        if endpoint.endswith("/actions/workflows/17"):
+            return self.workflow
+        raise AssertionError(endpoint)
+
+
+def _consume_source(client):
+    return consume_published_source(
+        client,
+        "uibcdf/example",
+        42,
+        artifact_prefix="compact",
+        reporter_workflow=".github/workflows/reporter.yml",
+    )
+
+
+def test_source_discovery_verifies_producer_and_reuses_source_facts():
+    report = _report()
+    client = _DiscoveryClient(_archive(report), report=report)
+
+    consumed = _consume_source(client)
+
+    assert consumed["consumer_verification"]["reporter_run_id"] == 99
+    assert consumed["consumer_verification"]["reporter_identity"] == "verified"
+    assert consumed["consumer_verification"]["reporter_workflow"] == (
+        ".github/workflows/reporter.yml"
+    )
+    assert "publishing workflow identity verified" in consumed["warnings"][-1]
+    assert "reporter_identity=verified" in render_llm(consumed)
+    endpoints = [call[0] for call in client.calls]
+    assert endpoints.count("/repos/uibcdf/example/actions/runs/42") == 1
+    assert not any("/jobs" in endpoint or "/logs" in endpoint for endpoint in endpoints)
+
+
+@pytest.mark.parametrize(
+    ("inventory_overrides", "reporter_overrides", "message"),
+    [
+        ({"total_count": 0, "artifacts": []}, {}, "exactly one"),
+        ({"total_count": 2}, {}, "exactly one"),
+        ({}, {"event": "push"}, "workflow_run reporter"),
+        ({}, {"status": "in_progress"}, "workflow_run reporter"),
+        ({}, {"path": ".github/workflows/other.yml@main"}, "path conflicts"),
+    ],
+)
+def test_source_discovery_fails_closed(
+    inventory_overrides, reporter_overrides, message
+):
+    client = _DiscoveryClient(
+        _archive(_report()),
+        inventory_overrides=inventory_overrides,
+        reporter_overrides=reporter_overrides,
+    )
+
+    with pytest.raises(BundleError, match=message):
+        _consume_source(client)
+
+
+def test_source_discovery_rejects_an_untrusted_workflow_identity():
+    client = _DiscoveryClient(
+        _archive(_report()),
+        workflow_overrides={"path": ".github/workflows/other.yml"},
+    )
+
+    with pytest.raises(BundleError, match="expected reporter workflow"):
+        _consume_source(client)
+
+
+def test_source_discovery_rejects_conflicting_artifact_producer_identity():
+    client = _DiscoveryClient(_archive(_report()))
+    client.artifact["workflow_run"]["head_sha"] = "other-sha"
+
+    with pytest.raises(BundleError, match="publishing identity conflicts"):
+        _consume_source(client)
+
+
+def test_source_discovery_requires_a_terminal_source_before_artifact_lookup():
+    client = _DiscoveryClient(_archive(_report()))
+    client.source.update({"status": "in_progress", "conclusion": None})
+
+    with pytest.raises(BundleError, match="source run is not terminal"):
+        _consume_source(client)
+    assert [call[0] for call in client.calls] == [
+        "/repos/uibcdf/example/actions/runs/42"
+    ]
 
 
 def test_consumption_verifies_digest_source_facts_and_avoids_jobs_and_logs():

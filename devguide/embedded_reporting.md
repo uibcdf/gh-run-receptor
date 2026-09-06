@@ -50,7 +50,7 @@ jobs:
 
 The source workflow and reporter workflow are separate runs. The external CLI remains the
 fallback when a downstream workflow is absent, skipped, cancelled, or lacks permission.
-This exact pattern is live-tested by `workflow-run-report-validation.yml`: it grants only
+This exact pattern is live-tested by `gh-run-receptor-report.yml`: it grants only
 `actions: read` and `contents: read`, checks out no source content, and verifies source ID
 and conclusion parity independently of the Action.
 
@@ -62,7 +62,7 @@ The implemented preview Action accepts:
 - `repository`: explicit source repository, defaulting to the current repository;
 - `profile`: built-in or automatic interpretation profile;
 - `capture`: `adaptive`, `full`, or `metadata`;
-- `report-name`: artifact and summary label;
+- `report-name`: safe artifact prefix, limited to 48 characters;
 - `strict-reporter`: opt-in development behavior for treating reporter faults as errors.
 
 Repository default-branch rules remain active through the shared capture path. Inline
@@ -75,6 +75,15 @@ It emits:
 - Markdown in `GITHUB_STEP_SUMMARY`;
 - a small `gh-run-receptor.report@1` JSON artifact;
 - scalar outputs for assessment, failed groups, incomplete groups, and report artifact.
+
+The Action appends the authoritative source run ID and attempt to `report-name`. The
+default artifact for source run `123`, attempt `2`, is therefore
+`gh-run-receptor-report-123-2`. This deterministic identity enables bounded repository
+lookup and prevents a rerun from being confused with an older attempt.
+
+The source-first CLI trusts only a configured exact reporter workflow path; the conventional
+default is `.github/workflows/gh-run-receptor-report.yml`. Renaming that workflow requires
+passing the same explicit path to `published-source`.
 
 The implementation caps its JSON report at 8 MiB and its summary at 32 KiB, well below
 GitHub's 1 MiB per-step summary limit. Large evidence remains in the private runner cache;

@@ -1,4 +1,4 @@
-name: Terminal workflow_run report validation
+name: Canonical gh-run-receptor report
 
 on:
   workflow_run:
@@ -17,13 +17,12 @@ jobs:
     steps:
       - name: Build the terminal source report
         id: receptor
-        uses: uibcdf/gh-run-receptor@0.12.0
+        uses: uibcdf/gh-run-receptor@0.14.0
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
           profile: ci
           capture: metadata
-          report-name: terminal-source-report
           strict-reporter: "true"
 
       - name: Verify source identity and terminal truth
@@ -31,7 +30,9 @@ jobs:
         env:
           ASSESSMENT: ${{ steps.receptor.outputs.assessment }}
           CONCLUSION: ${{ steps.receptor.outputs['github-conclusion'] }}
+          REPORT_ARTIFACT: ${{ steps.receptor.outputs['report-artifact'] }}
           REPORT_PATH: ${{ steps.receptor.outputs['report-path'] }}
+          SOURCE_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}
           SOURCE_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
           SOURCE_RUN_ID: ${{ github.event.workflow_run.id }}
         run: |
@@ -45,3 +46,8 @@ jobs:
           assert report["github"]["conclusion"] == os.environ["SOURCE_CONCLUSION"]
           assert os.environ["CONCLUSION"] == os.environ["SOURCE_CONCLUSION"]
           assert os.environ["ASSESSMENT"] == "PASS"
+          expected = (
+              f"gh-run-receptor-report-{os.environ['SOURCE_RUN_ID']}-"
+              f"{os.environ['SOURCE_ATTEMPT']}"
+          )
+          assert os.environ["REPORT_ARTIFACT"] == expected

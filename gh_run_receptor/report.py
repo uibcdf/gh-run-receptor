@@ -801,6 +801,8 @@ def render_llm(report: dict[str, Any]) -> str:
                     + _safe_text(consumer_verification.get("interpretation")),
                 ]
             )
+            if consumer_verification.get("reporter_identity") == "verified":
+                fields.append("reporter_identity=verified")
         fields.extend(
             [
                 f"artifacts={len(report['artifacts'])}",

@@ -5,7 +5,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def _source():
     return (
-        ROOT / ".github/workflows/workflow-run-report-validation.yml"
+        ROOT / ".github/workflows/gh-run-receptor-report.yml"
     ).read_text(encoding="utf-8")
 
 
@@ -33,10 +33,13 @@ def test_terminal_report_listener_is_read_only_and_executes_no_source_content():
 def test_terminal_report_listener_preserves_event_identity_and_conclusion():
     source = _source()
 
-    assert "uses: uibcdf/gh-run-receptor@0.12.0" in source
+    assert "uses: uibcdf/gh-run-receptor@0.14.0" in source
     assert "run-id: ${{ github.event.workflow_run.id }}" in source
     assert "SOURCE_CONCLUSION: ${{ github.event.workflow_run.conclusion }}" in source
     assert "SOURCE_RUN_ID: ${{ github.event.workflow_run.id }}" in source
+    assert "SOURCE_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}" in source
+    assert "REPORT_ARTIFACT: ${{ steps.receptor.outputs['report-artifact'] }}" in source
     assert 'report["subject"]["run_id"] == int(os.environ["SOURCE_RUN_ID"])' in source
     assert 'report["github"]["status"] == "completed"' in source
     assert 'os.environ["CONCLUSION"] == os.environ["SOURCE_CONCLUSION"]' in source
+    assert 'os.environ["REPORT_ARTIFACT"] == expected' in source

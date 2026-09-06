@@ -14,12 +14,13 @@ from urllib.parse import urlparse
 from gh_run_receptor.errors import AcquisitionError, ReceptorError
 from gh_run_receptor.github import _safe_error_line
 from gh_run_receptor.limits import MAX_REPORT_BYTES
+from gh_run_receptor.published import published_artifact_name
 from gh_run_receptor.report import render_json, render_llm
 from gh_run_receptor.service import create_report
 
 MAX_SUMMARY_BYTES = 32 * 1024
-MAX_REPORT_NAME = 80
-_REPORT_NAME = re.compile(r"[A-Za-z0-9](?:[A-Za-z0-9._-]{0,79})")
+MAX_REPORT_NAME = 48
+_REPORT_NAME = re.compile(r"[A-Za-z0-9](?:[A-Za-z0-9._-]{0,47})")
 _PROFILES = {"auto", "generic", "ci", "conda", "docs", "release"}
 _CAPTURE_POLICIES = {"full", "adaptive", "metadata"}
 ReportFactory = Callable[..., dict[str, Any]]
@@ -53,11 +54,11 @@ def _choice(environment: Mapping[str, str], name: str, allowed: set[str], defaul
     return value
 
 
-def _report_name(environment: Mapping[str, str]) -> str:
+def _report_name_prefix(environment: Mapping[str, str]) -> str:
     value = environment.get("INPUT_REPORT_NAME", "").strip() or "gh-run-receptor-report"
     if len(value) > MAX_REPORT_NAME or _REPORT_NAME.fullmatch(value) is None:
         raise ReceptorError(
-            "report-name must contain only letters, digits, period, underscore, or hyphen"
+            "report-name prefix must use safe characters and contain at most 48 characters"
         )
     return value
 
@@ -156,7 +157,7 @@ def run_action(
         profile = _choice(values, "INPUT_PROFILE", _PROFILES, "auto")
         capture = _choice(values, "INPUT_CAPTURE", _CAPTURE_POLICIES, "adaptive")
         _choice(values, "INPUT_STRICT_REPORTER", {"true", "false"}, "false")
-        report_name = _report_name(values)
+        report_name_prefix = _report_name_prefix(values)
         runner_temp = _required_path(values, "RUNNER_TEMP")
         output_path = _required_path(values, "GITHUB_OUTPUT")
         summary_path = _required_path(values, "GITHUB_STEP_SUMMARY")
@@ -170,6 +171,11 @@ def run_action(
             cache_root=cache_root,
         )
         report["publisher"] = _publisher(values)
+        report_name = published_artifact_name(
+            report_name_prefix,
+            report["subject"]["run_id"],
+            report["subject"]["run_attempt"],
+        )
         rendered = render_json(report).encode("utf-8")
         if len(rendered) > MAX_REPORT_BYTES:
             raise ReceptorError(f"JSON report exceeds the {MAX_REPORT_BYTES}-byte limit")

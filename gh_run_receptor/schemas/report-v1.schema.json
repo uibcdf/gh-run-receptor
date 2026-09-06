@@ -93,6 +93,11 @@
         "artifact_digest": {
           "type": ["string", "null"],
           "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "reporter_identity": {"const": "verified"},
+        "reporter_workflow": {
+          "type": "string",
+          "pattern": "^\\.github/workflows/[^/]+\\.ya?ml$"
         }
       },
       "additionalProperties": false

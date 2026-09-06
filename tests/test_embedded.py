@@ -101,7 +101,7 @@ def test_success_publishes_one_canonical_report_summary_and_scalar_outputs(tmp_p
         "profile": "ci",
         "failed-groups": "0",
         "incomplete-groups": "0",
-        "report-artifact": "receptor-report",
+        "report-artifact": "receptor-report-42-1",
         "report-path": str(report_path),
         "report-ready": "true",
     }
@@ -194,6 +194,18 @@ def test_unsafe_report_name_is_rejected_before_acquisition(tmp_path):
     assert run_action(environment, report_factory=factory) == 5
     assert called is False
     assert _outputs(tmp_path / "output") == {"report-ready": "false"}
+
+
+def test_report_name_is_unique_for_a_source_rerun(tmp_path):
+    environment = _environment(tmp_path)
+    report = _report()
+    report["subject"]["run_attempt"] = 3
+
+    assert run_action(environment, report_factory=lambda **_: report) == 0
+
+    outputs = _outputs(tmp_path / "output")
+    assert outputs["report-artifact"] == "receptor-report-42-3"
+    assert Path(outputs["report-path"]).name == "receptor-report-42-3.json"
 
 
 def test_invalid_strict_reporter_value_is_rejected_before_acquisition(tmp_path):

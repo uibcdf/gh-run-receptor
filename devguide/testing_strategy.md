@@ -65,6 +65,11 @@ structure, publisher presence, fresh source identity, terminal state, and assess
 are independent guards. Manual extension run `34047166101` passes this path on all three
 hosted operating systems without fetching source jobs or logs.
 
+Source-first discovery additionally tests rerun-qualified names, empty and duplicate
+repository results, missing or contradictory producer identity, non-terminal and non-
+`workflow_run` publishers, and exact workflow-path disagreement. Its successful fixture
+asserts that source metadata is fetched once and source jobs and logs are never requested.
+
 ### Adversarial tests
 
 The cases required by [security.md](security.md) run locally and in CI. Fuzz or property

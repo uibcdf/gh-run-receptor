@@ -17,6 +17,9 @@ from gh_run_receptor.limits import MAX_PUBLISHED_ARTIFACT_BYTES, MAX_REPORT_BYTE
 from gh_run_receptor.report import exit_code, render_human, render_llm
 
 _ARTIFACT_NAME = re.compile(r"[A-Za-z0-9](?:[A-Za-z0-9._-]{0,79})")
+_ARTIFACT_PREFIX = re.compile(r"[A-Za-z0-9](?:[A-Za-z0-9._-]{0,47})")
+DEFAULT_ARTIFACT_PREFIX = "gh-run-receptor-report"
+DEFAULT_REPORTER_WORKFLOW = ".github/workflows/gh-run-receptor-report.yml"
 _BASE_ASSESSMENT = {
     "success": "PASS",
     "failure": "FAIL",
@@ -32,6 +35,34 @@ def _artifact_name(value: str) -> str:
         raise BundleError(
             "artifact name must contain only letters, digits, period, underscore, or hyphen"
         )
+    return value
+
+
+def published_artifact_name(prefix: str, source_run_id: int, source_attempt: int) -> str:
+    """Building the deterministic artifact identity for one source attempt."""
+    if _ARTIFACT_PREFIX.fullmatch(prefix) is None:
+        raise BundleError(
+            "artifact prefix must use safe characters and contain at most 48 characters"
+        )
+    for label, value in (("source run ID", source_run_id), ("source attempt", source_attempt)):
+        if isinstance(value, bool) or not isinstance(value, int) or value < 1:
+            raise BundleError(f"{label} must be a positive integer")
+    name = f"{prefix}-{source_run_id}-{source_attempt}"
+    if _ARTIFACT_NAME.fullmatch(name) is None:
+        raise BundleError("report-name prefix is too long for the source run identity")
+    return name
+
+
+def _reporter_workflow_path(value: str) -> str:
+    if (
+        not isinstance(value, str)
+        or not value.startswith(".github/workflows/")
+        or value.count("/") != 2
+        or not value.endswith((".yml", ".yaml"))
+        or len(value) > 255
+        or any(ord(character) < 32 for character in value)
+    ):
+        raise BundleError("reporter workflow must be an exact .github/workflows YAML path")
     return value
 
 
@@ -172,14 +203,17 @@ def _verify_source(report: dict[str, Any], source: Any, repository: str) -> None
         raise BundleError("insufficient published evidence must remain INCOMPLETE")
 
 
-def consume_published_report(
+def _consume_selected_report(
     client: GitHubClient,
     repository: str,
     reporter_run_id: int,
     *,
     artifact_name: str,
+    reporter: Any,
+    artifact: Any,
+    source: Any | None,
 ) -> dict[str, Any]:
-    """Downloading one report and verifying its terminal source facts."""
+    """Downloading a selected report and verifying its terminal source facts."""
     if (
         isinstance(reporter_run_id, bool)
         or not isinstance(reporter_run_id, int)
@@ -187,22 +221,14 @@ def consume_published_report(
     ):
         raise BundleError("reporter run ID must be a positive integer")
     selected_name = _artifact_name(artifact_name)
-    reporter = client.json(f"/repos/{repository}/actions/runs/{reporter_run_id}")
-    if not isinstance(reporter, dict) or reporter.get("status") != "completed":
+    if (
+        not isinstance(reporter, dict)
+        or reporter.get("id") != reporter_run_id
+        or reporter.get("status") != "completed"
+    ):
         raise BundleError("reporter run must be completed")
-    inventory = merge_pages(
-        client.json(
-            f"/repos/{repository}/actions/runs/{reporter_run_id}/artifacts?per_page=100",
-            paginate=True,
-        ),
-        "artifacts",
-    )
-    if not all(isinstance(item, dict) for item in inventory["artifacts"]):
-        raise BundleError("reporter artifact inventory contains a non-object")
-    matches = [item for item in inventory["artifacts"] if item.get("name") == selected_name]
-    if len(matches) != 1:
-        raise BundleError(f"expected exactly one report artifact named {selected_name!r}")
-    artifact = matches[0]
+    if not isinstance(artifact, dict) or artifact.get("name") != selected_name:
+        raise BundleError("selected report artifact identity is invalid")
     if artifact.get("expired") is not False:
         raise BundleError("report artifact is expired or has unknown availability")
     size = artifact.get("size_in_bytes")
@@ -226,8 +252,9 @@ def consume_published_report(
         digest = _verify_digest(archive, artifact.get("digest"))
         report = _read_report_archive(archive)
 
-    source_run_id = report["subject"]["run_id"]
-    source = client.json(f"/repos/{repository}/actions/runs/{source_run_id}")
+    if source is None:
+        source_run_id = report["subject"]["run_id"]
+        source = client.json(f"/repos/{repository}/actions/runs/{source_run_id}")
     _verify_source(report, source, repository)
     report["consumer_verification"] = {
         "source_facts": "verified",
@@ -246,4 +273,139 @@ def consume_published_report(
         exit_code(report)
     except (KeyError, TypeError, ValueError) as error:
         raise BundleError(f"published report cannot be rendered: {error}") from error
+    return report
+
+
+def consume_published_report(
+    client: GitHubClient,
+    repository: str,
+    reporter_run_id: int,
+    *,
+    artifact_name: str,
+) -> dict[str, Any]:
+    """Downloading one explicitly selected report and verifying source facts."""
+    if (
+        isinstance(reporter_run_id, bool)
+        or not isinstance(reporter_run_id, int)
+        or reporter_run_id < 1
+    ):
+        raise BundleError("reporter run ID must be a positive integer")
+    selected_name = _artifact_name(artifact_name)
+    reporter = client.json(f"/repos/{repository}/actions/runs/{reporter_run_id}")
+    if (
+        not isinstance(reporter, dict)
+        or reporter.get("id") != reporter_run_id
+        or reporter.get("status") != "completed"
+    ):
+        raise BundleError("reporter run must be completed")
+    inventory = merge_pages(
+        client.json(
+            f"/repos/{repository}/actions/runs/{reporter_run_id}/artifacts?per_page=100",
+            paginate=True,
+        ),
+        "artifacts",
+    )
+    if not all(isinstance(item, dict) for item in inventory["artifacts"]):
+        raise BundleError("reporter artifact inventory contains a non-object")
+    matches = [item for item in inventory["artifacts"] if item.get("name") == selected_name]
+    if len(matches) != 1:
+        raise BundleError(f"expected exactly one report artifact named {selected_name!r}")
+    return _consume_selected_report(
+        client,
+        repository,
+        reporter_run_id,
+        artifact_name=selected_name,
+        reporter=reporter,
+        artifact=matches[0],
+        source=None,
+    )
+
+
+def consume_published_source(
+    client: GitHubClient,
+    repository: str,
+    source_run_id: int,
+    *,
+    artifact_prefix: str = DEFAULT_ARTIFACT_PREFIX,
+    reporter_workflow: str = DEFAULT_REPORTER_WORKFLOW,
+) -> dict[str, Any]:
+    """Discovering and consuming a canonical report for one source attempt."""
+    if isinstance(source_run_id, bool) or not isinstance(source_run_id, int) or source_run_id < 1:
+        raise BundleError("source run ID must be a positive integer")
+    expected_workflow = _reporter_workflow_path(reporter_workflow)
+    source = client.json(f"/repos/{repository}/actions/runs/{source_run_id}")
+    if not isinstance(source, dict) or source.get("id") != source_run_id:
+        raise BundleError("source workflow-run response is invalid")
+    if source.get("status") != "completed" or not isinstance(source.get("conclusion"), str):
+        raise BundleError("published source run is not terminal")
+    attempt = source.get("run_attempt", 1)
+    artifact_name = published_artifact_name(artifact_prefix, source_run_id, attempt)
+    inventory = client.json(
+        f"/repos/{repository}/actions/artifacts?name={artifact_name}&per_page=100"
+    )
+    if not isinstance(inventory, dict) or not isinstance(inventory.get("artifacts"), list):
+        raise BundleError("repository artifact inventory is invalid")
+    artifacts = inventory["artifacts"]
+    total = inventory.get("total_count")
+    if (
+        isinstance(total, bool)
+        or not isinstance(total, int)
+        or total != 1
+        or len(artifacts) != 1
+    ):
+        raise BundleError(f"expected exactly one report artifact named {artifact_name!r}")
+    artifact = artifacts[0]
+    if not isinstance(artifact, dict) or artifact.get("name") != artifact_name:
+        raise BundleError("repository artifact query returned an unexpected artifact")
+    producer = artifact.get("workflow_run")
+    reporter_run_id = producer.get("id") if isinstance(producer, dict) else None
+    if (
+        isinstance(reporter_run_id, bool)
+        or not isinstance(reporter_run_id, int)
+        or reporter_run_id < 1
+    ):
+        raise BundleError("report artifact has no valid publishing run identity")
+    reporter = client.json(f"/repos/{repository}/actions/runs/{reporter_run_id}")
+    workflow_id = reporter.get("workflow_id") if isinstance(reporter, dict) else None
+    if (
+        not isinstance(reporter, dict)
+        or reporter.get("id") != reporter_run_id
+        or reporter.get("status") != "completed"
+        or reporter.get("event") != "workflow_run"
+        or isinstance(workflow_id, bool)
+        or not isinstance(workflow_id, int)
+        or workflow_id < 1
+    ):
+        raise BundleError("publishing run is not a completed workflow_run reporter")
+    producer_sha = producer.get("head_sha")
+    if producer_sha is not None and producer_sha != reporter.get("head_sha"):
+        raise BundleError("report artifact publishing identity conflicts with GitHub")
+    workflow = client.json(f"/repos/{repository}/actions/workflows/{workflow_id}")
+    if (
+        not isinstance(workflow, dict)
+        or workflow.get("id") != workflow_id
+        or workflow.get("path") != expected_workflow
+    ):
+        raise BundleError("publishing run does not use the expected reporter workflow")
+    run_path = reporter.get("path")
+    if not isinstance(run_path, str) or run_path.split("@", 1)[0] != expected_workflow:
+        raise BundleError("publishing run path conflicts with the expected reporter workflow")
+    report = _consume_selected_report(
+        client,
+        repository,
+        reporter_run_id,
+        artifact_name=artifact_name,
+        reporter=reporter,
+        artifact=artifact,
+        source=source,
+    )
+    report["consumer_verification"].update(
+        {
+            "reporter_identity": "verified",
+            "reporter_workflow": expected_workflow,
+        }
+    )
+    report["warnings"].append(
+        f"publishing workflow identity verified: {expected_workflow}"
+    )
     return report

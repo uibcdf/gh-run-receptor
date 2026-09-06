@@ -125,6 +125,14 @@ JSON member expanded to at most 8 MiB, and verifies a supplied GitHub SHA-256 di
 then performs a fresh source-run lookup. A digest proves the downloaded bytes; it does not
 prove the producer's interpretation.
 
+The source-first `published-source` path first retrieves the completed source run to derive
+its current attempt, then queries the repository artifact endpoint by the exact deterministic
+`<prefix>-<run>-<attempt>` name. GitHub's artifact record supplies the publishing
+`workflow_run.id`; the consumer retrieves that run and its workflow record and requires a
+completed `workflow_run` event at the configured exact workflow path before downloading any
+artifact bytes. Exactly one result is required. This identifies the trusted publication
+route but still does not make its profile interpretation an authoritative GitHub fact.
+
 ## Authentication and permissions
 
 Public metadata may be available anonymously, but supported operation assumes an

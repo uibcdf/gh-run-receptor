@@ -1,10 +1,10 @@
 ---
 summary: Discover a trusted published report from its source run
 issue: uibcdf/gh-run-receptor#21
-status: open
+status: active
 opened: 2026-09-06
 closed:
-verification: asserted
+verification: inspected
 area: ['github', 'cli', 'security']
 guard:
 normative:
@@ -15,7 +15,8 @@ supersedes: []
 # Discovering a trusted published report from its source run
 
 **Reported:** 2026-09-06, while exercising the first external published-report consumer.
-**Status:** Open; the API contract and fail-closed selection rules are defined below.
+**Status:** Active; implementation and local gates pass, while hosted release evidence is
+pending.
 
 ## What
 
@@ -97,6 +98,37 @@ The API exposes producer run identity on repository artifact records but not the
 producer workflow identity, so discovery needs one additional run lookup and workflow
 lookup. Artifact retention can make discovery unavailable; this is expected and must be
 reported as absence rather than reconstructed. No tracked dependency blocks implementation.
+
+## Implementation checkpoint
+
+The 0.14.0 candidate adds the shared attempt-qualified naming function, changes the Action
+input to a 48-character prefix, adds `published-source`, and renames the live listener to
+the canonical `.github/workflows/gh-run-receptor-report.yml` path. Discovery reuses the
+existing selected-artifact consumer so archive parsing and source truth do not fork.
+
+The structured consumer record distinguishes the stronger route with
+`reporter_identity: verified` and the exact `reporter_workflow`; compact successful output
+adds `reporter_identity=verified`. The manual hosted gate now exercises explicit historical
+consumption and source-first discovery on Ubuntu, macOS, and Windows.
+
+Local evidence on 2026-09-06:
+
+```text
+ruff check .
+All checks passed!
+
+python -m pytest -q --receptor=llm
+PASS exit=0 | 223 passed | 2.06s
+
+python devtools/scripts/validate_devguide.py
+Developer report lifecycle is valid.
+
+python -m build
+Successfully built wheel and source distribution for the dirty 0.14.0 candidate.
+```
+
+Hosted source-to-reporter discovery and an exact tagged build remain required before
+resolution.
 
 ## Provenance
 

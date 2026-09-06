@@ -107,6 +107,11 @@ pipeline. It downloads one bounded report artifact, validates it as untrusted in
 freshly verifies only its GitHub source facts. It reuses the shared renderers but labels the
 profile interpretation as published and not independently recomputed.
 
+The `published-source` adapter adds a discovery stage ahead of that same consumer. It derives
+an attempt-qualified artifact name from authoritative source metadata and admits a candidate
+only when GitHub ties it to the configured canonical `workflow_run` reporter. Discovery does
+not create a second parsing or interpretation path.
+
 The embedded reporter is observability rather than a product gate. Failure to render produces a
 visible `RECEPTOR_ERROR` but must not convert successful primary work into a false
 product failure. Cancellation may prevent the reporting job from running, so the
