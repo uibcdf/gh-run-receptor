@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.13.0 - 2026-09-06
+
 - Validate the public `0.12.0` Action tag across hosted Ubuntu, macOS, and Windows.
 - Synchronize the 0.12.0 consumer guide to all eleven tracked client repositories.
 - Add a read-only downstream `workflow_run` gate for terminal source-run reporting.

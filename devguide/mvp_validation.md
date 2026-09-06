@@ -237,6 +237,20 @@ ID rather than itself, verified exact conclusion parity and receptor `PASS`, com
 8 seconds, and uploaded a 1,449-byte canonical report. It performed no checkout or source
 artifact execution.
 
+## Published report consumption
+
+The explicit `published` command consumed reporter run `34045953527`, verified its
+1,449-byte artifact digest and bounded ZIP, then matched source repository, run
+`34045930131`, attempt, SHA, terminal status, conclusion, and URL against fresh GitHub
+metadata. It fetched no source jobs or logs and marked profile interpretation as published,
+not independently recomputed.
+
+Against a fresh metadata capture of the same successful source, the command reduced API
+requests from seven to four (42.9%), transferred bytes from 36,735 to 26,653 (27.4%), and
+elapsed time from 4.04 to 2.63 seconds (34.9%); peak RSS was effectively unchanged. Manual
+extension run `34047166101` passed the same command on Ubuntu, macOS, and Windows, with the
+consumption step taking 2--3 seconds in every job.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

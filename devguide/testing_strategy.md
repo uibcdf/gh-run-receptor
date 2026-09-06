@@ -59,6 +59,12 @@ A separate live listener tests the terminal path. Manual distributed-Action run
 the completed source ID and conclusion through the 0.12.0 tag using read-only permissions
 and no checkout. The reporter completed in 8 seconds and uploaded a 1,449-byte report.
 
+Published-report tests treat the artifact as hostile: exact selection, compressed and
+expanded limits, transport streaming, digest, member type/path/count, strict JSON,
+structure, publisher presence, fresh source identity, terminal state, and assessment truth
+are independent guards. Manual extension run `34047166101` passes this path on all three
+hosted operating systems without fetching source jobs or logs.
+
 ### Adversarial tests
 
 The cases required by [security.md](security.md) run locally and in CI. Fuzz or property

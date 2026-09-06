@@ -7,7 +7,7 @@ evidence.
 
 ## Current state
 
-The project has a `0.12.0` tagged source preview but no published package-index artifact or
+The project is preparing a `0.13.0` tagged source preview but has no published package-index artifact or
 stable public contract;
 the contracts in this guide are explicit but provisional unless marked settled. The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
@@ -60,6 +60,8 @@ The current MVP implements:
   hosted checkout-local and remote-source validation passing on all three operating systems.
 - a live read-only downstream `workflow_run` integration that reports a completed source
   run with exact identity/conclusion parity and no source checkout.
+- explicit bounded consumption of one Action report artifact with GitHub digest and fresh
+  terminal source-fact verification, validated as an extension on all three operating systems.
 
 It does not yet provide a broad cross-workflow corpus; run comparison; remote workflow
 discovery; pattern rules; or a released and permission-validated embedded Action. The CI,
@@ -136,10 +138,9 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The next milestone lets the external CLI consume the small embedded report artifact before
-falling back to raw evidence, and verifies restricted-token and pull-request boundaries. It
-then closes the remaining outcome and distribution gaps: Zenodo verification and a minimum
-supported GitHub CLI.
+The next milestone discovers the trusted downstream reporter from a source run and verifies
+restricted-token and pull-request boundaries. It then closes the remaining outcome and
+distribution gaps: Zenodo verification and a minimum supported GitHub CLI.
 Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need

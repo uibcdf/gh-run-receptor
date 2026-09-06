@@ -5,11 +5,11 @@ repetitive run output into a compact, truth-preserving report while retaining a 
 path to the captured evidence.
 
 The project is in pre-1.0 development; no package has been published to a package index and
-the public contract may still evolve. The `0.12.0` source release can inspect, watch, and
+the public contract may still evolve. The `0.13.0` source release can inspect, watch, and
 replay structured run evidence. Install the GitHub CLI extension at the exact preview tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 0.12.0
+gh extension install uibcdf/gh-run-receptor --pin 0.13.0
 gh run-receptor --version
 ```
 
@@ -47,7 +47,7 @@ jobs:
   report:
     runs-on: ubuntu-latest
     steps:
-      - uses: uibcdf/gh-run-receptor@0.12.0
+      - uses: uibcdf/gh-run-receptor@0.13.0
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
@@ -59,6 +59,20 @@ and uploads the canonical JSON report. Invoking it inside the source run is supp
 the result is honestly `PENDING` because that run is still active. Reporter faults are
 fail-open by default; set `strict-reporter: "true"` only in controlled integration gates.
 High-assurance consumers may pin the full release commit SHA instead of the tag.
+
+Consume that downstream run's published report without downloading the source jobs or
+logs:
+
+```text
+gh run-receptor published REPORTER_RUN_ID --repo OWNER/REPO \
+  --artifact gh-run-receptor-report --receptor=llm
+```
+
+The command verifies the artifact digest and bounded ZIP, then checks the original source
+run's ID, attempt, SHA, terminal status, conclusion, and URL against fresh GitHub metadata.
+It explicitly labels the profile interpretation as published rather than independently
+recomputed. Use `inspect SOURCE_RUN_ID` as the fallback when the artifact is absent,
+expired, or insufficient for the decision.
 
 The current MVP recognizes clear Conda matrices automatically. When failure logs were
 captured, it reports independently reusable platform artifacts and groups repeated causes
@@ -120,7 +134,7 @@ gh run-receptor config explain .github/workflows/build_conda.yaml
 
 Live capture reads policy only from the repository's default branch, stores its revision
 and digest in the evidence bundle, and fails if required platforms are absent. Version
-`0.12.0` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
+`0.13.0` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
 patterns and unknown settings rather than silently ignoring them.
 
 An explicit `--attempt` reads the attempt-specific run, jobs, and logs endpoints. Bundle

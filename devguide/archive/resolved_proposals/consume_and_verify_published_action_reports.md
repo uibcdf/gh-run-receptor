@@ -1,12 +1,12 @@
 ---
 summary: Consume and verify published Action reports
 issue: uibcdf/gh-run-receptor#19
-status: active
+status: resolved
 opened: 2026-09-06
-closed:
+closed: 2026-09-06
 verification: measured
 area: ['github']
-guard:
+guard: tests/test_published.py
 normative:
 blocked_by: []
 supersedes: []
@@ -16,8 +16,8 @@ supersedes: []
 
 **Reported:** 2026-09-06, after the first terminal downstream reporter uploaded a bounded
 canonical report that the external CLI could inventory but not consume.
-**Status:** Active; the trust boundary, command shape, and real artifact envelope are
-defined before implementation.
+**Status:** Resolved; the command passes adversarial local tests, real artifact consumption,
+and GitHub CLI extension validation on Ubuntu, macOS, and Windows.
 
 ## What
 
@@ -76,8 +76,9 @@ mapping. Its dependency-free consumer validates inventory, transport bytes, GitH
 ZIP structure, strict JSON, report structure, publisher presence, fresh source identity,
 terminal truth, and conclusion/assessment compatibility. The transport accepts a narrower
 caller limit so oversized bytes stop during streaming. Unit and contract tests cover the
-hostile boundaries; a manual three-operating-system extension workflow is ready for live
-validation.
+hostile boundaries. Manual run `34047166101` passed 3/3 on Ubuntu, macOS, and Windows;
+published-report consumption took 2--3 seconds in each hosted job and preserved the same
+verified source identity and `PASS` conclusion.
 
 ## What was refuted
 
@@ -121,6 +122,7 @@ need a separate trust decision.
 
 ## Provenance
 
-Linux, Python 3.13.14, GitHub CLI 2.81.0, gh-run-receptor 0.12.0, unzip 6.00,
-2026-09-06. Artifact inventory and archive bytes came from public runs in
+Linux, Python 3.13.14, GitHub CLI 2.81.0, gh-run-receptor 0.12.0 through the 0.13.0
+release candidate, unzip 6.00, 2026-09-06. Artifact inventory, archive bytes, and
+cross-platform execution came from public runs in
 `uibcdf/gh-run-receptor`.
