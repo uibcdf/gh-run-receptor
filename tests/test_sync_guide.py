@@ -2,7 +2,22 @@
 
 from pathlib import Path
 
-from devtools.scripts.sync_gh_run_receptor_guide import synchronize
+from devtools.scripts.sync_gh_run_receptor_guide import DEFAULT_REPOSITORIES, synchronize
+
+
+def test_default_clients_cover_the_scientific_tooling_suite():
+    assert {
+        "argdigest",
+        "depdigest",
+        "elastnetmt",
+        "molsysmt",
+        "molsysviewer",
+        "pharmacophoremt",
+        "pytest-receptor",
+        "pyunitwizard",
+        "smonitor",
+        "topomt",
+    } <= set(DEFAULT_REPOSITORIES)
 
 
 def _tree(root: Path):

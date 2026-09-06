@@ -10,11 +10,14 @@ DEFAULT_REPOSITORIES = (
     "action-build-and-upload-conda-packages",
     "argdigest",
     "depdigest",
+    "elastnetmt",
     "molsysmt",
     "molsysviewer",
+    "pharmacophoremt",
     "pytest-receptor",
     "pyunitwizard",
     "smonitor",
+    "topomt",
 )
 
 
