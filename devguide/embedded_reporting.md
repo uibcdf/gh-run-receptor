@@ -50,6 +50,9 @@ jobs:
 
 The source workflow and reporter workflow are separate runs. The external CLI remains the
 fallback when a downstream workflow is absent, skipped, cancelled, or lacks permission.
+This exact pattern is live-tested by `workflow-run-report-validation.yml`: it grants only
+`actions: read` and `contents: read`, checks out no source content, and verifies source ID
+and conclusion parity independently of the Action.
 
 ## Action contract
 

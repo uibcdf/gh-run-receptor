@@ -58,6 +58,8 @@ The current MVP implements:
 - a first checkout-local composite Action implementation with bounded summaries, scalar
   outputs, canonical JSON artifacts, explicit publisher provenance, and offline tests;
   hosted checkout-local and remote-source validation passing on all three operating systems.
+- a live read-only downstream `workflow_run` integration that reports a completed source
+  run with exact identity/conclusion parity and no source checkout.
 
 It does not yet provide a broad cross-workflow corpus; run comparison; remote workflow
 discovery; pattern rules; or a released and permission-validated embedded Action. The CI,
@@ -134,9 +136,10 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The next milestone adds the trusted downstream `workflow_run` integration and verifies
-restricted-token and pull-request boundaries. It then closes the remaining outcome and
-distribution gaps: Zenodo verification and a minimum supported GitHub CLI.
+The next milestone lets the external CLI consume the small embedded report artifact before
+falling back to raw evidence, and verifies restricted-token and pull-request boundaries. It
+then closes the remaining outcome and distribution gaps: Zenodo verification and a minimum
+supported GitHub CLI.
 Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need

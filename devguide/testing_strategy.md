@@ -54,6 +54,11 @@ Linux, macOS, and Windows against completed-success and current-active runs; Lin
 checks a completed source failure. Restricted tokens, forks, downstream reusable workflows,
 and the external CLI fallback after cancellation remain release-gate cases.
 
+A separate live listener tests the terminal path. Manual distributed-Action run
+`34045930131` delivered `workflow_run` reporter `34045953527`; the downstream run verified
+the completed source ID and conclusion through the 0.12.0 tag using read-only permissions
+and no checkout. The reporter completed in 8 seconds and uploaded a 1,449-byte report.
+
 ### Adversarial tests
 
 The cases required by [security.md](security.md) run locally and in CI. Fuzz or property

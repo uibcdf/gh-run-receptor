@@ -1,12 +1,12 @@
 ---
 summary: Validate terminal reporting through workflow_run
 issue: uibcdf/gh-run-receptor#18
-status: active
+status: resolved
 opened: 2026-09-06
-closed:
-verification: upstream
+closed: 2026-09-06
+verification: measured
 area: ['github']
-guard:
+guard: tests/test_workflow_run_reporting.py
 normative:
 blocked_by: []
 supersedes: []
@@ -16,8 +16,8 @@ supersedes: []
 
 **Reported:** 2026-09-06, after the 0.12.0 Action proved same-run `PENDING` and
 completed-run terminal reports independently.
-**Status:** Active; the downstream security and truth contract is defined before the live
-integration is added.
+**Status:** Resolved; the read-only downstream integration preserves completed source
+identity and conclusion in a separate live `workflow_run` execution.
 
 ## What
 
@@ -59,7 +59,10 @@ The listener now targets only completed `Distributed Action validation` runs. It
 read-only Actions and contents access, performs no checkout or artifact download, calls the
 released 0.12.0 Action with the event run ID, and independently asserts source ID, completed
 status, conclusion parity, and receptor `PASS`. Static tests guard each security and truth
-property. Live evidence still requires one new manual source dispatch.
+property. Source run `34045930131` passed 3/3 and delivered downstream run `34045953527`.
+The downstream job completed in 8 seconds, its Action step in 4 seconds, and its canonical
+report artifact was 1,449 bytes. The workflow assertions verified source run ID, completed
+status, GitHub conclusion parity, and receptor `PASS`.
 
 ## What was refuted
 
@@ -96,6 +99,7 @@ than interpreted as a receptor result.
 
 ## Provenance
 
-Design inspection on Linux, Python 3.13.14, GitHub CLI 2.81.0, gh-run-receptor 0.12.0,
+Design and live validation on Linux, Python 3.13.14, GitHub CLI 2.81.0,
+gh-run-receptor 0.12.0,
 2026-09-06. Event and security behavior was checked against GitHub's official
 `workflow_run` documentation.

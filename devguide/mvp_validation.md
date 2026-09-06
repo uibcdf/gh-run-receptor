@@ -231,6 +231,12 @@ verified exact publisher repository/ref provenance.
 The post-tag distribution workflow resolves `uibcdf/gh-run-receptor@0.12.0` directly and
 requires the embedded report to retain `publisher.ref: 0.12.0` on every operating system.
 
+Manual tagged-source run `34045930131` passed 3/3 and triggered the separate read-only
+`workflow_run` reporter `34045953527`. That downstream run inspected the completed source
+ID rather than itself, verified exact conclusion parity and receptor `PASS`, completed in
+8 seconds, and uploaded a 1,449-byte canonical report. It performed no checkout or source
+artifact execution.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not
