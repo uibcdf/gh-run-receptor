@@ -17,7 +17,7 @@ jobs:
     steps:
       - name: Build the terminal source report
         id: receptor
-        uses: uibcdf/gh-run-receptor@09c164a4cac2187068d8058b630a92a049486a1d
+        uses: uibcdf/gh-run-receptor@0.15.0
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}

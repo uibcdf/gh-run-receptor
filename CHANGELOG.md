@@ -4,12 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.15.0 - 2026-09-06
+
+- Synchronize the 0.14.0 canonical adoption guide to all eleven tracked clients after
+  byte-identical validation.
 - Add trusted inline Action `config@1` rules with default-branch, same-repository caller
   provenance and the same bounded parser and interpretation path as repository policy.
 - Add `report-ready` and `error-category` Action outputs so fail-open reporter faults can
   be handled without scraping logs or changing the source workflow conclusion.
-- Synchronize the 0.14.0 canonical adoption guide to all eleven tracked clients after
-  byte-identical validation.
+- Validate exact public permission behavior, same-repository pull-request rejection, and
+  the canonical inline `workflow_run` reporter through hosted gates.
 
 ## 0.14.0 - 2026-09-06
 

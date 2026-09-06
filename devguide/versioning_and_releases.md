@@ -43,3 +43,9 @@ a live canonical `workflow_run` reporter, source-first consumption from only the
 run ID, and installed-extension validation on Ubuntu, macOS, and Windows. The report must
 distinguish verified source facts, verified reporter identity, and published rather than
 recomputed interpretation.
+
+The `0.15.0` gate additionally requires inline `config@1` equivalence, default-branch
+provenance, stable fail-open outputs, exact public permission observations, live
+same-repository pull-request rejection, and a canonical `workflow_run` report selected by
+trusted inline policy. Private-repository and fork behavior remain unclaimed unless tested
+in those environments.
