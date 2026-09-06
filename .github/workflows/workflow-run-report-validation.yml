@@ -1,0 +1,47 @@
+name: Terminal workflow_run report validation
+
+on:
+  workflow_run:
+    workflows: [Distributed Action validation]
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  report:
+    name: Report the completed source run
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Build the terminal source report
+        id: receptor
+        uses: uibcdf/gh-run-receptor@0.12.0
+        with:
+          run-id: ${{ github.event.workflow_run.id }}
+          repository: ${{ github.repository }}
+          profile: ci
+          capture: metadata
+          report-name: terminal-source-report
+          strict-reporter: "true"
+
+      - name: Verify source identity and terminal truth
+        shell: python
+        env:
+          ASSESSMENT: ${{ steps.receptor.outputs.assessment }}
+          CONCLUSION: ${{ steps.receptor.outputs['github-conclusion'] }}
+          REPORT_PATH: ${{ steps.receptor.outputs['report-path'] }}
+          SOURCE_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          SOURCE_RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          import json
+          import os
+          from pathlib import Path
+
+          report = json.loads(Path(os.environ["REPORT_PATH"]).read_text(encoding="utf-8"))
+          assert report["subject"]["run_id"] == int(os.environ["SOURCE_RUN_ID"])
+          assert report["github"]["status"] == "completed"
+          assert report["github"]["conclusion"] == os.environ["SOURCE_CONCLUSION"]
+          assert os.environ["CONCLUSION"] == os.environ["SOURCE_CONCLUSION"]
+          assert os.environ["ASSESSMENT"] == "PASS"

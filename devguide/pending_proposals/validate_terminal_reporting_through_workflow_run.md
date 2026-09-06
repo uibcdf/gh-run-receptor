@@ -53,6 +53,14 @@ operating systems. The downstream run ID, report bytes, duration, source identit
 conclusion parity remain unmeasured until the listener is committed and a new source run is
 manually dispatched.
 
+## Implementation progress
+
+The listener now targets only completed `Distributed Action validation` runs. It grants
+read-only Actions and contents access, performs no checkout or artifact download, calls the
+released 0.12.0 Action with the event run ID, and independently asserts source ID, completed
+status, conclusion parity, and receptor `PASS`. Static tests guard each security and truth
+property. Live evidence still requires one new manual source dispatch.
+
 ## What was refuted
 
 - Treating a final same-run job as terminal is rejected because the source run is active.
