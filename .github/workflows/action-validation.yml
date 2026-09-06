@@ -25,6 +25,8 @@ jobs:
 
       - name: Validate the GitHub CLI script extension
         shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           gh extension install .
           gh run-receptor --version

@@ -82,6 +82,12 @@ The manual workflow will next validate the checkout-local Action and script exte
 Ubuntu, macOS, and Windows against retained successful and failed runs and its own active
 run. No cross-platform or timing claim is made until that run completes.
 
+The first hosted run, `34043472028`, proved extension installation and version execution on
+all three operating systems, then failed during extension removal because GitHub CLI also
+requires `GH_TOKEN` for that command in Actions. The validation step now receives the
+ephemeral token through its environment. No Action step had run, so this result is recorded
+as a validation-harness defect rather than Action evidence.
+
 ## What was refuted
 
 - A separately implemented JavaScript reporter is rejected for the first slice because it

@@ -16,6 +16,7 @@ def test_action_validation_is_manual_bounded_and_cross_platform():
     assert "timeout-minutes: 15" in source
     assert "os: [ubuntu-latest, macos-latest, windows-latest]" in source
     assert "gh extension install ." in source
+    assert "GH_TOKEN: ${{ github.token }}" in source
     assert source.count("uses: ./") == 3
     assert 'assert os.environ["ASSESSMENT"] == "PASS"' in source
     assert 'assert os.environ["ASSESSMENT"] == "PENDING"' in source
@@ -34,4 +35,3 @@ def test_action_validation_pins_every_external_action():
         "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7"
     ]
     assert re.fullmatch(r"[^@]+@[0-9a-f]{40} # v[0-9]+", external[0])
-
