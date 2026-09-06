@@ -7,7 +7,7 @@ evidence.
 
 ## Current state
 
-The project has a `0.11.0` tagged source preview but no published package-index artifact or
+The project is preparing a `0.12.0` tagged source preview but has no published package-index artifact or
 stable public contract;
 the contracts in this guide are explicit but provisional unless marked settled. The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
@@ -57,7 +57,7 @@ The current MVP implements:
   exact workflow rules and metadata-only remote smoke validation.
 - a first checkout-local composite Action implementation with bounded summaries, scalar
   outputs, canonical JSON artifacts, explicit publisher provenance, and offline tests;
-  hosted cross-platform validation is pending.
+  hosted checkout-local and remote-source validation passing on all three operating systems.
 
 It does not yet provide a broad cross-workflow corpus; run comparison; remote workflow
 discovery; pattern rules; or a released and permission-validated embedded Action. The CI,
@@ -134,11 +134,9 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The next milestone validates and releases the first composite Action on Ubuntu, macOS, and
-Windows, including checkout-local GitHub CLI extension installation, honest active-run
-state, terminal source outcomes, startup cost, and artifact bytes. It then closes the
-remaining outcome and distribution gaps: Zenodo verification and a minimum supported
-GitHub CLI.
+The next milestone adds the trusted downstream `workflow_run` integration and verifies
+restricted-token and pull-request boundaries. It then closes the remaining outcome and
+distribution gaps: Zenodo verification and a minimum supported GitHub CLI.
 Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need

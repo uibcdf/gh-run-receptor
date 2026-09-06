@@ -219,7 +219,14 @@ Offline tests verify pinned Action dependencies, validated inputs, completed suc
 failure, honest `PENDING` state for the current run, fail-open reporter errors, strict-mode
 step behavior, escaped summaries, scalar outputs, bounded report size, and publisher
 provenance. A manual three-operating-system workflow is committed but has not yet supplied
-live evidence; this checkpoint therefore makes no cross-platform Action claim.
+live evidence.
+
+Checkout-local run `34043552961` then passed Ubuntu, macOS, and Windows. It covered script
+extension installation, completed `PASS`, current-run `PENDING`, and a Linux completed
+`FAIL` source without reporter failure. Seven reports were 1,559--2,009 bytes and Action
+steps took 3--9 seconds at GitHub's one-second timing resolution. Distributed-source run
+`34043774335` independently passed 3/3 after downloading the Action by full commit SHA and
+verified exact publisher repository/ref provenance.
 
 ## What this does not prove
 
@@ -227,7 +234,6 @@ live evidence; this checkpoint therefore makes no cross-platform Action claim.
   yet a complete diagnosis engine.
 - The committed real-run corpus remains narrow; timed-out, restricted-token,
   active-transition, and real Zenodo cases remain gaps.
-- Cross-platform installation as a GitHub CLI script extension is not yet validated; the
-  matrix proves the Python console entry point installed from its wheel.
+- Restricted-token and fork behavior of the embedded Action are not yet validated.
 - External registries, GitHub Releases, Git refs, and archive records are not queried by
   the first release profile.

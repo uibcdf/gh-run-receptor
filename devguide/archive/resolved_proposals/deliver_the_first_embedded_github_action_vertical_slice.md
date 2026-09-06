@@ -1,12 +1,12 @@
 ---
 summary: Deliver the first embedded GitHub Action vertical slice
 issue: uibcdf/gh-run-receptor#17
-status: active
+status: resolved
 opened: 2026-09-06
-closed:
-verification: inspected
+closed: 2026-09-06
+verification: measured
 area: ['github']
-guard:
+guard: tests/test_embedded.py
 normative:
 blocked_by: []
 supersedes: []
@@ -16,8 +16,8 @@ supersedes: []
 
 **Reported:** 2026-09-06, after the external CLI reached a measured cross-platform package
 gate while the embedded-Action roadmap phase still had no implementation credit.
-**Status:** Active; the composite vertical slice passes its offline gate and awaits the
-manual hosted-runner matrix.
+**Status:** Resolved; the composite vertical slice passes offline, checkout-local, and
+remote-source gates on Ubuntu, macOS, and Windows.
 
 ## What
 
@@ -65,8 +65,8 @@ the source workflow completes. By contrast, a reporting job inside its own sourc
 necessarily still executing when it reads that run. Therefore terminal same-run reporting
 is rejected as an unsupported truth claim; the Action must preserve the API's active state.
 
-Cold start, artifact bytes, runtime, runner availability of GitHub CLI, and exact behavior
-on the three hosted operating systems remain unmeasured until the live matrix runs.
+Hosted-runner timing and artifact measurements are recorded below. Restricted tokens,
+forks, and long-term hosted-runner tool availability remain outside this slice.
 
 ## Implementation progress
 
@@ -84,6 +84,11 @@ proved script-extension installation and execution, completed-source `PASS`, cur
 Action invocations took 3--9 seconds at GitHub's one-second metadata resolution. Seven
 JSON artifacts were 1,559--2,009 bytes. A separate three-platform workflow now checks the
 same Action downloaded by exact commit SHA, rather than from the workflow checkout.
+
+Distributed-source run `34043774335` passed 3/3 and verified exact publisher repository and
+ref provenance from the downloaded Action. Together with the 181-test local suite, these
+runs satisfy the first-slice acceptance criteria. Restricted-token, fork, inline-rule, and
+reusable-workflow work remains explicitly outside this resolved proposal.
 
 The first hosted run, `34043472028`, proved extension installation and version execution on
 all three operating systems, then failed during extension removal because GitHub CLI also
@@ -129,12 +134,13 @@ cancel, approval, deployment, and product artifact mutation remain out of scope.
 
 There is no tracked blocker. The composite approach depends on hosted-runner Python setup,
 an installed GitHub CLI transport, package-index access for setup-python itself, and Actions
-artifact service availability. The first live run must distinguish source incompatibility
-from runner or service failure. Source-action version provenance also needs an explicit
-fallback when a downloaded action directory has no Git metadata.
+artifact service availability. Hosted validation distinguished a harness authentication
+fault from Action behavior. Publisher repository/ref fields provide source provenance
+without requiring Git metadata in the downloaded Action directory.
 
 ## Provenance
 
-Design inspection on Linux, Python 3.13.14, GitHub CLI 2.81.0, gh-run-receptor 0.11.0,
+Design and implementation inspection on Linux, Python 3.13.14, GitHub CLI 2.81.0,
+gh-run-receptor 0.11.0 through the 0.12.0 release candidate,
 2026-09-06. Upstream behavior was checked against GitHub's official metadata syntax,
 contexts, workflow commands, and workflow event documentation.

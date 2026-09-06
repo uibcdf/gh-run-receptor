@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.12.0 - 2026-09-06
+
 - Add the first composite GitHub Action around the shared capture and report core.
 - Publish bounded compact logs, escaped job summaries, scalar outputs, and a canonical JSON
   artifact without turning source-workflow failure into reporter failure.

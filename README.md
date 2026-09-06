@@ -5,11 +5,11 @@ repetitive run output into a compact, truth-preserving report while retaining a 
 path to the captured evidence.
 
 The project is in pre-1.0 development; no package has been published to a package index and
-the public contract may still evolve. The `0.11.0` source release can inspect, watch, and
+the public contract may still evolve. The `0.12.0` source release can inspect, watch, and
 replay structured run evidence. Install the GitHub CLI extension at the exact preview tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 0.11.0
+gh extension install uibcdf/gh-run-receptor --pin 0.12.0
 gh run-receptor --version
 ```
 
@@ -27,6 +27,38 @@ Use `--receptor=human` for an explanatory terminal report. When omitted, the com
 selects `human` for an interactive terminal and `llm` when stdout is redirected. Use
 `--format=json` for the versioned structured report; JSON is a format, not a receptor.
 The ordinary native GitHub presentation remains available through `gh run view`.
+
+The same release provides a composite Action. For a truthful terminal report, invoke it
+from a downstream workflow after the source workflow completes:
+
+```yaml
+name: Compact CI report
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: uibcdf/gh-run-receptor@0.12.0
+        with:
+          run-id: ${{ github.event.workflow_run.id }}
+          repository: ${{ github.repository }}
+          profile: ci
+```
+
+The Action prints bounded compact text, writes an escaped job summary and scalar outputs,
+and uploads the canonical JSON report. Invoking it inside the source run is supported, but
+the result is honestly `PENDING` because that run is still active. Reporter faults are
+fail-open by default; set `strict-reporter: "true"` only in controlled integration gates.
+High-assurance consumers may pin the full release commit SHA instead of the tag.
 
 The current MVP recognizes clear Conda matrices automatically. When failure logs were
 captured, it reports independently reusable platform artifacts and groups repeated causes
@@ -88,7 +120,7 @@ gh run-receptor config explain .github/workflows/build_conda.yaml
 
 Live capture reads policy only from the repository's default branch, stores its revision
 and digest in the evidence bundle, and fails if required platforms are absent. Version
-`0.11.0` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
+`0.12.0` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
 patterns and unknown settings rather than silently ignoring them.
 
 An explicit `--attempt` reads the attempt-specific run, jobs, and logs endpoints. Bundle

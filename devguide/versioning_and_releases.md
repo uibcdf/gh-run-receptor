@@ -33,3 +33,7 @@ entry point; script-extension support requires its own installation gate.
 
 A tag identifies source but does not by itself publish a package or GitHub Release. Those
 are separate, explicit release steps.
+
+The `0.12.0` gate additionally requires checkout-local and exact-commit remote-source
+execution of the composite Action on Ubuntu, macOS, and Windows. A same-run test must stay
+`PENDING`; a completed source failure must not become a reporter failure.

@@ -26,19 +26,9 @@ page and retain only a concise decision record here.
 | Reader selection | `human` and `llm`; automatic TTY selection | JSON remains an orthogonal output format |
 | Project license | MIT, aligned with MolSysMT and MolSysViewer | Source and distributed artifacts include `LICENSE` |
 | Live fixture ownership | Use reviewed public UIBCDF captures and manual gh-run-receptor experiments; add a separate fixture repository only when repeated live coverage justifies it | No scheduled or push-triggered failure generators; synthetic cases remain where GitHub cannot safely produce the source state |
+| Initial Action distribution | Thin composite Action around the dependency-free shared Python core and hosted `gh` command | Preserve one interpretation path across operating systems; pin runtime/artifact Actions and record publisher provenance |
 
 ## Open decision gates
-
-### OD-001: Stable Action distribution
-
-- **Question:** bundled JavaScript, packaged Python, or thin composite Action?
-- **Needed evidence:** cold-start benchmarks on Linux, macOS, and Windows; artifact size;
-  dependency and provenance review; release-maintenance cost.
-- **Gate:** before publishing the first stable Action.
-- **Current candidate:** a thin composite Action runs the dependency-free shared Python
-  core with commit-pinned runtime and artifact Actions. A separate JavaScript model and a
-  Linux-only container are rejected. The decision closes only after hosted Linux, macOS,
-  and Windows cold-start and artifact measurements pass from released source.
 
 ### OD-002: Stable adaptive-capture threshold
 
