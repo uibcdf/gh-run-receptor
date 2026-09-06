@@ -33,7 +33,7 @@ transient failures are bounded, untrusted names are escaped, and completed runs 
 a redundant transition. Three consecutive acquisition failures terminate the watch instead
 of retrying forever. A live completed Conda run produced only its one-line final
 report. No active UIBCDF run was available, so live transition behavior is still an
-explicit validation gap.
+explicit validation gap at that checkpoint; run `34027741137` closes it below.
 
 A `0.1.1` wheel was built without dependency download, installed into a fresh temporary
 virtual environment, and invoked through its installed console entry point. The wheel
@@ -149,6 +149,11 @@ public UIBCDF repositories inspected on 2026-09-06. A minimal manual workflow at
 `34027741137` completed as `cancelled`; its job and interrupted wait step were also
 `cancelled`. The receptor returned `CANCELLED` and exit status 2 from a complete 20,380-byte
 metadata bundle.
+
+The same run supplied the first live active-watch observation. During approximately one
+minute of execution, watch emitted one initial `in_progress` state and no unchanged
+snapshots. At completion it emitted the job transition, run transition, and one final
+report. The simulated-clock contract therefore agrees with observed remote behavior.
 
 This refutes the assumption that standard Actions job timeout generates the API's
 `timed_out` conclusion. GitHub documents the setting as automatic cancellation. The

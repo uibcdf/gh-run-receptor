@@ -125,9 +125,9 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The next milestone closes the remaining outcome and distribution gaps: active-run
-transitions, Zenodo verification, and supported platform installation. Standard job
-timeout is now measured as cancellation; authentic
+The next milestone closes the remaining outcome and distribution gaps: Zenodo verification
+and supported platform installation. Standard job timeout is now measured as cancellation;
+authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need
 structured producer evidence or new capture sources rather than name inference.

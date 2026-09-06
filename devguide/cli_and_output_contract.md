@@ -104,7 +104,8 @@ It polls only run and paginated job metadata until terminal state, emits transit
 stderr, retries at most two consecutive transient acquisition failures, and performs one
 ordinary capture/report operation after completion. An already completed run skips the
 initial snapshot and transitions. Cancellation by the user returns 130. Live active-run
-behavior remains unclaimed until observed outside the simulated clock suite.
+behavior is validated by run `34027741137`: watch emitted one initial state, one job
+completion, one run completion, and one final report without repeated snapshots.
 
 ### `compare`
 

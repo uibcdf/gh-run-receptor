@@ -105,15 +105,15 @@ its exit condition and deliverables are satisfied:
 
 | Phase | Weight toward 1.0 | Evidenced credit | Current state |
 | --- | ---: | ---: | --- |
-| Phase 0: corpus and feasibility | 15% | 14% | Measured sanitized fixtures cover native/noarch Conda, failing CI, successful/failing documentation and npm release workflows, cancellation, expired logs, and paired reruns; a live experiment documents why standard job timeout cannot generate `timed_out`; restricted-token, active-transition, and Zenodo evidence remain |
+| Phase 0: corpus and feasibility | 15% | 14% | Measured sanitized fixtures cover native/noarch Conda, failing CI, successful/failing documentation and npm release workflows, cancellation, expired logs, and paired reruns; a live experiment documents why standard job timeout cannot generate `timed_out`; authentic `timed_out` and Zenodo evidence remain |
 | Phase 1: generic CLI | 30% | 28% | Capture, strict validated replay, formal bundle/model/report schemas, source-referenced normalization, bounded reports, attempt-specific historical truth, outcome exit-code parity, degraded log analysis, and structured redacted acquisition failures are tested; remaining real outcome cases and byte-identical replay timing remain |
 | Phase 2: rules and profiles | 20% | 18% | Initial native/noarch Conda, CI, documentation, and release interpretations plus repeated-failure grouping, strict trusted exact-match configuration, local discovery, and non-overwriting `init` are tested; richer rules and external release verification remain |
 | Phase 3: embedded Action | 15% | 0% | Contract designed; no distributed Action implementation yet |
-| Phase 4: aggregation and comparison | 10% | 2% | Transition-only watch tested; aggregation and comparison remain |
+| Phase 4: aggregation and comparison | 10% | 3% | Transition-only watch is unit-tested and measured against one active remote run; aggregation and comparison remain |
 | Cross-cutting release gate | 10% | 2% | Flat installable package, tag-derived version, local tests, and wheel smoke test verified on Linux; platform and release gates remain |
 
 Design completion is reported separately from implementation progress. The evidenced
-implementation credit at this checkpoint is **64% toward 1.0**. This is not a schedule
+implementation credit at this checkpoint is **65% toward 1.0**. This is not a schedule
 estimate: credit is deliberately withheld where a phase's required corpus, schema,
 platform, or distribution evidence is absent. Percentages change only with linked tests,
 builds, or benchmark evidence, not by subjective confidence.
