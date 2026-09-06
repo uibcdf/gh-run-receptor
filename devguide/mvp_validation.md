@@ -197,6 +197,21 @@ counts. Declaring LF checkout for `tests/fixtures/**` fixed transport without we
 bundle validation; the second run then passed 9/9. Job durations ranged from 15 to 45
 seconds.
 
+## Client adoption validation
+
+The canonical 0.11.0 guide is synchronized byte-identically to eleven client repositories:
+MolSysMT, MolSysViewer, PyUnitWizard, SMonitor, ArgDigest, DepDigest, ElastNetMT, TopoMT,
+PharmacophoreMT, pytest-receptor, and the Conda build Action. The eight newly configured
+Python clients declare 37 exact workflow-path rules. Every configuration passes the strict
+`config check`; Conda expectations come from explicit platform flags in each workflow,
+not from filename inference.
+
+Metadata-only remote smokes against one retained run from each newly configured client
+loaded policy from the default branch and preserved all eight GitHub conclusions: five
+`PASS` and three `FAIL`. The GitHub-generated `pages-build-deployment` workflow in
+ArgDigest correctly remained `generic` because it is not the configured source workflow.
+No logs were needed for this adoption check.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

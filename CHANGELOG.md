@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## Unreleased
+
+- Track ElastNetMT, TopoMT, and PharmacophoreMT in the canonical consumer-guide sync set.
+- Deploy strict workflow rules and the 0.11.0 guide to eight additional client repositories.
+
 ## 0.11.0 - 2026-09-06
 
 - Add a bounded, manually dispatched Ubuntu, macOS, and Windows compatibility matrix for

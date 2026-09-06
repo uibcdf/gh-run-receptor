@@ -53,6 +53,8 @@ The current MVP implements:
 - a manually dispatched nine-combination compatibility gate proving the Python console
   command, suite, build, wheel installation, and smoke path on Ubuntu, macOS, and Windows
   with Python 3.11 through 3.13.
+- strict repository policy deployed across eight additional MolSysSuite clients, with 37
+  exact workflow rules and metadata-only remote smoke validation.
 
 It does not yet provide a broad cross-workflow corpus; run comparison; remote workflow
 discovery; pattern rules; or the embedded Action. The CI, documentation, Conda, release, and
