@@ -23,6 +23,10 @@ inputs:
     description: Safe artifact prefix; source run ID and attempt are appended
     required: false
     default: gh-run-receptor-report
+  rules:
+    description: Trusted default-branch gh-run-receptor config@1 document
+    required: false
+    default: ""
   strict-reporter:
     description: Failing the step when the reporter itself cannot produce a report
     required: false
@@ -50,6 +54,12 @@ outputs:
   report-path:
     description: Runner-local canonical JSON report path
     value: ${{ steps.reporter.outputs['report-path'] }}
+  report-ready:
+    description: Whether the reporter produced a canonical JSON report
+    value: ${{ steps.reporter.outputs['report-ready'] }}
+  error-category:
+    description: Stable reporter error category; empty when report-ready is true
+    value: ${{ steps.reporter.outputs['error-category'] }}
 
 runs:
   using: "composite"
@@ -71,9 +81,15 @@ runs:
         INPUT_PROFILE: ${{ inputs.profile }}
         INPUT_CAPTURE: ${{ inputs.capture }}
         INPUT_REPORT_NAME: ${{ inputs['report-name'] }}
+        INPUT_RULES: ${{ inputs.rules }}
         INPUT_STRICT_REPORTER: ${{ inputs['strict-reporter'] }}
         RECEPTOR_ACTION_REPOSITORY: ${{ github.action_repository }}
         RECEPTOR_ACTION_REF: ${{ github.action_ref }}
+        RECEPTOR_CALLER_EVENT: ${{ github.event_name }}
+        RECEPTOR_CALLER_REF: ${{ github.ref }}
+        RECEPTOR_CALLER_REPOSITORY: ${{ github.repository }}
+        RECEPTOR_CALLER_WORKFLOW_REF: ${{ github.workflow_ref }}
+        RECEPTOR_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
       run: |
         import runpy
         runpy.run_module("gh_run_receptor.embedded", run_name="__main__")

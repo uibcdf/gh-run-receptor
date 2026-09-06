@@ -63,11 +63,15 @@ The implemented preview Action accepts:
 - `profile`: built-in or automatic interpretation profile;
 - `capture`: `adaptive`, `full`, or `metadata`;
 - `report-name`: safe artifact prefix, limited to 48 characters;
+- `rules`: an optional multiline `config@1` document trusted only from a same-repository
+  workflow definition on the default branch;
 - `strict-reporter`: opt-in development behavior for treating reporter faults as errors.
 
 Repository default-branch rules remain active through the shared capture path. Inline
-rules and alternate configuration revisions are deferred until precedence and pull-request
-trust behavior are specified and tested.
+rules use the same bounded parser, exact workflow selection, profiles, and settings. They
+override the captured repository configuration only when present and trusted; explicit
+`profile` still overrides the selected rule's profile. Alternate configuration revisions
+remain unsupported.
 
 It emits:
 
@@ -75,6 +79,8 @@ It emits:
 - Markdown in `GITHUB_STEP_SUMMARY`;
 - a small `gh-run-receptor.report@1` JSON artifact;
 - scalar outputs for assessment, failed groups, incomplete groups, and report artifact.
+- scalar `report-ready` and `error-category` outputs for automation around fail-open
+  reporter errors.
 
 The Action appends the authoritative source run ID and attempt to `report-name`. The
 default artifact for source run `123`, attempt `2`, is therefore
@@ -106,6 +112,13 @@ The reusable reporter requests only read permissions needed for the selected evi
 It must work with the caller's GitHub context and document limitations for forked pull
 requests and restricted tokens. Inline rules and workflow logs are untrusted data; the
 security constraints in [security.md](security.md) apply.
+
+Inline rules are authorized only when GitHub context identifies the caller workflow and
+current ref as the same repository's default branch. The evaluated repository must equal
+the caller repository. Pull-request merge refs, tags, feature branches, cross-repository
+targets, and incomplete caller context are rejected before evidence acquisition. The
+Action passes context through its own `${{ github.* }}` expressions rather than trusting
+caller-defined environment values.
 
 ## Structured producer events
 

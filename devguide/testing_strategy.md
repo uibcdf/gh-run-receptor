@@ -70,6 +70,13 @@ repository results, missing or contradictory producer identity, non-terminal and
 `workflow_run` publishers, and exact workflow-path disagreement. Its successful fixture
 asserts that source metadata is fetched once and source jobs and logs are never requested.
 
+Inline-rule tests require equivalence with repository rule selection and reject
+pull-request refs, non-default branches, cross-repository targets, missing GitHub context,
+malformed syntax, and size violations before acquisition. Reporter-output tests preserve a
+stable machine-readable category for acquisition, trust, configuration, and internal
+failures. Hosted permission tests remove declared scopes one at a time and record the
+public-repository behavior rather than extrapolating a private-fork claim.
+
 ### Adversarial tests
 
 The cases required by [security.md](security.md) run locally and in CI. Fuzz or property

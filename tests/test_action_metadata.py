@@ -13,6 +13,7 @@ def test_action_metadata_exposes_the_bounded_first_contract():
         "profile",
         "capture",
         "report-name",
+        "rules",
         "strict-reporter",
     ):
         assert f"  {input_name}:\n" in source
@@ -24,12 +25,17 @@ def test_action_metadata_exposes_the_bounded_first_contract():
         "incomplete-groups",
         "report-artifact",
         "report-path",
+        "report-ready",
+        "error-category",
     ):
         assert f"  {output_name}:\n" in source
     assert 'using: "composite"' in source
     assert "GITHUB_STEP_SUMMARY" not in source
     assert "GH_TOKEN: ${{ github.token }}" in source
     assert "INPUT_STRICT_REPORTER: ${{ inputs['strict-reporter'] }}" in source
+    assert "INPUT_RULES: ${{ inputs.rules }}" in source
+    assert "RECEPTOR_CALLER_WORKFLOW_REF: ${{ github.workflow_ref }}" in source
+    assert "RECEPTOR_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}" in source
     assert "continue-on-error: ${{ inputs['strict-reporter'] != 'true' }}" in source
     assert "steps.reporter.outputs['report-ready'] == 'true'" in source
     assert "inputs.run-id" not in source

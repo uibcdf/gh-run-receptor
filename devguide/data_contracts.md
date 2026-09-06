@@ -215,6 +215,13 @@ on repository, run, attempt, SHA, terminal status, conclusion, and URL. The sepa
 misread as independent profile recomputation. Reporter run, artifact ID, exact name, and
 GitHub digest remain visible provenance.
 
+When a trusted Action `rules` input supplies the matched configuration,
+`configuration.source` contains `kind: action_inline`, the caller workflow `path`, its
+default-branch `ref`, the caller `event`, and the SHA-256 digest of the exact input bytes.
+Repository configuration retains its existing path, branch, blob, and content digest
+shape. Both sources feed the same normalized `configuration.match`, `profile`, and
+`settings` fields.
+
 Source-first discovery additionally records `reporter_identity: verified` and the exact
 `reporter_workflow` after GitHub agrees on artifact producer run, `workflow_run` event, run
 path, workflow ID, and workflow path. These fields are absent from explicit historical

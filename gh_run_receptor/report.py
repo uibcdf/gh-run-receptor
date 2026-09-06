@@ -434,6 +434,8 @@ def build_report(
     *,
     profile: str = "generic",
     bundle_directory: Path | None = None,
+    config_override: dict[str, Any] | None = None,
+    config_source_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Building a generic report without changing source conclusions."""
     model = normalize_evidence(manifest, evidence)
@@ -443,7 +445,16 @@ def build_report(
     config_capture = evidence.get("config.json")
     selected_rule = None
     config_source = None
-    if isinstance(config_capture, dict):
+    if config_override is not None:
+        config_source = config_source_override
+        config = config_override
+        selected_rule = select_rule(
+            config,
+            path=workflow.get("path"),
+            workflow_id=workflow.get("id"),
+            name=workflow.get("name") or evidence["run.json"].get("name"),
+        )
+    elif isinstance(config_capture, dict):
         config_source = config_capture.get("source")
         config = config_capture.get("config")
         if isinstance(config, dict):
@@ -1017,10 +1028,16 @@ def render_human(report: dict[str, Any]) -> str:
         source = report["configuration"]["source"] or {}
         match = report["configuration"]["match"] or {}
         match_key, match_value = next(iter(match.items()))
+        source_kind = source.get("kind")
+        heading = (
+            "Inline Action configuration"
+            if source_kind == "action_inline"
+            else "Repository configuration"
+        )
         lines.extend(
             [
                 "",
-                "Repository configuration",
+                heading,
                 f"  Source: {source.get('path', '?')} at {source.get('ref', '?')}",
                 f"  Rule:   {match_key}={_safe_text(match_value)}",
             ]

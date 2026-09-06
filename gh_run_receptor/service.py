@@ -73,6 +73,8 @@ def create_report(
     profile: str,
     capture: str,
     cache_root: Path,
+    config_override: dict[str, Any] | None = None,
+    config_source_override: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Creating one report through the same core used by the external CLI."""
     client = GitHubClient(hostname)
@@ -85,9 +87,15 @@ def create_report(
         policy=capture,
         cache_root=cache_root,
     )
+    build_options: dict[str, Any] = {
+        "profile": profile,
+        "bundle_directory": captured.path,
+    }
+    if config_override is not None:
+        build_options["config_override"] = config_override
+        build_options["config_source_override"] = config_source_override
     return build_report(
         captured.manifest,
         captured.evidence,
-        profile=profile,
-        bundle_directory=captured.path,
+        **build_options,
     )

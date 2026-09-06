@@ -26,3 +26,7 @@ class BundleError(ReceptorError):
 
 class ConfigError(ReceptorError):
     """Representing invalid or conflicting declarative configuration."""
+
+
+class TrustError(ReceptorError):
+    """Representing configuration rejected at a provenance boundary."""

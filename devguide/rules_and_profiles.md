@@ -138,40 +138,52 @@ A pull request cannot supply its own receptor rules and then use those rules to 
 the same pull request. The report records the configuration source, revision, schema
 version, and digest. Explicit alternative trusted revisions remain future work.
 
-## Future inline Action rules
+## Inline Action rules
 
-A future GitHub Action may carry a small multiline rules document:
+The GitHub Action may carry the complete version 1 configuration as a multiline input:
 
 ```yaml
 - if: always()
-  uses: uibcdf/gh-run-receptor@v1
+  uses: uibcdf/gh-run-receptor@0.15.0
   with:
-    profile: conda
     rules: |
-      expected_platforms: [linux-64, osx-64, win-64]
-      artifact_pattern: "*.conda"
+      schema_version: 1
+      workflows:
+        - match:
+            path: .github/workflows/build_conda.yaml
+          profile: conda
+          settings:
+            expected_platforms: [linux-64, osx-64, win-64]
 ```
 
-This syntax is design intent, not an implemented interface. If delivered, inline rules
-will avoid an extra file for simple workflows. Repository configuration is preferred when
-rules are shared, extensive, or need independent validation. Inline settings will never
-be allowed to rewrite source conclusions.
+The input uses the same strict parser, 64 KiB and 1,000-line limits, exact matching, and
+supported settings as `.github/gh-run-receptor.yaml`; it is not a second compact grammar.
+Blank input preserves repository configuration. Trusted inline configuration takes
+precedence over captured repository configuration, while an explicit `profile` input
+takes precedence over the selected rule's profile.
+
+Inline rules are accepted only from a same-repository workflow definition executing on
+that repository's default branch. Pull-request merge refs, feature branches, tags,
+cross-repository evaluation, and incomplete caller context fail before run evidence is
+acquired. Repository configuration remains preferable when rules are shared or extensive.
+Neither source can rewrite GitHub's authoritative conclusions.
 
 ## Matching and precedence
 
 The implemented workflow matching order is:
 
 1. an explicit CLI selection and profile;
-2. an exact workflow path from trusted repository configuration;
-3. a numeric workflow ID from trusted repository configuration;
-4. an exact display name from trusted repository configuration;
-5. conservative auto-detection;
-6. the generic profile.
+2. an explicit Action `profile` input;
+3. an exact match from trusted inline Action configuration, when supplied;
+4. an exact workflow path from trusted repository configuration;
+5. a numeric workflow ID from trusted repository configuration;
+6. an exact display name from trusted repository configuration;
+7. conservative auto-detection;
+8. the generic profile.
 
-Future organization configuration and inline Action settings require their own explicit
-trust and precedence gate. Later layers may refine interpretation but cannot alter
-GitHub's authoritative states. Duplicate identities are a configuration error; list
-order is not an implicit tie-breaker.
+Future organization configuration requires its own explicit trust and precedence gate.
+Later layers may refine interpretation but cannot alter GitHub's authoritative states.
+Duplicate identities are a configuration error; list order is not an implicit tie-breaker.
 
 `config explain` shows the winning exact match and active values. A captured report shows
 the trusted source path and revision. More detailed explanations of ignored candidates

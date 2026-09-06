@@ -63,6 +63,30 @@ the result is honestly `PENDING` because that run is still active. Reporter faul
 fail-open by default; set `strict-reporter: "true"` only in controlled integration gates.
 High-assurance consumers may pin the full release commit SHA instead of the tag.
 
+A small dedicated reporter can keep its full `config@1` policy beside the invocation:
+
+```yaml
+      - uses: uibcdf/gh-run-receptor@0.15.0
+        with:
+          run-id: ${{ github.event.workflow_run.id }}
+          repository: ${{ github.repository }}
+          rules: |
+            schema_version: 1
+            workflows:
+              - match:
+                  path: .github/workflows/build_conda.yaml
+                profile: conda
+                settings:
+                  expected_platforms: [linux-64, osx-arm64, win-64]
+```
+
+This is the same strict configuration document accepted by `config check`. Inline rules
+are trusted only when the caller workflow runs from the same repository's default branch;
+pull-request refs, feature branches, tags, cross-repository targets, and missing provenance
+are rejected before capture. The `report-ready` output is `true` only when the canonical
+JSON report exists; `error-category` is empty on success and provides a bounded recovery
+category on fail-open reporter errors.
+
 Once the canonical downstream workflow has completed, consume its report directly from the
 source run ID without downloading source jobs or logs:
 
@@ -144,10 +168,11 @@ gh run-receptor config check
 gh run-receptor config explain .github/workflows/build_conda.yaml
 ```
 
-Live capture reads policy only from the repository's default branch, stores its revision
-and digest in the evidence bundle, and fails if required platforms are absent. Version
-`0.14.0` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
-patterns and unknown settings rather than silently ignoring them.
+Live capture reads repository policy only from the default branch and accepts Action-local
+policy only through the default-branch provenance gate. It stores the selected source,
+revision, and digest in the evidence bundle and fails if required platforms are absent.
+Version `0.15.0` accepts exact path, numeric ID, or display-name matches; it deliberately
+rejects patterns and unknown settings rather than silently ignoring them.
 
 An explicit `--attempt` reads the attempt-specific run, jobs, and logs endpoints. Bundle
 loading rejects contradictory retained run identity rather than risking a false result.

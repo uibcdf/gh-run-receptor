@@ -405,6 +405,46 @@ def test_explicit_profile_overrides_repository_profile_but_preserves_settings():
     assert report["expectations"]["satisfied"] is True
 
 
+def test_inline_rule_uses_the_same_profile_path_and_exposes_its_provenance():
+    evidence = _evidence(conclusion="success")
+    for job in evidence["jobs.json"]["jobs"]:
+        job["conclusion"] = "success"
+        job["steps"] = []
+    config = {
+        "schema": "gh-run-receptor.config@1",
+        "schema_version": 1,
+        "workflows": [
+            {
+                "match": {"path": ".github/workflows/conda.yaml"},
+                "profile": "conda",
+                "settings": {"expected_platforms": ["linux-64", "win-64", "osx-arm64"]},
+            }
+        ],
+    }
+    source = {
+        "kind": "action_inline",
+        "path": ".github/workflows/reporter.yml",
+        "ref": "refs/heads/main",
+        "event": "workflow_run",
+        "sha256": "0" * 64,
+    }
+
+    report = build_report(
+        _manifest(),
+        evidence,
+        profile="auto",
+        config_override=config,
+        config_source_override=source,
+    )
+
+    assert report["receptor"]["profile"] == "conda"
+    assert report["receptor"]["assessment"] == "FAIL"
+    assert report["configuration"]["source"] == source
+    assert report["expectations"]["missing_platforms"] == ["osx-arm64"]
+    assert "Inline Action configuration" in render_human(report)
+    assert "Source: .github/workflows/reporter.yml at refs/heads/main" in render_human(report)
+
+
 def test_ci_profile_groups_every_job_and_preserves_official_failure():
     evidence = _evidence()
     evidence["workflow.json"]["path"] = ".github/workflows/CI.yaml"

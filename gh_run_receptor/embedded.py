@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import html
 import os
 import re
@@ -11,7 +12,8 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
-from gh_run_receptor.errors import AcquisitionError, ReceptorError
+from gh_run_receptor.config import parse_config
+from gh_run_receptor.errors import AcquisitionError, ConfigError, ReceptorError, TrustError
 from gh_run_receptor.github import _safe_error_line
 from gh_run_receptor.limits import MAX_REPORT_BYTES
 from gh_run_receptor.published import published_artifact_name
@@ -76,6 +78,49 @@ def _publisher(environment: Mapping[str, str]) -> dict[str, str]:
     return {"kind": "github_action", "repository": repository, "ref": reference}
 
 
+def _inline_configuration(
+    environment: Mapping[str, str], repository: str
+) -> tuple[dict[str, Any] | None, dict[str, str] | None]:
+    text = environment.get("INPUT_RULES", "")
+    if not text.strip():
+        return None, None
+    caller_repository = environment.get("RECEPTOR_CALLER_REPOSITORY", "")
+    default_branch = environment.get("RECEPTOR_DEFAULT_BRANCH", "")
+    event = environment.get("RECEPTOR_CALLER_EVENT", "")
+    caller_ref = environment.get("RECEPTOR_CALLER_REF", "")
+    workflow_ref = environment.get("RECEPTOR_CALLER_WORKFLOW_REF", "")
+    expected_ref = f"refs/heads/{default_branch}"
+    prefix = f"{caller_repository}/"
+    if (
+        repository != caller_repository
+        or caller_repository.count("/") != 1
+        or not default_branch
+        or not event
+        or caller_ref != expected_ref
+        or not workflow_ref.startswith(prefix)
+        or "@" not in workflow_ref
+    ):
+        raise TrustError("inline rules require a same-repository default-branch workflow")
+    workflow_path, workflow_revision = workflow_ref[len(prefix) :].rsplit("@", 1)
+    if (
+        workflow_revision != expected_ref
+        or not workflow_path.startswith(".github/workflows/")
+        or workflow_path.count("/") != 2
+        or not workflow_path.endswith((".yml", ".yaml"))
+    ):
+        raise TrustError("inline rules require a same-repository default-branch workflow")
+    data = text.encode("utf-8")
+    config = parse_config(data)
+    source = {
+        "kind": "action_inline",
+        "path": workflow_path,
+        "ref": workflow_revision,
+        "event": event,
+        "sha256": hashlib.sha256(data).hexdigest(),
+    }
+    return config, source
+
+
 def _failed_groups(report: dict[str, Any]) -> int:
     groups = set()
     for job in report["jobs"]:
@@ -131,10 +176,23 @@ def _safe_error(error: Exception) -> str:
     return f"RECEPTOR_ERROR: {detail}"
 
 
-def _write_error(environment: Mapping[str, str], message: str) -> None:
+def _error_category(error: Exception) -> str:
+    if isinstance(error, AcquisitionError):
+        return error.category
+    if isinstance(error, TrustError):
+        return "untrusted_inline_rules"
+    if isinstance(error, ConfigError):
+        return "invalid_configuration"
+    return "reporter_error"
+
+
+def _write_error(environment: Mapping[str, str], message: str, category: str) -> None:
     output = environment.get("GITHUB_OUTPUT")
     if output:
-        _append_outputs(Path(output), {"report-ready": "false"})
+        _append_outputs(
+            Path(output),
+            {"report-ready": "false", "error-category": category},
+        )
     summary = environment.get("GITHUB_STEP_SUMMARY")
     if summary:
         text = f"## gh-run-receptor\n\n`{html.escape(message)}`\n"
@@ -158,17 +216,24 @@ def run_action(
         capture = _choice(values, "INPUT_CAPTURE", _CAPTURE_POLICIES, "adaptive")
         _choice(values, "INPUT_STRICT_REPORTER", {"true", "false"}, "false")
         report_name_prefix = _report_name_prefix(values)
+        inline_config, inline_source = _inline_configuration(values, repository)
         runner_temp = _required_path(values, "RUNNER_TEMP")
         output_path = _required_path(values, "GITHUB_OUTPUT")
         summary_path = _required_path(values, "GITHUB_STEP_SUMMARY")
         cache_root = runner_temp / "gh-run-receptor-action"
+        report_options: dict[str, Any] = {
+            "repository": repository,
+            "hostname": _hostname(values),
+            "run_id": run_id,
+            "profile": profile,
+            "capture": capture,
+            "cache_root": cache_root,
+        }
+        if inline_config is not None:
+            report_options["config_override"] = inline_config
+            report_options["config_source_override"] = inline_source
         report = report_factory(
-            repository=repository,
-            hostname=_hostname(values),
-            run_id=run_id,
-            profile=profile,
-            capture=capture,
-            cache_root=cache_root,
+            **report_options,
         )
         report["publisher"] = _publisher(values)
         report_name = published_artifact_name(
@@ -195,12 +260,13 @@ def run_action(
                 "report-artifact": report_name,
                 "report-path": str(report_path),
                 "report-ready": "true",
+                "error-category": "",
             },
         )
         print(compact, end="")
         return 0
     except (ReceptorError, OSError, KeyError, TypeError, ValueError) as error:
-        _write_error(values, _safe_error(error))
+        _write_error(values, _safe_error(error), _error_category(error))
         return 5
 
 

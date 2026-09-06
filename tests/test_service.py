@@ -94,3 +94,39 @@ def test_create_report_delegates_to_the_same_capture_and_report_core(tmp_path, m
             {"profile": "ci", "bundle_directory": Path("bundle")},
         )
     ]
+
+
+def test_create_report_passes_inline_config_to_the_shared_builder(tmp_path, monkeypatch):
+    captured = CapturedEvidence(
+        manifest={"schema": "bundle"},
+        evidence={"run.json": {"id": 42}},
+        path=Path("bundle"),
+    )
+    client = _Client()
+    build_calls = []
+    config = {"schema": "gh-run-receptor.config@1"}
+    source = {"kind": "action_inline"}
+
+    monkeypatch.setattr("gh_run_receptor.service.GitHubClient", lambda hostname: client)
+    monkeypatch.setattr(
+        "gh_run_receptor.service.acquire_evidence", lambda *args, **kwargs: captured
+    )
+    monkeypatch.setattr(
+        "gh_run_receptor.service.build_report",
+        lambda *args, **kwargs: build_calls.append((args, kwargs)) or {"schema": "report"},
+    )
+
+    report = create_report(
+        repository="uibcdf/example",
+        hostname="github.com",
+        run_id=42,
+        profile="auto",
+        capture="metadata",
+        cache_root=tmp_path,
+        config_override=config,
+        config_source_override=source,
+    )
+
+    assert report == {"schema": "report"}
+    assert build_calls[0][1]["config_override"] is config
+    assert build_calls[0][1]["config_source_override"] is source

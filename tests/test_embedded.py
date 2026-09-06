@@ -1,6 +1,9 @@
 import json
 from pathlib import Path
 
+import pytest
+
+from gh_run_receptor.config import MAX_CONFIG_BYTES
 from gh_run_receptor.embedded import MAX_REPORT_BYTES, run_action
 from gh_run_receptor.errors import AcquisitionError
 
@@ -63,9 +66,17 @@ def _environment(tmp_path: Path, **overrides):
         "INPUT_PROFILE": "ci",
         "INPUT_CAPTURE": "metadata",
         "INPUT_REPORT_NAME": "receptor-report",
+        "INPUT_RULES": "",
         "INPUT_STRICT_REPORTER": "false",
         "RECEPTOR_ACTION_REPOSITORY": "uibcdf/gh-run-receptor",
         "RECEPTOR_ACTION_REF": "0.12.0",
+        "RECEPTOR_CALLER_EVENT": "workflow_dispatch",
+        "RECEPTOR_CALLER_REF": "refs/heads/main",
+        "RECEPTOR_CALLER_REPOSITORY": "uibcdf/example",
+        "RECEPTOR_CALLER_WORKFLOW_REF": (
+            "uibcdf/example/.github/workflows/reporter.yml@refs/heads/main"
+        ),
+        "RECEPTOR_DEFAULT_BRANCH": "main",
     }
     values.update(overrides)
     return values
@@ -104,6 +115,7 @@ def test_success_publishes_one_canonical_report_summary_and_scalar_outputs(tmp_p
         "report-artifact": "receptor-report-42-1",
         "report-path": str(report_path),
         "report-ready": "true",
+        "error-category": "",
     }
     summary = (tmp_path / "summary").read_text(encoding="utf-8")
     assert "## gh-run-receptor" in summary
@@ -181,7 +193,10 @@ def test_internal_failure_is_bounded_visible_and_has_no_report(tmp_path, capsys)
 
     assert run_action(environment, report_factory=fail) == 5
     outputs = _outputs(tmp_path / "output")
-    assert outputs == {"report-ready": "false"}
+    assert outputs == {
+        "report-ready": "false",
+        "error-category": "permission_denied",
+    }
     rendered = capsys.readouterr().err
     assert rendered.startswith("RECEPTOR_ERROR category=permission_denied:")
     assert token not in rendered
@@ -202,7 +217,10 @@ def test_unsafe_report_name_is_rejected_before_acquisition(tmp_path):
 
     assert run_action(environment, report_factory=factory) == 5
     assert called is False
-    assert _outputs(tmp_path / "output") == {"report-ready": "false"}
+    assert _outputs(tmp_path / "output") == {
+        "report-ready": "false",
+        "error-category": "reporter_error",
+    }
 
 
 def test_report_name_is_unique_for_a_source_rerun(tmp_path):
@@ -217,6 +235,91 @@ def test_report_name_is_unique_for_a_source_rerun(tmp_path):
     assert Path(outputs["report-path"]).name == "receptor-report-42-3.json"
 
 
+def _rules():
+    return """schema_version: 1
+workflows:
+  - match:
+      path: .github/workflows/ci.yml
+    profile: ci
+"""
+
+
+def test_default_branch_inline_rules_reuse_the_strict_configuration(tmp_path):
+    environment = _environment(tmp_path, INPUT_PROFILE="auto", INPUT_RULES=_rules())
+    calls = []
+
+    def factory(**kwargs):
+        calls.append(kwargs)
+        return _report()
+
+    assert run_action(environment, report_factory=factory) == 0
+
+    inline = calls[0]["config_override"]
+    source = calls[0]["config_source_override"]
+    assert inline["schema"] == "gh-run-receptor.config@1"
+    assert inline["workflows"][0]["match"] == {"path": ".github/workflows/ci.yml"}
+    assert source["kind"] == "action_inline"
+    assert source["path"] == ".github/workflows/reporter.yml"
+    assert source["ref"] == "refs/heads/main"
+    assert source["event"] == "workflow_dispatch"
+    assert len(source["sha256"]) == 64
+
+
+@pytest.mark.parametrize(
+    "overrides",
+    [
+        {"RECEPTOR_CALLER_REF": "refs/pull/7/merge"},
+        {
+            "RECEPTOR_CALLER_WORKFLOW_REF": (
+                "uibcdf/example/.github/workflows/reporter.yml@refs/pull/7/merge"
+            )
+        },
+        {"RECEPTOR_CALLER_REF": "refs/heads/feature"},
+        {"RECEPTOR_CALLER_REPOSITORY": "uibcdf/other"},
+        {"INPUT_REPOSITORY": "uibcdf/other"},
+        {"RECEPTOR_DEFAULT_BRANCH": ""},
+        {"RECEPTOR_CALLER_EVENT": ""},
+    ],
+)
+def test_untrusted_inline_rules_fail_before_acquisition(tmp_path, overrides):
+    environment = _environment(tmp_path, INPUT_RULES=_rules(), **overrides)
+    called = False
+
+    def factory(**_):
+        nonlocal called
+        called = True
+
+    assert run_action(environment, report_factory=factory) == 5
+    assert called is False
+    assert _outputs(tmp_path / "output") == {
+        "report-ready": "false",
+        "error-category": "untrusted_inline_rules",
+    }
+
+
+@pytest.mark.parametrize(
+    "rules",
+    [
+        "profile: ci\n",
+        "x" * (MAX_CONFIG_BYTES + 1),
+    ],
+)
+def test_invalid_inline_rules_fail_before_acquisition(tmp_path, rules):
+    environment = _environment(tmp_path, INPUT_RULES=rules)
+    called = False
+
+    def factory(**_):
+        nonlocal called
+        called = True
+
+    assert run_action(environment, report_factory=factory) == 5
+    assert called is False
+    assert _outputs(tmp_path / "output") == {
+        "report-ready": "false",
+        "error-category": "invalid_configuration",
+    }
+
+
 def test_invalid_strict_reporter_value_is_rejected_before_acquisition(tmp_path):
     environment = _environment(tmp_path, INPUT_STRICT_REPORTER="yes")
     called = False
@@ -227,7 +330,10 @@ def test_invalid_strict_reporter_value_is_rejected_before_acquisition(tmp_path):
 
     assert run_action(environment, report_factory=factory) == 5
     assert called is False
-    assert _outputs(tmp_path / "output") == {"report-ready": "false"}
+    assert _outputs(tmp_path / "output") == {
+        "report-ready": "false",
+        "error-category": "reporter_error",
+    }
 
 
 def test_oversized_json_is_a_reporter_failure(tmp_path):
@@ -235,5 +341,8 @@ def test_oversized_json_is_a_reporter_failure(tmp_path):
     report = _report(warning="x" * MAX_REPORT_BYTES)
 
     assert run_action(environment, report_factory=lambda **_: report) == 5
-    assert _outputs(tmp_path / "output") == {"report-ready": "false"}
+    assert _outputs(tmp_path / "output") == {
+        "report-ready": "false",
+        "error-category": "reporter_error",
+    }
     assert not list(tmp_path.glob("*.json"))

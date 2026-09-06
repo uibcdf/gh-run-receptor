@@ -30,7 +30,20 @@ remains a live release-gate case rather than an assumed capability.
 The implemented repository loader reads rules only from the target repository's default
 branch. Support for another explicitly trusted revision remains future work. Pull-request
 head configuration is data, not policy. Reports include the policy path, default-branch
-revision, and digest. Inline Action rules are not yet implemented.
+revision, and digest.
+
+Inline Action configuration has a separate provenance gate. It is accepted only when the
+GitHub-provided caller repository, current ref, workflow ref, event, and default branch
+show that an immediate workflow file is executing from that repository's default branch,
+and only when the evaluated repository is the same repository. Its exact bytes are hashed
+and its workflow path, revision, event, and digest remain in the report. Pull-request merge
+refs and fork-controlled workflow revisions fail before capture.
+
+The `workflow_run` event can execute with privileges unavailable to its source workflow.
+The canonical reporter therefore grants only `actions: read` and `contents: read`, checks
+out no source revision, and never executes source artifacts, caches, scripts, or suggested
+commands. Inline policy comes from the reporter definition on the default branch, not from
+the source run.
 
 The rule language is declarative. The dependency-free parser accepts a narrow YAML subset
 and rejects tags, anchors, flow mappings, multiline scalars, patterns, unknown fields, and

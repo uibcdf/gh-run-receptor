@@ -16,7 +16,8 @@ supersedes: []
 
 **Reported:** 2026-09-06, after source-first report discovery closed the reporter identity
 boundary but left Action-local customization and restricted-token behavior unverified.
-**Status:** Open; the trust and validation contract is defined below.
+**Status:** Open; the local implementation and focused regression suite pass, while the
+hosted permission and caller-context evidence remains to be recorded.
 
 ## What
 
@@ -124,3 +125,12 @@ repository visibility and may remain narrower than the parser/trust contract.
 Design sources are GitHub's official `workflow_run`, workflow syntax, repository Actions
 settings, and `GITHUB_TOKEN` documentation as checked on 2026-09-06. Local and hosted
 provenance will be appended during implementation.
+
+The first local implementation reuses `parse_config`, `select_rule`, and `build_report`,
+adds provenance to the ordinary configuration source, rejects untrusted or invalid input
+before constructing the runner, and exposes stable Action outputs. Focused validation on
+2026-09-06 passed Ruff lint and format plus 61 receptor-formatted tests covering embedded
+execution, Action metadata, service delegation, and report equivalence. The same checkout
+then passed the full 235-test receptor-formatted suite, Ruff lint and format, developer
+report validation, and isolated wheel and source-distribution construction. Hosted gates
+remain pending.
