@@ -199,7 +199,7 @@ seconds.
 
 ## Client adoption validation
 
-The canonical 0.13.1 guide is synchronized byte-identically to eleven client repositories:
+The canonical 0.14.0 guide is synchronized byte-identically to eleven client repositories:
 MolSysMT, MolSysViewer, PyUnitWizard, SMonitor, ArgDigest, DepDigest, ElastNetMT, TopoMT,
 PharmacophoreMT, pytest-receptor, and the Conda build Action. The eight configured
 Python clients declare 37 exact workflow-path rules. Every configuration passes the strict
@@ -211,6 +211,12 @@ loaded policy from the default branch and preserved all eight GitHub conclusions
 `PASS` and three `FAIL`. The GitHub-generated `pages-build-deployment` workflow in
 ArgDigest correctly remained `generic` because it is not the configured source workflow.
 No logs were needed for this adoption check.
+
+The 0.14.0 synchronization teaches every client the canonical reporter filename,
+attempt-qualified artifact identity, source-first command, explicit fallback, and remaining
+fork/restricted-token boundary. Each repository received only the guide in a `[skip ci]`
+commit after exact-copy validation; TopoMT's pre-existing untracked smoke notebook was left
+untouched.
 
 ## Embedded Action offline validation
 

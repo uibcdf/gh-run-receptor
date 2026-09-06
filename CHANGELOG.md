@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+- Synchronize the 0.14.0 canonical adoption guide to all eleven tracked clients after
+  byte-identical validation.
+
 ## 0.14.0 - 2026-09-06
 
 - Add `published-source`, which discovers a compact report from the original run ID and
