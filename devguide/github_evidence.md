@@ -79,6 +79,16 @@ The run response is authoritative for run status and conclusion. Job responses a
 authoritative for jobs. Step metadata is authoritative for step outcome and conclusion
 when present. Log text never overrides these fields.
 
+`timed_out` remains a valid open-enum conclusion, but it must not be inferred from elapsed
+time or a configured job timeout. In measured run `34027741137`, GitHub applied
+`timeout-minutes: 1` by reporting the run, job, and interrupted step as `cancelled`.
+GitHub's workflow syntax likewise describes job timeout as automatic cancellation. A
+`timed_out` assessment therefore requires that exact source conclusion; synthetic coverage
+is retained until an authentic workflow-run example is observed. The upstream distinctions
+are documented in GitHub's [workflow syntax](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax),
+[workflow-run REST API](https://docs.github.com/en/rest/actions/workflow-runs), and
+[Checks API guide](https://docs.github.com/en/rest/guides/using-the-rest-api-to-interact-with-checks).
+
 ## Logs
 
 The run-log endpoint returns a redirect to an archive; the redirect URL is temporary and

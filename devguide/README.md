@@ -123,10 +123,12 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The next milestone closes the remaining outcome and distribution gaps: real timed-out and
+The next milestone closes the remaining outcome and distribution gaps:
 restricted-permission evidence, active-run transitions, Zenodo verification, and supported
-platform installation. It must also identify which release facts need structured producer
-evidence or new capture sources rather than name inference.
+platform installation. Standard job timeout is now measured as cancellation; authentic
+`timed_out` evidence remains opportunistic because it must not be inferred from elapsed
+time or `timeout-minutes`. The milestone must also identify which release facts need
+structured producer evidence or new capture sources rather than name inference.
 
 The executable task list and exit criteria remain in
 [development_roadmap.md](development_roadmap.md). The configuration and report contracts

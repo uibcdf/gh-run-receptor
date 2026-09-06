@@ -141,6 +141,20 @@ This evidence exposed a critical 0.8.0 defect in which historical jobs were comb
 the current run response. Capture and watch now request the attempt-specific run endpoint,
 and replay rejects a retained run ID, attempt, or head SHA that contradicts its manifest.
 
+## Standard job-timeout experiment
+
+No `timed_out` workflow run was found across the active tool repositories or 22 additional
+public UIBCDF repositories inspected on 2026-09-06. A minimal manual workflow at commit
+`a87e5b9` then ran one inert Ubuntu job with `timeout-minutes: 1`. GitHub run
+`34027741137` completed as `cancelled`; its job and interrupted wait step were also
+`cancelled`. The receptor returned `CANCELLED` and exit status 2 from a complete 20,380-byte
+metadata bundle.
+
+This refutes the assumption that standard Actions job timeout generates the API's
+`timed_out` conclusion. GitHub documents the setting as automatic cancellation. The
+temporary manual workflow was therefore removed rather than retained as a redundant
+cancelled generator. `TIMED_OUT` remains truth-table tested but not real-run validated.
+
 ## What this proves
 
 - Complete remote evidence can be acquired without entering the language-model output

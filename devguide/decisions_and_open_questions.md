@@ -25,6 +25,7 @@ page and retain only a concise decision record here.
 | Implementation start | Python 3.11–3.13, installed `gh` transport adapter | Fast prototype without coupling the data model to transport |
 | Reader selection | `human` and `llm`; automatic TTY selection | JSON remains an orthogonal output format |
 | Project license | MIT, aligned with MolSysMT and MolSysViewer | Source and distributed artifacts include `LICENSE` |
+| Live fixture ownership | Use reviewed public UIBCDF captures and manual gh-run-receptor experiments; add a separate fixture repository only when repeated live coverage justifies it | No scheduled or push-triggered failure generators; synthetic cases remain where GitHub cannot safely produce the source state |
 
 ## Open decision gates
 
@@ -76,13 +77,6 @@ page and retain only a concise decision record here.
 - **Gate:** before CLI 1.0.
 - **Current default:** use the provisional mapping and reject collisions silently coerced to
   generic failure.
-
-### OD-007: Fixture repository and publication policy
-
-- **Question:** which repository owns live fixtures and which captured evidence may be public?
-- **Needed evidence:** retention, license, privacy review, maintenance owner, and cost.
-- **Gate:** before enabling scheduled live integration tests.
-- **Current default:** synthetic and explicitly sanitized local fixtures only.
 
 ### OD-008: Version and support policy
 
