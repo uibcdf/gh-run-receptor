@@ -1,0 +1,14 @@
+name: Fixture - timed out
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  timed-out:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: Wait beyond the job timeout
+        run: sleep 90
