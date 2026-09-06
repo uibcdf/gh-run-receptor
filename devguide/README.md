@@ -7,7 +7,7 @@ evidence.
 
 ## Current state
 
-The project is preparing a `0.13.0` tagged source preview but has no published package-index artifact or
+The project has a `0.13.0` tagged source preview but no published package-index artifact or
 stable public contract;
 the contracts in this guide are explicit but provisional unless marked settled. The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render

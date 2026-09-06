@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+- Synchronize the 0.13.0 consumer guide to all eleven tracked client repositories and
+  verify the tag through isolated wheel and GitHub CLI extension installations.
+
 ## 0.13.0 - 2026-09-06
 
 - Validate the public `0.12.0` Action tag across hosted Ubuntu, macOS, and Windows.

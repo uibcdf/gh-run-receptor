@@ -199,7 +199,7 @@ seconds.
 
 ## Client adoption validation
 
-The canonical 0.12.0 guide is synchronized byte-identically to eleven client repositories:
+The canonical 0.13.0 guide is synchronized byte-identically to eleven client repositories:
 MolSysMT, MolSysViewer, PyUnitWizard, SMonitor, ArgDigest, DepDigest, ElastNetMT, TopoMT,
 PharmacophoreMT, pytest-receptor, and the Conda build Action. The eight configured
 Python clients declare 37 exact workflow-path rules. Every configuration passes the strict
@@ -250,6 +250,10 @@ requests from seven to four (42.9%), transferred bytes from 36,735 to 26,653 (27
 elapsed time from 4.04 to 2.63 seconds (34.9%); peak RSS was effectively unchanged. Manual
 extension run `34047166101` passed the same command on Ubuntu, macOS, and Windows, with the
 consumption step taking 2--3 seconds in every job.
+
+The 0.13.0 wheel installed outside the checkout and the GitHub CLI extension cloned into an
+isolated data directory both reported exact version `0.13.0` and consumed the retained live
+artifact successfully. The release artifacts are a 53 KiB wheel and 72 KiB source archive.
 
 ## What this does not prove
 
