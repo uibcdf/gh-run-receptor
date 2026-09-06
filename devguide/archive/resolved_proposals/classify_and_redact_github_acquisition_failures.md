@@ -1,12 +1,12 @@
 ---
 summary: Classify and redact GitHub acquisition failures
 issue: uibcdf/gh-run-receptor#15
-status: active
+status: resolved
 opened: 2026-09-06
-closed:
+closed: 2026-09-06
 verification: measured
 area: ['github', 'security', 'cli', 'tests']
-guard:
+guard: tests/test_github.py
 normative:
 blocked_by: []
 supersedes: []
@@ -15,7 +15,7 @@ supersedes: []
 # Classify and redact GitHub acquisition failures
 
 **Reported:** 2026-09-06, while closing the restricted-permission evidence gap.
-**Status:** Active; four transport outcomes have been measured or bounded.
+**Status:** Resolved; measured and adversarial transport outcomes are classified safely.
 
 ## What
 
@@ -94,3 +94,12 @@ to a generic category rather than a guessed permission diagnosis.
 Linux, Python 3.13.14, GitHub CLI 2.81.0, gh-run-receptor 0.9.0, 2026-09-06.
 Authenticated probes were read-only; the unauthenticated probes used an isolated temporary
 configuration directory.
+
+## Resolution
+
+`AcquisitionError` now carries a stable category and optional HTTP status. Both JSON and
+download transport failures pass through a bounded control-safe redaction boundary, CLI
+output exposes the category with exit status 5, and optional resources suppress only the
+structured 404 case. Real CLI probes validate missing authentication, 401, and 404; a real
+read-only 403 response and synthetic rate-limit/adversarial inputs cross the same tested
+classifier.

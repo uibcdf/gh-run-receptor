@@ -130,6 +130,14 @@ Authentication failure, insufficient scope, SSO requirements, and inaccessible p
 resources are distinct acquisition errors. They are redacted and reported without
 printing headers or tokens.
 
+The implemented transport categories are `authentication_required` when GitHub CLI has no
+session, `authentication_failed` for HTTP 401, `permission_denied` for HTTP 403,
+`not_found_or_inaccessible` for HTTP 404, `rate_limited` for HTTP 429 or an explicit
+rate-limit diagnostic, and `acquisition_failed` otherwise. The HTTP status is retained
+when observed. Optional-resource lookup suppresses only a structured 404; it does not
+generalize string matching to other errors. Because GitHub may hide inaccessible private
+resources behind 404, the user-facing category preserves that ambiguity.
+
 ## Rate limits and caching
 
 - Cache immutable completed-attempt responses by repository, run ID, attempt, URL, and

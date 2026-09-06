@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.10.0 - 2026-09-06
+
+- Classify GitHub CLI acquisition failures as authentication required, authentication
+  failed, permission denied, not found or inaccessible, rate limited, or generic failure.
+- Keep receptor exit status 5 while exposing the stable category in one bounded stderr
+  line for human and agent recovery.
+- Redact GitHub-token, authorization-header, and token-assignment shapes and make terminal
+  controls visible before remote stderr reaches the user-facing channel.
+- Make optional-resource handling depend on structured HTTP 404 status rather than parsing
+  exception prose.
+- Validate missing-session, HTTP 401, 403, and 404 behavior with real read-only probes and
+  cover rate limits and hostile diagnostics synthetically.
+
 ## 0.9.0 - 2026-09-05
 
 - Fetch and validate the attempt-specific workflow-run response when inspecting or

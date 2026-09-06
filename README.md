@@ -5,11 +5,11 @@ repetitive run output into a compact, truth-preserving report while retaining a 
 path to the captured evidence.
 
 The project is in pre-1.0 development; no package has been published to a package index and
-the public contract may still evolve. The `0.9.0` source release can inspect, watch, and
+the public contract may still evolve. The `0.10.0` source release can inspect, watch, and
 replay structured run evidence. Install the GitHub CLI extension at the exact preview tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 0.9.0
+gh extension install uibcdf/gh-run-receptor --pin 0.10.0
 gh run-receptor --version
 ```
 
@@ -88,13 +88,18 @@ gh run-receptor config explain .github/workflows/build_conda.yaml
 
 Live capture reads policy only from the repository's default branch, stores its revision
 and digest in the evidence bundle, and fails if required platforms are absent. Version
-`0.9.0` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
+`0.10.0` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
 patterns and unknown settings rather than silently ignoring them.
 
 An explicit `--attempt` reads the attempt-specific run, jobs, and logs endpoints. Bundle
 loading rejects contradictory retained run identity rather than risking a false result.
 If requested evidence such as retained logs is unavailable, the receptor preserves the
 official GitHub conclusion but reports `INCOMPLETE` and exits with status 4.
+
+Acquisition failures retain exit status 5 and expose one stable category, such as
+`authentication_required`, `authentication_failed`, `permission_denied`,
+`not_found_or_inaccessible`, or `rate_limited`. Remote diagnostics are bounded and
+credential-shaped values are redacted before stderr is rendered.
 
 ## Measured token reduction
 

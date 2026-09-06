@@ -155,6 +155,20 @@ This refutes the assumption that standard Actions job timeout generates the API'
 temporary manual workflow was therefore removed rather than retained as a redundant
 cancelled generator. `TIMED_OUT` remains truth-table tested but not real-run validated.
 
+## Acquisition-failure validation
+
+The 0.10.0 increment measures missing GitHub CLI authentication, invalid credentials
+(HTTP 401), insufficient Actions-policy permission (HTTP 403), and an unavailable run
+(HTTP 404). Source-tree CLI probes returned exit status 5 with respectively
+`authentication_required`, `authentication_failed`, and `not_found_or_inaccessible`;
+the real 403 transport text is covered through the same classifier boundary.
+
+Unit tests additionally validate HTTP/rate-limit precedence, conservative generic
+fallback, structured optional-404 handling, bounded diagnostics, GitHub-token and
+authorization redaction, and visible terminal/bidirectional controls. No credential value
+was printed, stored, or committed. Automatic authentication, scope changes, and retries
+remain outside the product.
+
 ## What this proves
 
 - Complete remote evidence can be acquired without entering the language-model output

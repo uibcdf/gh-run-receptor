@@ -14,7 +14,7 @@ from gh_run_receptor import __version__
 from gh_run_receptor.bundle import capture_bundle, default_bundle_path, load_bundle
 from gh_run_receptor.config import CONFIG_PATH, load_config, select_rule
 from gh_run_receptor.discovery import discover_workflows, render_config, write_config
-from gh_run_receptor.errors import BundleError, ReceptorError
+from gh_run_receptor.errors import AcquisitionError, BundleError, ReceptorError
 from gh_run_receptor.github import GitHubClient
 from gh_run_receptor.report import build_report, exit_code, render_human, render_json, render_llm
 from gh_run_receptor.watch import watch_run
@@ -286,6 +286,9 @@ def main(arguments: list[str] | None = None) -> int:
         )
         print(_render(report, args.format, args.receptor), end="")
         return exit_code(report)
+    except AcquisitionError as error:
+        print(f"RECEPTOR_ERROR category={error.category}: {error}", file=sys.stderr)
+        return 5
     except ReceptorError as error:
         print(f"RECEPTOR_ERROR: {error}", file=sys.stderr)
         return 5

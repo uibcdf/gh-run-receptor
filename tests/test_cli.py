@@ -5,6 +5,7 @@ import json
 import pytest
 
 from gh_run_receptor.cli import _parser, _run_reference, main
+from gh_run_receptor.errors import AcquisitionError
 
 
 def _bundle(path, conclusion="success"):
@@ -255,6 +256,25 @@ def test_config_check_returns_bounded_receptor_error(tmp_path, capsys):
     captured = capsys.readouterr()
     assert captured.out == ""
     assert captured.err.startswith("RECEPTOR_ERROR: line 1: unsupported schema_version")
+
+
+def test_acquisition_error_exposes_category_and_keeps_exit_five(monkeypatch, capsys):
+    def denied(self, explicit):
+        raise AcquisitionError(
+            "GitHub CLI request failed: permission denied (HTTP 403)",
+            category="permission_denied",
+            http_status=403,
+        )
+
+    monkeypatch.setattr("gh_run_receptor.cli.GitHubClient.repository", denied)
+
+    assert main(["inspect", "42", "--repo", "uibcdf/example"]) == 5
+    captured = capsys.readouterr()
+    assert captured.out == ""
+    assert captured.err == (
+        "RECEPTOR_ERROR category=permission_denied: "
+        "GitHub CLI request failed: permission denied (HTTP 403)\n"
+    )
 
 
 def test_init_previews_without_writing(tmp_path, capsys):

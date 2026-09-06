@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 import tempfile
 from pathlib import Path
@@ -14,6 +15,60 @@ API_VERSION = "2022-11-28"
 MAX_JSON_BYTES = 64 * 1024 * 1024
 MAX_DOWNLOAD_BYTES = 512 * 1024 * 1024
 READ_CHUNK_BYTES = 64 * 1024
+MAX_ERROR_CHARACTERS = 500
+_HTTP_STATUS = re.compile(r"\bHTTP ([1-5][0-9]{2})\b")
+_GITHUB_TOKEN = re.compile(r"\bgh[pousr]_[A-Za-z0-9_]{20,}\b")
+_AUTHORIZATION = re.compile(r"(?i)\b(authorization\s*:\s*(?:bearer|token)\s+)\S+")
+_TOKEN_ASSIGNMENT = re.compile(r"(?i)\b(GH_TOKEN|GITHUB_TOKEN|access_token)=\S+")
+_BIDI_CONTROLS = frozenset(
+    "\u061c\u200e\u200f\u202a\u202b\u202c\u202d\u202e\u2066\u2067\u2068\u2069"
+)
+
+
+def _safe_error_line(error_output: bytes) -> tuple[str, str, int | None]:
+    text = error_output.decode("utf-8", errors="replace")
+    status_match = _HTTP_STATUS.search(text)
+    http_status = int(status_match.group(1)) if status_match else None
+    lowered = text.lower()
+    if http_status == 429 or "rate limit" in lowered:
+        category = "rate_limited"
+    elif http_status == 401:
+        category = "authentication_failed"
+    elif http_status == 403:
+        category = "permission_denied"
+    elif http_status == 404:
+        category = "not_found_or_inaccessible"
+    elif "gh auth login" in lowered and "gh_token" in lowered:
+        category = "authentication_required"
+    else:
+        category = "acquisition_failed"
+
+    if category == "authentication_required":
+        detail = "GitHub CLI is not authenticated; run gh auth login"
+    else:
+        lines = [line.strip() for line in text.splitlines() if line.strip()]
+        detail = lines[-1] if lines else "unknown error"
+        if detail.startswith("gh: "):
+            detail = detail[4:]
+    detail = _GITHUB_TOKEN.sub("[REDACTED]", detail)
+    detail = _AUTHORIZATION.sub(r"\1[REDACTED]", detail)
+    detail = _TOKEN_ASSIGNMENT.sub(r"\1=[REDACTED]", detail)
+    visible = []
+    for character in detail:
+        codepoint = ord(character)
+        if codepoint < 32 or codepoint == 127 or character in _BIDI_CONTROLS:
+            visible.append(f"\\u{codepoint:04x}")
+        else:
+            visible.append(character)
+    bounded = "".join(visible)[:MAX_ERROR_CHARACTERS]
+    return category, bounded, http_status
+
+
+def _cli_failure(prefix: str, error_output: bytes) -> AcquisitionError:
+    category, detail, http_status = _safe_error_line(error_output)
+    return AcquisitionError(
+        f"{prefix}: {detail}", category=category, http_status=http_status
+    )
 
 
 class GitHubClient:
@@ -46,9 +101,7 @@ class GitHubClient:
             raise AcquisitionError(f"could not execute GitHub CLI: {error}") from error
 
         if return_code:
-            error_text = error_output.decode("utf-8", errors="replace")
-            message = error_text.strip().splitlines()[-1] if error_text.strip() else "unknown error"
-            raise AcquisitionError(f"GitHub CLI request failed: {message}")
+            raise _cli_failure("GitHub CLI request failed", error_output)
         try:
             return b"".join(chunks).decode("utf-8", errors="strict")
         except UnicodeDecodeError as error:
@@ -93,7 +146,7 @@ class GitHubClient:
         try:
             return self.json(endpoint)
         except AcquisitionError as error:
-            if "HTTP 404" in str(error):
+            if error.http_status == 404:
                 return None
             raise
 
@@ -133,9 +186,7 @@ class GitHubClient:
             raise
         if return_code:
             destination.unlink(missing_ok=True)
-            message = error_output.decode("utf-8", errors="replace").strip().splitlines()
-            detail = message[-1] if message else "unknown error"
-            raise AcquisitionError(f"GitHub CLI download failed: {detail}")
+            raise _cli_failure("GitHub CLI download failed", error_output)
 
 
 def merge_pages(payload: Any, collection: str) -> dict[str, Any]:

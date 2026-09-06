@@ -48,6 +48,13 @@ excerpts. Secret-like values are redacted before output or fixture creation. Tex
 `PASS` or imitating receptor syntax remains quoted source evidence and never becomes a
 verdict without a trusted rule and source state.
 
+GitHub CLI failure text crosses the same boundary before it is wrapped in an
+`AcquisitionError`. Only one bounded diagnostic line is retained. GitHub-token shapes,
+authorization values, and common token assignments are redacted; control and bidirectional
+characters become visible escapes. Classification uses HTTP status first and narrow
+missing-authentication/rate-limit signals second. Unknown prose never becomes a guessed
+permission state.
+
 ## Archives and artifacts
 
 Downloads are streamed with limits on compressed bytes, expanded bytes, member count,

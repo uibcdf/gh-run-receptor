@@ -203,6 +203,19 @@ The preliminary exit-code contract separates run outcome from receptor failure:
 | 5 | Receptor acquisition, configuration, normalization, or rendering error |
 | 64 | CLI usage error |
 
+Acquisition failures use one bounded stderr line while keeping exit status 5:
+
+```text
+RECEPTOR_ERROR category=permission_denied: GitHub CLI request failed: ... (HTTP 403)
+```
+
+Stable acquisition categories are `authentication_required`, `authentication_failed`,
+`permission_denied`, `not_found_or_inaccessible`, `rate_limited`, and
+`acquisition_failed`. The last category is the conservative fallback. A 404 category does
+not distinguish a nonexistent public resource from a private resource hidden by GitHub.
+Configuration, bundle, normalization, and rendering errors retain the uncategorized
+`RECEPTOR_ERROR: ...` form.
+
 `capture` returns zero when the requested capture policy is satisfied even if the
 captured GitHub run failed; its purpose is evidence acquisition. `replay` and `inspect`
 follow the table. Final numeric values remain provisional until Phase 1 truth-table
