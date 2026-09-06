@@ -307,6 +307,18 @@ workflow path/ref/event/digest provenance, and passed exact terminal-source chec
 Starting only from the source ID, `published-source` then verified both source facts and
 reporter identity.
 
+Exact lightweight tag `0.15.0` points to commit `bee7a76`. An isolated tagged build
+produced `gh_run_receptor-0.15.0-py3-none-any.whl` and the matching source distribution;
+a clean virtual environment installed the wheel without dependencies and reported version
+`0.15.0` through the console command. Post-tag distributed Action run `34065271843` passed
+on Ubuntu, macOS, and Windows and triggered canonical inline reporter run `34065293853`.
+Source-first consumption again verified the CI profile, source facts, and reporter identity.
+
+The 0.15.0 canonical guide was then synchronized byte-identically to all eleven tracked
+clients in focused `[skip ci]` commits. It documents inline configuration, ready/error
+outputs, the default-branch trust boundary, and the deliberately narrower private/fork
+claim.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not
