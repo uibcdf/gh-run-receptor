@@ -62,8 +62,22 @@ contains exactly one 8,043-byte JSON member compressed to 1,281 bytes. These val
 measured with the Actions artifacts API and `unzip -lv`; limits deliberately leave orders
 of magnitude of headroom while matching the Action's existing 8 MiB report cap.
 
-The request-count and byte reduction versus ordinary metadata capture remain to be measured
-after the command works against this run.
+The implemented command consumed that live artifact and preserved source run `34045930131`.
+It made four requests rather than the seven needed by equivalent metadata capture, a 42.9%
+reduction. Response and artifact bytes fell from 36,735 to 26,653 (27.4%), elapsed time from
+4.04 to 2.63 seconds (34.9%), and peak RSS from 42,380 to 42,204 KiB (0.4%). This successful
+run required no logs; unsuccessful adaptive capture would add the retained log archive to
+the baseline.
+
+## Implementation progress
+
+`published` now has an exact artifact selector and shares the ordinary renderers and exit
+mapping. Its dependency-free consumer validates inventory, transport bytes, GitHub digest,
+ZIP structure, strict JSON, report structure, publisher presence, fresh source identity,
+terminal truth, and conclusion/assessment compatibility. The transport accepts a narrower
+caller limit so oversized bytes stop during streaming. Unit and contract tests cover the
+hostile boundaries; a manual three-operating-system extension workflow is ready for live
+validation.
 
 ## What was refuted
 

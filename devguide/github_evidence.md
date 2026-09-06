@@ -119,6 +119,12 @@ explicit request or profile rule with size bounds.
 Expired and unavailable artifacts remain represented with their metadata. The digest
 reported by GitHub and the digest of any downloaded archive are recorded separately.
 
+The explicit `published` path is the first bounded artifact-content consumer. It selects
+one exact report name, rejects inventory or downloaded ZIPs over 10 MiB, accepts one regular
+JSON member expanded to at most 8 MiB, and verifies a supplied GitHub SHA-256 digest. It
+then performs a fresh source-run lookup. A digest proves the downloaded bytes; it does not
+prove the producer's interpretation.
+
 ## Authentication and permissions
 
 Public metadata may be available anonymously, but supported operation assumes an

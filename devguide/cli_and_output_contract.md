@@ -77,6 +77,23 @@ gh run-receptor replay BUNDLE [--profile NAME]
 Validates the manifest and digests, then renders without network access. Replay never
 silently fills missing evidence from GitHub. A separate explicit recapture is required.
 
+### `published`
+
+```text
+gh run-receptor published REPORTER_RUN_OR_URL [--artifact EXACT_NAME]
+```
+
+Downloads exactly one non-expired Action report artifact from a completed reporter run.
+The default artifact name is `gh-run-receptor-report`. The command validates the bounded
+ZIP and report structure, then fetches the report's source run to verify repository, run
+ID, attempt, head SHA, completed status, conclusion, and URL. It does not fetch source jobs
+or logs. The existing human, LLM, JSON, and exit-code contracts then render the report.
+
+Artifact interpretations are not source authority. Output adds
+`consumer_verification.source_facts=verified` and a warning that profile interpretation
+was published rather than independently recomputed. Impossible conclusion/assessment pairs
+fail closed, including any official non-success presented as `PASS`.
+
 ### `list`
 
 ```text
@@ -218,9 +235,9 @@ Configuration, bundle, normalization, and rendering errors retain the uncategori
 `RECEPTOR_ERROR: ...` form.
 
 `capture` returns zero when the requested capture policy is satisfied even if the
-captured GitHub run failed; its purpose is evidence acquisition. `replay` and `inspect`
-follow the table. Final numeric values remain provisional until Phase 1 truth-table
-tests validate composition with shell and agent workflows.
+captured GitHub run failed; its purpose is evidence acquisition. `replay`, `inspect`, and
+`published` follow the table. Final numeric values remain provisional until Phase 1
+truth-table tests validate composition with shell and agent workflows.
 
 ## Compact rendering
 

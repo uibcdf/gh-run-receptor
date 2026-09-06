@@ -102,6 +102,11 @@ A reporter inside the source run necessarily observes an active run and remains 
 A terminal report uses an explicit completed source run ID, normally from a downstream
 `workflow_run` workflow. This avoids circular self-exclusion and invented terminal truth.
 
+The external CLI's `published` adapter reverses the publication path without re-running the
+pipeline. It downloads one bounded report artifact, validates it as untrusted input, and
+freshly verifies only its GitHub source facts. It reuses the shared renderers but labels the
+profile interpretation as published and not independently recomputed.
+
 The embedded reporter is observability rather than a product gate. Failure to render produces a
 visible `RECEPTOR_ERROR` but must not convert successful primary work into a false
 product failure. Cancellation may prevent the reporting job from running, so the

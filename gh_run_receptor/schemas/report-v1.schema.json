@@ -77,6 +77,25 @@
         "ref": {"type": "string", "minLength": 1, "maxLength": 200}
       },
       "additionalProperties": false
+    },
+    "consumer_verification": {
+      "type": "object",
+      "required": [
+        "source_facts", "interpretation", "reporter_run_id", "artifact_id",
+        "artifact_name", "artifact_digest"
+      ],
+      "properties": {
+        "source_facts": {"const": "verified"},
+        "interpretation": {"const": "published_not_recomputed"},
+        "reporter_run_id": {"type": "integer", "minimum": 1},
+        "artifact_id": {"type": "integer", "minimum": 1},
+        "artifact_name": {"type": "string"},
+        "artifact_digest": {
+          "type": ["string", "null"],
+          "pattern": "^sha256:[0-9a-f]{64}$"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "$defs": {

@@ -1,0 +1,63 @@
+name: Published report CLI validation
+
+on:
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  validate:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - name: Check out the exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+
+      - name: Install the exact checkout as a GitHub CLI extension
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh extension install .
+
+      - name: Consume and verify the retained published report
+        shell: python
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          import json
+          import subprocess
+
+          result = subprocess.run(
+              [
+                  "gh",
+                  "run-receptor",
+                  "--repo",
+                  "uibcdf/gh-run-receptor",
+                  "--format=json",
+                  "published",
+                  "34045953527",
+                  "--artifact",
+                  "terminal-source-report",
+              ],
+              check=False,
+              capture_output=True,
+              text=True,
+          )
+          assert result.returncode == 0, result.stderr
+          report = json.loads(result.stdout)
+          assert report["subject"]["run_id"] == 34045930131
+          assert report["github"]["conclusion"] == "success"
+          assert report["receptor"]["assessment"] == "PASS"
+          assert report["consumer_verification"]["source_facts"] == "verified"
+          assert report["consumer_verification"]["reporter_run_id"] == 34045953527
+          assert report["consumer_verification"]["artifact_name"] == "terminal-source-report"

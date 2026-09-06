@@ -74,6 +74,26 @@ def test_text_rendering_is_stable_under_shuffled_api_collections():
     assert reordered == original
 
 
+def test_report_schema_accepts_additive_publisher_and_consumer_verification():
+    manifest, evidence = load_bundle(FIXTURES / "bundles/molsysmt_conda_success")
+    report = build_report(manifest, evidence, profile="auto")
+    report["publisher"] = {
+        "kind": "github_action",
+        "repository": "uibcdf/gh-run-receptor",
+        "ref": "0.12.0",
+    }
+    report["consumer_verification"] = {
+        "source_facts": "verified",
+        "interpretation": "published_not_recomputed",
+        "reporter_run_id": 99,
+        "artifact_id": 7,
+        "artifact_name": "gh-run-receptor-report",
+        "artifact_digest": "sha256:" + "a" * 64,
+    }
+
+    _validator("report-v1.schema.json").validate(report)
+
+
 def test_unknown_github_enum_is_preserved_with_source_reference():
     manifest, evidence = load_bundle(FIXTURES / "bundles/molsysmt_conda_success")
     evidence["jobs.json"]["jobs"][0]["conclusion"] = "future_conclusion"

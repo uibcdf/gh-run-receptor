@@ -134,3 +134,27 @@ def test_run_raises_structured_error_from_failed_process(monkeypatch):
 
     assert captured.value.category == "permission_denied"
     assert captured.value.http_status == 403
+
+
+def test_download_enforces_a_caller_specific_byte_limit(tmp_path, monkeypatch):
+    class OversizedProcess:
+        def __init__(self):
+            self.stdout = io.BytesIO(b"123456")
+            self.return_code = 0
+
+        def terminate(self):
+            self.return_code = -15
+
+        def wait(self):
+            return self.return_code
+
+    monkeypatch.setattr(
+        "gh_run_receptor.github.subprocess.Popen",
+        lambda command, stdout, stderr: OversizedProcess(),
+    )
+    destination = tmp_path / "download"
+
+    with pytest.raises(AcquisitionError, match="5-byte limit"):
+        GitHubClient().download("/artifact", destination, max_bytes=5)
+
+    assert not destination.exists()

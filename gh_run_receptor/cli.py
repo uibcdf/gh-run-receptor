@@ -16,6 +16,7 @@ from gh_run_receptor.config import CONFIG_PATH, load_config, select_rule
 from gh_run_receptor.discovery import discover_workflows, render_config, write_config
 from gh_run_receptor.errors import AcquisitionError, BundleError, ReceptorError
 from gh_run_receptor.github import GitHubClient
+from gh_run_receptor.published import consume_published_report
 from gh_run_receptor.report import build_report, exit_code, render_human, render_json, render_llm
 from gh_run_receptor.service import acquire_evidence
 from gh_run_receptor.watch import watch_run
@@ -107,6 +108,12 @@ def _parser() -> argparse.ArgumentParser:
     replay = subparsers.add_parser("replay", help="render a saved evidence bundle")
     _add_common_options(replay, suppress_defaults=True)
     replay.add_argument("bundle", type=Path)
+    published = subparsers.add_parser(
+        "published", help="verify and render one Action report artifact"
+    )
+    _add_common_options(published, suppress_defaults=True)
+    published.add_argument("run", type=_run_reference, help="completed reporter run")
+    published.add_argument("--artifact", default="gh-run-receptor-report")
     watch = subparsers.add_parser("watch", help="print transitions and one final report")
     _add_common_options(watch, suppress_defaults=True)
     watch.add_argument("run", type=_run_reference)
@@ -260,6 +267,27 @@ def main(arguments: list[str] | None = None) -> int:
                 emit=lambda message: print(message, file=sys.stderr),
             )
             return _capture(args, render=True)
+        if args.command == "published":
+            hostname = args.hostname or args.run.hostname or "github.com"
+            if args.hostname and args.run.hostname and args.hostname != args.run.hostname:
+                raise BundleError("run URL hostname conflicts with --hostname")
+            if args.repo and args.run.repository and args.repo != args.run.repository:
+                raise BundleError("run URL repository conflicts with --repo")
+            client = GitHubClient(hostname)
+            repository = client.repository(args.repo or args.run.repository)
+            report = consume_published_report(
+                client,
+                repository,
+                args.run.run_id,
+                artifact_name=args.artifact,
+            )
+            try:
+                rendered = _render(report, args.format, args.receptor)
+                result = exit_code(report)
+            except (KeyError, TypeError, ValueError) as error:
+                raise BundleError(f"published report cannot be rendered: {error}") from error
+            print(rendered, end="")
+            return result
         manifest, evidence = load_bundle(args.bundle)
         report = build_report(
             manifest,

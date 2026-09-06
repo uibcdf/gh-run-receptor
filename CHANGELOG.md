@@ -7,6 +7,10 @@ All notable changes to this project will be documented in this file.
 - Validate the public `0.12.0` Action tag across hosted Ubuntu, macOS, and Windows.
 - Synchronize the 0.12.0 consumer guide to all eleven tracked client repositories.
 - Add a read-only downstream `workflow_run` gate for terminal source-run reporting.
+- Add an explicit `published` command that consumes one bounded Action report artifact and
+  verifies its terminal source identity and conclusion against fresh GitHub metadata.
+- Apply caller-specific transport limits before hashing or expanding published ZIP data,
+  and reject unsafe archives, malformed reports, and impossible assessment combinations.
 
 ## 0.12.0 - 2026-09-06
 

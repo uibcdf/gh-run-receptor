@@ -208,6 +208,13 @@ The report preserves official and derived state:
 Action repository and requested ref rather than inferring a package version from a source
 archive without Git metadata. CLI reports omit it.
 
+After the external CLI verifies a published report, it adds an optional
+`consumer_verification` object. `source_facts: verified` means a fresh API response agreed
+on repository, run, attempt, SHA, terminal status, conclusion, and URL. The separate
+`interpretation: published_not_recomputed` value prevents that verification from being
+misread as independent profile recomputation. Reporter run, artifact ID, exact name, and
+GitHub digest remain visible provenance.
+
 Unknown GitHub enum values and unrecognized fields are preserved in source evidence and
 listed in `unknowns` when they affect interpretation.
 

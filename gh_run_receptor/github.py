@@ -150,7 +150,13 @@ class GitHubClient:
                 return None
             raise
 
-    def download(self, endpoint: str, destination: Path) -> None:
+    def download(
+        self,
+        endpoint: str,
+        destination: Path,
+        *,
+        max_bytes: int = MAX_DOWNLOAD_BYTES,
+    ) -> None:
         """Downloading a binary API response without sending it to stdout."""
         command = [
             "gh",
@@ -168,11 +174,11 @@ class GitHubClient:
                 size = 0
                 while chunk := process.stdout.read(READ_CHUNK_BYTES):
                     size += len(chunk)
-                    if size > MAX_DOWNLOAD_BYTES:
+                    if size > max_bytes:
                         process.terminate()
                         process.wait()
                         raise AcquisitionError(
-                            f"GitHub download exceeded the {MAX_DOWNLOAD_BYTES}-byte limit"
+                            f"GitHub download exceeded the {max_bytes}-byte limit"
                         )
                     stream.write(chunk)
                 return_code = process.wait()

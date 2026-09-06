@@ -13,10 +13,10 @@ from urllib.parse import urlparse
 
 from gh_run_receptor.errors import AcquisitionError, ReceptorError
 from gh_run_receptor.github import _safe_error_line
+from gh_run_receptor.limits import MAX_REPORT_BYTES
 from gh_run_receptor.report import render_json, render_llm
 from gh_run_receptor.service import create_report
 
-MAX_REPORT_BYTES = 8 * 1024 * 1024
 MAX_SUMMARY_BYTES = 32 * 1024
 MAX_REPORT_NAME = 80
 _REPORT_NAME = re.compile(r"[A-Za-z0-9](?:[A-Za-z0-9._-]{0,79})")

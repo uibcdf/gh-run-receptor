@@ -77,6 +77,13 @@ bytes, individual members, and individual log lines. It reads ZIP members in pla
 extracting them. Configurable limits, elapsed-time enforcement, and broader archive-format
 coverage remain release work and must not be claimed as implemented.
 
+Published report consumption narrows the generic binary limit to 10 MiB at the transport
+call itself, before hashing or ZIP parsing. It accepts one regular, unencrypted, basename-
+only JSON member of at most 8 MiB and rejects links, traversal, extra members, malformed or
+duplicate-key JSON, invalid provenance, and digest mismatch. Fresh source-run metadata must
+agree with the artifact. This verifies source facts, not arbitrary profile claims; output
+states that distinction explicitly and rejects any derived `PASS` over official non-success.
+
 ## Pattern safety
 
 Exact matching is the default. User patterns have length and count limits, are compiled
