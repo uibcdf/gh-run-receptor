@@ -141,4 +141,8 @@ GitHub-hosted public-repository probe run `34062721386` passed all three jobs on
 `report-ready=true` with an empty error category for the public source run. This observed
 anonymous/public-read-compatible behavior does not establish the result for a private
 repository or fork. The workflow now asserts those exact public results; its second hosted
-run remains pending.
+run `34062840512` passed all three exact assertions on commit `15763a5`.
+
+A path-filtered same-repository pull-request gate is now defined. It expects fail-open
+rejection with `untrusted_inline_rules`, no report, and no evidence acquisition. Its live
+probe branch and run remain pending.

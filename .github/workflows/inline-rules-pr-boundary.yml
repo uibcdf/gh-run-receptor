@@ -1,0 +1,43 @@
+name: Inline rules pull-request boundary
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - .github/gh-run-receptor-pr-boundary-probe
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  reject:
+    name: Reject pull-request inline policy
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Attempt to apply pull-request inline rules
+        id: receptor
+        uses: uibcdf/gh-run-receptor@09c164a4cac2187068d8058b630a92a049486a1d
+        with:
+          run-id: "34037657805"
+          repository: uibcdf/gh-run-receptor
+          profile: auto
+          capture: metadata
+          rules: |
+            schema_version: 1
+            workflows:
+              - match:
+                  path: .github/workflows/compatibility.yml
+                profile: ci
+
+      - name: Verify rejection before report creation
+        shell: bash
+        env:
+          ERROR_CATEGORY: ${{ steps.receptor.outputs['error-category'] }}
+          REPORT_PATH: ${{ steps.receptor.outputs['report-path'] }}
+          REPORT_READY: ${{ steps.receptor.outputs['report-ready'] }}
+        run: |
+          test "$REPORT_READY" = "false"
+          test "$ERROR_CATEGORY" = "untrusted_inline_rules"
+          test -z "$REPORT_PATH"

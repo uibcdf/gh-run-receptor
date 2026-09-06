@@ -77,6 +77,11 @@ stable machine-readable category for acquisition, trust, configuration, and inte
 failures. Hosted permission tests remove declared scopes one at a time and record the
 public-repository behavior rather than extrapolating a private-fork claim.
 
+A narrowly path-filtered pull-request workflow supplies inline configuration and requires
+`untrusted_inline_rules`, `report-ready=false`, and no report path. Its marker exists only
+on an intentionally opened same-repository validation branch; ordinary pull requests do
+not spend a runner on this dedicated gate.
+
 ### Adversarial tests
 
 The cases required by [security.md](security.md) run locally and in CI. Fuzz or property
