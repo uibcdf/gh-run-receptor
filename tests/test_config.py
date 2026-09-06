@@ -163,9 +163,7 @@ workflows:
             "require the conda profile",
         ),
         (
-            CONFIG.replace(
-                b"expected_platforms:", b"package_kind: unsupported\n      #"
-            ),
+            CONFIG.replace(b"expected_platforms:", b"package_kind: unsupported\n      #"),
             "package_kind",
         ),
     ],

@@ -5,9 +5,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def _source():
-    return (
-        ROOT / ".github/workflows/published-report-validation.yml"
-    ).read_text(encoding="utf-8")
+    return (ROOT / ".github/workflows/published-report-validation.yml").read_text(encoding="utf-8")
 
 
 def test_published_report_validation_is_manual_bounded_and_cross_platform():
@@ -34,12 +32,8 @@ def test_published_report_validation_is_manual_bounded_and_cross_platform():
 
 def test_published_report_validation_pins_external_actions():
     external = [
-        line.strip().removeprefix("uses: ")
-        for line in _source().splitlines()
-        if "uses:" in line
+        line.strip().removeprefix("uses: ") for line in _source().splitlines() if "uses:" in line
     ]
 
-    assert external == [
-        "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7"
-    ]
+    assert external == ["actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7"]
     assert re.fullmatch(r"[^@]+@[0-9a-f]{40} # v[0-9]+", external[0])

@@ -129,9 +129,7 @@ def test_invalid_run_reference_is_rejected(value):
 
 
 def test_common_options_are_accepted_after_subcommand():
-    args = _parser().parse_args(
-        ["inspect", "42", "--repo", "uibcdf/molsysmt", "--receptor", "llm"]
-    )
+    args = _parser().parse_args(["inspect", "42", "--repo", "uibcdf/molsysmt", "--receptor", "llm"])
 
     assert args.repo == "uibcdf/molsysmt"
     assert args.receptor == "llm"
@@ -243,9 +241,7 @@ workflows:
         )
         == 0
     )
-    assert capsys.readouterr().out == (
-        "match=path:.github/workflows/docs.yaml profile=docs\n"
-    )
+    assert capsys.readouterr().out == ("match=path:.github/workflows/docs.yaml profile=docs\n")
 
 
 def test_config_check_returns_bounded_receptor_error(tmp_path, capsys):

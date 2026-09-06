@@ -208,8 +208,7 @@ def parse_config(data: bytes) -> dict[str, Any]:
     if not workflows:
         raise ConfigError("configuration requires at least one workflow rule")
     identities = [
-        (next(iter(rule["match"])), next(iter(rule["match"].values())))
-        for rule in workflows
+        (next(iter(rule["match"])), next(iter(rule["match"].values()))) for rule in workflows
     ]
     if len(identities) != len(set(identities)):
         raise ConfigError("configuration contains duplicate workflow matches")
@@ -280,9 +279,7 @@ def validate_config_capture(value: Any) -> dict[str, Any]:
             raise ConfigError("captured configuration has unsupported settings")
         if "expected_platforms" in settings:
             if rule["profile"] != "conda":
-                raise ConfigError(
-                    "captured expected platforms require the conda profile"
-                )
+                raise ConfigError("captured expected platforms require the conda profile")
             platforms = settings["expected_platforms"]
             if (
                 not isinstance(platforms, list)

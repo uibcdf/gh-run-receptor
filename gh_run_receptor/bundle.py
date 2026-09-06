@@ -140,9 +140,7 @@ def capture_bundle(
         )
     run = current_run
     if selected_attempt != current_attempt:
-        run = client.json(
-            f"/repos/{repository}/actions/runs/{run_id}/attempts/{selected_attempt}"
-        )
+        run = client.json(f"/repos/{repository}/actions/runs/{run_id}/attempts/{selected_attempt}")
         if not isinstance(run, dict):
             raise BundleError("workflow-run attempt response is not an object")
         if run.get("run_attempt") != selected_attempt:

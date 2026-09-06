@@ -130,9 +130,8 @@ def test_conda_profile_preserves_failure_and_marks_reusable_platforms():
     platforms = {item["name"]: item for item in report["matrix"]["platforms"]}
     assert platforms["linux-64"]["reusable"] is True
     assert platforms["win-64"]["status"] == "failed"
-    assert (
-        "conda platforms: successful=1 failed=1 missing=0 artifacts=1 observed=2"
-        in render_llm(report)
+    assert "conda platforms: successful=1 failed=1 missing=0 artifacts=1 observed=2" in render_llm(
+        report
     )
 
 
@@ -171,9 +170,7 @@ def test_cancelled_conda_run_preserves_platform_and_job_states():
         ("completed", "future_state", "future_state"),
     ],
 )
-def test_conda_platform_aggregation_preserves_non_failure_states(
-    status, conclusion, expected
-):
+def test_conda_platform_aggregation_preserves_non_failure_states(status, conclusion, expected):
     evidence = _evidence(conclusion=conclusion, status=status)
     evidence["jobs.json"]["jobs"] = [
         {
@@ -361,9 +358,7 @@ def test_repository_rule_selects_profile_and_enforces_expected_platforms():
                 {
                     "match": {"path": ".github/workflows/conda.yaml"},
                     "profile": "conda",
-                    "settings": {
-                        "expected_platforms": ["linux-64", "win-64", "osx-arm64"]
-                    },
+                    "settings": {"expected_platforms": ["linux-64", "win-64", "osx-arm64"]},
                 }
             ],
         },
@@ -625,9 +620,7 @@ def test_docs_profile_keeps_combined_build_deploy_evidence_indivisible():
         {
             "name": "build_deploy",
             "counts": {"success": 1},
-            "evidence": [
-                {"job_id": 10, "step_number": 1, "kind": "step", "state": "success"}
-            ],
+            "evidence": [{"job_id": 10, "step_number": 1, "kind": "step", "state": "success"}],
         }
     ]
     assert "phases=build_deploy:1" in rendered
@@ -753,9 +746,7 @@ def test_release_profile_preserves_trigger_identity_and_phase_evidence():
 
 
 def test_release_profile_reports_successful_publish_as_step_evidence_only():
-    report = build_report(
-        _manifest(), _release_evidence(conclusion="success"), profile="release"
-    )
+    report = build_report(_manifest(), _release_evidence(conclusion="success"), profile="release")
     rendered = render_llm(report)
 
     assert report["receptor"]["assessment"] == "PASS"

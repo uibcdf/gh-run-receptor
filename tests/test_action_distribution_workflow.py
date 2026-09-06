@@ -4,9 +4,9 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def test_distributed_action_validation_is_manual_bounded_and_cross_platform():
-    source = (
-        ROOT / ".github/workflows/action-distribution-validation.yml"
-    ).read_text(encoding="utf-8")
+    source = (ROOT / ".github/workflows/action-distribution-validation.yml").read_text(
+        encoding="utf-8"
+    )
 
     assert source.count("workflow_dispatch:") == 1
     assert "\n  push:" not in source
@@ -20,8 +20,8 @@ def test_distributed_action_validation_is_manual_bounded_and_cross_platform():
 
 
 def test_distributed_action_validation_uses_only_read_permissions():
-    source = (
-        ROOT / ".github/workflows/action-distribution-validation.yml"
-    ).read_text(encoding="utf-8")
+    source = (ROOT / ".github/workflows/action-distribution-validation.yml").read_text(
+        encoding="utf-8"
+    )
 
     assert "permissions:\n  actions: read\n  contents: read" in source

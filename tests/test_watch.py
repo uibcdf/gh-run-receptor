@@ -147,9 +147,7 @@ def test_transitions_escape_untrusted_job_name():
         (JobState(1, "build\x1b[31m", "queued", None),),
     )
 
-    assert transitions(previous, current) == [
-        "job discovered: build\\u001b[31m | status=queued"
-    ]
+    assert transitions(previous, current) == ["job discovered: build\\u001b[31m | status=queued"]
 
 
 def test_watch_stops_after_bounded_consecutive_errors():

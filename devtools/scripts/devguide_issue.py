@@ -90,9 +90,7 @@ def close_issue(args: argparse.Namespace) -> int:
         f"Decision — {status} in {args.commit}: {outcome}\n"
         f"{anchor_name} — {anchor}\nRecord — {path.relative_to(ROOT)}"
     )
-    current = json.loads(
-        gh("issue", "view", str(issue), "--repo", REPO, "--json", "labels")
-    )
+    current = json.loads(gh("issue", "view", str(issue), "--repo", REPO, "--json", "labels"))
     current_labels = {item["name"] for item in current["labels"]}
     for label in sorted(current_labels & set(STATE_LABELS.values())):
         gh("issue", "edit", str(issue), "--repo", REPO, "--remove-label", label)

@@ -66,9 +66,7 @@ def _safe_error_line(error_output: bytes) -> tuple[str, str, int | None]:
 
 def _cli_failure(prefix: str, error_output: bytes) -> AcquisitionError:
     category, detail, http_status = _safe_error_line(error_output)
-    return AcquisitionError(
-        f"{prefix}: {detail}", category=category, http_status=http_status
-    )
+    return AcquisitionError(f"{prefix}: {detail}", category=category, http_status=http_status)
 
 
 class GitHubClient:
@@ -115,9 +113,7 @@ class GitHubClient:
                 raise AcquisitionError("repository must use OWNER/REPO form")
             return "/".join(parts)
 
-        output = self._run(
-            ["repo", "view", "--json", "nameWithOwner", "--jq", ".nameWithOwner"]
-        )
+        output = self._run(["repo", "view", "--json", "nameWithOwner", "--jq", ".nameWithOwner"])
         repository = output.strip()
         if not repository:
             raise AcquisitionError("could not infer the current GitHub repository")

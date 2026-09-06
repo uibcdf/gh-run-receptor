@@ -80,9 +80,7 @@ def _add_common_options(
         default=default,
         help="target reader; inferred from whether stdout is a terminal by default",
     )
-    parser.add_argument(
-        "--format", choices=("text", "json"), default=default or "text"
-    )
+    parser.add_argument("--format", choices=("text", "json"), default=default or "text")
     parser.add_argument(
         "--profile",
         choices=("generic", "ci", "conda", "docs", "release"),

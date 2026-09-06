@@ -31,7 +31,5 @@ def test_action_validation_pins_every_external_action():
         if "uses:" in line and "uses: ./" not in line
     ]
 
-    assert external == [
-        "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7"
-    ]
+    assert external == ["actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7"]
     assert re.fullmatch(r"[^@]+@[0-9a-f]{40} # v[0-9]+", external[0])

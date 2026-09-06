@@ -123,9 +123,7 @@ class _Client:
 
 
 def _consume(client):
-    return consume_published_report(
-        client, "uibcdf/example", 99, artifact_name="compact-report"
-    )
+    return consume_published_report(client, "uibcdf/example", 99, artifact_name="compact-report")
 
 
 def test_published_command_has_an_explicit_exact_artifact_selector():
@@ -247,9 +245,7 @@ def test_source_discovery_verifies_producer_and_reuses_source_facts():
         ({}, {"path": ".github/workflows/other.yml@main"}, "path conflicts"),
     ],
 )
-def test_source_discovery_fails_closed(
-    inventory_overrides, reporter_overrides, message
-):
+def test_source_discovery_fails_closed(inventory_overrides, reporter_overrides, message):
     client = _DiscoveryClient(
         _archive(_report()),
         inventory_overrides=inventory_overrides,
@@ -284,9 +280,7 @@ def test_source_discovery_requires_a_terminal_source_before_artifact_lookup():
 
     with pytest.raises(BundleError, match="source run is not terminal"):
         _consume_source(client)
-    assert [call[0] for call in client.calls] == [
-        "/repos/uibcdf/example/actions/runs/42"
-    ]
+    assert [call[0] for call in client.calls] == ["/repos/uibcdf/example/actions/runs/42"]
 
 
 def test_consumption_verifies_digest_source_facts_and_avoids_jobs_and_logs():

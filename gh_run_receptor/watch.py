@@ -52,9 +52,7 @@ def fetch_state(
             f"attempt {selected_attempt} is outside the available range 1..{current_attempt}"
         )
     if selected_attempt != current_attempt:
-        run = client.json(
-            f"/repos/{repository}/actions/runs/{run_id}/attempts/{selected_attempt}"
-        )
+        run = client.json(f"/repos/{repository}/actions/runs/{run_id}/attempts/{selected_attempt}")
         if not isinstance(run, dict) or run.get("run_attempt") != selected_attempt:
             raise AcquisitionError("workflow-run attempt response has conflicting identity")
     payload = client.json(
@@ -116,9 +114,7 @@ def transitions(previous: RunState, current: RunState) -> list[str]:
         if message := _job_transition(old_jobs.get(job.job_id), job):
             messages.append(message)
     if previous.status != current.status and current.status != "completed":
-        messages.append(
-            f"run state: {_safe_text(previous.status)} -> {_safe_text(current.status)}"
-        )
+        messages.append(f"run state: {_safe_text(previous.status)} -> {_safe_text(current.status)}")
     if not previous.terminal and current.terminal:
         completed = sum(job.status == "completed" for job in current.jobs)
         messages.append(

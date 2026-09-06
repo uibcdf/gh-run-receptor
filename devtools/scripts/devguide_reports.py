@@ -47,8 +47,8 @@ def _value(raw: str) -> object:
         contents = raw[1:-1].strip()
         if not contents:
             return []
-        return [item.strip().strip('"\'') for item in contents.split(",")]
-    return raw.strip('"\'')
+        return [item.strip().strip("\"'") for item in contents.split(",")]
+    return raw.strip("\"'")
 
 
 def parse_report(path: Path) -> Report:
@@ -176,8 +176,7 @@ def validate_all() -> list[str]:
         issue = str(report.fields.get("issue", ""))
         if issue in seen:
             errors.append(
-                f"{report.path.relative_to(ROOT)}: issue duplicates "
-                f"{seen[issue].relative_to(ROOT)}"
+                f"{report.path.relative_to(ROOT)}: issue duplicates {seen[issue].relative_to(ROOT)}"
             )
         else:
             seen[issue] = report.path

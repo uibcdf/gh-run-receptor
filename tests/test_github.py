@@ -72,9 +72,7 @@ def test_optional_json_preserves_other_acquisition_failures(monkeypatch):
         (b"gh: service unavailable (HTTP 503)\n", "acquisition_failed", 503),
     ],
 )
-def test_cli_error_classification_uses_measured_transport_boundaries(
-    stderr, category, http_status
-):
+def test_cli_error_classification_uses_measured_transport_boundaries(stderr, category, http_status):
     observed_category, detail, observed_status = _safe_error_line(stderr)
 
     assert observed_category == category
@@ -86,8 +84,7 @@ def test_cli_error_classification_uses_measured_transport_boundaries(
 def test_cli_error_text_is_bounded_visible_and_redacted():
     token = "ghp_abcdefghijklmnopqrstuvwxyz123456"
     category, detail, status = _safe_error_line(
-        f"gh: Authorization: Bearer {token} unsafe\x1b[31m\u202e (HTTP 403)".encode()
-        + b"x" * 1000
+        f"gh: Authorization: Bearer {token} unsafe\x1b[31m\u202e (HTTP 403)".encode() + b"x" * 1000
     )
 
     assert category == "permission_denied"

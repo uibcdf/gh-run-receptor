@@ -113,9 +113,7 @@ def test_unknown_github_enum_is_preserved_with_source_reference():
 
 
 def test_real_rerun_fixtures_keep_attempts_and_conclusions_separate():
-    first_manifest, first_evidence = load_bundle(
-        FIXTURES / "bundles/argdigest_ci_rerun_attempt_1"
-    )
+    first_manifest, first_evidence = load_bundle(FIXTURES / "bundles/argdigest_ci_rerun_attempt_1")
     second_manifest, second_evidence = load_bundle(
         FIXTURES / "bundles/argdigest_ci_rerun_attempt_2"
     )
@@ -155,9 +153,7 @@ def test_real_cancelled_conda_fixture_accounts_for_every_platform_state():
 
 
 def test_real_expired_log_fixture_fails_closed_as_incomplete():
-    manifest, evidence = load_bundle(
-        FIXTURES / "bundles/pyunitwizard_ci_incomplete_logs"
-    )
+    manifest, evidence = load_bundle(FIXTURES / "bundles/pyunitwizard_ci_incomplete_logs")
     report = build_report(manifest, evidence, profile="generic")
 
     assert manifest["complete"] is False
@@ -172,9 +168,7 @@ def test_real_expired_log_fixture_fails_closed_as_incomplete():
 
 
 def test_molsysviewer_noarch_fixture_uses_the_trusted_package_kind():
-    manifest, evidence = load_bundle(
-        FIXTURES / "bundles/molsysviewer_conda_noarch_success"
-    )
+    manifest, evidence = load_bundle(FIXTURES / "bundles/molsysviewer_conda_noarch_success")
 
     report = build_report(manifest, evidence, profile="auto")
     rendered = render_llm(report)
@@ -192,9 +186,7 @@ def test_documentation_fixtures_preserve_distinct_phase_evidence():
     failure_manifest, failure_evidence = load_bundle(
         FIXTURES / "bundles/molsysviewer_docs_notebooks_failure"
     )
-    success_manifest, success_evidence = load_bundle(
-        FIXTURES / "bundles/molsysmt_docs_success"
-    )
+    success_manifest, success_evidence = load_bundle(FIXTURES / "bundles/molsysmt_docs_success")
 
     failure = build_report(failure_manifest, failure_evidence, profile="auto")
     success = build_report(success_manifest, success_evidence, profile="auto")

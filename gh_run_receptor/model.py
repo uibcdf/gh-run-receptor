@@ -71,9 +71,7 @@ def _completeness(manifest: dict[str, Any], workflow: dict[str, Any]) -> dict[st
     }
 
 
-def normalize_evidence(
-    manifest: dict[str, Any], evidence: dict[str, Any]
-) -> dict[str, Any]:
+def normalize_evidence(manifest: dict[str, Any], evidence: dict[str, Any]) -> dict[str, Any]:
     """Normalizing validated source evidence into ``model@1``."""
     run = _object(evidence, "run.json")
     workflow = _object(evidence, "workflow.json")

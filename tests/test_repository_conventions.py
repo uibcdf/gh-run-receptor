@@ -32,9 +32,7 @@ def test_package_uses_flat_layout_and_dynamic_tag_versioning():
         requirement.startswith("versioningit")
         for requirement in configuration["build-system"]["requires"]
     )
-    assert configuration["tool"]["versioningit"]["write"]["file"] == (
-        "gh_run_receptor/_version.py"
-    )
+    assert configuration["tool"]["versioningit"]["write"]["file"] == ("gh_run_receptor/_version.py")
 
 
 def test_all_developer_reports_obey_the_local_lifecycle():

@@ -4,9 +4,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def _source():
-    return (
-        ROOT / ".github/workflows/gh-run-receptor-report.yml"
-    ).read_text(encoding="utf-8")
+    return (ROOT / ".github/workflows/gh-run-receptor-report.yml").read_text(encoding="utf-8")
 
 
 def test_terminal_report_listener_has_a_narrow_completed_run_trigger():

@@ -81,8 +81,7 @@ def _source_text(data: bytes, path: Path) -> str:
 def _classify(relative_path: str, source: str) -> DiscoveredWorkflow:
     filename_words = _words(Path(relative_path).stem)
     filename_matches = {
-        profile: sorted(filename_words & signals)
-        for profile, signals in _FILENAME_SIGNALS.items()
+        profile: sorted(filename_words & signals) for profile, signals in _FILENAME_SIGNALS.items()
     }
     content = "\n".join(
         line.strip().lower()
@@ -110,9 +109,7 @@ def _classify(relative_path: str, source: str) -> DiscoveredWorkflow:
         confidence = "high" if filename_evidence else "medium"
         settings: tuple[tuple[str, str], ...] = ()
         if profile == "conda" and (
-            "noarch" in filename_words
-            or "noarch package" in content
-            or "noarch: python" in content
+            "noarch" in filename_words or "noarch package" in content or "noarch: python" in content
         ):
             settings = (("package_kind", "noarch"),)
         return DiscoveredWorkflow(
@@ -149,8 +146,7 @@ def discover_workflows(root: Path) -> list[DiscoveredWorkflow]:
             candidates.append(path)
             if len(candidates) > MAX_DISCOVERED_WORKFLOWS:
                 raise ConfigError(
-                    f"workflow count exceeds the {MAX_DISCOVERED_WORKFLOWS}-file "
-                    "discovery limit"
+                    f"workflow count exceeds the {MAX_DISCOVERED_WORKFLOWS}-file discovery limit"
                 )
     except OSError as error:
         raise ConfigError(f"cannot read workflow directory: {workflow_directory}") from error
@@ -178,8 +174,7 @@ def discover_workflows(root: Path) -> list[DiscoveredWorkflow]:
         total_bytes += len(data)
         if total_bytes > MAX_TOTAL_WORKFLOW_BYTES:
             raise ConfigError(
-                "workflow sources exceed the "
-                f"{MAX_TOTAL_WORKFLOW_BYTES}-byte total discovery limit"
+                f"workflow sources exceed the {MAX_TOTAL_WORKFLOW_BYTES}-byte total discovery limit"
             )
         discovered.append(_classify(relative_path, _source_text(data, path)))
     return discovered

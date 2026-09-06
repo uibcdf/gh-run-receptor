@@ -126,18 +126,27 @@ def test_success_publishes_one_canonical_report_summary_and_scalar_outputs(tmp_p
 def test_source_failure_is_a_successful_reporter_result(tmp_path):
     environment = _environment(tmp_path)
 
-    assert run_action(environment, report_factory=lambda **_: _report(
-        assessment="FAIL", conclusion="failure"
-    )) == 0
+    assert (
+        run_action(
+            environment, report_factory=lambda **_: _report(assessment="FAIL", conclusion="failure")
+        )
+        == 0
+    )
     assert _outputs(tmp_path / "output")["assessment"] == "FAIL"
 
 
 def test_current_run_remains_pending_while_the_reporter_executes(tmp_path):
     environment = _environment(tmp_path)
 
-    assert run_action(environment, report_factory=lambda **_: _report(
-        assessment="PENDING", conclusion=None, status="in_progress"
-    )) == 0
+    assert (
+        run_action(
+            environment,
+            report_factory=lambda **_: _report(
+                assessment="PENDING", conclusion=None, status="in_progress"
+            ),
+        )
+        == 0
+    )
     outputs = _outputs(tmp_path / "output")
     assert outputs["assessment"] == "PENDING"
     assert outputs["github-conclusion"] == ""

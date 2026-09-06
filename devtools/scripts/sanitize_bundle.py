@@ -16,9 +16,7 @@ def _canonical(value: Any) -> bytes:
     return (json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n").encode()
 
 
-def _selected_evidence(
-    evidence: dict[str, Any], *, include_config: bool = True
-) -> dict[str, Any]:
+def _selected_evidence(evidence: dict[str, Any], *, include_config: bool = True) -> dict[str, Any]:
     run = evidence["run.json"]
     workflow = evidence["workflow.json"]
     jobs = evidence["jobs.json"]["jobs"]

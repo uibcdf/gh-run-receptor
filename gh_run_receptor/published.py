@@ -347,12 +347,7 @@ def consume_published_source(
         raise BundleError("repository artifact inventory is invalid")
     artifacts = inventory["artifacts"]
     total = inventory.get("total_count")
-    if (
-        isinstance(total, bool)
-        or not isinstance(total, int)
-        or total != 1
-        or len(artifacts) != 1
-    ):
+    if isinstance(total, bool) or not isinstance(total, int) or total != 1 or len(artifacts) != 1:
         raise BundleError(f"expected exactly one report artifact named {artifact_name!r}")
     artifact = artifacts[0]
     if not isinstance(artifact, dict) or artifact.get("name") != artifact_name:
@@ -405,7 +400,5 @@ def consume_published_source(
             "reporter_workflow": expected_workflow,
         }
     )
-    report["warnings"].append(
-        f"publishing workflow identity verified: {expected_workflow}"
-    )
+    report["warnings"].append(f"publishing workflow identity verified: {expected_workflow}")
     return report

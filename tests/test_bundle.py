@@ -93,9 +93,7 @@ def test_load_bundle_rejects_traversal_member(tmp_path):
 
 
 def test_default_bundle_path_separates_capture_policies(tmp_path):
-    metadata = default_bundle_path(
-        tmp_path, "github.com", "uibcdf/molsysmt", 42, 2, "metadata"
-    )
+    metadata = default_bundle_path(tmp_path, "github.com", "uibcdf/molsysmt", 42, 2, "metadata")
     full = default_bundle_path(tmp_path, "github.com", "uibcdf/molsysmt", 42, 2, "full")
 
     assert metadata != full
