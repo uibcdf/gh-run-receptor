@@ -134,3 +134,11 @@ execution, Action metadata, service delegation, and report equivalence. The same
 then passed the full 235-test receptor-formatted suite, Ruff lint and format, developer
 report validation, and isolated wheel and source-distribution construction. Hosted gates
 remain pending.
+
+GitHub-hosted public-repository probe run `34062721386` passed all three jobs on commit
+`00c3fa3`. The minimum case produced a trusted inline report with `actions: read` and
+`contents: read`. Removing either declared scope independently still produced
+`report-ready=true` with an empty error category for the public source run. This observed
+anonymous/public-read-compatible behavior does not establish the result for a private
+repository or fork. The workflow now asserts those exact public results; its second hosted
+run remains pending.

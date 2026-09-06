@@ -45,6 +45,12 @@ out no source revision, and never executes source artifacts, caches, scripts, or
 commands. Inline policy comes from the reporter definition on the default branch, not from
 the source run.
 
+Do not infer private-repository permission requirements from public-repository probes.
+GitHub-hosted validation against this public repository could still read the public run
+when either declared read scope was removed. The canonical workflow keeps both explicit
+read scopes so its requirement is reviewable and portable to repositories whose evidence
+is not public.
+
 The rule language is declarative. The dependency-free parser accepts a narrow YAML subset
 and rejects tags, anchors, flow mappings, multiline scalars, patterns, unknown fields, and
 oversized input. It has no shell commands, imports, arbitrary templates, network requests,

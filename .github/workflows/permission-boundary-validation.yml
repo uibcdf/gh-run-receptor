@@ -54,7 +54,7 @@ jobs:
           assert len(source["sha256"]) == 64
 
   without-actions-read:
-    name: Observe without actions read
+    name: Verify public run without actions read
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -69,7 +69,7 @@ jobs:
           profile: ci
           capture: metadata
 
-      - name: Record observed outputs
+      - name: Verify and record public-repository result
         shell: bash
         env:
           ERROR_CATEGORY: ${{ steps.receptor.outputs['error-category'] }}
@@ -77,9 +77,11 @@ jobs:
         run: |
           printf 'without-actions-read: report-ready=%s error-category=%s\n' \
             "$REPORT_READY" "$ERROR_CATEGORY" | tee -a "$GITHUB_STEP_SUMMARY"
+          test "$REPORT_READY" = "true"
+          test -z "$ERROR_CATEGORY"
 
   without-contents-read:
-    name: Observe without contents read
+    name: Verify public run without contents read
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
@@ -94,7 +96,7 @@ jobs:
           profile: ci
           capture: metadata
 
-      - name: Record observed outputs
+      - name: Verify and record public-repository result
         shell: bash
         env:
           ERROR_CATEGORY: ${{ steps.receptor.outputs['error-category'] }}
@@ -102,3 +104,5 @@ jobs:
         run: |
           printf 'without-contents-read: report-ready=%s error-category=%s\n' \
             "$REPORT_READY" "$ERROR_CATEGORY" | tee -a "$GITHUB_STEP_SUMMARY"
+          test "$REPORT_READY" = "true"
+          test -z "$ERROR_CATEGORY"

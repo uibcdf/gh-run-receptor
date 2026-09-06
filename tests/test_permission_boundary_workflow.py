@@ -23,8 +23,10 @@ def test_permission_boundary_probe_removes_one_scope_at_a_time():
     assert source.count("      actions: read") == 2
     assert source.count("      contents: read") == 2
     assert "Minimum documented permissions" in source
-    assert "Observe without actions read" in source
-    assert "Observe without contents read" in source
+    assert "Verify public run without actions read" in source
+    assert "Verify public run without contents read" in source
+    assert source.count('test "$REPORT_READY" = "true"') == 2
+    assert source.count('test -z "$ERROR_CATEGORY"') == 2
 
 
 def test_minimum_permission_case_asserts_inline_source_provenance():
