@@ -1,0 +1,50 @@
+name: Distributed Action validation
+
+on:
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  validate:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - name: Report a completed successful run from distributed source
+        id: receptor
+        uses: uibcdf/gh-run-receptor@074c01349034d3374ca270be2cf3768cc0e0bfae
+        with:
+          run-id: "34037657805"
+          repository: uibcdf/gh-run-receptor
+          profile: ci
+          capture: metadata
+          report-name: distributed-${{ runner.os }}
+          strict-reporter: "true"
+
+      - name: Verify distributed-source identity and truth
+        shell: python
+        env:
+          ASSESSMENT: ${{ steps.receptor.outputs.assessment }}
+          CONCLUSION: ${{ steps.receptor.outputs['github-conclusion'] }}
+          REPORT_PATH: ${{ steps.receptor.outputs['report-path'] }}
+        run: |
+          import json
+          import os
+          from pathlib import Path
+
+          report = json.loads(Path(os.environ["REPORT_PATH"]).read_text(encoding="utf-8"))
+          assert os.environ["ASSESSMENT"] == "PASS"
+          assert os.environ["CONCLUSION"] == "success"
+          assert report["publisher"] == {
+              "kind": "github_action",
+              "repository": "uibcdf/gh-run-receptor",
+              "ref": "074c01349034d3374ca270be2cf3768cc0e0bfae",
+          }

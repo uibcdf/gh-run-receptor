@@ -78,9 +78,12 @@ to full commit SHAs. Offline tests cover success, source failure, active state, 
 failure, hostile diagnostics, unsafe names, oversize output, local provenance fallback,
 metadata syntax, and the manual validation workflow contract.
 
-The manual workflow will next validate the checkout-local Action and script extension on
-Ubuntu, macOS, and Windows against retained successful and failed runs and its own active
-run. No cross-platform or timing claim is made until that run completes.
+Run `34043552961` passed all three checkout-local jobs on Ubuntu, macOS, and Windows. It
+proved script-extension installation and execution, completed-source `PASS`, current-run
+`PENDING`, and, on Linux, completed-source `FAIL` without reporter failure. Individual
+Action invocations took 3--9 seconds at GitHub's one-second metadata resolution. Seven
+JSON artifacts were 1,559--2,009 bytes. A separate three-platform workflow now checks the
+same Action downloaded by exact commit SHA, rather than from the workflow checkout.
 
 The first hosted run, `34043472028`, proved extension installation and version execution on
 all three operating systems, then failed during extension removal because GitHub CLI also
