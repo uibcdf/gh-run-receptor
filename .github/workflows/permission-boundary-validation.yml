@@ -1,0 +1,104 @@
+name: Action permission boundary validation
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  minimum:
+    name: Minimum documented permissions
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - name: Apply trusted inline rules
+        id: receptor
+        uses: uibcdf/gh-run-receptor@09c164a4cac2187068d8058b630a92a049486a1d
+        with:
+          run-id: "34037657805"
+          repository: uibcdf/gh-run-receptor
+          profile: auto
+          capture: metadata
+          report-name: permission-minimum
+          strict-reporter: "true"
+          rules: |
+            schema_version: 1
+            workflows:
+              - match:
+                  path: .github/workflows/compatibility.yml
+                profile: ci
+
+      - name: Verify report and inline provenance
+        shell: python
+        env:
+          ERROR_CATEGORY: ${{ steps.receptor.outputs['error-category'] }}
+          REPORT_PATH: ${{ steps.receptor.outputs['report-path'] }}
+          REPORT_READY: ${{ steps.receptor.outputs['report-ready'] }}
+        run: |
+          import json
+          import os
+          from pathlib import Path
+
+          report = json.loads(Path(os.environ["REPORT_PATH"]).read_text(encoding="utf-8"))
+          source = report["configuration"]["source"]
+          assert os.environ["REPORT_READY"] == "true"
+          assert os.environ["ERROR_CATEGORY"] == ""
+          assert report["receptor"]["profile"] == "ci"
+          assert source["kind"] == "action_inline"
+          assert source["path"] == ".github/workflows/permission-boundary-validation.yml"
+          assert source["ref"] == "refs/heads/main"
+          assert source["event"] == "workflow_dispatch"
+          assert len(source["sha256"]) == 64
+
+  without-actions-read:
+    name: Observe without actions read
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+    steps:
+      - name: Probe reporter
+        id: receptor
+        uses: uibcdf/gh-run-receptor@09c164a4cac2187068d8058b630a92a049486a1d
+        with:
+          run-id: "34037657805"
+          repository: uibcdf/gh-run-receptor
+          profile: ci
+          capture: metadata
+
+      - name: Record observed outputs
+        shell: bash
+        env:
+          ERROR_CATEGORY: ${{ steps.receptor.outputs['error-category'] }}
+          REPORT_READY: ${{ steps.receptor.outputs['report-ready'] }}
+        run: |
+          printf 'without-actions-read: report-ready=%s error-category=%s\n' \
+            "$REPORT_READY" "$ERROR_CATEGORY" | tee -a "$GITHUB_STEP_SUMMARY"
+
+  without-contents-read:
+    name: Observe without contents read
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      actions: read
+    steps:
+      - name: Probe reporter
+        id: receptor
+        uses: uibcdf/gh-run-receptor@09c164a4cac2187068d8058b630a92a049486a1d
+        with:
+          run-id: "34037657805"
+          repository: uibcdf/gh-run-receptor
+          profile: ci
+          capture: metadata
+
+      - name: Record observed outputs
+        shell: bash
+        env:
+          ERROR_CATEGORY: ${{ steps.receptor.outputs['error-category'] }}
+          REPORT_READY: ${{ steps.receptor.outputs['report-ready'] }}
+        run: |
+          printf 'without-contents-read: report-ready=%s error-category=%s\n' \
+            "$REPORT_READY" "$ERROR_CATEGORY" | tee -a "$GITHUB_STEP_SUMMARY"
