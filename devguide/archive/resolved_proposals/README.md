@@ -10,6 +10,7 @@
 - [#15 — Classify and redact GitHub acquisition failures](classify_and_redact_github_acquisition_failures.md) (`resolved`)
 - [#19 — Consume and verify published Action reports](consume_and_verify_published_action_reports.md) (`resolved`)
 - [#17 — Deliver the first embedded GitHub Action vertical slice](deliver_the_first_embedded_github_action_vertical_slice.md) (`resolved`)
+- [#21 — Discover a trusted published report from its source run](discover_a_trusted_published_report_from_its_source_run.md) (`resolved`)
 - [#2 — Formalize version 1 bundle, model, and report schemas](formalize_version_1_bundle_model_and_report_schemas.md) (`resolved`)
 - [#5 — Load trusted workflow rules from client repositories](load_trusted_workflow_rules_from_client_repositories.md) (`resolved`)
 - [#4 — Publish measured adoption guidance for client repositories](publish_measured_adoption_guidance_for_client_repositories.md) (`resolved`)

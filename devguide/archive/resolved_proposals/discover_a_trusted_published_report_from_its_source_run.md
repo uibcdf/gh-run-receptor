@@ -1,12 +1,12 @@
 ---
 summary: Discover a trusted published report from its source run
 issue: uibcdf/gh-run-receptor#21
-status: active
+status: resolved
 opened: 2026-09-06
-closed:
-verification: inspected
+closed: 2026-09-06
+verification: measured
 area: ['github', 'cli', 'security']
-guard:
+guard: tests/test_published.py
 normative:
 blocked_by: []
 supersedes: []
@@ -15,8 +15,8 @@ supersedes: []
 # Discovering a trusted published report from its source run
 
 **Reported:** 2026-09-06, while exercising the first external published-report consumer.
-**Status:** Active; implementation and local gates pass, while hosted release evidence is
-pending.
+**Status:** Resolved in 0.14.0 with local, installed-wheel, live Action, and hosted
+cross-platform evidence.
 
 ## What
 
@@ -127,8 +127,19 @@ python -m build
 Successfully built wheel and source distribution for the dirty 0.14.0 candidate.
 ```
 
-Hosted source-to-reporter discovery and an exact tagged build remain required before
-resolution.
+Hosted evidence on 2026-09-06:
+
+- distributed Action run `34050056151` passed on Ubuntu, macOS, and Windows and triggered
+  canonical reporter run `34050080872`;
+- the reporter uploaded exactly one 1,489-byte artifact named
+  `gh-run-receptor-report-34050056151-1`, ID `9994266757`, with GitHub SHA-256 digest
+  `26764d1ebe94135e1b621a73c1f49f342581710b501195b8b72b98fcac465e0a`;
+- `published-source 34050056151` located that artifact without a reporter ID and rendered
+  `PASS` with all three trust distinctions;
+- extension gate `34050112408` passed explicit and source-first consumption on Ubuntu,
+  macOS, and Windows;
+- an isolated exact-tag wheel reported `0.14.0`, consumed the live source successfully,
+  and measured 55 KiB; its source distribution measured 75 KiB.
 
 ## Provenance
 

@@ -108,12 +108,12 @@ its exit condition and deliverables are satisfied:
 | Phase 0: corpus and feasibility | 15% | 14% | Measured sanitized fixtures cover native/noarch Conda, failing CI, successful/failing documentation and npm release workflows, cancellation, expired logs, and paired reruns; a live experiment documents why standard job timeout cannot generate `timed_out`; authentic `timed_out` and Zenodo evidence remain |
 | Phase 1: generic CLI | 30% | 28% | Capture, strict validated replay, formal bundle/model/report schemas, source-referenced normalization, bounded reports, attempt-specific historical truth, outcome exit-code parity, degraded log analysis, and structured redacted acquisition failures are tested; remaining real outcome cases and byte-identical replay timing remain |
 | Phase 2: rules and profiles | 20% | 19% | Initial native/noarch Conda, CI, documentation, and release interpretations plus repeated-failure grouping, strict trusted exact-match configuration, local discovery, non-overwriting `init`, and default-branch adoption across eight additional clients are tested; richer rules and external release verification remain |
-| Phase 3: embedded Action | 15% | 11% | Composite publication, provenance, fail-open and active-run truth, read-only terminal `workflow_run`, and bounded external report-artifact consumption pass adversarial tests and live hosted validation; inline rules, fork/restricted permissions, and source-to-reporter discovery remain |
+| Phase 3: embedded Action | 15% | 13% | Composite publication, provenance, fail-open and active-run truth, read-only terminal `workflow_run`, bounded report consumption, and verified source-to-reporter discovery pass adversarial and live hosted validation; inline rules and fork/restricted permissions remain |
 | Phase 4: aggregation and comparison | 10% | 3% | Transition-only watch is unit-tested and measured against one active remote run; aggregation and comparison remain |
 | Cross-cutting release gate | 10% | 8% | Python packaging passes the nine OS/interpreter combinations; script-extension installation, remote-source Action execution, terminal downstream reporting, and published-report consumption pass on Ubuntu, macOS, and Windows; publication, minimum GitHub CLI, and final release gates remain |
 
 Design completion is reported separately from implementation progress. The evidenced
-implementation credit at this checkpoint is **83% toward 1.0**. This is not a schedule
+implementation credit at this checkpoint is **85% toward 1.0**. This is not a schedule
 estimate: credit is deliberately withheld where a phase's required corpus, schema,
 platform, or distribution evidence is absent. Percentages change only with linked tests,
 builds, or benchmark evidence, not by subjective confidence.

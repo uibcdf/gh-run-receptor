@@ -37,3 +37,9 @@ are separate, explicit release steps.
 The `0.12.0` gate additionally requires checkout-local and exact-commit remote-source
 execution of the composite Action on Ubuntu, macOS, and Windows. A same-run test must stay
 `PENDING`; a completed source failure must not become a reporter failure.
+
+The `0.14.0` gate additionally requires deterministic source run/attempt artifact identity,
+a live canonical `workflow_run` reporter, source-first consumption from only the original
+run ID, and installed-extension validation on Ubuntu, macOS, and Windows. The report must
+distinguish verified source facts, verified reporter identity, and published rather than
+recomputed interpretation.

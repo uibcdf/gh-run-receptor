@@ -259,6 +259,24 @@ The 0.13.1 wheel independently installed outside the checkout, reported exact ve
 `0.13.1`, and exposed both trust fields in live compact output. Its canonical guide is
 synchronized to every tracked consumer.
 
+## Source-first report discovery
+
+Release 0.14.0 makes every Action artifact attempt-qualified. Distributed Action run
+`34050056151` passed 3/3 on Ubuntu, macOS, and Windows and triggered canonical
+`.github/workflows/gh-run-receptor-report.yml` run `34050080872`. The reporter published
+exactly one 1,489-byte artifact named `gh-run-receptor-report-34050056151-1`, with artifact
+ID `9994266757` and GitHub SHA-256 digest
+`26764d1ebe94135e1b621a73c1f49f342581710b501195b8b72b98fcac465e0a`.
+
+Starting only from source ID `34050056151`, `published-source` recovered the reporter,
+verified its `workflow_run` event, workflow ID, run path, workflow path, artifact producer
+identity, digest, and fresh source facts, then rendered `PASS` with
+`reporter_identity=verified`. Hosted extension run `34050112408` passed both explicit
+historical consumption and this source-first route on Ubuntu, macOS, and Windows.
+
+An isolated wheel built from exact tag `0.14.0` reported that version and consumed the same
+live report successfully. The wheel measured 55 KiB and the source distribution 75 KiB.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

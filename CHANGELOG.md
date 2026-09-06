@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.14.0 - 2026-09-06
+
 - Add `published-source`, which discovers a compact report from the original run ID and
   fails closed unless GitHub ties exactly one attempt-qualified artifact to the expected
   canonical `workflow_run` reporter.
@@ -11,6 +13,8 @@ All notable changes to this project will be documented in this file.
   authoritative source run ID and attempt to a bounded caller-controlled prefix.
 - Establish `.github/workflows/gh-run-receptor-report.yml` as the conventional reporter
   workflow path while preserving explicit `published` consumption as the fallback.
+- Validate the tagged Action, canonical reporter, exact-tag wheel, and installed extension
+  end to end, including Ubuntu, macOS, and Windows source-first consumption.
 
 ## 0.13.1 - 2026-09-06
 
