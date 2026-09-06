@@ -31,13 +31,20 @@ def test_terminal_report_listener_is_read_only_and_executes_no_source_content():
 def test_terminal_report_listener_preserves_event_identity_and_conclusion():
     source = _source()
 
-    assert "uses: uibcdf/gh-run-receptor@0.14.0" in source
+    assert "uses: uibcdf/gh-run-receptor@09c164a4cac2187068d8058b630a92a049486a1d" in source
     assert "run-id: ${{ github.event.workflow_run.id }}" in source
+    assert "profile: auto" in source
+    assert "rules: |" in source
+    assert "path: .github/workflows/action-distribution-validation.yml" in source
     assert "SOURCE_CONCLUSION: ${{ github.event.workflow_run.conclusion }}" in source
     assert "SOURCE_RUN_ID: ${{ github.event.workflow_run.id }}" in source
     assert "SOURCE_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}" in source
     assert "REPORT_ARTIFACT: ${{ steps.receptor.outputs['report-artifact'] }}" in source
     assert 'report["subject"]["run_id"] == int(os.environ["SOURCE_RUN_ID"])' in source
     assert 'report["github"]["status"] == "completed"' in source
+    assert 'configuration_source["kind"] == "action_inline"' in source
+    assert 'configuration_source["event"] == "workflow_run"' in source
+    assert 'os.environ["REPORT_READY"] == "true"' in source
+    assert 'os.environ["ERROR_CATEGORY"] == ""' in source
     assert 'os.environ["CONCLUSION"] == os.environ["SOURCE_CONCLUSION"]' in source
     assert 'os.environ["REPORT_ARTIFACT"] == expected' in source

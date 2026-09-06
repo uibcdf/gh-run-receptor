@@ -145,4 +145,10 @@ run `34062840512` passed all three exact assertions on commit `15763a5`.
 
 A path-filtered same-repository pull-request gate is now defined. It expects fail-open
 rejection with `untrusted_inline_rules`, no report, and no evidence acquisition. Its live
-probe branch and run remain pending.
+probe PR `uibcdf/gh-run-receptor#24` was closed without merge after run `34063608569`
+passed the rejection assertions on head `80a3ff4`; no marker entered the default branch.
+
+The canonical `workflow_run` reporter is now pinned to the implementation commit and
+carries a full inline `config@1` rule selecting the source workflow's CI profile. It
+asserts trusted source provenance, ready/error outputs, and terminal source identity. Its
+hosted source-and-reporter pair remains pending.

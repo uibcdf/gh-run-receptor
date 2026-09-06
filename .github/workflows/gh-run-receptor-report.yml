@@ -17,21 +17,29 @@ jobs:
     steps:
       - name: Build the terminal source report
         id: receptor
-        uses: uibcdf/gh-run-receptor@0.14.0
+        uses: uibcdf/gh-run-receptor@09c164a4cac2187068d8058b630a92a049486a1d
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
-          profile: ci
+          profile: auto
           capture: metadata
           strict-reporter: "true"
+          rules: |
+            schema_version: 1
+            workflows:
+              - match:
+                  path: .github/workflows/action-distribution-validation.yml
+                profile: ci
 
       - name: Verify source identity and terminal truth
         shell: python
         env:
           ASSESSMENT: ${{ steps.receptor.outputs.assessment }}
           CONCLUSION: ${{ steps.receptor.outputs['github-conclusion'] }}
+          ERROR_CATEGORY: ${{ steps.receptor.outputs['error-category'] }}
           REPORT_ARTIFACT: ${{ steps.receptor.outputs['report-artifact'] }}
           REPORT_PATH: ${{ steps.receptor.outputs['report-path'] }}
+          REPORT_READY: ${{ steps.receptor.outputs['report-ready'] }}
           SOURCE_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}
           SOURCE_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
           SOURCE_RUN_ID: ${{ github.event.workflow_run.id }}
@@ -41,9 +49,17 @@ jobs:
           from pathlib import Path
 
           report = json.loads(Path(os.environ["REPORT_PATH"]).read_text(encoding="utf-8"))
+          configuration_source = report["configuration"]["source"]
+          assert os.environ["REPORT_READY"] == "true"
+          assert os.environ["ERROR_CATEGORY"] == ""
           assert report["subject"]["run_id"] == int(os.environ["SOURCE_RUN_ID"])
           assert report["github"]["status"] == "completed"
           assert report["github"]["conclusion"] == os.environ["SOURCE_CONCLUSION"]
+          assert report["receptor"]["profile"] == "ci"
+          assert configuration_source["kind"] == "action_inline"
+          assert configuration_source["path"] == ".github/workflows/gh-run-receptor-report.yml"
+          assert configuration_source["ref"] == "refs/heads/main"
+          assert configuration_source["event"] == "workflow_run"
           assert os.environ["CONCLUSION"] == os.environ["SOURCE_CONCLUSION"]
           assert os.environ["ASSESSMENT"] == "PASS"
           expected = (
