@@ -19,10 +19,10 @@ def test_minimum_cli_gate_is_manual_linux_only_and_bounded():
     assert "GH_VERSION: 2.48.0" in source
 
 
-def test_minimum_cli_gate_pins_source_action_archive_and_checksum():
+def test_minimum_cli_gate_pins_archive_release_and_checksum():
     source = _source()
 
-    assert "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7" in source
+    assert "actions/checkout" not in source
     assert "releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_amd64.tar.gz" in source
     assert "1c477e2562aca8679b0219569f0482f1975de76daca8ba307892c1787338a28d" in source
     assert "sha256sum --check --strict" in source
@@ -32,8 +32,8 @@ def test_minimum_cli_gate_pins_source_action_archive_and_checksum():
 def test_minimum_cli_gate_installs_the_extension_and_exercises_remote_pagination():
     source = _source()
 
-    assert "gh extension install ." in source
-    assert "gh run-receptor --version" in source
+    assert "gh extension install uibcdf/gh-run-receptor --pin 0.16.0" in source
+    assert 'test "$(gh run-receptor --version)" = "0.16.0"' in source
     assert "inspect 34037657805 --profile=ci --capture=metadata" in source
     assert "report['github']['conclusion'] == 'success'" in source
     assert "report['receptor']['assessment'] == 'PASS'" in source

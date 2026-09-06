@@ -31,7 +31,7 @@ def test_terminal_report_listener_is_read_only_and_executes_no_source_content():
 def test_terminal_report_listener_preserves_event_identity_and_conclusion():
     source = _source()
 
-    assert "uses: uibcdf/gh-run-receptor@0.15.0" in source
+    assert "uses: uibcdf/gh-run-receptor@0.16.0" in source
     assert "run-id: ${{ github.event.workflow_run.id }}" in source
     assert "profile: auto" in source
     assert "rules: |" in source

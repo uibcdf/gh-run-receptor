@@ -16,11 +16,6 @@ jobs:
       GH_VERSION: 2.48.0
       GH_ARCHIVE_SHA256: 1c477e2562aca8679b0219569f0482f1975de76daca8ba307892c1787338a28d
     steps:
-      - name: Check out the exact receptor source
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
-        with:
-          fetch-depth: 0
-
       - name: Install the checksum-pinned minimum GitHub CLI
         shell: bash
         run: |
@@ -37,13 +32,13 @@ jobs:
         run: |
           test "$(gh --version | sed -n '1p')" = "gh version 2.48.0 (2024-04-17)"
 
-      - name: Install the checkout as a GitHub CLI extension
+      - name: Install the exact release as a GitHub CLI extension
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh extension install .
-          gh run-receptor --version
+          gh extension install uibcdf/gh-run-receptor --pin 0.16.0
+          test "$(gh run-receptor --version)" = "0.16.0"
 
       - name: Inspect a real run through the minimum transport
         shell: bash

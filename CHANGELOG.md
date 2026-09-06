@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.16.0 - 2026-09-06
+
 - Require GitHub CLI 2.48.0 or newer for networked commands, reject incompatible or
   unrecognizable versions before API acquisition, and retain offline operation without it.
 - Add a checksum-pinned hosted gate that installs the minimum official GitHub CLI binary

@@ -144,7 +144,7 @@ The GitHub Action may carry the complete version 1 configuration as a multiline 
 
 ```yaml
 - if: always()
-  uses: uibcdf/gh-run-receptor@0.15.0
+  uses: uibcdf/gh-run-receptor@0.16.0
   with:
     rules: |
       schema_version: 1
