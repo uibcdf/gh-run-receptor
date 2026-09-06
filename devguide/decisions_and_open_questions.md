@@ -84,7 +84,9 @@ page and retain only a concise decision record here.
   supported GitHub CLI version.
 - **Needed evidence:** first vertical-slice compatibility runs and packaging choice.
 - **Gate:** before the first public package release.
-- **Current default:** Python 3.11–3.13; no OS support claim until verified.
+- **Current default:** the Python console distribution supports Python 3.11–3.13 on Ubuntu,
+  macOS, and Windows, backed by the nine-job run `34037657805`. Script-extension operating
+  systems and the minimum GitHub CLI version remain unclaimed until separately verified.
 
 ## Deferred, not forgotten
 

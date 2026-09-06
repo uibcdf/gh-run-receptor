@@ -110,10 +110,10 @@ its exit condition and deliverables are satisfied:
 | Phase 2: rules and profiles | 20% | 18% | Initial native/noarch Conda, CI, documentation, and release interpretations plus repeated-failure grouping, strict trusted exact-match configuration, local discovery, and non-overwriting `init` are tested; richer rules and external release verification remain |
 | Phase 3: embedded Action | 15% | 0% | Contract designed; no distributed Action implementation yet |
 | Phase 4: aggregation and comparison | 10% | 3% | Transition-only watch is unit-tested and measured against one active remote run; aggregation and comparison remain |
-| Cross-cutting release gate | 10% | 2% | Flat installable package, tag-derived version, local tests, and wheel smoke test verified on Linux; platform and release gates remain |
+| Cross-cutting release gate | 10% | 5% | The Python console command, full suite, build, wheel installation, and smoke path pass on Ubuntu, macOS, and Windows with Python 3.11--3.13; extension, publication, and final release gates remain |
 
 Design completion is reported separately from implementation progress. The evidenced
-implementation credit at this checkpoint is **65% toward 1.0**. This is not a schedule
+implementation credit at this checkpoint is **68% toward 1.0**. This is not a schedule
 estimate: credit is deliberately withheld where a phase's required corpus, schema,
 platform, or distribution evidence is absent. Percentages change only with linked tests,
 builds, or benchmark evidence, not by subjective confidence.
@@ -146,7 +146,8 @@ and the following final checks agree:
 - the benchmark report meets the token-reduction target without semantic misses;
 - security and resource-bound cases pass under supported platforms;
 - CLI and any shipped Action install from their released artifacts, not a source checkout;
-- examples run against a dedicated fixture repository with documented permissions;
+- examples run against reviewed public captures or bounded manual workflows with documented
+  permissions;
 - release notes enumerate supported Python, GitHub CLI, GitHub host, and operating systems;
 - documentation contains no behavior claimed solely from design intent;
 - every open decision whose gate is at or before 1.0 is closed or explicitly removes the

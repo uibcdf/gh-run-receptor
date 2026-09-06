@@ -1,12 +1,12 @@
 ---
 summary: Validate the Python CLI across supported platforms
 issue: uibcdf/gh-run-receptor#16
-status: active
+status: resolved
 opened: 2026-09-06
-closed:
-verification: inspected
+closed: 2026-09-06
+verification: measured
 area: ['packaging', 'tests', 'cli']
-guard:
+guard: tests/test_compatibility_workflow.py
 normative:
 blocked_by: []
 supersedes: []
@@ -15,7 +15,7 @@ supersedes: []
 # Validate the Python CLI across supported platforms
 
 **Reported:** 2026-09-06, after the Linux-only 0.10.0 release gate.
-**Status:** Active; the nine-combination compatibility workflow is designed but unmeasured.
+**Status:** Resolved; the corrected nine-combination compatibility run passed 9/9.
 
 ## What
 
@@ -100,3 +100,15 @@ partial matrix remains useful evidence and must not be rerun wholesale without d
 Planning on Linux, Python 3.13.14, GitHub CLI 2.81.0, gh-run-receptor 0.10.0,
 2026-09-06. Action SHAs were read from the official `actions/checkout` and
 `actions/setup-python` repositories through the GitHub API.
+
+## Resolution
+
+Run `34037657805` at commit `44562d5` passed all nine operating-system and Python-version
+jobs. Each completed the full suite, built wheel and sdist, installed the wheel, and ran
+the console smoke test outside the checkout. The observed development version was
+`0.10.0+4.g44562d5`; durations were 15--45 seconds.
+
+The preceding run `34037154711` exposed Windows CRLF conversion in byte-exact fixtures.
+The fix adds an LF checkout rule and a test guarding it; bundle verification remains
+strict. This closes Python package compatibility only. GitHub CLI script-extension
+installation remains a separate OD-008 gate.

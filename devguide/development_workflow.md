@@ -24,9 +24,10 @@ and tests run from the checkout without a `PYTHONPATH` override. The expected lo
 are Git, an authenticated GitHub CLI, Python 3.11 or newer, Ruff, pytest, and
 `pytest-receptor`.
 
-GitHub-dependent tests use a dedicated fixture repository and an explicitly authenticated
-`gh` session. Unit, contract, replay, and adversarial tests remain offline. Never require a
-personal token in a committed file or echo authentication state containing credentials.
+GitHub-dependent validation uses reviewed public UIBCDF captures or bounded, manually
+dispatched workflows and an explicitly authenticated `gh` session. Unit, contract, replay,
+and adversarial tests remain offline. Never require a personal token in a committed file or
+echo authentication state containing credentials.
 
 ## Architecture boundaries
 

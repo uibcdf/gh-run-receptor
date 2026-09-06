@@ -183,12 +183,27 @@ remain outside the product.
 - Human and LLM presentations can differ without disagreeing on facts or exit status.
 - A captured run can be replayed without network access from an installed wheel.
 
+## Cross-platform package validation
+
+Manual run `34037657805` at commit `44562d5` passed all nine combinations of
+GitHub-hosted Ubuntu, macOS, and Windows with Python 3.11, 3.12, and 3.13. Every job ran
+the complete 163-test suite with `--receptor=llm`, built exactly one wheel and one source
+distribution, installed the wheel, and invoked the installed `gh-run-receptor` command
+outside the checkout. The derived version was `0.10.0+4.g44562d5`, not `0+unknown`.
+
+The first run, `34037154711`, passed Ubuntu and macOS but exposed CRLF conversion of
+byte-exact JSON fixtures on Windows. The loader correctly rejected the altered byte
+counts. Declaring LF checkout for `tests/fixtures/**` fixed transport without weakening
+bundle validation; the second run then passed 9/9. Job durations ranged from 15 to 45
+seconds.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not
   yet a complete diagnosis engine.
 - The committed real-run corpus remains narrow; timed-out, restricted-token,
   active-transition, and real Zenodo cases remain gaps.
-- No cross-platform installation support claim follows from local Linux validation.
+- Cross-platform installation as a GitHub CLI script extension is not yet validated; the
+  matrix proves the Python console entry point installed from its wheel.
 - External registries, GitHub Releases, Git refs, and archive records are not queried by
   the first release profile.

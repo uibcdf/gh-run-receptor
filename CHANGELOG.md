@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## 0.11.0 - 2026-09-06
+
+- Add a bounded, manually dispatched Ubuntu, macOS, and Windows compatibility matrix for
+  Python 3.11, 3.12, and 3.13.
+- Run the full receptor-formatted suite, build wheel and source distribution, install the
+  wheel, and smoke-test the console command outside the checkout in every matrix job.
+- Preserve byte-exact fixture JSON with LF checkouts on every platform while retaining
+  strict manifest byte-count and digest validation.
+- Validate all nine platform/interpreter combinations in GitHub Actions run `34037657805`.
+
 ## 0.10.0 - 2026-09-06
 
 - Classify GitHub CLI acquisition failures as authentication required, authentication

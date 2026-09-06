@@ -5,11 +5,11 @@ repetitive run output into a compact, truth-preserving report while retaining a 
 path to the captured evidence.
 
 The project is in pre-1.0 development; no package has been published to a package index and
-the public contract may still evolve. The `0.10.0` source release can inspect, watch, and
+the public contract may still evolve. The `0.11.0` source release can inspect, watch, and
 replay structured run evidence. Install the GitHub CLI extension at the exact preview tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 0.10.0
+gh extension install uibcdf/gh-run-receptor --pin 0.11.0
 gh run-receptor --version
 ```
 
@@ -88,7 +88,7 @@ gh run-receptor config explain .github/workflows/build_conda.yaml
 
 Live capture reads policy only from the repository's default branch, stores its revision
 and digest in the evidence bundle, and fails if required platforms are absent. Version
-`0.10.0` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
+`0.11.0` accepts exact path, numeric ID, or display-name matches; it deliberately rejects
 patterns and unknown settings rather than silently ignoring them.
 
 An explicit `--attempt` reads the attempt-specific run, jobs, and logs endpoints. Bundle
@@ -154,6 +154,11 @@ The root `gh-run-receptor` launcher satisfies the GitHub CLI script-extension na
 contract. A local checkout can also be installed with `gh extension install .` or exercised
 directly with `./gh-run-receptor --help`. The tag installs source; Python-index and binary
 artifacts remain future distribution modes.
+
+The Python console command, full test suite, wheel and source-distribution build, wheel
+installation, and an outside-checkout smoke test are verified on GitHub-hosted Ubuntu,
+macOS, and Windows with Python 3.11, 3.12, and 3.13. This does not yet claim that the
+GitHub CLI script-extension installation path works on all three operating systems.
 
 Product contracts, contributor onboarding, security boundaries, open decisions, and the
 implementation route are maintained in the

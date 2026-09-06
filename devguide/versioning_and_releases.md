@@ -25,5 +25,11 @@ Before creating a release tag:
 5. verify that the built metadata version equals the intended tag;
 6. create and push the lightweight tag without moving an existing tag.
 
+For a release that changes a platform-support claim, manually dispatch
+`.github/workflows/compatibility.yml`. Its explicit matrix must pass the full suite, build,
+wheel installation, and outside-checkout console smoke test on Ubuntu, macOS, and Windows
+with Python 3.11, 3.12, and 3.13. This is evidence for the Python package and console
+entry point; script-extension support requires its own installation gate.
+
 A tag identifies source but does not by itself publish a package or GitHub Release. Those
 are separate, explicit release steps.

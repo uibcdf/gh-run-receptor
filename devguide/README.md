@@ -7,7 +7,7 @@ evidence.
 
 ## Current state
 
-The project has a `0.10.0` tagged source preview but no published package-index artifact or
+The project has a `0.11.0` tagged source preview but no published package-index artifact or
 stable public contract;
 the contracts in this guide are explicit but provisional unless marked settled. The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
@@ -50,6 +50,9 @@ The current MVP implements:
   strict configuration proposals with visible confidence and ambiguity fallback.
 - structured acquisition-error categories with bounded, control-safe, credential-redacted
   diagnostics and structured optional-404 handling.
+- a manually dispatched nine-combination compatibility gate proving the Python console
+  command, suite, build, wheel installation, and smoke path on Ubuntu, macOS, and Windows
+  with Python 3.11 through 3.13.
 
 It does not yet provide a broad cross-workflow corpus; run comparison; remote workflow
 discovery; pattern rules; or the embedded Action. The CI, documentation, Conda, release, and
@@ -125,9 +128,9 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The next milestone closes the remaining outcome and distribution gaps: Zenodo verification
-and supported platform installation. Standard job timeout is now measured as cancellation;
-authentic
+The next milestone closes the remaining outcome and distribution gaps: Zenodo verification,
+cross-platform GitHub CLI extension installation, and a minimum supported GitHub CLI.
+Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need
 structured producer evidence or new capture sources rather than name inference.
