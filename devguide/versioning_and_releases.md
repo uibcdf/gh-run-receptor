@@ -49,3 +49,8 @@ provenance, stable fail-open outputs, exact public permission observations, live
 same-repository pull-request rejection, and a canonical `workflow_run` report selected by
 trusted inline policy. Private-repository and fork behavior remain unclaimed unless tested
 in those environments.
+
+The `0.16.0` gate additionally requires pre-acquisition enforcement of GitHub CLI 2.48.0,
+offline independence from `gh`, and a real installed-extension metadata capture through
+the official checksum-pinned minimum Linux amd64 binary. Documentation distinguishes the
+functional floor from the recommendation to use the latest patched stable CLI.

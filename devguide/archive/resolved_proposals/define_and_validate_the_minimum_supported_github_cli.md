@@ -1,12 +1,12 @@
 ---
 summary: Define and validate the minimum supported GitHub CLI
 issue: uibcdf/gh-run-receptor#25
-status: active
+status: resolved
 opened: 2026-09-06
-closed:
-verification: asserted
+closed: 2026-09-06
+verification: measured
 area: ['github', 'cli', 'packaging']
-guard:
+guard: tests/test_github.py
 normative:
 blocked_by: []
 supersedes: []
@@ -15,8 +15,8 @@ supersedes: []
 # Defining and validating the minimum supported GitHub CLI
 
 **Reported:** 2026-09-06, while closing the remaining cross-cutting 1.0 distribution gate.
-**Status:** Active; implementation and local gates pass, while the checksum-pinned hosted
-minimum-version run remains pending.
+**Status:** Resolved; implementation, local gates, and the checksum-pinned hosted minimum
+version pass.
 
 ## What
 
@@ -110,3 +110,9 @@ The first implementation checks the CLI once per remote client, preserves missin
 failures separately, exposes the minimum in `--help`, and adds the hosted official-binary
 workflow. Fifty focused receptor-formatted tests pass across the transport, CLI, and
 workflow contracts; Ruff lint/format and developer-report validation also pass.
+
+The full local suite passed 254 tests, isolated wheel/source construction, Ruff lint and
+format, and developer-report validation. GitHub-hosted run `34066699901` then downloaded
+the official Linux amd64 2.48.0 archive, verified its published SHA-256, installed the
+checkout as a GitHub CLI extension, and completed a real metadata inspection with
+`PASS`/`success` through that exact transport.

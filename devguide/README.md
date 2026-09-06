@@ -68,6 +68,9 @@ The current MVP implements:
 - trusted inline Action `config@1` rules with default-branch caller provenance, stable
   ready/error outputs, exact public permission probes, and live same-repository
   pull-request rejection before acquisition.
+- an enforced GitHub CLI 2.48.0 functional floor for network commands, with lazy
+  pre-acquisition rejection, offline independence, and checksum-pinned hosted validation
+  of the official minimum binary.
 
 It does not yet provide a broad cross-workflow corpus; run comparison; remote workflow
 discovery; pattern rules; or validated private-repository and fork token behavior. The CI,
@@ -144,8 +147,8 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The next milestone closes the remaining outcome and distribution gaps: Zenodo verification
-and a minimum supported GitHub CLI.
+The next milestone closes the remaining outcome and distribution gaps, led by real Zenodo
+verification and final publication policy.
 Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need

@@ -319,6 +319,21 @@ clients in focused `[skip ci]` commits. It documents inline configuration, ready
 outputs, the default-branch trust boundary, and the deliberately narrower private/fork
 claim.
 
+## Minimum GitHub CLI validation
+
+GitHub CLI 2.48.0 is the first release containing the required
+`gh api --paginate --slurp` interface. The receptor now checks the stable version line once
+per remote client and rejects older or unrecognizable versions with
+`unsupported_gh_cli` before any API command. Missing executables remain a distinct
+acquisition failure, and offline operations do not perform the check.
+
+Hosted run `34066699901` downloaded the official Linux amd64 2.48.0 archive, verified
+SHA-256 `1c477e2562aca8679b0219569f0482f1975de76daca8ba307892c1787338a28d`, installed the
+checkout as an extension under that binary, and inspected public compatibility run
+`34037657805` through a real metadata capture. The resulting report retained GitHub
+`success` and receptor `PASS`. This establishes a functional transport floor, not a
+recommendation to prefer an old CLI over the latest patched stable release.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not
