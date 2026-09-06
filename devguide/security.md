@@ -20,6 +20,11 @@ authorization headers, signed redirect URLs, and environment-variable values are
 serialized. Authentication errors identify the missing capability without echoing secret
 material.
 
+The composite Action passes GitHub's ephemeral token only through `GH_TOKEN`; it never
+places it in a command argument, output, summary, artifact, or publisher field. Its example
+permission set is `actions: read` and `contents: read`. Restricted and fork-token behavior
+remains a live release-gate case rather than an assumed capability.
+
 ## Configuration trust
 
 The implemented repository loader reads rules only from the target repository's default
@@ -54,6 +59,10 @@ authorization values, and common token assignments are redacted; control and bid
 characters become visible escapes. Classification uses HTTP status first and narrow
 missing-authentication/rate-limit signals second. Unknown prose never becomes a guessed
 permission state.
+
+The Action HTML-escapes untrusted report text before writing the Markdown summary, rejects
+multiline scalar outputs and unsafe report names, bounds the summary to 32 KiB and report
+to 8 MiB, and reuses the same credential-redacted error boundary as the CLI.
 
 ## Archives and artifacts
 

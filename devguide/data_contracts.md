@@ -195,9 +195,18 @@ The report preserves official and derived state:
   "causes": [],
   "artifacts": [],
   "unknowns": [],
-  "warnings": []
+  "warnings": [],
+  "publisher": {
+    "kind": "github_action",
+    "repository": "uibcdf/gh-run-receptor",
+    "ref": "0.12.0"
+  }
 }
 ```
+
+`publisher` is an optional additive report field. The embedded Action sets it from the
+Action repository and requested ref rather than inferring a package version from a source
+archive without Git metadata. CLI reports omit it.
 
 Unknown GitHub enum values and unrecognized fields are preserved in source evidence and
 listed in `unknowns` when they affect interpretation.

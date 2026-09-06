@@ -35,7 +35,10 @@ page and retain only a concise decision record here.
 - **Needed evidence:** cold-start benchmarks on Linux, macOS, and Windows; artifact size;
   dependency and provenance review; release-maintenance cost.
 - **Gate:** before publishing the first stable Action.
-- **Current default:** develop the Python CLI and keep the Action boundary transport-neutral.
+- **Current candidate:** a thin composite Action runs the dependency-free shared Python
+  core with commit-pinned runtime and artifact Actions. A separate JavaScript model and a
+  Linux-only container are rejected. The decision closes only after hosted Linux, macOS,
+  and Windows cold-start and artifact measurements pass from released source.
 
 ### OD-002: Stable adaptive-capture threshold
 

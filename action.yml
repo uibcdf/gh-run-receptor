@@ -1,0 +1,93 @@
+name: gh-run-receptor report
+description: Publishing a compact, truth-preserving GitHub Actions run report
+author: UIBCDF Lab
+
+inputs:
+  run-id:
+    description: Completed source run ID; defaults to the current, still-active run
+    required: false
+    default: ""
+  repository:
+    description: Source repository in OWNER/REPO form
+    required: false
+    default: ""
+  profile:
+    description: Built-in profile or auto
+    required: false
+    default: auto
+  capture:
+    description: "Evidence policy: adaptive, full, or metadata"
+    required: false
+    default: adaptive
+  report-name:
+    description: Safe artifact and report basename
+    required: false
+    default: gh-run-receptor-report
+  strict-reporter:
+    description: Failing the step when the reporter itself cannot produce a report
+    required: false
+    default: "false"
+
+outputs:
+  assessment:
+    description: Receptor assessment from the shared report
+    value: ${{ steps.reporter.outputs.assessment }}
+  github-conclusion:
+    description: Authoritative GitHub conclusion, empty while the source run is active
+    value: ${{ steps.reporter.outputs['github-conclusion'] }}
+  profile:
+    description: Applied profile
+    value: ${{ steps.reporter.outputs.profile }}
+  failed-groups:
+    description: Number of distinct non-success job groups
+    value: ${{ steps.reporter.outputs['failed-groups'] }}
+  incomplete-groups:
+    description: Number of incomplete requested evidence dimensions
+    value: ${{ steps.reporter.outputs['incomplete-groups'] }}
+  report-artifact:
+    description: Uploaded JSON report artifact name
+    value: ${{ steps.reporter.outputs['report-artifact'] }}
+  report-path:
+    description: Runner-local canonical JSON report path
+    value: ${{ steps.reporter.outputs['report-path'] }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Set up the embedded Python runtime
+      uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+      with:
+        python-version: "3.13"
+
+    - name: Build the compact report
+      id: reporter
+      shell: python
+      continue-on-error: ${{ inputs['strict-reporter'] != 'true' }}
+      env:
+        GH_TOKEN: ${{ github.token }}
+        PYTHONPATH: ${{ github.action_path }}
+        INPUT_RUN_ID: ${{ inputs['run-id'] }}
+        INPUT_REPOSITORY: ${{ inputs.repository }}
+        INPUT_PROFILE: ${{ inputs.profile }}
+        INPUT_CAPTURE: ${{ inputs.capture }}
+        INPUT_REPORT_NAME: ${{ inputs['report-name'] }}
+        INPUT_STRICT_REPORTER: ${{ inputs['strict-reporter'] }}
+        RECEPTOR_ACTION_REPOSITORY: ${{ github.action_repository }}
+        RECEPTOR_ACTION_REF: ${{ github.action_ref }}
+      run: |
+        import runpy
+        runpy.run_module("gh_run_receptor.embedded", run_name="__main__")
+
+    - name: Upload the canonical JSON report
+      id: upload
+      if: steps.reporter.outputs['report-ready'] == 'true'
+      uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+      with:
+        name: ${{ steps.reporter.outputs['report-artifact'] }}
+        path: ${{ steps.reporter.outputs['report-path'] }}
+        if-no-files-found: error
+        retention-days: 7
+
+branding:
+  icon: activity
+  color: blue

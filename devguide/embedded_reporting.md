@@ -12,47 +12,59 @@ must not be required to interpret an ordinary GitHub Actions run.
 
 ## Integration forms
 
-A step inside one job can summarize only evidence visible to that job. It is suitable
-for a self-contained producer:
+A step inside the run can inspect that run, but the authoritative run remains active
+while the reporter executes. This convenience form therefore publishes `PENDING`; it is
+useful for checking the integration, not for claiming a terminal run result:
 
 ```yaml
 - name: Compact receptor report
   if: always()
-  uses: uibcdf/gh-run-receptor@v1
+  uses: uibcdf/gh-run-receptor@<full-commit-sha>
   with:
     profile: ci
 ```
 
-A run-wide report belongs in a final job or reusable workflow. GitHub Actions has no
-wildcard for `needs`, so every primary job must be listed explicitly:
+A terminal run-wide report belongs in a downstream `workflow_run` workflow, where the
+source run has already completed. The first composite Action accepts that completed run's
+ID explicitly:
 
 ```yaml
-receptor-report:
-  if: always()
-  needs: [lint, test, build]
-  permissions:
-    actions: read
-    checks: read
-    contents: read
-  uses: uibcdf/gh-run-receptor/.github/workflows/report.yaml@v1
-  with:
-    profile: ci
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+
+jobs:
+  receptor-report:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: uibcdf/gh-run-receptor@<full-commit-sha>
+        with:
+          run-id: ${{ github.event.workflow_run.id }}
+          repository: ${{ github.repository }}
+          profile: ci
 ```
 
-The reporter excludes its own job from evaluation. Cancellation may prevent the final
-job from running; the external CLI is the fallback for cancelled or interrupted runs.
+The source workflow and reporter workflow are separate runs. The external CLI remains the
+fallback when a downstream workflow is absent, skipped, cancelled, or lacks permission.
 
 ## Action contract
 
-The first stable Action should accept these concepts, whether their final input names are
-identical or not:
+The implemented preview Action accepts:
 
-- `profile`: built-in or repository-defined interpretation profile;
-- `rules`: optional small inline YAML document;
-- `config-path`: repository configuration path;
+- `run-id`: explicit source run, defaulting to the active current run;
+- `repository`: explicit source repository, defaulting to the current repository;
+- `profile`: built-in or automatic interpretation profile;
 - `capture`: `adaptive`, `full`, or `metadata`;
 - `report-name`: artifact and summary label;
 - `strict-reporter`: opt-in development behavior for treating reporter faults as errors.
+
+Repository default-branch rules remain active through the shared capture path. Inline
+rules and alternate configuration revisions are deferred until precedence and pull-request
+trust behavior are specified and tested.
 
 It emits:
 
@@ -61,8 +73,9 @@ It emits:
 - a small `gh-run-receptor.report@1` JSON artifact;
 - scalar outputs for assessment, failed groups, incomplete groups, and report artifact.
 
-The summary must stay well below GitHub's 1 MiB per-step summary limit. Large evidence is
-stored in an artifact and referenced by identity; it is not pasted into the summary.
+The implementation caps its JSON report at 8 MiB and its summary at 32 KiB, well below
+GitHub's 1 MiB per-step summary limit. Large evidence remains in the private runner cache;
+only the canonical report is uploaded.
 
 ## Failure semantics
 
@@ -71,7 +84,8 @@ receptor error is shown as `RECEPTOR_ERROR`, but does not convert successful pri
 into a product failure. Source job failures remain failures. `strict-reporter` is for the
 receptor's own tests and controlled adoption gates, not the default for downstream users.
 
-The Action is read-only. It does not rerun, cancel, approve, upload, publish, or deploy.
+The Action is read-only with respect to the source run. It does not rerun, cancel, approve,
+publish, or deploy. Uploading its own report artifact is its explicit output contract.
 Suggested commands are inert text and always identify their exact target.
 
 ## Permissions and untrusted input
@@ -94,11 +108,11 @@ The Action itself consumes runner time and artifact storage. The initial impleme
 must measure this overhead and keep it bounded. A compact report is worthwhile only when
 its generation and retrieval cost is materially lower than repeated full-log inspection.
 
-## Distribution decision gate
+## Distribution decision
 
-The CLI prototype targets Python 3.11 through 3.13 and delegates authentication and HTTP
-transport to the installed `gh` command. Before the first stable Action, the project must
-choose and record one reproducible distribution strategy: bundled JavaScript, a packaged
-Python runtime, or a thin composite Action around an installed executable. The decision
-must account for cold-start time, supply-chain surface, cross-platform support, release
-automation, and version pinning. It is intentionally not guessed during Phase 0.
+The preview is a thin composite Action around the shared dependency-free Python source and
+the hosted runner's `gh` command. A commit-pinned `setup-python` provides Python 3.13 and a
+commit-pinned artifact action uploads the report. This avoids a second JavaScript model and
+the Linux-only boundary of a container Action. The report records Action repository and ref
+provenance, including an explicit `local` fallback for checkout-local validation. Stable
+support still requires measured hosted-runner startup, artifact, and permission evidence.

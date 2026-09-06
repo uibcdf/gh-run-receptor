@@ -16,8 +16,8 @@ supersedes: []
 
 **Reported:** 2026-09-06, after the external CLI reached a measured cross-platform package
 gate while the embedded-Action roadmap phase still had no implementation credit.
-**Status:** Active; the distribution and same-run truth boundaries are inspected and the
-first composite vertical slice is ready for implementation.
+**Status:** Active; the composite vertical slice passes its offline gate and awaits the
+manual hosted-runner matrix.
 
 ## What
 
@@ -67,6 +67,20 @@ is rejected as an unsupported truth claim; the Action must preserve the API's ac
 
 Cold start, artifact bytes, runtime, runner availability of GitHub CLI, and exact behavior
 on the three hosted operating systems remain unmeasured until the live matrix runs.
+
+## Implementation progress
+
+The root `action.yml` now wraps a factored capture/report service instead of invoking the
+CLI or duplicating its interpretation path. The Python adapter validates bounded inputs,
+keeps the token in the environment, escapes summaries, publishes scalar outputs, writes an
+8 MiB-capped report and records Action-source provenance. All external Actions are pinned
+to full commit SHAs. Offline tests cover success, source failure, active state, reporter
+failure, hostile diagnostics, unsafe names, oversize output, local provenance fallback,
+metadata syntax, and the manual validation workflow contract.
+
+The manual workflow will next validate the checkout-local Action and script extension on
+Ubuntu, macOS, and Windows against retained successful and failed runs and its own active
+run. No cross-platform or timing claim is made until that run completes.
 
 ## What was refuted
 

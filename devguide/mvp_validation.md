@@ -212,6 +212,15 @@ loaded policy from the default branch and preserved all eight GitHub conclusions
 ArgDigest correctly remained `generic` because it is not the configured source workflow.
 No logs were needed for this adoption check.
 
+## Embedded Action offline validation
+
+The first composite Action uses the same capture and report service as the external CLI.
+Offline tests verify pinned Action dependencies, validated inputs, completed success and
+failure, honest `PENDING` state for the current run, fail-open reporter errors, strict-mode
+step behavior, escaped summaries, scalar outputs, bounded report size, and publisher
+provenance. A manual three-operating-system workflow is committed but has not yet supplied
+live evidence; this checkpoint therefore makes no cross-platform Action claim.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

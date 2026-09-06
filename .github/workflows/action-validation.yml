@@ -1,0 +1,104 @@
+name: Embedded Action validation
+
+on:
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  validate:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+      - name: Check out the exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+
+      - name: Validate the GitHub CLI script extension
+        shell: bash
+        run: |
+          gh extension install .
+          gh run-receptor --version
+          gh extension remove run-receptor
+
+      - name: Report a completed successful run
+        id: completed
+        uses: ./
+        with:
+          run-id: "34037657805"
+          repository: uibcdf/gh-run-receptor
+          profile: ci
+          capture: metadata
+          report-name: completed-${{ runner.os }}
+          strict-reporter: "true"
+
+      - name: Verify completed-run outputs
+        shell: python
+        env:
+          ASSESSMENT: ${{ steps.completed.outputs.assessment }}
+          CONCLUSION: ${{ steps.completed.outputs['github-conclusion'] }}
+          REPORT_PATH: ${{ steps.completed.outputs['report-path'] }}
+        run: |
+          import json
+          import os
+          from pathlib import Path
+
+          report = json.loads(Path(os.environ["REPORT_PATH"]).read_text(encoding="utf-8"))
+          assert os.environ["ASSESSMENT"] == "PASS"
+          assert os.environ["CONCLUSION"] == "success"
+          assert report["receptor"]["assessment"] == "PASS"
+          assert report["github"]["conclusion"] == "success"
+
+      - name: Report this still-active run
+        id: active
+        uses: ./
+        with:
+          repository: uibcdf/gh-run-receptor
+          profile: ci
+          capture: metadata
+          report-name: active-${{ runner.os }}
+          strict-reporter: "true"
+
+      - name: Verify active-run truth
+        shell: python
+        env:
+          ASSESSMENT: ${{ steps.active.outputs.assessment }}
+          CONCLUSION: ${{ steps.active.outputs['github-conclusion'] }}
+        run: |
+          import os
+
+          assert os.environ["ASSESSMENT"] == "PENDING"
+          assert os.environ["CONCLUSION"] == ""
+
+      - name: Report a completed failed run without failing the reporter
+        if: runner.os == 'Linux'
+        id: failed-source
+        uses: ./
+        with:
+          run-id: "34037154711"
+          repository: uibcdf/gh-run-receptor
+          profile: ci
+          capture: metadata
+          report-name: failed-source-${{ runner.os }}
+          strict-reporter: "true"
+
+      - name: Verify failed-source separation
+        if: runner.os == 'Linux'
+        shell: python
+        env:
+          ASSESSMENT: ${{ steps['failed-source'].outputs.assessment }}
+          CONCLUSION: ${{ steps['failed-source'].outputs['github-conclusion'] }}
+        run: |
+          import os
+
+          assert os.environ["ASSESSMENT"] == "FAIL"
+          assert os.environ["CONCLUSION"] == "failure"

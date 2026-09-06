@@ -55,10 +55,14 @@ The current MVP implements:
   with Python 3.11 through 3.13.
 - strict repository policy deployed across eight additional MolSysSuite clients, with 37
   exact workflow rules and metadata-only remote smoke validation.
+- a first checkout-local composite Action implementation with bounded summaries, scalar
+  outputs, canonical JSON artifacts, explicit publisher provenance, and offline tests;
+  hosted cross-platform validation is pending.
 
 It does not yet provide a broad cross-workflow corpus; run comparison; remote workflow
-discovery; pattern rules; or the embedded Action. The CI, documentation, Conda, release, and
-configuration contracts are initial vertical slices, not their complete stable forms.
+discovery; pattern rules; or a released and permission-validated embedded Action. The CI,
+documentation, Conda, release, configuration, and Action contracts are initial vertical
+slices, not their complete stable forms.
 
 ## Reading order
 
@@ -130,8 +134,11 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The next milestone closes the remaining outcome and distribution gaps: Zenodo verification,
-cross-platform GitHub CLI extension installation, and a minimum supported GitHub CLI.
+The next milestone validates and releases the first composite Action on Ubuntu, macOS, and
+Windows, including checkout-local GitHub CLI extension installation, honest active-run
+state, terminal source outcomes, startup cost, and artifact bytes. It then closes the
+remaining outcome and distribution gaps: Zenodo verification and a minimum supported
+GitHub CLI.
 Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need

@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+- Add the first composite GitHub Action around the shared capture and report core.
+- Publish bounded compact logs, escaped job summaries, scalar outputs, and a canonical JSON
+  artifact without turning source-workflow failure into reporter failure.
+- Add a manual Linux, macOS, and Windows validation matrix for the Action and GitHub CLI
+  extension, including completed success, completed failure, and honest active-run state.
 - Track ElastNetMT, TopoMT, and PharmacophoreMT in the canonical consumer-guide sync set.
 - Deploy strict workflow rules and the 0.11.0 guide to eight additional client repositories.
 

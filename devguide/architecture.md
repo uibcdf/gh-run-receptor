@@ -93,11 +93,16 @@ it serializes the shared report independently of text presentation.
 
 ## Embedded reporting
 
-A final reporting job should declare `if: always()` and depend on all primary jobs. This
-makes completed job evidence available before aggregation. The reporter must ignore its
-own job to avoid circular interpretation.
+The composite Action is a publication adapter around the same capture and report services
+used by the CLI. It validates Actions inputs, writes bounded scalar outputs and Markdown,
+adds publisher provenance, and uploads the canonical JSON report. It does not normalize or
+interpret evidence independently.
 
-The embedded reporter is observability rather than a gate. Failure to render produces a
+A reporter inside the source run necessarily observes an active run and remains `PENDING`.
+A terminal report uses an explicit completed source run ID, normally from a downstream
+`workflow_run` workflow. This avoids circular self-exclusion and invented terminal truth.
+
+The embedded reporter is observability rather than a product gate. Failure to render produces a
 visible `RECEPTOR_ERROR` but must not convert successful primary work into a false
 product failure. Cancellation may prevent the reporting job from running, so the
 external CLI remains the universal fallback.

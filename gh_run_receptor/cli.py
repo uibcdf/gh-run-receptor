@@ -11,12 +11,13 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from gh_run_receptor import __version__
-from gh_run_receptor.bundle import capture_bundle, default_bundle_path, load_bundle
+from gh_run_receptor.bundle import load_bundle
 from gh_run_receptor.config import CONFIG_PATH, load_config, select_rule
 from gh_run_receptor.discovery import discover_workflows, render_config, write_config
 from gh_run_receptor.errors import AcquisitionError, BundleError, ReceptorError
 from gh_run_receptor.github import GitHubClient
 from gh_run_receptor.report import build_report, exit_code, render_human, render_json, render_llm
+from gh_run_receptor.service import acquire_evidence
 from gh_run_receptor.watch import watch_run
 
 
@@ -154,36 +155,18 @@ def _capture(args: argparse.Namespace, *, render: bool) -> int:
     repository = client.repository(args.repo or args.run.repository)
     run_id = args.run.run_id
 
-    run = client.json(f"/repos/{repository}/actions/runs/{run_id}")
-    current_attempt = int(run.get("run_attempt") or 1)
-    selected_attempt = args.attempt or current_attempt
-    destination = args.output or default_bundle_path(
-        _cache_root(args.cache_dir), hostname, repository, run_id, selected_attempt, args.capture
+    captured = acquire_evidence(
+        client,
+        repository,
+        run_id,
+        attempt=args.attempt,
+        policy=args.capture,
+        cache_root=_cache_root(args.cache_dir),
+        output=args.output,
     )
-    if destination.exists():
-        manifest, evidence = load_bundle(destination)
-        expected = (repository, run_id, selected_attempt, args.capture)
-        actual = (
-            manifest.get("repository"),
-            manifest.get("run_id"),
-            manifest.get("run_attempt"),
-            manifest.get("capture_policy"),
-        )
-        if actual != expected:
-            raise BundleError(
-                "existing bundle identity or capture policy does not match the request"
-            )
-    else:
-        manifest = capture_bundle(
-            client,
-            repository,
-            run_id,
-            attempt=args.attempt,
-            policy=args.capture,
-            destination=destination,
-            run=run,
-        )
-        _, evidence = load_bundle(destination)
+    manifest = captured.manifest
+    evidence = captured.evidence
+    destination = captured.path
 
     if not render:
         total = sum(int(member["bytes"]) for member in manifest["members"])

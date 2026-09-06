@@ -46,10 +46,13 @@ read-only evidence becomes available.
 
 ### Action and reusable-workflow tests
 
-These tests verify `if: always()`, explicit `needs`, reporter self-exclusion, permissions,
-step summaries, JSON artifacts, outputs, fork restrictions, fail-open behavior, and the
-external CLI fallback after cancellation. Linux, macOS, and Windows are required before a
-stable cross-platform claim.
+The first Action slice has offline tests for metadata shape, pinned dependencies, input
+validation, source-failure/reporter-failure separation, active-run truth, publisher
+provenance, escaped bounded summaries, scalar outputs, and report-size limits. A manual
+hosted matrix installs the GitHub CLI extension and invokes the checkout-local Action on
+Linux, macOS, and Windows against completed-success and current-active runs; Linux also
+checks a completed source failure. Restricted tokens, forks, downstream reusable workflows,
+and the external CLI fallback after cancellation remain release-gate cases.
 
 ### Adversarial tests
 

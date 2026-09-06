@@ -67,7 +67,17 @@
       "type": "array",
       "items": {"$ref": "model-v1.schema.json#/$defs/unknown"}
     },
-    "warnings": {"type": "array", "items": {"type": "string"}}
+    "warnings": {"type": "array", "items": {"type": "string"}},
+    "publisher": {
+      "type": "object",
+      "required": ["kind", "repository", "ref"],
+      "properties": {
+        "kind": {"const": "github_action"},
+        "repository": {"type": "string", "pattern": "^[^/]+/[^/]+$"},
+        "ref": {"type": "string", "minLength": 1, "maxLength": 200}
+      },
+      "additionalProperties": false
+    }
   },
   "$defs": {
     "occurrence": {
