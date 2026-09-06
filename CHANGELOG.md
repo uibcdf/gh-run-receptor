@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+- Synchronize the corrective 0.13.1 guide to all eleven tracked client repositories and
+  verify the installed wheel against the retained live report.
+
 ## 0.13.1 - 2026-09-06
 
 - Expose verified source facts and non-recomputed published interpretation explicitly in
