@@ -6,6 +6,7 @@
 - [#8 — Add the first documentation workflow profile](add_the_first_documentation_workflow_profile.md) (`resolved`)
 - [#9 — Add the first release workflow profile](add_the_first_release_workflow_profile.md) (`resolved`)
 - [#10 — Add workflow discovery and safe configuration initialization](add_workflow_discovery_and_safe_configuration_initialization.md) (`resolved`)
+- [#22 — Adopt the shared MolSysSuite policy and Ruff quality gate](adopt_molsyssuite_policy_v1.md) (`resolved`)
 - [#1 — Adopt MolSysSuite repository lifecycle and packaging conventions](adopt_molsyssuite_repository_lifecycle_and_packaging_conventions.md) (`resolved`)
 - [#15 — Classify and redact GitHub acquisition failures](classify_and_redact_github_acquisition_failures.md) (`resolved`)
 - [#19 — Consume and verify published Action reports](consume_and_verify_published_action_reports.md) (`resolved`)

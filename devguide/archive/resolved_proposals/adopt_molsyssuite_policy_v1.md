@@ -1,13 +1,13 @@
 ---
 summary: Adopt the shared MolSysSuite policy and Ruff quality gate
 issue: uibcdf/gh-run-receptor#22
-status: open
+status: resolved
 opened: 2026-09-06
-closed:
+closed: 2026-09-06
 verification: measured
 area: [governance, tests]
-guard:
-normative:
+guard: .github/workflows/molsyssuite-policy.yml
+normative: testing_strategy.md
 blocked_by: []
 supersedes: []
 ---
@@ -16,8 +16,8 @@ supersedes: []
 
 **Reported:** 2026-09-06, during the first repository rollout of the central
 MolSysSuite conformance policy.
-**Status:** Open; the repository routes suite-wide concerns correctly, but it still needs
-to adopt the executable Ruff gate and its formatting baseline.
+**Status:** Resolved on `main`; the executable shared gate and the Ruff formatting
+baseline are active.
 
 ## What
 
@@ -45,7 +45,9 @@ On 2026-09-06, `ruff check --no-cache gh_run_receptor tests devtools` passed. Wi
 0.16.5, `ruff format --check --no-cache .` reported 26 files that would be reformatted.
 The original central workflow run `34053873977` passed under `policy-v1.0.0`; that result
 did not execute the formatter and is therefore insufficient evidence for the corrected
-policy. No behavioral or performance change is assumed from the mechanical formatting.
+policy. After the migration, 223 tests passed locally and central policy run `34059932644`
+passed using `policy-v1.1.0`. No behavioral or performance change is assumed from the
+mechanical formatting.
 
 ## What was refuted
 
@@ -77,5 +79,7 @@ future diagnosis straightforward.
 
 ## Provenance
 
-Repository inspection on 2026-09-06 using Python 3.13 and Ruff 0.16.5. Central policy
-history and workflow evidence are recorded in `uibcdf/molsyssuite#6`, `#7`, and `#8`.
+Repository inspection and validation on 2026-09-06 using Python 3.13 and Ruff 0.16.5.
+`PYTHONPATH=$PWD pytest -q -p no:cacheprovider` passed 223 tests; Ruff lint and format
+checks passed; GitHub Actions run `34059932644` passed the shared conformance and Ruff
+gate. Central policy history is recorded in `uibcdf/molsyssuite#6`, `#7`, and `#8`.
