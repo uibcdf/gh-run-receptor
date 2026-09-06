@@ -199,9 +199,9 @@ seconds.
 
 ## Client adoption validation
 
-The canonical 0.11.0 guide is synchronized byte-identically to eleven client repositories:
+The canonical 0.12.0 guide is synchronized byte-identically to eleven client repositories:
 MolSysMT, MolSysViewer, PyUnitWizard, SMonitor, ArgDigest, DepDigest, ElastNetMT, TopoMT,
-PharmacophoreMT, pytest-receptor, and the Conda build Action. The eight newly configured
+PharmacophoreMT, pytest-receptor, and the Conda build Action. The eight configured
 Python clients declare 37 exact workflow-path rules. Every configuration passes the strict
 `config check`; Conda expectations come from explicit platform flags in each workflow,
 not from filename inference.
@@ -227,6 +227,9 @@ extension installation, completed `PASS`, current-run `PENDING`, and a Linux com
 steps took 3--9 seconds at GitHub's one-second timing resolution. Distributed-source run
 `34043774335` independently passed 3/3 after downloading the Action by full commit SHA and
 verified exact publisher repository/ref provenance.
+
+The post-tag distribution workflow resolves `uibcdf/gh-run-receptor@0.12.0` directly and
+requires the embedded report to retain `publisher.ref: 0.12.0` on every operating system.
 
 ## What this does not prove
 
