@@ -334,6 +334,16 @@ checkout as an extension under that binary, and inspected public compatibility r
 `success` and receptor `PASS`. This establishes a functional transport floor, not a
 recommendation to prefer an old CLI over the latest patched stable release.
 
+Exact lightweight tag `0.16.0` points to commit `2a4570a`. An isolated tagged build
+produced `gh_run_receptor-0.16.0-py3-none-any.whl` and the matching source distribution;
+an isolated wheel installation reported exactly `0.16.0`. Hosted run `34067180540` then
+installed that remote tag using the checksum-pinned GitHub CLI 2.48.0 binary and completed
+a real metadata inspection with `PASS`/`success`. Distributed Action run `34067181837`
+passed 3/3 on Ubuntu, macOS, and Windows and triggered canonical reporter run
+`34067199652`. Source-first consumption verified the terminal source facts, published
+interpretation, and reporter identity. The 0.16.0 guide was subsequently synchronized
+byte-identically to all eleven tracked clients in focused `[skip ci]` commits.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

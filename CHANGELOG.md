@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+- Synchronize the 0.16.0 canonical adoption guide to all eleven tracked clients after
+  exact-tag transport and distribution validation.
+
 ## 0.16.0 - 2026-09-06
 
 - Require GitHub CLI 2.48.0 or newer for networked commands, reject incompatible or
