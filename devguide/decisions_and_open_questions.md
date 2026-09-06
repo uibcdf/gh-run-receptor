@@ -27,6 +27,7 @@ page and retain only a concise decision record here.
 | Project license | MIT, aligned with MolSysMT and MolSysViewer | Source and distributed artifacts include `LICENSE` |
 | Live fixture ownership | Use reviewed public UIBCDF captures and manual gh-run-receptor experiments; add a separate fixture repository only when repeated live coverage justifies it | No scheduled or push-triggered failure generators; synthetic cases remain where GitHub cannot safely produce the source state |
 | Initial Action distribution | Thin composite Action around the dependency-free shared Python core and hosted `gh` command | Preserve one interpretation path across operating systems; pin runtime/artifact Actions and record publisher provenance |
+| Runtime support | Python 3.11--3.13; GitHub CLI 2.48.0 minimum for networked commands; latest patched stable CLI recommended | The floor matches the first required `--paginate --slurp` release and is tested independently of current runner images |
 
 ## Open decision gates
 
@@ -70,16 +71,6 @@ page and retain only a concise decision record here.
 - **Gate:** before CLI 1.0.
 - **Current default:** use the provisional mapping and reject collisions silently coerced to
   generic failure.
-
-### OD-008: Version and support policy
-
-- **Question:** release cadence, pre-1.0 compatibility, operating-system matrix, and minimum
-  supported GitHub CLI version.
-- **Needed evidence:** first vertical-slice compatibility runs and packaging choice.
-- **Gate:** before the first public package release.
-- **Current default:** the Python console distribution supports Python 3.11–3.13 on Ubuntu,
-  macOS, and Windows, backed by the nine-job run `34037657805`. Script-extension operating
-  systems and the minimum GitHub CLI version remain unclaimed until separately verified.
 
 ## Deferred, not forgotten
 

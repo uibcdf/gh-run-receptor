@@ -6,6 +6,7 @@ import pytest
 
 from gh_run_receptor.cli import _parser, _run_reference, main
 from gh_run_receptor.errors import AcquisitionError
+from gh_run_receptor.github import MINIMUM_GH_VERSION_TEXT
 
 
 def _bundle(path, conclusion="success"):
@@ -309,3 +310,12 @@ def test_init_write_creates_once_and_then_returns_a_receptor_error(tmp_path, cap
     assert second.out == ""
     assert "configuration already exists" in second.err
     assert target.read_bytes() == original
+
+
+def test_help_declares_the_minimum_github_cli(capsys):
+    with pytest.raises(SystemExit) as captured:
+        main(["--help"])
+
+    assert captured.value.code == 0
+    normalized = " ".join(capsys.readouterr().out.split())
+    assert f"GitHub CLI {MINIMUM_GH_VERSION_TEXT} or newer" in normalized

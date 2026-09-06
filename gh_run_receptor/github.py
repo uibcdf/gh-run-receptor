@@ -12,11 +12,14 @@ from typing import Any
 from gh_run_receptor.errors import AcquisitionError
 
 API_VERSION = "2022-11-28"
+MINIMUM_GH_VERSION = (2, 48, 0)
+MINIMUM_GH_VERSION_TEXT = ".".join(str(part) for part in MINIMUM_GH_VERSION)
 MAX_JSON_BYTES = 64 * 1024 * 1024
 MAX_DOWNLOAD_BYTES = 512 * 1024 * 1024
 READ_CHUNK_BYTES = 64 * 1024
 MAX_ERROR_CHARACTERS = 500
 _HTTP_STATUS = re.compile(r"\bHTTP ([1-5][0-9]{2})\b")
+_GH_VERSION = re.compile(r"^gh version ([0-9]+)\.([0-9]+)\.([0-9]+)(?:\s|$)")
 _GITHUB_TOKEN = re.compile(r"\bgh[pousr]_[A-Za-z0-9_]{20,}\b")
 _AUTHORIZATION = re.compile(r"(?i)\b(authorization\s*:\s*(?:bearer|token)\s+)\S+")
 _TOKEN_ASSIGNMENT = re.compile(r"(?i)\b(GH_TOKEN|GITHUB_TOKEN|access_token)=\S+")
@@ -69,13 +72,51 @@ def _cli_failure(prefix: str, error_output: bytes) -> AcquisitionError:
     return AcquisitionError(f"{prefix}: {detail}", category=category, http_status=http_status)
 
 
+def _parse_gh_version(output: str) -> tuple[int, int, int] | None:
+    lines = output.splitlines()
+    first_line = lines[0] if lines else ""
+    match = _GH_VERSION.match(first_line)
+    if match is None:
+        return None
+    return tuple(int(part) for part in match.groups())
+
+
 class GitHubClient:
     """Calling GitHub APIs without owning authentication credentials."""
 
     def __init__(self, hostname: str = "github.com") -> None:
         self.hostname = hostname
+        self._cli_version_checked = False
 
-    def _run(self, arguments: list[str]) -> str:
+    def _ensure_supported_cli(self) -> None:
+        if self._cli_version_checked:
+            return
+        output = self._run(["--version"], check_cli=False)
+        version = _parse_gh_version(output)
+        if version is None:
+            message = (
+                "could not determine GitHub CLI version; "
+                f"{MINIMUM_GH_VERSION_TEXT} or newer is required"
+            )
+            raise AcquisitionError(
+                message,
+                category="unsupported_gh_cli",
+            )
+        if version < MINIMUM_GH_VERSION:
+            observed = ".".join(str(part) for part in version)
+            message = (
+                f"GitHub CLI {observed} is unsupported; "
+                f"{MINIMUM_GH_VERSION_TEXT} or newer is required"
+            )
+            raise AcquisitionError(
+                message,
+                category="unsupported_gh_cli",
+            )
+        self._cli_version_checked = True
+
+    def _run(self, arguments: list[str], *, check_cli: bool = True) -> str:
+        if check_cli:
+            self._ensure_supported_cli()
         command = ["gh", *arguments]
         try:
             with tempfile.TemporaryFile() as stderr:
@@ -154,6 +195,7 @@ class GitHubClient:
         max_bytes: int = MAX_DOWNLOAD_BYTES,
     ) -> None:
         """Downloading a binary API response without sending it to stdout."""
+        self._ensure_supported_cli()
         command = [
             "gh",
             "api",

@@ -1,7 +1,7 @@
 ---
 summary: Define and validate the minimum supported GitHub CLI
 issue: uibcdf/gh-run-receptor#25
-status: open
+status: active
 opened: 2026-09-06
 closed:
 verification: asserted
@@ -15,7 +15,8 @@ supersedes: []
 # Defining and validating the minimum supported GitHub CLI
 
 **Reported:** 2026-09-06, while closing the remaining cross-cutting 1.0 distribution gate.
-**Status:** Open; the minimum is evidenced upstream and implementation is pending.
+**Status:** Active; implementation and local gates pass, while the checksum-pinned hosted
+minimum-version run remains pending.
 
 ## What
 
@@ -104,3 +105,8 @@ external change and must not be silently weakened.
 Official evidence is GitHub CLI pull request `cli/cli#8620`, release `v2.48.0`, its checksum
 manifest, and the current `gh api` manual, inspected 2026-09-06. Local evidence comes from
 Linux x86_64, Python 3.13.14, gh 2.93.0. Hosted run provenance will be appended.
+
+The first implementation checks the CLI once per remote client, preserves missing-binary
+failures separately, exposes the minimum in `--help`, and adds the hosted official-binary
+workflow. Fifty focused receptor-formatted tests pass across the transport, CLI, and
+workflow contracts; Ruff lint/format and developer-report validation also pass.

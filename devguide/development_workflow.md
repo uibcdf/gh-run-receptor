@@ -21,7 +21,7 @@ python -m pip install -e '.[dev]'
 
 The package uses the same flat repository layout as MolSysMT and MolSysViewer, so commands
 and tests run from the checkout without a `PYTHONPATH` override. The expected local tools
-are Git, an authenticated GitHub CLI, Python 3.11 or newer, Ruff, pytest, and
+are Git, an authenticated GitHub CLI 2.48.0 or newer, Python 3.11 or newer, Ruff, pytest, and
 `pytest-receptor`.
 
 GitHub-dependent validation uses reviewed public UIBCDF captures or bounded, manually

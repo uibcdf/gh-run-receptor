@@ -12,6 +12,13 @@ implicit latest schema. GitHub.com is the initial target; GitHub Enterprise Serv
 support is unclaimed until hostname, API-version, and endpoint compatibility tests
 exist.
 
+Network acquisition requires GitHub CLI 2.48.0 or newer. That release is the first to
+contain the `--paginate --slurp` interface used to turn every response page into one valid
+outer JSON array. The adapter checks the stable `gh --version` first line once per remote
+client and rejects an older or unrecognizable version with `unsupported_gh_cli` before an
+API request. This is a functional floor; users should install the latest patched stable
+CLI. Offline paths do not perform the check.
+
 ## Structured resources
 
 A full capture obtains these resources independently because GitHub has no single total
@@ -147,8 +154,9 @@ printing headers or tokens.
 The implemented transport categories are `authentication_required` when GitHub CLI has no
 session, `authentication_failed` for HTTP 401, `permission_denied` for HTTP 403,
 `not_found_or_inaccessible` for HTTP 404, `rate_limited` for HTTP 429 or an explicit
-rate-limit diagnostic, and `acquisition_failed` otherwise. The HTTP status is retained
-when observed. Optional-resource lookup suppresses only a structured 404; it does not
+rate-limit diagnostic, `unsupported_gh_cli` for an incompatible local CLI interface, and
+`acquisition_failed` otherwise. The HTTP status is retained when observed.
+Optional-resource lookup suppresses only a structured 404; it does not
 generalize string matching to other errors. Because GitHub may hide inaccessible private
 resources behind 404, the user-facing category preserves that ambiguity.
 

@@ -11,7 +11,7 @@ gh run-receptor COMMAND ...
 ```
 
 Both entry points call the same application and produce identical output. The Phase 1
-prototype requires Python 3.11--3.13 and an authenticated GitHub CLI for networked
+prototype requires Python 3.11--3.13 and authenticated GitHub CLI 2.48.0 or newer for networked
 commands. `replay`, config validation, normalization, and rendering do not require
 network access.
 
@@ -246,9 +246,15 @@ Acquisition failures use one bounded stderr line while keeping exit status 5:
 RECEPTOR_ERROR category=permission_denied: GitHub CLI request failed: ... (HTTP 403)
 ```
 
+An incompatible local transport fails before an API request:
+
+```text
+RECEPTOR_ERROR category=unsupported_gh_cli: GitHub CLI 2.47.0 is unsupported; 2.48.0 or newer is required
+```
+
 Stable acquisition categories are `authentication_required`, `authentication_failed`,
-`permission_denied`, `not_found_or_inaccessible`, `rate_limited`, and
-`acquisition_failed`. The last category is the conservative fallback. A 404 category does
+`permission_denied`, `not_found_or_inaccessible`, `rate_limited`, `unsupported_gh_cli`,
+and `acquisition_failed`. The last category is the conservative fallback. A 404 category does
 not distinguish a nonexistent public resource from a private resource hidden by GitHub.
 Configuration, bundle, normalization, and rendering errors retain the uncategorized
 `RECEPTOR_ERROR: ...` form.

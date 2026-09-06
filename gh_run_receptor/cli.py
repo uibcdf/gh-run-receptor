@@ -15,7 +15,7 @@ from gh_run_receptor.bundle import load_bundle
 from gh_run_receptor.config import CONFIG_PATH, load_config, select_rule
 from gh_run_receptor.discovery import discover_workflows, render_config, write_config
 from gh_run_receptor.errors import AcquisitionError, BundleError, ReceptorError
-from gh_run_receptor.github import GitHubClient
+from gh_run_receptor.github import MINIMUM_GH_VERSION_TEXT, GitHubClient
 from gh_run_receptor.published import (
     DEFAULT_ARTIFACT_PREFIX,
     DEFAULT_REPORTER_WORKFLOW,
@@ -89,7 +89,13 @@ def _add_common_options(
 
 
 def _parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="gh-run-receptor")
+    parser = argparse.ArgumentParser(
+        prog="gh-run-receptor",
+        description=(
+            "Compact GitHub Actions evidence reports; network commands require "
+            f"GitHub CLI {MINIMUM_GH_VERSION_TEXT} or newer"
+        ),
+    )
     parser.add_argument("--version", action="version", version=__version__)
     _add_common_options(parser)
     subparsers = parser.add_subparsers(dest="command", required=True)

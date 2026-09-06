@@ -15,6 +15,10 @@ gh run-receptor --version
 
 A pinned script extension intentionally stays on that revision. To move an existing pinned
 installation to a later tag, remove it and install again with the new `--pin` value.
+Networked commands require GitHub CLI 2.48.0 or newer because evidence pagination uses
+`gh api --paginate --slurp`. Use the latest patched stable GitHub CLI when possible;
+2.48.0 is a tested functional floor, not a security recommendation. Offline `replay` and
+local configuration commands do not require GitHub CLI.
 
 Then inspect a run:
 
@@ -182,7 +186,9 @@ official GitHub conclusion but reports `INCOMPLETE` and exits with status 4.
 Acquisition failures retain exit status 5 and expose one stable category, such as
 `authentication_required`, `authentication_failed`, `permission_denied`,
 `not_found_or_inaccessible`, or `rate_limited`. Remote diagnostics are bounded and
-credential-shaped values are redacted before stderr is rendered.
+credential-shaped values are redacted before stderr is rendered. An installed GitHub CLI
+below 2.48.0, or version output that cannot be identified safely, yields
+`unsupported_gh_cli` before an API request.
 
 ## Measured token reduction
 
@@ -240,8 +246,9 @@ artifacts remain future distribution modes.
 
 The Python console command, full test suite, wheel and source-distribution build, wheel
 installation, and an outside-checkout smoke test are verified on GitHub-hosted Ubuntu,
-macOS, and Windows with Python 3.11, 3.12, and 3.13. This does not yet claim that the
-GitHub CLI script-extension installation path works on all three operating systems.
+macOS, and Windows with Python 3.11, 3.12, and 3.13. The GitHub CLI script-extension and
+Action paths are also validated on all three operating systems; the minimum GitHub CLI
+binary gate is Linux amd64 because it tests a transport version, not an OS support matrix.
 
 Product contracts, contributor onboarding, security boundaries, open decisions, and the
 implementation route are maintained in the

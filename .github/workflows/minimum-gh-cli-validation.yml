@@ -1,0 +1,56 @@
+name: Minimum GitHub CLI validation
+
+on:
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  validate:
+    name: GitHub CLI 2.48.0 · Linux amd64
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_VERSION: 2.48.0
+      GH_ARCHIVE_SHA256: 1c477e2562aca8679b0219569f0482f1975de76daca8ba307892c1787338a28d
+    steps:
+      - name: Check out the exact receptor source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+
+      - name: Install the checksum-pinned minimum GitHub CLI
+        shell: bash
+        run: |
+          archive="$RUNNER_TEMP/gh_${GH_VERSION}_linux_amd64.tar.gz"
+          curl --fail --location --retry 3 \
+            --output "$archive" \
+            "https://github.com/cli/cli/releases/download/v${GH_VERSION}/gh_${GH_VERSION}_linux_amd64.tar.gz"
+          printf '%s  %s\n' "$GH_ARCHIVE_SHA256" "$archive" | sha256sum --check --strict
+          tar --extract --gzip --file "$archive" --directory "$RUNNER_TEMP"
+          printf '%s\n' "$RUNNER_TEMP/gh_${GH_VERSION}_linux_amd64/bin" >> "$GITHUB_PATH"
+
+      - name: Verify the selected GitHub CLI
+        shell: bash
+        run: |
+          test "$(gh --version | sed -n '1p')" = "gh version 2.48.0 (2024-04-17)"
+
+      - name: Install the checkout as a GitHub CLI extension
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh extension install .
+          gh run-receptor --version
+
+      - name: Inspect a real run through the minimum transport
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          report="$RUNNER_TEMP/minimum-gh-report.json"
+          gh run-receptor --repo uibcdf/gh-run-receptor --format=json \
+            inspect 34037657805 --profile=ci --capture=metadata > "$report"
+          python -c "import json, pathlib; report=json.loads(pathlib.Path('$report').read_text()); assert report['github']['conclusion'] == 'success'; assert report['receptor']['assessment'] == 'PASS'"

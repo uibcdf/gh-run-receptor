@@ -3,7 +3,91 @@ import io
 import pytest
 
 from gh_run_receptor.errors import AcquisitionError
-from gh_run_receptor.github import GitHubClient, _safe_error_line, merge_pages
+from gh_run_receptor.github import (
+    MINIMUM_GH_VERSION,
+    GitHubClient,
+    _parse_gh_version,
+    _safe_error_line,
+    merge_pages,
+)
+
+
+@pytest.mark.parametrize(
+    ("text", "expected"),
+    [
+        (
+            "gh version 2.48.0 (2024-04-17)\nhttps://github.com/cli/cli/releases/tag/v2.48.0\n",
+            (2, 48, 0),
+        ),
+        ("gh version 2.93.0 (2026-05-27)\r\n", (2, 93, 0)),
+        ("gh version 2.48.0-pre.1\n", None),
+        ("wrapper version unknown\n", None),
+        ("gh version 2.48\n", None),
+    ],
+)
+def test_parse_gh_version_uses_only_the_stable_first_line(text, expected):
+    assert _parse_gh_version(text) == expected
+
+
+def _process(output: bytes, return_code: int = 0):
+    class Process:
+        def __init__(self):
+            self.stdout = io.BytesIO(output)
+
+        def wait(self):
+            return return_code
+
+    return Process()
+
+
+@pytest.mark.parametrize("version", ["2.47.0", "unknown"])
+def test_unsupported_cli_fails_before_the_api_command(monkeypatch, version):
+    commands = []
+
+    def factory(command, stdout, stderr):
+        commands.append(command)
+        return _process(f"gh version {version}\n".encode())
+
+    monkeypatch.setattr("gh_run_receptor.github.subprocess.Popen", factory)
+
+    with pytest.raises(AcquisitionError) as captured:
+        GitHubClient()._run(["api", "/example"])
+
+    assert captured.value.category == "unsupported_gh_cli"
+    assert commands == [["gh", "--version"]]
+    assert "2.48.0 or newer" in str(captured.value)
+
+
+@pytest.mark.parametrize("version", ["2.48.0", "2.93.0"])
+def test_supported_cli_is_checked_once_before_requests(monkeypatch, version):
+    commands = []
+
+    def factory(command, stdout, stderr):
+        commands.append(command)
+        if command == ["gh", "--version"]:
+            return _process(f"gh version {version}\n".encode())
+        return _process(b"{}\n")
+
+    monkeypatch.setattr("gh_run_receptor.github.subprocess.Popen", factory)
+    client = GitHubClient()
+
+    assert client._run(["api", "/first"]) == "{}\n"
+    assert client._run(["api", "/second"]) == "{}\n"
+    assert commands.count(["gh", "--version"]) == 1
+    assert MINIMUM_GH_VERSION == (2, 48, 0)
+
+
+def test_missing_cli_retains_the_executable_failure(monkeypatch):
+    def missing(*args, **kwargs):
+        raise FileNotFoundError("gh")
+
+    monkeypatch.setattr("gh_run_receptor.github.subprocess.Popen", missing)
+
+    with pytest.raises(AcquisitionError) as captured:
+        GitHubClient()._run(["api", "/example"])
+
+    assert captured.value.category == "acquisition_failed"
+    assert "could not execute GitHub CLI" in str(captured.value)
 
 
 def test_merge_pages_preserves_every_item():
@@ -126,8 +210,10 @@ def test_run_raises_structured_error_from_failed_process(monkeypatch):
         lambda command, stdout, stderr: FailedProcess(stderr),
     )
 
+    client = GitHubClient()
+    client._cli_version_checked = True
     with pytest.raises(AcquisitionError) as captured:
-        GitHubClient()._run(["api", "/example"])
+        client._run(["api", "/example"])
 
     assert captured.value.category == "permission_denied"
     assert captured.value.http_status == 403
@@ -151,7 +237,9 @@ def test_download_enforces_a_caller_specific_byte_limit(tmp_path, monkeypatch):
     )
     destination = tmp_path / "download"
 
+    client = GitHubClient()
+    client._cli_version_checked = True
     with pytest.raises(AcquisitionError, match="5-byte limit"):
-        GitHubClient().download("/artifact", destination, max_bytes=5)
+        client.download("/artifact", destination, max_bytes=5)
 
     assert not destination.exists()

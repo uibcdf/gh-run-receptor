@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+- Require GitHub CLI 2.48.0 or newer for networked commands, reject incompatible or
+  unrecognizable versions before API acquisition, and retain offline operation without it.
+- Add a checksum-pinned hosted gate that installs the minimum official GitHub CLI binary
+  and exercises a real installed-extension metadata capture.
 - Synchronize the 0.15.0 canonical adoption guide to all eleven tracked clients after
   byte-identical validation.
 

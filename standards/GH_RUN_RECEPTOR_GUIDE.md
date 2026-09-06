@@ -83,7 +83,11 @@ GitHub CLI script extension and the composite Action on hosted runners.
 
 ## Installation
 
-The client requires Git, Python 3.11 through 3.13, and an authenticated GitHub CLI.
+The client requires Git, Python 3.11 through 3.13, and an authenticated GitHub CLI 2.48.0
+or newer for networked commands. Version 2.48.0 is the tested functional floor because it
+introduced the required `gh api --paginate --slurp` interface; use the latest patched
+stable GitHub CLI when possible. Offline replay and local configuration operations do not
+need GitHub CLI.
 Install the exact preview tag:
 
 ```text
