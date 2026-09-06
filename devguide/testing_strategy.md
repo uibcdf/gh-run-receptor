@@ -138,6 +138,7 @@ Once the package skeleton exists, the normal local gate is:
 
 ```text
 ruff check .
+ruff format --check .
 pytest --receptor=llm
 ```
 

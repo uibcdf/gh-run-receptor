@@ -32,7 +32,7 @@ gh-run-receptor = "gh_run_receptor.cli:main"
 
 [project.optional-dependencies]
 test = ["jsonschema>=4.23", "pytest", "pytest-receptor"]
-dev = ["jsonschema>=4.23", "pytest", "pytest-receptor", "ruff"]
+dev = ["jsonschema>=4.23", "pytest", "pytest-receptor", "ruff==0.16.5"]
 
 [tool.setuptools.packages.find]
 include = ["gh_run_receptor*"]

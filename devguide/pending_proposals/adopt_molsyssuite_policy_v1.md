@@ -35,14 +35,14 @@ in the local gate, and establish the current Ruff formatting baseline mechanical
 
 The initial policy caller used `policy-v1.0.0`, whose conformance script inspected Ruff
 configuration but did not prove that CI executed Ruff. Correcting that omission exposed
-19 existing Python files that pass linting but do not pass `ruff format --check`. Leaving
+26 existing Python files that pass linting but do not pass `ruff format --check`. Leaving
 the mismatch unresolved would make the corrected shared gate fail and would allow local
 and suite-wide development instructions to disagree.
 
 ## What is measured and what is assumed
 
 On 2026-09-06, `ruff check --no-cache gh_run_receptor tests devtools` passed. With Ruff
-0.16.5, `ruff format --check --no-cache .` reported 19 files that would be reformatted.
+0.16.5, `ruff format --check --no-cache .` reported 26 files that would be reformatted.
 The original central workflow run `34053873977` passed under `policy-v1.0.0`; that result
 did not execute the formatter and is therefore insufficient evidence for the corrected
 policy. No behavioral or performance change is assumed from the mechanical formatting.
