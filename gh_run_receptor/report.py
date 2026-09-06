@@ -792,6 +792,15 @@ def render_llm(report: dict[str, Any]) -> str:
             )
         if receptor["profile"] != "release":
             fields.append(f"jobs={successful_jobs}/{len(report['jobs'])}")
+        consumer_verification = report.get("consumer_verification")
+        if isinstance(consumer_verification, dict):
+            fields.extend(
+                [
+                    f"source_facts={_safe_text(consumer_verification.get('source_facts'))}",
+                    "interpretation="
+                    + _safe_text(consumer_verification.get("interpretation")),
+                ]
+            )
         fields.extend(
             [
                 f"artifacts={len(report['artifacts'])}",

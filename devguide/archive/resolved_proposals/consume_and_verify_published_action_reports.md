@@ -126,3 +126,9 @@ Linux, Python 3.13.14, GitHub CLI 2.81.0, gh-run-receptor 0.12.0 through the 0.1
 release candidate, unzip 6.00, 2026-09-06. Artifact inventory, archive bytes, and
 cross-platform execution came from public runs in
 `uibcdf/gh-run-receptor`.
+
+## Correction, 2026-09-06
+
+The 0.13.0 JSON and human report exposed the interpretation warning, but the successful LLM
+fast path omitted it. Issue `uibcdf/gh-run-receptor#20` adds the two structured trust values
+to the compact success line and is guarded in `tests/test_published.py` for 0.13.1.

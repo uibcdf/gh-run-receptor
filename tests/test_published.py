@@ -10,6 +10,7 @@ from gh_run_receptor.cli import _parser
 from gh_run_receptor.errors import BundleError
 from gh_run_receptor.limits import MAX_PUBLISHED_ARTIFACT_BYTES, MAX_REPORT_BYTES
 from gh_run_receptor.published import consume_published_report
+from gh_run_receptor.report import render_llm
 
 
 def _report(*, conclusion="success", assessment="PASS"):
@@ -151,6 +152,16 @@ def test_consumption_verifies_digest_source_facts_and_avoids_jobs_and_logs():
     assert "not independently recomputed" in consumed["warnings"][-1]
     endpoints = [call[0] for call in client.calls]
     assert not any("/jobs" in endpoint or "/logs" in endpoint for endpoint in endpoints)
+
+
+def test_compact_success_exposes_verified_facts_and_published_interpretation():
+    report = _report()
+    consumed = _consume(_Client(_archive(report), report=report))
+
+    compact = render_llm(consumed)
+
+    assert "source_facts=verified" in compact
+    assert "interpretation=published_not_recomputed" in compact
 
 
 @pytest.mark.parametrize(

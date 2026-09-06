@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.13.1 - 2026-09-06
+
+- Expose verified source facts and non-recomputed published interpretation explicitly in
+  successful compact LLM output.
+- Add a regression reproduced against 0.13.0 while preserving the ordinary one-line
+  success projection byte-for-byte.
 - Synchronize the 0.13.0 consumer guide to all eleven tracked client repositories and
   verify the tag through isolated wheel and GitHub CLI extension installations.
 
