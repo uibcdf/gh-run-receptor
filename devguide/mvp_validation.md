@@ -283,12 +283,37 @@ historical consumption and this source-first route on Ubuntu, macOS, and Windows
 An isolated wheel built from exact tag `0.14.0` reported that version and consumed the same
 live report successfully. The wheel measured 55 KiB and the source distribution 75 KiB.
 
+## Inline Action rules and permission boundaries
+
+The post-0.14 implementation accepts a complete `config@1` document from an Action input
+only when GitHub caller context proves a same-repository workflow on the default branch.
+The full local suite reached 235 tests before hosted workflows were added; isolated wheel
+and source-distribution construction, Ruff lint and format, and developer-report validation
+also passed.
+
+Public-repository permission run `34062840512` passed three exact jobs. The canonical case
+used `actions: read` and `contents: read`; independently removing either declared scope
+still allowed this public source run to be reported. This is evidence about public access,
+not a private-repository or fork permission claim.
+
+Temporary same-repository PR `uibcdf/gh-run-receptor#24` triggered run `34063608569`, which
+verified that pull-request inline configuration returns `untrusted_inline_rules`, produces
+no report, and does not reach acquisition. The PR was closed without merge and its marker
+never entered `main`.
+
+Distributed source run `34064088835` passed 3/3 and triggered canonical reporter run
+`34064107455`. The reporter selected `ci` through its inline rule, retained default-branch
+workflow path/ref/event/digest provenance, and passed exact terminal-source checks.
+Starting only from the source ID, `published-source` then verified both source facts and
+reporter identity.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not
   yet a complete diagnosis engine.
-- The committed real-run corpus remains narrow; timed-out, restricted-token,
-  active-transition, and real Zenodo cases remain gaps.
-- Restricted-token and fork behavior of the embedded Action are not yet validated.
+- The committed real-run corpus remains narrow; authentic `timed_out` and real Zenodo
+  cases remain gaps.
+- Private-repository and fork token behavior of the embedded Action is not established by
+  the public and same-repository probes.
 - External registries, GitHub Releases, Git refs, and archive records are not queried by
   the first release profile.

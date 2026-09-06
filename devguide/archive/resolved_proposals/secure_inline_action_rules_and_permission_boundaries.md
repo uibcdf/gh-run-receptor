@@ -1,12 +1,12 @@
 ---
 summary: Secure inline Action rules and permission boundaries
 issue: uibcdf/gh-run-receptor#23
-status: open
+status: resolved
 opened: 2026-09-06
-closed:
-verification: asserted
+closed: 2026-09-06
+verification: measured
 area: ['github', 'security', 'profiles']
-guard:
+guard: tests/test_embedded.py
 normative:
 blocked_by: []
 supersedes: []
@@ -16,8 +16,8 @@ supersedes: []
 
 **Reported:** 2026-09-06, after source-first report discovery closed the reporter identity
 boundary but left Action-local customization and restricted-token behavior unverified.
-**Status:** Open; the local implementation and focused regression suite pass, while the
-hosted permission and caller-context evidence remains to be recorded.
+**Status:** Resolved; local, public-permission, default-branch reporter, and
+same-repository pull-request gates pass.
 
 ## What
 
@@ -151,4 +151,5 @@ passed the rejection assertions on head `80a3ff4`; no marker entered the default
 The canonical `workflow_run` reporter is now pinned to the implementation commit and
 carries a full inline `config@1` rule selecting the source workflow's CI profile. It
 asserts trusted source provenance, ready/error outputs, and terminal source identity. Its
-hosted source-and-reporter pair remains pending.
+source run `34064088835` passed 3/3, reporter run `34064107455` passed, and source-first
+consumption verified the CI profile, source facts, and reporter identity.

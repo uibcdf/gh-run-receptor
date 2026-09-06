@@ -65,10 +65,12 @@ The current MVP implements:
 - one-command source-first discovery through deterministic attempt-qualified artifacts and
   an exact canonical reporter workflow, validated live and as an extension on all three
   operating systems.
+- trusted inline Action `config@1` rules with default-branch caller provenance, stable
+  ready/error outputs, exact public permission probes, and live same-repository
+  pull-request rejection before acquisition.
 
 It does not yet provide a broad cross-workflow corpus; run comparison; remote workflow
-discovery; pattern rules; or a permission-validated embedded Action across restricted and
-fork tokens. The CI,
+discovery; pattern rules; or validated private-repository and fork token behavior. The CI,
 documentation, Conda, release, configuration, and Action contracts are initial vertical
 slices, not their complete stable forms.
 
@@ -142,9 +144,8 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The next milestone verifies restricted-token and pull-request boundaries. It then closes
-the remaining outcome and
-distribution gaps: Zenodo verification and a minimum supported GitHub CLI.
+The next milestone closes the remaining outcome and distribution gaps: Zenodo verification
+and a minimum supported GitHub CLI.
 Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need
