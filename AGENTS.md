@@ -19,6 +19,10 @@ more local `AGENTS.md` may refine these rules within its directory.
 - Read `devguide/reporting_protocol.md` before filing or closing a substantial defect or
   proposal. Every pending developer report must be backed by a GitHub issue; the report
   carries analysis while the issue carries public state and settled facts.
+- Route policies, compatibility contracts and proposals shared by multiple components to
+  `uibcdf/molsyssuite`. Keep gh-run-receptor product behavior, implementation and evidence
+  in this repository, linked across repositories by stable `uibcdf/<repo>#<number>`
+  references. This repository adopts MolSysSuite policy 1.0.
 
 ## Product invariants
 
