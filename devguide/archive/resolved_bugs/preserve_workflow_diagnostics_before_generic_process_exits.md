@@ -1,13 +1,13 @@
 ---
 summary: Preserve workflow diagnostics before generic process exits
 issue: uibcdf/gh-run-receptor#29
-status: active
+status: resolved
 opened: 2026-09-07
-closed:
+closed: 2026-09-07
 severity: medium
-verification: asserted
+verification: measured
 area: ['reports']
-guard:
+guard: tests/test_logs.py
 normative:
 blocked_by: []
 supersedes: []
@@ -16,8 +16,8 @@ supersedes: []
 # Preserving workflow diagnostics before generic process exits
 
 **Reported:** 2026-09-07 from the first hosted Zenodo verification run.
-**Status:** Active; the live defect is reproduced and a conservative extraction rule is
-being implemented.
+**Status:** Resolved; the conservative extraction and redaction rule passes synthetic and
+live regression evidence.
 
 ## What
 
