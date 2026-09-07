@@ -344,6 +344,27 @@ passed 3/3 on Ubuntu, macOS, and Windows and triggered canonical reporter run
 interpretation, and reporter identity. The 0.16.0 guide was subsequently synchronized
 byte-identically to all eleven tracked clients in focused `[skip ci]` commits.
 
+## First public GitHub Release
+
+Tag `0.17.0` points to commit `aa9cba3`. Hosted publication run `34101051525` validated
+tag/ref/commit identity, citation metadata, all 265 tests, exact-version installation,
+checksums, and release notes. It created draft release `383936348` with the expected wheel,
+source distribution, and checksum manifest, then failed closed because the public
+release-by-tag endpoint does not expose drafts.
+
+The retained draft assets were downloaded and passed the repository verifier against the
+draft API record, tag ref, local sizes, manifest, and GitHub-reported SHA-256 digests. Only
+then was the draft published at `https://github.com/uibcdf/gh-run-receptor/releases/tag/0.17.0`;
+the same verification passed again through the public tag endpoint. The corrected workflow
+resolves a draft database ID through authenticated `gh release view` before reading its API
+record. That correction still requires a fresh exact-tag hosted exercise.
+
+An anonymous Zenodo records query for exact title `gh-run-receptor` returned zero records
+after publication. This is real negative evidence at the query time, not proof that the
+repository integration is disabled: Zenodo documents asynchronous processing and the
+account enablement state is not visible through GitHub. No DOI or archival success is
+claimed.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

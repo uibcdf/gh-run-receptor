@@ -121,3 +121,21 @@ Eleven focused release-tool and workflow-contract tests pass. The complete local
 passes 265 tests, Ruff lint and format pass across 108 files, the citation and developer
 report validators pass, and an isolated source/wheel build succeeds. These results validate
 the local mechanics but do not yet count as external publication evidence.
+
+Hosted run `34101051525` validated tag identity, citation, all 265 tests, the build,
+installed version, checksums, and notes, then created draft release `383936348` with all
+three expected assets. Its next read used the public `releases/tags/{tag}` endpoint, which
+returns 404 for a draft even to the writer. The workflow therefore failed closed before
+publication and retained the draft. An authenticated `gh release view` and release-list
+query confirm the draft ID and uploaded assets. The correction resolves the draft's numeric
+database ID through `gh release view`, then reads `releases/{id}` for pre-publication
+verification; the public tag endpoint remains appropriate after publication.
+
+The three retained assets were downloaded and passed the semantic verifier against draft
+release `383936348`, lightweight tag `0.17.0`, commit `aa9cba3`, local sizes and hashes,
+the checksum manifest, and GitHub's asset digests. The draft was then published and the
+same verifier passed against the public tag endpoint. An anonymous Zenodo records query for
+exact title `gh-run-receptor` returned zero records at that time. This independently
+observes absence without deciding whether integration is disabled or processing is merely
+pending. The corrected draft lookup remains locally guarded but needs a new tag to exercise
+the uninterrupted workflow end to end.

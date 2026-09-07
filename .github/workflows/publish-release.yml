@@ -73,7 +73,13 @@ jobs:
           gh release create "$RELEASE_TAG" dist/* \
             --repo "$GITHUB_REPOSITORY" --draft --verify-tag --title "$RELEASE_TAG" \
             --notes-file "$RUNNER_TEMP/release-notes.md"
-          gh api "repos/$GITHUB_REPOSITORY/releases/tags/$RELEASE_TAG" \
+          release_id=$(gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" \
+            --json databaseId --jq .databaseId)
+          if [[ ! "$release_id" =~ ^[0-9]+$ ]]; then
+            printf 'Draft release ID is not numeric: %s\n' "$release_id" >&2
+            exit 1
+          fi
+          gh api "repos/$GITHUB_REPOSITORY/releases/$release_id" \
             > "$RUNNER_TEMP/release.json"
           gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$RELEASE_TAG" \
             > "$RUNNER_TEMP/tag.json"

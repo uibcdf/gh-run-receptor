@@ -72,7 +72,8 @@ The current MVP implements:
   pre-acquisition rejection, offline independence, and checksum-pinned hosted validation
   of the official minimum binary.
 - a locally guarded exact-tag GitHub Release path with consistent citation/Zenodo metadata,
-  draft-first asset verification, and public-release revalidation; hosted publication is
+  draft-first asset verification, and public-release revalidation; release 0.17.0 was
+  recovered from its verified retained draft, while the corrected fully automated path is
   pending on the next preview tag.
 
 It does not yet provide a broad cross-workflow corpus; run comparison; remote workflow

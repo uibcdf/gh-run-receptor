@@ -43,6 +43,8 @@ def test_release_workflow_verifies_draft_before_publication_and_rechecks_public_
 
     assert "gh release create" in source
     assert "--draft --verify-tag" in source
+    assert "--json databaseId --jq .databaseId" in source
+    assert 'gh api "repos/$GITHUB_REPOSITORY/releases/$release_id"' in source
     assert draft < publish < published
     assert "release_tools.py manifest" in source
     assert "release_tools.py citation" in source
