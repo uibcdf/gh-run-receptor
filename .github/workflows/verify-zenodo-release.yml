@@ -1,0 +1,48 @@
+name: Verify Zenodo release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Exact X.Y.Z version expected in Zenodo
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify Zenodo ${{ inputs.version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out release verification policy
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.13"
+
+      - name: Install metadata parser
+        run: python -m pip install "PyYAML>=6.0"
+
+      - name: Query and verify the public Zenodo record
+        env:
+          RELEASE_VERSION: ${{ inputs.version }}
+        shell: bash
+        run: |
+          if [[ ! "$RELEASE_VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            printf 'Release version must use X.Y.Z: %s\n' "$RELEASE_VERSION" >&2
+            exit 1
+          fi
+          response="$RUNNER_TEMP/zenodo-records.json"
+          curl --fail --location --retry 3 --silent --show-error --get \
+            https://zenodo.org/api/records/ \
+            --data-urlencode 'q="gh-run-receptor"' \
+            --data 'all_versions=true' --data 'size=25' --output "$response"
+          python devtools/scripts/release_tools.py zenodo "$RELEASE_VERSION" \
+            --response "$response"

@@ -88,3 +88,18 @@ honestly retaining the observed `absent` state.
 The initial query was performed 2026-09-07 from the development host against Zenodo's
 anonymous public records API after GitHub Release 0.18.0. Local implementation uses Python
 3.13 and saved JSON fixtures; it must not require network access during pytest.
+
+## Implementation checkpoint
+
+The maintainer release policy now contains the account-side activation, synchronization,
+publication, query, and verification sequence, with explicit ownership and an explicit
+warning that enabling a repository does not imply retroactive ingestion. A read-only
+verifier classifies a saved complete Zenodo search response as `verified`, `absent`, or
+`invalid`; its command-line exit codes are respectively 0, 2, and 1, and every result is
+one bounded line. The manual `verify-zenodo-release.yml` workflow acquires the public
+response and delegates all semantic decisions to that tested offline verifier.
+
+Tests cover all acceptance cases, including the three command-line states. A live query
+for 0.18.0 still returns `ABSENT`, which is the expected honest result until a maintainer
+enables the integration and publishes a subsequent release. This external state does not
+invalidate the delivered procedure or verifier and must not be recorded as a DOI.

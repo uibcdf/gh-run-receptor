@@ -18,6 +18,7 @@ REPOSITORY_URL = f"https://github.com/{REPOSITORY}"
 PROJECT_TITLE = "gh-run-receptor"
 VERSION_RE = re.compile(r"^\d+\.\d+\.\d+$")
 COMMIT_RE = re.compile(r"^[0-9a-f]{40}$")
+ZENODO_DOI_RE = re.compile(r"^10\.5281/zenodo\.\d+$")
 
 
 def distribution_names(version: str) -> tuple[str, str]:
@@ -109,6 +110,11 @@ def validate_citation(repo: Path, expected_version: str) -> list[str]:
         zenodo = json.loads((repo / ".zenodo.json").read_text(encoding="utf-8"))
     except Exception as exc:
         return [f".zenodo.json cannot be parsed: {exc}"]
+
+    if not isinstance(cff, dict):
+        return ["CITATION.cff must contain a mapping"]
+    if not isinstance(zenodo, dict):
+        return [".zenodo.json must contain an object"]
 
     released = cff.get("date-released")
     released_text = released.isoformat() if isinstance(released, date) else str(released)
@@ -259,6 +265,89 @@ def verify_release(
     return errors
 
 
+def verify_zenodo_search(
+    payload: dict, *, repo: Path, version: str
+) -> tuple[str, list[str], dict | None]:
+    """Classify a saved public Zenodo records response."""
+
+    distribution_names(version)
+    hits_container = payload.get("hits")
+    hits = hits_container.get("hits") if isinstance(hits_container, dict) else None
+    if not isinstance(hits, list):
+        return "invalid", ["Zenodo response must contain hits.hits as a list"], None
+    total = hits_container.get("total")
+    if not isinstance(total, int) or total < 0:
+        return "invalid", ["Zenodo response must contain a nonnegative integer total"], None
+    if total != len(hits):
+        return "invalid", ["Zenodo response is incomplete; fetch every matching hit"], None
+
+    exact = []
+    for record in hits:
+        if not isinstance(record, dict):
+            return "invalid", ["Zenodo hits must be JSON objects"], None
+        metadata = record.get("metadata")
+        if not isinstance(metadata, dict):
+            return "invalid", ["Zenodo record metadata must be a JSON object"], None
+        if metadata.get("title") == PROJECT_TITLE and str(metadata.get("version")) == version:
+            exact.append(record)
+    if not exact:
+        return "absent", [], None
+    if len(exact) != 1:
+        return "invalid", [f"expected one exact Zenodo record, found {len(exact)}"], None
+
+    record = exact[0]
+    metadata = record.get("metadata") or {}
+    errors: list[str] = []
+    doi = record.get("doi")
+    if not isinstance(doi, str) or not ZENODO_DOI_RE.fullmatch(doi):
+        errors.append("Zenodo record must expose a version DOI")
+    if (metadata.get("resource_type") or {}).get("type") != "software":
+        errors.append("Zenodo record resource type must be software")
+    if metadata.get("access_right") != "open":
+        errors.append("Zenodo record access_right must be open")
+
+    expected_metadata = json.loads((repo / ".zenodo.json").read_text(encoding="utf-8"))
+    if not isinstance(expected_metadata, dict):
+        errors.append(".zenodo.json must contain an object")
+        expected_metadata = {}
+    expected_creators = _zenodo_creators(expected_metadata)
+    actual_creators = _zenodo_creators({"creators": metadata.get("creators", [])})
+    if not expected_creators or actual_creators != expected_creators:
+        errors.append("Zenodo record creators/ORCIDs disagree with .zenodo.json")
+
+    relations = metadata.get("related_identifiers") or []
+    source_relation = {
+        "relation": "isSupplementTo",
+        "identifier": REPOSITORY_URL,
+        "scheme": "url",
+    }
+    if source_relation not in relations:
+        errors.append("Zenodo record does not identify the source repository")
+
+    files = record.get("files")
+    if not isinstance(files, list) or not files:
+        errors.append("Zenodo record must contain at least one archived file")
+    else:
+        names: set[str] = set()
+        for item in files:
+            name = item.get("key") if isinstance(item, dict) else None
+            size = item.get("size") if isinstance(item, dict) else None
+            checksum = item.get("checksum") if isinstance(item, dict) else None
+            if (
+                not isinstance(name, str)
+                or not name
+                or name in names
+                or not isinstance(size, int)
+                or size <= 0
+                or not isinstance(checksum, str)
+                or ":" not in checksum
+            ):
+                errors.append("Zenodo record contains invalid or duplicate file evidence")
+                break
+            names.add(name)
+    return ("verified" if not errors else "invalid"), errors, record
+
+
 def _load_json(path: Path) -> dict:
     payload = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(payload, dict):
@@ -296,6 +385,11 @@ def main() -> int:
     verify.add_argument("--tag-json", type=Path, required=True)
     verify.add_argument("--state", choices=("draft", "published"), required=True)
 
+    zenodo = subparsers.add_parser("zenodo")
+    zenodo.add_argument("version")
+    zenodo.add_argument("--response", type=Path, required=True)
+    zenodo.add_argument("--repo", type=Path, default=Path.cwd())
+
     args = parser.parse_args()
     try:
         if args.command == "notes":
@@ -314,7 +408,7 @@ def main() -> int:
         elif args.command == "prepare-citation":
             prepare_citation(args.repo.resolve(), args.version, date.fromisoformat(args.released))
             print(f"Release citation preparation: PASS — {args.version} ({args.released})")
-        else:
+        elif args.command == "verify":
             errors = verify_release(
                 _load_json(args.release_json),
                 _load_json(args.tag_json),
@@ -326,6 +420,16 @@ def main() -> int:
             if errors:
                 raise ValueError("; ".join(errors))
             print(f"GitHub Release: PASS — {args.version} ({args.state})")
+        else:
+            state, errors, record = verify_zenodo_search(
+                _load_json(args.response), repo=args.repo.resolve(), version=args.version
+            )
+            if state == "absent":
+                print(f"Zenodo archive: ABSENT — {args.version}", file=sys.stderr)
+                return 2
+            if errors:
+                raise ValueError("; ".join(errors))
+            print(f"Zenodo archive: VERIFIED — {args.version} doi={record['doi']}")
     except (OSError, ValueError, json.JSONDecodeError, yaml.YAMLError) as exc:
         print(f"Release tooling: FAIL — {exc}", file=sys.stderr)
         return 1

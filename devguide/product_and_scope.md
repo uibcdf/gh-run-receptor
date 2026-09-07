@@ -21,6 +21,20 @@ smallest useful rerun target, and retains a path back to the complete evidence.
 - Workflow authors who want to publish a compact, machine-readable report directly from
   a run.
 
+## Portability boundary
+
+The runtime product is repository-agnostic. It does not import, depend on, or special-case
+MolSysMT, MolSysViewer, MolSysSuite package names, UIBCDF ownership, or the sibling-guide
+sync inventory. Generic capture and replay operate on any accessible GitHub Actions run;
+built-in profiles describe workflow families rather than projects; repository configuration
+contains client-specific exact identities.
+
+MolSysSuite repositories are the initial measured corpus and hosted integration laboratory.
+Their sanitized fixtures, public run IDs, workflow names, and guide synchronizer are
+development evidence, not public API defaults. Before 1.0, portability must also be
+measured against reviewed public workflows outside UIBCDF. A profile that needs a project
+name in runtime logic fails this boundary and belongs in declarative client configuration.
+
 ## Delivery modes
 
 ### External CLI

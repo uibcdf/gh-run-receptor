@@ -57,6 +57,42 @@ Before preparing a release commit, run
 release workflow independently validates the resulting records but never rewrites tagged
 source.
 
+## Zenodo maintainer handoff
+
+Zenodo account configuration is a maintainer operation, not a GitHub Actions permission or
+receptor feature. A maintainer with access to the UIBCDF Zenodo integration must:
+
+1. sign in to Zenodo and connect the GitHub account if it is not already connected;
+2. open the GitHub integration page and select **Sync now**;
+3. find `uibcdf/gh-run-receptor` and enable its repository toggle;
+4. publish a new GitHub Release after enablement, because prior tags or releases are not
+   assumed to be backfilled;
+5. wait for Zenodo's asynchronous processing to finish and inspect any integration error;
+6. query and save the public response, then run the repository verifier;
+7. record the version DOI, concept DOI, files, and verification date in this guide only
+   after the verifier reports `VERIFIED`.
+
+The official account procedure is
+`https://help.zenodo.org/docs/github/enable-repository/`. Acquire bounded public evidence
+without a token:
+
+```text
+curl --fail --location --silent --show-error --get \
+  https://zenodo.org/api/records/ \
+  --data-urlencode 'q="gh-run-receptor"' \
+  --data 'all_versions=true' --data 'size=25' \
+  --output /tmp/gh-run-receptor-zenodo.json
+python devtools/scripts/release_tools.py zenodo X.Y.Z \
+  --response /tmp/gh-run-receptor-zenodo.json
+```
+
+Exit 0 and `VERIFIED` mean exactly one semantically complete record matched. Exit 2 and
+`ABSENT` mean no exact title/version record was present at query time. Exit 1 means the
+response was malformed, ambiguous, or the matching record disagreed with required DOI,
+creator, repository, type, access, or file evidence. `.github/workflows/verify-zenodo-release.yml`
+provides the same bounded read-only check manually on a hosted runner. It intentionally
+fails while the record is absent; it does not create or repair deposits.
+
 The `0.12.0` gate additionally requires checkout-local and exact-commit remote-source
 execution of the composite Action on Ubuntu, macOS, and Windows. A same-run test must stay
 `PENDING`; a completed source failure must not become a reporter failure.

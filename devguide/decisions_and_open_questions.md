@@ -28,6 +28,7 @@ page and retain only a concise decision record here.
 | Live fixture ownership | Use reviewed public UIBCDF captures and manual gh-run-receptor experiments; add a separate fixture repository only when repeated live coverage justifies it | No scheduled or push-triggered failure generators; synthetic cases remain where GitHub cannot safely produce the source state |
 | Initial Action distribution | Thin composite Action around the dependency-free shared Python core and hosted `gh` command | Preserve one interpretation path across operating systems; pin runtime/artifact Actions and record publisher provenance |
 | Runtime support | Python 3.11--3.13; GitHub CLI 2.48.0 minimum for networked commands; latest patched stable CLI recommended | The floor matches the first required `--paginate --slurp` release and is tested independently of current runner images |
+| Product portability | Runtime core and profiles are repository-agnostic; MolSysSuite identities remain fixtures, hosted evidence, or explicit client configuration | External public workflows must join the pre-1.0 corpus; UIBCDF-specific release/guide tooling is not product behavior |
 
 ## Open decision gates
 

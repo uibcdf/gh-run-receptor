@@ -6,6 +6,13 @@ All notable changes to this project will be documented in this file.
 
 - Synchronize the 0.18.0 canonical adoption guide to all eleven tracked clients after
   uninterrupted release, minimum-CLI, and distributed-Action validation.
+- Add a maintainer Zenodo activation handoff and a bounded read-only verifier that
+  distinguishes absent, ambiguous, invalid, and semantically verified archive records.
+- Make the repository-agnostic product boundary explicit and require non-UIBCDF portability
+  evidence before 1.0.
+- Add a manual read-only portability gate over three unrelated public repositories, with
+  native GitHub parity, bounded LLM output, deterministic offline replay, and distinct
+  unavailable-versus-semantic failure states.
 
 ## 0.18.0 - 2026-09-07
 

@@ -74,9 +74,15 @@ The current MVP implements:
 - a hosted exact-tag GitHub Release path with consistent citation/Zenodo metadata,
   draft-first asset verification, public-release revalidation, and a completed
   uninterrupted 0.18.0 publication.
+- a bounded read-only Zenodo verification gate with distinct absent, invalid, and verified
+  states plus an explicit maintainer activation handoff; a real project record remains
+  absent.
+- a first portable live corpus spanning three non-UIBCDF repositories, including native
+  conclusion parity, bounded output, and deterministic offline replay.
 
-It does not yet provide a broad cross-workflow corpus; run comparison; remote workflow
-discovery; pattern rules; or validated private-repository and fork token behavior. The CI,
+It does not yet provide a broad cross-workflow corpus beyond that initial external sample;
+run comparison; remote workflow discovery; pattern rules; or validated private-repository
+and fork token behavior. The CI,
 documentation, Conda, release, configuration, and Action contracts are initial vertical
 slices, not their complete stable forms.
 

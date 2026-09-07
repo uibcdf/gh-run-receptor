@@ -258,7 +258,12 @@ starting a change. Libraries and workflow repositories adopting the tool should 
 [canonical consumer guide](standards/GH_RUN_RECEPTOR_GUIDE.md). Release behavior is
 summarized in [CHANGELOG.md](CHANGELOG.md).
 
+Maintainers can run `python devtools/scripts/validate_public_runs.py` to exercise the
+reviewed non-UIBCDF portability corpus. This live integration gate is manual because
+third-party run retention and availability are not controlled by this project.
+
 Citation metadata is maintained in [CITATION.cff](CITATION.cff). The accompanying
 [Zenodo metadata](.zenodo.json) prepares releases for archival when the repository is
 enabled in the owning Zenodo account; a GitHub Release alone is not evidence that archival
-or DOI assignment succeeded.
+or DOI assignment succeeded. Maintainer activation and verification steps are documented
+in [the release policy](devguide/versioning_and_releases.md#zenodo-maintainer-handoff).

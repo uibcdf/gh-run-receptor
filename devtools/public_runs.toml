@@ -1,0 +1,26 @@
+schema = 1
+
+[[runs]]
+repository = "cli/cli"
+run_id = 34111073880
+attempt = 1
+event = "schedule"
+conclusion = "success"
+minimum_jobs = 3
+
+[[runs]]
+repository = "astral-sh/ruff"
+run_id = 34105319798
+attempt = 1
+event = "pull_request"
+conclusion = "success"
+minimum_jobs = 40
+offline_replay = true
+
+[[runs]]
+repository = "pypa/build"
+run_id = 34104628031
+attempt = 1
+event = "pull_request"
+conclusion = "success"
+minimum_jobs = 50
