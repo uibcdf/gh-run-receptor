@@ -110,10 +110,10 @@ its exit condition and deliverables are satisfied:
 | Phase 2: rules and profiles | 20% | 19% | Initial native/noarch Conda, CI, documentation, and release interpretations plus repeated-failure grouping, strict trusted exact-match configuration, local discovery, non-overwriting `init`, and default-branch adoption across eight additional clients are tested; richer rules and external release verification remain |
 | Phase 3: embedded Action | 15% | 15% | Composite publication, provenance, fail-open and active-run truth, trusted inline rules, public permission boundaries, live pull-request rejection, read-only terminal `workflow_run`, bounded report consumption, and verified source-to-reporter discovery pass adversarial and hosted validation; private-fork behavior remains an explicitly narrower unclaimed environment case |
 | Phase 4: aggregation and comparison | 10% | 3% | Transition-only watch is unit-tested and measured against one active remote run; aggregation and comparison remain |
-| Cross-cutting release gate | 10% | 9% | Python packaging passes the nine OS/interpreter combinations; script-extension installation, remote-source Action execution, terminal downstream reporting, and published-report consumption pass on Ubuntu, macOS, and Windows; the checksum-pinned GitHub CLI 2.48.0 minimum passes a real extension capture; publication and final release gates remain |
+| Cross-cutting release gate | 10% | 10% | Python packaging passes the nine OS/interpreter combinations; released wheel installation, script-extension installation, remote-source Action execution, terminal downstream reporting, and published-report consumption pass; the checksum-pinned GitHub CLI 2.48.0 minimum and uninterrupted draft-first GitHub Release publication pass hosted gates |
 
 Design completion is reported separately from implementation progress. The evidenced
-implementation credit at this checkpoint is **88% toward 1.0**. This is not a schedule
+implementation credit at this checkpoint is **89% toward 1.0**. This is not a schedule
 estimate: credit is deliberately withheld where a phase's required corpus, schema,
 platform, or distribution evidence is absent. Percentages change only with linked tests,
 builds, or benchmark evidence, not by subjective confidence.

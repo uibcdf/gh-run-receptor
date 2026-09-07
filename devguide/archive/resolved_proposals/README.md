@@ -15,6 +15,7 @@
 - [#21 — Discover a trusted published report from its source run](discover_a_trusted_published_report_from_its_source_run.md) (`resolved`)
 - [#2 — Formalize version 1 bundle, model, and report schemas](formalize_version_1_bundle_model_and_report_schemas.md) (`resolved`)
 - [#5 — Load trusted workflow rules from client repositories](load_trusted_workflow_rules_from_client_repositories.md) (`resolved`)
+- [#26 — Publish and verify reproducible GitHub releases](publish_and_verify_reproducible_github_releases.md) (`resolved`)
 - [#4 — Publish measured adoption guidance for client repositories](publish_measured_adoption_guidance_for_client_repositories.md) (`resolved`)
 - [#23 — Secure inline Action rules and permission boundaries](secure_inline_action_rules_and_permission_boundaries.md) (`resolved`)
 - [#7 — Support Conda noarch package workflows](support_conda_noarch_package_workflows.md) (`resolved`)

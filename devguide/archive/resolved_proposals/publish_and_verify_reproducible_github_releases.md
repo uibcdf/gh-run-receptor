@@ -1,12 +1,12 @@
 ---
 summary: Publish and verify reproducible GitHub releases
 issue: uibcdf/gh-run-receptor#26
-status: active
+status: resolved
 opened: 2026-09-07
-closed:
+closed: 2026-09-07
 verification: measured
 area: ['packaging', 'github']
-guard:
+guard: tests/test_release_tools.py
 normative:
 blocked_by: []
 supersedes: []
@@ -16,7 +16,7 @@ supersedes: []
 
 **Reported:** 2026-09-07, after the exact-tag 0.16.0 distribution gate passed while the
 repository still exposed no GitHub Releases.
-**Status:** Active; the publication contract and first hosted exercise are being built.
+**Status:** Resolved; the corrected exact-tag path and independent public verification pass.
 
 ## What
 
@@ -139,3 +139,12 @@ exact title `gh-run-receptor` returned zero records at that time. This independe
 observes absence without deciding whether integration is disabled or processing is merely
 pending. The corrected draft lookup remains locally guarded but needs a new tag to exercise
 the uninterrupted workflow end to end.
+
+Tag `0.18.0` exercised that correction without intervention in hosted run `34102195605`.
+The workflow validated all local gates, resolved and verified draft `383944270`, published
+it, and revalidated its public record. A separate download verified every asset digest and
+installed the released wheel as exactly 0.18.0. The minimum GitHub CLI gate
+`34102327634`, distributed Action run `34102330094`, and canonical reporter
+`34102367041` also pass. The canonical 0.18.0 guide is byte-identical across all eleven
+tracked clients. Zenodo still returns no matching record, which remains an explicit next
+external integration step rather than an invented success condition.

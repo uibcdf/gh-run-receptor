@@ -365,6 +365,20 @@ repository integration is disabled: Zenodo documents asynchronous processing and
 account enablement state is not visible through GitHub. No DOI or archival success is
 claimed.
 
+Tag `0.18.0` points to commit `1a95305`. Hosted run `34102195605` completed the corrected
+path without intervention: exact tag identity, citation, 265 tests, build, installed
+version, checksums, notes, authenticated draft lookup, draft verification, publication,
+and public verification all passed. Public release `383944270` contains exactly the 57,332
+byte wheel, 83,003 byte source distribution, and 202 byte checksum manifest, each uploaded
+with a GitHub SHA-256 digest matching downloaded bytes. A fresh external download passed
+the same verifier and installed as exactly 0.18.0.
+
+Minimum GitHub CLI run `34102327634` passed through the exact 0.18.0 extension. Distributed
+Action run `34102330094` passed 3/3 on Ubuntu, macOS, and Windows and triggered canonical
+reporter run `34102367041`; source-first consumption verified source facts, published
+interpretation, and reporter identity. The 0.18.0 guide was then synchronized
+byte-identically to all eleven tracked clients.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

@@ -7,8 +7,8 @@ evidence.
 
 ## Current state
 
-The project is preparing a `0.18.0` tagged source preview but has no published package-index
-artifact or stable public contract;
+The project has a `0.18.0` tagged source preview and verified GitHub Release assets, but no
+published package-index artifact or stable public contract;
 the contracts in this guide are explicit but provisional unless marked settled. The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
 human, LLM, or JSON reports without changing the run or hiding its authoritative GitHub
@@ -71,10 +71,9 @@ The current MVP implements:
 - an enforced GitHub CLI 2.48.0 functional floor for network commands, with lazy
   pre-acquisition rejection, offline independence, and checksum-pinned hosted validation
   of the official minimum binary.
-- a locally guarded exact-tag GitHub Release path with consistent citation/Zenodo metadata,
-  draft-first asset verification, and public-release revalidation; release 0.17.0 was
-  recovered from its verified retained draft, while the corrected fully automated path is
-  pending on the next preview tag.
+- a hosted exact-tag GitHub Release path with consistent citation/Zenodo metadata,
+  draft-first asset verification, public-release revalidation, and a completed
+  uninterrupted 0.18.0 publication.
 
 It does not yet provide a broad cross-workflow corpus; run comparison; remote workflow
 discovery; pattern rules; or validated private-repository and fork token behavior. The CI,
@@ -151,8 +150,8 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The next milestone closes the remaining outcome and distribution gaps, led by real Zenodo
-verification and final publication policy.
+The next milestone closes the remaining outcome and aggregation gaps, led by real Zenodo
+verification, broader corpus evidence, and run comparison.
 Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need

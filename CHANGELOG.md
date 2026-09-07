@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+- Synchronize the 0.18.0 canonical adoption guide to all eleven tracked clients after
+  uninterrupted release, minimum-CLI, and distributed-Action validation.
+
 ## 0.18.0 - 2026-09-07
 
 - Resolve draft releases by their authenticated database ID before publication, because
