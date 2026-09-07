@@ -82,3 +82,7 @@ The `0.17.0` gate additionally requires matching citation and Zenodo ingestion m
 an exact-tag GitHub Release containing the verified wheel, source distribution, and
 checksum manifest, and independent public revalidation of tag/commit identity and every
 asset's name, size, and SHA-256 digest. Zenodo archival remains a separate observed fact.
+
+The `0.18.0` gate repeats the exact-tag publication after correcting authenticated draft
+lookup and requires the uninterrupted workflow to verify draft and public release states
+without maintainer recovery.

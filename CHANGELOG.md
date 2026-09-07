@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.18.0 - 2026-09-07
+
+- Resolve draft releases by their authenticated database ID before publication, because
+  GitHub's public release-by-tag endpoint does not expose drafts.
+
 ## 0.17.0 - 2026-09-07
 
 - Synchronize the 0.16.0 canonical adoption guide to all eleven tracked clients after

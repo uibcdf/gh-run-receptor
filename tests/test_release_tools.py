@@ -14,7 +14,7 @@ from devtools.scripts.release_tools import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = "0.17.0"
+VERSION = "0.18.0"
 COMMIT = "a" * 40
 
 
@@ -50,8 +50,8 @@ def _tag_ref() -> dict:
 def test_extract_release_notes_selects_exact_nonempty_section(tmp_path):
     changelog = tmp_path / "CHANGELOG.md"
     changelog.write_text(
-        "# Changes\n\n## Unreleased\n\n## 0.17.0 - 2026-09-07\n\n- New.\n\n"
-        "## 0.16.0 - 2026-09-06\n\n- Old.\n",
+        "# Changes\n\n## Unreleased\n\n## 0.18.0 - 2026-09-07\n\n- New.\n\n"
+        "## 0.17.0 - 2026-09-07\n\n- Old.\n",
         encoding="utf-8",
     )
 
@@ -60,7 +60,7 @@ def test_extract_release_notes_selects_exact_nonempty_section(tmp_path):
 
 def test_extract_release_notes_rejects_missing_and_empty_sections(tmp_path):
     changelog = tmp_path / "CHANGELOG.md"
-    changelog.write_text("## 0.17.0 - 2026-09-07\n\n", encoding="utf-8")
+    changelog.write_text("## 0.18.0 - 2026-09-07\n\n", encoding="utf-8")
 
     for version in (VERSION, "0.18.0"):
         try:
@@ -112,12 +112,12 @@ def test_prepare_citation_updates_release_fields_and_revalidates(tmp_path):
         (ROOT / ".zenodo.json").read_text(encoding="utf-8"), encoding="utf-8"
     )
 
-    prepare_citation(tmp_path, "0.18.0", date(2026, 9, 8))
+    prepare_citation(tmp_path, "0.19.0", date(2026, 9, 8))
 
     cff = yaml.safe_load((tmp_path / "CITATION.cff").read_text(encoding="utf-8"))
-    assert cff["version"] == "0.18.0"
+    assert cff["version"] == "0.19.0"
     assert cff["date-released"].isoformat() == "2026-09-08"
-    assert validate_citation(tmp_path, "0.18.0") == []
+    assert validate_citation(tmp_path, "0.19.0") == []
 
 
 def test_release_verifier_accepts_exact_draft_and_published_assets(tmp_path):
