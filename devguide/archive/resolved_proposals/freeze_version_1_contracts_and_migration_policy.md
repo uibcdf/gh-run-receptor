@@ -1,12 +1,12 @@
 ---
 summary: Freeze version 1 contracts and migration policy
 issue: uibcdf/gh-run-receptor#30
-status: active
+status: resolved
 opened: 2026-09-07
-closed:
-verification: asserted
+closed: 2026-09-07
+verification: measured
 area: ['governance', 'tests']
-guard:
+guard: tests/test_contract_compatibility.py
 normative:
 blocked_by: []
 supersedes: []
@@ -15,8 +15,8 @@ supersedes: []
 # Freezing version 1 contracts and migration policy
 
 **Reported:** 2026-09-07 during the 1.0 readiness audit.
-**Status:** Active; the published baseline is confirmed and the compatibility gate is being
-implemented.
+**Status:** Resolved; the published baseline, multiversion registry, migration policy, and
+local, packaged, and hosted compatibility gates are verified.
 
 ## What
 
@@ -130,3 +130,7 @@ checkout, allowing the release prerequisite to be tested without creating a rele
 A clean isolated build produced both source distribution and wheel. The wheel contains the
 new contract module and all five schemas; installation into a fresh virtual environment
 successfully ran `gh-run-receptor contracts --format=json` outside the checkout.
+
+Hosted run `34165723824` passed the manual read-only gate from a full-tag checkout at
+commit `a6f1346`, independently confirming access to the 0.18.0 baseline and equality of
+all four historically frozen schema resources.
