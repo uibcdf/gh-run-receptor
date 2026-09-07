@@ -114,6 +114,37 @@ It explicitly labels the profile interpretation as published rather than indepen
 recomputed. Use `inspect SOURCE_RUN_ID` as the fallback when the artifact is absent,
 expired, or insufficient for the decision.
 
+Current development builds also provide a reusable terminal reporter. A client keeps the
+`workflow_run` trigger and delegates the complete reporting job:
+
+```yaml
+name: Compact CI report
+
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  report:
+    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@FULL_COMMIT_SHA
+    with:
+      run-id: ${{ github.event.workflow_run.id }}
+      repository: ${{ github.repository }}
+      profile: ci
+```
+
+The reusable workflow exposes durable assessment, conclusion, profile, group-count,
+artifact-name, ready-state, and error-category outputs; it deliberately does not expose a
+runner-local path. Internally it uses GitHub's same-repository `$/` reference, so a caller
+pinning the workflow to a commit also gets the Action from that exact commit. This path
+currently targets github.com runners 2.336.0 or newer; older GitHub Enterprise Server
+versions without `$/` are not claimed.
+
 The current MVP recognizes clear Conda matrices automatically. When failure logs were
 captured, it reports independently reusable platform artifacts and groups repeated causes
 with member-and-line provenance. The `ci` profile groups jobs into presentation roles and

@@ -1,0 +1,53 @@
+name: Validate reusable report distribution
+
+on:
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: validate-reusable-report
+  cancel-in-progress: false
+
+jobs:
+  report:
+    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@main
+    with:
+      run-id: "34037657805"
+      repository: uibcdf/gh-run-receptor
+      profile: ci
+      capture: metadata
+      report-name: gh-run-receptor-reusable
+      strict-reporter: true
+
+  verify:
+    needs: report
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify durable called-workflow outputs
+        shell: python
+        env:
+          ASSESSMENT: ${{ needs.report.outputs.assessment }}
+          CONCLUSION: ${{ needs.report.outputs.github-conclusion }}
+          ERROR_CATEGORY: ${{ needs.report.outputs.error-category }}
+          FAILED_GROUPS: ${{ needs.report.outputs.failed-groups }}
+          INCOMPLETE_GROUPS: ${{ needs.report.outputs.incomplete-groups }}
+          PROFILE: ${{ needs.report.outputs.profile }}
+          REPORT_ARTIFACT: ${{ needs.report.outputs.report-artifact }}
+          REPORT_READY: ${{ needs.report.outputs.report-ready }}
+        run: |
+          import os
+
+          assert os.environ["ASSESSMENT"] == "PASS"
+          assert os.environ["CONCLUSION"] == "success"
+          assert os.environ["ERROR_CATEGORY"] == ""
+          assert os.environ["FAILED_GROUPS"] == "0"
+          assert os.environ["INCOMPLETE_GROUPS"] == "0"
+          assert os.environ["PROFILE"] == "ci"
+          assert os.environ["REPORT_ARTIFACT"] == (
+              "gh-run-receptor-reusable-34037657805-1"
+          )
+          assert os.environ["REPORT_READY"] == "true"

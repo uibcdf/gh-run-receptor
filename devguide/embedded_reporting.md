@@ -54,6 +54,25 @@ This exact pattern is live-tested by `gh-run-receptor-report.yml`: it grants onl
 `actions: read` and `contents: read`, checks out no source content, and verifies source ID
 and conclusion parity independently of the Action.
 
+Clients may replace the copied reporter job with the reusable adapter while retaining the
+same trigger and permissions:
+
+```yaml
+jobs:
+  receptor-report:
+    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@<full-commit-sha>
+    with:
+      run-id: ${{ github.event.workflow_run.id }}
+      repository: ${{ github.repository }}
+      profile: ci
+      capture: metadata
+```
+
+The adapter uses `$/` to execute the root Action from the same repository commit as the
+called workflow. It does not checkout caller or receptor source. The syntax requires
+github.com runner 2.336.0 or newer and is not a compatibility claim for older GitHub
+Enterprise Server installations.
+
 ## Action contract
 
 The implemented preview Action accepts:
@@ -81,6 +100,10 @@ It emits:
 - scalar outputs for assessment, failed groups, incomplete groups, and report artifact.
 - scalar `report-ready` and `error-category` outputs for automation around fail-open
   reporter errors.
+
+The reusable workflow forwards those durable scalars as workflow outputs. It excludes
+`report-path` because one runner's local filesystem path cannot be consumed by a later
+caller job; callers use `report-artifact` for cross-job retrieval.
 
 The Action appends the authoritative source run ID and attempt to `report-name`. The
 default artifact for source run `123`, attempt `2`, is therefore

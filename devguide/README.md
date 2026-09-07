@@ -85,6 +85,9 @@ The current MVP implements:
 - a first-class offline and remote `compare` command with an independently versioned
   comparison contract, explicit source/commit identity, bounded human and LLM output, and
   descriptive job, duration, artifact-inventory, and matrix-coverage deltas.
+- a call-only reusable terminal reporter that forwards typed policy to the shared Action,
+  exposes durable cross-job outputs, and resolves its Action from the exact same repository
+  revision without a checkout or internal moving reference.
 
 It does not yet provide a broad cross-workflow corpus beyond that initial external sample;
 cross-run aggregation; remote workflow discovery; pattern rules; or validated private-repository
@@ -163,7 +166,8 @@ known design question; it does not mean that unimplemented behavior has been val
 ## Immediate milestone
 
 The next milestone closes the remaining outcome and aggregation gaps, led by real Zenodo
-verification, broader corpus evidence, and run comparison.
+verification, broader corpus evidence, structured per-job aggregation, and explicit
+comparison regression policy.
 Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need

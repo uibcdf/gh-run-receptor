@@ -90,6 +90,13 @@ repository results, missing or contradictory producer identity, non-terminal and
 `workflow_run` publishers, and exact workflow-path disagreement. Its successful fixture
 asserts that source metadata is fetched once and source jobs and logs are never requested.
 
+The reusable reporter has static guards for call-only triggering, read-only permissions,
+typed input forwarding, durable-only outputs, bounded execution, and the absence of a
+hardcoded internal Action revision. Its manual distribution caller invokes the workflow
+through a remote repository reference; the called workflow then resolves the root Action
+through `$/` at that exact called-workflow commit and verifies terminal outputs against a
+retained public run.
+
 Inline-rule tests require equivalence with repository rule selection and reject
 pull-request refs, non-default branches, cross-repository targets, missing GitHub context,
 malformed syntax, and size violations before acquisition. Reporter-output tests preserve a

@@ -1,0 +1,94 @@
+name: Reusable gh-run-receptor report
+
+on:
+  workflow_call:
+    inputs:
+      run-id:
+        description: Completed source run ID
+        required: true
+        type: string
+      repository:
+        description: Source repository in OWNER/REPO form
+        required: true
+        type: string
+      profile:
+        description: Built-in profile or auto
+        required: false
+        default: auto
+        type: string
+      capture:
+        description: Evidence policy
+        required: false
+        default: metadata
+        type: string
+      report-name:
+        description: Safe report artifact prefix
+        required: false
+        default: gh-run-receptor-report
+        type: string
+      rules:
+        description: Trusted default-branch config@1 document
+        required: false
+        default: ""
+        type: string
+      strict-reporter:
+        description: Fail the called job when the reporter cannot produce a report
+        required: false
+        default: false
+        type: boolean
+    outputs:
+      assessment:
+        description: Receptor assessment
+        value: ${{ jobs.report.outputs.assessment }}
+      github-conclusion:
+        description: Authoritative GitHub conclusion
+        value: ${{ jobs.report.outputs['github-conclusion'] }}
+      profile:
+        description: Applied profile
+        value: ${{ jobs.report.outputs.profile }}
+      failed-groups:
+        description: Number of distinct non-success job groups
+        value: ${{ jobs.report.outputs['failed-groups'] }}
+      incomplete-groups:
+        description: Number of incomplete evidence dimensions
+        value: ${{ jobs.report.outputs['incomplete-groups'] }}
+      report-artifact:
+        description: Uploaded canonical report artifact name
+        value: ${{ jobs.report.outputs['report-artifact'] }}
+      report-ready:
+        description: Whether a canonical report was produced
+        value: ${{ jobs.report.outputs['report-ready'] }}
+      error-category:
+        description: Stable reporter error category
+        value: ${{ jobs.report.outputs['error-category'] }}
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  report:
+    name: Report the completed source run
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      assessment: ${{ steps.receptor.outputs.assessment }}
+      github-conclusion: ${{ steps.receptor.outputs['github-conclusion'] }}
+      profile: ${{ steps.receptor.outputs.profile }}
+      failed-groups: ${{ steps.receptor.outputs['failed-groups'] }}
+      incomplete-groups: ${{ steps.receptor.outputs['incomplete-groups'] }}
+      report-artifact: ${{ steps.receptor.outputs['report-artifact'] }}
+      report-ready: ${{ steps.receptor.outputs['report-ready'] }}
+      error-category: ${{ steps.receptor.outputs['error-category'] }}
+    steps:
+      - name: Build the terminal source report
+        id: receptor
+        uses: $/.
+        with:
+          run-id: ${{ inputs['run-id'] }}
+          repository: ${{ inputs.repository }}
+          profile: ${{ inputs.profile }}
+          capture: ${{ inputs.capture }}
+          report-name: ${{ inputs['report-name'] }}
+          rules: ${{ inputs.rules }}
+          strict-reporter: ${{ inputs['strict-reporter'] }}
