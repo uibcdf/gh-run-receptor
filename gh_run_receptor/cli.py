@@ -13,6 +13,21 @@ from urllib.parse import urlparse
 
 from gh_run_receptor import __version__
 from gh_run_receptor.bundle import load_bundle
+from gh_run_receptor.comparison import (
+    compare_reports,
+)
+from gh_run_receptor.comparison import (
+    exit_code as comparison_exit_code,
+)
+from gh_run_receptor.comparison import (
+    render_human as render_comparison_human,
+)
+from gh_run_receptor.comparison import (
+    render_json as render_comparison_json,
+)
+from gh_run_receptor.comparison import (
+    render_llm as render_comparison_llm,
+)
 from gh_run_receptor.config import CONFIG_PATH, load_config, select_rule
 from gh_run_receptor.contracts import SCHEMA_BASELINE_TAG, contract_inventory
 from gh_run_receptor.discovery import discover_workflows, render_config, write_config
@@ -141,6 +156,20 @@ def _parser() -> argparse.ArgumentParser:
     watch.add_argument("--capture", choices=("full", "adaptive", "metadata"), default="adaptive")
     watch.add_argument("--output", type=Path)
 
+    compare = subparsers.add_parser(
+        "compare", help="compare two bundles, runs, or attempts without merging evidence"
+    )
+    _add_common_options(compare, suppress_defaults=True)
+    compare.add_argument("left", help="left bundle directory, run ID, or run URL")
+    compare.add_argument("right", nargs="?", help="right bundle directory, run ID, or run URL")
+    compare.add_argument(
+        "--attempt",
+        type=int,
+        action="append",
+        help="attempt number; repeat twice to select the left and right attempts",
+    )
+    compare.add_argument("--capture", choices=("full", "adaptive", "metadata"), default="metadata")
+
     initialize = subparsers.add_parser(
         "init", help="discover local workflows and propose repository rules"
     )
@@ -213,6 +242,98 @@ def _capture(args: argparse.Namespace, *, render: bool) -> int:
     )
     print(_render(report, args.format, args.receptor), end="")
     return exit_code(report)
+
+
+def _comparison_render(comparison: dict, output_format: str, receptor: str | None) -> str:
+    if output_format == "json":
+        return render_comparison_json(comparison)
+    selected = receptor or ("human" if sys.stdout.isatty() else "llm")
+    return (
+        render_comparison_human(comparison)
+        if selected == "human"
+        else render_comparison_llm(comparison)
+    )
+
+
+def _comparison_reference(value: str) -> RunReference:
+    try:
+        return _run_reference(value)
+    except argparse.ArgumentTypeError as error:
+        raise BundleError(str(error)) from error
+
+
+def _compare(args: argparse.Namespace) -> int:
+    left_path = Path(args.left)
+    right_path = Path(args.right) if args.right is not None else None
+    attempts = args.attempt or []
+    if any(attempt < 1 for attempt in attempts):
+        raise BundleError("comparison attempt numbers must be positive")
+
+    if left_path.is_dir() or (right_path is not None and right_path.is_dir()):
+        if not left_path.is_dir() or right_path is None or not right_path.is_dir():
+            raise BundleError("offline comparison requires two bundle directories")
+        if attempts:
+            raise BundleError("--attempt cannot be used when comparing bundle directories")
+        reports = []
+        for path in (left_path, right_path):
+            manifest, evidence = load_bundle(path)
+            reports.append(
+                build_report(
+                    manifest,
+                    evidence,
+                    profile=args.profile or "auto",
+                    bundle_directory=path,
+                )
+            )
+    else:
+        if args.right is None:
+            if len(attempts) != 2:
+                raise BundleError("one-run comparison requires exactly two --attempt options")
+            references = [_comparison_reference(args.left)] * 2
+        else:
+            if len(attempts) not in {0, 2}:
+                raise BundleError("two-run comparison accepts either zero or two --attempt options")
+            references = [
+                _comparison_reference(args.left),
+                _comparison_reference(args.right),
+            ]
+            if not attempts:
+                attempts = [None, None]
+
+        hostnames = [args.hostname or item.hostname or "github.com" for item in references]
+        for item in references:
+            if args.hostname and item.hostname and args.hostname != item.hostname:
+                raise BundleError("run URL hostname conflicts with --hostname")
+        if hostnames[0] != hostnames[1]:
+            raise BundleError("comparison sources must use the same GitHub hostname")
+        client = GitHubClient(hostnames[0])
+        repositories = []
+        for item in references:
+            if args.repo and item.repository and args.repo != item.repository:
+                raise BundleError("run URL repository conflicts with --repo")
+            repositories.append(client.repository(args.repo or item.repository))
+        reports = []
+        for item, repository, attempt in zip(references, repositories, attempts, strict=True):
+            captured = acquire_evidence(
+                client,
+                repository,
+                item.run_id,
+                attempt=attempt,
+                policy=args.capture,
+                cache_root=_cache_root(args.cache_dir),
+            )
+            reports.append(
+                build_report(
+                    captured.manifest,
+                    captured.evidence,
+                    profile=args.profile or "auto",
+                    bundle_directory=captured.path,
+                )
+            )
+
+    comparison = compare_reports(*reports)
+    print(_comparison_render(comparison, args.format, args.receptor), end="")
+    return comparison_exit_code(comparison)
 
 
 def main(arguments: list[str] | None = None) -> int:
@@ -289,6 +410,8 @@ def main(arguments: list[str] | None = None) -> int:
             return _capture(args, render=True)
         if args.command == "capture":
             return _capture(args, render=False)
+        if args.command == "compare":
+            return _compare(args)
         if args.command == "watch":
             hostname = args.hostname or args.run.hostname or "github.com"
             if args.hostname and args.run.hostname and args.hostname != args.run.hostname:

@@ -2,13 +2,18 @@
 
 ## Contract family
 
-The project uses five related, independently versioned documents:
+The runtime registry exposes six related, independently versioned documents:
 
 - `gh-run-receptor.bundle@1`: captured source resources and manifest;
+- `gh-run-receptor.config@1`: normalized trusted repository workflow rules;
+- `gh-run-receptor.config-capture@1`: captured configuration plus source provenance;
 - `gh-run-receptor.model@1`: normalized internal/source model serialized for testing;
 - `gh-run-receptor.report@1`: profile assessment and rendered-report inputs;
-- `gh-run-receptor.config@1`: normalized trusted repository workflow rules;
-- `gh-run-receptor.events@1`: optional evidence emitted by an instrumented workflow.
+- `gh-run-receptor.comparison@1`: two independently identified reports and their deltas.
+
+The separate `gh-run-receptor.events@1` producer format is optional corroborating
+evidence. It remains a provisional producer boundary rather than a registered persisted
+document with a packaged JSON Schema.
 
 Version identifiers are explicit strings, not inferred from package version. Additive
 optional fields do not require a major schema change. Removing fields, changing meaning,
@@ -230,6 +235,26 @@ consumption when no canonical reporter identity was requested.
 Unknown GitHub enum values and unrecognized fields are preserved in source evidence and
 listed in `unknowns` when they affect interpretation.
 
+## Comparison
+
+`gh-run-receptor.comparison@1` contains independent `left` and `right` identities plus
+explicit `same_repository`, `same_workflow`, `same_run`, and `same_head_sha` relations.
+It never merges evidence across attempts and never hides a commit difference. Each side
+retains the required completeness dimensions used to decide whether comparison evidence
+is sufficient.
+
+The comparison records official status and conclusion transitions separately from
+receptor assessment. Job identity across runs is based on displayed-name multisets because
+GitHub assigns new database IDs to rerun jobs; repeated names retain per-state counts.
+Known durations and artifact sizes include item coverage and expose a delta only when both
+totals are complete. Matrix coverage is comparable only when both reports expose the same
+profile-specific dimension.
+
+Artifact additions and removals have the fixed interpretation `inventory_at_capture`.
+They do not assert publication history or regression because retention and expiry may
+change later observations. `CHANGED` and `UNCHANGED` are descriptive. `INCOMPLETE` means
+one side lacks required metadata, jobs, or artifact-inventory evidence.
+
 ## Cause groups
 
 A cause group contains a stable fingerprint derived from normalized failure class,
@@ -287,15 +312,16 @@ count, line size, total bytes, nesting, and string lengths.
 
 The machine-readable Draft 2020-12 schemas ship inside `gh_run_receptor.schemas` as
 `bundle-v1.schema.json`, `config-v1.schema.json`, `config-capture-v1.schema.json`,
-`model-v1.schema.json`, and `report-v1.schema.json`. They are the formal spelling of the
-version 1 boundaries. `gh_run_receptor.contracts` is the single registry for their kinds,
-identifiers, current and readable versions, resources, and freeze baselines. Producers and
-untrusted readers do not duplicate those identifiers.
+`comparison-v1.schema.json`, `model-v1.schema.json`, and `report-v1.schema.json`. They are
+the formal spelling of the version 1 boundaries. `gh_run_receptor.contracts` is the single
+registry for their kinds, identifiers, current and readable versions, resources, and
+freeze baselines. Producers and untrusted readers do not duplicate those identifiers.
 
 The four schema files already shipped by release 0.18.0 are byte-frozen against that Git
 tag. `config-capture@1` was already a persisted bundle envelope but gains its first formal
-schema after that release, so it truthfully reports no historical freeze tag until the next
-release establishes one. Release preparation runs `validate_contracts.py`; changing a
+schema after that release, and `comparison@1` is new after it. Both truthfully report no
+historical freeze tag until the next release establishes one. Release preparation runs
+`validate_contracts.py`; changing a
 frozen schema in place, losing a registered resource, or adding an unregistered version
 fails before distributions are built.
 

@@ -150,9 +150,26 @@ gh run-receptor compare LEFT RIGHT
 gh run-receptor compare RUN_ID --attempt LEFT --attempt RIGHT
 ```
 
-Compares conclusions, matrix coverage, durations, artifact inventory and size, and
-profile metrics. It never treats runs from different commits as equivalent without
-showing the commit difference.
+`LEFT` and `RIGHT` may be two bundle directories, two run IDs, or two run URLs. One run
+reference plus exactly two `--attempt` options compares two attempts of that run. Two run
+references accept either no explicit attempts or one attempt for each side. Remote
+comparison uses metadata capture by default; bundle comparison is offline and never fills
+missing evidence from GitHub.
+
+Both sides pass through the ordinary normalized-report pipeline. The comparison preserves
+repository, workflow, run, attempt, commit, URL, profile, official status/conclusion,
+assessment, and required completeness independently. It then reports official-state
+transitions, job count/inventory/state changes, known total duration, artifact inventory
+and known size, and comparable Conda platform, CI role, documentation phase, or release
+phase coverage. Duplicate job names are compared as state-count multisets rather than
+arbitrarily paired IDs.
+
+Artifact changes mean inventory observed at capture time. They are not evidence that an
+artifact was never published, because expiry and retention may differ between captures.
+Likewise, `CHANGED` is descriptive and does not claim improvement or regression. A valid
+`CHANGED` or `UNCHANGED` comparison returns zero; missing required metadata, jobs, or
+artifact-inventory evidence returns `INCOMPLETE` and status 4. Different or unavailable
+commits remain visible and produce a warning.
 
 ### Configuration commands
 
@@ -275,6 +292,10 @@ Configuration, bundle, normalization, and rendering errors retain the uncategori
 captured GitHub run failed; its purpose is evidence acquisition. `replay`, `inspect`, and
 `published` follow the table. Final numeric values remain provisional until Phase 1
 truth-table tests validate composition with shell and agent workflows.
+
+`compare` describes differences rather than adopting either run's outcome. Complete
+`CHANGED` and `UNCHANGED` results return 0, incomplete comparison evidence returns 4, and
+acquisition or validation failures return 5.
 
 ## Compact rendering
 

@@ -29,6 +29,7 @@ def test_inventory_exposes_every_serialized_boundary_in_stable_order():
         "bundle",
         "config",
         "config-capture",
+        "comparison",
         "model",
         "report",
     ]

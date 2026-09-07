@@ -59,6 +59,12 @@ _SPECS = (
         (SchemaVersion(1, "config-capture-v1.schema.json", None),),
     ),
     ContractSpec(
+        "comparison",
+        1,
+        frozenset({1}),
+        (SchemaVersion(1, "comparison-v1.schema.json", None),),
+    ),
+    ContractSpec(
         "model",
         1,
         frozenset({1}),

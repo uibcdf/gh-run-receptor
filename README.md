@@ -187,6 +187,25 @@ loading rejects contradictory retained run identity rather than risking a false 
 If requested evidence such as retained logs is unavailable, the receptor preserves the
 official GitHub conclusion but reports `INCOMPLETE` and exits with status 4.
 
+Current development builds can compare two saved bundles without network access:
+
+```text
+gh run-receptor compare LEFT_BUNDLE RIGHT_BUNDLE --receptor=llm
+```
+
+They can also capture and compare two attempts of the same run, or two distinct run IDs:
+
+```text
+gh run-receptor compare RUN_ID --attempt 1 --attempt 2 --repo OWNER/REPO
+gh run-receptor compare LEFT_RUN_ID RIGHT_RUN_ID --repo OWNER/REPO
+```
+
+The comparison always shows both repositories, runs, attempts, commits, and official
+conclusions. It reports job-state and duration deltas, artifact inventory observed at each
+capture, and comparable profile matrix coverage. `CHANGED` is descriptive, not a success
+or regression verdict; a valid comparison returns zero even when facts differ. Missing
+required metadata, jobs, or artifact inventory produces `INCOMPLETE` and status 4.
+
 Acquisition failures retain exit status 5 and expose one stable category, such as
 `authentication_required`, `authentication_failed`, `permission_denied`,
 `not_found_or_inaccessible`, or `rate_limited`. Remote diagnostics are bounded and
@@ -267,8 +286,9 @@ reviewed non-UIBCDF portability corpus. This live integration gate is manual bec
 third-party run retention and availability are not controlled by this project.
 
 `gh run-receptor contracts` reports the current and readable bundle, configuration,
-normalized-model, and report contract versions without network access. Its JSON form is
-available with `contracts --format=json` for compatibility automation.
+configuration-capture, comparison, normalized-model, and report contract versions without
+network access. Its JSON form is available with `contracts --format=json` for
+compatibility automation.
 
 Citation metadata is maintained in [CITATION.cff](CITATION.cff). The accompanying
 [Zenodo metadata](.zenodo.json) prepares releases for archival when the repository is

@@ -1,0 +1,192 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://uibcdf.org/gh-run-receptor/schemas/comparison-v1.schema.json",
+  "title": "gh-run-receptor.comparison@1",
+  "type": "object",
+  "required": [
+    "schema", "assessment", "evidence_sufficient", "left", "right", "relation",
+    "transition", "jobs", "artifacts", "matrix", "warnings"
+  ],
+  "properties": {
+    "schema": {"const": "gh-run-receptor.comparison@1"},
+    "assessment": {"enum": ["UNCHANGED", "CHANGED", "INCOMPLETE"]},
+    "evidence_sufficient": {"type": "boolean"},
+    "left": {"$ref": "#/$defs/side"},
+    "right": {"$ref": "#/$defs/side"},
+    "relation": {
+      "type": "object",
+      "required": ["same_repository", "same_workflow", "same_run", "same_head_sha"],
+      "properties": {
+        "same_repository": {"type": "boolean"},
+        "same_workflow": {"type": "boolean"},
+        "same_run": {"type": "boolean"},
+        "same_head_sha": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "transition": {
+      "type": "object",
+      "required": ["status_changed", "conclusion_changed", "assessment_changed"],
+      "properties": {
+        "status_changed": {"type": "boolean"},
+        "conclusion_changed": {"type": "boolean"},
+        "assessment_changed": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "jobs": {
+      "type": "object",
+      "required": ["counts", "inventory", "state_changes", "duration_seconds"],
+      "properties": {
+        "counts": {"$ref": "#/$defs/countDelta"},
+        "inventory": {"$ref": "#/$defs/inventory"},
+        "state_changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "left", "right"],
+            "properties": {
+              "name": {"type": "string"},
+              "left": {"$ref": "#/$defs/counts"},
+              "right": {"$ref": "#/$defs/counts"}
+            },
+            "additionalProperties": false
+          }
+        },
+        "duration_seconds": {"$ref": "#/$defs/quantityChange"}
+      },
+      "additionalProperties": false
+    },
+    "artifacts": {
+      "type": "object",
+      "required": ["interpretation", "left_total", "right_total", "added", "removed", "size_bytes"],
+      "properties": {
+        "interpretation": {"const": "inventory_at_capture"},
+        "left_total": {"type": "integer", "minimum": 0},
+        "right_total": {"type": "integer", "minimum": 0},
+        "added": {"$ref": "#/$defs/namedCounts"},
+        "removed": {"$ref": "#/$defs/namedCounts"},
+        "size_bytes": {"$ref": "#/$defs/quantityChange"}
+      },
+      "additionalProperties": false
+    },
+    "matrix": {
+      "type": "object",
+      "required": ["left_kind", "right_kind", "comparable", "dimension", "added", "removed", "changes"],
+      "properties": {
+        "left_kind": {"type": ["string", "null"]},
+        "right_kind": {"type": ["string", "null"]},
+        "comparable": {"type": "boolean"},
+        "dimension": {"type": ["string", "null"]},
+        "added": {"type": "array", "items": {"type": "string"}},
+        "removed": {"type": "array", "items": {"type": "string"}},
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "left", "right"],
+            "additionalProperties": false,
+            "properties": {
+              "name": {"type": "string"},
+              "left": {"type": "object"},
+              "right": {"type": "object"}
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "warnings": {"type": "array", "items": {"type": "string"}}
+  },
+  "$defs": {
+    "side": {
+      "type": "object",
+      "required": [
+        "repository", "workflow", "run_id", "run_attempt", "head_sha", "url", "profile",
+        "status", "conclusion", "assessment", "completeness"
+      ],
+      "properties": {
+        "repository": {"type": "string", "pattern": "^[^/]+/[^/]+$"},
+        "workflow": {"type": ["string", "null"]},
+        "run_id": {"type": "integer", "minimum": 1},
+        "run_attempt": {"type": "integer", "minimum": 1},
+        "head_sha": {"type": ["string", "null"]},
+        "url": {"type": ["string", "null"]},
+        "profile": {"type": "string"},
+        "status": {"type": ["string", "null"]},
+        "conclusion": {"type": ["string", "null"]},
+        "assessment": {"type": "string"},
+        "completeness": {
+          "type": "object",
+          "required": ["metadata", "jobs", "artifact_inventory"],
+          "properties": {
+            "metadata": {"$ref": "#/$defs/completenessValue"},
+            "jobs": {"$ref": "#/$defs/completenessValue"},
+            "artifact_inventory": {"$ref": "#/$defs/completenessValue"}
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "completenessValue": {
+      "enum": [
+        "complete", "partial", "unavailable", "expired", "not_permitted",
+        "not_requested", "invalid", null
+      ]
+    },
+    "counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+    "countDelta": {
+      "type": "object",
+      "required": ["left", "right", "delta"],
+      "properties": {
+        "left": {"$ref": "#/$defs/counts"},
+        "right": {"$ref": "#/$defs/counts"},
+        "delta": {"type": "object", "additionalProperties": {"type": "integer"}}
+      },
+      "additionalProperties": false
+    },
+    "namedCounts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "count"],
+        "properties": {"name": {"type": "string"}, "count": {"type": "integer", "minimum": 1}},
+        "additionalProperties": false
+      }
+    },
+    "inventory": {
+      "type": "object",
+      "required": ["left_total", "right_total", "added", "removed"],
+      "properties": {
+        "left_total": {"type": "integer", "minimum": 0},
+        "right_total": {"type": "integer", "minimum": 0},
+        "added": {"$ref": "#/$defs/namedCounts"},
+        "removed": {"$ref": "#/$defs/namedCounts"}
+      },
+      "additionalProperties": false
+    },
+    "quantitySide": {
+      "type": "object",
+      "required": ["known_items", "total_items", "complete", "total"],
+      "properties": {
+        "known_items": {"type": "integer", "minimum": 0},
+        "total_items": {"type": "integer", "minimum": 0},
+        "complete": {"type": "boolean"},
+        "total": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "quantityChange": {
+      "type": "object",
+      "required": ["left", "right", "delta"],
+      "properties": {
+        "left": {"$ref": "#/$defs/quantitySide"},
+        "right": {"$ref": "#/$defs/quantitySide"},
+        "delta": {"type": ["integer", "null"]}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

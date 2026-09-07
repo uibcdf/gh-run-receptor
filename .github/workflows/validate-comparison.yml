@@ -1,0 +1,37 @@
+name: Validate run comparison
+
+on:
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: validate-run-comparison
+  cancel-in-progress: false
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.13"
+      - name: Compare two attempts of one public run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          report="$RUNNER_TEMP/comparison.json"
+          python -m gh_run_receptor.cli compare 22638022385 \
+            --attempt 1 --attempt 2 \
+            --repo uibcdf/argdigest \
+            --profile generic \
+            --capture metadata \
+            --format json > "$report"
+          python -c "import json, pathlib; value=json.loads(pathlib.Path('$report').read_text()); assert value['schema'] == 'gh-run-receptor.comparison@1'; assert value['assessment'] == 'CHANGED'; assert value['evidence_sufficient'] is True; assert value['relation']['same_run'] is True; assert value['relation']['same_head_sha'] is True; assert value['left']['run_attempt'] == 1; assert value['right']['run_attempt'] == 2; assert value['left']['conclusion'] == 'failure'; assert value['right']['conclusion'] == 'success'"
