@@ -14,12 +14,26 @@ MAX_ARCHIVE_MEMBERS = 2_000
 MAX_MEMBER_BYTES = 32 * 1024 * 1024
 MAX_EXPANDED_BYTES = 256 * 1024 * 1024
 MAX_LINE_BYTES = 16 * 1024
+MAX_CAUSE_CHARACTERS = 500
 
 _ANSI = re.compile(r"\x1b(?:\[[0-?]*[ -/]*[@-~]|\][^\x07]*(?:\x07|\x1b\\))")
 _TIMESTAMP = re.compile(r"^\d{4}-\d{2}-\d{2}T\S+Z\s+")
 _JOB_PREFIX = re.compile(r"^\d+_")
 _TEMP_SCRIPT = re.compile(
     r"(?:[A-Za-z]:[\\/]|/)[^:\n]*?(?:_temp|Temp)[\\/][0-9A-Fa-f-]+\.(?:sh|ps1|cmd|bat)"
+)
+_STRUCTURED_DIAGNOSTIC = re.compile(
+    r"^[A-Za-z][A-Za-z0-9 ._/-]{0,79}:\s+"
+    r"(?:PASS|FAIL|ERROR|ABSENT|INVALID|UNAVAILABLE|CANCELLED|TIMED_OUT|PARTIAL|"
+    r"INCOMPLETE|UNKNOWN)\b",
+    re.IGNORECASE,
+)
+_GITHUB_TOKEN = re.compile(r"\bgh[pousr]_[A-Za-z0-9_]{20,}\b")
+_AUTHORIZATION = re.compile(r"(?i)\b(authorization\s*:\s*(?:bearer|token)\s+)\S+")
+_CREDENTIAL_ASSIGNMENT = re.compile(
+    r"(?i)\b((?:[A-Za-z_][A-Za-z0-9_]*_)?"
+    r"(?:TOKEN|PASSWORD|PASSWD|SECRET|API_KEY|PRIVATE_KEY))"
+    r"(\s*[:=]\s*)\S+"
 )
 
 
@@ -65,6 +79,19 @@ def _normalized(message: str) -> str:
     value = _TEMP_SCRIPT.sub("$RUNNER_TEMP/script", message)
     value = re.sub(r"\s+", " ", value).strip()
     return value
+
+
+def _safe_cause(message: str) -> str:
+    value = _GITHUB_TOKEN.sub("[REDACTED]", message)
+    value = _AUTHORIZATION.sub(r"\1[REDACTED]", value)
+    value = _CREDENTIAL_ASSIGNMENT.sub(r"\1\2[REDACTED]", value)
+    return value[:MAX_CAUSE_CHARACTERS]
+
+
+def _adjacent_diagnostic(message: str, line: int) -> Candidate | None:
+    if _STRUCTURED_DIAGNOSTIC.search(message):
+        return Candidate(20, line, "structured_diagnostic", message)
+    return None
 
 
 def _safe_member(info: zipfile.ZipInfo) -> bool:
@@ -121,15 +148,25 @@ def extract_causes(
                 if job_name not in failed_by_name:
                     continue
                 candidates: list[Candidate] = []
+                previous: tuple[str, int] | None = None
                 with zipped.open(info) as stream:
                     for line_number, raw in _bounded_lines(stream):
-                        if candidate := _candidate(_clean_line(raw), line_number):
+                        message = _clean_line(raw)
+                        if candidate := _candidate(message, line_number):
                             candidates.append(candidate)
+                            if (
+                                candidate.kind == "exit_code"
+                                and previous is not None
+                                and (adjacent := _adjacent_diagnostic(*previous))
+                            ):
+                                candidates.append(adjacent)
+                        previous = (message, line_number)
                 if not candidates:
                     warnings.append(f"no causal line found for failed job: {job_name}")
                     continue
                 best = max(candidates, key=lambda item: (item.priority, item.line))
-                normalized = _normalized(best.message)
+                safe_message = _safe_cause(best.message)
+                normalized = _normalized(safe_message)
                 occurrences.append(
                     {
                         "job_id": failed_by_name[job_name].get("id"),
@@ -137,7 +174,7 @@ def extract_causes(
                         "member": info.filename,
                         "line": best.line,
                         "kind": best.kind,
-                        "message": best.message,
+                        "message": safe_message,
                         "normalized": normalized,
                     }
                 )

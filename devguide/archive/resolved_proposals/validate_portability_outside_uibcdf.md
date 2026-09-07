@@ -1,12 +1,12 @@
 ---
 summary: Validate portability outside UIBCDF
 issue: uibcdf/gh-run-receptor#28
-status: active
+status: resolved
 opened: 2026-09-07
-closed:
-verification: asserted
+closed: 2026-09-07
+verification: measured
 area: ['github']
-guard:
+guard: tests/test_public_runs.py
 normative:
 blocked_by: []
 supersedes: []
@@ -16,8 +16,8 @@ supersedes: []
 
 **Reported:** 2026-09-07 while reviewing whether the MolSysSuite integration corpus had
 introduced product-specific assumptions.
-**Status:** Active; the first independent public-run evidence has passed and is being
-converted into a repeatable pre-1.0 gate.
+**Status:** Resolved; the first independent public-run evidence is a repeatable local and
+hosted pre-1.0 gate.
 
 ## What
 
@@ -106,3 +106,5 @@ coverage.
 Measurements were made from the development host on 2026-09-07 with Python 3.13.14,
 GitHub CLI 2.93.0, and gh-run-receptor `0.18.0+2.g628def2.dirty`. The captured Ruff bundle
 was stored only in `/tmp`; it contains third-party metadata and is not a repository fixture.
+Hosted run `34159750369` subsequently passed the same three-repository corpus from a clean
+Ubuntu runner at commit `d0b72af`.

@@ -1,12 +1,12 @@
 ---
 summary: Document and verify Zenodo archival
 issue: uibcdf/gh-run-receptor#27
-status: active
+status: resolved
 opened: 2026-09-07
-closed:
-verification: asserted
+closed: 2026-09-07
+verification: measured
 area: ['packaging', 'documentation']
-guard:
+guard: tests/test_zenodo_verification.py
 normative:
 blocked_by: []
 supersedes: []
@@ -16,8 +16,8 @@ supersedes: []
 
 **Reported:** 2026-09-07, after publishing the first verified GitHub Releases and observing
 no matching public Zenodo record.
-**Status:** Active; the maintainer handoff and read-only verification contract are being
-implemented.
+**Status:** Resolved; the maintainer handoff and read-only verification contract are
+implemented and tested, while the independently measured archive state remains absent.
 
 ## What
 
@@ -103,3 +103,7 @@ Tests cover all acceptance cases, including the three command-line states. A liv
 for 0.18.0 still returns `ABSENT`, which is the expected honest result until a maintainer
 enables the integration and publishes a subsequent release. This external state does not
 invalidate the delivered procedure or verifier and must not be recorded as a DOI.
+
+Hosted run `34159750417` exercised the manual workflow against the public Zenodo API. It
+terminated with the designed exit 2 and `Zenodo archive: ABSENT — 0.18.0`; therefore the
+hosted path distinguishes missing archival from malformed evidence without claiming a DOI.

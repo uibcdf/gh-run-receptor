@@ -124,6 +124,10 @@ event/ref/SHA identity and separates packaging, publication, and archive verific
 without claiming external delivery. Use `--profile=generic`, `--profile=ci`,
 `--profile=conda`, `--profile=docs`, or `--profile=release` to select explicitly.
 
+Cause selection prefers concrete errors over GitHub's generic process-exit marker. When a
+tool emits an immediately adjacent bounded structured verdict such as `Build: FAIL` or
+`Archive: ABSENT`, that diagnostic is retained with credential-shaped text redacted.
+
 A client repository can generate a reviewable starting point without changing the
 checkout:
 

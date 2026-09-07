@@ -13,6 +13,8 @@ All notable changes to this project will be documented in this file.
 - Add a manual read-only portability gate over three unrelated public repositories, with
   native GitHub parity, bounded LLM output, deterministic offline replay, and distinct
   unavailable-versus-semantic failure states.
+- Preserve bounded structured workflow diagnostics immediately before generic process-exit
+  markers, while keeping stronger causes dominant and redacting credential-shaped text.
 
 ## 0.18.0 - 2026-09-07
 

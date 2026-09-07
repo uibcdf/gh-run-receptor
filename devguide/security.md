@@ -79,6 +79,12 @@ characters become visible escapes. Classification uses HTTP status first and nar
 missing-authentication/rate-limit signals second. Unknown prose never becomes a guessed
 permission state.
 
+Selected log causes are also bounded and redact GitHub-token shapes, authorization values,
+and credential-shaped assignments before storage in a report. A structured workflow
+verdict is eligible only when immediately adjacent to a generic process-exit marker;
+arbitrary neighboring log text does not become causal evidence. This deterministic
+allow-list supplements but does not replace GitHub's masking of registered secrets.
+
 The Action HTML-escapes untrusted report text before writing the Markdown summary, rejects
 multiline scalar outputs and unsafe report names, bounds the summary to 32 KiB and report
 to 8 MiB, and reuses the same credential-redacted error boundary as the CLI.
