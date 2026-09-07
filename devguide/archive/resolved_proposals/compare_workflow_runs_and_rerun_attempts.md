@@ -1,12 +1,12 @@
 ---
 summary: Compare workflow runs and rerun attempts
 issue: uibcdf/gh-run-receptor#31
-status: open
+status: resolved
 opened: 2026-09-07
-closed:
-verification: asserted
+closed: 2026-09-07
+verification: measured
 area: ['cli', 'reports']
-guard:
+guard: tests/test_comparison.py
 normative:
 blocked_by: []
 supersedes: []
@@ -15,7 +15,7 @@ supersedes: []
 # Comparing workflow runs and rerun attempts
 
 **Reported:** 2026-09-07 while reviewing the remaining Phase 4 work before 1.0.
-**Status:** Open; implementation and hosted validation are in progress.
+**Status:** Resolved; offline, installed, remote, and hosted comparison paths pass.
 
 ## What
 
@@ -58,6 +58,16 @@ concluded ``success``. These are captured facts asserted by
 No token saving or performance figure is assumed by this proposal. Output bounds and
 determinism will be measured in tests over those saved inputs.
 
+The completed local suite passes 314 tests. The dedicated comparison tests validate the
+new schema, exact paired-rerun semantics, order independence, incompleteness, artifact
+wording, bounded text, and CLI behavior. A built wheel installed without dependencies in
+a clean virtual environment and compared the same bundles outside the checkout.
+
+The live local command and hosted run `34167676919` independently reacquired ArgDigest
+run `22638022385` attempts 1 and 2. Both produced `CHANGED`, `same_run=true`,
+`same_head_sha=true`, and the official `failure` to `success` transition. The hosted gate
+completed successfully at implementation commit `551005d`.
+
 ## What was refuted
 
 - Comparing rendered text was rejected because it would couple semantics to presentation.
@@ -92,5 +102,20 @@ CLI acquisition boundary; offline comparison remains available without network a
 
 ## Provenance
 
-Initial design inspection: Linux host, Python 3.12 development environment, repository
-commit ``c522785``, 2026-09-07. Final validation provenance will be added at closure.
+Initial design inspection: Linux host, repository commit `c522785`, 2026-09-07. Final
+local validation used Python 3.13.14, Ruff 0.16.5, 314 pytest cases with
+`--receptor=llm`, an isolated wheel install under `/tmp`, and implementation commit
+`551005d`. GitHub-hosted Ubuntu validation used run `34167676919` on the same date.
+
+## Implementation checkpoint
+
+`compare` now accepts two bundle directories, two run IDs/URLs, or one run plus two
+attempts. Both sides use the existing report pipeline and remain separately identified.
+The machine output is `comparison@1`; human and LLM projections are bounded and do not
+reinterpret official outcomes.
+
+The comparison exposes official transitions, state-count multisets for repeated job
+names, complete-known duration and artifact-size deltas, capture-time artifact inventory,
+and comparable profile matrix units. It fails closed with status 4 when required evidence
+is incomplete and returns zero for complete changed or unchanged evidence. Regression
+policy and cross-job aggregation remain deliberately separate Phase 4 work.

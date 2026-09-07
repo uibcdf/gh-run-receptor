@@ -379,6 +379,25 @@ reporter run `34102367041`; source-first consumption verified source facts, publ
 interpretation, and reporter identity. The 0.18.0 guide was then synchronized
 byte-identically to all eleven tracked clients.
 
+## Run and rerun comparison
+
+The first comparison slice uses the two retained attempts of ArgDigest run
+`22638022385` as a paired real-world guard. Offline replay and a fresh live capture both
+retain repository, workflow, run, attempt, and SHA independently. They report attempt 1
+as `failure`/`FAIL`, attempt 2 as `success`/`PASS`, `same_run=true`, and
+`same_head_sha=true`; known job duration changes from 40 to 79 seconds.
+
+The versioned `comparison@1` contract also covers deterministic repeated job names,
+different-commit warnings, incomplete required dimensions, capture-time artifact
+semantics, comparable matrix units, and bounded human/LLM rendering. A clean wheel install
+ran the offline command outside the checkout. Manual read-only hosted run `34167676919`
+then reacquired both public attempts at commit `551005d` and passed every exact identity
+and transition assertion.
+
+This proves descriptive comparison, not causal performance regression analysis. A changed
+duration or artifact inventory is a measured delta; policies for classifying it remain
+future Phase 4 work.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not
