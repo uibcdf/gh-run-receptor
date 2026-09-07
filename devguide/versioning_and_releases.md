@@ -34,6 +34,29 @@ entry point; script-extension support requires its own installation gate.
 A tag identifies source but does not by itself publish a package or GitHub Release. Those
 are separate, explicit release steps.
 
+Starting with 0.17.0, `.github/workflows/publish-release.yml` is the only normal GitHub
+Release publication path. Dispatch it from the exact tag ref and provide the same tag as
+its input. Its single writer job checks tag/ref/commit identity, validates citation
+metadata, runs the complete suite, builds and installs the distributions, generates a
+checksum manifest and bounded changelog notes, and creates a draft containing exactly
+those assets. It publishes only after the draft agrees with the local names, sizes, and
+SHA-256 values, then repeats the check against the public release.
+
+An interrupted workflow may leave a draft. That is a fail-closed recovery state: inspect
+it explicitly instead of deleting or replacing it automatically. The repository currently
+does not enforce GitHub immutable releases; enabling that administrative policy is separate
+from product publication. The draft-first workflow is compatible with enabling it later.
+
+`CITATION.cff` is the GitHub-facing citation record. `.zenodo.json` supplies the matching
+creators and project metadata used by Zenodo, which gives it precedence when both files
+exist. Version and publication date remain absent from `.zenodo.json` because the release
+event supplies them. A published GitHub Release does not prove Zenodo ingestion: record
+existence, DOI, version, repository relation, and files must be observed independently.
+Before preparing a release commit, run
+`python devtools/scripts/release_tools.py prepare-citation X.Y.Z --date YYYY-MM-DD`; the
+release workflow independently validates the resulting records but never rewrites tagged
+source.
+
 The `0.12.0` gate additionally requires checkout-local and exact-commit remote-source
 execution of the composite Action on Ubuntu, macOS, and Windows. A same-run test must stay
 `PENDING`; a completed source failure must not become a reporter failure.

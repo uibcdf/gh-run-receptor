@@ -4,7 +4,7 @@ issue: uibcdf/gh-run-receptor#26
 status: active
 opened: 2026-09-07
 closed:
-verification: asserted
+verification: measured
 area: ['packaging', 'github']
 guard:
 normative:
@@ -107,3 +107,17 @@ issue until its state is observed.
 Initial observations were made 2026-09-07 from the development host with Python 3.13 and
 GitHub CLI 2.93.0 against `uibcdf/gh-run-receptor`. Hosted evidence will record its run,
 tag, commit, asset names, and external release identifier.
+
+## Implementation checkpoint
+
+The first implementation adds consistent `CITATION.cff` and `.zenodo.json` records, a
+test-only PyYAML dependency, a release-tool module with semantic tests, and one manual,
+bounded writer workflow. The workflow requires its dispatch ref and input to identify the
+same exact lightweight tag, retains an interrupted draft for explicit review, and verifies
+both draft and public asset bytes. Hosted publication remains deliberately unclaimed until
+the next exact tag exercises this path.
+
+Eleven focused release-tool and workflow-contract tests pass. The complete local suite
+passes 265 tests, Ruff lint and format pass across 108 files, the citation and developer
+report validators pass, and an isolated source/wheel build succeeds. These results validate
+the local mechanics but do not yet count as external publication evidence.

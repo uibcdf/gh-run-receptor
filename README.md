@@ -241,8 +241,9 @@ on an already completed successful run produces only the one-line final report.
 
 The root `gh-run-receptor` launcher satisfies the GitHub CLI script-extension naming
 contract. A local checkout can also be installed with `gh extension install .` or exercised
-directly with `./gh-run-receptor --help`. The tag installs source; Python-index and binary
-artifacts remain future distribution modes.
+directly with `./gh-run-receptor --help`. Starting with 0.17.0, each GitHub Release carries
+the exact wheel, source distribution, and `SHA256SUMS` manifest built from its tag. A
+Python package index remains a future distribution mode.
 
 The Python console command, full test suite, wheel and source-distribution build, wheel
 installation, and an outside-checkout smoke test are verified on GitHub-hosted Ubuntu,
@@ -256,3 +257,8 @@ implementation route are maintained in the
 starting a change. Libraries and workflow repositories adopting the tool should use the
 [canonical consumer guide](standards/GH_RUN_RECEPTOR_GUIDE.md). Release behavior is
 summarized in [CHANGELOG.md](CHANGELOG.md).
+
+Citation metadata is maintained in [CITATION.cff](CITATION.cff). The accompanying
+[Zenodo metadata](.zenodo.json) prepares releases for archival when the repository is
+enabled in the owning Zenodo account; a GitHub Release alone is not evidence that archival
+or DOI assignment succeeded.

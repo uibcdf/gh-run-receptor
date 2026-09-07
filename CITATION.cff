@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use gh-run-receptor, please cite the software using this metadata."
+title: gh-run-receptor
+type: software
+authors:
+  - family-names: Prada-Gracia
+    given-names: Diego
+    orcid: "https://orcid.org/0000-0003-3375-870X"
+    affiliation: Hospital Infantil de México Federico Gómez (HIMFG) – UIBCDF
+  - family-names: Moreno-Vargas
+    given-names: Liliana M.
+    orcid: "https://orcid.org/0000-0003-2812-1499"
+    affiliation: Hospital Infantil de México Federico Gómez (HIMFG) – UIBCDF
+version: 0.17.0
+date-released: 2026-09-07
+url: "https://github.com/uibcdf/gh-run-receptor"
+repository-code: "https://github.com/uibcdf/gh-run-receptor"
+license: MIT
+abstract: >-
+  A read-only evidence receptor that turns GitHub Actions runs into compact,
+  truth-preserving reports for humans and language models.
+keywords:
+  - GitHub Actions
+  - continuous integration
+  - developer tooling
+  - language models
+  - reproducible diagnostics

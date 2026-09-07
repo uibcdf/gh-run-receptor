@@ -23,6 +23,8 @@ The package uses the same flat repository layout as MolSysMT and MolSysViewer, s
 and tests run from the checkout without a `PYTHONPATH` override. The expected local tools
 are Git, an authenticated GitHub CLI 2.48.0 or newer, Python 3.11 or newer, Ruff, pytest, and
 `pytest-receptor`.
+PyYAML is a test/development-only dependency used to validate `CITATION.cff`; it is not a
+runtime dependency of the receptor.
 
 GitHub-dependent validation uses reviewed public UIBCDF captures or bounded, manually
 dispatched workflows and an explicitly authenticated `gh` session. Unit, contract, replay,

@@ -31,8 +31,8 @@ Issues = "https://github.com/uibcdf/gh-run-receptor/issues"
 gh-run-receptor = "gh_run_receptor.cli:main"
 
 [project.optional-dependencies]
-test = ["jsonschema>=4.23", "pytest", "pytest-receptor"]
-dev = ["jsonschema>=4.23", "pytest", "pytest-receptor", "ruff==0.16.5"]
+test = ["jsonschema>=4.23", "pytest", "pytest-receptor", "PyYAML>=6.0"]
+dev = ["jsonschema>=4.23", "pytest", "pytest-receptor", "PyYAML>=6.0", "ruff==0.16.5"]
 
 [tool.setuptools.packages.find]
 include = ["gh_run_receptor*"]

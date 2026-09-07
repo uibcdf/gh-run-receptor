@@ -71,6 +71,9 @@ The current MVP implements:
 - an enforced GitHub CLI 2.48.0 functional floor for network commands, with lazy
   pre-acquisition rejection, offline independence, and checksum-pinned hosted validation
   of the official minimum binary.
+- a locally guarded exact-tag GitHub Release path with consistent citation/Zenodo metadata,
+  draft-first asset verification, and public-release revalidation; hosted publication is
+  pending on the next preview tag.
 
 It does not yet provide a broad cross-workflow corpus; run comparison; remote workflow
 discovery; pattern rules; or validated private-repository and fork token behavior. The CI,

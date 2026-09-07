@@ -6,6 +6,10 @@ All notable changes to this project will be documented in this file.
 
 - Synchronize the 0.16.0 canonical adoption guide to all eleven tracked clients after
   exact-tag transport and distribution validation.
+- Add consistent GitHub and Zenodo citation metadata with release-time validation.
+- Add an exact-tag GitHub Release workflow that tests and installs the built wheel, derives
+  bounded changelog notes, publishes through a verified draft, and checks public asset
+  names, sizes, and SHA-256 digests.
 
 ## 0.16.0 - 2026-09-06
 
