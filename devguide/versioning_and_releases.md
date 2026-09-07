@@ -77,3 +77,8 @@ The `0.16.0` gate additionally requires pre-acquisition enforcement of GitHub CL
 offline independence from `gh`, and a real installed-extension metadata capture through
 the official checksum-pinned minimum Linux amd64 binary. Documentation distinguishes the
 functional floor from the recommendation to use the latest patched stable CLI.
+
+The `0.17.0` gate additionally requires matching citation and Zenodo ingestion metadata,
+an exact-tag GitHub Release containing the verified wheel, source distribution, and
+checksum manifest, and independent public revalidation of tag/commit identity and every
+asset's name, size, and SHA-256 digest. Zenodo archival remains a separate observed fact.

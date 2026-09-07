@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.17.0 - 2026-09-07
+
 - Synchronize the 0.16.0 canonical adoption guide to all eleven tracked clients after
   exact-tag transport and distribution validation.
 - Add consistent GitHub and Zenodo citation metadata with release-time validation.

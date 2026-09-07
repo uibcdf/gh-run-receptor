@@ -32,8 +32,8 @@ def test_minimum_cli_gate_pins_archive_release_and_checksum():
 def test_minimum_cli_gate_installs_the_extension_and_exercises_remote_pagination():
     source = _source()
 
-    assert "gh extension install uibcdf/gh-run-receptor --pin 0.16.0" in source
-    assert 'test "$(gh run-receptor --version)" = "0.16.0"' in source
+    assert "gh extension install uibcdf/gh-run-receptor --pin 0.17.0" in source
+    assert 'test "$(gh run-receptor --version)" = "0.17.0"' in source
     assert "inspect 34037657805 --profile=ci --capture=metadata" in source
     assert "report['github']['conclusion'] == 'success'" in source
     assert "report['receptor']['assessment'] == 'PASS'" in source

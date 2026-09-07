@@ -37,8 +37,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh extension install uibcdf/gh-run-receptor --pin 0.16.0
-          test "$(gh run-receptor --version)" = "0.16.0"
+          gh extension install uibcdf/gh-run-receptor --pin 0.17.0
+          test "$(gh run-receptor --version)" = "0.17.0"
 
       - name: Inspect a real run through the minimum transport
         shell: bash
