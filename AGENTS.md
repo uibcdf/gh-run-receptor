@@ -3,6 +3,10 @@
 This file defines the baseline rules for automated agents and human contributors. A
 more local `AGENTS.md` may refine these rules within its directory.
 
+Read `MOLSYSSUITE_GUIDE.md` before development. It is the synchronized, read-only
+suite-governance guide owned by `uibcdf/molsyssuite` and routes shared policies,
+cross-component feedback, and issue ownership.
+
 ## Language and documentation
 
 - Write all repository-facing text in English, including code, comments, docstrings,
