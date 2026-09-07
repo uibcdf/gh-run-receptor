@@ -11,7 +11,8 @@ from pathlib import Path
 from typing import Any
 
 from gh_run_receptor.bundle import _strict_json
-from gh_run_receptor.errors import BundleError
+from gh_run_receptor.contracts import upgrade_contract
+from gh_run_receptor.errors import BundleError, ContractError
 from gh_run_receptor.github import GitHubClient, merge_pages
 from gh_run_receptor.limits import MAX_PUBLISHED_ARTIFACT_BYTES, MAX_REPORT_BYTES
 from gh_run_receptor.report import exit_code, render_human, render_llm
@@ -74,10 +75,10 @@ def _object(container: dict[str, Any], key: str) -> dict[str, Any]:
 
 
 def _validate_report_structure(value: Any) -> dict[str, Any]:
-    if not isinstance(value, dict):
-        raise BundleError("published report is not a JSON object")
-    if value.get("schema") != "gh-run-receptor.report@1":
-        raise BundleError(f"unsupported published report schema: {value.get('schema')!r}")
+    try:
+        value = upgrade_contract(value, "report")
+    except ContractError as error:
+        raise BundleError(str(error)) from error
     for key in ("subject", "github", "receptor", "completeness", "configuration", "expectations"):
         _object(value, key)
     for key in ("jobs", "artifacts", "causes", "unknowns", "warnings"):

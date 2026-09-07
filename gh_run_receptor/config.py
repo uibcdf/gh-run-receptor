@@ -11,10 +11,12 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import quote
 
-from gh_run_receptor.errors import AcquisitionError, ConfigError
+from gh_run_receptor.contracts import schema_id, upgrade_contract
+from gh_run_receptor.errors import AcquisitionError, ConfigError, ContractError
 
 CONFIG_PATH = ".github/gh-run-receptor.yaml"
-CONFIG_SCHEMA = "gh-run-receptor.config@1"
+CONFIG_SCHEMA = schema_id("config", 1)
+CONFIG_CAPTURE_SCHEMA = schema_id("config-capture", 1)
 MAX_CONFIG_BYTES = 64 * 1024
 MAX_CONFIG_LINES = 1_000
 MAX_LINE_LENGTH = 2_048
@@ -225,10 +227,12 @@ def load_config(path: Path) -> dict[str, Any]:
 
 def validate_config_capture(value: Any) -> dict[str, Any]:
     """Validating the normalized configuration envelope stored in a bundle."""
-    if not isinstance(value, dict) or set(value) != {"schema", "source", "config"}:
+    try:
+        value = upgrade_contract(value, "config-capture")
+    except ContractError as error:
+        raise ConfigError(str(error)) from error
+    if set(value) != {"schema", "source", "config"}:
         raise ConfigError("configuration capture has invalid root fields")
-    if value["schema"] != "gh-run-receptor.config-capture@1":
-        raise ConfigError("configuration capture has an unsupported schema")
     source = value["source"]
     if not isinstance(source, dict) or set(source) != {
         "path",
@@ -249,8 +253,13 @@ def validate_config_capture(value: Any) -> dict[str, Any]:
     config = value["config"]
     if not isinstance(config, dict) or set(config) != {"schema", "schema_version", "workflows"}:
         raise ConfigError("captured configuration has invalid root fields")
-    if config["schema"] != CONFIG_SCHEMA or config["schema_version"] != 1:
-        raise ConfigError("captured configuration has an unsupported schema")
+    try:
+        config = upgrade_contract(config, "config")
+    except ContractError as error:
+        raise ConfigError(str(error)) from error
+    value["config"] = config
+    if config["schema_version"] != 1:
+        raise ConfigError("captured configuration has an unsupported schema_version")
     workflows = config["workflows"]
     if not isinstance(workflows, list) or not workflows:
         raise ConfigError("captured configuration requires workflow rules")
@@ -347,7 +356,7 @@ def capture_repository_config(client: Any, repository: str) -> dict[str, Any] | 
         raise AcquisitionError("repository configuration has invalid base64 content") from error
     config = parse_config(data)
     return {
-        "schema": "gh-run-receptor.config-capture@1",
+        "schema": CONFIG_CAPTURE_SCHEMA,
         "source": {
             "path": CONFIG_PATH,
             "ref": branch,

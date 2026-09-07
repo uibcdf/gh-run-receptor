@@ -24,6 +24,10 @@ class BundleError(ReceptorError):
     """Representing an invalid or incomplete evidence bundle."""
 
 
+class ContractError(ReceptorError):
+    """Representing an unsupported or invalid serialized contract version."""
+
+
 class ConfigError(ReceptorError):
     """Representing invalid or conflicting declarative configuration."""
 

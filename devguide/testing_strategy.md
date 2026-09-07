@@ -23,6 +23,12 @@ Recorded GitHub responses exercise pagination, attempts, missing fields, new enu
 expired log links, artifact metadata, annotations, and partial permissions. Fixtures retain
 HTTP boundaries and source identifiers while removing secrets and private content.
 
+The compatibility gate validates all five registered JSON Schema resources, exercises
+wrong-kind, malformed, retired, future, and missing-migration states, and proves a
+synthetic stepwise migration leaves its source unchanged. Release preparation additionally
+compares every previously published v1 schema byte-for-byte with tag 0.18.0. Updating a
+local checksum beside a changed schema is not an acceptable compatibility test.
+
 ### Replay and golden tests
 
 Sanitized evidence bundles are replayed through profiles. Golden reports test deliberately

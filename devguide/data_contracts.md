@@ -286,15 +286,43 @@ count, line size, total bytes, nesting, and string lengths.
   error for future major versions.
 
 The machine-readable Draft 2020-12 schemas ship inside `gh_run_receptor.schemas` as
-`bundle-v1.schema.json`, `model-v1.schema.json`, `report-v1.schema.json`, and
-`config-v1.schema.json`. They are the
-formal spelling of the version 1 boundaries. The runtime validates untrusted bundle JSON,
-critical manifest types, member paths, byte counts, digests, source collection shapes,
-duplicate keys, and non-finite numbers without adding a validation dependency. The test
-gate uses `jsonschema` to prove that real normalized models and reports conform to the
-published files; `jsonschema` is a test/development dependency, not a runtime dependency.
+`bundle-v1.schema.json`, `config-v1.schema.json`, `config-capture-v1.schema.json`,
+`model-v1.schema.json`, and `report-v1.schema.json`. They are the formal spelling of the
+version 1 boundaries. `gh_run_receptor.contracts` is the single registry for their kinds,
+identifiers, current and readable versions, resources, and freeze baselines. Producers and
+untrusted readers do not duplicate those identifiers.
+
+The four schema files already shipped by release 0.18.0 are byte-frozen against that Git
+tag. `config-capture@1` was already a persisted bundle envelope but gains its first formal
+schema after that release, so it truthfully reports no historical freeze tag until the next
+release establishes one. Release preparation runs `validate_contracts.py`; changing a
+frozen schema in place, losing a registered resource, or adding an unregistered version
+fails before distributions are built.
+
+The runtime validates untrusted bundle JSON, critical manifest types, member paths, byte
+counts, digests, source collection shapes, duplicate keys, and non-finite numbers without
+adding a validation dependency. The test gate uses `jsonschema` to prove that real
+normalized models, configuration captures, and reports conform to the published files;
+`jsonschema` is a test/development dependency, not a runtime dependency.
 
 Unknown GitHub enum values remain valid strings in normalized facts and also appear in
 `unknowns` with their source reference. Additional fields are allowed at contract
 boundaries so additive evidence survives older readers. A reader must still reject an
 unknown schema identifier rather than guessing compatibility.
+
+### Compatibility and migration policy
+
+- A published schema file is immutable. Compatible optional data may use extension points
+  already allowed by that schema, but existing field identity, type, or meaning cannot be
+  rewritten under the same major contract number.
+- Incompatible required fields, types, closed enum semantics, identity rules, or removals
+  require the next integer contract version and a new schema resource.
+- Readers classify malformed identifiers, wrong contract kinds, retired versions, and
+  future versions separately. Future data is never best-effort downgraded.
+- A retained older version migrates forward one major step at a time through an explicit
+  `(kind, source_version)` registry. Each migration receives a deep copy, returns a JSON
+  object with exactly the next identifier, and must preserve source facts. Missing steps
+  fail closed. Migrations never mutate their input and never run backward.
+- No production migration is currently registered because version 1 is the first and
+  current version for every family. A future v2 is incomplete until its semantic fixtures
+  and v1-to-v2 decision land with it, or v1 is explicitly retired.

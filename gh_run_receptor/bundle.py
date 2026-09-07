@@ -12,7 +12,8 @@ from typing import Any
 
 from gh_run_receptor import __version__
 from gh_run_receptor.config import capture_repository_config, validate_config_capture
-from gh_run_receptor.errors import AcquisitionError, BundleError, ConfigError
+from gh_run_receptor.contracts import schema_id, upgrade_contract
+from gh_run_receptor.errors import AcquisitionError, BundleError, ConfigError, ContractError
 from gh_run_receptor.github import API_VERSION, GitHubClient, merge_pages
 
 REQUIRED_STRUCTURED_MEMBERS = (
@@ -57,10 +58,10 @@ def _strict_json(data: str | bytes, context: str) -> Any:
 
 
 def _validate_manifest(manifest: Any) -> dict[str, Any]:
-    if not isinstance(manifest, dict):
-        raise BundleError("bundle manifest is not a JSON object")
-    if manifest.get("schema") != "gh-run-receptor.bundle@1":
-        raise BundleError(f"unsupported bundle schema: {manifest.get('schema')!r}")
+    try:
+        manifest = upgrade_contract(manifest, "bundle")
+    except ContractError as error:
+        raise BundleError(str(error)) from error
     required_types = {
         "repository": str,
         "hostname": str,
@@ -224,7 +225,7 @@ def capture_bundle(
 
         complete = not warnings
         manifest = {
-            "schema": "gh-run-receptor.bundle@1",
+            "schema": schema_id("bundle", 1),
             "repository": repository,
             "hostname": client.hostname,
             "run_id": run_id,

@@ -79,6 +79,9 @@ The current MVP implements:
   absent.
 - a first portable live corpus spanning three non-UIBCDF repositories, including native
   conclusion parity, bounded output, and deterministic offline replay.
+- one runtime registry for all five serialized boundaries, a formal configuration-capture
+  schema, offline compatibility introspection, forward-only migration rules, and a release
+  gate freezing the four v1 schemas already published in 0.18.0.
 
 It does not yet provide a broad cross-workflow corpus beyond that initial external sample;
 run comparison; remote workflow discovery; pattern rules; or validated private-repository

@@ -170,6 +170,18 @@ strict version 1 subset, duplicate identities, and bounds. `explain` shows the w
 exact rule and active settings. Pattern analysis, remote discovery, and a full override
 trace remain future work.
 
+### `contracts`
+
+```text
+gh run-receptor contracts
+gh run-receptor contracts --format=json
+```
+
+Reports every serialized contract kind, current version, readable versions, packaged
+schema resource, and historical freeze baseline. It is deterministic, bounded, and fully
+offline. This is introspection rather than negotiation: a reader still rejects future,
+retired, malformed, or wrong-kind documents instead of selecting a weaker interpretation.
+
 ## Output channels
 
 - **stdout** contains one bounded report and is the machine/agent-facing channel.

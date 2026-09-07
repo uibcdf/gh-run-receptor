@@ -266,6 +266,10 @@ Maintainers can run `python devtools/scripts/validate_public_runs.py` to exercis
 reviewed non-UIBCDF portability corpus. This live integration gate is manual because
 third-party run retention and availability are not controlled by this project.
 
+`gh run-receptor contracts` reports the current and readable bundle, configuration,
+normalized-model, and report contract versions without network access. Its JSON form is
+available with `contracts --format=json` for compatibility automation.
+
 Citation metadata is maintained in [CITATION.cff](CITATION.cff). The accompanying
 [Zenodo metadata](.zenodo.json) prepares releases for archival when the repository is
 enabled in the owning Zenodo account; a GitHub Release alone is not evidence that archival

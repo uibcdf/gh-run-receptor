@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import re
 import sys
@@ -13,6 +14,7 @@ from urllib.parse import urlparse
 from gh_run_receptor import __version__
 from gh_run_receptor.bundle import load_bundle
 from gh_run_receptor.config import CONFIG_PATH, load_config, select_rule
+from gh_run_receptor.contracts import SCHEMA_BASELINE_TAG, contract_inventory
 from gh_run_receptor.discovery import discover_workflows, render_config, write_config
 from gh_run_receptor.errors import AcquisitionError, BundleError, ReceptorError
 from gh_run_receptor.github import MINIMUM_GH_VERSION_TEXT, GitHubClient
@@ -158,6 +160,10 @@ def _parser() -> argparse.ArgumentParser:
     explain.add_argument("--config", type=Path, default=Path(CONFIG_PATH))
     explain.add_argument("--workflow-id", type=int)
     explain.add_argument("--workflow-name")
+    contracts = subparsers.add_parser(
+        "contracts", help="show readable serialized contract versions"
+    )
+    contracts.add_argument("--format", choices=("text", "json"), default=argparse.SUPPRESS)
     return parser
 
 
@@ -214,6 +220,24 @@ def main(arguments: list[str] | None = None) -> int:
     parser = _parser()
     args = parser.parse_args(arguments)
     try:
+        if args.command == "contracts":
+            inventory = contract_inventory()
+            if args.format == "json":
+                print(
+                    json.dumps(
+                        {"baseline": SCHEMA_BASELINE_TAG, "contracts": inventory},
+                        indent=2,
+                        sort_keys=True,
+                    )
+                )
+            else:
+                items = " ".join(
+                    f"{item['kind']}@{item['current']}"
+                    f"(readable={','.join(map(str, item['readable']))})"
+                    for item in inventory
+                )
+                print(f"contracts baseline={SCHEMA_BASELINE_TAG} | {items}")
+            return 0
         if args.command == "init":
             workflows = discover_workflows(args.root)
             data = render_config(workflows)

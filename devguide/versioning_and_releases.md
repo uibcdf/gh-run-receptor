@@ -57,6 +57,13 @@ Before preparing a release commit, run
 release workflow independently validates the resulting records but never rewrites tagged
 source.
 
+The same exact-tag workflow runs
+`python devtools/scripts/validate_contracts.py --baseline 0.18.0` before building. The tag
+is fetched by checkout, and all four schema resources published by 0.18.0 must remain
+byte-identical. A contract change that cannot satisfy this gate requires a new integer
+contract version and the migration/retirement process in `data_contracts.md`; editing the
+baseline tag or weakening the comparison is not a release operation.
+
 ## Zenodo maintainer handoff
 
 Zenodo account configuration is a maintainer operation, not a GitHub Actions permission or

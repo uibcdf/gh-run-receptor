@@ -5,9 +5,10 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any
 
+from gh_run_receptor.contracts import schema_id
 from gh_run_receptor.errors import BundleError
 
-MODEL_SCHEMA = "gh-run-receptor.model@1"
+MODEL_SCHEMA = schema_id("model", 1)
 KNOWN_STATUSES = {"completed", "in_progress", "pending", "queued", "requested", "waiting"}
 KNOWN_CONCLUSIONS = {
     "action_required",

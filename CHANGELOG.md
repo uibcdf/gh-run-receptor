@@ -15,6 +15,9 @@ All notable changes to this project will be documented in this file.
   unavailable-versus-semantic failure states.
 - Preserve bounded structured workflow diagnostics immediately before generic process-exit
   markers, while keeping stronger causes dominant and redacting credential-shaped text.
+- Centralize five serialized contract families, expose offline compatibility introspection,
+  formalize `config-capture@1`, add forward-only migration machinery, and freeze the four
+  schemas published in 0.18.0 through the release gate.
 
 ## 0.18.0 - 2026-09-07
 

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://uibcdf.org/gh-run-receptor/schemas/config-capture-v1.schema.json",
+  "title": "gh-run-receptor.config-capture@1",
+  "type": "object",
+  "required": ["schema", "source", "config"],
+  "properties": {
+    "schema": {"const": "gh-run-receptor.config-capture@1"},
+    "source": {
+      "type": "object",
+      "required": ["path", "ref", "blob_sha", "sha256"],
+      "properties": {
+        "path": {"const": ".github/gh-run-receptor.yaml"},
+        "ref": {"type": "string", "minLength": 1},
+        "blob_sha": {"type": ["string", "null"]},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      },
+      "additionalProperties": false
+    },
+    "config": {"$ref": "config-v1.schema.json"}
+  },
+  "additionalProperties": false
+}

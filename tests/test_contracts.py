@@ -12,6 +12,7 @@ from jsonschema import Draft202012Validator
 from referencing import Registry, Resource
 
 from gh_run_receptor.bundle import load_bundle
+from gh_run_receptor.contracts import CONTRACTS
 from gh_run_receptor.model import normalize_evidence
 from gh_run_receptor.report import build_report, exit_code, render_json, render_llm
 
@@ -24,8 +25,11 @@ def _schema(name: str) -> dict:
 
 
 def _validator(name: str) -> Draft202012Validator:
-    model = _schema("model-v1.schema.json")
-    registry = Registry().with_resource(model["$id"], Resource.from_contents(model))
+    registry = Registry()
+    for spec in CONTRACTS.values():
+        for item in spec.schemas:
+            schema = _schema(item.resource)
+            registry = registry.with_resource(schema["$id"], Resource.from_contents(schema))
     return Draft202012Validator(_schema(name), registry=registry)
 
 
@@ -43,6 +47,8 @@ def test_sanitized_bundle_crosses_all_three_schema_boundaries(case):
     _validator("bundle-v1.schema.json").validate(manifest)
     _validator("model-v1.schema.json").validate(model)
     _validator("report-v1.schema.json").validate(report)
+    if "config.json" in evidence:
+        _validator("config-capture-v1.schema.json").validate(evidence["config.json"])
     assert report["github"]["conclusion"] == case["expected_github_conclusion"]
     assert report["receptor"]["assessment"] == case["expected_assessment"]
     assert report["subject"]["run_id"] == case["run_id"]

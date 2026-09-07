@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from gh_run_receptor.config import select_rule
+from gh_run_receptor.contracts import schema_id
 from gh_run_receptor.logs import extract_causes
 from gh_run_receptor.model import normalize_evidence
 
@@ -536,7 +537,7 @@ def build_report(
         assessment = "FAIL"
 
     return {
-        "schema": "gh-run-receptor.report@1",
+        "schema": schema_id("report", 1),
         "subject": model["subject"],
         "github": model["github"],
         "receptor": {
