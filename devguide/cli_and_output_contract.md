@@ -148,6 +148,7 @@ completion, one run completion, and one final report without repeated snapshots.
 ```text
 gh run-receptor compare LEFT RIGHT
 gh run-receptor compare RUN_ID --attempt LEFT --attempt RIGHT
+gh run-receptor compare BASELINE CANDIDATE --policy POLICY.json
 ```
 
 `LEFT` and `RIGHT` may be two bundle directories, two run IDs, or two run URLs. One run
@@ -170,6 +171,17 @@ Likewise, `CHANGED` is descriptive and does not claim improvement or regression.
 `CHANGED` or `UNCHANGED` comparison returns zero; missing required metadata, jobs, or
 artifact-inventory evidence returns `INCOMPLETE` and status 4. Different or unavailable
 commits remain visible and produce a warning.
+
+An optional `comparison-policy@1` JSON file treats the left side as baseline and the right
+side as candidate. Rules are individually opt-in and can require equal repository,
+workflow, or commit; require a candidate conclusion; bound absolute or percentage job
+duration growth and absolute artifact-size growth; or forbid removed jobs, artifacts,
+matrix units, and changed matrix states. No universal threshold is inferred.
+
+Every comparison carries a policy assessment: `NOT_EVALUATED`, `PASS`, `FAIL`, or
+`INCOMPLETE`. A missing metric required by policy is an unknown and never passes. The
+structured result lists exact rule names, expected bounds, and observations independently
+from descriptive `CHANGED`/`UNCHANGED` state.
 
 ### Configuration commands
 
@@ -296,6 +308,8 @@ truth-table tests validate composition with shell and agent workflows.
 `compare` describes differences rather than adopting either run's outcome. Complete
 `CHANGED` and `UNCHANGED` results return 0, incomplete comparison evidence returns 4, and
 acquisition or validation failures return 5.
+When a policy is selected, a complete policy violation returns 1 and an unknown required
+policy metric returns 4; the descriptive comparison assessment remains unchanged.
 
 ## Compact rendering
 

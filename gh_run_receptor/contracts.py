@@ -65,6 +65,12 @@ _SPECS = (
         (SchemaVersion(1, "comparison-v1.schema.json", None),),
     ),
     ContractSpec(
+        "comparison-policy",
+        1,
+        frozenset({1}),
+        (SchemaVersion(1, "comparison-policy-v1.schema.json", None),),
+    ),
+    ContractSpec(
         "model",
         1,
         frozenset({1}),

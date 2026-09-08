@@ -5,7 +5,7 @@
   "type": "object",
   "required": [
     "schema", "assessment", "evidence_sufficient", "left", "right", "relation",
-    "transition", "jobs", "artifacts", "matrix", "warnings"
+    "transition", "jobs", "artifacts", "matrix", "policy", "warnings"
   ],
   "properties": {
     "schema": {"const": "gh-run-receptor.comparison@1"},
@@ -95,6 +95,58 @@
         }
       },
       "additionalProperties": false
+    },
+    "policy": {
+      "type": "object",
+      "required": ["evaluated", "assessment", "violations", "unknowns"],
+      "properties": {
+        "evaluated": {"type": "boolean"},
+        "assessment": {"enum": ["NOT_EVALUATED", "PASS", "FAIL", "INCOMPLETE"]},
+        "violations": {"$ref": "#/$defs/policyEntries"},
+        "unknowns": {"$ref": "#/$defs/policyEntries"}
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {"properties": {"evaluated": {"const": false}}},
+          "then": {
+            "properties": {
+              "assessment": {"const": "NOT_EVALUATED"},
+              "violations": {"maxItems": 0},
+              "unknowns": {"maxItems": 0}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"assessment": {"const": "PASS"}}},
+          "then": {
+            "properties": {
+              "evaluated": {"const": true},
+              "violations": {"maxItems": 0},
+              "unknowns": {"maxItems": 0}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"assessment": {"const": "FAIL"}}},
+          "then": {
+            "properties": {
+              "evaluated": {"const": true},
+              "violations": {"minItems": 1},
+              "unknowns": {"maxItems": 0}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"assessment": {"const": "INCOMPLETE"}}},
+          "then": {
+            "properties": {
+              "evaluated": {"const": true},
+              "unknowns": {"minItems": 1}
+            }
+          }
+        }
+      ]
     },
     "warnings": {"type": "array", "items": {"type": "string"}}
   },
@@ -186,6 +238,19 @@
         "delta": {"type": ["integer", "null"]}
       },
       "additionalProperties": false
+    },
+    "policyEntries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rule", "expected", "observed"],
+        "properties": {
+          "rule": {"type": "string"},
+          "expected": {},
+          "observed": {}
+        },
+        "additionalProperties": false
+      }
     }
   },
   "additionalProperties": false

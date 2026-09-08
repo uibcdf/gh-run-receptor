@@ -28,6 +28,7 @@ from gh_run_receptor.comparison import (
 from gh_run_receptor.comparison import (
     render_llm as render_comparison_llm,
 )
+from gh_run_receptor.comparison_policy import load_policy
 from gh_run_receptor.config import CONFIG_PATH, load_config, select_rule
 from gh_run_receptor.contracts import SCHEMA_BASELINE_TAG, contract_inventory
 from gh_run_receptor.discovery import discover_workflows, render_config, write_config
@@ -169,6 +170,7 @@ def _parser() -> argparse.ArgumentParser:
         help="attempt number; repeat twice to select the left and right attempts",
     )
     compare.add_argument("--capture", choices=("full", "adaptive", "metadata"), default="metadata")
+    compare.add_argument("--policy", type=Path, help="strict comparison-policy@1 JSON file")
 
     initialize = subparsers.add_parser(
         "init", help="discover local workflows and propose repository rules"
@@ -331,7 +333,8 @@ def _compare(args: argparse.Namespace) -> int:
                 )
             )
 
-    comparison = compare_reports(*reports)
+    policy = load_policy(args.policy) if args.policy is not None else None
+    comparison = compare_reports(*reports, policy=policy)
     print(_comparison_render(comparison, args.format, args.receptor), end="")
     return comparison_exit_code(comparison)
 

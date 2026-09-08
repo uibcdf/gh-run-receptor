@@ -237,6 +237,30 @@ capture, and comparable profile matrix coverage. `CHANGED` is descriptive, not a
 or regression verdict; a valid comparison returns zero even when facts differ. Missing
 required metadata, jobs, or artifact inventory produces `INCOMPLETE` and status 4.
 
+Automation can apply an explicit policy without changing those descriptive facts:
+
+```json
+{
+  "schema": "gh-run-receptor.comparison-policy@1",
+  "rules": {
+    "same_repository": true,
+    "same_workflow": true,
+    "candidate_conclusion": "success",
+    "max_job_duration_increase_percent": 20,
+    "forbid_matrix_removals": true
+  }
+}
+```
+
+```text
+gh run-receptor compare BASELINE CANDIDATE --policy comparison-policy.json
+```
+
+Rules are opt-in: an absent key adds no requirement. Policy `PASS` returns 0, a measured
+violation returns 1, and evidence insufficient for a requested rule returns 4. Invalid or
+unsafe policy input returns 5. Files are bounded strict JSON, reject duplicate keys and
+non-finite numbers, and are never executable configuration.
+
 Acquisition failures retain exit status 5 and expose one stable category, such as
 `authentication_required`, `authentication_failed`, `permission_denied`,
 `not_found_or_inaccessible`, or `rate_limited`. Remote diagnostics are bounded and
@@ -317,9 +341,9 @@ reviewed non-UIBCDF portability corpus. This live integration gate is manual bec
 third-party run retention and availability are not controlled by this project.
 
 `gh run-receptor contracts` reports the current and readable bundle, configuration,
-configuration-capture, comparison, normalized-model, and report contract versions without
-network access. Its JSON form is available with `contracts --format=json` for
-compatibility automation.
+configuration-capture, comparison, comparison-policy, normalized-model, and report
+contract versions without network access. Its JSON form is available with
+`contracts --format=json` for compatibility automation.
 
 Citation metadata is maintained in [CITATION.cff](CITATION.cff). The accompanying
 [Zenodo metadata](.zenodo.json) prepares releases for archival when the repository is

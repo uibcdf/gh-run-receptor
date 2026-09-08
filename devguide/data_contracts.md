@@ -2,7 +2,7 @@
 
 ## Contract family
 
-The runtime registry exposes six related, independently versioned documents:
+The runtime registry exposes seven related, independently versioned documents:
 
 - `gh-run-receptor.bundle@1`: captured source resources and manifest;
 - `gh-run-receptor.config@1`: normalized trusted repository workflow rules;
@@ -10,6 +10,7 @@ The runtime registry exposes six related, independently versioned documents:
 - `gh-run-receptor.model@1`: normalized internal/source model serialized for testing;
 - `gh-run-receptor.report@1`: profile assessment and rendered-report inputs;
 - `gh-run-receptor.comparison@1`: two independently identified reports and their deltas.
+- `gh-run-receptor.comparison-policy@1`: explicit candidate regression rules.
 
 The separate `gh-run-receptor.events@1` producer format is optional corroborating
 evidence. It remains a provisional producer boundary rather than a registered persisted
@@ -255,6 +256,13 @@ They do not assert publication history or regression because retention and expir
 change later observations. `CHANGED` and `UNCHANGED` are descriptive. `INCOMPLETE` means
 one side lacks required metadata, jobs, or artifact-inventory evidence.
 
+Every comparison also contains a policy result. Without a selected policy its assessment
+is `NOT_EVALUATED`. A strict `comparison-policy@1` document makes individual identity,
+candidate-outcome, duration, artifact-size, inventory, and matrix rules active only when
+their keys are present. Evaluation yields `PASS`, `FAIL` with measured violations, or
+`INCOMPLETE` with required observations that could not be derived. Policy never rewrites
+the source facts or the descriptive comparison assessment.
+
 ## Cause groups
 
 A cause group contains a stable fingerprint derived from normalized failure class,
@@ -312,14 +320,16 @@ count, line size, total bytes, nesting, and string lengths.
 
 The machine-readable Draft 2020-12 schemas ship inside `gh_run_receptor.schemas` as
 `bundle-v1.schema.json`, `config-v1.schema.json`, `config-capture-v1.schema.json`,
-`comparison-v1.schema.json`, `model-v1.schema.json`, and `report-v1.schema.json`. They are
+`comparison-v1.schema.json`, `comparison-policy-v1.schema.json`,
+`model-v1.schema.json`, and `report-v1.schema.json`. They are
 the formal spelling of the version 1 boundaries. `gh_run_receptor.contracts` is the single
 registry for their kinds, identifiers, current and readable versions, resources, and
 freeze baselines. Producers and untrusted readers do not duplicate those identifiers.
 
 The four schema files already shipped by release 0.18.0 are byte-frozen against that Git
 tag. `config-capture@1` was already a persisted bundle envelope but gains its first formal
-schema after that release, and `comparison@1` is new after it. Both truthfully report no
+schema after that release; `comparison@1` and `comparison-policy@1` are also new after it.
+All three truthfully report no
 historical freeze tag until the next release establishes one. Release preparation runs
 `validate_contracts.py`; changing a
 frozen schema in place, losing a registered resource, or adding an unregistered version

@@ -72,6 +72,16 @@ def test_comparison_contract_accepts_real_rerun_and_json_is_deterministic():
     with pytest.raises(ValidationError):
         Draft202012Validator(schema).validate(conforming_emptiness)
 
+    incoherent_policy = copy.deepcopy(comparison)
+    incoherent_policy["policy"] = {
+        "evaluated": True,
+        "assessment": "PASS",
+        "violations": [{"rule": "anything", "expected": True, "observed": False}],
+        "unknowns": [],
+    }
+    with pytest.raises(ValidationError):
+        Draft202012Validator(schema).validate(incoherent_policy)
+
 
 def test_different_commit_is_explicit_and_never_treated_as_equivalent():
     left = _report("argdigest_ci_rerun_attempt_1")
@@ -198,6 +208,9 @@ def test_hosted_comparison_gate_is_manual_read_only_bounded_and_pinned():
     assert "persist-credentials: false" in source
     assert "--attempt 1 --attempt 2" in source
     assert "--capture metadata" in source
+    assert "argdigest-rerun-pass.json" in source
+    assert "argdigest-rerun-fail.json" in source
+    assert 'test "$status" -eq 1' in source
     assert "uibcdf/argdigest" in source
     assert "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7" in source
     assert "actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7" in source

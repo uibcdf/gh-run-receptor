@@ -32,5 +32,9 @@ class ConfigError(ReceptorError):
     """Representing invalid or conflicting declarative configuration."""
 
 
+class PolicyError(ReceptorError):
+    """Representing an invalid comparison regression policy."""
+
+
 class TrustError(ReceptorError):
     """Representing configuration rejected at a provenance boundary."""

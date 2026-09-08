@@ -6,6 +6,7 @@ import json
 from collections import Counter
 from typing import Any
 
+from gh_run_receptor.comparison_policy import evaluate_policy
 from gh_run_receptor.contracts import schema_id
 
 COMPARISON_SCHEMA = schema_id("comparison", 1)
@@ -199,7 +200,9 @@ def _side_sufficient(report: dict[str, Any]) -> bool:
     )
 
 
-def compare_reports(left: dict[str, Any], right: dict[str, Any]) -> dict[str, Any]:
+def compare_reports(
+    left: dict[str, Any], right: dict[str, Any], *, policy: dict[str, Any] | None = None
+) -> dict[str, Any]:
     """Building a truth-preserving comparison from two normalized reports."""
     left_identity = _identity(left)
     right_identity = _identity(right)
@@ -242,7 +245,7 @@ def compare_reports(left: dict[str, Any], right: dict[str, Any]) -> dict[str, An
         warnings.append("workflow identities differ")
     if not sufficient:
         warnings.append("required metadata, jobs, or artifact inventory evidence is incomplete")
-    return {
+    comparison = {
         "schema": COMPARISON_SCHEMA,
         "assessment": "INCOMPLETE" if not sufficient else ("CHANGED" if changed else "UNCHANGED"),
         "evidence_sufficient": sufficient,
@@ -255,6 +258,8 @@ def compare_reports(left: dict[str, Any], right: dict[str, Any]) -> dict[str, An
         "matrix": matrix,
         "warnings": warnings,
     }
+    comparison["policy"] = evaluate_policy(comparison, policy)
+    return comparison
 
 
 def render_json(comparison: dict[str, Any]) -> str:
@@ -327,6 +332,13 @@ def render_llm(comparison: dict[str, Any]) -> str:
             f"matrix comparable=false "
             f"kind={_safe(matrix['left_kind'])}->{_safe(matrix['right_kind'])}"
         )
+    policy = comparison["policy"]
+    if policy["evaluated"]:
+        lines.append(
+            f"policy={policy['assessment']} violations="
+            f"{_items(policy['violations'], key='rule')} "
+            f"unknowns={_items(policy['unknowns'], key='rule')}"
+        )
     lines.extend(f"warning: {_safe(item)}" for item in comparison["warnings"][:MAX_LIST_ITEMS])
     return "\n".join(lines) + "\n"
 
@@ -356,10 +368,24 @@ def render_human(comparison: dict[str, Any]) -> str:
         f"{artifacts['left_total']} -> {artifacts['right_total']}; "
         f"added: {artifacts_added}; removed: {artifacts_removed}",
     ]
+    policy = comparison["policy"]
+    if policy["evaluated"]:
+        lines.append(
+            f"Regression policy: {policy['assessment']}; "
+            f"violations: {_items(policy['violations'], key='rule')}; "
+            f"unknowns: {_items(policy['unknowns'], key='rule')}"
+        )
     lines.extend(f"Warning: {_safe(item)}" for item in comparison["warnings"][:MAX_LIST_ITEMS])
     return "\n".join(lines) + "\n"
 
 
 def exit_code(comparison: dict[str, Any]) -> int:
-    """Returning 4 only when required comparison evidence is incomplete."""
-    return 0 if comparison.get("evidence_sufficient") else 4
+    """Returning a distinct status for violation, incomplete evidence, or success."""
+    if not comparison.get("evidence_sufficient"):
+        return 4
+    policy = comparison.get("policy", {})
+    if policy.get("assessment") == "INCOMPLETE":
+        return 4
+    if policy.get("assessment") == "FAIL":
+        return 1
+    return 0

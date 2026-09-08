@@ -23,7 +23,7 @@ Recorded GitHub responses exercise pagination, attempts, missing fields, new enu
 expired log links, artifact metadata, annotations, and partial permissions. Fixtures retain
 HTTP boundaries and source identifiers while removing secrets and private content.
 
-The compatibility gate validates all six registered JSON Schema resources, exercises
+The compatibility gate validates all seven registered JSON Schema resources, exercises
 wrong-kind, malformed, retired, future, and missing-migration states, and proves a
 synthetic stepwise migration leaves its source unchanged. Release preparation additionally
 compares every previously published v1 schema byte-for-byte with tag 0.18.0. Updating a
@@ -34,6 +34,10 @@ primary semantic guard. They assert independent attempt and commit identity, the
 failure-to-success transition, deterministic aggregation of duplicate job names,
 incomplete-evidence failure, bounded text, capture-time artifact semantics, and offline
 CLI replay. A manual hosted gate repeats that comparison against the public attempts.
+Policy truth tables independently cover identity, official candidate outcome, absolute and
+percentage duration, artifact size, inventory removal, matrix removal/state change,
+undefined metrics, strict parsing, schema intent, bounded rendering, and exit codes. The
+hosted comparison gate evaluates both a passing boundary and an intentional violation.
 
 ### Replay and golden tests
 

@@ -1,0 +1,11 @@
+{
+  "schema": "gh-run-receptor.comparison-policy@1",
+  "rules": {
+    "same_repository": true,
+    "same_workflow": true,
+    "same_head_sha": true,
+    "candidate_conclusion": "success",
+    "max_job_duration_increase_seconds": 39,
+    "max_job_duration_increase_percent": 100
+  }
+}

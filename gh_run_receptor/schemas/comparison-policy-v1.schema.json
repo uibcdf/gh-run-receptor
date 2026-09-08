@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://uibcdf.org/gh-run-receptor/schemas/comparison-policy-v1.schema.json",
+  "title": "gh-run-receptor.comparison-policy@1",
+  "type": "object",
+  "required": ["schema", "rules"],
+  "properties": {
+    "schema": {"const": "gh-run-receptor.comparison-policy@1"},
+    "rules": {
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "same_repository": {"const": true},
+        "same_workflow": {"const": true},
+        "same_head_sha": {"const": true},
+        "candidate_conclusion": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 50,
+          "pattern": "^[A-Za-z0-9_]+$"
+        },
+        "max_job_duration_increase_seconds": {"type": "integer", "minimum": 0},
+        "max_job_duration_increase_percent": {"type": "number", "minimum": 0},
+        "max_artifact_size_increase_bytes": {"type": "integer", "minimum": 0},
+        "forbid_job_removals": {"const": true},
+        "forbid_artifact_removals": {"const": true},
+        "forbid_matrix_removals": {"const": true},
+        "forbid_matrix_changes": {"const": true}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

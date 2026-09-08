@@ -30,6 +30,7 @@ def test_inventory_exposes_every_serialized_boundary_in_stable_order():
         "config",
         "config-capture",
         "comparison",
+        "comparison-policy",
         "model",
         "report",
     ]

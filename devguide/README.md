@@ -79,12 +79,15 @@ The current MVP implements:
   absent.
 - a first portable live corpus spanning three non-UIBCDF repositories, including native
   conclusion parity, bounded output, and deterministic offline replay.
-- one runtime registry for all six serialized boundaries, formal configuration-capture
+- one runtime registry for all seven serialized boundaries, formal configuration-capture
   schema, offline compatibility introspection, forward-only migration rules, and a release
   gate freezing the four v1 schemas already published in 0.18.0.
 - a first-class offline and remote `compare` command with an independently versioned
   comparison contract, explicit source/commit identity, bounded human and LLM output, and
   descriptive job, duration, artifact-inventory, and matrix-coverage deltas.
+- strict opt-in `comparison-policy@1` files with explicit identity, candidate outcome,
+  duration, artifact-size, inventory, and matrix rules plus distinct pass, violation, and
+  unknown-evidence results.
 - a call-only reusable terminal reporter that forwards typed policy to the shared Action,
   exposes durable cross-job outputs, and resolves its Action from the exact same repository
   revision without a checkout or internal moving reference.
