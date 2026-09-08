@@ -53,7 +53,7 @@ jobs:
       - name: Validate release metadata and tests
         run: |
           python devtools/scripts/release_tools.py citation "$RELEASE_TAG"
-          python devtools/scripts/validate_contracts.py --baseline 0.18.0
+          python devtools/scripts/validate_contracts.py --baseline 0.19.0
           python -m pytest --receptor=llm
 
       - name: Build and verify distributions

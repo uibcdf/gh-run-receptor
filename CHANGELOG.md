@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.19.0 - 2026-09-08
+
 - Synchronize the 0.18.0 canonical adoption guide to all eleven tracked clients after
   uninterrupted release, minimum-CLI, and distributed-Action validation.
 - Add a maintainer Zenodo activation handoff and a bounded read-only verifier that
@@ -18,6 +20,14 @@ All notable changes to this project will be documented in this file.
 - Centralize five serialized contract families, expose offline compatibility introspection,
   formalize `config-capture@1`, add forward-only migration machinery, and freeze the four
   schemas published in 0.18.0 through the release gate.
+- Compare offline bundles, rerun attempts, and remote runs through a versioned descriptive
+  contract that preserves both source identities and bounded deltas.
+- Evaluate strict opt-in comparison policies with distinct pass, measured-violation, and
+  insufficient-evidence outcomes.
+- Publish a call-only reusable terminal reporter whose durable outputs and internal Action
+  resolve from the exact same repository revision.
+- Freeze `config-capture@1`, `comparison@1`, and `comparison-policy@1` in 0.19.0 while
+  retaining byte-level validation of the four contracts frozen in 0.18.0.
 
 ## 0.18.0 - 2026-09-07
 

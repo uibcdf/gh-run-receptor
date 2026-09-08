@@ -26,7 +26,8 @@ HTTP boundaries and source identifiers while removing secrets and private conten
 The compatibility gate validates all seven registered JSON Schema resources, exercises
 wrong-kind, malformed, retired, future, and missing-migration states, and proves a
 synthetic stepwise migration leaves its source unchanged. Release preparation additionally
-compares every previously published v1 schema byte-for-byte with tag 0.18.0. Updating a
+compares every previously published v1 schema byte-for-byte with its 0.18.0 or 0.19.0
+freeze tag. Updating a
 local checksum beside a changed schema is not an acceptable compatibility test.
 
 Comparison contract tests use the two sanitized attempts of one real ArgDigest run as the

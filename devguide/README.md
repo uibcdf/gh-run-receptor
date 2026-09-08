@@ -7,7 +7,7 @@ evidence.
 
 ## Current state
 
-The project has a `0.18.0` tagged source preview and verified GitHub Release assets, but no
+The project has a `0.19.0` tagged source preview and verified GitHub Release assets, but no
 published package-index artifact or stable public contract;
 the contracts in this guide are explicit but provisional unless marked settled. The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
@@ -81,7 +81,7 @@ The current MVP implements:
   conclusion parity, bounded output, and deterministic offline replay.
 - one runtime registry for all seven serialized boundaries, formal configuration-capture
   schema, offline compatibility introspection, forward-only migration rules, and a release
-  gate freezing the four v1 schemas already published in 0.18.0.
+  gate retaining the four v1 freezes from 0.18.0 and the three new freezes from 0.19.0.
 - a first-class offline and remote `compare` command with an independently versioned
   comparison contract, explicit source/commit identity, bounded human and LLM output, and
   descriptive job, duration, artifact-inventory, and matrix-coverage deltas.

@@ -57,12 +57,19 @@ Before preparing a release commit, run
 release workflow independently validates the resulting records but never rewrites tagged
 source.
 
-The same exact-tag workflow runs
-`python devtools/scripts/validate_contracts.py --baseline 0.18.0` before building. The tag
-is fetched by checkout, and all four schema resources published by 0.18.0 must remain
-byte-identical. A contract change that cannot satisfy this gate requires a new integer
-contract version and the migration/retirement process in `data_contracts.md`; editing the
-baseline tag or weakening the comparison is not a release operation.
+The exact-tag workflow runs
+`python devtools/scripts/validate_contracts.py --baseline 0.19.0` before building. Each
+registered resource is compared with its own first publishing tag: four against 0.18.0 and
+three against 0.19.0. A contract change that cannot satisfy this gate requires a new
+integer contract version and the migration/retirement process in `data_contracts.md`;
+editing a baseline tag or weakening the comparison is not a release operation.
+
+A candidate that introduces a freeze must be validated before its tag exists. Use
+`python devtools/scripts/validate_contracts.py --baseline 0.18.0 --candidate 0.19.0` for
+this release. Candidate mode requires the named tag to be absent and only permits a
+resource absent from the published baseline to acquire the new freeze. The ordinary mode
+continues to fail until the tag exists, so candidate mode cannot be reused to bypass a
+published baseline.
 
 ## Zenodo maintainer handoff
 
@@ -129,3 +136,7 @@ asset's name, size, and SHA-256 digest. Zenodo archival remains a separate obser
 The `0.18.0` gate repeats the exact-tag publication after correcting authenticated draft
 lookup and requires the uninterrupted workflow to verify draft and public release states
 without maintainer recovery.
+
+The `0.19.0` gate additionally freezes all seven current v1 contract resources, validates
+new freezes before tag creation without relabeling published resources, and publishes run
+comparison, explicit regression policy, and the same-revision reusable terminal reporter.

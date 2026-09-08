@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 from collections.abc import Callable, Sequence
@@ -21,6 +22,7 @@ from gh_run_receptor.contracts import (  # noqa: E402
 )
 
 Runner = Callable[..., subprocess.CompletedProcess[bytes]]
+VERSION_TAG = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+$")
 
 
 def _baseline_bytes(
@@ -42,11 +44,27 @@ def validate_contracts(
     root: Path,
     *,
     baseline_tag: str = SCHEMA_BASELINE_TAG,
+    candidate_tag: str | None = None,
     runner: Runner = subprocess.run,
 ) -> list[str]:
     """Returning contract registry, schema, migration, and baseline errors."""
 
     errors: list[str] = []
+    if candidate_tag is not None:
+        if not VERSION_TAG.fullmatch(candidate_tag):
+            return ["candidate tag must use X.Y.Z without a prefix"]
+        if candidate_tag == baseline_tag:
+            return ["candidate tag must differ from its published baseline"]
+        tag_result = runner(
+            ["git", "tag", "--list", candidate_tag],
+            cwd=root,
+            capture_output=True,
+            check=False,
+        )
+        if tag_result.returncode:
+            return [f"cannot determine whether candidate tag {candidate_tag} exists"]
+        if tag_result.stdout.strip():
+            return [f"candidate tag {candidate_tag} already exists; use normal validation"]
     schema_root = root / "gh_run_receptor/schemas"
     registered = {schema.resource for spec in CONTRACTS.values() for schema in spec.schemas}
     discovered = {path.name for path in schema_root.glob("*-v*.schema.json")}
@@ -69,6 +87,7 @@ def validate_contracts(
                 errors.append(f"{kind} readable version {version} has no forward migration")
         for schema in spec.schemas:
             path = schema_root / schema.resource
+            relative = path.relative_to(root)
             try:
                 raw = path.read_bytes()
                 payload = json.loads(raw)
@@ -86,8 +105,17 @@ def validate_contracts(
                 errors.append(f"{schema.resource} $id disagrees with resource path")
 
             if schema.frozen_since is None:
+                if candidate_tag is not None:
+                    errors.append(f"{relative} is not frozen for candidate {candidate_tag}")
                 continue
-            relative = path.relative_to(root)
+            if candidate_tag is not None and schema.frozen_since == candidate_tag:
+                prior, _ = _baseline_bytes(root, baseline_tag, relative, runner)
+                if prior is not None:
+                    errors.append(
+                        f"{relative} existed in {baseline_tag} and cannot be newly frozen "
+                        f"in {candidate_tag}"
+                    )
+                continue
             baseline, detail = _baseline_bytes(root, schema.frozen_since, relative, runner)
             if baseline is None:
                 errors.append(f"cannot read {relative} from {schema.frozen_since}: {detail}")
@@ -101,6 +129,8 @@ def validate_contracts(
     }
     if baseline_tag not in frozen_tags:
         errors.append(f"required baseline {baseline_tag!r} is not registered")
+    if candidate_tag is not None and candidate_tag not in frozen_tags:
+        errors.append(f"candidate freeze {candidate_tag!r} is not registered")
     return errors
 
 
@@ -108,8 +138,16 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--baseline", default=SCHEMA_BASELINE_TAG)
+    parser.add_argument(
+        "--candidate",
+        help="pre-tag release being prepared; must not exist and may freeze only new resources",
+    )
     args = parser.parse_args(argv)
-    errors = validate_contracts(args.root.resolve(), baseline_tag=args.baseline)
+    errors = validate_contracts(
+        args.root.resolve(),
+        baseline_tag=args.baseline,
+        candidate_tag=args.candidate,
+    )
     if errors:
         for error in errors:
             print(f"Contract compatibility: FAIL — {error}", file=sys.stderr)

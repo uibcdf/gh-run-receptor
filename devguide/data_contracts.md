@@ -326,14 +326,18 @@ the formal spelling of the version 1 boundaries. `gh_run_receptor.contracts` is 
 registry for their kinds, identifiers, current and readable versions, resources, and
 freeze baselines. Producers and untrusted readers do not duplicate those identifiers.
 
-The four schema files already shipped by release 0.18.0 are byte-frozen against that Git
-tag. `config-capture@1` was already a persisted bundle envelope but gains its first formal
-schema after that release; `comparison@1` and `comparison-policy@1` are also new after it.
-All three truthfully report no
-historical freeze tag until the next release establishes one. Release preparation runs
-`validate_contracts.py`; changing a
-frozen schema in place, losing a registered resource, or adding an unregistered version
-fails before distributions are built.
+The four schema files shipped by release 0.18.0 are byte-frozen against that Git tag.
+Release 0.19.0 freezes the first formal `config-capture@1` schema and the new
+`comparison@1` and `comparison-policy@1` schemas. The registry retains each resource's own
+first publishing tag instead of pretending that all seven originated in one release.
+
+Before the 0.19.0 tag exists, release preparation runs `validate_contracts.py --baseline
+0.18.0 --candidate 0.19.0`. Candidate mode fails if the candidate tag already exists,
+requires every packaged schema to declare a freeze, and permits a candidate freeze only
+for resources absent from the published baseline. Normal validation remains fail-closed
+until the tag exists. The exact-tag publisher then validates baseline 0.19.0 normally;
+changing a frozen schema in place, losing a registered resource, or adding an unregistered
+version fails before distributions are built.
 
 The runtime validates untrusted bundle JSON, critical manifest types, member paths, byte
 counts, digests, source collection shapes, duplicate keys, and non-finite numbers without

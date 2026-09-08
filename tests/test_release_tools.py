@@ -15,6 +15,7 @@ from devtools.scripts.release_tools import (
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = "0.18.0"
+CURRENT_VERSION = "0.19.0"
 COMMIT = "a" * 40
 
 
@@ -91,7 +92,7 @@ def test_manifest_requires_exact_distributions_and_is_deterministic(tmp_path):
 
 
 def test_repository_citation_metadata_is_consistent():
-    assert validate_citation(ROOT, VERSION) == []
+    assert validate_citation(ROOT, CURRENT_VERSION) == []
 
 
 def test_citation_validator_detects_creator_disagreement(tmp_path):

@@ -29,7 +29,7 @@ page and retain only a concise decision record here.
 | Initial Action distribution | Thin composite Action around the dependency-free shared Python core and hosted `gh` command | Preserve one interpretation path across operating systems; pin runtime/artifact Actions and record publisher provenance |
 | Runtime support | Python 3.11--3.13; GitHub CLI 2.48.0 minimum for networked commands; latest patched stable CLI recommended | The floor matches the first required `--paginate --slurp` release and is tested independently of current runner images |
 | Product portability | Runtime core and profiles are repository-agnostic; MolSysSuite identities remain fixtures, hosted evidence, or explicit client configuration | External public workflows must join the pre-1.0 corpus; UIBCDF-specific release/guide tooling is not product behavior |
-| Serialized contract evolution | Published major-schema resources are immutable; incompatible changes use a new integer version with explicit forward-only migration or documented retirement | Readers reject malformed, wrong-kind, retired, and future contracts; 0.18.0 freezes the first four v1 schema resources |
+| Serialized contract evolution | Published major-schema resources are immutable; incompatible changes use a new integer version with explicit forward-only migration or documented retirement | Readers reject malformed, wrong-kind, retired, and future contracts; 0.18.0 freezes the first four v1 resources and 0.19.0 freezes the remaining three current v1 resources |
 
 ## Open decision gates
 

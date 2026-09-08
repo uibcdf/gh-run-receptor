@@ -12,7 +12,8 @@ from typing import Any
 from gh_run_receptor.errors import ContractError
 
 SCHEMA_PREFIX = "gh-run-receptor"
-SCHEMA_BASELINE_TAG = "0.18.0"
+SCHEMA_BASELINE_TAG = "0.19.0"
+_SCHEMA_018_BASELINE_TAG = "0.18.0"
 _SCHEMA_ID = re.compile(r"^gh-run-receptor\.([a-z][a-z0-9-]*)@([1-9][0-9]*)$")
 
 
@@ -44,43 +45,43 @@ _SPECS = (
         "bundle",
         1,
         frozenset({1}),
-        (SchemaVersion(1, "bundle-v1.schema.json", SCHEMA_BASELINE_TAG),),
+        (SchemaVersion(1, "bundle-v1.schema.json", _SCHEMA_018_BASELINE_TAG),),
     ),
     ContractSpec(
         "config",
         1,
         frozenset({1}),
-        (SchemaVersion(1, "config-v1.schema.json", SCHEMA_BASELINE_TAG),),
+        (SchemaVersion(1, "config-v1.schema.json", _SCHEMA_018_BASELINE_TAG),),
     ),
     ContractSpec(
         "config-capture",
         1,
         frozenset({1}),
-        (SchemaVersion(1, "config-capture-v1.schema.json", None),),
+        (SchemaVersion(1, "config-capture-v1.schema.json", SCHEMA_BASELINE_TAG),),
     ),
     ContractSpec(
         "comparison",
         1,
         frozenset({1}),
-        (SchemaVersion(1, "comparison-v1.schema.json", None),),
+        (SchemaVersion(1, "comparison-v1.schema.json", SCHEMA_BASELINE_TAG),),
     ),
     ContractSpec(
         "comparison-policy",
         1,
         frozenset({1}),
-        (SchemaVersion(1, "comparison-policy-v1.schema.json", None),),
+        (SchemaVersion(1, "comparison-policy-v1.schema.json", SCHEMA_BASELINE_TAG),),
     ),
     ContractSpec(
         "model",
         1,
         frozenset({1}),
-        (SchemaVersion(1, "model-v1.schema.json", SCHEMA_BASELINE_TAG),),
+        (SchemaVersion(1, "model-v1.schema.json", _SCHEMA_018_BASELINE_TAG),),
     ),
     ContractSpec(
         "report",
         1,
         frozenset({1}),
-        (SchemaVersion(1, "report-v1.schema.json", SCHEMA_BASELINE_TAG),),
+        (SchemaVersion(1, "report-v1.schema.json", _SCHEMA_018_BASELINE_TAG),),
     ),
 )
 CONTRACTS: Mapping[str, ContractSpec] = MappingProxyType({item.kind: item for item in _SPECS})

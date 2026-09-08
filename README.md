@@ -5,11 +5,12 @@ repetitive run output into a compact, truth-preserving report while retaining a 
 path to the captured evidence.
 
 The project is in pre-1.0 development; no package has been published to a package index and
-the public contract may still evolve. The `0.18.0` source release can inspect, watch, and
-replay structured run evidence. Install the GitHub CLI extension at the exact preview tag:
+the public contract may still evolve. The `0.19.0` source release can inspect, watch,
+replay, and compare structured run evidence. Install the GitHub CLI extension at the exact
+preview tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 0.18.0
+gh extension install uibcdf/gh-run-receptor --pin 0.19.0
 gh run-receptor --version
 ```
 
@@ -51,7 +52,7 @@ jobs:
   report:
     runs-on: ubuntu-latest
     steps:
-      - uses: uibcdf/gh-run-receptor@0.18.0
+      - uses: uibcdf/gh-run-receptor@0.19.0
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
@@ -70,7 +71,7 @@ High-assurance consumers may pin the full release commit SHA instead of the tag.
 A small dedicated reporter can keep its full `config@1` policy beside the invocation:
 
 ```yaml
-      - uses: uibcdf/gh-run-receptor@0.18.0
+      - uses: uibcdf/gh-run-receptor@0.19.0
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
@@ -114,7 +115,7 @@ It explicitly labels the profile interpretation as published rather than indepen
 recomputed. Use `inspect SOURCE_RUN_ID` as the fallback when the artifact is absent,
 expired, or insufficient for the decision.
 
-Current development builds also provide a reusable terminal reporter. A client keeps the
+Version `0.19.0` also provides a reusable terminal reporter. A client keeps the
 `workflow_run` trigger and delegates the complete reporting job:
 
 ```yaml
@@ -131,7 +132,7 @@ permissions:
 
 jobs:
   report:
-    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@FULL_COMMIT_SHA
+    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@0.19.0
     with:
       run-id: ${{ github.event.workflow_run.id }}
       repository: ${{ github.repository }}
@@ -210,7 +211,7 @@ gh run-receptor config explain .github/workflows/build_conda.yaml
 Live capture reads repository policy only from the default branch and accepts Action-local
 policy only through the default-branch provenance gate. It stores the selected source,
 revision, and digest in the evidence bundle and fails if required platforms are absent.
-Version `0.18.0` accepts exact path, numeric ID, or display-name matches; it deliberately
+Version `0.19.0` accepts exact path, numeric ID, or display-name matches; it deliberately
 rejects patterns and unknown settings rather than silently ignoring them.
 
 An explicit `--attempt` reads the attempt-specific run, jobs, and logs endpoints. Bundle
@@ -218,7 +219,7 @@ loading rejects contradictory retained run identity rather than risking a false 
 If requested evidence such as retained logs is unavailable, the receptor preserves the
 official GitHub conclusion but reports `INCOMPLETE` and exits with status 4.
 
-Current development builds can compare two saved bundles without network access:
+Version `0.19.0` can compare two saved bundles without network access:
 
 ```text
 gh run-receptor compare LEFT_BUNDLE RIGHT_BUNDLE --receptor=llm
