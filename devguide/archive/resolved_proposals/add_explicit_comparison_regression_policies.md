@@ -1,12 +1,12 @@
 ---
 summary: Add explicit comparison regression policies
 issue: uibcdf/gh-run-receptor#33
-status: open
+status: resolved
 opened: 2026-09-08
-closed:
-verification: asserted
+closed: 2026-09-08
+verification: measured
 area: ['cli', 'reports', 'governance']
-guard:
+guard: tests/test_comparison_policy.py
 normative:
 blocked_by: []
 supersedes: []
@@ -15,7 +15,7 @@ supersedes: []
 # Adding explicit comparison regression policies
 
 **Reported:** 2026-09-08 after the descriptive comparison and reusable reporter gates.
-**Status:** Open; contract and evaluation implementation are in progress.
+**Status:** Resolved; the contract, evaluator, CLI, documentation, and hosted gate pass.
 
 ## What
 
@@ -86,5 +86,16 @@ No tracked dependency blocks this change. It extends only contracts introduced a
 
 ## Provenance
 
-Initial design: Linux host, Python 3.13.14, commit `d2ed809`, 2026-09-08. Final local and
-hosted provenance will be added before closure.
+Initial design: Linux host, Python 3.13.14, commit `d2ed809`, 2026-09-08.
+
+Implementation commit `d98fc2f` passed 334 local tests, Ruff check and format, devguide
+validation, and compatibility validation over seven registered contract families while
+preserving all four frozen schema resources. A wheel and source distribution built
+locally; the wheel installed in a clean environment outside the checkout, discovered
+`comparison-policy@1`, returned `PASS`/exit 0 for the permissive fixture, and returned the
+exact 39-second violation with `FAIL`/exit 1 for the strict fixture.
+
+Manual hosted run `34213219459` reacquired the two retained ArgDigest attempts and passed
+the descriptive comparison, the passing policy, and the intentionally failing policy
+assertions. The hosted workflow itself remained successful because it captured and
+verified the expected policy-failure exit instead of weakening the gate.

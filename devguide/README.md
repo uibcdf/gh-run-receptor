@@ -169,8 +169,7 @@ known design question; it does not mean that unimplemented behavior has been val
 ## Immediate milestone
 
 The next milestone closes the remaining outcome and aggregation gaps, led by real Zenodo
-verification, broader corpus evidence, structured per-job aggregation, and explicit
-comparison regression policy.
+verification, broader corpus evidence, and structured per-job aggregation.
 Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need

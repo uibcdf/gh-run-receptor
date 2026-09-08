@@ -1,6 +1,7 @@
 # Resolved proposals
 
 <!-- generated: devguide_index -->
+- [#33 — Add explicit comparison regression policies](add_explicit_comparison_regression_policies.md) (`resolved`)
 - [#13 — Add real cancelled incomplete and rerun outcome fixtures](add_real_cancelled_incomplete_and_rerun_outcome_fixtures.md) (`resolved`)
 - [#6 — Add the first CI workflow profile](add_the_first_ci_workflow_profile.md) (`resolved`)
 - [#8 — Add the first documentation workflow profile](add_the_first_documentation_workflow_profile.md) (`resolved`)

@@ -395,8 +395,27 @@ then reacquired both public attempts at commit `551005d` and passed every exact 
 and transition assertion.
 
 This proves descriptive comparison, not causal performance regression analysis. A changed
-duration or artifact inventory is a measured delta; policies for classifying it remain
-future Phase 4 work.
+duration or artifact inventory remains a measured delta until a caller supplies an
+explicit policy.
+
+## Explicit comparison policy
+
+The strict, versioned `comparison-policy@1` contract lets a caller classify a candidate
+without changing the descriptive comparison facts. Opt-in rules cover source identity,
+candidate conclusion, absolute and percentage job-duration increases, artifact-size
+increases, removed jobs or artifacts, and removed or changed matrix units. Missing
+evidence produces `INCOMPLETE`/exit 4 rather than a false pass; a measured violation
+produces `FAIL`/exit 1.
+
+The ArgDigest paired-attempt fixture exercises a known 40-to-79-second job-duration
+increase. A clean wheel installed outside the checkout returned `PASS`/exit 0 at a
+39-second threshold and returned one exact `max_job_duration_increase_seconds` violation
+at a 30-second threshold. Manual hosted run `34213219459` repeated both assertions against
+the live public attempts and passed at implementation commit `d98fc2f`.
+
+This establishes deterministic, user-selected regression policy over current evidence.
+It does not infer causal regressions, learn historical baselines, or choose project
+thresholds automatically.
 
 ## Reusable terminal reporter
 
