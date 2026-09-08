@@ -74,3 +74,7 @@ def test_remote_distribution_gate_is_manual_and_checks_called_outputs():
     assert "needs: report" in source
     assert 'os.environ["REPORT_READY"] == "true"' in source
     assert "gh-run-receptor-reusable-34037657805-1" in source
+    assert "gh run download \"$GITHUB_RUN_ID\"" in source
+    assert "EXPECTED_SHA: ${{ github.sha }}" in source
+    assert "report['publisher'] ==" in source
+    assert "'ref': os.environ['EXPECTED_SHA']" in source
