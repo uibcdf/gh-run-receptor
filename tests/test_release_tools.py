@@ -15,7 +15,7 @@ from devtools.scripts.release_tools import (
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = "0.18.0"
-CURRENT_VERSION = "0.19.0"
+CURRENT_VERSION = "0.19.1"
 COMMIT = "a" * 40
 
 
@@ -113,12 +113,12 @@ def test_prepare_citation_updates_release_fields_and_revalidates(tmp_path):
         (ROOT / ".zenodo.json").read_text(encoding="utf-8"), encoding="utf-8"
     )
 
-    prepare_citation(tmp_path, "0.19.0", date(2026, 9, 8))
+    prepare_citation(tmp_path, "0.19.1", date(2026, 9, 8))
 
     cff = yaml.safe_load((tmp_path / "CITATION.cff").read_text(encoding="utf-8"))
-    assert cff["version"] == "0.19.0"
+    assert cff["version"] == "0.19.1"
     assert cff["date-released"].isoformat() == "2026-09-08"
-    assert validate_citation(tmp_path, "0.19.0") == []
+    assert validate_citation(tmp_path, "0.19.1") == []
 
 
 def test_release_verifier_accepts_exact_draft_and_published_assets(tmp_path):

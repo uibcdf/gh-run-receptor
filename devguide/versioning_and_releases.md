@@ -140,3 +140,8 @@ without maintainer recovery.
 The `0.19.0` gate additionally freezes all seven current v1 contract resources, validates
 new freezes before tag creation without relabeling published resources, and publishes run
 comparison, explicit regression policy, and the same-revision reusable terminal reporter.
+
+The `0.19.1` gate retains those seven frozen resources and publishes the safe discovery
+correction: filename-only Conda hints and action-internal platform inputs cannot be
+misrepresented as an observable native-platform matrix. Its distributed Action, minimum
+GitHub CLI, exact-tag build, and public release gates repeat against the patch tag.

@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.19.1 - 2026-09-08
+
 - Fall back to `generic` when local discovery sees action-internal platform inputs, reject
   filename-only Conda inference, and document evidence-topology profile selection without
   claiming hidden platform or registry results.
