@@ -11,6 +11,7 @@ DEFAULT_REPOSITORIES = (
     "argdigest",
     "depdigest",
     "elastnetmt",
+    "lindelint",
     "molsysmt",
     "molsysviewer",
     "pharmacophoremt",

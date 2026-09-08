@@ -10,6 +10,7 @@ def test_default_clients_cover_the_scientific_tooling_suite():
         "argdigest",
         "depdigest",
         "elastnetmt",
+        "lindelint",
         "molsysmt",
         "molsysviewer",
         "pharmacophoremt",
