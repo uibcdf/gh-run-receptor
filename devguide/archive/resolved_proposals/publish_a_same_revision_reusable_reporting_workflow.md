@@ -1,12 +1,12 @@
 ---
 summary: Publish a same-revision reusable reporting workflow
 issue: uibcdf/gh-run-receptor#32
-status: open
+status: resolved
 opened: 2026-09-07
-closed:
-verification: asserted
+closed: 2026-09-08
+verification: measured
 area: ['reports', 'github']
-guard:
+guard: tests/test_reusable_report_workflow.py
 normative:
 blocked_by: []
 supersedes: []
@@ -15,7 +15,7 @@ supersedes: []
 # Publishing a same-revision reusable reporting workflow
 
 **Reported:** 2026-09-07 during the Phase 4 gap audit after run comparison landed.
-**Status:** Open; implementation and remote distribution validation are in progress.
+**Status:** Resolved; local contract tests and remote same-revision execution pass.
 
 ## What
 
@@ -58,6 +58,15 @@ not available on older GitHub Enterprise Server versions.
 No runner-time saving is assumed. The expected benefit is a smaller, revision-coherent
 client configuration and one maintained output contract.
 
+The local gate passes 319 tests. Remote run `34168584873` first proved that the called
+workflow, `$/` root Action, artifact publication, and all eight durable outputs work. Its
+downloaded report recorded Action ref `67fb3b11b90269872b1b3055b1325d6bc0d486d6`, exactly
+the implementation commit used by the called workflow.
+
+The permanent gate then incorporated that provenance assertion. Run `34201435368` passed
+both the called report job and caller verification job at commit `d71fe6d`, including a
+fresh artifact download and exact equality between `publisher.ref` and `github.sha`.
+
 ## What was refuted
 
 - Calling `uibcdf/gh-run-receptor@main` internally is rejected because the caller's pinned
@@ -95,5 +104,21 @@ runners; the product already describes github.com as the initial network target.
 ## Provenance
 
 Design audit: Linux host, Python 3.13.14, commit `ede4b8a`, 2026-09-07. GitHub syntax was
-checked against the official documentation current on the same date. Hosted provenance
-will be recorded before closure.
+checked against the official documentation current on that date. Final local validation
+used Ruff 0.16.5 and 319 pytest cases with `--receptor=llm`. GitHub-hosted Ubuntu runs
+`34168584873` and `34201435368` completed successfully on 2026-09-07 and 2026-09-08,
+respectively.
+
+## Implementation checkpoint
+
+`reusable-report.yml` is a read-only `workflow_call` adapter with typed inputs and a
+bounded ten-minute job. It delegates all interpretation to the shared Action using
+`$/.`, so GitHub resolves the Action from the same repository commit as the called
+workflow without checkout. It forwards assessment, official conclusion, profile, group
+counts, artifact name, readiness, and error category. Runner-local report paths are not
+exported across the job boundary.
+
+The manual remote caller verifies terminal success and CI interpretation for retained run
+`34037657805`, exact attempt-qualified artifact identity, and same-revision Action
+provenance. Client trigger choice and token permission remain caller-owned. Structured
+producer-event aggregation and regression thresholds remain separate Phase 4 work.

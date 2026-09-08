@@ -398,6 +398,23 @@ This proves descriptive comparison, not causal performance regression analysis. 
 duration or artifact inventory is a measured delta; policies for classifying it remain
 future Phase 4 work.
 
+## Reusable terminal reporter
+
+The call-only `reusable-report.yml` forwards typed report policy to the composite Action
+and returns eight durable workflow outputs. It omits the runner-local report path and uses
+GitHub's `$/` self-repository reference so the Action resolves from the exact same commit
+as the called workflow without a source checkout.
+
+Manual remote caller run `34168584873` passed the report and verify jobs, published the
+expected `gh-run-receptor-reusable-34037657805-1` artifact, and exposed terminal
+`success`/`PASS` with the CI profile. The downloaded report identified publisher ref
+`67fb3b11b90269872b1b3055b1325d6bc0d486d6`, exactly the called implementation commit.
+
+The permanent gate then downloaded its own called-job artifact and asserted
+`publisher.ref == github.sha`. Run `34201435368` passed both jobs at commit `d71fe6d`.
+This proves the reusable distribution path and same-revision invariant on github.com; it
+does not claim `$/` support on older GitHub Enterprise Server runners.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not
