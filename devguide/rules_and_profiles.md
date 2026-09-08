@@ -83,6 +83,14 @@ does not render `platforms=0/0`, and classifies current GitHub artifact evidence
 means only that the complete current inventory is empty; it does not prove that an
 artifact never existed or that channel publication did or did not occur.
 
+The profile applies only to platform identities visible in GitHub jobs or matching GitHub
+artifacts. A workflow filename, release trigger, Conda recipe, or action input requesting
+a platform is not evidence that the platform build or upload completed. When a composite
+or reusable action performs the native matrix internally and the visible workflow
+orchestrates publication, select `release` for the observable workflow and retain an
+independent registry gate. Until `uibcdf/gh-run-receptor#35` supplies structured producer
+evidence, the receptor must not translate requested hidden platforms into observed ones.
+
 ### Release
 
 Relates the exact commit, tag, gates, built artifacts, registries, GitHub Release, and
@@ -102,6 +110,20 @@ inspection remain future work.
 
 ## Repository configuration
 
+Profile selection follows GitHub-visible evidence. The operational decision is:
+
+| Observable shape | Profile |
+| --- | --- |
+| Separate native-platform jobs or matching GitHub artifacts | `conda` |
+| Explicit noarch package jobs | `conda` with `package_kind: noarch` |
+| Publication orchestration whose platform matrix is internal to an action | `release` |
+| Build or validation without publication semantics | `ci` |
+| Shape outside the implemented contracts | `generic` |
+
+This ordering resolves hybrid workflows by evidence topology rather than filename or
+artifact intent. A `release` projection of an internal matrix does not validate its hidden
+platforms or external publication.
+
 The default configuration path is `.github/gh-run-receptor.yaml`:
 
 ```yaml
@@ -113,7 +135,7 @@ workflows:
     profile: ci
 
   - match:
-      path: .github/workflows/build_and_upload_conda_packages.yaml
+      path: .github/workflows/build_native_conda_matrix.yaml
     profile: conda
     settings:
       expected_platforms:
@@ -132,6 +154,13 @@ on stderr, and retains ambiguous workflows as `generic`. Preview is the default;
 `docs`, and `release` profiles and the Conda `expected_platforms` and `package_kind`
 settings. Package kind is `native` or `noarch`; a noarch rule cannot require native
 platforms. Unknown fields fail validation instead of being ignored.
+
+A Conda filename without source evidence is not enough for discovery to propose the
+Conda profile. Recognized action-internal platform inputs fall back to `generic` because
+their requested values do not prove outcomes. A reviewed repository rule may select
+`release` for the visible publication orchestration, but that is a safe projection rather
+than structured support for the hidden matrix. The discovery rule describes a portable
+workflow shape and does not depend on a UIBCDF repository or action identity.
 
 Repository configuration is trusted only when read from the repository's default branch.
 A pull request cannot supply its own receptor rules and then use those rules to classify

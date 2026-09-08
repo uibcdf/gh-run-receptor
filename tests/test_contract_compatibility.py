@@ -263,6 +263,7 @@ def test_hosted_contract_gate_is_manual_read_only_bounded_and_pinned():
     assert "timeout-minutes: 5" in source
     assert "fetch-depth: 0" in source
     assert "persist-credentials: false" in source
-    assert "validate_contracts.py --baseline 0.18.0 --candidate 0.19.0" in source
+    assert "validate_contracts.py --baseline 0.19.0" in source
+    assert "--candidate" not in source
     assert "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7" in source
     assert "actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7" in source

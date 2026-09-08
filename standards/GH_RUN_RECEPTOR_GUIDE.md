@@ -336,6 +336,29 @@ files are bounded, duplicate-key rejecting, non-finite rejecting, and never exec
 
 ## Profiles
 
+Choose a profile from the job, step, and artifact evidence that GitHub exposes, not from
+the workflow filename, trigger, or intended package type alone. When a workflow combines
+several concerns, use this decision table:
+
+| GitHub-visible workflow shape | Profile |
+| --- | --- |
+| Native platforms appear as separate jobs or matching GitHub artifacts | `conda` |
+| A declared `noarch: python` package is built by visible package jobs | `conda` with `package_kind: noarch` |
+| A composite or reusable action builds several platforms internally and the visible workflow orchestrates publication | `release` |
+| Build, test, or validation runs without publication semantics | `ci` |
+| No built-in profile represents the visible evidence faithfully | `generic`, followed by targeted native inspection |
+
+The `release` workaround for an action-internal platform matrix preserves the visible
+publication steps but does not prove any hidden platform result or external registry
+state. Keep Anaconda or another registry check as an independent gate. Do not configure
+`expected_platforms` unless those platform identities are present in evidence available
+to the Conda profile. Structured support for hidden producer matrices is tracked in
+`uibcdf/gh-run-receptor#35`.
+
+In version `0.19.0`, every `init` result remains a review-only proposal. In particular, a
+Conda-looking filename can overstate what GitHub exposes. Review the workflow topology and
+override the proposal according to the table above before committing it.
+
 Use `generic` when no workflow-specific interpretation is wanted:
 
 ```text
@@ -361,7 +384,7 @@ native matrix:
 
 ```yaml
   - match:
-      path: .github/workflows/build_and_upload_conda_packages.yaml
+      path: .github/workflows/build_noarch_conda_package.yaml
     profile: conda
     settings:
       package_kind: noarch
@@ -448,7 +471,7 @@ workflows:
     profile: release
 
   - match:
-      path: .github/workflows/build_and_upload_conda_packages.yaml
+      path: .github/workflows/build_native_conda_matrix.yaml
     profile: conda
     settings:
       expected_platforms:
@@ -474,7 +497,7 @@ Before committing a client rule, run:
 
 ```text
 gh run-receptor config check
-gh run-receptor config explain .github/workflows/build_and_upload_conda_packages.yaml
+gh run-receptor config explain .github/workflows/build_native_conda_matrix.yaml
 ```
 
 `config check` and `config explain` inspect an explicit local candidate. Remote `inspect`,

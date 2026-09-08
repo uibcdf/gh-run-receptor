@@ -16,6 +16,9 @@ MAX_WORKFLOW_BYTES = 1024 * 1024
 MAX_TOTAL_WORKFLOW_BYTES = 8 * 1024 * 1024
 _SAFE_PATH = re.compile(r"^[A-Za-z0-9_./ ()+-]+$")
 _WORD = re.compile(r"[a-z0-9]+")
+_ACTION_PLATFORM_INPUT = re.compile(
+    r"(?m)^platform_(?:linux-64|linux-aarch64|osx-64|osx-arm64|win-64):\s*(?:true|false)\s*$"
+)
 
 _FILENAME_SIGNALS = {
     "conda": {"conda", "rattler", "anaconda"},
@@ -92,6 +95,17 @@ def _classify(relative_path: str, source: str) -> DiscoveredWorkflow:
         profile: [signal for signal in signals if signal in content]
         for profile, signals in _CONTENT_SIGNALS.items()
     }
+    noarch_hint = (
+        "noarch" in filename_words or "noarch package" in content or "noarch: python" in content
+    )
+
+    if _ACTION_PLATFORM_INPUT.search(content) is not None:
+        return DiscoveredWorkflow(
+            relative_path,
+            "generic",
+            "low",
+            ("unsupported:action-internal-platform-matrix",),
+        )
 
     specialized = []
     for profile in ("conda", "docs", "release"):
@@ -104,13 +118,23 @@ def _classify(relative_path: str, source: str) -> DiscoveredWorkflow:
     if specialized:
         profile = specialized[0]
         filename_evidence = filename_matches[profile]
+        if (
+            profile == "conda"
+            and filename_evidence
+            and not content_matches[profile]
+            and not noarch_hint
+        ):
+            return DiscoveredWorkflow(
+                relative_path,
+                "generic",
+                "low",
+                tuple(f"filename-only:{item}" for item in filename_evidence),
+            )
         evidence = filename_evidence or content_matches[profile]
         source_kind = "filename" if filename_evidence else "content"
         confidence = "high" if filename_evidence else "medium"
         settings: tuple[tuple[str, str], ...] = ()
-        if profile == "conda" and (
-            "noarch" in filename_words or "noarch package" in content or "noarch: python" in content
-        ):
+        if profile == "conda" and noarch_hint:
             settings = (("package_kind", "noarch"),)
         return DiscoveredWorkflow(
             relative_path,

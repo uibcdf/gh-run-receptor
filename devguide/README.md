@@ -47,7 +47,8 @@ The current MVP implements:
 - a release profile that preserves observed event/ref/SHA identity, keeps composite work
   indivisible, and distinguishes step success from external delivery verification.
 - deterministic local workflow discovery and a non-overwriting `init` command that emits
-  strict configuration proposals with visible confidence and ambiguity fallback.
+  strict configuration proposals with visible confidence, ambiguity fallback, and safe
+  handling of the known action-internal Conda publication shape.
 - structured acquisition-error categories with bounded, control-safe, credential-redacted
   diagnostics and structured optional-404 handling.
 - a manually dispatched nine-combination compatibility gate proving the Python console
@@ -72,8 +73,8 @@ The current MVP implements:
   pre-acquisition rejection, offline independence, and checksum-pinned hosted validation
   of the official minimum binary.
 - a hosted exact-tag GitHub Release path with consistent citation/Zenodo metadata,
-  draft-first asset verification, public-release revalidation, and a completed
-  uninterrupted 0.18.0 publication.
+  draft-first asset verification, public-release revalidation, and completed
+  uninterrupted 0.18.0 and 0.19.0 publications.
 - a bounded read-only Zenodo verification gate with distinct absent, invalid, and verified
   states plus an explicit maintainer activation handoff; a real project record remains
   absent.
@@ -96,7 +97,8 @@ It does not yet provide a broad cross-workflow corpus beyond that initial extern
 cross-run aggregation; remote workflow discovery; pattern rules; or validated private-repository
 and fork token behavior. The CI,
 documentation, Conda, release, configuration, and Action contracts are initial vertical
-slices, not their complete stable forms.
+slices, not their complete stable forms. In particular, action-internal native matrices
+have a safe release-profile projection but no structured per-platform representation yet.
 
 ## Reading order
 

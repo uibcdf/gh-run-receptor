@@ -1,7 +1,7 @@
 ---
 summary: Support Conda workflows with an action-internal platform matrix
 issue: uibcdf/gh-run-receptor#35
-status: active
+status: partial
 opened: 2026-09-08
 closed:
 verification: measured
@@ -16,7 +16,8 @@ supersedes: []
 
 **Reported:** 2026-09-08 while SMonitor used GH Run Receptor as the preferred first
 inspection path for its 0.14.0 Conda publication.
-**Status:** Active design proposal; SMonitor tracks the temporary integration change in
+**Status:** Safe discovery and client guidance are delivered; structured hidden-matrix
+evidence remains open. SMonitor tracks the temporary integration change in
 `uibcdf/smonitor#10`.
 
 ## What
@@ -46,17 +47,25 @@ declares hidden platform work could instead report platform coverage as not obse
 derive `INCOMPLETE` when platform coverage is required. The exact setting name and whether
 structured producer evidence should be admitted remain design questions.
 
-Until that contract exists, SMonitor can map this release-triggered workflow to the
-`release` profile. That profile reports the package steps and explicitly retains
+Until that contract exists, SMonitor maps this release-triggered workflow to the `release`
+profile. That profile reports the package steps and explicitly retains
 `registry=not_observed`; Anaconda remains a separate release gate.
+
+The immediate discovery defense is repository-neutral: a Conda-looking filename without
+source evidence no longer selects `conda`, and recognized action-internal platform inputs
+fall back to `generic`. A reviewed client rule may select `release` for the visible
+publication orchestration. The canonical guide now makes this evidence-topology decision
+explicit. Full support still requires a versioned producer event or another structured
+source tying every platform, Python version, artifact, validation result, and upload
+result to the source run.
 
 ## Why
 
 Action-composed publishing is used to avoid duplicating platform build machinery in every
 consumer. Treating invisible platform dimensions as failed dimensions makes a successful
-release look failed and discourages routine receptor use. Removing
-`expected_platforms` under the current Conda profile is also insufficient: it would make
-the report pass without explaining that zero platform evidence was observed.
+release look failed and discourages routine receptor use. Removing `expected_platforms`
+under the current Conda profile is also insufficient: it would make the report pass
+without explaining that zero platform evidence was observed.
 
 ## What is measured and what is assumed
 
@@ -97,6 +106,8 @@ publishing action makes that likely, but a suite-wide count has not yet been mea
   failure, but would silently reduce the platform contract to zero observed platforms.
 - Parsing action inputs as proof of output was rejected. Requested platforms do not prove
   that packages were built or uploaded.
+- Hard-coding the UIBCDF action identity in discovery was rejected because profile
+  selection must remain portable to non-MolSysSuite repositories.
 
 ## Scope and exclusions
 
@@ -105,6 +116,10 @@ receptor sole release authority. It does not change the existing behavior for wo
 that expose platform-named jobs or GitHub artifacts. External registry verification and
 structured evidence emitted by the publishing action may be related future work, but are
 not assumed to be available here.
+
+The delivered partial increment covers safe discovery, normative profile choice, and
+client fallback. It does not parse arbitrary action implementations or represent hidden
+platform outcomes.
 
 ## Acceptance criteria
 
@@ -117,12 +132,16 @@ not assumed to be available here.
   semantics.
 - Configuration and profile documentation explain when action-internal matrices require
   the new contract or a release/generic-profile fallback.
+- Filename-only Conda discovery falls back to `generic`.
+- Recognized action-internal platform inputs fall back to `generic` with no Conda settings.
 
 ## Dependencies and risks
 
 There is no external blocker. The main design risk is weakening a required expectation
 until a green GitHub conclusion becomes a false package-publication claim. Any design must
-keep external delivery outside the inferred evidence boundary.
+keep external delivery outside the inferred evidence boundary. Full semantic support
+depends on a producer evidence contract and must not infer outcomes from action inputs or
+log wording.
 
 ## Provenance
 

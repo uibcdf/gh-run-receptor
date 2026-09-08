@@ -434,6 +434,39 @@ The permanent gate then downloaded its own called-job artifact and asserted
 This proves the reusable distribution path and same-revision invariant on github.com; it
 does not claim `$/` support on older GitHub Enterprise Server runners.
 
+## Release 0.19.0
+
+Tag `0.19.0` points to commit `6cda3c71fb5c6174c2b699cac5e5cb0015c655e5`.
+Before tag creation, candidate contract run `34278690899`, remote comparison/policy run
+`34278693945`, and same-revision reusable-reporter run `34278697374` passed. A local exact
+tag build then passed 337 tests, Ruff, citation validation, normal contract validation,
+wheel installation outside the checkout, version equality, seven packaged schema
+resources, policy evaluation, and deterministic checksums.
+
+After the tag was pushed, distributed Action run `34279247047` passed 3/3 on Ubuntu,
+macOS, and Windows, producing three artifacts. Minimum GitHub CLI run `34279250025`
+installed the exact tagged extension and passed its metadata capture.
+
+Exact-tag publisher run `34279324609` completed without intervention. Public release
+`385066828` is neither a draft nor a prerelease and contains exactly:
+
+- `SHA256SUMS`, 202 bytes, GitHub digest
+  `038b965c548025ae8ee570f437a5a9c5f7662fa943ab75c00eb0f6c89802611f`;
+- `gh_run_receptor-0.19.0-py3-none-any.whl`, 71,776 bytes, GitHub digest
+  `580a9783ae68ccfb1b0b3445528a2c3916772b152227bde94613cc0f71e3b341`;
+- `gh_run_receptor-0.19.0.tar.gz`, 105,441 bytes, GitHub digest
+  `ee255503864b6f29057f79f6cd4d44909f5aa6447b9d27e7841407b44d213bce`.
+
+Fresh downloads passed the published manifest and the independent release verifier.
+GitHub reports `isImmutable=false`; policy, exact tag identity, and asset verification are
+therefore the current protection rather than GitHub's administrative immutable-release
+setting.
+
+Zenodo verification run `34279652622` queried the public API after publication and
+returned `ABSENT` for 0.19.0. No archive record or DOI is claimed. Enabling the repository
+in the maintainer's Zenodo/GitHub integration remains an external handoff documented in
+the release policy.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

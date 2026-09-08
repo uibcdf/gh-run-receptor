@@ -19,4 +19,4 @@ jobs:
         with:
           python-version: "3.13"
       - name: Compare registered contracts with published baselines
-        run: python devtools/scripts/validate_contracts.py --baseline 0.18.0 --candidate 0.19.0
+        run: python devtools/scripts/validate_contracts.py --baseline 0.19.0

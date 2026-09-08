@@ -62,6 +62,44 @@ def test_content_signals_classify_generic_filenames_and_ambiguity_falls_back(tmp
     assert by_name["unknown.yaml"].reasons == ("no-profile-signal",)
 
 
+def test_conda_filename_alone_does_not_claim_an_observable_platform_matrix(tmp_path):
+    _workflow(tmp_path, "build_and_upload_conda_packages.yaml", "name: Package publication\n")
+
+    workflow = discover_workflows(tmp_path)[0]
+
+    assert workflow.profile == "generic"
+    assert workflow.confidence == "low"
+    assert workflow.reasons == ("filename-only:conda",)
+
+
+def test_action_internal_conda_platform_matrix_falls_back_to_generic(tmp_path):
+    _workflow(
+        tmp_path,
+        "build_and_upload_conda_packages.yaml",
+        """name: Build and upload conda packages
+on:
+  release:
+jobs:
+  publish:
+    strategy:
+      matrix:
+        python-version: [\"3.11\", \"3.12\"]
+    steps:
+      - uses: uibcdf/action-build-and-upload-conda-packages@v2.0.1
+        with:
+          platform_linux-64: true
+          platform_win-64: true
+""",
+    )
+
+    workflow = discover_workflows(tmp_path)[0]
+
+    assert workflow.profile == "generic"
+    assert workflow.confidence == "low"
+    assert workflow.settings == ()
+    assert workflow.reasons == ("unsupported:action-internal-platform-matrix",)
+
+
 def test_rendered_configuration_round_trips_through_the_strict_parser(tmp_path):
     _workflow(tmp_path, "ci.yaml", "name: CI\n")
     _workflow(tmp_path, "conda.yaml", "name: A noarch package\n")
