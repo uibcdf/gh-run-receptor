@@ -36,6 +36,17 @@ def test_release_workflow_checks_exact_tag_before_building():
     assert "python -m build" in source
 
 
+def test_release_workflow_imports_installed_wheel_outside_checkout():
+    source = _source()
+
+    install = source.index('python -m pip install --no-deps --target "$RUNNER_TEMP/install"')
+    leave_checkout = source.index('cd "$RUNNER_TEMP"', install)
+    import_installed = source.index('PYTHONPATH="$RUNNER_TEMP/install" python -c', leave_checkout)
+
+    assert install < leave_checkout < import_installed
+    assert "gh_run_receptor.__file__.startswith('$RUNNER_TEMP/install/')" in source
+
+
 def test_release_workflow_verifies_draft_before_publication_and_rechecks_public_state():
     source = _source()
     draft = source.index("--state draft")

@@ -467,6 +467,35 @@ returned `ABSENT` for 0.19.0. No archive record or DOI is claimed. Enabling the 
 in the maintainer's Zenodo/GitHub integration remains an external handoff documented in
 the release policy.
 
+## Release 0.19.1
+
+Tag `0.19.1` points to commit `4f910661d220b12d2626aa1f45ac99e07524b1c1` and publishes
+the compatible safe-discovery correction. Contract run `34285137551` retained all seven
+0.19.0 schema freezes. Minimum GitHub CLI run `34285137250` installed the exact tagged
+extension and passed a real metadata capture. Distributed Action run `34285137260` passed
+on Ubuntu, macOS, and Windows.
+
+Exact-tag publisher run `34285248253` passed citation and contract validation, all 339
+tests, build and manifest generation, draft verification, publication, and public-state
+verification. Public release `385099198` is neither a draft nor a prerelease and contains
+exactly:
+
+- `SHA256SUMS`, 202 bytes, GitHub digest
+  `16b0d02d6235c53c9ca4d22dfb7a3a8b5aa2c32d5facac33f6446a7dfc596435`;
+- `gh_run_receptor-0.19.1-py3-none-any.whl`, 71,985 bytes, GitHub digest
+  `57abf4074b870799ccba3e41177daf3ec19a147c9a7f3c1d443c3a58e4084983`;
+- `gh_run_receptor-0.19.1.tar.gz`, 105,909 bytes, GitHub digest
+  `f0f4c3bf4472a145054c079f12a37ab26dc0e9b4b632f9fa4fb8033f9e233c55`.
+
+Fresh public downloads passed the published checksum manifest. The wheel then installed
+without dependencies outside the checkout, reported exactly 0.19.1, and imported from the
+isolated installation path. That independent check exposed and led to the correction of a
+checkout-shadowing weakness in the publisher's own wheel-import assertion; the public
+wheel itself passed the corrected procedure.
+
+Zenodo verification run `34285502130` queried the public API after publication and returned
+`ABSENT` for 0.19.1. No archive record or DOI is claimed.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

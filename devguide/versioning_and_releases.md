@@ -145,3 +145,7 @@ The `0.19.1` gate retains those seven frozen resources and publishes the safe di
 correction: filename-only Conda hints and action-internal platform inputs cannot be
 misrepresented as an observable native-platform matrix. Its distributed Action, minimum
 GitHub CLI, exact-tag build, and public release gates repeat against the patch tag.
+
+Installed-wheel verification must run outside the source checkout and assert that the
+imported module path belongs to the isolated installation target. A matching version string
+alone is not evidence that the wheel payload was imported.

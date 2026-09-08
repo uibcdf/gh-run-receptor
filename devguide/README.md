@@ -7,8 +7,8 @@ evidence.
 
 ## Current state
 
-The project has verified `0.19.0` GitHub Release assets and this exact source is prepared
-as the compatible `0.19.1` correction, but no published package-index artifact or stable public contract;
+The project has verified `0.19.1` GitHub Release assets, but no published package-index
+artifact or stable public contract;
 the contracts in this guide are explicit but provisional unless marked settled. The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
 human, LLM, or JSON reports without changing the run or hiding its authoritative GitHub

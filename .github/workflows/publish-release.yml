@@ -63,8 +63,11 @@ jobs:
           python devtools/scripts/release_tools.py manifest "$RELEASE_TAG"
           python -m pip install --no-deps --target "$RUNNER_TEMP/install" \
             "dist/gh_run_receptor-${RELEASE_TAG}-py3-none-any.whl"
-          PYTHONPATH="$RUNNER_TEMP/install" python -c \
-            "import gh_run_receptor; assert gh_run_receptor.__version__ == '$RELEASE_TAG'"
+          (
+            cd "$RUNNER_TEMP"
+            PYTHONPATH="$RUNNER_TEMP/install" python -c \
+              "import gh_run_receptor; assert gh_run_receptor.__version__ == '$RELEASE_TAG'; assert gh_run_receptor.__file__.startswith('$RUNNER_TEMP/install/')"
+          )
           python devtools/scripts/release_tools.py notes "$RELEASE_TAG" \
             --output "$RUNNER_TEMP/release-notes.md"
 

@@ -5,5 +5,6 @@
 - [#20 — Expose published interpretation trust in compact success output](expose_published_interpretation_trust_in_compact_success_output.md) (`resolved`)
 - [#11 — Historical attempt capture mixes source facts and can report false PASS](historical_attempt_capture_mixes_source_facts_and_can_report_false_pass.md) (`resolved`)
 - [#29 — Preserve workflow diagnostics before generic process exits](preserve_workflow_diagnostics_before_generic_process_exits.md) (`resolved`)
+- [#36 — Release wheel verification can import the checkout](release_wheel_verification_can_import_the_checkout.md) (`resolved`)
 - [#3 — Script extension reports an unknown source version](script_extension_reports_an_unknown_source_version.md) (`resolved`)
 <!-- /generated -->
