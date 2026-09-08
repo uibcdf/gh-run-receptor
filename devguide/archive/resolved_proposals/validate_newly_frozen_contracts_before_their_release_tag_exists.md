@@ -1,12 +1,12 @@
 ---
 summary: Validate newly frozen contracts before their release tag exists
 issue: uibcdf/gh-run-receptor#34
-status: open
+status: resolved
 opened: 2026-09-08
-closed:
-verification: asserted
+closed: 2026-09-08
+verification: measured
 area: ['packaging', 'tests']
-guard:
+guard: tests/test_contract_compatibility.py
 normative:
 blocked_by: []
 supersedes: []
@@ -15,8 +15,7 @@ supersedes: []
 # Validating newly frozen contracts before their release tag exists
 
 **Reported:** 2026-09-08 while preparing the 0.19.0 contract freeze.
-**Status:** Open; the implementation passes focused local tests and awaits the hosted
-candidate gate.
+**Status:** Resolved; local, installed-artifact, and hosted candidate gates pass.
 
 ## What
 
@@ -83,3 +82,14 @@ depends on this proposal; the proposal is not blocked by the release.
 
 Initial reproduction and focused validation: Linux, Python 3.13.14, 2026-09-08, starting
 from commit `3c8c25d`.
+
+Implementation commit `921f434` passed Ruff, devguide validation, citation validation,
+337 tests, and candidate validation over seven registered and frozen schemas. Wheel and
+source distributions built locally; the wheel installed outside the checkout and exposed
+all seven schema resources, baseline 0.19.0, policy `PASS`/exit 0, and the exact 39-second
+policy violation with `FAIL`/exit 1. Ordinary validation failed on precisely the three
+new resources while the 0.19.0 tag remained absent.
+
+Manual hosted contract run `34278690899`, comparison/policy run `34278693945`, and
+same-revision reusable-reporter run `34278697374` all passed from the implementation
+candidate. The release tag and exact-tag publisher remain separate release operations.

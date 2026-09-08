@@ -24,6 +24,7 @@
 - [#4 — Publish measured adoption guidance for client repositories](publish_measured_adoption_guidance_for_client_repositories.md) (`resolved`)
 - [#23 — Secure inline Action rules and permission boundaries](secure_inline_action_rules_and_permission_boundaries.md) (`resolved`)
 - [#7 — Support Conda noarch package workflows](support_conda_noarch_package_workflows.md) (`resolved`)
+- [#34 — Validate newly frozen contracts before their release tag exists](validate_newly_frozen_contracts_before_their_release_tag_exists.md) (`resolved`)
 - [#28 — Validate portability outside UIBCDF](validate_portability_outside_uibcdf.md) (`resolved`)
 - [#18 — Validate terminal reporting through workflow_run](validate_terminal_reporting_through_workflow_run.md) (`resolved`)
 - [#16 — Validate the Python CLI across supported platforms](validate_the_python_cli_across_supported_platforms.md) (`resolved`)
