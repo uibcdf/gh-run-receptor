@@ -1,0 +1,19 @@
+{
+  "artifacts": [
+    {
+      "digest": "sha256:1d3e01c4fa29a828ce4b1abdb56ea14eabbd202dc364bb31a65fa7e69e85c98a",
+      "expired": false,
+      "id": 10303315670,
+      "name": "gh-run-receptor-events-v1-34709939550-1-multiple-python-variants-0",
+      "size_in_bytes": 934
+    },
+    {
+      "digest": "sha256:f70ee34bdb5f047af1f490b1fbab3d80331195bec6f22f6fb28ead5b8d1e375f",
+      "expired": false,
+      "id": 10303041350,
+      "name": "gh-run-receptor-events-v1-34709939550-1-multiple-python-variants-1",
+      "size_in_bytes": 936
+    }
+  ],
+  "total_count": 2
+}

@@ -88,8 +88,10 @@ artifacts. A workflow filename, release trigger, Conda recipe, or action input r
 a platform is not evidence that the platform build or upload completed. When a composite
 or reusable action performs the native matrix internally and the visible workflow
 orchestrates publication, select `release` for the observable workflow and retain an
-independent registry gate. Until `uibcdf/gh-run-receptor#35` supplies structured producer
-evidence, the receptor must not translate requested hidden platforms into observed ones.
+independent registry gate. The development implementation for
+`uibcdf/gh-run-receptor#35` consumes strict `events@1` package results when present; the
+published 0.19.1 release still requires the `release` fallback. No version translates
+requested hidden platforms into observed ones.
 
 ### Release
 

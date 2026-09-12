@@ -2,19 +2,20 @@
 
 ## Contract family
 
-The runtime registry exposes seven related, independently versioned documents:
+The runtime registry exposes eight related, independently versioned documents:
 
 - `gh-run-receptor.bundle@1`: captured source resources and manifest;
 - `gh-run-receptor.config@1`: normalized trusted repository workflow rules;
 - `gh-run-receptor.config-capture@1`: captured configuration plus source provenance;
 - `gh-run-receptor.model@1`: normalized internal/source model serialized for testing;
 - `gh-run-receptor.report@1`: profile assessment and rendered-report inputs;
-- `gh-run-receptor.comparison@1`: two independently identified reports and their deltas.
-- `gh-run-receptor.comparison-policy@1`: explicit candidate regression rules.
+- `gh-run-receptor.comparison@1`: two independently identified reports and their deltas;
+- `gh-run-receptor.comparison-policy@1`: explicit candidate regression rules;
+- `gh-run-receptor.events@1`: optional corroborating producer evidence.
 
-The separate `gh-run-receptor.events@1` producer format is optional corroborating
-evidence. It remains a provisional producer boundary rather than a registered persisted
-document with a packaged JSON Schema.
+The events contract is registered with a packaged JSON Schema but remains provisional and
+unfrozen until
+the 0.20.0 release gate accepts its hosted producer/consumer evidence.
 
 Version identifiers are explicit strings, not inferred from package version. Additive
 optional fields do not require a major schema change. Removing fields, changing meaning,
@@ -284,27 +285,56 @@ before they enter the report or an occurrence.
 
 ## Producer events
 
-Instrumented workflows may emit newline-delimited events or a final document. A minimal
-event contains:
+Instrumented workflows may upload a final document in a reserved, attempt-qualified
+artifact. The version 1 envelope contains producer and source-invocation identity plus one
+or more observed package results:
 
 ```json
 {
   "schema": "gh-run-receptor.events@1",
-  "producer": "uibcdf/action-build-and-upload-conda-packages",
-  "producer_version": "2.0.3",
-  "run_id": 33863426589,
-  "job_id": 987654,
-  "kind": "conda.artifact_validated",
-  "platform": "osx-64",
-  "artifact": "molsysmt-0.22.0-pyabi3h123_2.conda",
-  "python_versions": ["3.11", "3.12", "3.13"],
-  "result": "success"
+  "producer": {
+    "repository": "uibcdf/action-build-and-upload-conda-packages",
+    "ref": "v2.1.0"
+  },
+  "subject": {
+    "repository": "uibcdf/molsysmt",
+    "run_id": 33863426589,
+    "run_attempt": 1,
+    "head_sha": "0123456789abcdef",
+    "job_key": "build_conda",
+    "matrix_index": 2
+  },
+  "events": [
+    {
+      "kind": "conda.package",
+      "platform": "osx-64",
+      "artifact": "molsysmt-0.22.0-py311h123_2.conda",
+      "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+      "build": "success",
+      "upload": "success",
+      "python_versions": ["3.11"]
+    }
+  ]
 }
 ```
 
-Producer evidence is untrusted corroborating evidence. Run and job IDs must match the
-captured subject. Events cannot override official conclusions. Limits apply to event
-count, line size, total bytes, nesting, and string lengths.
+The artifact name begins
+`gh-run-receptor-events-v1-<run-id>-<attempt>-` and has one basename-only member named
+`gh-run-receptor-events.json`. Capture checks GitHub's archive digest when present and
+stores the exact JSON bytes plus artifact provenance in the replay bundle.
+
+Producer evidence is untrusted corroborating evidence. Repository, run, attempt, and head
+SHA must match the captured subject. GitHub does not expose the numeric job ID inside a
+running composite Action, so version 1 records the caller's job key and optional matrix
+index without pretending they are a GitHub job database identity. Events cannot override
+official conclusions. A producer failure can make a green run fail the derived profile;
+a producer success cannot make a non-successful GitHub conclusion pass.
+
+Capture accepts at most 50 matching artifacts. Each compressed artifact is at most 4 MiB,
+contains exactly one regular unencrypted JSON member, expands to at most 1 MiB, and contains
+at most 500 events. Duplicate keys, non-finite values, identity conflicts, duplicate package
+identities, unsafe names, unsupported results, expiry, and digest mismatch fail closed as
+incomplete evidence.
 
 ## Serialization and validation
 
@@ -321,7 +351,7 @@ count, line size, total bytes, nesting, and string lengths.
 The machine-readable Draft 2020-12 schemas ship inside `gh_run_receptor.schemas` as
 `bundle-v1.schema.json`, `config-v1.schema.json`, `config-capture-v1.schema.json`,
 `comparison-v1.schema.json`, `comparison-policy-v1.schema.json`,
-`model-v1.schema.json`, and `report-v1.schema.json`. They are
+`events-v1.schema.json`, `model-v1.schema.json`, and `report-v1.schema.json`. They are
 the formal spelling of the version 1 boundaries. `gh_run_receptor.contracts` is the single
 registry for their kinds, identifiers, current and readable versions, resources, and
 freeze baselines. Producers and untrusted readers do not duplicate those identifiers.
@@ -330,6 +360,7 @@ The four schema files shipped by release 0.18.0 are byte-frozen against that Git
 Release 0.19.0 freezes the first formal `config-capture@1` schema and the new
 `comparison@1` and `comparison-policy@1` schemas. The registry retains each resource's own
 first publishing tag instead of pretending that all seven originated in one release.
+The events schema is the sole registered but unfrozen contract during 0.20.0 development.
 
 Before the 0.19.0 tag exists, release preparation runs `validate_contracts.py --baseline
 0.18.0 --candidate 0.19.0`. Candidate mode fails if the candidate tag already exists,

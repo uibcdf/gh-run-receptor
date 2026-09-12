@@ -61,6 +61,19 @@ def _completeness(manifest: dict[str, Any], workflow: dict[str, Any]) -> dict[st
         logs = "not_requested"
     else:
         logs = "not_requested"
+    event_members = [
+        member
+        for member in manifest["members"]
+        if member.get("kind") == "gh-run-receptor.producer_events"
+    ]
+    if event_members:
+        producer_events = "complete"
+    elif any(str(item).startswith("producer events invalid") for item in manifest["warnings"]):
+        producer_events = "invalid"
+    elif any(str(item).startswith("producer events unavailable") for item in manifest["warnings"]):
+        producer_events = "unavailable"
+    else:
+        producer_events = "not_requested"
     return {
         "metadata": "complete",
         "workflow": "unavailable" if "unavailable" in workflow else "complete",
@@ -69,7 +82,44 @@ def _completeness(manifest: dict[str, Any], workflow: dict[str, Any]) -> dict[st
         "artifact_inventory": "complete",
         "artifact_content": "not_requested",
         "logs": logs,
+        "producer_events": producer_events,
     }
+
+
+def _producer_events(manifest: dict[str, Any], evidence: dict[str, Any]) -> list[dict[str, Any]]:
+    normalized = []
+    for member in manifest["members"]:
+        if member.get("kind") != "gh-run-receptor.producer_events":
+            continue
+        name = member["path"]
+        document = _object(evidence, name)
+        for index, event in enumerate(document["events"]):
+            normalized.append(
+                {
+                    **event,
+                    "producer": dict(document["producer"]),
+                    "invocation": dict(document["subject"]),
+                    "source": {
+                        "member": name,
+                        "json_pointer": f"/events/{index}",
+                        "artifact_id": member.get("artifact_id"),
+                        "artifact_name": member.get("artifact_name"),
+                        "artifact_digest": member.get("artifact_digest"),
+                    },
+                }
+            )
+    normalized.sort(
+        key=lambda item: (
+            str(item["platform"]),
+            str(item["artifact"]),
+            str(item["producer"]["repository"]),
+            str(item["invocation"]["job_key"]),
+            -1
+            if item["invocation"]["matrix_index"] is None
+            else int(item["invocation"]["matrix_index"]),
+        )
+    )
+    return normalized
 
 
 def normalize_evidence(manifest: dict[str, Any], evidence: dict[str, Any]) -> dict[str, Any]:
@@ -194,6 +244,7 @@ def normalize_evidence(manifest: dict[str, Any], evidence: dict[str, Any]) -> di
         "jobs": jobs,
         "job_counts": dict(sorted(counts.items())),
         "artifacts": artifacts,
+        "producer_events": _producer_events(manifest, evidence),
         "unknowns": unknowns,
         "warnings": list(manifest["warnings"]),
     }

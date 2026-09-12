@@ -32,6 +32,7 @@ def test_inventory_exposes_every_serialized_boundary_in_stable_order():
         "config-capture",
         "comparison",
         "comparison-policy",
+        "events",
         "model",
         "report",
     ]
@@ -39,6 +40,7 @@ def test_inventory_exposes_every_serialized_boundary_in_stable_order():
     schemas = [schema for item in inventory for schema in item["schemas"]]
     assert sum(item["frozen_since"] == "0.18.0" for item in schemas) == 4
     assert sum(item["frozen_since"] == "0.19.0" for item in schemas) == 3
+    assert sum(item["frozen_since"] is None for item in schemas) == 1
 
 
 @pytest.mark.parametrize(
@@ -166,16 +168,13 @@ def _candidate_runner(command, **kwargs):
     return subprocess.CompletedProcess(command, 1, b"", b"missing baseline resource")
 
 
-def test_candidate_gate_freezes_only_new_resources_and_normal_mode_stays_fail_closed():
-    assert (
-        validate_contracts(
-            ROOT,
-            baseline_tag="0.18.0",
-            candidate_tag="0.19.0",
-            runner=_candidate_runner,
-        )
-        == []
-    )
+def test_candidate_gate_requires_every_new_resource_to_be_frozen():
+    assert validate_contracts(
+        ROOT,
+        baseline_tag="0.18.0",
+        candidate_tag="0.19.0",
+        runner=_candidate_runner,
+    ) == ["gh_run_receptor/schemas/events-v1.schema.json is not frozen for candidate 0.19.0"]
 
     errors = validate_contracts(ROOT, baseline_tag="0.19.0", runner=_candidate_runner)
     assert len([error for error in errors if "cannot read" in error]) == 3
@@ -218,7 +217,8 @@ def test_candidate_gate_rejects_relabeling_a_published_resource(monkeypatch):
     )
     assert errors == [
         "gh_run_receptor/schemas/bundle-v1.schema.json existed in 0.18.0 "
-        "and cannot be newly frozen in 0.19.0"
+        "and cannot be newly frozen in 0.19.0",
+        "gh_run_receptor/schemas/events-v1.schema.json is not frozen for candidate 0.19.0",
     ]
 
 

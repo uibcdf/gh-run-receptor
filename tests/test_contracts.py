@@ -49,6 +49,9 @@ def test_sanitized_bundle_crosses_all_three_schema_boundaries(case):
     _validator("report-v1.schema.json").validate(report)
     if "config.json" in evidence:
         _validator("config-capture-v1.schema.json").validate(evidence["config.json"])
+    for member in manifest["members"]:
+        if member["kind"] == "gh-run-receptor.producer_events":
+            _validator("events-v1.schema.json").validate(evidence[member["path"]])
     assert report["github"]["conclusion"] == case["expected_github_conclusion"]
     assert report["receptor"]["assessment"] == case["expected_assessment"]
     assert report["subject"]["run_id"] == case["run_id"]
@@ -156,6 +159,33 @@ def test_real_cancelled_conda_fixture_accounts_for_every_platform_state():
     }
     assert "non-success jobs (10):" in rendered
     assert "successful=2 failed=1 cancelled=2 missing=0" in rendered
+
+
+def test_real_internal_conda_matrix_uses_bounded_producer_evidence():
+    manifest, evidence = load_bundle(FIXTURES / "bundles/action_conda_internal_matrix_success")
+    report = build_report(manifest, evidence, profile="conda")
+    rendered = render_llm(report)
+
+    states = {item["name"]: item["status"] for item in report["matrix"]["platforms"]}
+    sources = {
+        source["artifact_id"]
+        for platform in report["matrix"]["platforms"]
+        for source in platform["producer_event_sources"]
+    }
+    assert report["github"]["conclusion"] == "success"
+    assert report["receptor"]["assessment"] == "PASS"
+    assert report["completeness"]["producer_events"] == "complete"
+    assert states == {
+        "linux-64": "success",
+        "osx-64": "success",
+        "osx-arm64": "success",
+        "win-64": "success",
+    }
+    assert report["matrix"]["producer_event_count"] == 16
+    assert report["matrix"]["producer_upload_counts"] == {"not_requested": 16}
+    assert sources == {10303041350, 10303315670}
+    assert "producer_events=16" in rendered
+    assert "producer_uploads=not_requested:16" in rendered
 
 
 def test_real_expired_log_fixture_fails_closed_as_incomplete():

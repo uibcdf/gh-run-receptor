@@ -147,8 +147,10 @@ caller-defined environment values.
 
 Workflows may upload `gh-run-receptor.events@1` JSON rather than forcing the receptor to
 recover semantics from prose logs. Producer events are additive evidence. They retain a
-source job, step, attempt, and artifact digest, and they cannot override official GitHub
-conclusions.
+source repository, run, attempt, SHA, job key, matrix index, package digest, and producer
+revision. They cannot override official GitHub conclusions. The producing Action exposes a
+path and reserved artifact name; the caller uploads it explicitly so retention and storage
+cost remain visible workflow policy.
 
 ## Cost model
 

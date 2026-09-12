@@ -496,6 +496,32 @@ wheel itself passed the corrected procedure.
 Zenodo verification run `34285502130` queried the public API after publication and returned
 `ABSENT` for 0.19.1. No archive record or DOI is claimed.
 
+## Producer-event hosted checkpoint
+
+The post-0.19.1 implementation registers provisional `events@1` without changing any of
+the seven frozen schemas. It accepts only bounded, digest-checked, attempt-qualified
+artifacts whose subject agrees with repository, run, attempt, and SHA. Local tests cover
+safe ZIP handling, duplicate keys and identities, future contracts, wrong attempts,
+offline replay, and profile aggregation.
+
+A synthetic hidden-matrix case contains three GitHub-visible Python jobs and twelve
+producer package events spanning four native platforms. The Conda profile reports all four
+platforms successful, zero GitHub package artifacts, twelve producer events, and twelve
+successful upload observations. A counterexample with a green official conclusion and a
+producer-reported upload failure derives `FAIL` rather than hiding the contradiction.
+
+Hosted producer run `34709939550` passes its two jobs on Ubuntu and Windows. Its two
+attempt-qualified event artifacts are 934 and 936 bytes, and the generation plus explicit
+artifact upload adds no more than one second per step at GitHub's timestamp resolution.
+Normal metadata capture validates 16 events across four platforms and reports `PASS` while
+preserving GitHub's `conclusion=success`. The 43,856-byte capture reduces to a reviewed
+13,832-byte fixture with no logs or package archives; offline replay is deterministic.
+
+The local gate covers that live fixture at the bundle, events, model, and report boundaries.
+Contract validation retains eight registered and seven frozen schemas; `events@1` remains
+the sole provisional boundary awaiting the 0.20.0 freeze. The complete gate passes 356
+tests, Ruff lint and format, developer-report validation, and 0.19.0 compatibility.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

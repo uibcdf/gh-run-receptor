@@ -1,0 +1,73 @@
+{
+  "api_version": "2022-11-28",
+  "capture_policy": "metadata",
+  "captured_at": "2026-09-12T18:07:31.755897+00:00",
+  "complete": true,
+  "head_sha": "236df788a4b3154765cf0cbeff87df9f4f698a80",
+  "hostname": "github.com",
+  "members": [
+    {
+      "bytes": 360,
+      "complete": true,
+      "kind": "github.workflow_run",
+      "path": "run.json",
+      "sha256": "d8052c726322c3e93489093f6c84e9ac2312db69789d4c9e4bdd1442d1b4c027"
+    },
+    {
+      "bytes": 62,
+      "complete": true,
+      "kind": "github.workflow",
+      "path": "workflow.json",
+      "sha256": "b9538e985b675b6ec447487591cb185d2e0ee1518a8c440a62eeb0cd840bf88e"
+    },
+    {
+      "bytes": 3870,
+      "complete": true,
+      "kind": "github.jobs",
+      "path": "jobs.json",
+      "sha256": "36083d06647407e937319679b7ba9dace1656966806688126a5a6211099715ac"
+    },
+    {
+      "bytes": 43,
+      "complete": true,
+      "kind": "github.check_runs",
+      "path": "checks.json",
+      "sha256": "28cd5311a9d18008254c30a9fc641a07c1eb1d556010fc66509e91c06a93e9bb"
+    },
+    {
+      "bytes": 572,
+      "complete": true,
+      "kind": "github.artifacts",
+      "path": "artifacts.json",
+      "sha256": "4b374dd5284833e46d9683ac7172c4f6f7bfdc272df3fc3b84a957f120eec7fa"
+    },
+    {
+      "archive_sha256": "1d3e01c4fa29a828ce4b1abdb56ea14eabbd202dc364bb31a65fa7e69e85c98a",
+      "artifact_digest": "sha256:1d3e01c4fa29a828ce4b1abdb56ea14eabbd202dc364bb31a65fa7e69e85c98a",
+      "artifact_id": 10303315670,
+      "artifact_name": "gh-run-receptor-events-v1-34709939550-1-multiple-python-variants-0",
+      "bytes": 3167,
+      "complete": true,
+      "kind": "gh-run-receptor.producer_events",
+      "path": "producer-events-10303315670.json",
+      "sha256": "a8323a09283c31f6c4f331bf2881c5c4ebc6762327fee89d9168de6dff71350c"
+    },
+    {
+      "archive_sha256": "f70ee34bdb5f047af1f490b1fbab3d80331195bec6f22f6fb28ead5b8d1e375f",
+      "artifact_digest": "sha256:f70ee34bdb5f047af1f490b1fbab3d80331195bec6f22f6fb28ead5b8d1e375f",
+      "artifact_id": 10303041350,
+      "artifact_name": "gh-run-receptor-events-v1-34709939550-1-multiple-python-variants-1",
+      "bytes": 3167,
+      "complete": true,
+      "kind": "gh-run-receptor.producer_events",
+      "path": "producer-events-10303041350.json",
+      "sha256": "b5803e5811c4772b5f61c68537203bc8fb432a9fd0ff4f47a84bac89b66f4d31"
+    }
+  ],
+  "receptor_version": "0.19.1+1.gf6160e7.dirty",
+  "repository": "uibcdf/action-build-and-upload-conda-packages",
+  "run_attempt": 1,
+  "run_id": 34709939550,
+  "schema": "gh-run-receptor.bundle@1",
+  "warnings": []
+}

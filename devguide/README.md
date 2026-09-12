@@ -80,9 +80,10 @@ The current MVP implements:
   absent.
 - a first portable live corpus spanning three non-UIBCDF repositories, including native
   conclusion parity, bounded output, and deterministic offline replay.
-- one runtime registry for all seven serialized boundaries, formal configuration-capture
+- one runtime registry for eight serialized boundaries, formal configuration-capture
   schema, offline compatibility introspection, forward-only migration rules, and a release
-  gate retaining the four v1 freezes from 0.18.0 and the three new freezes from 0.19.0.
+  gate retaining the four v1 freezes from 0.18.0 and the three new freezes from 0.19.0;
+  producer events remain the sole provisional unfrozen contract.
 - a first-class offline and remote `compare` command with an independently versioned
   comparison contract, explicit source/commit identity, bounded human and LLM output, and
   descriptive job, duration, artifact-inventory, and matrix-coverage deltas.
@@ -92,13 +93,17 @@ The current MVP implements:
 - a call-only reusable terminal reporter that forwards typed policy to the shared Action,
   exposes durable cross-job outputs, and resolves its Action from the exact same repository
   revision without a checkout or internal moving reference.
+- bounded attempt-qualified producer-event acquisition, exact source-identity validation,
+  offline normalization, and Conda hidden-platform aggregation, validated end to end with
+  two hosted producer jobs on Linux and Windows and a sanitized deterministic replay.
 
 It does not yet provide a broad cross-workflow corpus beyond that initial external sample;
 cross-run aggregation; remote workflow discovery; pattern rules; or validated private-repository
 and fork token behavior. The CI,
 documentation, Conda, release, configuration, and Action contracts are initial vertical
-slices, not their complete stable forms. In particular, action-internal native matrices
-have a safe release-profile projection but no structured per-platform representation yet.
+slices, not their complete stable forms. In particular, action-internal native matrices now
+have a hosted provisional structured per-platform representation, but the contract remains
+unfrozen until the 0.20.0 release gate.
 
 ## Reading order
 

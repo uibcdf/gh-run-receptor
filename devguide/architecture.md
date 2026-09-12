@@ -155,4 +155,6 @@ owners, and gates are recorded in
 Check-run annotations are read evidence and do not justify write permissions. Portable
 step/log association is treated as incomplete when GitHub cannot prove it. The versioned
 `gh-run-receptor.events@1` producer format is an accepted optional contract, not a
-requirement for generic reporting.
+requirement for generic reporting. Reserved artifacts are acquired into the source bundle,
+validated against exact run identity, normalized with source pointers, and only then
+consumed by profiles; producer requests never count as observed results.

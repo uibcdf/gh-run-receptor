@@ -2,6 +2,20 @@
   "schema": "gh-run-receptor.test-corpus@1",
   "captures": [
     {
+      "path": "bundles/action_conda_internal_matrix_success",
+      "repository": "uibcdf/action-build-and-upload-conda-packages",
+      "run_id": 34709939550,
+      "run_attempt": 1,
+      "captured_at": "2026-09-12",
+      "reason": "A successful two-job workflow where each Action invocation produces two Python variants for four internal Conda platforms and publishes attempt-qualified structured evidence.",
+      "sanitization": "Retained run and attempt identity, official state, workflow path, job timing, conclusions and complete step state, artifact identity metadata, both validated producer documents, and their archive provenance. Removed actors, commit data beyond the subject SHA, runner details, labels, pull requests, checks, logs, package archives, and unrelated API fields.",
+      "profile": "conda",
+      "expected_github_conclusion": "success",
+      "expected_assessment": "PASS",
+      "expected_exit_code": 0,
+      "upstream_retention": "The public GitHub run and producer artifacts are subject to GitHub retention; this fixture is a self-contained sanitized replay and contains no package archives or logs."
+    },
+    {
       "path": "bundles/molsysmt_conda_cancelled",
       "repository": "uibcdf/molsysmt",
       "run_id": 33636046706,

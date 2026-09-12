@@ -1,0 +1,11 @@
+{
+  "conclusion": "success",
+  "event": "workflow_dispatch",
+  "head_branch": "main",
+  "head_sha": "236df788a4b3154765cf0cbeff87df9f4f698a80",
+  "html_url": "https://github.com/uibcdf/action-build-and-upload-conda-packages/actions/runs/34709939550",
+  "id": 34709939550,
+  "name": "Test multiple Conda variants",
+  "run_attempt": 1,
+  "status": "completed"
+}

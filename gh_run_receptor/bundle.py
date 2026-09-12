@@ -14,6 +14,13 @@ from gh_run_receptor import __version__
 from gh_run_receptor.config import capture_repository_config, validate_config_capture
 from gh_run_receptor.contracts import schema_id, upgrade_contract
 from gh_run_receptor.errors import AcquisitionError, BundleError, ConfigError, ContractError
+from gh_run_receptor.events import (
+    MAX_EVENT_ARCHIVE_BYTES,
+    read_event_archive,
+    select_event_artifacts,
+    validate_event_document,
+    verify_event_archive_digest,
+)
 from gh_run_receptor.github import API_VERSION, GitHubClient, merge_pages
 
 REQUIRED_STRUCTURED_MEMBERS = (
@@ -177,6 +184,52 @@ def capture_bundle(
         artifacts = merge_pages(artifacts_payload, "artifacts")
         members.append(_write_member(temporary, "artifacts.json", artifacts, "github.artifacts"))
 
+        try:
+            event_artifacts = select_event_artifacts(
+                artifacts["artifacts"], run_id, selected_attempt
+            )
+        except BundleError as error:
+            event_artifacts = []
+            warnings.append(f"producer events invalid: {error}")
+        for artifact in event_artifacts:
+            artifact_id = artifact["id"]
+            archive_path = temporary / f".producer-events-{artifact_id}.zip"
+            try:
+                client.download(
+                    f"/repos/{repository}/actions/artifacts/{artifact_id}/zip",
+                    archive_path,
+                    max_bytes=MAX_EVENT_ARCHIVE_BYTES,
+                )
+                archive_digest = verify_event_archive_digest(archive_path, artifact.get("digest"))
+                data, _ = read_event_archive(
+                    archive_path,
+                    repository=repository,
+                    run_id=run_id,
+                    run_attempt=selected_attempt,
+                    head_sha=run.get("head_sha"),
+                )
+                name = f"producer-events-{artifact_id}.json"
+                (temporary / name).write_bytes(data)
+                members.append(
+                    {
+                        "path": name,
+                        "kind": "gh-run-receptor.producer_events",
+                        "bytes": len(data),
+                        "sha256": _sha256(data),
+                        "complete": True,
+                        "artifact_id": artifact_id,
+                        "artifact_name": artifact["name"],
+                        "artifact_digest": artifact.get("digest"),
+                        "archive_sha256": archive_digest.removeprefix("sha256:"),
+                    }
+                )
+            except AcquisitionError as error:
+                warnings.append(f"producer events unavailable for artifact {artifact_id}: {error}")
+            except (BundleError, OSError) as error:
+                warnings.append(f"producer events invalid for artifact {artifact_id}: {error}")
+            finally:
+                archive_path.unlink(missing_ok=True)
+
         checks = {"total_count": 0, "check_runs": []}
         check_suite_id = run.get("check_suite_id")
         if check_suite_id:
@@ -293,6 +346,15 @@ def load_bundle(directory: Path) -> tuple[dict[str, Any], dict[str, Any]]:
             raise BundleError(f"digest mismatch for bundle member: {name}")
         if name in STRUCTURED_MEMBERS:
             evidence[name] = _strict_json(data, name)
+        elif member["kind"] == "gh-run-receptor.producer_events":
+            document = _strict_json(data, name)
+            evidence[name] = validate_event_document(
+                document,
+                repository=manifest["repository"],
+                run_id=manifest["run_id"],
+                run_attempt=manifest["run_attempt"],
+                head_sha=manifest.get("head_sha"),
+            )
 
     required = set(REQUIRED_STRUCTURED_MEMBERS)
     if missing := sorted(required - evidence.keys()):

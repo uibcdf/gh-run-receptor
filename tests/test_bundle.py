@@ -1,9 +1,11 @@
 import hashlib
+import io
 import json
+import zipfile
 
 import pytest
 
-from devtools.scripts.sanitize_bundle import _selected_evidence
+from devtools.scripts.sanitize_bundle import _selected_evidence, sanitize
 from gh_run_receptor.bundle import (
     REQUIRED_STRUCTURED_MEMBERS,
     capture_bundle,
@@ -11,6 +13,7 @@ from gh_run_receptor.bundle import (
     load_bundle,
 )
 from gh_run_receptor.errors import BundleError
+from gh_run_receptor.events import EVENT_DOCUMENT_NAME, event_artifact_prefix
 
 
 def _write_bundle(path):
@@ -214,6 +217,154 @@ def test_capture_uses_attempt_specific_run_facts_for_a_historical_attempt(tmp_pa
     assert manifest["run_attempt"] == 1
     assert evidence["run.json"]["run_attempt"] == 1
     assert evidence["run.json"]["conclusion"] == "failure"
+
+
+class EventClient:
+    hostname = "github.com"
+
+    def __init__(self, *, conflicting_attempt=False):
+        document = {
+            "schema": "gh-run-receptor.events@1",
+            "producer": {
+                "repository": "uibcdf/action-build-and-upload-conda-packages",
+                "ref": "v2.1.0",
+            },
+            "subject": {
+                "repository": "uibcdf/example",
+                "run_id": 42,
+                "run_attempt": 2 if conflicting_attempt else 1,
+                "head_sha": "abc",
+                "job_key": "build",
+                "matrix_index": None,
+            },
+            "events": [
+                {
+                    "kind": "conda.package",
+                    "platform": "linux-64",
+                    "artifact": "example-1.0-py311_0.conda",
+                    "sha256": "a" * 64,
+                    "build": "success",
+                    "upload": "not_requested",
+                    "python_versions": ["3.11"],
+                }
+            ],
+        }
+        stream = io.BytesIO()
+        with zipfile.ZipFile(stream, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+            archive.writestr(EVENT_DOCUMENT_NAME, json.dumps(document, sort_keys=True))
+        self.archive = stream.getvalue()
+        self.endpoints = []
+
+    def json(self, endpoint, *, paginate=False):
+        self.endpoints.append(endpoint)
+        if endpoint.endswith("/actions/workflows/7"):
+            return {"id": 7, "path": ".github/workflows/conda.yaml"}
+        if "/attempts/1/jobs?" in endpoint:
+            return [{"total_count": 1, "jobs": [{"id": 11, "name": "build"}]}]
+        if endpoint.endswith("/artifacts?per_page=100"):
+            return [
+                {
+                    "total_count": 1,
+                    "artifacts": [
+                        {
+                            "id": 99,
+                            "name": event_artifact_prefix(42, 1) + "build-0",
+                            "size_in_bytes": len(self.archive),
+                            "expired": False,
+                            "digest": "sha256:" + hashlib.sha256(self.archive).hexdigest(),
+                        }
+                    ],
+                }
+            ]
+        if endpoint == "/repos/uibcdf/example":
+            return {"default_branch": "main"}
+        raise AssertionError(endpoint)
+
+    def optional_json(self, endpoint):
+        self.endpoints.append(endpoint)
+        return None
+
+    def download(self, endpoint, destination, *, max_bytes):
+        self.endpoints.append(endpoint)
+        assert max_bytes >= len(self.archive)
+        destination.write_bytes(self.archive)
+
+
+def test_metadata_capture_downloads_and_replays_attempt_qualified_producer_events(tmp_path):
+    destination = tmp_path / "bundle"
+    current = {
+        "id": 42,
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "abc",
+        "workflow_id": 7,
+    }
+    client = EventClient()
+
+    manifest = capture_bundle(
+        client,
+        "uibcdf/example",
+        42,
+        attempt=None,
+        policy="metadata",
+        destination=destination,
+        run=current,
+    )
+    loaded, evidence = load_bundle(destination)
+
+    event_member = next(
+        item for item in manifest["members"] if item["kind"] == "gh-run-receptor.producer_events"
+    )
+    assert event_member["artifact_id"] == 99
+    assert event_member["artifact_name"] == event_artifact_prefix(42, 1) + "build-0"
+    assert event_member["archive_sha256"] == hashlib.sha256(client.archive).hexdigest()
+    assert loaded["complete"] is True
+    assert evidence[event_member["path"]]["events"][0]["platform"] == "linux-64"
+    assert "/repos/uibcdf/example/actions/artifacts/99/zip" in client.endpoints
+
+    sanitized = tmp_path / "sanitized"
+    sanitize(destination, sanitized, include_config=False)
+    sanitized_manifest, sanitized_evidence = load_bundle(sanitized)
+    sanitized_member = next(
+        item
+        for item in sanitized_manifest["members"]
+        if item["kind"] == "gh-run-receptor.producer_events"
+    )
+    assert sanitized_member["artifact_id"] == event_member["artifact_id"]
+    assert sanitized_member["artifact_digest"] == event_member["artifact_digest"]
+    assert sanitized_member["archive_sha256"] == event_member["archive_sha256"]
+    assert sanitized_evidence[sanitized_member["path"]] == evidence[event_member["path"]]
+
+
+def test_invalid_producer_events_make_the_bundle_incomplete_without_hiding_github(tmp_path):
+    destination = tmp_path / "bundle"
+    current = {
+        "id": 42,
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "abc",
+        "workflow_id": 7,
+    }
+
+    manifest = capture_bundle(
+        EventClient(conflicting_attempt=True),
+        "uibcdf/example",
+        42,
+        attempt=None,
+        policy="metadata",
+        destination=destination,
+        run=current,
+    )
+    _, evidence = load_bundle(destination)
+
+    assert manifest["complete"] is False
+    assert manifest["warnings"] == [
+        "producer events invalid for artifact 99: "
+        "producer events subject run attempt conflicts with bundle"
+    ]
+    assert evidence["run.json"]["conclusion"] == "success"
 
 
 def test_sanitizer_retains_optional_trusted_configuration():

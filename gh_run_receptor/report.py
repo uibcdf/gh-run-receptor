@@ -161,6 +161,7 @@ def _detect_profile(workflow: Any, jobs: list[dict[str, Any]]) -> str:
 def _conda_matrix(
     jobs: list[dict[str, Any]],
     artifacts: list[dict[str, Any]],
+    producer_events: list[dict[str, Any]],
     expected_platforms: list[str] | None = None,
     package_kind: str = "native",
     artifact_inventory: str = "complete",
@@ -197,16 +198,25 @@ def _conda_matrix(
         }
     platforms = []
     expected = set(expected_platforms or [])
-    for platform in _CONDA_PLATFORMS:
+    producer_platforms = {str(event["platform"]) for event in producer_events}
+    platform_order = [*_CONDA_PLATFORMS, *sorted(producer_platforms - set(_CONDA_PLATFORMS))]
+    for platform in platform_order:
         platform_jobs = [job for job in jobs if platform in str(job.get("name", "")).lower()]
         platform_artifacts = [
             artifact for artifact in artifacts if platform in str(artifact.get("name", "")).lower()
         ]
-        if not platform_jobs and not platform_artifacts and platform not in expected:
+        platform_events = [event for event in producer_events if event["platform"] == platform]
+        if (
+            not platform_jobs
+            and not platform_artifacts
+            and not platform_events
+            and platform not in expected
+        ):
             continue
         states = [
             str(job.get("conclusion") or job.get("status") or "unknown") for job in platform_jobs
         ]
+        states.extend(str(event["build"]) for event in platform_events)
         status = "unknown"
         for state in _PLATFORM_STATE_PRECEDENCE:
             if state in states:
@@ -218,6 +228,9 @@ def _conda_matrix(
             elif platform in expected and not platform_artifacts and not states:
                 status = "missing"
         successful = status == "success"
+        upload_counts: dict[str, int] = {}
+        for event in platform_events:
+            upload_counts[event["upload"]] = upload_counts.get(event["upload"], 0) + 1
         platforms.append(
             {
                 "name": platform,
@@ -226,9 +239,26 @@ def _conda_matrix(
                 "status": status,
                 "reusable": successful and bool(platform_artifacts),
                 "expected": platform in expected,
+                "producer_event_sources": [event["source"] for event in platform_events],
+                "producer_artifacts": [event["artifact"] for event in platform_events],
+                "upload_counts": dict(sorted(upload_counts.items())),
             }
         )
-    return {"kind": "conda", "package_kind": "native", "platforms": platforms}
+    producer_build_counts: dict[str, int] = {}
+    producer_upload_counts: dict[str, int] = {}
+    for event in producer_events:
+        build = event["build"]
+        upload = event["upload"]
+        producer_build_counts[build] = producer_build_counts.get(build, 0) + 1
+        producer_upload_counts[upload] = producer_upload_counts.get(upload, 0) + 1
+    return {
+        "kind": "conda",
+        "package_kind": "native",
+        "platforms": platforms,
+        "producer_event_count": len(producer_events),
+        "producer_build_counts": dict(sorted(producer_build_counts.items())),
+        "producer_upload_counts": dict(sorted(producer_upload_counts.items())),
+    }
 
 
 def _ci_role(name: Any) -> str:
@@ -493,6 +523,7 @@ def build_report(
         matrix = _conda_matrix(
             jobs,
             artifacts,
+            model["producer_events"],
             expected_platforms,
             package_kind,
             model["completeness"]["artifact_inventory"],
@@ -516,7 +547,11 @@ def build_report(
     if (
         selected_profile == "conda"
         and assessment == "FAIL"
-        and any(platform["reusable"] for platform in matrix["platforms"])
+        and any(
+            platform["reusable"] or platform["producer_event_sources"]
+            for platform in matrix["platforms"]
+            if platform["status"] == "success"
+        )
     ):
         assessment = "PARTIAL"
     if (
@@ -534,6 +569,15 @@ def build_report(
     ):
         assessment = "PARTIAL"
     if missing_platforms and assessment == "PASS":
+        assessment = "FAIL"
+    if (
+        selected_profile == "conda"
+        and assessment == "PASS"
+        and any(
+            event["build"] == "failure" or event["upload"] == "failure"
+            for event in model["producer_events"]
+        )
+    ):
         assessment = "FAIL"
 
     return {
@@ -562,6 +606,7 @@ def build_report(
         "jobs": jobs,
         "job_counts": model["job_counts"],
         "artifacts": artifacts,
+        "producer_events": model["producer_events"],
         "matrix": matrix,
         "causes": causes,
         "unknowns": model["unknowns"],
@@ -741,6 +786,15 @@ def render_llm(report: dict[str, Any]) -> str:
                 platforms = report["matrix"]["platforms"]
                 successful_platforms = sum(item["status"] == "success" for item in platforms)
                 fields.append(f"platforms={successful_platforms}/{len(platforms)}")
+                event_count = report["matrix"].get("producer_event_count", 0)
+                if event_count:
+                    upload_text = ",".join(
+                        f"{state}:{count}"
+                        for state, count in report["matrix"]["producer_upload_counts"].items()
+                    )
+                    fields.extend(
+                        [f"producer_events={event_count}", f"producer_uploads={upload_text}"]
+                    )
         elif report["matrix"].get("kind") == "ci":
             roles = ",".join(
                 f"{role['name']}:{len(role['job_ids'])}" for role in report["matrix"]["roles"]
@@ -882,6 +936,14 @@ def render_llm(report: dict[str, Any]) -> str:
                 f" missing={len(missing_platforms)} artifacts={len(report['artifacts'])} "
                 f"observed={len(platforms) - len(missing_platforms)}"
             )
+            event_count = report["matrix"].get("producer_event_count", 0)
+            if event_count:
+                platform_summary += f" producer_events={event_count}"
+                uploads = ",".join(
+                    f"{state}:{count}"
+                    for state, count in report["matrix"]["producer_upload_counts"].items()
+                )
+                platform_summary += f" producer_uploads={uploads}"
             lines.append(platform_summary)
             if missing_platforms:
                 lines.append(f"missing expected: {', '.join(missing_platforms)}")
@@ -991,7 +1053,15 @@ def render_human(report: dict[str, Any]) -> str:
             lines.extend(["", "Conda platforms"])
             for platform in report["matrix"]["platforms"]:
                 reusable = ", reusable artifact" if platform["reusable"] else ""
-                lines.append(f"  {platform['status']:<8} {platform['name']}{reusable}")
+                produced = len(platform.get("producer_event_sources", []))
+                producer = f", producer packages={produced}" if produced else ""
+                upload_counts = ",".join(
+                    f"{state}={count}" for state, count in platform["upload_counts"].items()
+                )
+                uploads = f", uploads={upload_counts}" if upload_counts else ""
+                lines.append(
+                    f"  {platform['status']:<8} {platform['name']}{reusable}{producer}{uploads}"
+                )
     elif report["matrix"].get("kind") == "ci":
         lines.extend(["", "CI roles"])
         for role in report["matrix"]["roles"]:

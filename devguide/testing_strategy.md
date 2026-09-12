@@ -173,6 +173,9 @@ At minimum the suite covers:
 - one root cause repeated across jobs and multiple independent root causes;
 - workflow build success followed by deployment failure;
 - producer events that agree and disagree with GitHub source state;
+- producer artifacts from the wrong attempt, expired or oversized artifacts, unsafe ZIPs,
+  duplicate package identities, digest mismatch, and a green GitHub run containing a
+  producer-reported upload failure;
 - configuration ties, invalid schemas, and untrusted policy sources;
 - deterministic rendering under shuffled API order.
 

@@ -1,0 +1,105 @@
+{
+  "events": [
+    {
+      "artifact": "action-multiple-variants-fixture-0.1.0-py311_0.tar.bz2",
+      "build": "success",
+      "kind": "conda.package",
+      "platform": "linux-64",
+      "python_versions": [
+        "3.11"
+      ],
+      "sha256": "27a22b544a57458363a70d763cfd569521ce10e85003d631d3c0eedc829dfe27",
+      "upload": "not_requested"
+    },
+    {
+      "artifact": "action-multiple-variants-fixture-0.1.0-py312_0.tar.bz2",
+      "build": "success",
+      "kind": "conda.package",
+      "platform": "linux-64",
+      "python_versions": [
+        "3.12"
+      ],
+      "sha256": "0983cf091d304abfb6f9b1699f7df64cb84d6dbfad0926a59c5295bb2b2ad51a",
+      "upload": "not_requested"
+    },
+    {
+      "artifact": "action-multiple-variants-fixture-0.1.0-py311_0.tar.bz2",
+      "build": "success",
+      "kind": "conda.package",
+      "platform": "osx-64",
+      "python_versions": [
+        "3.11"
+      ],
+      "sha256": "38ace64d88d90176dbc67ee67ec060902f1e94e0c5f7f1e9cc66556d1d9ca881",
+      "upload": "not_requested"
+    },
+    {
+      "artifact": "action-multiple-variants-fixture-0.1.0-py312_0.tar.bz2",
+      "build": "success",
+      "kind": "conda.package",
+      "platform": "osx-64",
+      "python_versions": [
+        "3.12"
+      ],
+      "sha256": "3070071b4f86d0a9dec0174a1379c394b66b7941c42ac735cad8dcd41a1b18c9",
+      "upload": "not_requested"
+    },
+    {
+      "artifact": "action-multiple-variants-fixture-0.1.0-py311_0.tar.bz2",
+      "build": "success",
+      "kind": "conda.package",
+      "platform": "osx-arm64",
+      "python_versions": [
+        "3.11"
+      ],
+      "sha256": "3fd23d8b813b73ce7410fb87a8d014012821dbd64580fa28b15058b13acf158d",
+      "upload": "not_requested"
+    },
+    {
+      "artifact": "action-multiple-variants-fixture-0.1.0-py312_0.tar.bz2",
+      "build": "success",
+      "kind": "conda.package",
+      "platform": "osx-arm64",
+      "python_versions": [
+        "3.12"
+      ],
+      "sha256": "798d574aa4e3a81587255798242c077257341419f0845682a2cfd464b2eb0267",
+      "upload": "not_requested"
+    },
+    {
+      "artifact": "action-multiple-variants-fixture-0.1.0-py311_0.tar.bz2",
+      "build": "success",
+      "kind": "conda.package",
+      "platform": "win-64",
+      "python_versions": [
+        "3.11"
+      ],
+      "sha256": "590854b7505f5113bd5ab189e34d11e04007ac78708b04d42a99f3ec8773b1bc",
+      "upload": "not_requested"
+    },
+    {
+      "artifact": "action-multiple-variants-fixture-0.1.0-py312_0.tar.bz2",
+      "build": "success",
+      "kind": "conda.package",
+      "platform": "win-64",
+      "python_versions": [
+        "3.12"
+      ],
+      "sha256": "f6c9b21576c0ac299f2f246ab4de4a1b6cb6eba3ec33bbd0072ff4e8f6cbed01",
+      "upload": "not_requested"
+    }
+  ],
+  "producer": {
+    "ref": "local",
+    "repository": "uibcdf/action-build-and-upload-conda-packages"
+  },
+  "schema": "gh-run-receptor.events@1",
+  "subject": {
+    "head_sha": "236df788a4b3154765cf0cbeff87df9f4f698a80",
+    "job_key": "multiple-python-variants",
+    "matrix_index": 0,
+    "repository": "uibcdf/action-build-and-upload-conda-packages",
+    "run_attempt": 1,
+    "run_id": 34709939550
+  }
+}

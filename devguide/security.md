@@ -109,6 +109,13 @@ duplicate-key JSON, invalid provenance, and digest mismatch. Fresh source-run me
 agree with the artifact. This verifies source facts, not arbitrary profile claims; output
 states that distinction explicitly and rejects any derived `PASS` over official non-success.
 
+Producer-event discovery is restricted to an exact run- and attempt-qualified prefix. It
+accepts at most 50 artifacts of 4 MiB compressed each. Every archive contains exactly one
+regular, unencrypted, basename-only `gh-run-receptor-events.json` member of at most 1 MiB.
+The reader checks GitHub's digest when supplied, rejects duplicate JSON keys and non-finite
+numbers, validates subject identity against the bundle, and caps each document at 500
+events. An invalid matching artifact makes the bundle incomplete rather than disappearing.
+
 Source-first discovery does not scan or download arbitrary artifacts. It derives an exact
 attempt-qualified name from fresh source metadata, requires one match, checks the artifact's
 publishing run identity, and verifies a completed `workflow_run` event plus the exact

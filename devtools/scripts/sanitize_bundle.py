@@ -78,6 +78,9 @@ def _selected_evidence(evidence: dict[str, Any], *, include_config: bool = True)
     }
     if include_config and "config.json" in evidence:
         selected["config.json"] = evidence["config.json"]
+    for name, value in evidence.items():
+        if name.startswith("producer-events-") and name.endswith(".json"):
+            selected[name] = value
     return selected
 
 
@@ -92,15 +95,22 @@ def sanitize(source: Path, destination: Path, *, include_config: bool = True) ->
         data = _canonical(value)
         (destination / name).write_bytes(data)
         source_member = next(item for item in manifest["members"] if item["path"] == name)
-        members.append(
-            {
-                "path": name,
-                "kind": source_member["kind"],
-                "bytes": len(data),
-                "sha256": hashlib.sha256(data).hexdigest(),
-                "complete": source_member["complete"],
-            }
-        )
+        member = {
+            "path": name,
+            "kind": source_member["kind"],
+            "bytes": len(data),
+            "sha256": hashlib.sha256(data).hexdigest(),
+            "complete": source_member["complete"],
+        }
+        for key in (
+            "artifact_id",
+            "artifact_name",
+            "artifact_digest",
+            "archive_sha256",
+        ):
+            if key in source_member:
+                member[key] = source_member[key]
+        members.append(member)
     sanitized_manifest = {
         "schema": "gh-run-receptor.bundle@1",
         "repository": manifest["repository"],

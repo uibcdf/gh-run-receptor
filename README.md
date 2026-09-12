@@ -33,6 +33,15 @@ selects `human` for an interactive terminal and `llm` when stdout is redirected.
 `--format=json` for the versioned structured report; JSON is a format, not a receptor.
 The ordinary native GitHub presentation remains available through `gh run view`.
 
+Development after 0.19.1 adds provisional `gh-run-receptor.events@1` support for work that
+a composite Action performs inside a GitHub-visible job. A producer uploads an artifact
+whose name starts with
+`gh-run-receptor-events-v1-<run-id>-<attempt>-`; metadata capture downloads and validates
+that bounded document automatically. The Conda profile can then report actual package
+platforms, digests, and upload results without inferring success from Action inputs. This
+contract is not part of the published 0.19.1 surface and remains unfrozen until the 0.20.0
+hosted gate passes.
+
 The same release provides a composite Action. For a truthful terminal report, invoke it
 from a downstream workflow after the source workflow completes:
 
