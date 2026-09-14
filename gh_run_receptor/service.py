@@ -2,9 +2,11 @@
 
 from __future__ import annotations
 
+import shutil
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+from uuid import uuid4
 
 from gh_run_receptor.bundle import capture_bundle, default_bundle_path, load_bundle
 from gh_run_receptor.errors import BundleError
@@ -19,6 +21,51 @@ class CapturedEvidence:
     manifest: dict[str, Any]
     evidence: dict[str, Any]
     path: Path
+
+
+def _discard_bundle(path: Path) -> None:
+    """Discarding one cache path without following a symlink."""
+    if path.is_symlink():
+        path.unlink()
+    elif path.exists():
+        shutil.rmtree(path)
+
+
+def _refresh_bundle(
+    client: GitHubClient,
+    repository: str,
+    run_id: int,
+    *,
+    attempt: int | None,
+    policy: str,
+    destination: Path,
+    run: dict[str, Any],
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    """Replacing one nonterminal cache entry after validating fresh evidence."""
+    nonce = uuid4().hex
+    replacement = destination.with_name(f".{destination.name}.refresh-{nonce}")
+    stale = destination.with_name(f".{destination.name}.stale-{nonce}")
+    try:
+        capture_bundle(
+            client,
+            repository,
+            run_id,
+            attempt=attempt,
+            policy=policy,
+            destination=replacement,
+            run=run,
+        )
+        load_bundle(replacement)
+        destination.rename(stale)
+        try:
+            replacement.rename(destination)
+        except Exception:
+            stale.rename(destination)
+            raise
+        _discard_bundle(stale)
+        return load_bundle(destination)
+    finally:
+        _discard_bundle(replacement)
 
 
 def acquire_evidence(
@@ -50,6 +97,17 @@ def acquire_evidence(
         if actual != expected:
             raise BundleError(
                 "existing bundle identity or capture policy does not match the request"
+            )
+        retained_run = evidence.get("run.json")
+        if not isinstance(retained_run, dict) or retained_run.get("status") != "completed":
+            manifest, evidence = _refresh_bundle(
+                client,
+                repository,
+                run_id,
+                attempt=attempt,
+                policy=policy,
+                destination=destination,
+                run=run,
             )
     else:
         manifest = capture_bundle(

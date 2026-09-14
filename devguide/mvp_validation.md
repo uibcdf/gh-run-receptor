@@ -521,8 +521,16 @@ The local gate covers that live fixture at the bundle, events, model, and report
 All eight registered schemas now declare a freeze; candidate validation proves that
 `events@1` is the only resource newly frozen in 0.20.0 and did not exist in 0.19.0. The
 declaration becomes published history only when the exact candidate tag exists. The
-complete candidate gate passes 357 tests, Ruff lint and format, developer-report
+complete candidate gate passes 360 tests, Ruff lint and format, developer-report
 validation, and 0.19.0 compatibility.
+
+During that gate, run `34888469115` exposed a stale-active-cache defect: repeated
+inspection retained a six-success/three-active snapshot after GitHub had completed with
+three Windows failures. The corrected acquisition path recaptured and validated a
+replacement in the same cache location and then reported the authoritative failure with
+all three jobs grouped. The Windows failures themselves were an oversized implicit pytest
+parameter identity; bounded explicit IDs keep `PYTEST_CURRENT_TEST` below Windows'
+environment-variable limit without weakening the 64 KiB configuration boundary test.
 
 ## What this does not prove
 

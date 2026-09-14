@@ -286,8 +286,10 @@ Capture policies:
 Bundles separate hostname, repository, run, attempt, and policy. Members carry exact byte
 counts and SHA-256 digests. A metadata bundle is never reused as if it satisfied a full
 request. An explicit historical attempt uses attempt-specific run, job, and log evidence;
-replay rejects contradictory retained identity. If requested logs have expired, capture
-remains replayable but is marked incomplete and cannot produce `PASS`.
+replay rejects contradictory retained identity. Completed-attempt bundles are reused;
+cached active runs are recaptured through a validated replacement before reporting. If
+requested logs have expired, capture remains replayable but is marked incomplete and
+cannot produce `PASS`.
 
 ## Monitoring without repeated output
 

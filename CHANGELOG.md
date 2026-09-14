@@ -13,6 +13,9 @@ All notable changes to this project will be documented in this file.
   sanitized live fixture while keeping external registry verification independent.
 - Harden release-wheel verification so the installed wheel is imported outside the source
   checkout, and synchronize the MolSysSuite working-state governance guide.
+- Refresh cached nonterminal runs through a validated replacement so repeated inspection
+  cannot retain an obsolete active snapshot, and keep oversized-rule tests portable on
+  Windows by using bounded pytest parameter identities.
 - Freeze `events@1` in 0.20.0 while retaining the seven contracts frozen in 0.18.0 and
   0.19.0 byte-for-byte.
 

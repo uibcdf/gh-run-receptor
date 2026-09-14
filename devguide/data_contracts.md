@@ -84,8 +84,10 @@ auto-detection during replay.
 
 The default cache identity includes hostname, repository, run ID, attempt, and capture
 policy. A metadata-only bundle is never reused as though it satisfied an adaptive or full
-request. An explicit output path is accepted only when its manifest identity exactly
-matches the request.
+request. Completed-attempt bundles are immutable and reusable. A retained nonterminal run
+is recaptured and validated before atomically replacing its cache entry, so repeated
+inspection cannot freeze an active snapshot. An explicit output path is accepted only
+when its manifest identity exactly matches the request.
 
 ## Evidence references
 

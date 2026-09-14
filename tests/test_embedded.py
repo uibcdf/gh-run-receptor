@@ -303,6 +303,7 @@ def test_untrusted_inline_rules_fail_before_acquisition(tmp_path, overrides):
         "profile: ci\n",
         "x" * (MAX_CONFIG_BYTES + 1),
     ],
+    ids=("invalid-syntax", "oversized"),
 )
 def test_invalid_inline_rules_fail_before_acquisition(tmp_path, rules):
     environment = _environment(tmp_path, INPUT_RULES=rules)
