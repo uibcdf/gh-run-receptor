@@ -40,7 +40,8 @@ def test_inventory_exposes_every_serialized_boundary_in_stable_order():
     schemas = [schema for item in inventory for schema in item["schemas"]]
     assert sum(item["frozen_since"] == "0.18.0" for item in schemas) == 4
     assert sum(item["frozen_since"] == "0.19.0" for item in schemas) == 3
-    assert sum(item["frozen_since"] is None for item in schemas) == 1
+    assert sum(item["frozen_since"] == "0.20.0" for item in schemas) == 1
+    assert all(item["frozen_since"] is not None for item in schemas)
 
 
 @pytest.mark.parametrize(
@@ -154,6 +155,12 @@ _PUBLISHED_018_RESOURCES = {
     "model-v1.schema.json",
     "report-v1.schema.json",
 }
+_PUBLISHED_019_RESOURCES = {
+    *_PUBLISHED_018_RESOURCES,
+    "config-capture-v1.schema.json",
+    "comparison-v1.schema.json",
+    "comparison-policy-v1.schema.json",
+}
 
 
 def _candidate_runner(command, **kwargs):
@@ -165,34 +172,62 @@ def _candidate_runner(command, **kwargs):
     path = ROOT / relative
     if tag == "0.18.0" and path.name in _PUBLISHED_018_RESOURCES:
         return subprocess.CompletedProcess(command, 0, path.read_bytes(), b"")
+    if tag == "0.19.0" and path.name in _PUBLISHED_019_RESOURCES:
+        return subprocess.CompletedProcess(command, 0, path.read_bytes(), b"")
     return subprocess.CompletedProcess(command, 1, b"", b"missing baseline resource")
 
 
-def test_candidate_gate_requires_every_new_resource_to_be_frozen():
+def test_candidate_gate_requires_every_new_resource_to_be_frozen(monkeypatch):
+    events = CONTRACTS["events"]
+    monkeypatch.setattr(
+        contract_validation,
+        "CONTRACTS",
+        {
+            **CONTRACTS,
+            "events": ContractSpec(
+                events.kind,
+                events.current_version,
+                events.readable_versions,
+                (SchemaVersion(1, "events-v1.schema.json", None),),
+            ),
+        },
+    )
     assert validate_contracts(
         ROOT,
-        baseline_tag="0.18.0",
-        candidate_tag="0.19.0",
+        baseline_tag="0.19.0",
+        candidate_tag="0.20.0",
         runner=_candidate_runner,
-    ) == ["gh_run_receptor/schemas/events-v1.schema.json is not frozen for candidate 0.19.0"]
+    ) == [
+        "gh_run_receptor/schemas/events-v1.schema.json is not frozen for candidate 0.20.0",
+        "candidate freeze '0.20.0' is not registered",
+    ]
 
-    errors = validate_contracts(ROOT, baseline_tag="0.19.0", runner=_candidate_runner)
-    assert len([error for error in errors if "cannot read" in error]) == 3
+
+def test_020_candidate_freezes_only_the_new_events_resource():
+    assert (
+        validate_contracts(
+            ROOT,
+            baseline_tag="0.19.0",
+            candidate_tag="0.20.0",
+            runner=_candidate_runner,
+        )
+        == []
+    )
 
 
 def test_candidate_gate_rejects_an_existing_tag():
     def existing_tag_runner(command, **kwargs):
         if command[:3] == ["git", "tag", "--list"]:
-            return subprocess.CompletedProcess(command, 0, b"0.19.0\n", b"")
+            return subprocess.CompletedProcess(command, 0, b"0.20.0\n", b"")
         return _candidate_runner(command, **kwargs)
 
     errors = validate_contracts(
         ROOT,
-        baseline_tag="0.18.0",
-        candidate_tag="0.19.0",
+        baseline_tag="0.19.0",
+        candidate_tag="0.20.0",
         runner=existing_tag_runner,
     )
-    assert errors == ["candidate tag 0.19.0 already exists; use normal validation"]
+    assert errors == ["candidate tag 0.20.0 already exists; use normal validation"]
 
 
 def test_candidate_gate_rejects_relabeling_a_published_resource(monkeypatch):
@@ -201,7 +236,7 @@ def test_candidate_gate_rejects_relabeling_a_published_resource(monkeypatch):
         bundle.kind,
         bundle.current_version,
         bundle.readable_versions,
-        (SchemaVersion(1, "bundle-v1.schema.json", "0.19.0"),),
+        (SchemaVersion(1, "bundle-v1.schema.json", "0.20.0"),),
     )
     monkeypatch.setattr(
         contract_validation,
@@ -211,14 +246,13 @@ def test_candidate_gate_rejects_relabeling_a_published_resource(monkeypatch):
 
     errors = validate_contracts(
         ROOT,
-        baseline_tag="0.18.0",
-        candidate_tag="0.19.0",
+        baseline_tag="0.19.0",
+        candidate_tag="0.20.0",
         runner=_candidate_runner,
     )
     assert errors == [
-        "gh_run_receptor/schemas/bundle-v1.schema.json existed in 0.18.0 "
-        "and cannot be newly frozen in 0.19.0",
-        "gh_run_receptor/schemas/events-v1.schema.json is not frozen for candidate 0.19.0",
+        "gh_run_receptor/schemas/bundle-v1.schema.json existed in 0.19.0 "
+        "and cannot be newly frozen in 0.20.0",
     ]
 
 
@@ -244,12 +278,12 @@ def test_contracts_cli_is_offline_bounded_and_machine_readable(capsys):
     assert main(["contracts"]) == 0
     text = capsys.readouterr().out
     assert len(text.splitlines()) == 1
-    assert "baseline=0.19.0" in text
+    assert "baseline=0.20.0" in text
     assert "config-capture@1(readable=1)" in text
 
     assert main(["contracts", "--format=json"]) == 0
     payload = json.loads(capsys.readouterr().out)
-    assert payload == {"baseline": "0.19.0", "contracts": contract_inventory()}
+    assert payload == {"baseline": "0.20.0", "contracts": contract_inventory()}
     assert set(CONTRACTS) == {item["kind"] for item in payload["contracts"]}
 
 
@@ -263,7 +297,7 @@ def test_hosted_contract_gate_is_manual_read_only_bounded_and_pinned():
     assert "timeout-minutes: 5" in source
     assert "fetch-depth: 0" in source
     assert "persist-credentials: false" in source
-    assert "validate_contracts.py --baseline 0.19.0" in source
+    assert "validate_contracts.py --baseline 0.20.0" in source
     assert "--candidate" not in source
     assert "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7" in source
     assert "actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7" in source

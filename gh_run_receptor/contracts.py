@@ -12,8 +12,9 @@ from typing import Any
 from gh_run_receptor.errors import ContractError
 
 SCHEMA_PREFIX = "gh-run-receptor"
-SCHEMA_BASELINE_TAG = "0.19.0"
+SCHEMA_BASELINE_TAG = "0.20.0"
 _SCHEMA_018_BASELINE_TAG = "0.18.0"
+_SCHEMA_019_BASELINE_TAG = "0.19.0"
 _SCHEMA_ID = re.compile(r"^gh-run-receptor\.([a-z][a-z0-9-]*)@([1-9][0-9]*)$")
 
 
@@ -57,25 +58,25 @@ _SPECS = (
         "config-capture",
         1,
         frozenset({1}),
-        (SchemaVersion(1, "config-capture-v1.schema.json", SCHEMA_BASELINE_TAG),),
+        (SchemaVersion(1, "config-capture-v1.schema.json", _SCHEMA_019_BASELINE_TAG),),
     ),
     ContractSpec(
         "comparison",
         1,
         frozenset({1}),
-        (SchemaVersion(1, "comparison-v1.schema.json", SCHEMA_BASELINE_TAG),),
+        (SchemaVersion(1, "comparison-v1.schema.json", _SCHEMA_019_BASELINE_TAG),),
     ),
     ContractSpec(
         "comparison-policy",
         1,
         frozenset({1}),
-        (SchemaVersion(1, "comparison-policy-v1.schema.json", SCHEMA_BASELINE_TAG),),
+        (SchemaVersion(1, "comparison-policy-v1.schema.json", _SCHEMA_019_BASELINE_TAG),),
     ),
     ContractSpec(
         "events",
         1,
         frozenset({1}),
-        (SchemaVersion(1, "events-v1.schema.json", None),),
+        (SchemaVersion(1, "events-v1.schema.json", SCHEMA_BASELINE_TAG),),
     ),
     ContractSpec(
         "model",

@@ -83,7 +83,7 @@ The current MVP implements:
 - one runtime registry for eight serialized boundaries, formal configuration-capture
   schema, offline compatibility introspection, forward-only migration rules, and a release
   gate retaining the four v1 freezes from 0.18.0 and the three new freezes from 0.19.0;
-  producer events remain the sole provisional unfrozen contract.
+  producer events declare the sole 0.20.0 candidate freeze.
 - a first-class offline and remote `compare` command with an independently versioned
   comparison contract, explicit source/commit identity, bounded human and LLM output, and
   descriptive job, duration, artifact-inventory, and matrix-coverage deltas.
@@ -102,8 +102,8 @@ cross-run aggregation; remote workflow discovery; pattern rules; or validated pr
 and fork token behavior. The CI,
 documentation, Conda, release, configuration, and Action contracts are initial vertical
 slices, not their complete stable forms. In particular, action-internal native matrices now
-have a hosted provisional structured per-platform representation, but the contract remains
-unfrozen until the 0.20.0 release gate.
+have a hosted structured per-platform representation and a passing candidate freeze, but
+that freeze is not published history until the exact 0.20.0 tag exists.
 
 ## Reading order
 

@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.20.0 - 2026-09-14
+
+- Add strict `events@1` producer evidence for Action-internal Conda matrices, including
+  attempt-qualified artifact discovery, digest and ZIP validation, source identity,
+  bounded capture, offline replay, and fail-closed producer contradictions.
+- Validate the complete producer/consumer path on hosted Ubuntu and Windows with a
+  sanitized live fixture while keeping external registry verification independent.
+- Harden release-wheel verification so the installed wheel is imported outside the source
+  checkout, and synchronize the MolSysSuite working-state governance guide.
+- Freeze `events@1` in 0.20.0 while retaining the seven contracts frozen in 0.18.0 and
+  0.19.0 byte-for-byte.
+
 ## 0.19.1 - 2026-09-08
 
 - Fall back to `generic` when local discovery sees action-internal platform inputs, reject

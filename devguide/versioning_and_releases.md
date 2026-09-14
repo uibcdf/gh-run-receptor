@@ -58,18 +58,17 @@ release workflow independently validates the resulting records but never rewrite
 source.
 
 The exact-tag workflow runs
-`python devtools/scripts/validate_contracts.py --baseline 0.19.0` before building. Each
+`python devtools/scripts/validate_contracts.py --baseline 0.20.0` before building. Each
 registered resource is compared with its own first publishing tag: four against 0.18.0 and
 three against 0.19.0. A contract change that cannot satisfy this gate requires a new
 integer contract version and the migration/retirement process in `data_contracts.md`;
 editing a baseline tag or weakening the comparison is not a release operation.
 
-A candidate that introduces a freeze must be validated before its tag exists. Use
-`python devtools/scripts/validate_contracts.py --baseline 0.18.0 --candidate 0.19.0` for
-this release. Candidate mode requires the named tag to be absent and only permits a
-resource absent from the published baseline to acquire the new freeze. The ordinary mode
-continues to fail until the tag exists, so candidate mode cannot be reused to bypass a
-published baseline.
+A candidate that introduces a freeze must be validated before its tag exists. For 0.20.0,
+use `python devtools/scripts/validate_contracts.py --baseline 0.19.0 --candidate 0.20.0`.
+Candidate mode requires the named tag to be absent and only permits a resource absent from
+the published baseline to acquire the new freeze. The ordinary mode continues to fail
+until the tag exists, so candidate mode cannot be reused to bypass a published baseline.
 
 ## Zenodo maintainer handoff
 
@@ -145,6 +144,11 @@ The `0.19.1` gate retains those seven frozen resources and publishes the safe di
 correction: filename-only Conda hints and action-internal platform inputs cannot be
 misrepresented as an observable native-platform matrix. Its distributed Action, minimum
 GitHub CLI, exact-tag build, and public release gates repeat against the patch tag.
+
+The `0.20.0` gate freezes `events@1` as the eighth serialized boundary and publishes
+strict, attempt-qualified producer evidence for Action-internal Conda matrices. Hosted
+Ubuntu and Windows producers, normal network capture, sanitized offline replay, and
+producer-failure truth semantics must pass before the tag is created.
 
 Installed-wheel verification must run outside the source checkout and assert that the
 imported module path belongs to the isolated installation target. A matching version string

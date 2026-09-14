@@ -13,9 +13,9 @@ The runtime registry exposes eight related, independently versioned documents:
 - `gh-run-receptor.comparison-policy@1`: explicit candidate regression rules;
 - `gh-run-receptor.events@1`: optional corroborating producer evidence.
 
-The events contract is registered with a packaged JSON Schema but remains provisional and
-unfrozen until
-the 0.20.0 release gate accepts its hosted producer/consumer evidence.
+The events contract is registered with a packaged JSON Schema and declares 0.20.0 as its
+first freeze after the hosted producer/consumer gate passed. Until that exact tag exists,
+candidate validation rather than published history protects the declaration.
 
 Version identifiers are explicit strings, not inferred from package version. Additive
 optional fields do not require a major schema change. Removing fields, changing meaning,
@@ -360,13 +360,14 @@ The four schema files shipped by release 0.18.0 are byte-frozen against that Git
 Release 0.19.0 freezes the first formal `config-capture@1` schema and the new
 `comparison@1` and `comparison-policy@1` schemas. The registry retains each resource's own
 first publishing tag instead of pretending that all seven originated in one release.
-The events schema is the sole registered but unfrozen contract during 0.20.0 development.
+Release 0.20.0 freezes `events@1` as the eighth registered contract. Before the tag exists,
+that freeze is a candidate declaration rather than published immutability.
 
-Before the 0.19.0 tag exists, release preparation runs `validate_contracts.py --baseline
-0.18.0 --candidate 0.19.0`. Candidate mode fails if the candidate tag already exists,
+Before the 0.20.0 tag exists, release preparation runs `validate_contracts.py --baseline
+0.19.0 --candidate 0.20.0`. Candidate mode fails if the candidate tag already exists,
 requires every packaged schema to declare a freeze, and permits a candidate freeze only
 for resources absent from the published baseline. Normal validation remains fail-closed
-until the tag exists. The exact-tag publisher then validates baseline 0.19.0 normally;
+until the tag exists. The exact-tag publisher then validates baseline 0.20.0 normally;
 changing a frozen schema in place, losing a registered resource, or adding an unregistered
 version fails before distributions are built.
 

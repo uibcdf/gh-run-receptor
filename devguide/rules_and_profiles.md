@@ -87,11 +87,11 @@ The profile applies only to platform identities visible in GitHub jobs or matchi
 artifacts. A workflow filename, release trigger, Conda recipe, or action input requesting
 a platform is not evidence that the platform build or upload completed. When a composite
 or reusable action performs the native matrix internally and the visible workflow
-orchestrates publication, select `release` for the observable workflow and retain an
-independent registry gate. The development implementation for
-`uibcdf/gh-run-receptor#35` consumes strict `events@1` package results when present; the
-published 0.19.1 release still requires the `release` fallback. No version translates
-requested hidden platforms into observed ones.
+orchestrates publication without producer evidence, select `release` for the observable
+workflow and retain an independent registry gate. Version 0.20.0 consumes strict
+`events@1` package results when present and can then apply the Conda profile to those
+observed hidden platforms. No version translates requested Action inputs into observed
+results.
 
 ### Release
 

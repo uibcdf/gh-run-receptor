@@ -518,9 +518,11 @@ preserving GitHub's `conclusion=success`. The 43,856-byte capture reduces to a r
 13,832-byte fixture with no logs or package archives; offline replay is deterministic.
 
 The local gate covers that live fixture at the bundle, events, model, and report boundaries.
-Contract validation retains eight registered and seven frozen schemas; `events@1` remains
-the sole provisional boundary awaiting the 0.20.0 freeze. The complete gate passes 356
-tests, Ruff lint and format, developer-report validation, and 0.19.0 compatibility.
+All eight registered schemas now declare a freeze; candidate validation proves that
+`events@1` is the only resource newly frozen in 0.20.0 and did not exist in 0.19.0. The
+declaration becomes published history only when the exact candidate tag exists. The
+complete candidate gate passes 357 tests, Ruff lint and format, developer-report
+validation, and 0.19.0 compatibility.
 
 ## What this does not prove
 
