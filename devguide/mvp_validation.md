@@ -529,8 +529,10 @@ inspection retained a six-success/three-active snapshot after GitHub had complet
 three Windows failures. The corrected acquisition path recaptured and validated a
 replacement in the same cache location and then reported the authoritative failure with
 all three jobs grouped. The Windows failures themselves were an oversized implicit pytest
-parameter identity; bounded explicit IDs keep `PYTEST_CURRENT_TEST` below Windows'
-environment-variable limit without weakening the 64 KiB configuration boundary test.
+parameter identity followed by host-native separators in validator diagnostics. Bounded
+explicit IDs keep `PYTEST_CURRENT_TEST` below Windows' environment-variable limit without
+weakening the 64 KiB configuration boundary test; POSIX-normalized diagnostic paths keep
+the release gate byte-deterministic across operating systems.
 
 ## What this does not prove
 

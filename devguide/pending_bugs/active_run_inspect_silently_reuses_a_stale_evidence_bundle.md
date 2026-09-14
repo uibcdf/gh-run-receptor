@@ -75,10 +75,12 @@ active runs and the acquisition design promises active refresh.
 
 ## Scope and exclusions
 
-This report does not cover the three Windows test failures in the same run. Those arose
-from an oversized implicit pytest parameter ID overflowing Windows'
-`PYTEST_CURRENT_TEST` environment variable and require only a short explicit test ID. It
-also does not change retention or reuse of completed-attempt evidence.
+This report does not cover the Windows test failures in the same release gates. They
+arose from an oversized implicit pytest parameter ID overflowing Windows'
+`PYTEST_CURRENT_TEST` environment variable and host-native path separators in validator
+diagnostics. They require bounded IDs and POSIX-normalized display paths, not changes to
+cache acquisition. This report also does not change retention or reuse of
+completed-attempt evidence.
 
 ## Acceptance criteria
 

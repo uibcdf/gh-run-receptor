@@ -88,6 +88,7 @@ def validate_contracts(
         for schema in spec.schemas:
             path = schema_root / schema.resource
             relative = path.relative_to(root)
+            relative_text = relative.as_posix()
             try:
                 raw = path.read_bytes()
                 payload = json.loads(raw)
@@ -106,21 +107,23 @@ def validate_contracts(
 
             if schema.frozen_since is None:
                 if candidate_tag is not None:
-                    errors.append(f"{relative} is not frozen for candidate {candidate_tag}")
+                    errors.append(f"{relative_text} is not frozen for candidate {candidate_tag}")
                 continue
             if candidate_tag is not None and schema.frozen_since == candidate_tag:
                 prior, _ = _baseline_bytes(root, baseline_tag, relative, runner)
                 if prior is not None:
                     errors.append(
-                        f"{relative} existed in {baseline_tag} and cannot be newly frozen "
+                        f"{relative_text} existed in {baseline_tag} and cannot be newly frozen "
                         f"in {candidate_tag}"
                     )
                 continue
             baseline, detail = _baseline_bytes(root, schema.frozen_since, relative, runner)
             if baseline is None:
-                errors.append(f"cannot read {relative} from {schema.frozen_since}: {detail}")
+                errors.append(f"cannot read {relative_text} from {schema.frozen_since}: {detail}")
             elif baseline != raw:
-                errors.append(f"{relative} changed after frozen baseline {schema.frozen_since}")
+                errors.append(
+                    f"{relative_text} changed after frozen baseline {schema.frozen_since}"
+                )
     frozen_tags = {
         schema.frozen_since
         for spec in CONTRACTS.values()

@@ -14,8 +14,8 @@ All notable changes to this project will be documented in this file.
 - Harden release-wheel verification so the installed wheel is imported outside the source
   checkout, and synchronize the MolSysSuite working-state governance guide.
 - Refresh cached nonterminal runs through a validated replacement so repeated inspection
-  cannot retain an obsolete active snapshot, and keep oversized-rule tests portable on
-  Windows by using bounded pytest parameter identities.
+  cannot retain an obsolete active snapshot, and keep release gates deterministic on
+  Windows through bounded pytest parameter identities and POSIX-normalized diagnostics.
 - Freeze `events@1` in 0.20.0 while retaining the seven contracts frozen in 0.18.0 and
   0.19.0 byte-for-byte.
 
