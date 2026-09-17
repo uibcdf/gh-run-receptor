@@ -98,6 +98,9 @@ The current MVP implements:
 - bounded attempt-qualified producer-event acquisition, exact source-identity validation,
   offline normalization, and Conda hidden-platform aggregation, validated end to end with
   two hosted producer jobs on Linux and Windows and a sanitized deterministic replay.
+- real downstream adoption in MolSysMT, where the public 0.20.0 wheel consumed a
+  failure-safe `events@1` artifact from a non-publishing Linux ABI3 build and reported
+  exact platform, build, upload-intent, job, and artifact state.
 
 It does not yet provide a broad cross-workflow corpus beyond that initial external sample;
 cross-run aggregation; remote workflow discovery; pattern rules; or validated private-repository
@@ -177,7 +180,8 @@ known design question; it does not mean that unimplemented behavior has been val
 ## Immediate milestone
 
 The next milestone closes the remaining outcome and aggregation gaps, led by real Zenodo
-verification, broader corpus evidence, and structured per-job aggregation.
+verification, broader corpus evidence including a real MolSysViewer noarch delivery, and
+structured aggregation beyond one client run.
 Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need

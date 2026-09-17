@@ -566,9 +566,20 @@ twelve repositories. The published wheel accepted all eleven client `config@1` p
 covering 63 exact workflow rules. MolSysMT commit `db9bec49e` and MolSysViewer commit
 `4822f299` upgraded their native/ABI3 and noarch Conda publishers respectively to producer
 Action v2.1.0, with explicit failure-safe event artifact upload. Six focused MolSysMT
-workflow tests and the MolSysViewer workflow guard pass locally. This proves source
-adoption, not hosted client delivery; the next real client Conda runs must still establish
-end-to-end evidence in those repositories.
+workflow tests and the MolSysViewer workflow guard pass locally.
+
+MolSysMT manual run `35196968944` then supplied the first real client delivery proof. It
+built one Linux ABI3 candidate from exact commit `db9bec49e` with LTO enabled, validated
+the artifact on Python 3.11, 3.12, and 3.13, and completed both GitHub-visible jobs
+successfully without publishing to Anaconda. Producer Action v2.1.0 emitted the exact
+attempt-qualified artifact
+`gh-run-receptor-events-v1-35196968944-1-build-and-test-0`; its 668-byte `events@1`
+payload records the package digest, `linux-64` platform, successful build, and
+`upload=not_requested`. A complete 144 KiB capture replayed offline to the same bounded
+summary: one of one platforms successful, one producer event, two of two jobs successful,
+and two artifacts. The independently installed public 0.20.0 wheel reported the same
+result. MolSysViewer source adoption remains locally guarded but still awaits its first
+real noarch client run.
 
 ## What this does not prove
 
