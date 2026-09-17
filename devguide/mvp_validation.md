@@ -581,7 +581,7 @@ and two artifacts. The independently installed public 0.20.0 wheel reported the 
 result. MolSysViewer source adoption remains locally guarded but still awaits its first
 real noarch client run.
 
-## 0.21.0 multi-run aggregation candidate checkpoint
+## 0.21.0 multi-run aggregation and release checkpoint
 
 Issue `uibcdf/gh-run-receptor#38` defines an `aggregate@1` contract rather than
 overloading two-run comparison. The first implementation accepts two to fifty homogeneous
@@ -618,6 +618,34 @@ token reduction. Two separate receptor success lines remain smaller at 278 bytes
 tokens. This counterexample is intentional: multi-run aggregation supplies a coherent
 versioned collection and coverage summary, while repeated `inspect` is preferable when the
 reader needs only two already-known per-run verdicts.
+
+Tag `0.21.0` points to commit `957adf849e7bab3ab4d9f2bcbb53b8f8c31f1998`.
+Before publication, the full local suite passed with 372 tests together with Ruff,
+citation, devguide, and compatibility-against-0.20 contract validation. An exact-tag
+local wheel installed outside the checkout, imported from the isolated target, reported
+0.21.0, and executed a two-bundle `aggregate@1` report successfully.
+
+Draft-first release run `35209615936` passed the full release gate and published a
+non-draft, non-prerelease GitHub Release. Independent public checks resolved the tag to
+the exact commit above, verified the checksum manifest, installed the downloaded wheel
+outside the checkout, and imported version 0.21.0 from that installation. The release
+contains:
+
+- `gh_run_receptor-0.21.0-py3-none-any.whl`, 83,137 bytes, GitHub digest
+  `sha256:1cba5e6c6a6035bf98802e69dd59db65869883b8d0e52e4f3e3f76020cdffb76`;
+- `gh_run_receptor-0.21.0.tar.gz`, 121,352 bytes, GitHub digest
+  `sha256:b82be07189ec53eee02a9e40977f43d4204bd1c833e91fe78091f9a35039663f`;
+- `SHA256SUMS`, 202 bytes, GitHub digest
+  `sha256:d7bb145bbe5cd54049f1c256c3111f6cdebe3fcf8b6a43ff042b2f8600644312`.
+
+Five exact-tag post-release gates then passed: distributed Action run `35209958663` on
+Ubuntu, macOS, and Windows; checksum-pinned minimum GitHub CLI run `35209958849`; frozen
+contract run `35209958624`; live success and mixed-failure aggregate run `35209958468`;
+and the nine-combination Python 3.11--3.13 compatibility matrix `35209958620`. Finally,
+the independently installed public wheel aggregated those five runs into one complete
+`PASS` assessment covering five workflows, 15 successful jobs, and three artifacts. This
+is the first release whose new multi-run contract is both its subject and the mechanism
+used to summarize its post-publication evidence.
 
 ## What this does not prove
 

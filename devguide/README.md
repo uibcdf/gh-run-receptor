@@ -7,10 +7,10 @@ evidence.
 
 ## Current state
 
-The project has verified `0.20.0` GitHub Release assets, but no published package-index
-artifact or stable 1.0 contract. All eight published serialized boundaries are frozen
-against their first publishing tags; the ninth `aggregate@1` boundary has passed its
-0.21.0 candidate evidence gate while the pre-1.0 product surface may still evolve.
+The project has verified `0.21.0` GitHub Release assets, but no published package-index
+artifact or stable 1.0 contract. All nine published serialized boundaries are frozen
+against their first publishing tags, including the `aggregate@1` boundary introduced in
+0.21.0, while the pre-1.0 product surface may still evolve.
 The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
 human, LLM, or JSON reports without changing the run or hiding its authoritative GitHub
@@ -77,7 +77,7 @@ The current MVP implements:
   of the official minimum binary.
 - a hosted exact-tag GitHub Release path with consistent citation/Zenodo metadata,
   draft-first asset verification, public-release revalidation, and completed
-  uninterrupted publications through 0.20.0.
+  uninterrupted publications through 0.21.0.
 - a bounded read-only Zenodo verification gate with distinct absent, invalid, and verified
   states plus an explicit maintainer activation handoff; a real project record remains
   absent.
@@ -184,9 +184,10 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The next milestone closes the remaining outcome and aggregation gaps, led by real Zenodo
-verification, broader corpus evidence including a real MolSysViewer noarch delivery, and
-publication and distribution validation of the 0.21.0 multi-run contract.
+The next milestone closes the remaining evidence gaps, led by real Zenodo verification,
+broader corpus evidence including a real MolSysViewer noarch delivery, and an authentic
+`timed_out` outcome. Publication and distribution validation of the 0.21.0 multi-run
+contract is complete.
 Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need
