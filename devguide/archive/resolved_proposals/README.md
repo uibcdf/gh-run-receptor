@@ -23,6 +23,7 @@
 - [#32 — Publish a same-revision reusable reporting workflow](publish_a_same_revision_reusable_reporting_workflow.md) (`resolved`)
 - [#26 — Publish and verify reproducible GitHub releases](publish_and_verify_reproducible_github_releases.md) (`resolved`)
 - [#4 — Publish measured adoption guidance for client repositories](publish_measured_adoption_guidance_for_client_repositories.md) (`resolved`)
+- [#40 — Publish public documentation and repository identity](publish_public_documentation_and_repository_identity.md) (`resolved`)
 - [#23 — Secure inline Action rules and permission boundaries](secure_inline_action_rules_and_permission_boundaries.md) (`resolved`)
 - [#39 — Stabilize the CLI exit-code contract before 1.0](stabilize_the_cli_exit_code_contract_before_1_0.md) (`resolved`)
 - [#7 — Support Conda noarch package workflows](support_conda_noarch_package_workflows.md) (`resolved`)

@@ -24,7 +24,7 @@ dependencies = []
 
 [project.urls]
 Homepage = "https://github.com/uibcdf/gh-run-receptor"
-Documentation = "https://uibcdf.github.io/gh-run-receptor/"
+Documentation = "https://www.uibcdf.org/gh-run-receptor/"
 Repository = "https://github.com/uibcdf/gh-run-receptor"
 Issues = "https://github.com/uibcdf/gh-run-receptor/issues"
 Changelog = "https://github.com/uibcdf/gh-run-receptor/blob/main/CHANGELOG.md"

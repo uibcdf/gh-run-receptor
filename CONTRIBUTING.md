@@ -15,3 +15,11 @@ The most useful current contributions are broader sanitized corpus cases, generi
 documentation profiles, safe repository configuration, GitHub API compatibility tests,
 schema review, and threat-model tests identified in
 [the roadmap](devguide/development_roadmap.md).
+
+Changes to public behavior must update the task-oriented pages under `docs/`. Install the
+optional documentation environment with `python -m pip install -e ".[docs]"` and run the
+same strict gate used by GitHub Pages:
+
+```text
+sphinx-build -W --keep-going -b html docs docs/_build/html
+```

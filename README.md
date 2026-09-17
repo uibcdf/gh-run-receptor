@@ -1,5 +1,11 @@
 # gh-run-receptor
 
+[![MolSysSuite policy](https://github.com/uibcdf/gh-run-receptor/actions/workflows/molsyssuite-policy.yml/badge.svg?branch=main)](https://github.com/uibcdf/gh-run-receptor/actions/workflows/molsyssuite-policy.yml)
+[![Documentation](https://github.com/uibcdf/gh-run-receptor/actions/workflows/docs.yml/badge.svg?branch=main)](https://www.uibcdf.org/gh-run-receptor/)
+[![GitHub release](https://img.shields.io/github/v/release/uibcdf/gh-run-receptor?label=release)](https://github.com/uibcdf/gh-run-receptor/releases/latest)
+[![Python](https://img.shields.io/badge/python-3.11--3.13-blue.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 `gh-run-receptor` is a GitHub Actions evidence receptor for coding agents: compact reports
 without hiding failures or uncertainty. It is read-only and retains a replayable path to
 the captured evidence.
@@ -368,7 +374,7 @@ Action paths are also validated on all three operating systems; the minimum GitH
 binary gate is Linux amd64 because it tests a transport version, not an OS support matrix.
 
 Public installation, usage, integration, contract, security, and limitation documentation
-is published at [uibcdf.github.io/gh-run-receptor](https://uibcdf.github.io/gh-run-receptor/).
+is published at [www.uibcdf.org/gh-run-receptor](https://www.uibcdf.org/gh-run-receptor/).
 
 Product contracts, contributor onboarding, security boundaries, open decisions, and the
 implementation route are maintained in the

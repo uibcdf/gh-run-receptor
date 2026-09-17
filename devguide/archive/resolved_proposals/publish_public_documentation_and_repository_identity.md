@@ -1,13 +1,13 @@
 ---
 summary: Publish public documentation and repository identity
 issue: uibcdf/gh-run-receptor#40
-status: active
+status: resolved
 opened: 2026-09-17
-closed:
+closed: 2026-09-17
 verification: measured
 area: ['documentation']
-guard:
-normative:
+guard: tests/test_documentation.py
+normative: ../docs/index.md
 blocked_by: []
 supersedes: []
 ---
@@ -16,8 +16,8 @@ supersedes: []
 
 **Reported:** 2026-09-17, after the verified 0.21.1 rollout and comparison with the public
 pytest-receptor presentation.
-**Status:** Active; repository identity and the public documentation surface are designed,
-but no gh-run-receptor Pages site exists yet.
+**Status:** Resolved; the public site, strict build/deploy workflow, tagline, homepage,
+truthful status badges, and package/README links are published and independently verified.
 
 ## What
 
@@ -102,6 +102,8 @@ does not promise private-fork behavior that has not been validated.
 - Hosted Pages deployment succeeds and its public index is fetched after publication.
 - README and package URLs point to the public documentation without replacing source,
   issue, changelog, or developer-guide links.
+- README badges expose only real project surfaces and do not label a manual validation
+  workflow as continuous test coverage.
 - Tests guard the workflow trust boundary and the documentation navigation.
 
 ## Dependencies and risks
@@ -116,3 +118,19 @@ Measured 2026-09-17 from GitHub's repository and Pages APIs and the local checko
 gh-run-receptor `80e47cb` and pytest-receptor main. Local environment: Linux
 7.0.0-28-generic x86_64, Python 3.13.14, Sphinx 8.2.3, MyST Parser 4.0.1, and
 sphinx-rtd-theme 3.1.0.
+
+## Resolution
+
+Commit `62b314d` added ten MyST source pages, optional bounded documentation dependencies,
+the least-privilege pinned Pages workflow, README/package links, contributor instructions,
+and executable repository guards. The completion checkpoint added badges for the policy
+gate, documentation deployment, latest release, supported Python versions, and MIT license.
+It deliberately omitted a generic “Tests” badge because the full compatibility workflows
+are release gates rather than continuous push/PR checks. Local Sphinx completed with
+warnings as errors and the full suite passed with 391 tests.
+
+Hosted run `35224624974` passed both build and deploy jobs. Pages was enabled with workflow
+build type, and independent HTTP checks returned 200 for every published page at
+`https://www.uibcdf.org/gh-run-receptor/`. GitHub now exposes the proposed tagline and
+that verified HTTPS homepage. The public site is the durable user-facing norm; devguide
+retains implementation evidence and maintainer decisions.

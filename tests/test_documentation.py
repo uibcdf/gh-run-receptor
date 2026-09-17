@@ -41,7 +41,21 @@ def test_documentation_dependencies_are_optional_and_version_bounded():
         "sphinx>=8,<10",
         "sphinx-rtd-theme>=3,<4",
     ]
-    assert project["urls"]["Documentation"] == "https://uibcdf.github.io/gh-run-receptor/"
+    assert project["urls"]["Documentation"] == "https://www.uibcdf.org/gh-run-receptor/"
+
+
+def test_readme_badges_reference_real_project_surfaces():
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+
+    expected_targets = (
+        "actions/workflows/molsyssuite-policy.yml/badge.svg?branch=main",
+        "actions/workflows/docs.yml/badge.svg?branch=main",
+        "img.shields.io/github/v/release/uibcdf/gh-run-receptor",
+        "img.shields.io/badge/python-3.11--3.13-blue.svg",
+        "img.shields.io/badge/License-MIT-yellow.svg",
+    )
+    for target in expected_targets:
+        assert target in readme
 
 
 def test_pages_workflow_separates_read_only_build_from_deployment_permissions():

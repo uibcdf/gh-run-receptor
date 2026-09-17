@@ -24,6 +24,9 @@ The current MVP implements:
   artifacts, and policy-selected logs;
 - SHA-256-validated bundles separated by repository, attempt, and capture policy;
 - a shared generic report rendered for `human`, `llm`, or JSON;
+- a public task-oriented Sphinx/MyST site covering installation, CLI use, profiles,
+  embedded reporting, configuration, contracts, security, limitations, and benchmarks,
+  deployed through a least-privilege GitHub Pages workflow;
 - numeric IDs and HTTPS run URLs, including repository and hostname extraction;
 - authoritative outcome exit codes and bounded terminal-safe text;
 - a stable non-overlapping process-status map that distinguishes source failure, other

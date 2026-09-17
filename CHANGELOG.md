@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+- Publish task-oriented Sphinx/MyST documentation through a least-privilege, commit-pinned
+  GitHub Pages workflow and expose the verified site from repository and package metadata.
+- Add the public repository tagline describing compact reports without hidden failures or
+  uncertainty.
+- Add status badges for the policy gate, documentation deployment, latest release,
+  supported Python versions, and MIT license.
+
 ## 0.21.1 - 2026-09-17
 
 - Stabilize the CLI process-status contract, centralize its named categories, and make
