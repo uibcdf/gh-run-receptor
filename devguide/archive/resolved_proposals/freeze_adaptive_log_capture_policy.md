@@ -1,13 +1,13 @@
 ---
 summary: Measure and freeze the adaptive log-capture policy for 1.0
 issue: uibcdf/gh-run-receptor#41
-status: active
+status: resolved
 opened: 2026-09-17
-closed:
+closed: 2026-09-17
 verification: measured
 area: [capture, performance, contracts]
-guard:
-normative:
+guard: tests/test_capture_policy_benchmark.py
+normative: architecture.md
 blocked_by: []
 supersedes: []
 ---
@@ -16,8 +16,8 @@ supersedes: []
 
 **Reported:** 2026-09-17 while selecting the next evidence-backed increment after the
 0.21.1 release and public-documentation rollout.
-**Status:** Active; the current rule and contradictory defaults are measured, while the
-corpus benchmark and stable decision remain in progress.
+**Status:** Resolved; the command-specific defaults and run-level adaptive threshold are
+measured, tested, documented, and validated at the exact implementation revision.
 
 ## What
 
@@ -138,8 +138,10 @@ avoided the 13,678-byte log archive. Failed Zenodo-verification run `35221505754
 failed job. The paired benchmark reports 13,678 observed bytes saved and zero missing
 diagnoses across one successful and one terminal non-success pair.
 
-The candidate stable rule is supported locally. The remaining acceptance work is the
-complete suite, strict documentation build, and exact-revision hosted pair gate.
+The candidate stable rule passed the complete 420-test suite, strict documentation build,
+Ruff, all nine frozen contracts, and exact-revision hosted pair gate `35265984761` at
+commit `5709a84`. The hosted benchmark reproduced 13,678 observed bytes saved and zero
+missing diagnoses.
 
 ## Alternatives and refuted paths
 
@@ -203,8 +205,22 @@ and causal diagnosis.
 
 ## Provenance
 
-Measured 2026-09-17 on Linux 7.0.0-28-generic x86_64 from gh-run-receptor `62c3fb2`.
+Measured 2026-09-17 on Linux 7.0.0-28-generic x86_64 from gh-run-receptor `5709a84`.
 The local corpus paths were `/home/diego/.cache/gh-run-receptor`,
 `/tmp/ghrr-adaptive-live`, and `/tmp/molsysmt-35196968944-ghrr.json`; raw evidence remains
 uncommitted. GitHub CLI and API behavior are interpreted through the project's installed
 transport adapter and API version `2022-11-28`.
+
+## Resolution
+
+Commit `5709a84` centralized the policy in `should_fetch_logs()`, added a complete truth
+table, introduced the deterministic local benchmark and a least-privilege manual hosted
+gate, corrected sanitization provenance, and reconciled the README, public documentation,
+architecture, evidence, CLI, testing, and roadmap records.
+
+Local validation passed 420 tests, strict Sphinx, Ruff, the developer-report lifecycle,
+and nine contracts frozen against 0.21.0. Hosted run `35265984761` passed at the exact
+commit. Its offline phase validated 13 committed bundles; its live phase captured one
+success and one failure under both full and adaptive policies, saved 13,678 observed bytes,
+and lost zero failed-job diagnoses. OD-002 is therefore settled for the 0.22.0 candidate
+without changing any serialized contract.

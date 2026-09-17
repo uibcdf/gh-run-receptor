@@ -741,6 +741,12 @@ failed job. The benchmark therefore recorded 13,678 observed bytes saved and zer
 diagnoses across one success and one terminal non-success pair. Raw logs were neither
 committed nor uploaded.
 
+The complete local gate passed 420 tests, Ruff, strict Sphinx, developer-report validation,
+and all nine contracts frozen against 0.21.0. Exact-revision hosted run `35265984761`
+passed at commit `5709a84`. Its committed-corpus phase validated 13 bundles; its live
+phase reproduced two full/adaptive pairs, 13,678 observed bytes saved, and zero missing
+diagnoses without uploading an artifact. OD-002 is settled for the 0.22.0 candidate.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

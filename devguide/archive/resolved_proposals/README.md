@@ -18,6 +18,7 @@
 - [#21 — Discover a trusted published report from its source run](discover_a_trusted_published_report_from_its_source_run.md) (`resolved`)
 - [#27 — Document and verify Zenodo archival](document_and_verify_zenodo_archival.md) (`resolved`)
 - [#2 — Formalize version 1 bundle, model, and report schemas](formalize_version_1_bundle_model_and_report_schemas.md) (`resolved`)
+- [#41 — Measure and freeze the adaptive log-capture policy for 1.0](freeze_adaptive_log_capture_policy.md) (`resolved`)
 - [#30 — Freeze version 1 contracts and migration policy](freeze_version_1_contracts_and_migration_policy.md) (`resolved`)
 - [#5 — Load trusted workflow rules from client repositories](load_trusted_workflow_rules_from_client_repositories.md) (`resolved`)
 - [#32 — Publish a same-revision reusable reporting workflow](publish_a_same_revision_reusable_reporting_workflow.md) (`resolved`)
