@@ -496,9 +496,9 @@ wheel itself passed the corrected procedure.
 Zenodo verification run `34285502130` queried the public API after publication and returned
 `ABSENT` for 0.19.1. No archive record or DOI is claimed.
 
-## Producer-event hosted checkpoint
+## Release 0.20.0 producer-event checkpoint
 
-The post-0.19.1 implementation registers provisional `events@1` without changing any of
+Release 0.20.0 registers and freezes `events@1` without changing any of
 the seven frozen schemas. It accepts only bounded, digest-checked, attempt-qualified
 artifacts whose subject agrees with repository, run, attempt, and SHA. Local tests cover
 safe ZIP handling, duplicate keys and identities, future contracts, wrong attempts,
@@ -518,11 +518,11 @@ preserving GitHub's `conclusion=success`. The 43,856-byte capture reduces to a r
 13,832-byte fixture with no logs or package archives; offline replay is deterministic.
 
 The local gate covers that live fixture at the bundle, events, model, and report boundaries.
-All eight registered schemas now declare a freeze; candidate validation proves that
+All eight registered schemas now have published freezes. Candidate validation proved that
 `events@1` is the only resource newly frozen in 0.20.0 and did not exist in 0.19.0. The
-declaration becomes published history only when the exact candidate tag exists. The
-complete candidate gate passes 360 tests, Ruff lint and format, developer-report
-validation, and 0.19.0 compatibility.
+exact `0.20.0` tag makes that declaration published history. The complete candidate gate
+passed 360 tests, Ruff lint and format, developer-report validation, and 0.19.0
+compatibility.
 
 During that gate, run `34888469115` exposed a stale-active-cache defect: repeated
 inspection retained a six-success/three-active snapshot after GitHub had completed with
@@ -533,6 +533,26 @@ parameter identity followed by host-native separators in validator diagnostics. 
 explicit IDs keep `PYTEST_CURRENT_TEST` below Windows' environment-variable limit without
 weakening the 64 KiB configuration boundary test; POSIX-normalized diagnostic paths keep
 the release gate byte-deterministic across operating systems.
+
+Tag `0.20.0` points to commit `bbbc8a6851446ca5c9483020ac352e97fb058849`.
+Compatibility run `34892386411` passed all nine supported OS/interpreter combinations;
+embedded Action run `34890911327` passed Ubuntu, macOS, and Windows. Exact-tag publisher
+run `35194079890` passed citation and 0.20.0 contract validation, the full suite, isolated
+distribution verification, draft verification, publication, and public-state
+revalidation. Public release `390505433` is neither a draft nor a prerelease and contains
+exactly:
+
+- `SHA256SUMS`, 202 bytes, GitHub digest
+  `d6cc28b71c1fcbbad326eddb11abe7ed009fc13b65f7a02cbc20d2bc386bd0f9`;
+- `gh_run_receptor-0.20.0-py3-none-any.whl`, 78,115 bytes, GitHub digest
+  `11845fa62e8d56b901efe86657b0c834e11e0d93d1539102314fd104936f2883`;
+- `gh_run_receptor-0.20.0.tar.gz`, 115,082 bytes, GitHub digest
+  `ff28dd232418c53e0103fc69c1ef74a69f23330821541496cacd149182b57f5b`.
+
+Fresh public downloads passed the manifest and independent release verifier. The wheel
+installed without dependencies outside the checkout, reported exactly 0.20.0, and imported
+from the isolated installation. A public Zenodo query on 2026-09-17 returned `ABSENT`; no
+archive record or DOI is claimed, and the maintainer activation handoff remains open.
 
 ## What this does not prove
 

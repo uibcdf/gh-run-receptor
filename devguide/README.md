@@ -7,9 +7,10 @@ evidence.
 
 ## Current state
 
-The project has verified `0.19.1` GitHub Release assets, but no published package-index
-artifact or stable public contract;
-the contracts in this guide are explicit but provisional unless marked settled. The MVP
+The project has verified `0.20.0` GitHub Release assets, but no published package-index
+artifact or stable 1.0 contract. All eight current serialized boundaries are frozen
+against their first publishing tags while the pre-1.0 product surface may still evolve.
+The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
 human, LLM, or JSON reports without changing the run or hiding its authoritative GitHub
 state. Broader log interpretation, deeper profile contracts, published packaging, and
@@ -74,7 +75,7 @@ The current MVP implements:
   of the official minimum binary.
 - a hosted exact-tag GitHub Release path with consistent citation/Zenodo metadata,
   draft-first asset verification, public-release revalidation, and completed
-  uninterrupted 0.18.0 and 0.19.0 publications.
+  uninterrupted publications through 0.20.0.
 - a bounded read-only Zenodo verification gate with distinct absent, invalid, and verified
   states plus an explicit maintainer activation handoff; a real project record remains
   absent.
@@ -82,8 +83,8 @@ The current MVP implements:
   conclusion parity, bounded output, and deterministic offline replay.
 - one runtime registry for eight serialized boundaries, formal configuration-capture
   schema, offline compatibility introspection, forward-only migration rules, and a release
-  gate retaining the four v1 freezes from 0.18.0 and the three new freezes from 0.19.0;
-  producer events declare the sole 0.20.0 candidate freeze.
+  gate retaining the four v1 freezes from 0.18.0, three from 0.19.0, and the producer-event
+  freeze from 0.20.0.
 - a first-class offline and remote `compare` command with an independently versioned
   comparison contract, explicit source/commit identity, bounded human and LLM output, and
   descriptive job, duration, artifact-inventory, and matrix-coverage deltas.
@@ -101,9 +102,8 @@ It does not yet provide a broad cross-workflow corpus beyond that initial extern
 cross-run aggregation; remote workflow discovery; pattern rules; or validated private-repository
 and fork token behavior. The CI,
 documentation, Conda, release, configuration, and Action contracts are initial vertical
-slices, not their complete stable forms. In particular, action-internal native matrices now
-have a hosted structured per-platform representation and a passing candidate freeze, but
-that freeze is not published history until the exact 0.20.0 tag exists.
+slices, not their complete stable forms. Action-internal native matrices now have a hosted
+structured per-platform representation and a published 0.20.0 contract freeze.
 
 ## Reading order
 
