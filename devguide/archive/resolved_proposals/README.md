@@ -24,6 +24,7 @@
 - [#26 — Publish and verify reproducible GitHub releases](publish_and_verify_reproducible_github_releases.md) (`resolved`)
 - [#4 — Publish measured adoption guidance for client repositories](publish_measured_adoption_guidance_for_client_repositories.md) (`resolved`)
 - [#23 — Secure inline Action rules and permission boundaries](secure_inline_action_rules_and_permission_boundaries.md) (`resolved`)
+- [#39 — Stabilize the CLI exit-code contract before 1.0](stabilize_the_cli_exit_code_contract_before_1_0.md) (`resolved`)
 - [#7 — Support Conda noarch package workflows](support_conda_noarch_package_workflows.md) (`resolved`)
 - [#35 — Support Conda workflows with an action-internal platform matrix](support_conda_workflows_with_an_action_internal_platform_matrix.md) (`resolved`)
 - [#34 — Validate newly frozen contracts before their release tag exists](validate_newly_frozen_contracts_before_their_release_tag_exists.md) (`resolved`)

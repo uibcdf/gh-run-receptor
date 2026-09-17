@@ -654,7 +654,7 @@ the unrelated untracked TopoMT smoke-test notebook was preserved. Exact-tag Zeno
 0.21.0. The GitHub Release is valid, but archival is not complete: a UIBCDF maintainer must
 enable the repository integration before a future release and then repeat the verifier.
 
-## Stable CLI exit-code candidate checkpoint
+## Stable CLI exit-code release checkpoint
 
 Issue `uibcdf/gh-run-receptor#39` audited the complete command boundary before 1.0. The
 documented map already assigned invalid usage to 64, but the default `argparse` behavior
@@ -668,9 +668,29 @@ The local gate passed 386 tests. Four real replay fixtures and a missing bundle 
 process statuses 0, 1, 2, 4, and 5; malformed command and run references exercise 64;
 deterministic unit cases cover pending status 3 and interruption status 130. Exact-revision
 hosted run `35219407440` passed the reproducible console categories at commit `28dbddb`.
-The non-overlapping map is the 0.21.1 candidate for CLI 1.0. It becomes a released stable
-boundary only after the exact-tag wheel and distributed extension gates pass; new meanings
-will then require a compatibility decision rather than reuse of an existing number.
+Tag `0.21.1` points to commit `08c42405829d8675392cb201cbdbd6ed56e2bea4`.
+Draft-first release run `35221114971` passed the full gate, including installation outside
+the checkout and status 64 from that installed wheel. The public release contains:
+
+- `gh_run_receptor-0.21.1-py3-none-any.whl`, 83,964 bytes, GitHub digest
+  `sha256:8eb85e9e5d88fe5d44b85fcbe660aa58155fb04c01a380b8cdc3b514a005b702`;
+- `gh_run_receptor-0.21.1.tar.gz`, 123,090 bytes, GitHub digest
+  `sha256:77eafedd72058831740839cdf759df0a056f8b0c2092c8460c59625e8c00dd78`;
+- `SHA256SUMS`, 202 bytes, GitHub digest
+  `sha256:2af2c53e25f59eb521681afa06e85d90c1dafaedef4fff14b96ba7e327709459`.
+
+Independent download verified both checksums, exact tag identity, isolated import, version,
+and status 64. Post-release runs passed the distributed Action on three systems
+(`35221273239`), GitHub CLI 2.48.0 extension installation and usage boundary
+(`35221272574`), the nine OS/Python combinations (`35221272724`), exact-tag exit-code gate
+(`35221272758`), and all nine frozen contracts (`35221272678`). The public wheel aggregated
+those five runs as `PASS` with 15 successful jobs, three artifacts, and complete evidence.
+Its canonical guide was then synchronized byte-for-byte to all twelve tracked clients.
+
+The non-overlapping map is now a released stable boundary for CLI 1.0. New meanings require
+a compatibility decision rather than reuse of an existing number. Exact-tag Zenodo run
+`35221505754` returned the designed `ABSENT` result; account-side activation remains the
+separate archival blocker.
 
 ## What this does not prove
 

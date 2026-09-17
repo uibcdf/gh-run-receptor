@@ -1,13 +1,13 @@
 ---
 summary: Stabilize the CLI exit-code contract before 1.0
 issue: uibcdf/gh-run-receptor#39
-status: active
+status: resolved
 opened: 2026-09-17
-closed:
+closed: 2026-09-17
 verification: measured
 area: ['cli']
-guard:
-normative:
+guard: tests/test_exit_codes.py
+normative: cli_and_output_contract.md
 blocked_by: []
 supersedes: []
 ---
@@ -15,8 +15,8 @@ supersedes: []
 # Stabilizing the CLI exit-code contract before 1.0
 
 **Reported:** 2026-09-17, while selecting the next evidence gate after publishing 0.21.0.
-**Status:** Active; the stable map is centralized and validated at the real process
-boundary, but the correcting patch has not yet completed public release verification.
+**Status:** Resolved; the map is centralized, released in 0.21.1, and validated through
+the installed wheel, minimum GitHub CLI extension, and cross-platform distribution gates.
 
 ## What
 
@@ -118,6 +118,11 @@ checkout-local 0.21.0 code plus post-release documentation commits.
 Commit `28dbddb` introduced the named map, corrected argparse usage status, and added the
 manual hosted gate. The complete local suite passed with 386 tests; hosted run
 `35219407440` passed at the exact implementation revision. The normative CLI contract and
-consumer guide now call the map stable. Public 0.21.0 retains argparse's old status, so
-the proposal remains active until the correcting 0.21.1 patch and its distribution gates
-pass; only then is OD-006 settled for released clients.
+consumer guide now call the map stable. Public 0.21.0 retains argparse's old status; the
+correcting 0.21.1 patch is the minimum release for the stable usage boundary.
+
+Release run `35221114971` published exact tag `08c4240`. Independent public installation
+returned 64 for invalid usage. Distributed Action run `35221273239`, minimum GitHub CLI
+run `35221272574`, compatibility run `35221272724`, exact-tag exit-code run `35221272758`,
+and contract run `35221272678` all passed. The canonical guide was synchronized to all
+twelve tracked clients, so OD-006 is settled for released consumers.

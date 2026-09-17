@@ -30,6 +30,7 @@ page and retain only a concise decision record here.
 | Runtime support | Python 3.11--3.13; GitHub CLI 2.48.0 minimum for networked commands; latest patched stable CLI recommended | The floor matches the first required `--paginate --slurp` release and is tested independently of current runner images |
 | Product portability | Runtime core and profiles are repository-agnostic; MolSysSuite identities remain fixtures, hosted evidence, or explicit client configuration | External public workflows must join the pre-1.0 corpus; UIBCDF-specific release/guide tooling is not product behavior |
 | Serialized contract evolution | Published major-schema resources are immutable; incompatible changes use a new integer version with explicit forward-only migration or documented retirement | Readers reject malformed, wrong-kind, retired, and future contracts; 0.18.0 freezes the first four v1 resources and 0.19.0 freezes the remaining three current v1 resources |
+| CLI process status | Freeze 0 success, 1 known failure, 2 other terminal non-success, 3 active, 4 incomplete, 5 receptor error, 64 usage error, and 130 interruption | Shell and agent callers can distinguish source truth from invocation and receptor failures without parsing text; command-specific semantics remain normative |
 
 ## Open decision gates
 
@@ -64,15 +65,6 @@ page and retain only a concise decision record here.
 - **Needed evidence:** rate-limit measurements and comparison with `gh run watch --compact`.
 - **Gate:** before declaring `watch` stable.
 - **Current default:** emit only state changes and a final report; no repeated unchanged tree.
-
-### OD-006: Exit-code stability
-
-- **Question:** whether the non-overlapping candidate map is ready to freeze for CLI 1.0.
-- **Needed evidence:** public 0.21.1 wheel and distributed-command validation, after local
-  and exact-revision shell gates proved every reproducible category.
-- **Gate:** before CLI 1.0.
-- **Current default:** candidate codes are 0 success, 1 known failure, 2 other terminal
-  non-success, 3 active, 4 incomplete, 5 receptor error, 64 usage, and 130 interruption.
 
 ## Deferred, not forgotten
 

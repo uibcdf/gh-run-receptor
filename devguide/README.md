@@ -7,13 +7,10 @@ evidence.
 
 ## Current state
 
-The project has verified `0.21.0` GitHub Release assets, but no published package-index
+The project has verified `0.21.1` GitHub Release assets, but no published package-index
 artifact or stable 1.0 contract. All nine published serialized boundaries are frozen
 against their first publishing tags, including the `aggregate@1` boundary introduced in
 0.21.0, while the pre-1.0 product surface may still evolve.
-A 0.21.1 patch candidate corrects the discovered argparse usage-status collision and has
-passed its local and exact-revision hosted console gate; public distribution validation is
-still required before that exit-code boundary is called released.
 The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
 human, LLM, or JSON reports without changing the run or hiding its authoritative GitHub
@@ -29,7 +26,7 @@ The current MVP implements:
 - a shared generic report rendered for `human`, `llm`, or JSON;
 - numeric IDs and HTTPS run URLs, including repository and hostname extraction;
 - authoritative outcome exit codes and bounded terminal-safe text;
-- a candidate non-overlapping process-status map that distinguishes source failure, other
+- a stable non-overlapping process-status map that distinguishes source failure, other
   terminal non-success, active work, incomplete evidence, receptor error, invalid usage,
   and user interruption;
 - bounded log-cause extraction with archive and line limits;
@@ -63,7 +60,7 @@ The current MVP implements:
   command, suite, build, wheel installation, and smoke path on Ubuntu, macOS, and Windows
   with Python 3.11 through 3.13.
 - strict repository policy deployed across eleven additional MolSysSuite clients, with 63
-  exact workflow rules accepted by the published parser, plus the canonical 0.21.0 guide
+  exact workflow rules accepted by the published parser, plus the canonical 0.21.1 guide
   synchronized byte-for-byte across twelve client repositories.
 - a first checkout-local composite Action implementation with bounded summaries, scalar
   outputs, canonical JSON artifacts, explicit publisher provenance, and offline tests;
@@ -83,9 +80,9 @@ The current MVP implements:
   of the official minimum binary.
 - a hosted exact-tag GitHub Release path with consistent citation/Zenodo metadata,
   draft-first asset verification, public-release revalidation, and completed
-  uninterrupted publications through 0.21.0.
+  uninterrupted publications through 0.21.1.
 - a bounded read-only Zenodo verification gate with distinct absent, invalid, and verified
-  states plus an explicit maintainer activation handoff; an exact-tag 0.21.0 query confirms
+  states plus an explicit maintainer activation handoff; an exact-tag 0.21.1 query confirms
   that a real project record remains absent.
 - a first portable live corpus spanning three non-UIBCDF repositories, including native
   conclusion parity, bounded output, and deterministic offline replay.
