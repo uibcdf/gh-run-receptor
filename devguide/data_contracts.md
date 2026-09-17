@@ -15,9 +15,9 @@ The runtime registry exposes nine related, independently versioned documents:
 - `gh-run-receptor.events@1`: optional corroborating producer evidence.
 
 The events contract is frozen against its first published 0.20.0 schema. The aggregate
-contract is registered with a packaged JSON Schema but remains deliberately unfrozen while
-the 0.21.0 evidence gate is active. A published schema is immutable; an unfrozen schema is
-explicitly provisional rather than silently treated as stable.
+contract declares 0.21.0 as its first freeze after the offline, live, and hosted evidence
+gate passed. Candidate validation protects that declaration before the exact tag exists;
+the tag turns it into published immutable history.
 
 Version identifiers are explicit strings, not inferred from package version. Additive
 optional fields do not require a major schema change. Removing fields, changing meaning,
@@ -386,16 +386,15 @@ The four schema files shipped by release 0.18.0 are byte-frozen against that Git
 Release 0.19.0 freezes the first formal `config-capture@1` schema and the new
 `comparison@1` and `comparison-policy@1` schemas. The registry retains each resource's own
 first publishing tag instead of pretending that all seven originated in one release.
-Release 0.20.0 freezes `events@1` as the eighth published contract. The provisional
-`aggregate@1` resource is the ninth registered boundary and has no freeze tag yet.
+Release 0.20.0 freezes `events@1` as the eighth published contract. Release 0.21.0 assigns
+the new `aggregate@1` resource as the ninth boundary without relabeling an older schema.
 
-Release preparation for 0.21.0 will run `validate_contracts.py --baseline 0.20.0
+Release preparation for 0.21.0 runs `validate_contracts.py --baseline 0.20.0
 --candidate 0.21.0` after assigning only `aggregate@1` to the candidate tag. Candidate
 mode fails if the candidate tag already exists, requires every packaged schema to declare
 a freeze, and permits a candidate freeze only for resources absent from the published
-baseline. Normal validation skips a deliberately unfrozen development resource while
-continuing to compare all eight published schemas byte-for-byte. The exact-tag publisher
-will then validate baseline 0.21.0 normally; changing a frozen schema in place, losing a
+baseline. The exact-tag publisher then validates baseline 0.21.0 normally; changing a
+frozen schema in place, losing a
 registered resource, or adding an unregistered version fails before distributions are
 built.
 

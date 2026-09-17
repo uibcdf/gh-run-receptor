@@ -58,14 +58,15 @@ release workflow independently validates the resulting records but never rewrite
 source.
 
 The exact-tag workflow runs
-`python devtools/scripts/validate_contracts.py --baseline 0.20.0` before building. Each
-registered resource is compared with its own first publishing tag: four against 0.18.0 and
-three against 0.19.0. A contract change that cannot satisfy this gate requires a new
-integer contract version and the migration/retirement process in `data_contracts.md`;
-editing a baseline tag or weakening the comparison is not a release operation.
+`python devtools/scripts/validate_contracts.py --baseline 0.21.0` before building. Each
+registered resource is compared with its own first publishing tag: four against 0.18.0,
+three against 0.19.0, one against 0.20.0, and one against 0.21.0. A contract change that
+cannot satisfy this gate requires a new integer contract version and the
+migration/retirement process in `data_contracts.md`; editing a baseline tag or weakening
+the comparison is not a release operation.
 
-A candidate that introduces a freeze must be validated before its tag exists. For 0.20.0,
-use `python devtools/scripts/validate_contracts.py --baseline 0.19.0 --candidate 0.20.0`.
+A candidate that introduces a freeze must be validated before its tag exists. For 0.21.0,
+use `python devtools/scripts/validate_contracts.py --baseline 0.20.0 --candidate 0.21.0`.
 Candidate mode requires the named tag to be absent and only permits a resource absent from
 the published baseline to acquire the new freeze. The ordinary mode continues to fail
 until the tag exists, so candidate mode cannot be reused to bypass a published baseline.
@@ -149,6 +150,13 @@ The `0.20.0` gate freezes `events@1` as the eighth serialized boundary and publi
 strict, attempt-qualified producer evidence for Action-internal Conda matrices. Hosted
 Ubuntu and Windows producers, normal network capture, sanitized offline replay, and
 producer-failure truth semantics must pass before the tag is created.
+
+The `0.21.0` gate freezes `aggregate@1` as the ninth serialized boundary and publishes
+bounded multi-run aggregation. Offline CI/documentation/Conda fixtures, failure and
+incompleteness truth tables, a real cross-repository success collection, a real mixed
+success/failure collection, output bounds, and the exact-revision hosted gate must pass
+before the tag is created. The release record retains the measured counterexample that
+individual receptor lines are smaller for a narrow known-run question.
 
 Installed-wheel verification must run outside the source checkout and assert that the
 imported module path belongs to the isolated installation target. A matching version string

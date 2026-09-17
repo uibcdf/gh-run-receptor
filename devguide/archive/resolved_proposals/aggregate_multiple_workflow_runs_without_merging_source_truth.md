@@ -1,13 +1,13 @@
 ---
 summary: Aggregate multiple workflow runs without merging source truth
 issue: uibcdf/gh-run-receptor#38
-status: active
+status: resolved
 opened: 2026-09-17
-closed:
+closed: 2026-09-17
 verification: measured
 area: ['reports']
-guard:
-normative:
+guard: tests/test_aggregation.py
+normative: data_contracts.md
 blocked_by: []
 supersedes: []
 ---
@@ -15,7 +15,7 @@ supersedes: []
 # Aggregate multiple workflow runs without merging source truth
 
 **Reported:** 2026-09-17, after the first real MolSysMT producer-event adoption run.
-**Status:** Active; this is the defining product increment for 0.21.0.
+**Status:** Resolved; the bounded contract, CLI, evidence, and release gate are complete.
 
 ## What
 
@@ -78,14 +78,16 @@ Implementation checkpoint on 2026-09-17:
 - The first live invocation exposed that remote aggregation had omitted the required
   explicit `attempt=None` acquisition argument. The focused remote-path test now asserts
   this call contract.
-- The negative hosted-gate revision, broader multi-state benchmark, canonical client-guide
-  update, and 0.21.0 freeze remain open.
+- Exact-revision hosted gate `35204416931` passes both the positive and negative cases.
+  The multi-state benchmark, canonical client guide, and 0.21.0 candidate freeze are
+  complete.
 
 The first exact-revision gate, run `35202361626` at commit `37d8af7`, passed the successful
 cross-repository case with read-only permissions. A second live local probe combined the
 MolSysMT success with MolSysViewer CI failure `34890243748`; it retained complete evidence,
 reported one `PASS` plus one `FAIL`, and returned the aggregate `FAIL` path with nine jobs
-and two artifacts. That negative case is now part of the next hosted gate revision.
+and two artifacts. Gate `35204416931` passed that negative case together with the
+cross-repository success case at exact commit `64a82eb`.
 
 The same two-success collection was measured against a deliberately compact native JSON
 projection built from `gh run view --json` plus the artifacts endpoint, and against two
@@ -152,5 +154,6 @@ unfrozen until the 0.21.0 candidate gate.
 
 Measurements were made on `linux-64` host `tzinacan`, Python 3.13 in the MolSysSuite
 development environment, gh-run-receptor public 0.20.0 and checkout commit `630c8ea`, on
-2026-09-17. Hosted evidence comes from GitHub Actions run `35196968944` on
-`ubuntu-24.04`.
+2026-09-17. Hosted source evidence includes runs `35196968944`, `35194479266`, and
+`34890243748`; exact-revision aggregate gates `35202361626` and `35204416931` ran on
+`ubuntu-latest`.

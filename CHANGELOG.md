@@ -4,11 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.21.0 - 2026-09-17
+
 - Add provisional bounded offline and remote multi-run aggregation with independent source
   identity, conservative outcome precedence, deterministic human/LLM/JSON rendering, and
-  an unfrozen `aggregate@1` contract targeted at 0.21.0.
+  the first `aggregate@1` contract.
 - Validate cross-repository remote aggregation against real successful MolSysMT and
-  gh-run-receptor runs without inventing a collection-level GitHub conclusion.
+  gh-run-receptor runs, plus a retained MolSysViewer failure, without inventing a
+  collection-level GitHub conclusion.
+- Measure 33.2% fewer `cl100k_base` tokens than a compact native multi-run projection while
+  retaining the explicit counterexample that two individual receptor lines are smaller.
+- Freeze only `aggregate@1` in 0.21.0 while retaining all eight previously published
+  contracts byte-for-byte.
 
 ## 0.20.0 - 2026-09-17
 

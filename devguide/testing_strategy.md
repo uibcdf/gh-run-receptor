@@ -27,8 +27,8 @@ The compatibility gate validates all nine registered JSON Schema resources, exer
 wrong-kind, malformed, retired, future, and missing-migration states, and proves a
 synthetic stepwise migration leaves its source unchanged. Release preparation additionally
 compares every previously published v1 schema byte-for-byte with its 0.18.0, 0.19.0, or
-0.20.0 freeze tag while requiring the provisional aggregate resource to be assigned only
-at the 0.21.0 candidate gate. Updating a
+0.20.0 freeze tag while requiring only the new aggregate resource to be assigned at the
+0.21.0 candidate gate. Updating a
 local checksum beside a changed schema is not an acceptable compatibility test.
 
 Comparison contract tests use the two sanitized attempts of one real ArgDigest run as the

@@ -581,9 +581,9 @@ and two artifacts. The independently installed public 0.20.0 wheel reported the 
 result. MolSysViewer source adoption remains locally guarded but still awaits its first
 real noarch client run.
 
-## 0.21.0 multi-run aggregation development checkpoint
+## 0.21.0 multi-run aggregation candidate checkpoint
 
-Issue `uibcdf/gh-run-receptor#38` defines a provisional `aggregate@1` contract rather than
+Issue `uibcdf/gh-run-receptor#38` defines an `aggregate@1` contract rather than
 overloading two-run comparison. The first implementation accepts two to fifty homogeneous
 local or remote sources, rejects duplicate run attempts, preserves every source identity
 and official outcome, and derives a bounded collection assessment without inventing a
@@ -602,14 +602,15 @@ Action run `35194479266` by full URLs. An initial invocation exposed a missing e
 `attempt=None` at the shared acquisition boundary; the focused remote test now asserts that
 argument. The corrected invocation reported `PASS`, two complete sources, five jobs, five
 artifacts, two repositories, and two workflows. This is a read-only local-client probe of
-real hosted evidence, not yet the exact-revision hosted release gate required before the
-0.21.0 contract freeze.
+real hosted evidence.
 
 Exact-revision hosted gate `35202361626` passed that two-success case at commit `37d8af7`
 with only `actions: read` and `contents: read`. A retained MolSysViewer CI failure,
 `34890243748`, was then combined with the MolSysMT success locally: the aggregate preserved
 one official failure, one success, nine jobs, two artifacts, complete evidence, and exit 1.
-The negative case was added to the next hosted gate revision.
+Exact-revision gate `35204416931` then passed both the success and mixed-failure cases at
+commit `64a82eb`. Candidate validation assigns only `aggregate@1` to 0.21.0 and retains the
+other eight schema resources against their original published tags.
 
 For the two-success question, a compact native JSON projection measured 632 bytes and 208
 `cl100k_base` tokens; the three-line aggregate measured 527 bytes and 139 tokens, a 33.2%

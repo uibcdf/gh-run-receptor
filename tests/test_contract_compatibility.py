@@ -42,8 +42,8 @@ def test_inventory_exposes_every_serialized_boundary_in_stable_order():
     assert sum(item["frozen_since"] == "0.18.0" for item in schemas) == 4
     assert sum(item["frozen_since"] == "0.19.0" for item in schemas) == 3
     assert sum(item["frozen_since"] == "0.20.0" for item in schemas) == 1
-    assert sum(item["frozen_since"] is None for item in schemas) == 1
-    assert CONTRACTS["aggregate"].schemas[0].frozen_since is None
+    assert sum(item["frozen_since"] == "0.21.0" for item in schemas) == 1
+    assert all(item["frozen_since"] is not None for item in schemas)
 
 
 @pytest.mark.parametrize(
@@ -195,7 +195,21 @@ def _candidate_021_contracts():
     }
 
 
-def test_candidate_gate_requires_every_new_resource_to_be_frozen():
+def test_candidate_gate_requires_every_new_resource_to_be_frozen(monkeypatch):
+    aggregate = CONTRACTS["aggregate"]
+    monkeypatch.setattr(
+        contract_validation,
+        "CONTRACTS",
+        {
+            **CONTRACTS,
+            "aggregate": ContractSpec(
+                aggregate.kind,
+                aggregate.current_version,
+                aggregate.readable_versions,
+                (SchemaVersion(1, "aggregate-v1.schema.json", None),),
+            ),
+        },
+    )
     assert validate_contracts(
         ROOT,
         baseline_tag="0.20.0",
@@ -208,7 +222,7 @@ def test_candidate_gate_requires_every_new_resource_to_be_frozen():
 
 
 def test_021_candidate_freezes_only_the_new_aggregate_resource(monkeypatch):
-    monkeypatch.setattr(contract_validation, "CONTRACTS", _candidate_021_contracts())
+    monkeypatch.setattr(contract_validation, "CONTRACTS", CONTRACTS)
     assert (
         validate_contracts(
             ROOT,
@@ -284,12 +298,12 @@ def test_contracts_cli_is_offline_bounded_and_machine_readable(capsys):
     assert main(["contracts"]) == 0
     text = capsys.readouterr().out
     assert len(text.splitlines()) == 1
-    assert "baseline=0.20.0" in text
+    assert "baseline=0.21.0" in text
     assert "config-capture@1(readable=1)" in text
 
     assert main(["contracts", "--format=json"]) == 0
     payload = json.loads(capsys.readouterr().out)
-    assert payload == {"baseline": "0.20.0", "contracts": contract_inventory()}
+    assert payload == {"baseline": "0.21.0", "contracts": contract_inventory()}
     assert set(CONTRACTS) == {item["kind"] for item in payload["contracts"]}
 
 
@@ -303,7 +317,7 @@ def test_hosted_contract_gate_is_manual_read_only_bounded_and_pinned():
     assert "timeout-minutes: 5" in source
     assert "fetch-depth: 0" in source
     assert "persist-credentials: false" in source
-    assert "validate_contracts.py --baseline 0.20.0" in source
+    assert "validate_contracts.py --baseline 0.21.0" in source
     assert "--candidate" not in source
     assert "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7" in source
     assert "actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7" in source

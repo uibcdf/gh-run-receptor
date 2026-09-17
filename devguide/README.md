@@ -9,8 +9,8 @@ evidence.
 
 The project has verified `0.20.0` GitHub Release assets, but no published package-index
 artifact or stable 1.0 contract. All eight published serialized boundaries are frozen
-against their first publishing tags; a ninth provisional `aggregate@1` boundary is under
-active 0.21.0 validation while the pre-1.0 product surface may still evolve.
+against their first publishing tags; the ninth `aggregate@1` boundary has passed its
+0.21.0 candidate evidence gate while the pre-1.0 product surface may still evolve.
 The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
 human, LLM, or JSON reports without changing the run or hiding its authoritative GitHub
@@ -86,7 +86,7 @@ The current MVP implements:
 - one runtime registry for nine serialized boundaries, formal configuration-capture
   schema, offline compatibility introspection, forward-only migration rules, and a release
   gate retaining the four v1 freezes from 0.18.0, three from 0.19.0, and the producer-event
-  freeze from 0.20.0 while leaving the new aggregate boundary explicitly unfrozen.
+  freeze from 0.20.0 while assigning only the new aggregate boundary to 0.21.0.
 - a first-class offline and remote `compare` command with an independently versioned
   comparison contract, explicit source/commit identity, bounded human and LLM output, and
   descriptive job, duration, artifact-inventory, and matrix-coverage deltas.
@@ -102,9 +102,10 @@ The current MVP implements:
 - real downstream adoption in MolSysMT, where the public 0.20.0 wheel consumed a
   failure-safe `events@1` artifact from a non-publishing Linux ABI3 build and reported
   exact platform, build, upload-intent, job, and artifact state.
-- a provisional bounded `aggregate` command that preserves independent source truth for
+- a bounded `aggregate` command that preserves independent source truth for
   two to fifty offline or remote runs; its first live cross-repository pilot summarizes
-  two workflows, five jobs, and five artifacts with complete successful evidence.
+  two workflows, five jobs, and five artifacts with complete successful evidence, and its
+  hosted negative case preserves a real MolSysViewer failure.
 
 It does not yet provide a broad cross-workflow corpus beyond that initial external sample;
 policy-driven run discovery; pattern rules; or validated private-repository
@@ -185,7 +186,7 @@ known design question; it does not mean that unimplemented behavior has been val
 
 The next milestone closes the remaining outcome and aggregation gaps, led by real Zenodo
 verification, broader corpus evidence including a real MolSysViewer noarch delivery, and
-hosted validation of the provisional multi-run contract before its 0.21.0 freeze.
+publication and distribution validation of the 0.21.0 multi-run contract.
 Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need
