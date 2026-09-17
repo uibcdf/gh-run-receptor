@@ -67,6 +67,12 @@ jobs:
             cd "$RUNNER_TEMP"
             PYTHONPATH="$RUNNER_TEMP/install" python -c \
               "import gh_run_receptor; assert gh_run_receptor.__version__ == '$RELEASE_TAG'; assert gh_run_receptor.__file__.startswith('$RUNNER_TEMP/install/')"
+            set +e
+            PYTHONPATH="$RUNNER_TEMP/install" python -m gh_run_receptor invalid-command \
+              >"$RUNNER_TEMP/usage.out" 2>"$RUNNER_TEMP/usage.err"
+            usage_status="$?"
+            set -e
+            test "$usage_status" -eq 64
           )
           python devtools/scripts/release_tools.py notes "$RELEASE_TAG" \
             --output "$RUNNER_TEMP/release-notes.md"

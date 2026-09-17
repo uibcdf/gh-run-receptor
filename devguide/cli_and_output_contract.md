@@ -297,7 +297,7 @@ official conclusion.
 
 ## Exit codes
 
-The preliminary exit-code contract separates run outcome from receptor failure:
+The stable exit-code contract separates run outcome from receptor failure:
 
 | Code | Meaning |
 | ---: | --- |
@@ -308,6 +308,7 @@ The preliminary exit-code contract separates run outcome from receptor failure:
 | 4 | Evidence incomplete for the requested operation |
 | 5 | Receptor acquisition, configuration, normalization, or rendering error |
 | 64 | CLI usage error |
+| 130 | Operation interrupted by the user |
 
 Acquisition failures use one bounded stderr line while keeping exit status 5:
 
@@ -330,8 +331,9 @@ Configuration, bundle, normalization, and rendering errors retain the uncategori
 
 `capture` returns zero when the requested capture policy is satisfied even if the
 captured GitHub run failed; its purpose is evidence acquisition. `replay`, `inspect`, and
-`published` follow the table. Final numeric values remain provisional until Phase 1
-truth-table tests validate composition with shell and agent workflows.
+`published` follow the table. The values are frozen for CLI 1.0. Unit truth tables and
+hosted run `35219407440` exercise the real process boundary without collapsing usage,
+source outcome, incomplete evidence, or receptor failure into one status.
 
 `compare` describes differences rather than adopting either run's outcome. Complete
 `CHANGED` and `UNCHANGED` results return 0, incomplete comparison evidence returns 4, and

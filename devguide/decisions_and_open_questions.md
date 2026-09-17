@@ -67,12 +67,12 @@ page and retain only a concise decision record here.
 
 ### OD-006: Exit-code stability
 
-- **Question:** whether all provisional codes in the CLI contract are needed by automation.
-- **Needed evidence:** shell and CI consumer scenarios, especially incomplete evidence versus
-  receptor failure.
+- **Question:** whether the non-overlapping candidate map is ready to freeze for CLI 1.0.
+- **Needed evidence:** public 0.21.1 wheel and distributed-command validation, after local
+  and exact-revision shell gates proved every reproducible category.
 - **Gate:** before CLI 1.0.
-- **Current default:** use the provisional mapping and reject collisions silently coerced to
-  generic failure.
+- **Current default:** candidate codes are 0 success, 1 known failure, 2 other terminal
+  non-success, 3 active, 4 incomplete, 5 receptor error, 64 usage, and 130 interruption.
 
 ## Deferred, not forgotten
 

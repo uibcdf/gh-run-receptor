@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.21.1 - 2026-09-17
+
+- Stabilize the CLI process-status contract, centralize its named categories, and make
+  malformed usage return 64 instead of colliding with terminal non-success status 2.
+- Validate success, failure, cancellation, incomplete evidence, receptor error, and usage
+  error through the real console boundary locally and in an exact-revision hosted gate.
+
 ## 0.21.0 - 2026-09-17
 
 - Add provisional bounded offline and remote multi-run aggregation with independent source

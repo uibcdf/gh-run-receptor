@@ -158,6 +158,12 @@ success/failure collection, output bounds, and the exact-revision hosted gate mu
 before the tag is created. The release record retains the measured counterexample that
 individual receptor lines are smaller for a narrow known-run question.
 
+The `0.21.1` patch retains all nine contract freezes and corrects the mismatch between the
+documented CLI usage status 64 and argparse's former status 2, which collided with a valid
+terminal non-success outcome. Its gate requires the local and hosted process-status truth
+tables, an exact-tag installed-wheel usage check outside the checkout, and the minimum
+GitHub CLI extension installation check before the map becomes stable for CLI 1.0.
+
 Installed-wheel verification must run outside the source checkout and assert that the
 imported module path belongs to the isolated installation target. A matching version string
 alone is not evidence that the wheel payload was imported.

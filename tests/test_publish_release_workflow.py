@@ -45,6 +45,7 @@ def test_release_workflow_imports_installed_wheel_outside_checkout():
 
     assert install < leave_checkout < import_installed
     assert "gh_run_receptor.__file__.startswith('$RUNNER_TEMP/install/')" in source
+    assert 'test "$usage_status" -eq 64' in source
 
 
 def test_release_workflow_verifies_draft_before_publication_and_rechecks_public_state():

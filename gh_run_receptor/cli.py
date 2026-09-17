@@ -586,7 +586,7 @@ def main(arguments: list[str] | None = None) -> int:
         print(f"RECEPTOR_ERROR: {error}", file=sys.stderr)
         return exit_codes.RECEPTOR_ERROR
     except KeyboardInterrupt:
-        print("watch interrupted", file=sys.stderr)
+        print("operation interrupted", file=sys.stderr)
         return exit_codes.INTERRUPTED
 
 

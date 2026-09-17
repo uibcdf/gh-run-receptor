@@ -654,6 +654,24 @@ the unrelated untracked TopoMT smoke-test notebook was preserved. Exact-tag Zeno
 0.21.0. The GitHub Release is valid, but archival is not complete: a UIBCDF maintainer must
 enable the repository integration before a future release and then repeat the verifier.
 
+## Stable CLI exit-code candidate checkpoint
+
+Issue `uibcdf/gh-run-receptor#39` audited the complete command boundary before 1.0. The
+documented map already assigned invalid usage to 64, but the default `argparse` behavior
+returned 2, colliding with the legitimate terminal non-success category. A dedicated
+parser boundary now returns 64 for malformed commands and arguments while help and version
+remain 0. Named internal constants are shared by report, comparison, aggregation, capture,
+CLI error, interruption, and embedded Action paths without changing the Action's fail-open
+behavior.
+
+The local gate passed 386 tests. Four real replay fixtures and a missing bundle exercise
+process statuses 0, 1, 2, 4, and 5; malformed command and run references exercise 64;
+deterministic unit cases cover pending status 3 and interruption status 130. Exact-revision
+hosted run `35219407440` passed the reproducible console categories at commit `28dbddb`.
+The non-overlapping map is the 0.21.1 candidate for CLI 1.0. It becomes a released stable
+boundary only after the exact-tag wheel and distributed extension gates pass; new meanings
+will then require a compatibility decision rather than reuse of an existing number.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

@@ -94,7 +94,7 @@ def test_keyboard_interrupt_has_the_shell_conventional_status(monkeypatch, capsy
     monkeypatch.setattr(cli, "load_bundle", interrupt)
 
     assert cli.main(["replay", "bundle"]) == exit_codes.INTERRUPTED
-    assert capsys.readouterr().err == "watch interrupted\n"
+    assert capsys.readouterr().err == "operation interrupted\n"
 
 
 def test_hosted_exit_code_gate_is_manual_read_only_bounded_and_pinned():

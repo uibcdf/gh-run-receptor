@@ -15,8 +15,8 @@ supersedes: []
 # Stabilizing the CLI exit-code contract before 1.0
 
 **Reported:** 2026-09-17, while selecting the next evidence gate after publishing 0.21.0.
-**Status:** Active; the documented map is coherent, but its usage-error boundary is not
-implemented and the complete command surface has no single executable contract.
+**Status:** Active; the stable map is centralized and validated at the real process
+boundary, but the correcting patch has not yet completed public release verification.
 
 ## What
 
@@ -112,3 +112,12 @@ errors into usage errors; the parser subclass avoids that design.
 
 Measured 2026-09-17 on Linux 7.0.0-28-generic x86_64 with Python 3.13.14 and the
 checkout-local 0.21.0 code plus post-release documentation commits.
+
+## Implementation checkpoint
+
+Commit `28dbddb` introduced the named map, corrected argparse usage status, and added the
+manual hosted gate. The complete local suite passed with 386 tests; hosted run
+`35219407440` passed at the exact implementation revision. The normative CLI contract and
+consumer guide now call the map stable. Public 0.21.0 retains argparse's old status, so
+the proposal remains active until the correcting 0.21.1 patch and its distribution gates
+pass; only then is OD-006 settled for released clients.
