@@ -132,5 +132,7 @@ warnings as errors and the full suite passed with 391 tests.
 Hosted run `35224624974` passed both build and deploy jobs. Pages was enabled with workflow
 build type, and independent HTTP checks returned 200 for every published page at
 `https://www.uibcdf.org/gh-run-receptor/`. GitHub now exposes the proposed tagline and
-that verified HTTPS homepage. The public site is the durable user-facing norm; devguide
-retains implementation evidence and maintainer decisions.
+that verified HTTPS homepage. The generic discovery topics are `ai-agents`,
+`developer-tools`, `github-actions`, `github-cli`, `llm`, and `observability`; no topic
+couples the public tool to MolSysSuite. The public site is the durable user-facing norm;
+devguide retains implementation evidence and maintainer decisions.

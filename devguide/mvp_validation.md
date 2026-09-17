@@ -703,8 +703,9 @@ maintainer checkpoint rather than being exposed as the user learning path.
 The local strict Sphinx 8.2.3 build completed ten source pages with no warnings. The full
 suite passed with 391 tests, including guards for navigation, optional dependency bounds,
 workflow triggers, least-privilege job separation, four exact third-party Action commits,
-and badges backed by real project surfaces. Implementation commit `62b314d` deployed in hosted run `35224624974`: the
-read-only build and Pages-only deploy jobs both passed and produced one Pages artifact.
+and badges backed by real project surfaces. Implementation commit `62b314d` deployed in
+hosted run `35224624974`: the read-only build and Pages-only deploy jobs both passed and
+produced one Pages artifact.
 
 GitHub Pages reports workflow build mode and the public site at
 `https://www.uibcdf.org/gh-run-receptor/`. Independent retrieval returned HTTP 200 for the
@@ -713,6 +714,9 @@ receptor for coding agents: compact reports without hiding failures or uncertain
 the observed HTTPS site is its homepage. README and package metadata link to the same URL.
 The README also exposes the policy, documentation, release, Python-support, and license
 status without presenting a manual validation workflow as continuous test coverage.
+Repository discovery uses the generic topics `ai-agents`, `developer-tools`,
+`github-actions`, `github-cli`, `llm`, and `observability`; none couples the public tool to
+MolSysSuite.
 
 ## What this does not prove
 

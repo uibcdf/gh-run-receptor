@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file.
   uncertainty.
 - Add status badges for the policy gate, documentation deployment, latest release,
   supported Python versions, and MIT license.
+- Add generic discovery topics for AI agents, developer tooling, GitHub Actions, GitHub
+  CLI, LLMs, and observability.
 
 ## 0.21.1 - 2026-09-17
 
