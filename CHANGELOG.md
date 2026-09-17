@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
-## 0.20.0 - 2026-09-14
+## 0.20.0 - 2026-09-17
 
 - Add strict `events@1` producer evidence for Action-internal Conda matrices, including
   attempt-qualified artifact discovery, digest and ZIP validation, source identity,
