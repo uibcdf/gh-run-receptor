@@ -2,8 +2,9 @@
 
 ## Contract family
 
-The runtime registry exposes eight related, independently versioned documents:
+The runtime registry exposes nine related, independently versioned documents:
 
+- `gh-run-receptor.aggregate@1`: a bounded collection of independently identified reports;
 - `gh-run-receptor.bundle@1`: captured source resources and manifest;
 - `gh-run-receptor.config@1`: normalized trusted repository workflow rules;
 - `gh-run-receptor.config-capture@1`: captured configuration plus source provenance;
@@ -13,9 +14,10 @@ The runtime registry exposes eight related, independently versioned documents:
 - `gh-run-receptor.comparison-policy@1`: explicit candidate regression rules;
 - `gh-run-receptor.events@1`: optional corroborating producer evidence.
 
-The events contract is registered with a packaged JSON Schema and declares 0.20.0 as its
-first freeze after the hosted producer/consumer gate passed. Until that exact tag exists,
-candidate validation rather than published history protects the declaration.
+The events contract is frozen against its first published 0.20.0 schema. The aggregate
+contract is registered with a packaged JSON Schema but remains deliberately unfrozen while
+the 0.21.0 evidence gate is active. A published schema is immutable; an unfrozen schema is
+explicitly provisional rather than silently treated as stable.
 
 Version identifiers are explicit strings, not inferred from package version. Additive
 optional fields do not require a major schema change. Removing fields, changing meaning,
@@ -266,6 +268,27 @@ their keys are present. Evaluation yields `PASS`, `FAIL` with measured violation
 `INCOMPLETE` with required observations that could not be derived. Policy never rewrites
 the source facts or the descriptive comparison assessment.
 
+## Aggregate
+
+`gh-run-receptor.aggregate@1` contains between two and fifty independently normalized
+report summaries. A source preserves repository, workflow, run ID, attempt, commit, URL,
+official status and conclusion, profile assessment, required completeness, job counts,
+artifact count, and its ordinary report exit code. Sources are sorted deterministically
+and duplicate repository/run/attempt identities are invalid.
+
+The top-level assessment is derived, not supplied by GitHub. A known failure or profile
+violation dominates; another terminal non-success state follows, then active work, then
+incomplete evidence, and only a collection of complete successful sources is `PASS`.
+Aggregate evidence sufficiency remains false if any source is incomplete even when a known
+failure determines the exit code. Summary counts and totals are descriptive and never
+merge source jobs, artifacts, producer events, conclusions, or commits.
+
+The schema encodes the relationship between a source exit code and its assessment, and the
+relationship between the derived assessment and the required source-code witness. Thus a
+document cannot claim aggregate `PASS` while carrying a hidden failed source merely by
+matching the expected field shape. Policy and automatic run discovery are outside version
+1 of this contract.
+
 ## Cause groups
 
 A cause group contains a stable fingerprint derived from normalized failure class,
@@ -351,7 +374,8 @@ incomplete evidence.
   error for future major versions.
 
 The machine-readable Draft 2020-12 schemas ship inside `gh_run_receptor.schemas` as
-`bundle-v1.schema.json`, `config-v1.schema.json`, `config-capture-v1.schema.json`,
+`aggregate-v1.schema.json`, `bundle-v1.schema.json`, `config-v1.schema.json`,
+`config-capture-v1.schema.json`,
 `comparison-v1.schema.json`, `comparison-policy-v1.schema.json`,
 `events-v1.schema.json`, `model-v1.schema.json`, and `report-v1.schema.json`. They are
 the formal spelling of the version 1 boundaries. `gh_run_receptor.contracts` is the single
@@ -362,16 +386,18 @@ The four schema files shipped by release 0.18.0 are byte-frozen against that Git
 Release 0.19.0 freezes the first formal `config-capture@1` schema and the new
 `comparison@1` and `comparison-policy@1` schemas. The registry retains each resource's own
 first publishing tag instead of pretending that all seven originated in one release.
-Release 0.20.0 freezes `events@1` as the eighth registered contract. Before the tag exists,
-that freeze is a candidate declaration rather than published immutability.
+Release 0.20.0 freezes `events@1` as the eighth published contract. The provisional
+`aggregate@1` resource is the ninth registered boundary and has no freeze tag yet.
 
-Before the 0.20.0 tag exists, release preparation runs `validate_contracts.py --baseline
-0.19.0 --candidate 0.20.0`. Candidate mode fails if the candidate tag already exists,
-requires every packaged schema to declare a freeze, and permits a candidate freeze only
-for resources absent from the published baseline. Normal validation remains fail-closed
-until the tag exists. The exact-tag publisher then validates baseline 0.20.0 normally;
-changing a frozen schema in place, losing a registered resource, or adding an unregistered
-version fails before distributions are built.
+Release preparation for 0.21.0 will run `validate_contracts.py --baseline 0.20.0
+--candidate 0.21.0` after assigning only `aggregate@1` to the candidate tag. Candidate
+mode fails if the candidate tag already exists, requires every packaged schema to declare
+a freeze, and permits a candidate freeze only for resources absent from the published
+baseline. Normal validation skips a deliberately unfrozen development resource while
+continuing to compare all eight published schemas byte-for-byte. The exact-tag publisher
+will then validate baseline 0.21.0 normally; changing a frozen schema in place, losing a
+registered resource, or adding an unregistered version fails before distributions are
+built.
 
 The runtime validates untrusted bundle JSON, critical manifest types, member paths, byte
 counts, digests, source collection shapes, duplicate keys, and non-finite numbers without

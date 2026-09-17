@@ -183,6 +183,34 @@ Every comparison carries a policy assessment: `NOT_EVALUATED`, `PASS`, `FAIL`, o
 structured result lists exact rule names, expected bounds, and observations independently
 from descriptive `CHANGED`/`UNCHANGED` state.
 
+### `aggregate`
+
+```text
+gh run-receptor aggregate BUNDLE BUNDLE [BUNDLE ...]
+gh run-receptor aggregate RUN_OR_URL RUN_OR_URL [RUN_OR_URL ...]
+```
+
+The provisional 0.21 interface accepts between two and fifty sources. All inputs in one
+invocation are either existing bundle directories or remote run references; local and
+remote evidence cannot be mixed. Numeric remote IDs require `--repo`. Full run URLs carry
+their own repository and permit a collection to span repositories, but all remote sources
+must use one GitHub hostname. Remote acquisition uses `--capture metadata` by default.
+
+Every source passes through the ordinary capture, validation, normalization,
+configuration, profile, and report pipeline. `aggregate@1` retains each repository,
+workflow, run, attempt, commit, URL, official status and conclusion, receptor assessment,
+required completeness, job count, artifact count, and individual exit status. Duplicate
+run attempts are rejected rather than counted twice. The collection adds deterministic
+counts and totals, but it has no official GitHub conclusion; its `assessment` is explicitly
+derived.
+
+Known failure has precedence over missing evidence so a second incomplete source cannot
+hide it. Otherwise, non-success terminal state, active state, and incomplete evidence
+remain distinct. Human and LLM renderers include at most twenty source lines plus an
+omitted count; structured JSON retains every accepted source within the fifty-source
+bound. Aggregation does not discover runs, compare baselines, merge jobs or producer
+events, or apply a release policy.
+
 ### Configuration commands
 
 ```text
@@ -310,6 +338,12 @@ truth-table tests validate composition with shell and agent workflows.
 acquisition or validation failures return 5.
 When a policy is selected, a complete policy violation returns 1 and an unknown required
 policy metric returns 4; the descriptive comparison assessment remains unchanged.
+
+`aggregate` returns 1 when any source has a known failure or profile violation. If there is
+no such failure, it returns 2 for another non-success terminal source, 3 for active work,
+4 for incomplete evidence, and 0 only when every source is a complete success. Acquisition,
+validation, or source-list errors return 5. The text header calls this an aggregate
+assessment and never presents it as a GitHub conclusion.
 
 ## Compact rendering
 

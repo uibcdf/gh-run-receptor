@@ -8,8 +8,9 @@ evidence.
 ## Current state
 
 The project has verified `0.20.0` GitHub Release assets, but no published package-index
-artifact or stable 1.0 contract. All eight current serialized boundaries are frozen
-against their first publishing tags while the pre-1.0 product surface may still evolve.
+artifact or stable 1.0 contract. All eight published serialized boundaries are frozen
+against their first publishing tags; a ninth provisional `aggregate@1` boundary is under
+active 0.21.0 validation while the pre-1.0 product surface may still evolve.
 The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
 human, LLM, or JSON reports without changing the run or hiding its authoritative GitHub
@@ -82,10 +83,10 @@ The current MVP implements:
   absent.
 - a first portable live corpus spanning three non-UIBCDF repositories, including native
   conclusion parity, bounded output, and deterministic offline replay.
-- one runtime registry for eight serialized boundaries, formal configuration-capture
+- one runtime registry for nine serialized boundaries, formal configuration-capture
   schema, offline compatibility introspection, forward-only migration rules, and a release
   gate retaining the four v1 freezes from 0.18.0, three from 0.19.0, and the producer-event
-  freeze from 0.20.0.
+  freeze from 0.20.0 while leaving the new aggregate boundary explicitly unfrozen.
 - a first-class offline and remote `compare` command with an independently versioned
   comparison contract, explicit source/commit identity, bounded human and LLM output, and
   descriptive job, duration, artifact-inventory, and matrix-coverage deltas.
@@ -101,9 +102,12 @@ The current MVP implements:
 - real downstream adoption in MolSysMT, where the public 0.20.0 wheel consumed a
   failure-safe `events@1` artifact from a non-publishing Linux ABI3 build and reported
   exact platform, build, upload-intent, job, and artifact state.
+- a provisional bounded `aggregate` command that preserves independent source truth for
+  two to fifty offline or remote runs; its first live cross-repository pilot summarizes
+  two workflows, five jobs, and five artifacts with complete successful evidence.
 
 It does not yet provide a broad cross-workflow corpus beyond that initial external sample;
-cross-run aggregation; remote workflow discovery; pattern rules; or validated private-repository
+policy-driven run discovery; pattern rules; or validated private-repository
 and fork token behavior. The CI,
 documentation, Conda, release, configuration, and Action contracts are initial vertical
 slices, not their complete stable forms. Action-internal native matrices now have a hosted
@@ -181,7 +185,7 @@ known design question; it does not mean that unimplemented behavior has been val
 
 The next milestone closes the remaining outcome and aggregation gaps, led by real Zenodo
 verification, broader corpus evidence including a real MolSysViewer noarch delivery, and
-structured aggregation beyond one client run.
+hosted validation of the provisional multi-run contract before its 0.21.0 freeze.
 Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need

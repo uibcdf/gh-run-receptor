@@ -69,6 +69,18 @@ Measured facts:
 The expected token reduction for a real multi-workflow window is not yet measured. It
 must be benchmarked after the command exists rather than inferred from the one-run pilot.
 
+Implementation checkpoint on 2026-09-17:
+
+- 84 focused aggregation, compatibility, contract, and CLI tests pass.
+- A corrected live invocation over MolSysMT run `35196968944` and gh-run-receptor run
+  `35194479266` reports two complete successful sources, five jobs, five artifacts, two
+  repositories, and two workflows.
+- The first live invocation exposed that remote aggregation had omitted the required
+  explicit `attempt=None` acquisition argument. The focused remote-path test now asserts
+  this call contract.
+- The exact-revision hosted gate, broader corpus benchmark, canonical client-guide update,
+  and 0.21.0 freeze remain open.
+
 ## What was refuted
 
 - Extending `compare` to more than two sources is rejected because comparison answers a

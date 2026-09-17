@@ -39,6 +39,8 @@ performs inside a GitHub-visible job. A producer uploads an artifact whose name 
 that bounded document automatically. The Conda profile can then report actual package
 platforms, digests, and upload results without inferring success from Action inputs.
 `events@1` is frozen in 0.20.0 after a hosted Ubuntu/Windows producer-consumer gate.
+Development `main` additionally previews bounded multi-run aggregation for 0.21.0; that
+new contract is intentionally not frozen or claimed by the 0.20.0 tag.
 
 The same release provides a composite Action. For a truthful terminal report, invoke it
 from a downstream workflow after the source workflow completes:
@@ -269,6 +271,28 @@ violation returns 1, and evidence insufficient for a requested rule returns 4. I
 unsafe policy input returns 5. Files are bounded strict JSON, reject duplicate keys and
 non-finite numbers, and are never executable configuration.
 
+Development `main` can summarize two to fifty independent bundles without network access:
+
+```text
+gh run-receptor aggregate CI_BUNDLE DOCS_BUNDLE CONDA_BUNDLE --receptor=llm
+```
+
+It can also acquire explicit run URLs, including runs from different repositories:
+
+```text
+gh run-receptor aggregate \
+  https://github.com/OWNER/REPO/actions/runs/RUN_ID \
+  https://github.com/OTHER/REPO/actions/runs/RUN_ID \
+  --capture metadata --receptor=llm
+```
+
+The derived aggregate keeps every repository, workflow, run, attempt, commit, status, and
+conclusion separate. It never invents a GitHub conclusion for the collection. A known
+failure returns 1 even if another source is incomplete; other terminal non-success,
+pending work, and incomplete evidence retain exit statuses 2, 3, and 4 respectively.
+Local and remote inputs cannot be mixed in one invocation. This provisional
+`aggregate@1` shape remains subject to change until the 0.21.0 release gate.
+
 Acquisition failures retain exit status 5 and expose one stable category, such as
 `authentication_required`, `authentication_failed`, `permission_denied`,
 `not_found_or_inaccessible`, or `rate_limited`. Remote diagnostics are bounded and
@@ -348,9 +372,9 @@ Maintainers can run `python devtools/scripts/validate_public_runs.py` to exercis
 reviewed non-UIBCDF portability corpus. This live integration gate is manual because
 third-party run retention and availability are not controlled by this project.
 
-`gh run-receptor contracts` reports the current and readable bundle, configuration,
-configuration-capture, comparison, comparison-policy, normalized-model, and report
-contract versions without network access. Its JSON form is available with
+`gh run-receptor contracts` reports the current and readable aggregate, bundle,
+configuration, configuration-capture, comparison, comparison-policy, events,
+normalized-model, and report contract versions without network access. Its JSON form is available with
 `contracts --format=json` for compatibility automation.
 
 Citation metadata is maintained in [CITATION.cff](CITATION.cff). The accompanying

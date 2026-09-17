@@ -12,6 +12,23 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from gh_run_receptor import __version__
+from gh_run_receptor.aggregation import (
+    MAX_SOURCES,
+    MIN_SOURCES,
+    build_aggregate,
+)
+from gh_run_receptor.aggregation import (
+    exit_code as aggregate_exit_code,
+)
+from gh_run_receptor.aggregation import (
+    render_human as render_aggregate_human,
+)
+from gh_run_receptor.aggregation import (
+    render_json as render_aggregate_json,
+)
+from gh_run_receptor.aggregation import (
+    render_llm as render_aggregate_llm,
+)
 from gh_run_receptor.bundle import load_bundle
 from gh_run_receptor.comparison import (
     compare_reports,
@@ -172,6 +189,19 @@ def _parser() -> argparse.ArgumentParser:
     compare.add_argument("--capture", choices=("full", "adaptive", "metadata"), default="metadata")
     compare.add_argument("--policy", type=Path, help="strict comparison-policy@1 JSON file")
 
+    aggregate = subparsers.add_parser(
+        "aggregate", help="summarize several runs without merging source truth"
+    )
+    _add_common_options(aggregate, suppress_defaults=True)
+    aggregate.add_argument(
+        "sources",
+        nargs="+",
+        help="bundle directories, run IDs, or run URLs; local and remote sources cannot mix",
+    )
+    aggregate.add_argument(
+        "--capture", choices=("full", "adaptive", "metadata"), default="metadata"
+    )
+
     initialize = subparsers.add_parser(
         "init", help="discover local workflows and propose repository rules"
     )
@@ -262,6 +292,73 @@ def _comparison_reference(value: str) -> RunReference:
         return _run_reference(value)
     except argparse.ArgumentTypeError as error:
         raise BundleError(str(error)) from error
+
+
+def _aggregate_render(aggregate: dict, output_format: str, receptor: str | None) -> str:
+    if output_format == "json":
+        return render_aggregate_json(aggregate)
+    selected = receptor or ("human" if sys.stdout.isatty() else "llm")
+    return (
+        render_aggregate_human(aggregate)
+        if selected == "human"
+        else render_aggregate_llm(aggregate)
+    )
+
+
+def _aggregate(args: argparse.Namespace) -> int:
+    if not MIN_SOURCES <= len(args.sources) <= MAX_SOURCES:
+        raise BundleError(f"aggregate requires between {MIN_SOURCES} and {MAX_SOURCES} sources")
+    paths = [Path(value) for value in args.sources]
+    local = [path.is_dir() for path in paths]
+    reports = []
+    if any(local):
+        if not all(local):
+            raise BundleError("aggregate cannot mix bundle directories and remote runs")
+        for path in paths:
+            manifest, evidence = load_bundle(path)
+            reports.append(
+                build_report(
+                    manifest,
+                    evidence,
+                    profile=args.profile or "auto",
+                    bundle_directory=path,
+                )
+            )
+    else:
+        references = [_comparison_reference(value) for value in args.sources]
+        hostnames = [args.hostname or item.hostname or "github.com" for item in references]
+        for item in references:
+            if args.hostname and item.hostname and args.hostname != item.hostname:
+                raise BundleError("run URL hostname conflicts with --hostname")
+        if len(set(hostnames)) != 1:
+            raise BundleError("aggregate sources must use the same GitHub hostname")
+        client = GitHubClient(hostnames[0])
+        for item in references:
+            if args.repo and item.repository and args.repo != item.repository:
+                raise BundleError("run URL repository conflicts with --repo")
+            if args.repo is None and item.repository is None:
+                raise BundleError("numeric aggregate run IDs require --repo")
+            repository = client.repository(args.repo or item.repository)
+            captured = acquire_evidence(
+                client,
+                repository,
+                item.run_id,
+                attempt=None,
+                policy=args.capture,
+                cache_root=_cache_root(args.cache_dir),
+            )
+            reports.append(
+                build_report(
+                    captured.manifest,
+                    captured.evidence,
+                    profile=args.profile or "auto",
+                    bundle_directory=captured.path,
+                )
+            )
+
+    aggregate = build_aggregate(reports)
+    print(_aggregate_render(aggregate, args.format, args.receptor), end="")
+    return aggregate_exit_code(aggregate)
 
 
 def _compare(args: argparse.Namespace) -> int:
@@ -415,6 +512,8 @@ def main(arguments: list[str] | None = None) -> int:
             return _capture(args, render=False)
         if args.command == "compare":
             return _compare(args)
+        if args.command == "aggregate":
+            return _aggregate(args)
         if args.command == "watch":
             hostname = args.hostname or args.run.hostname or "github.com"
             if args.hostname and args.run.hostname and args.hostname != args.run.hostname:

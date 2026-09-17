@@ -581,6 +581,30 @@ and two artifacts. The independently installed public 0.20.0 wheel reported the 
 result. MolSysViewer source adoption remains locally guarded but still awaits its first
 real noarch client run.
 
+## 0.21.0 multi-run aggregation development checkpoint
+
+Issue `uibcdf/gh-run-receptor#38` defines a provisional `aggregate@1` contract rather than
+overloading two-run comparison. The first implementation accepts two to fifty homogeneous
+local or remote sources, rejects duplicate run attempts, preserves every source identity
+and official outcome, and derives a bounded collection assessment without inventing a
+GitHub conclusion. Its schema independently constrains source exit-code/assessment pairs
+and requires a witness for each derived non-pass state.
+
+The initial focused gate passes 84 aggregation, contract-registry, report-contract, and CLI
+tests. Truth tables cover known failure, other terminal non-success, pending work, and
+incomplete evidence; a known failure remains exit 1 even when another source is incomplete.
+Twenty-five adversarial source names prove terminal control escaping and the twenty-source
+text bound. The offline CLI combines sanitized CI, documentation, and Conda bundles without
+network access.
+
+The first live command combined MolSysMT run `35196968944` and gh-run-receptor distributed
+Action run `35194479266` by full URLs. An initial invocation exposed a missing explicit
+`attempt=None` at the shared acquisition boundary; the focused remote test now asserts that
+argument. The corrected invocation reported `PASS`, two complete sources, five jobs, five
+artifacts, two repositories, and two workflows. This is a read-only local-client probe of
+real hosted evidence, not yet the exact-revision hosted release gate required before the
+0.21.0 contract freeze.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

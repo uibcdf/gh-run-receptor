@@ -43,6 +43,12 @@ class ContractSpec:
 
 _SPECS = (
     ContractSpec(
+        "aggregate",
+        1,
+        frozenset({1}),
+        (SchemaVersion(1, "aggregate-v1.schema.json", None),),
+    ),
+    ContractSpec(
         "bundle",
         1,
         frozenset({1}),

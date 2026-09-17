@@ -144,6 +144,13 @@ fetch evidence. Profiles cannot mutate normalized source facts. The CLI, Action,
 reusable workflow orchestrate these layers but do not implement a second interpretation
 path.
 
+Multi-run aggregation sits above complete one-run reports. It stores only a bounded
+projection of each report and never combines their normalized evidence into a synthetic
+run. Remote aggregation invokes the same acquisition and report service independently for
+each explicit source; offline aggregation invokes no transport. This preserves one source
+of truth for profile semantics and makes every collection-level assessment visibly
+derived rather than a replacement for GitHub status or conclusion.
+
 ## Architectural decision gates
 
 The initial core is Python 3.11 through 3.13 and uses an installed `gh` command behind a

@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+- Add provisional bounded offline and remote multi-run aggregation with independent source
+  identity, conservative outcome precedence, deterministic human/LLM/JSON rendering, and
+  an unfrozen `aggregate@1` contract targeted at 0.21.0.
+- Validate cross-repository remote aggregation against real successful MolSysMT and
+  gh-run-receptor runs without inventing a collection-level GitHub conclusion.
+
 ## 0.20.0 - 2026-09-17
 
 - Add strict `events@1` producer evidence for Action-internal Conda matrices, including

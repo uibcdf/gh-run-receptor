@@ -23,11 +23,12 @@ Recorded GitHub responses exercise pagination, attempts, missing fields, new enu
 expired log links, artifact metadata, annotations, and partial permissions. Fixtures retain
 HTTP boundaries and source identifiers while removing secrets and private content.
 
-The compatibility gate validates all seven registered JSON Schema resources, exercises
+The compatibility gate validates all nine registered JSON Schema resources, exercises
 wrong-kind, malformed, retired, future, and missing-migration states, and proves a
 synthetic stepwise migration leaves its source unchanged. Release preparation additionally
-compares every previously published v1 schema byte-for-byte with its 0.18.0 or 0.19.0
-freeze tag. Updating a
+compares every previously published v1 schema byte-for-byte with its 0.18.0, 0.19.0, or
+0.20.0 freeze tag while requiring the provisional aggregate resource to be assigned only
+at the 0.21.0 candidate gate. Updating a
 local checksum beside a changed schema is not an acceptable compatibility test.
 
 Comparison contract tests use the two sanitized attempts of one real ArgDigest run as the
@@ -39,6 +40,15 @@ Policy truth tables independently cover identity, official candidate outcome, ab
 percentage duration, artifact size, inventory removal, matrix removal/state change,
 undefined metrics, strict parsing, schema intent, bounded rendering, and exit codes. The
 hosted comparison gate evaluates both a passing boundary and an intentional violation.
+
+Aggregate contract tests combine sanitized CI, documentation, and Conda reports. They
+assert independent source identity, deterministic ordering, duplicate rejection, the
+failure/non-success/pending/incomplete exit truth table, strict schema relationships,
+offline CLI behavior, terminal safety, and the twenty-line text rendering bound. Remote
+CLI tests require explicit repository identity and exercise cross-repository URLs through
+the ordinary acquisition path. A live read-only pilot over MolSysMT run `35196968944` and
+gh-run-receptor run `35194479266` reports two complete successful sources, five jobs, five
+artifacts, two repositories, and two workflows.
 
 ### Replay and golden tests
 

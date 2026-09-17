@@ -1,0 +1,212 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://uibcdf.org/gh-run-receptor/schemas/aggregate-v1.schema.json",
+  "title": "gh-run-receptor.aggregate@1",
+  "type": "object",
+  "required": [
+    "schema", "assessment", "evidence_sufficient", "source_count", "summary",
+    "totals", "sources", "warnings"
+  ],
+  "properties": {
+    "schema": {"const": "gh-run-receptor.aggregate@1"},
+    "assessment": {"enum": ["PASS", "FAIL", "NON_SUCCESS", "PENDING", "INCOMPLETE"]},
+    "evidence_sufficient": {"type": "boolean"},
+    "source_count": {"type": "integer", "minimum": 2, "maximum": 50},
+    "summary": {
+      "type": "object",
+      "required": [
+        "assessment_counts", "status_counts", "conclusion_counts", "profile_counts",
+        "repository_counts", "workflow_counts"
+      ],
+      "properties": {
+        "assessment_counts": {"$ref": "#/$defs/nonemptyCounts"},
+        "status_counts": {"$ref": "#/$defs/nonemptyCounts"},
+        "conclusion_counts": {"$ref": "#/$defs/nonemptyCounts"},
+        "profile_counts": {"$ref": "#/$defs/nonemptyCounts"},
+        "repository_counts": {"$ref": "#/$defs/nonemptyCounts"},
+        "workflow_counts": {"$ref": "#/$defs/nonemptyCounts"}
+      },
+      "additionalProperties": false
+    },
+    "totals": {
+      "type": "object",
+      "required": ["jobs", "artifacts"],
+      "properties": {
+        "jobs": {"type": "integer", "minimum": 0},
+        "artifacts": {"type": "integer", "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 50,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/source"}
+    },
+    "warnings": {
+      "type": "array",
+      "maxItems": 50,
+      "items": {"type": "string", "maxLength": 500}
+    }
+  },
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {"properties": {"assessment": {"const": "PASS"}}},
+      "then": {
+        "properties": {
+          "evidence_sufficient": {"const": true},
+          "sources": {"items": {"properties": {"exit_code": {"const": 0}}}}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"assessment": {"const": "FAIL"}}},
+      "then": {
+        "properties": {
+          "sources": {"contains": {"properties": {"exit_code": {"const": 1}}}}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"assessment": {"const": "NON_SUCCESS"}}},
+      "then": {
+        "properties": {
+          "sources": {
+            "contains": {"properties": {"exit_code": {"const": 2}}},
+            "not": {"contains": {"properties": {"exit_code": {"const": 1}}}}
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"assessment": {"const": "PENDING"}}},
+      "then": {
+        "properties": {
+          "sources": {
+            "contains": {"properties": {"exit_code": {"const": 3}}},
+            "items": {"properties": {"exit_code": {"enum": [0, 3]}}}
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"assessment": {"const": "INCOMPLETE"}}},
+      "then": {
+        "properties": {
+          "evidence_sufficient": {"const": false},
+          "sources": {
+            "contains": {"properties": {"exit_code": {"const": 4}}},
+            "items": {"properties": {"exit_code": {"enum": [0, 4]}}}
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "counts": {
+      "type": "object",
+      "additionalProperties": {"type": "integer", "minimum": 0}
+    },
+    "nonemptyCounts": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "integer", "minimum": 1}
+    },
+    "completenessValue": {
+      "enum": [
+        "complete", "partial", "unavailable", "expired", "not_permitted",
+        "not_requested", "invalid", null
+      ]
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "repository", "workflow", "run_id", "run_attempt", "head_sha", "url",
+        "profile", "status", "conclusion", "assessment", "evidence_sufficient",
+        "completeness", "jobs", "artifacts", "exit_code"
+      ],
+      "properties": {
+        "repository": {"type": "string", "pattern": "^[^/]+/[^/]+$"},
+        "workflow": {"type": ["string", "null"]},
+        "run_id": {"type": "integer", "minimum": 1},
+        "run_attempt": {"type": "integer", "minimum": 1},
+        "head_sha": {"type": ["string", "null"]},
+        "url": {"type": ["string", "null"]},
+        "profile": {"type": "string", "minLength": 1},
+        "status": {"type": ["string", "null"]},
+        "conclusion": {"type": ["string", "null"]},
+        "assessment": {
+          "enum": [
+            "PASS", "FAIL", "PARTIAL", "PENDING", "CANCELLED", "TIMED_OUT",
+            "ACTION_REQUIRED", "STALE", "UNKNOWN", "INCOMPLETE"
+          ]
+        },
+        "evidence_sufficient": {"type": "boolean"},
+        "completeness": {
+          "type": "object",
+          "required": ["metadata", "jobs", "artifact_inventory"],
+          "properties": {
+            "metadata": {"$ref": "#/$defs/completenessValue"},
+            "jobs": {"$ref": "#/$defs/completenessValue"},
+            "artifact_inventory": {"$ref": "#/$defs/completenessValue"}
+          },
+          "additionalProperties": false
+        },
+        "jobs": {
+          "type": "object",
+          "required": ["total", "counts"],
+          "properties": {
+            "total": {"type": "integer", "minimum": 0},
+            "counts": {"$ref": "#/$defs/counts"}
+          },
+          "additionalProperties": false
+        },
+        "artifacts": {
+          "type": "object",
+          "required": ["total"],
+          "properties": {"total": {"type": "integer", "minimum": 0}},
+          "additionalProperties": false
+        },
+        "exit_code": {"type": "integer", "minimum": 0, "maximum": 4}
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {"properties": {"exit_code": {"const": 0}}},
+          "then": {
+            "properties": {
+              "status": {"const": "completed"},
+              "conclusion": {"const": "success"},
+              "assessment": {"const": "PASS"},
+              "evidence_sufficient": {"const": true}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"exit_code": {"const": 1}}},
+          "then": {"properties": {"assessment": {"enum": ["FAIL", "PARTIAL"]}}}
+        },
+        {
+          "if": {"properties": {"exit_code": {"const": 2}}},
+          "then": {
+            "properties": {
+              "assessment": {
+                "enum": ["CANCELLED", "TIMED_OUT", "ACTION_REQUIRED", "STALE", "UNKNOWN"]
+              }
+            }
+          }
+        },
+        {
+          "if": {"properties": {"exit_code": {"const": 3}}},
+          "then": {"properties": {"assessment": {"const": "PENDING"}}}
+        },
+        {
+          "if": {"properties": {"exit_code": {"const": 4}}},
+          "then": {"properties": {"evidence_sufficient": {"const": false}}}
+        }
+      ]
+    }
+  }
+}

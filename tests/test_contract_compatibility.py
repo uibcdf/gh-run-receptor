@@ -27,6 +27,7 @@ def test_inventory_exposes_every_serialized_boundary_in_stable_order():
     inventory = contract_inventory()
 
     assert [item["kind"] for item in inventory] == [
+        "aggregate",
         "bundle",
         "config",
         "config-capture",
@@ -41,7 +42,8 @@ def test_inventory_exposes_every_serialized_boundary_in_stable_order():
     assert sum(item["frozen_since"] == "0.18.0" for item in schemas) == 4
     assert sum(item["frozen_since"] == "0.19.0" for item in schemas) == 3
     assert sum(item["frozen_since"] == "0.20.0" for item in schemas) == 1
-    assert all(item["frozen_since"] is not None for item in schemas)
+    assert sum(item["frozen_since"] is None for item in schemas) == 1
+    assert CONTRACTS["aggregate"].schemas[0].frozen_since is None
 
 
 @pytest.mark.parametrize(
@@ -161,6 +163,7 @@ _PUBLISHED_019_RESOURCES = {
     "comparison-v1.schema.json",
     "comparison-policy-v1.schema.json",
 }
+_PUBLISHED_020_RESOURCES = {*_PUBLISHED_019_RESOURCES, "events-v1.schema.json"}
 
 
 def _candidate_runner(command, **kwargs):
@@ -174,41 +177,43 @@ def _candidate_runner(command, **kwargs):
         return subprocess.CompletedProcess(command, 0, path.read_bytes(), b"")
     if tag == "0.19.0" and path.name in _PUBLISHED_019_RESOURCES:
         return subprocess.CompletedProcess(command, 0, path.read_bytes(), b"")
+    if tag == "0.20.0" and path.name in _PUBLISHED_020_RESOURCES:
+        return subprocess.CompletedProcess(command, 0, path.read_bytes(), b"")
     return subprocess.CompletedProcess(command, 1, b"", b"missing baseline resource")
 
 
-def test_candidate_gate_requires_every_new_resource_to_be_frozen(monkeypatch):
-    events = CONTRACTS["events"]
-    monkeypatch.setattr(
-        contract_validation,
-        "CONTRACTS",
-        {
-            **CONTRACTS,
-            "events": ContractSpec(
-                events.kind,
-                events.current_version,
-                events.readable_versions,
-                (SchemaVersion(1, "events-v1.schema.json", None),),
-            ),
-        },
-    )
+def _candidate_021_contracts():
+    aggregate = CONTRACTS["aggregate"]
+    return {
+        **CONTRACTS,
+        "aggregate": ContractSpec(
+            aggregate.kind,
+            aggregate.current_version,
+            aggregate.readable_versions,
+            (SchemaVersion(1, "aggregate-v1.schema.json", "0.21.0"),),
+        ),
+    }
+
+
+def test_candidate_gate_requires_every_new_resource_to_be_frozen():
     assert validate_contracts(
         ROOT,
-        baseline_tag="0.19.0",
-        candidate_tag="0.20.0",
+        baseline_tag="0.20.0",
+        candidate_tag="0.21.0",
         runner=_candidate_runner,
     ) == [
-        "gh_run_receptor/schemas/events-v1.schema.json is not frozen for candidate 0.20.0",
-        "candidate freeze '0.20.0' is not registered",
+        "gh_run_receptor/schemas/aggregate-v1.schema.json is not frozen for candidate 0.21.0",
+        "candidate freeze '0.21.0' is not registered",
     ]
 
 
-def test_020_candidate_freezes_only_the_new_events_resource():
+def test_021_candidate_freezes_only_the_new_aggregate_resource(monkeypatch):
+    monkeypatch.setattr(contract_validation, "CONTRACTS", _candidate_021_contracts())
     assert (
         validate_contracts(
             ROOT,
-            baseline_tag="0.19.0",
-            candidate_tag="0.20.0",
+            baseline_tag="0.20.0",
+            candidate_tag="0.21.0",
             runner=_candidate_runner,
         )
         == []
@@ -218,16 +223,16 @@ def test_020_candidate_freezes_only_the_new_events_resource():
 def test_candidate_gate_rejects_an_existing_tag():
     def existing_tag_runner(command, **kwargs):
         if command[:3] == ["git", "tag", "--list"]:
-            return subprocess.CompletedProcess(command, 0, b"0.20.0\n", b"")
+            return subprocess.CompletedProcess(command, 0, b"0.21.0\n", b"")
         return _candidate_runner(command, **kwargs)
 
     errors = validate_contracts(
         ROOT,
-        baseline_tag="0.19.0",
-        candidate_tag="0.20.0",
+        baseline_tag="0.20.0",
+        candidate_tag="0.21.0",
         runner=existing_tag_runner,
     )
-    assert errors == ["candidate tag 0.20.0 already exists; use normal validation"]
+    assert errors == ["candidate tag 0.21.0 already exists; use normal validation"]
 
 
 def test_candidate_gate_rejects_relabeling_a_published_resource(monkeypatch):
@@ -236,23 +241,24 @@ def test_candidate_gate_rejects_relabeling_a_published_resource(monkeypatch):
         bundle.kind,
         bundle.current_version,
         bundle.readable_versions,
-        (SchemaVersion(1, "bundle-v1.schema.json", "0.20.0"),),
+        (SchemaVersion(1, "bundle-v1.schema.json", "0.21.0"),),
     )
+    contracts = _candidate_021_contracts()
     monkeypatch.setattr(
         contract_validation,
         "CONTRACTS",
-        {**CONTRACTS, "bundle": relabeled},
+        {**contracts, "bundle": relabeled},
     )
 
     errors = validate_contracts(
         ROOT,
-        baseline_tag="0.19.0",
-        candidate_tag="0.20.0",
+        baseline_tag="0.20.0",
+        candidate_tag="0.21.0",
         runner=_candidate_runner,
     )
     assert errors == [
-        "gh_run_receptor/schemas/bundle-v1.schema.json existed in 0.19.0 "
-        "and cannot be newly frozen in 0.20.0",
+        "gh_run_receptor/schemas/bundle-v1.schema.json existed in 0.20.0 "
+        "and cannot be newly frozen in 0.21.0",
     ]
 
 
