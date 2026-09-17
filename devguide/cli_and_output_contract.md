@@ -55,8 +55,9 @@ gh run-receptor inspect RUN_OR_URL [--attempt N]
 ```
 
 Resolves the run, captures or reuses evidence, normalizes it, applies one profile, and
-renders the report. The development capture default is `full`; the intended stable
-default is `adaptive`.
+renders the report. The stable default is `adaptive`: no log request for active or
+completed successful runs, and one complete attempt-log request for a GitHub-confirmed
+completed conclusion other than `success`. Explicit `--capture` overrides the default.
 
 ### `capture`
 
@@ -66,7 +67,8 @@ gh run-receptor capture RUN_OR_URL [--attempt N]
 ```
 
 Creates or refreshes an evidence bundle without requiring profile interpretation. It
-prints only the bundle identity, completeness, size, and path.
+prints only the bundle identity, completeness, size, and path. Its archival default is
+`full`; callers that need structured state without logs select `metadata` explicitly.
 
 ### `replay`
 

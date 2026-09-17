@@ -28,11 +28,14 @@ selects `llm`.
 | Capture | Acquires | Typical use |
 | :--- | :--- | :--- |
 | `metadata` | Run, workflow, jobs, checks, artifacts, and eligible producer events | Fast status, coverage, artifact, and matrix questions |
-| `adaptive` | Structured evidence plus logs needed for unsuccessful or incomplete jobs | Default for `inspect` and `watch` |
+| `adaptive` | Structured evidence; the complete attempt log archive only after GitHub confirms a completed conclusion other than `success` | Default for `inspect` and `watch` |
 | `full` | Structured evidence and all retained job logs | Default for explicit `capture`; audit and parser development |
 
 Capture controls evidence on disk, not terminal verbosity. A full bundle can still render
-one compact line.
+one compact line. Adaptive capture does not request logs for active or successful runs. A
+completed run with an absent or unrecognized conclusion does request them because the
+terminal result is unresolved. The decision is run-level; it does not claim that GitHub's
+complete attempt archive contains only unsuccessful jobs.
 
 ## Watch without redrawing the tree
 

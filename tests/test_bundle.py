@@ -11,6 +11,7 @@ from gh_run_receptor.bundle import (
     capture_bundle,
     default_bundle_path,
     load_bundle,
+    should_fetch_logs,
 )
 from gh_run_receptor.errors import BundleError
 from gh_run_receptor.events import EVENT_DOCUMENT_NAME, event_artifact_prefix
@@ -101,6 +102,38 @@ def test_default_bundle_path_separates_capture_policies(tmp_path):
 
     assert metadata != full
     assert metadata.parts[-5:] == ("uibcdf", "molsysmt", "42", "2", "metadata")
+
+
+@pytest.mark.parametrize(
+    ("policy", "status", "conclusion", "expected"),
+    [
+        ("full", "in_progress", None, True),
+        ("full", "completed", "success", True),
+        ("metadata", "completed", "failure", False),
+        ("metadata", "completed", None, False),
+        ("adaptive", "in_progress", None, False),
+        ("adaptive", "queued", None, False),
+        ("adaptive", "unknown", "failure", False),
+        ("adaptive", "completed", "success", False),
+        ("adaptive", "completed", "failure", True),
+        ("adaptive", "completed", "cancelled", True),
+        ("adaptive", "completed", "timed_out", True),
+        ("adaptive", "completed", "neutral", True),
+        ("adaptive", "completed", "skipped", True),
+        ("adaptive", "completed", "action_required", True),
+        ("adaptive", "completed", "stale", True),
+        ("adaptive", "completed", "startup_failure", True),
+        ("adaptive", "completed", None, True),
+        ("adaptive", "completed", "future_conclusion", True),
+    ],
+)
+def test_log_fetch_policy_truth_table(policy, status, conclusion, expected):
+    assert should_fetch_logs(policy, status=status, conclusion=conclusion) is expected
+
+
+def test_log_fetch_policy_rejects_an_unknown_capture_policy():
+    with pytest.raises(BundleError, match="unsupported capture policy"):
+        should_fetch_logs("everything", status="completed", conclusion="failure")
 
 
 def test_load_bundle_rejects_duplicate_json_keys(tmp_path):
@@ -404,3 +437,49 @@ def test_sanitizer_retains_optional_trusted_configuration():
     assert selected["run.json"]["run_attempt"] == 2
     assert selected["jobs.json"]["jobs"][0]["steps"][0]["status"] == "completed"
     assert "config.json" not in _selected_evidence(evidence, include_config=False)
+
+
+def test_sanitizer_preserves_an_adaptive_unavailable_log_request(tmp_path):
+    source = tmp_path / "source"
+    _write_bundle(source)
+    manifest_path = source / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["capture_policy"] = "adaptive"
+    manifest["complete"] = False
+    manifest["warnings"] = ["logs unavailable: GitHub returned HTTP 410"]
+    manifest_path.write_text(json.dumps(manifest))
+    destination = tmp_path / "sanitized"
+
+    sanitize(source, destination)
+
+    sanitized = json.loads((destination / "manifest.json").read_text())
+    assert sanitized["capture_policy"] == "adaptive"
+    assert sanitized["complete"] is False
+    assert sanitized["warnings"] == ["logs unavailable: GitHub returned HTTP 410"]
+
+
+def test_sanitizer_marks_a_bundle_metadata_when_it_removes_logs(tmp_path):
+    source = tmp_path / "source"
+    _write_bundle(source)
+    log_data = b"reviewed raw log archive"
+    (source / "logs.zip").write_bytes(log_data)
+    manifest_path = source / "manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+    manifest["capture_policy"] = "full"
+    manifest["members"].append(
+        {
+            "path": "logs.zip",
+            "kind": "github.logs",
+            "bytes": len(log_data),
+            "sha256": hashlib.sha256(log_data).hexdigest(),
+            "complete": True,
+        }
+    )
+    manifest_path.write_text(json.dumps(manifest))
+    destination = tmp_path / "sanitized"
+
+    sanitize(source, destination)
+
+    sanitized = json.loads((destination / "manifest.json").read_text())
+    assert sanitized["capture_policy"] == "metadata"
+    assert not (destination / "logs.zip").exists()

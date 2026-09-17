@@ -22,6 +22,8 @@ The current MVP implements:
 - `inspect`, `capture`, and offline `replay` for one run attempt;
 - authenticated acquisition through `gh api` of run, workflow, paginated jobs, checks,
   artifacts, and policy-selected logs;
+- a frozen adaptive log-acquisition truth table with paired full/adaptive request, byte,
+  incomplete-retention, and diagnostic measurements;
 - SHA-256-validated bundles separated by repository, attempt, and capture policy;
 - a shared generic report rendered for `human`, `llm`, or JSON;
 - a public task-oriented Sphinx/MyST site covering installation, CLI use, profiles,
@@ -190,10 +192,10 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The next milestone closes the remaining evidence gaps, led by real Zenodo verification,
-broader corpus evidence including a real MolSysViewer noarch delivery, and an authentic
-`timed_out` outcome. Publication and distribution validation of the 0.21.0 multi-run
-contract is complete.
+The next milestone closes the remaining evidence gaps, led by real Zenodo verification
+and an authentic `timed_out` outcome. Publication and distribution validation of the
+0.21.0 multi-run contract is complete, and OD-002 now has a measured stable adaptive
+capture rule for the 0.22.0 candidate.
 Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need

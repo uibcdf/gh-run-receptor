@@ -157,6 +157,19 @@ removed, expected official and receptor outcomes, exit code where material, and 
 upstream-retention caveat. The committed bundles contain no actors, commit messages,
 runner details, pull-request data, or API URLs.
 
+## Capture-policy benchmark
+
+`devtools/scripts/benchmark_capture_policies.py` validates local bundles before measuring
+them. It recomputes the expected log request from the capture policy and authoritative
+run state, rejects contradictory bundles, separates observed bytes from unknown
+counterfactual bytes, and counts bounded failed-job diagnoses without printing causes.
+
+The committed fixture corpus is an offline gate. The manual hosted gate additionally
+captures one successful and one terminal non-success run in both `full` and `adaptive`
+modes and requires both pairs. Raw bundles live only in the runner's temporary directory;
+the workflow uploads no artifact. Exact commands, measurements, and limitations are in
+[the adaptive capture benchmark](benchmark_adaptive_capture_2026-09-17.md).
+
 ## Quality metrics
 
 Evaluation records both correctness and economy:

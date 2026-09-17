@@ -1,0 +1,63 @@
+name: Validate adaptive capture policy
+
+on:
+  workflow_dispatch:
+    inputs:
+      success_run:
+        description: Completed successful run with retained logs
+        required: true
+        default: "35224624974"
+        type: string
+      failure_run:
+        description: Completed non-success run with retained logs
+        required: true
+        default: "35221505754"
+        type: string
+
+permissions: {}
+
+concurrency:
+  group: validate-adaptive-capture-policy
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - name: Check out the exact source
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.13"
+      - name: Validate the committed corpus
+        run: python devtools/scripts/benchmark_capture_policies.py tests/fixtures/bundles
+      - name: Capture paired successful and non-success runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SUCCESS_RUN: ${{ inputs.success_run }}
+          FAILURE_RUN: ${{ inputs.failure_run }}
+        shell: bash
+        run: |
+          pair_root="${RUNNER_TEMP}/capture-policy-pairs"
+          mkdir -p "${pair_root}"
+          python -m gh_run_receptor --repo "${GITHUB_REPOSITORY}" \
+            capture "${SUCCESS_RUN}" --capture adaptive \
+            --output "${pair_root}/success-adaptive"
+          python -m gh_run_receptor --repo "${GITHUB_REPOSITORY}" \
+            capture "${SUCCESS_RUN}" --capture full \
+            --output "${pair_root}/success-full"
+          python -m gh_run_receptor --repo "${GITHUB_REPOSITORY}" \
+            capture "${FAILURE_RUN}" --capture adaptive \
+            --output "${pair_root}/failure-adaptive"
+          python -m gh_run_receptor --repo "${GITHUB_REPOSITORY}" \
+            capture "${FAILURE_RUN}" --capture full \
+            --output "${pair_root}/failure-full"
+          python devtools/scripts/benchmark_capture_policies.py "${pair_root}" \
+            --require-paired-success --require-paired-non-success

@@ -14,7 +14,7 @@ page and retain only a concise decision record here.
 | Product shape | External CLI first; optional Action and reusable reporter | Ordinary workflows remain inspectable without adoption |
 | GitHub CLI integration | Repository `gh-run-receptor`, executable `gh-run-receptor` | Invocation is `gh run-receptor` |
 | Phase 0 capture | Full API JSON records and log archive on disk | Early parsing is replayable and debuggable |
-| Stable capture direction | Adaptive by default, plus full and metadata modes | Avoid needless log transfer after reliability is proven |
+| Stable capture policy | `inspect`/`watch` default to adaptive, explicit archival `capture` to full, and remote `compare`/`aggregate` to metadata; adaptive requests the complete attempt archive only for a GitHub-confirmed completed conclusion other than `success` | The 0.22.0 truth table and paired benchmark avoid logs for active/successful runs without losing terminal non-success diagnosis |
 | Source authority | GitHub states are authoritative | Derived labels never erase source failure or uncertainty |
 | Mutation | Initial product is read-only | Rerun, cancel, approve, upload, and deploy are out of scope |
 | Configuration | Declarative repository rules plus compact inline Action rules | No arbitrary executable configuration |
@@ -33,15 +33,6 @@ page and retain only a concise decision record here.
 | CLI process status | Freeze 0 success, 1 known failure, 2 other terminal non-success, 3 active, 4 incomplete, 5 receptor error, 64 usage error, and 130 interruption | Shell and agent callers can distinguish source truth from invocation and receptor failures without parsing text; command-specific semantics remain normative |
 
 ## Open decision gates
-
-### OD-002: Stable adaptive-capture threshold
-
-- **Question:** exactly when are full logs fetched automatically?
-- **Needed evidence:** miss rate and request/byte cost across the initial corpus, including
-  incomplete and unknown states.
-- **Gate:** before changing the default from `full` to `adaptive`.
-- **Current default:** `full` during alpha; never claim complete diagnosis without the
-  evidence needed to support it.
 
 ### OD-003: Pattern engine
 

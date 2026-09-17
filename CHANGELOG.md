@@ -12,6 +12,11 @@ All notable changes to this project will be documented in this file.
   supported Python versions, and MIT license.
 - Add generic discovery topics for AI agents, developer tooling, GitHub Actions, GitHub
   CLI, LLMs, and observability.
+- Freeze the adaptive log-acquisition rule for 0.22.0, centralize its truth table, add a
+  reproducible request/byte/diagnostic benchmark, and validate paired successful and
+  non-success captures without retaining raw logs.
+- Preserve the original adaptive policy when sanitizing an unavailable-log capture;
+  downgrade to metadata only when sanitization actually removes a retained log archive.
 
 ## 0.21.1 - 2026-09-17
 

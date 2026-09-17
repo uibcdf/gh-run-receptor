@@ -32,6 +32,21 @@ gh run view RUN_ID --repo OWNER/REPO --json status,conclusion
 
 Compression is valuable only when it preserves information the reader actually needs.
 
+## Adaptive acquisition cost
+
+A paired 2026-09-17 measurement captured the same successful documentation run and failed
+archive-verification run with both `adaptive` and `full`. For the successful run,
+`adaptive` avoided one 13,678-byte log archive: its bundle contained 29,966 bytes versus
+43,644 bytes for `full`. For the failed run both policies requested the same 5,397-byte
+archive, produced 27,322-byte bundles, and diagnosed the same one failed job.
+
+An additional opportunistic local corpus contained 42 adaptive captures: 30 successes,
+nine failures, two cancellations, and one active run. The policy requested logs for the
+11 terminal non-successes and avoided 31 of 42 possible requests (73.8%). The skipped
+successful archive sizes are unknown, so the project does not misreport them as zero-byte
+savings. The reproducible benchmark reports only observed bytes and requires paired
+success and non-success evidence in its hosted gate.
+
 ## Multi-run counterexample
 
 For two known successful runs, two separate receptor lines measured 87 `cl100k_base`

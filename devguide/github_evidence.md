@@ -166,7 +166,9 @@ resources behind 404, the user-facing category preserves that ambiguity.
   ETag.
 - Refresh an active run with bounded exponential polling and jitter.
 - Render only state transitions in watch mode.
-- Do not fetch logs for healthy active jobs.
+- In adaptive mode, do not fetch logs for any active or completed successful run.
+- In adaptive mode, request one complete attempt archive after GitHub confirms completion
+  with any conclusion other than `success`, including absent or unrecognized values.
 - Do not download the same content digest twice within a cache.
 - Surface rate-limit exhaustion and the next available reset time when GitHub provides
   it.

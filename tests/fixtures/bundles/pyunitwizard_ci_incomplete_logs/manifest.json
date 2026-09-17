@@ -1,6 +1,6 @@
 {
   "api_version": "2022-11-28",
-  "capture_policy": "metadata",
+  "capture_policy": "adaptive",
   "captured_at": "2026-09-05T22:20:02.619068+00:00",
   "complete": false,
   "head_sha": "cfd55509840476b6be94d2884d3b48f34bbb50e5",

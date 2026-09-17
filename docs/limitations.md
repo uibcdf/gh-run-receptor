@@ -30,6 +30,12 @@ conclusion while lacking evidence needed for diagnosis, in which case the recept
 `INCOMPLETE`. Private-repository and fork token behavior has not completed a broad hosted
 validation matrix and remains an explicitly narrower claim.
 
+Adaptive capture avoids the complete log request for active and successful runs, but a
+terminal non-success can still have a large archive. Acquisition is bounded at 512 MiB.
+The current GitHub attempt endpoint is consumed as one archive; gh-run-receptor does not
+claim selective failed-job transfer. Raw bundles can contain sensitive output and remain
+local unless explicitly reviewed and sanitized.
+
 ## Interpretation coverage
 
 - Built-in profiles are initial vertical slices, not general CI semantics for every tool.

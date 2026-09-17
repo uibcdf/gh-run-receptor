@@ -718,6 +718,29 @@ Repository discovery uses the generic topics `ai-agents`, `developer-tools`,
 `github-actions`, `github-cli`, `llm`, and `observability`; none couples the public tool to
 MolSysSuite.
 
+## Adaptive capture policy checkpoint
+
+Issue `uibcdf/gh-run-receptor#41` extracted the automatic log decision into one pure truth
+table and added `devtools/scripts/benchmark_capture_policies.py`. The policy skips logs for
+active and completed successful runs and requests the complete attempt archive only after
+GitHub confirms completion with a conclusion other than `success`, including absent or
+unrecognized values. Explicit `full` and `metadata` retain their unconditional meanings.
+
+The 13 committed bundles pass the offline policy audit, including a real failed
+PyUnitWizard attempt whose adaptive request returned HTTP 410 and remains honestly
+incomplete. A separate 42-bundle local adaptive inventory requested logs for nine
+failures and two cancellations, skipped 30 successes and one active run, and avoided 31
+of 42 possible requests. It observed 879,112 log bytes but does not assign zero bytes to
+the skipped archives whose counterfactual sizes are unknown.
+
+Paired temporary captures used successful documentation run `35224624974` and failed
+Zenodo-verification run `35221505754`. Adaptive avoided the successful run's 13,678-byte
+archive, reducing that bundle from 43,644 to 29,966 bytes. Both modes captured 5,397 log
+bytes for the failure, produced equal 27,322-byte bundles, and diagnosed the same one
+failed job. The benchmark therefore recorded 13,678 observed bytes saved and zero missing
+diagnoses across one success and one terminal non-success pair. Raw logs were neither
+committed nor uploaded.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

@@ -39,6 +39,14 @@ selects `human` for an interactive terminal and `llm` when stdout is redirected.
 `--format=json` for the versioned structured report; JSON is a format, not a receptor.
 The ordinary native GitHub presentation remains available through `gh run view`.
 
+Without an explicit `--capture`, `inspect` and the final report from `watch` use the
+adaptive policy. Adaptive capture skips logs while a run is active and for a completed
+successful run. Once GitHub confirms completion with any other, absent, or unrecognized
+conclusion, it requests the complete attempt log archive for causal diagnosis. This is a
+run-level rule: GitHub's attempt endpoint returns the archive, not only failed-job logs.
+The explicit archival `capture` command defaults to `full`; remote `compare` and
+`aggregate` default to `metadata`.
+
 Version 0.20.0 adds `gh-run-receptor.events@1` support for work that a composite Action
 performs inside a GitHub-visible job. A producer uploads an artifact whose name starts with
 `gh-run-receptor-events-v1-<run-id>-<attempt>-`; metadata capture downloads and validates

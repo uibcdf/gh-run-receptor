@@ -34,6 +34,17 @@ STRUCTURED_MEMBERS = (*REQUIRED_STRUCTURED_MEMBERS, "config.json")
 _CAPTURE_POLICIES = {"full", "adaptive", "metadata"}
 
 
+def should_fetch_logs(policy: str, *, status: Any, conclusion: Any) -> bool:
+    """Deciding whether one capture policy requests the complete log archive."""
+    if policy not in _CAPTURE_POLICIES:
+        raise BundleError(f"unsupported capture policy: {policy!r}")
+    if policy == "full":
+        return True
+    if policy == "metadata":
+        return False
+    return status == "completed" and conclusion != "success"
+
+
 def _canonical_json(value: Any) -> bytes:
     return (json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n").encode()
 
@@ -137,6 +148,8 @@ def capture_bundle(
     run: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Capturing one run attempt atomically into ``destination``."""
+    if policy not in _CAPTURE_POLICIES:
+        raise BundleError(f"unsupported capture policy: {policy!r}")
     current_run = run or client.json(f"/repos/{repository}/actions/runs/{run_id}")
     if not isinstance(current_run, dict):
         raise BundleError("workflow-run response is not an object")
@@ -251,10 +264,10 @@ def capture_bundle(
                 )
             )
 
-        fetch_logs = policy == "full" or (
-            policy == "adaptive"
-            and run.get("status") == "completed"
-            and run.get("conclusion") != "success"
+        fetch_logs = should_fetch_logs(
+            policy,
+            status=run.get("status"),
+            conclusion=run.get("conclusion"),
         )
         if fetch_logs:
             try:

@@ -46,13 +46,15 @@ control by default, and subject to an explicit retention policy.
 ## Capture policies
 
 - `full`: capture all structured resources and the complete log archive.
-- `adaptive`: capture all structured resources and fetch logs only for failed or
-  otherwise unresolved jobs.
+- `adaptive`: capture all structured resources; skip logs for active and completed
+  successful runs, and request the complete attempt archive when GitHub confirms a
+  completed conclusion other than `success`, including absent or unrecognized values.
 - `metadata`: capture structured resources without logs.
 
-The development default is `full` because it supports differential testing and offline
-replay. The intended stable default is `adaptive`. A successful report should normally
-require no full-log download.
+Defaults are command-specific. Explicit archival `capture` uses `full`; `inspect` and the
+terminal report from `watch` use `adaptive`; remote `compare` and `aggregate` use
+`metadata`. Explicit `--capture` always wins. The adaptive choice is run-level because the
+GitHub attempt endpoint returns one archive, not a failed-job-only projection.
 
 ## Normalized model
 
@@ -154,9 +156,8 @@ derived rather than a replacement for GitHub status or conclusion.
 ## Architectural decision gates
 
 The initial core is Python 3.11 through 3.13 and uses an installed `gh` command behind a
-transport adapter. Distribution of the stable Action, adaptive log-fetch thresholds,
-pattern engine, and watch polling policy remain evidence-dependent. Their defaults,
-owners, and gates are recorded in
+transport adapter. Distribution of the stable Action, pattern engine, and watch polling
+policy remain evidence-dependent. Their defaults, owners, and gates are recorded in
 [decisions_and_open_questions.md](decisions_and_open_questions.md).
 
 Check-run annotations are read evidence and do not justify write permissions. Portable

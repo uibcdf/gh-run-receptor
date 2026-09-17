@@ -111,6 +111,7 @@ def sanitize(source: Path, destination: Path, *, include_config: bool = True) ->
             if key in source_member:
                 member[key] = source_member[key]
         members.append(member)
+    removed_logs = any(member.get("path") == "logs.zip" for member in manifest["members"])
     sanitized_manifest = {
         "schema": "gh-run-receptor.bundle@1",
         "repository": manifest["repository"],
@@ -120,7 +121,7 @@ def sanitize(source: Path, destination: Path, *, include_config: bool = True) ->
         "head_sha": manifest.get("head_sha"),
         "api_version": manifest["api_version"],
         "receptor_version": manifest["receptor_version"],
-        "capture_policy": "metadata",
+        "capture_policy": "metadata" if removed_logs else manifest["capture_policy"],
         "captured_at": manifest["captured_at"],
         "complete": manifest["complete"],
         "members": members,
