@@ -9,3 +9,4 @@ dist/
 gh_run_receptor/_version.py
 .gh-run-receptor-cache/
 evidence-private/
+docs/_build/

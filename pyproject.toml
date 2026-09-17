@@ -24,15 +24,27 @@ dependencies = []
 
 [project.urls]
 Homepage = "https://github.com/uibcdf/gh-run-receptor"
+Documentation = "https://uibcdf.github.io/gh-run-receptor/"
 Repository = "https://github.com/uibcdf/gh-run-receptor"
 Issues = "https://github.com/uibcdf/gh-run-receptor/issues"
+Changelog = "https://github.com/uibcdf/gh-run-receptor/blob/main/CHANGELOG.md"
 
 [project.scripts]
 gh-run-receptor = "gh_run_receptor.cli:main"
 
 [project.optional-dependencies]
 test = ["jsonschema>=4.23", "pytest", "pytest-receptor", "PyYAML>=6.0"]
-dev = ["jsonschema>=4.23", "pytest", "pytest-receptor", "PyYAML>=6.0", "ruff==0.16.5"]
+docs = ["myst-parser>=4,<5", "sphinx>=8,<10", "sphinx-rtd-theme>=3,<4"]
+dev = [
+  "jsonschema>=4.23",
+  "myst-parser>=4,<5",
+  "pytest",
+  "pytest-receptor",
+  "PyYAML>=6.0",
+  "ruff==0.16.5",
+  "sphinx>=8,<10",
+  "sphinx-rtd-theme>=3,<4",
+]
 
 [tool.setuptools.packages.find]
 include = ["gh_run_receptor*"]

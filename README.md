@@ -1,8 +1,8 @@
 # gh-run-receptor
 
-`gh-run-receptor` is a read-only GitHub Actions evidence receptor. It turns large,
-repetitive run output into a compact, truth-preserving report while retaining a replayable
-path to the captured evidence.
+`gh-run-receptor` is a GitHub Actions evidence receptor for coding agents: compact reports
+without hiding failures or uncertainty. It is read-only and retains a replayable path to
+the captured evidence.
 
 The project is in pre-1.0 development; no package has been published to a package index and
 the public contract may still evolve. The `0.21.1` source release can inspect, watch,
@@ -366,6 +366,9 @@ installation, and an outside-checkout smoke test are verified on GitHub-hosted U
 macOS, and Windows with Python 3.11, 3.12, and 3.13. The GitHub CLI script-extension and
 Action paths are also validated on all three operating systems; the minimum GitHub CLI
 binary gate is Linux amd64 because it tests a transport version, not an OS support matrix.
+
+Public installation, usage, integration, contract, security, and limitation documentation
+is published at [uibcdf.github.io/gh-run-receptor](https://uibcdf.github.io/gh-run-receptor/).
 
 Product contracts, contributor onboarding, security boundaries, open decisions, and the
 implementation route are maintained in the
