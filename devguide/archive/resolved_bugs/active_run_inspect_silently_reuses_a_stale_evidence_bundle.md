@@ -1,9 +1,9 @@
 ---
 summary: Active-run inspect silently reuses a stale evidence bundle
 issue: uibcdf/gh-run-receptor#37
-status: active
+status: resolved
 opened: 2026-09-14
-closed:
+closed: 2026-09-17
 severity: medium
 verification: reproduced
 area: ['github']
@@ -16,7 +16,7 @@ supersedes: []
 # Active-run inspect silently reuses a stale evidence bundle
 
 **Reported:** 2026-09-14, while monitoring the 0.20.0 compatibility candidate.
-**Status:** Active; the cause is reproduced and a fail-closed refresh is under test.
+**Status:** Resolved; active cache entries refresh through a validated replacement.
 
 Remove `severity` for proposals. The directory identifies the report kind.
 
@@ -108,4 +108,11 @@ On 2026-09-14 the candidate implementation recaptured the already cached path wi
 manual deletion. The same receptor command then returned `FAIL`,
 `conclusion=failure`, `status=completed`, and `jobs: 9 (failure=3, success=6)`, agreeing
 with GitHub and grouping the three Windows failures. Focused service and embedded tests
-pass locally; the complete local and hosted cross-platform gates remain before closure.
+passed locally.
+
+The complete local gate then passed 360 tests. Hosted compatibility run `34892386411`
+passed all nine Ubuntu, macOS, and Windows combinations on commit `408750b`; its repeated
+inspection advanced through active snapshots and finished `PASS` with `jobs=9/9`.
+Embedded Action run `34890911327` independently passed all three operating systems on the
+same acquisition implementation. These runs exercise both Windows directory exchange and
+real active-cache refresh before closure.
