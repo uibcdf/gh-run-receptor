@@ -561,6 +561,15 @@ completion triggered terminal `workflow_run` reporter `35194534510`, which prese
 source conclusion and produced the expected bounded report artifact. These are separate
 hosted checks of the published tag rather than source-checkout tests.
 
+After publication, the canonical 0.20.0 client guide was synchronized byte-for-byte to
+twelve repositories. The published wheel accepted all eleven client `config@1` policies,
+covering 63 exact workflow rules. MolSysMT commit `db9bec49e` and MolSysViewer commit
+`4822f299` upgraded their native/ABI3 and noarch Conda publishers respectively to producer
+Action v2.1.0, with explicit failure-safe event artifact upload. Six focused MolSysMT
+workflow tests and the MolSysViewer workflow guard pass locally. This proves source
+adoption, not hosted client delivery; the next real client Conda runs must still establish
+end-to-end evidence in those repositories.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

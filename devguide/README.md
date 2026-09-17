@@ -55,8 +55,9 @@ The current MVP implements:
 - a manually dispatched nine-combination compatibility gate proving the Python console
   command, suite, build, wheel installation, and smoke path on Ubuntu, macOS, and Windows
   with Python 3.11 through 3.13.
-- strict repository policy deployed across eight additional MolSysSuite clients, with 37
-  exact workflow rules and metadata-only remote smoke validation.
+- strict repository policy deployed across eleven additional MolSysSuite clients, with 63
+  exact workflow rules accepted by the published 0.20.0 parser, plus the canonical guide
+  synchronized byte-for-byte across twelve client repositories.
 - a first checkout-local composite Action implementation with bounded summaries, scalar
   outputs, canonical JSON artifacts, explicit publisher provenance, and offline tests;
   hosted checkout-local and remote-source validation passing on all three operating systems.
