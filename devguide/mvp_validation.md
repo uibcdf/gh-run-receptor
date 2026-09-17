@@ -605,6 +605,19 @@ artifacts, two repositories, and two workflows. This is a read-only local-client
 real hosted evidence, not yet the exact-revision hosted release gate required before the
 0.21.0 contract freeze.
 
+Exact-revision hosted gate `35202361626` passed that two-success case at commit `37d8af7`
+with only `actions: read` and `contents: read`. A retained MolSysViewer CI failure,
+`34890243748`, was then combined with the MolSysMT success locally: the aggregate preserved
+one official failure, one success, nine jobs, two artifacts, complete evidence, and exit 1.
+The negative case was added to the next hosted gate revision.
+
+For the two-success question, a compact native JSON projection measured 632 bytes and 208
+`cl100k_base` tokens; the three-line aggregate measured 527 bytes and 139 tokens, a 33.2%
+token reduction. Two separate receptor success lines remain smaller at 278 bytes and 87
+tokens. This counterexample is intentional: multi-run aggregation supplies a coherent
+versioned collection and coverage summary, while repeated `inspect` is preferable when the
+reader needs only two already-known per-run verdicts.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

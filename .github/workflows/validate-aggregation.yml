@@ -39,3 +39,19 @@ jobs:
             --capture metadata --receptor llm > "$compact"
           python -c "import json, pathlib; path=pathlib.Path('$report'); value=json.loads(path.read_text()); assert value['schema'] == 'gh-run-receptor.aggregate@1'; assert value['assessment'] == 'PASS'; assert value['evidence_sufficient'] is True; assert value['source_count'] == 2; assert value['totals'] == {'jobs': 5, 'artifacts': 5}; assert value['summary']['repository_counts'] == {'uibcdf/gh-run-receptor': 1, 'uibcdf/molsysmt': 1}; assert {item['conclusion'] for item in value['sources']} == {'success'}"
           python -c "import pathlib; text=pathlib.Path('$compact').read_text(); assert text.startswith('PASS aggregate sources=2'); assert len(text.splitlines()) == 3; assert len(text.encode()) < 2000"
+
+      - name: Preserve a real failure in a mixed collection
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          report="$RUNNER_TEMP/aggregate-failure.json"
+          set +e
+          python -m gh_run_receptor.cli aggregate \
+            "https://github.com/uibcdf/molsysmt/actions/runs/35196968944" \
+            "https://github.com/uibcdf/molsysviewer/actions/runs/34890243748" \
+            --capture metadata --format json > "$report"
+          status="$?"
+          set -e
+          test "$status" -eq 1
+          python -c "import json, pathlib; value=json.loads(pathlib.Path('$report').read_text()); assert value['assessment'] == 'FAIL'; assert value['evidence_sufficient'] is True; assert value['totals'] == {'jobs': 9, 'artifacts': 2}; assert value['summary']['assessment_counts'] == {'FAIL': 1, 'PASS': 1}; assert {item['conclusion'] for item in value['sources']} == {'failure', 'success'}"

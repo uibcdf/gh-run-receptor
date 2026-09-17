@@ -15,6 +15,7 @@ from jsonschema.exceptions import ValidationError
 from gh_run_receptor.aggregation import (
     build_aggregate,
     exit_code,
+    render_human,
     render_json,
     render_llm,
 )
@@ -132,6 +133,13 @@ def test_duplicate_and_unbounded_sources_are_rejected():
         build_aggregate([report])
     with pytest.raises(BundleError, match="must be unique"):
         build_aggregate([report, copy.deepcopy(report)])
+    oversized = []
+    for index in range(51):
+        item = copy.deepcopy(report)
+        item["subject"]["run_id"] += index
+        oversized.append(item)
+    with pytest.raises(BundleError, match="between 2 and 50"):
+        build_aggregate(oversized)
 
 
 def test_llm_rendering_is_bounded_and_terminal_safe():
@@ -151,6 +159,10 @@ def test_llm_rendering_is_bounded_and_terminal_safe():
     assert "\u202e" not in rendered
     assert "\\u202e" in rendered
     assert len(rendered.encode()) < 16_000
+
+    human = render_human(build_aggregate(reports[:2]))
+    assert human.startswith("Workflow aggregate: PASS\n")
+    assert "Source runs\n" in human
 
 
 def test_cli_aggregates_local_bundles_offline(capsys):
@@ -177,6 +189,17 @@ def test_cli_rejects_mixed_sources_and_ambiguous_numeric_ids(capsys):
     assert "cannot mix" in capsys.readouterr().err
     assert main(["aggregate", "123", "456"]) == 5
     assert "require --repo" in capsys.readouterr().err
+    assert (
+        main(
+            [
+                "aggregate",
+                "https://github.com/uibcdf/example/actions/runs/123",
+                "https://github.example/uibcdf/example/actions/runs/456",
+            ]
+        )
+        == 5
+    )
+    assert "same GitHub hostname" in capsys.readouterr().err
 
 
 def test_remote_aggregate_uses_each_url_repository(monkeypatch, capsys):
@@ -232,6 +255,8 @@ def test_hosted_aggregate_gate_is_manual_read_only_bounded_and_pinned():
     assert "--capture metadata" in source
     assert "35196968944" in source
     assert "35194479266" in source
+    assert "34890243748" in source
+    assert 'test "$status" -eq 1' in source
     assert "gh-run-receptor.aggregate@1" in source
     assert "len(text.encode()) < 2000" in source
     assert "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7" in source

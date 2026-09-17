@@ -78,8 +78,31 @@ Implementation checkpoint on 2026-09-17:
 - The first live invocation exposed that remote aggregation had omitted the required
   explicit `attempt=None` acquisition argument. The focused remote-path test now asserts
   this call contract.
-- The exact-revision hosted gate, broader corpus benchmark, canonical client-guide update,
-  and 0.21.0 freeze remain open.
+- The negative hosted-gate revision, broader multi-state benchmark, canonical client-guide
+  update, and 0.21.0 freeze remain open.
+
+The first exact-revision gate, run `35202361626` at commit `37d8af7`, passed the successful
+cross-repository case with read-only permissions. A second live local probe combined the
+MolSysMT success with MolSysViewer CI failure `34890243748`; it retained complete evidence,
+reported one `PASS` plus one `FAIL`, and returned the aggregate `FAIL` path with nine jobs
+and two artifacts. That negative case is now part of the next hosted gate revision.
+
+The same two-success collection was measured against a deliberately compact native JSON
+projection built from `gh run view --json` plus the artifacts endpoint, and against two
+ordinary receptor inspections. With tiktoken 0.13.0:
+
+| Output | Lines | Bytes | `cl100k_base` | `o200k_base` | `p50k_base` / `r50k_base` |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Compact native projection | 1 | 632 | 208 | 207 | 246 |
+| Multi-run aggregate | 3 | 527 | 139 | 140 | 163 |
+| Two individual receptor reports | 2 | 278 | 87 | 88 | 97 |
+
+The aggregate saves 33.2% `cl100k_base` tokens against the native projection while adding
+collection counts, profiles, workflow paths, and evidence sufficiency. It is 59.8% larger
+than two already-compact receptor lines. Therefore aggregation is justified by one
+machine-readable collection contract, coverage, and conservative outcome composition, not
+by claiming that it is always the shortest way to read a few known successful runs. The
+individual `inspect` commands remain the economical choice for that narrower question.
 
 ## What was refuted
 

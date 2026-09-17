@@ -48,7 +48,9 @@ offline CLI behavior, terminal safety, and the twenty-line text rendering bound.
 CLI tests require explicit repository identity and exercise cross-repository URLs through
 the ordinary acquisition path. A live read-only pilot over MolSysMT run `35196968944` and
 gh-run-receptor run `35194479266` reports two complete successful sources, five jobs, five
-artifacts, two repositories, and two workflows.
+artifacts, two repositories, and two workflows. Exact-revision hosted gate `35202361626`
+passes that case. Its next revision also combines retained MolSysViewer CI failure
+`34890243748` with the MolSysMT success and requires exit 1 plus one preserved failure.
 
 ### Replay and golden tests
 
