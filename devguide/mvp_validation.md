@@ -554,6 +554,13 @@ installed without dependencies outside the checkout, reported exactly 0.20.0, an
 from the isolated installation. A public Zenodo query on 2026-09-17 returned `ABSENT`; no
 archive record or DOI is claimed, and the maintainer activation handoff remains open.
 
+Post-release minimum-transport run `35194481436` installed tag 0.20.0 through the
+checksum-pinned GitHub CLI 2.48.0 and passed a real metadata capture. Distributed Action
+run `35194479266` passed on Ubuntu, macOS, and Windows with publisher ref 0.20.0. Its
+completion triggered terminal `workflow_run` reporter `35194534510`, which preserved the
+source conclusion and produced the expected bounded report artifact. These are separate
+hosted checks of the published tag rather than source-checkout tests.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not
