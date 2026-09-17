@@ -57,7 +57,7 @@ The current MVP implements:
   command, suite, build, wheel installation, and smoke path on Ubuntu, macOS, and Windows
   with Python 3.11 through 3.13.
 - strict repository policy deployed across eleven additional MolSysSuite clients, with 63
-  exact workflow rules accepted by the published 0.20.0 parser, plus the canonical guide
+  exact workflow rules accepted by the published parser, plus the canonical 0.21.0 guide
   synchronized byte-for-byte across twelve client repositories.
 - a first checkout-local composite Action implementation with bounded summaries, scalar
   outputs, canonical JSON artifacts, explicit publisher provenance, and offline tests;
@@ -79,8 +79,8 @@ The current MVP implements:
   draft-first asset verification, public-release revalidation, and completed
   uninterrupted publications through 0.21.0.
 - a bounded read-only Zenodo verification gate with distinct absent, invalid, and verified
-  states plus an explicit maintainer activation handoff; a real project record remains
-  absent.
+  states plus an explicit maintainer activation handoff; an exact-tag 0.21.0 query confirms
+  that a real project record remains absent.
 - a first portable live corpus spanning three non-UIBCDF repositories, including native
   conclusion parity, bounded output, and deterministic offline replay.
 - one runtime registry for nine serialized boundaries, formal configuration-capture

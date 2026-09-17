@@ -647,6 +647,13 @@ the independently installed public wheel aggregated those five runs into one com
 is the first release whose new multi-run contract is both its subject and the mechanism
 used to summarize its post-publication evidence.
 
+After publication, the canonical 0.21.0 client guide was synchronized byte-for-byte to
+all twelve tracked repositories. Each repository received an isolated `[skip ci]` commit;
+the unrelated untracked TopoMT smoke-test notebook was preserved. Exact-tag Zenodo run
+`35211669763` then queried the public service and returned the designed `ABSENT` result for
+0.21.0. The GitHub Release is valid, but archival is not complete: a UIBCDF maintainer must
+enable the repository integration before a future release and then repeat the verifier.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not
