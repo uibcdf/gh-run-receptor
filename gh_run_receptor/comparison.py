@@ -6,6 +6,7 @@ import json
 from collections import Counter
 from typing import Any
 
+from gh_run_receptor import exit_codes
 from gh_run_receptor.comparison_policy import evaluate_policy
 from gh_run_receptor.contracts import schema_id
 
@@ -382,10 +383,10 @@ def render_human(comparison: dict[str, Any]) -> str:
 def exit_code(comparison: dict[str, Any]) -> int:
     """Returning a distinct status for violation, incomplete evidence, or success."""
     if not comparison.get("evidence_sufficient"):
-        return 4
+        return exit_codes.INCOMPLETE
     policy = comparison.get("policy", {})
     if policy.get("assessment") == "INCOMPLETE":
-        return 4
+        return exit_codes.INCOMPLETE
     if policy.get("assessment") == "FAIL":
-        return 1
-    return 0
+        return exit_codes.FAILURE
+    return exit_codes.SUCCESS

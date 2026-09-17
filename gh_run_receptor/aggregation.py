@@ -7,6 +7,7 @@ import unicodedata
 from collections import Counter
 from typing import Any
 
+from gh_run_receptor import exit_codes
 from gh_run_receptor.contracts import schema_id
 from gh_run_receptor.errors import BundleError
 from gh_run_receptor.report import exit_code as report_exit_code
@@ -67,15 +68,15 @@ def _source(report: dict[str, Any]) -> dict[str, Any]:
 
 def _assessment(sources: list[dict[str, Any]]) -> str:
     codes = {source["exit_code"] for source in sources}
-    if 1 in codes:
+    if exit_codes.FAILURE in codes:
         return "FAIL"
-    if 2 in codes:
+    if exit_codes.TERMINAL_NON_SUCCESS in codes:
         return "NON_SUCCESS"
-    if 3 in codes:
+    if exit_codes.PENDING in codes:
         return "PENDING"
-    if 4 in codes:
+    if exit_codes.INCOMPLETE in codes:
         return "INCOMPLETE"
-    if codes == {0}:
+    if codes == {exit_codes.SUCCESS}:
         return "PASS"
     raise BundleError("aggregate contains an unsupported source exit status")
 
@@ -204,9 +205,9 @@ def render_human(aggregate: dict[str, Any]) -> str:
 def exit_code(aggregate: dict[str, Any]) -> int:
     """Returning the strongest known source outcome without hiding uncertainty."""
     return {
-        "PASS": 0,
-        "FAIL": 1,
-        "NON_SUCCESS": 2,
-        "PENDING": 3,
-        "INCOMPLETE": 4,
-    }.get(aggregate.get("assessment"), 5)
+        "PASS": exit_codes.SUCCESS,
+        "FAIL": exit_codes.FAILURE,
+        "NON_SUCCESS": exit_codes.TERMINAL_NON_SUCCESS,
+        "PENDING": exit_codes.PENDING,
+        "INCOMPLETE": exit_codes.INCOMPLETE,
+    }.get(aggregate.get("assessment"), exit_codes.RECEPTOR_ERROR)

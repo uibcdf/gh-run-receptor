@@ -11,7 +11,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from urllib.parse import urlparse
 
-from gh_run_receptor import __version__
+from gh_run_receptor import __version__, exit_codes
 from gh_run_receptor.aggregation import (
     MAX_SOURCES,
     MIN_SOURCES,
@@ -71,6 +71,14 @@ class RunReference:
     repository: str | None = None
 
 
+class _ArgumentParser(argparse.ArgumentParser):
+    """Keeping malformed invocation distinct from a GitHub run outcome."""
+
+    def error(self, message: str) -> None:
+        self.print_usage(sys.stderr)
+        self.exit(exit_codes.USAGE_ERROR, f"{self.prog}: error: {message}\n")
+
+
 def _run_reference(value: str) -> RunReference:
     if value.isdigit():
         return RunReference(run_id=int(value))
@@ -124,7 +132,7 @@ def _add_common_options(
 
 
 def _parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
+    parser = _ArgumentParser(
         prog="gh-run-receptor",
         description=(
             "Compact GitHub Actions evidence reports; network commands require "
@@ -264,7 +272,7 @@ def _capture(args: argparse.Namespace, *, render: bool) -> int:
             f"bundle run={manifest['run_id']} attempt={manifest['run_attempt']} "
             f"complete={str(manifest['complete']).lower()} bytes={total} path={destination}"
         )
-        return 0 if manifest["complete"] else 4
+        return exit_codes.SUCCESS if manifest["complete"] else exit_codes.INCOMPLETE
 
     report = build_report(
         manifest,
@@ -458,7 +466,7 @@ def main(arguments: list[str] | None = None) -> int:
                     for item in inventory
                 )
                 print(f"contracts baseline={SCHEMA_BASELINE_TAG} | {items}")
-            return 0
+            return exit_codes.SUCCESS
         if args.command == "init":
             workflows = discover_workflows(args.root)
             data = render_config(workflows)
@@ -474,7 +482,7 @@ def main(arguments: list[str] | None = None) -> int:
                 print(f"configuration written: path={target} workflows={len(workflows)}")
             else:
                 print(data.decode("utf-8"), end="")
-            return 0
+            return exit_codes.SUCCESS
         if args.command == "config":
             config = load_config(args.path if args.config_command == "check" else args.config)
             if args.config_command == "check":
@@ -482,7 +490,7 @@ def main(arguments: list[str] | None = None) -> int:
                     f"configuration valid: schema={config['schema_version']} "
                     f"rules={len(config['workflows'])}"
                 )
-                return 0
+                return exit_codes.SUCCESS
             rule = select_rule(
                 config,
                 path=args.workflow,
@@ -491,7 +499,7 @@ def main(arguments: list[str] | None = None) -> int:
             )
             if rule is None:
                 print("no matching rule; profile=auto")
-                return 0
+                return exit_codes.SUCCESS
             key, value = next(iter(rule["match"].items()))
             fields = [f"match={key}:{value}", f"profile={rule['profile']}"]
             if rule["profile"] == "conda":
@@ -505,7 +513,7 @@ def main(arguments: list[str] | None = None) -> int:
                     ]
                 )
             print(" ".join(fields))
-            return 0
+            return exit_codes.SUCCESS
         if args.command == "inspect":
             return _capture(args, render=True)
         if args.command == "capture":
@@ -573,13 +581,13 @@ def main(arguments: list[str] | None = None) -> int:
         return exit_code(report)
     except AcquisitionError as error:
         print(f"RECEPTOR_ERROR category={error.category}: {error}", file=sys.stderr)
-        return 5
+        return exit_codes.RECEPTOR_ERROR
     except ReceptorError as error:
         print(f"RECEPTOR_ERROR: {error}", file=sys.stderr)
-        return 5
+        return exit_codes.RECEPTOR_ERROR
     except KeyboardInterrupt:
         print("watch interrupted", file=sys.stderr)
-        return 130
+        return exit_codes.INTERRUPTED
 
 
 if __name__ == "__main__":

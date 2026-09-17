@@ -8,6 +8,7 @@ import unicodedata
 from pathlib import Path
 from typing import Any
 
+from gh_run_receptor import exit_codes
 from gh_run_receptor.config import select_rule
 from gh_run_receptor.contracts import schema_id
 from gh_run_receptor.logs import extract_causes
@@ -1133,18 +1134,18 @@ def render_human(report: dict[str, Any]) -> str:
 
 
 def exit_code(report: dict[str, Any]) -> int:
-    """Mapping authoritative run state to the provisional CLI exit contract."""
+    """Mapping authoritative run state to the stable CLI exit contract."""
     if not report["receptor"]["evidence_sufficient"]:
-        return 4
+        return exit_codes.INCOMPLETE
     assessment = report["receptor"]["assessment"]
     if assessment == "PASS":
-        return 0
+        return exit_codes.SUCCESS
     if assessment in {"FAIL", "PARTIAL"}:
-        return 1
+        return exit_codes.FAILURE
     if assessment == "PENDING":
-        return 3
+        return exit_codes.PENDING
     if assessment in {"CANCELLED", "TIMED_OUT", "ACTION_REQUIRED", "STALE", "UNKNOWN"}:
-        return 2
+        return exit_codes.TERMINAL_NON_SUCCESS
     if assessment == "INCOMPLETE":
-        return 4
-    return 5
+        return exit_codes.INCOMPLETE
+    return exit_codes.RECEPTOR_ERROR

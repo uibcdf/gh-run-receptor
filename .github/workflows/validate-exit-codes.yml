@@ -1,0 +1,46 @@
+name: Validate stable CLI exit codes
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.13"
+      - name: Exercise every reproducible console category
+        shell: bash
+        run: |
+          assert_status() {
+            expected="$1"
+            shift
+            set +e
+            python -m gh_run_receptor "$@" >/tmp/stdout 2>/tmp/stderr
+            actual="$?"
+            set -e
+            if [ "$actual" -ne "$expected" ]; then
+              printf 'expected=%s actual=%s command=%s\n' "$expected" "$actual" "$*" >&2
+              sed -n '1,5p' /tmp/stdout >&2
+              sed -n '1,5p' /tmp/stderr >&2
+              return 1
+            fi
+          }
+
+          assert_status 0 replay tests/fixtures/bundles/molsysmt_conda_success
+          assert_status 1 replay tests/fixtures/bundles/molsysviewer_ci_failure
+          assert_status 2 replay tests/fixtures/bundles/molsysmt_conda_cancelled
+          assert_status 4 replay tests/fixtures/bundles/pyunitwizard_ci_incomplete_logs
+          assert_status 5 replay missing-bundle
+          assert_status 64 invalid-command
+          assert_status 64 inspect not-a-run
+          assert_status 0 --help
+          assert_status 0 --version

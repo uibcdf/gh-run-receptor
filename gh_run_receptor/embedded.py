@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
+from gh_run_receptor import exit_codes
 from gh_run_receptor.config import parse_config
 from gh_run_receptor.errors import AcquisitionError, ConfigError, ReceptorError, TrustError
 from gh_run_receptor.github import _safe_error_line
@@ -264,10 +265,10 @@ def run_action(
             },
         )
         print(compact, end="")
-        return 0
+        return exit_codes.SUCCESS
     except (ReceptorError, OSError, KeyError, TypeError, ValueError) as error:
         _write_error(values, _safe_error(error), _error_category(error))
-        return 5
+        return exit_codes.RECEPTOR_ERROR
 
 
 if __name__ == "__main__":
