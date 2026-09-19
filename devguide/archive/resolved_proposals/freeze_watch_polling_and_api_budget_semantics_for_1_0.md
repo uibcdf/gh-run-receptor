@@ -1,13 +1,13 @@
 ---
 summary: Freeze watch polling and API-budget semantics for 1.0
 issue: uibcdf/gh-run-receptor#42
-status: active
+status: resolved
 opened: 2026-09-17
-closed:
-verification: inspected
+closed: 2026-09-19
+verification: measured
 area: ['cli', 'github', 'tests']
-guard:
-normative:
+guard: tests/test_watch.py
+normative: cli_and_output_contract.md
 blocked_by: []
 supersedes: []
 ---
@@ -15,8 +15,8 @@ supersedes: []
 # Freeze watch polling and API-budget semantics for 1.0
 
 **Reported:** 2026-09-17, while reviewing OD-005 before declaring `watch` stable.
-**Status:** Active; the existing behavior is implemented and partly observed, but its
-request budget and terminal handoff are not yet frozen.
+**Status:** Resolved; deterministic polling, transition output, request accounting, and
+terminal handoff are implemented, tested, measured, and documented.
 
 ## What
 
@@ -120,3 +120,34 @@ bypass bundle identity and completeness checks.
 Initial measurements ran on 2026-09-17 on Linux in the project checkout, with Python
 3.12.8 and GitHub CLI 2.93.0, against public `uibcdf/molsysmt` evidence. Raw debug output
 and caches remain under `/tmp` only and are not repository artifacts.
+
+The final 2026-09-19 validation ran on Linux with Python 3.13.14, pytest 9.1.1,
+pytest-receptor 0.7.0, Ruff 0.16.1, tiktoken 0.13.0, and GitHub CLI 2.93.0. The active
+comparison used public run `35432811964`; GitHub reported `completed`/`success` with one
+successful job.
+
+## Resolution
+
+The accepted contract uses finite intervals of at least one second, defaults of 10 and 60
+seconds, 1.5 unchanged backoff, transition reset, 2 error backoff, and termination on the
+third consecutive acquisition failure. It deliberately omits jitter. Successful polls
+count one run request, one request per jobs page, and one additional run request for a
+historical attempt.
+
+Terminal run and job payloads are retained by `RunSnapshot`. The final capture reuses them
+only when the run ID and attempt agree, the run is terminal, all jobs are terminal, and
+any available job identity fields agree. A lagging job collection is reacquired. All
+other report evidence remains freshly acquired or comes from an identity-checked completed
+cache.
+
+The active comparison measured 321 `cl100k_base` tokens across 38 native compact-watch
+lines versus 86 tokens across four receptor lines, a 73.2% reduction. The completed-run
+boundary measured 20 native tokens versus 39 receptor tokens and therefore carries no
+savings claim. Instrumentation counted nine receptor API invocations for the active case
+and seven for the optimized completed case; the latter used nine before terminal handoff.
+The full commands, formula, rejected quota-header inference, and limitations live in
+`devguide/benchmark_watch_2026-09-19.md`.
+
+Final local gates passed: 432 tests through `pytest --receptor=llm`, Ruff, all nine frozen
+serialized contracts against 0.21.0, developer-report validation, strict Sphinx, and
+`git diff --check`.

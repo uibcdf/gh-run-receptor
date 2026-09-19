@@ -252,6 +252,101 @@ def test_capture_uses_attempt_specific_run_facts_for_a_historical_attempt(tmp_pa
     assert evidence["run.json"]["conclusion"] == "failure"
 
 
+def test_capture_reuses_identity_checked_handed_off_jobs(tmp_path):
+    run = {
+        "id": 42,
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "abc",
+        "workflow_id": 7,
+    }
+    jobs = {
+        "total_count": 1,
+        "jobs": [
+            {
+                "id": 11,
+                "run_id": 42,
+                "run_attempt": 1,
+                "name": "test",
+                "status": "completed",
+                "conclusion": "success",
+                "steps": [],
+            }
+        ],
+    }
+    client = AttemptClient()
+    destination = tmp_path / "bundle"
+
+    capture_bundle(
+        client,
+        "uibcdf/example",
+        42,
+        attempt=1,
+        policy="metadata",
+        destination=destination,
+        run=run,
+        jobs=jobs,
+    )
+    _, evidence = load_bundle(destination)
+
+    assert not any("/jobs?" in endpoint for endpoint in client.endpoints)
+    assert evidence["jobs.json"] == jobs
+
+
+def test_capture_rejects_handed_off_jobs_from_another_run(tmp_path):
+    run = {
+        "id": 42,
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "abc",
+        "workflow_id": 7,
+    }
+    jobs = {
+        "total_count": 1,
+        "jobs": [
+            {"id": 11, "run_id": 99, "run_attempt": 1, "status": "completed"}
+        ],
+    }
+
+    with pytest.raises(BundleError, match="jobs evidence has conflicting identity"):
+        capture_bundle(
+            AttemptClient(),
+            "uibcdf/example",
+            42,
+            attempt=1,
+            policy="metadata",
+            destination=tmp_path / "bundle",
+            run=run,
+            jobs=jobs,
+        )
+
+
+def test_capture_rejects_nonterminal_handed_off_jobs(tmp_path):
+    run = {
+        "id": 42,
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "head_sha": "abc",
+        "workflow_id": 7,
+    }
+    jobs = {"total_count": 1, "jobs": [{"id": 11, "status": "in_progress"}]}
+
+    with pytest.raises(BundleError, match="jobs evidence is not terminal"):
+        capture_bundle(
+            AttemptClient(),
+            "uibcdf/example",
+            42,
+            attempt=1,
+            policy="metadata",
+            destination=tmp_path / "bundle",
+            run=run,
+            jobs=jobs,
+        )
+
+
 class EventClient:
     hostname = "github.com"
 

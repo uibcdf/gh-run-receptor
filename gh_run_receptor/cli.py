@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import os
 import re
 import sys
@@ -59,7 +60,7 @@ from gh_run_receptor.published import (
 )
 from gh_run_receptor.report import build_report, exit_code, render_human, render_json, render_llm
 from gh_run_receptor.service import acquire_evidence
-from gh_run_receptor.watch import watch_run
+from gh_run_receptor.watch import DEFAULT_MAX_POLL_INTERVAL, DEFAULT_POLL_INTERVAL, watch_run
 
 
 @dataclass(frozen=True)
@@ -105,8 +106,8 @@ def _positive_interval(value: str) -> float:
         interval = float(value)
     except ValueError as error:
         raise argparse.ArgumentTypeError("interval must be a number") from error
-    if interval < 1:
-        raise argparse.ArgumentTypeError("interval must be at least one second")
+    if not math.isfinite(interval) or interval < 1:
+        raise argparse.ArgumentTypeError("interval must be a finite number of at least one second")
     return interval
 
 
@@ -177,8 +178,10 @@ def _parser() -> argparse.ArgumentParser:
     _add_common_options(watch, suppress_defaults=True)
     watch.add_argument("run", type=_run_reference)
     watch.add_argument("--attempt", type=int)
-    watch.add_argument("--interval", type=_positive_interval, default=10.0)
-    watch.add_argument("--max-interval", type=_positive_interval, default=60.0)
+    watch.add_argument("--interval", type=_positive_interval, default=DEFAULT_POLL_INTERVAL)
+    watch.add_argument(
+        "--max-interval", type=_positive_interval, default=DEFAULT_MAX_POLL_INTERVAL
+    )
     watch.add_argument("--capture", choices=("full", "adaptive", "metadata"), default="adaptive")
     watch.add_argument("--output", type=Path)
 
@@ -243,14 +246,24 @@ def _render(report: dict, output_format: str, receptor: str | None) -> str:
     return render_human(report) if selected == "human" else render_llm(report)
 
 
-def _capture(args: argparse.Namespace, *, render: bool) -> int:
+def _capture(
+    args: argparse.Namespace,
+    *,
+    render: bool,
+    client: GitHubClient | None = None,
+    repository: str | None = None,
+    run: dict | None = None,
+    jobs: dict | None = None,
+) -> int:
     hostname = args.hostname or args.run.hostname or "github.com"
     if args.hostname and args.run.hostname and args.hostname != args.run.hostname:
         raise BundleError("run URL hostname conflicts with --hostname")
     if args.repo and args.run.repository and args.repo != args.run.repository:
         raise BundleError("run URL repository conflicts with --repo")
-    client = GitHubClient(hostname)
-    repository = client.repository(args.repo or args.run.repository)
+    client = GitHubClient(hostname) if client is None else client
+    repository = (
+        client.repository(args.repo or args.run.repository) if repository is None else repository
+    )
     run_id = args.run.run_id
 
     captured = acquire_evidence(
@@ -261,6 +274,8 @@ def _capture(args: argparse.Namespace, *, render: bool) -> int:
         policy=args.capture,
         cache_root=_cache_root(args.cache_dir),
         output=args.output,
+        run=run,
+        jobs=jobs,
     )
     manifest = captured.manifest
     evidence = captured.evidence
@@ -530,7 +545,7 @@ def main(arguments: list[str] | None = None) -> int:
                 raise BundleError("run URL repository conflicts with --repo")
             client = GitHubClient(hostname)
             repository = client.repository(args.repo or args.run.repository)
-            watch_run(
+            result = watch_run(
                 client,
                 repository,
                 args.run.run_id,
@@ -539,7 +554,14 @@ def main(arguments: list[str] | None = None) -> int:
                 max_interval=max(args.interval, args.max_interval),
                 emit=lambda message: print(message, file=sys.stderr),
             )
-            return _capture(args, render=True)
+            return _capture(
+                args,
+                render=True,
+                client=client,
+                repository=repository,
+                run=result.snapshot.run,
+                jobs=(result.snapshot.jobs if result.snapshot.reusable_terminal_jobs else None),
+            )
         if args.command in {"published", "published-source"}:
             hostname = args.hostname or args.run.hostname or "github.com"
             if args.hostname and args.run.hostname and args.hostname != args.run.hostname:

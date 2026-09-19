@@ -2,6 +2,7 @@ from pathlib import Path
 
 import pytest
 
+from gh_run_receptor.errors import BundleError
 from gh_run_receptor.service import CapturedEvidence, acquire_evidence, create_report
 
 
@@ -49,6 +50,78 @@ def test_acquire_evidence_captures_then_loads_the_shared_bundle(tmp_path, monkey
     assert result == CapturedEvidence(manifest=manifest, evidence=evidence, path=destination)
     assert calls[0][1:3] == ("uibcdf/example", 42)
     assert calls[0][3]["run"] == {"run_attempt": 2}
+
+
+def test_acquire_evidence_reuses_terminal_run_and_jobs_handoff(tmp_path, monkeypatch):
+    destination = tmp_path / "bundle"
+    run = {"id": 42, "run_attempt": 2, "status": "completed", "conclusion": "success"}
+    jobs = {"total_count": 0, "jobs": []}
+    manifest = {
+        "repository": "uibcdf/example",
+        "run_id": 42,
+        "run_attempt": 2,
+        "capture_policy": "metadata",
+    }
+    evidence = {"run.json": run, "jobs.json": jobs}
+    calls = []
+
+    class NoRequestClient:
+        hostname = "github.com"
+
+        def json(self, endpoint):
+            pytest.fail(f"terminal handoff repeated request: {endpoint}")
+
+    def capture(client, repository, run_id, **kwargs):
+        calls.append(kwargs)
+        destination.mkdir()
+        return manifest
+
+    monkeypatch.setattr("gh_run_receptor.service.capture_bundle", capture)
+    monkeypatch.setattr("gh_run_receptor.service.load_bundle", lambda path: (manifest, evidence))
+
+    acquire_evidence(
+        NoRequestClient(),
+        "uibcdf/example",
+        42,
+        attempt=2,
+        policy="metadata",
+        cache_root=tmp_path / "cache",
+        output=destination,
+        run=run,
+        jobs=jobs,
+    )
+
+    assert calls == [
+        {
+            "attempt": 2,
+            "policy": "metadata",
+            "destination": destination,
+            "run": run,
+            "jobs": jobs,
+        }
+    ]
+
+
+@pytest.mark.parametrize(
+    ("run", "attempt", "message"),
+    [
+        ({"id": 99, "run_attempt": 1, "status": "completed"}, 1, "conflicting identity"),
+        ({"id": 42, "run_attempt": 2, "status": "completed"}, 1, "conflicting attempt"),
+        ({"id": 42, "run_attempt": 1, "status": "in_progress"}, 1, "terminal"),
+    ],
+)
+def test_acquire_evidence_rejects_invalid_terminal_handoff(tmp_path, run, attempt, message):
+    with pytest.raises(BundleError, match=message):
+        acquire_evidence(
+            _Client(),
+            "uibcdf/example",
+            42,
+            attempt=attempt,
+            policy="metadata",
+            cache_root=tmp_path,
+            run=run,
+            jobs={"total_count": 0, "jobs": []},
+        )
 
 
 def test_acquire_evidence_refreshes_a_cached_active_run(tmp_path, monkeypatch):

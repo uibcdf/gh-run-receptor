@@ -44,7 +44,19 @@ gh run-receptor --repo OWNER/REPO watch RUN_ID --receptor=llm
 ```
 
 Transitions go to stderr. Unchanged snapshots are not printed. When the run becomes
-terminal, stdout receives exactly one ordinary report.
+terminal, stdout receives exactly one ordinary report. The default polling interval is 10
+seconds and unchanged state backs off deterministically to at most 60 seconds. Override
+those bounds with finite values of at least one second:
+
+```bash
+gh run-receptor --repo OWNER/REPO watch RUN_ID \
+  --interval 5 --max-interval 30 --receptor=llm
+```
+
+A state change resets the interval. Two consecutive acquisition failures are reported and
+retried with stronger backoff; the third aborts rather than polling forever. The terminal
+run and job evidence is reused by the final capture, while workflow, artifact, check,
+configuration, and policy-selected log evidence is still acquired normally.
 
 ## Capture and replay
 

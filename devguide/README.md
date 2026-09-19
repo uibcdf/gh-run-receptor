@@ -37,7 +37,8 @@ The current MVP implements:
 - bounded log-cause extraction with archive and line limits;
 - conservative Conda auto-detection, reusable-platform classification, and cross-job
   cause grouping;
-- transition-only `watch` with polling backoff and a single final adaptive report;
+- stable transition-only `watch` with deterministic polling backoff, an explicit per-page
+  API formula, identity-checked terminal evidence reuse, and a single final adaptive report;
 - machine-readable `bundle@1`, `model@1`, and `report@1` schemas, with strict bundle
   validation and source-referenced normalization;
 - sanitized success and partial-failure MolSysMT Conda fixtures plus a successful
@@ -82,7 +83,6 @@ The current MVP implements:
   pull-request rejection before acquisition.
 - an enforced GitHub CLI 2.48.0 functional floor for network commands, with lazy
   pre-acquisition rejection, offline independence, and checksum-pinned hosted validation
-  of the official minimum binary.
 - a hosted exact-tag GitHub Release path with consistent citation/Zenodo metadata,
   draft-first asset verification, public-release revalidation, and completed
   uninterrupted publications through 0.21.1.
@@ -142,7 +142,8 @@ structured per-platform representation and a published 0.20.0 contract freeze.
 16. [Decisions and open questions](decisions_and_open_questions.md)
 17. [MVP validation checkpoint](mvp_validation.md)
 18. [MolSysMT Conda pilot benchmark](benchmark_2026-09-04.md)
-19. [Development roadmap](development_roadmap.md)
+19. [Watch polling and output benchmark](benchmark_watch_2026-09-19.md)
+20. [Development roadmap](development_roadmap.md)
 
 These documents and the pending queue indexes are the current checkpoint. The
 [archive summary](archive/README.md) is the normal historical entry point. Routine
@@ -173,6 +174,7 @@ known design question; it does not mean that unimplemented behavior has been val
 | Settled decisions and unresolved choices | `decisions_and_open_questions.md` |
 | Implemented surface and real-run validation | `mvp_validation.md` |
 | Measured native baseline and token reduction | `benchmark_2026-09-04.md` |
+| Watch polling, API budget, and native comparison | `benchmark_watch_2026-09-19.md` |
 | Ordered implementation plan and release gates | `development_roadmap.md` |
 
 ## Settled direction

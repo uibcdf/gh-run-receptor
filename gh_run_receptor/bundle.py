@@ -146,6 +146,7 @@ def capture_bundle(
     policy: str,
     destination: Path,
     run: dict[str, Any] | None = None,
+    jobs: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Capturing one run attempt atomically into ``destination``."""
     if policy not in _CAPTURE_POLICIES:
@@ -184,11 +185,30 @@ def capture_bundle(
         )
         members.append(_write_member(temporary, "workflow.json", workflow, "github.workflow"))
 
-        jobs_payload = client.json(
-            f"/repos/{repository}/actions/runs/{run_id}/attempts/{selected_attempt}/jobs?per_page=100",
-            paginate=True,
-        )
-        jobs = merge_pages(jobs_payload, "jobs")
+        if jobs is None:
+            jobs_payload = client.json(
+                f"/repos/{repository}/actions/runs/{run_id}/attempts/{selected_attempt}/jobs?per_page=100",
+                paginate=True,
+            )
+            jobs = merge_pages(jobs_payload, "jobs")
+        else:
+            if not isinstance(jobs, dict):
+                raise BundleError("provided jobs evidence is not a job collection")
+            handed_off_jobs = jobs.get("jobs")
+            if not isinstance(handed_off_jobs, list):
+                raise BundleError("provided jobs evidence is not a job collection")
+            if run.get("status") != "completed" or any(
+                not isinstance(job, dict) or job.get("status") != "completed"
+                for job in handed_off_jobs
+            ):
+                raise BundleError("provided jobs evidence is not terminal")
+            if any(
+                job.get("run_id") not in {None, run_id}
+                or job.get("run_attempt") not in {None, selected_attempt}
+                for job in handed_off_jobs
+                if isinstance(job, dict)
+            ):
+                raise BundleError("provided jobs evidence has conflicting identity")
         members.append(_write_member(temporary, "jobs.json", jobs, "github.jobs"))
 
         artifacts_payload = client.json(

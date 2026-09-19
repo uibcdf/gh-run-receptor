@@ -183,6 +183,13 @@ Evaluation records both correctness and economy:
 - reduction relative to competent native GitHub CLI baselines;
 - repeated-output avoided during watch mode.
 
+Watch contract tests inject both the API adapter and clock. They count every successful
+jobs page, distinguish current from historical attempts, freeze the 1.5/2 backoff and
+reset behavior, bound consecutive failures, validate terminal handoff identity, and prove
+that final capture does not request terminal run/jobs evidence twice. The dated
+[watch benchmark](benchmark_watch_2026-09-19.md) compares active and already-completed
+public runs with native compact watch; raw transcripts remain local.
+
 Token counts must identify the tokenizer or model family. The primary product claim uses
 source/input tokens, not an unspecified token count. A result is rejected if improved
 compression hides a distinct failure, blocked dimension, or uncertainty.

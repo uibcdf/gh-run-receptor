@@ -40,6 +40,7 @@ def _refresh_bundle(
     policy: str,
     destination: Path,
     run: dict[str, Any],
+    jobs: dict[str, Any] | None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Replacing one nonterminal cache entry after validating fresh evidence."""
     nonce = uuid4().hex
@@ -54,6 +55,7 @@ def _refresh_bundle(
             policy=policy,
             destination=replacement,
             run=run,
+            jobs=jobs,
         )
         load_bundle(replacement)
         destination.rename(stale)
@@ -77,11 +79,22 @@ def acquire_evidence(
     policy: str,
     cache_root: Path,
     output: Path | None = None,
+    run: dict[str, Any] | None = None,
+    jobs: dict[str, Any] | None = None,
 ) -> CapturedEvidence:
     """Acquiring or reusing one identity-checked evidence bundle."""
-    run = client.json(f"/repos/{repository}/actions/runs/{run_id}")
+    handed_off_run = run is not None
+    run = run if run is not None else client.json(f"/repos/{repository}/actions/runs/{run_id}")
+    if not isinstance(run, dict):
+        raise BundleError("workflow-run evidence is not an object")
+    if handed_off_run and run.get("id") != run_id:
+        raise BundleError("provided workflow-run evidence has conflicting identity")
     current_attempt = int(run.get("run_attempt") or 1)
     selected_attempt = attempt or current_attempt
+    if handed_off_run and attempt is not None and current_attempt != attempt:
+        raise BundleError("provided workflow-run evidence has conflicting attempt")
+    if jobs is not None and (not handed_off_run or run.get("status") != "completed"):
+        raise BundleError("provided jobs evidence requires a terminal workflow-run handoff")
     destination = output or default_bundle_path(
         cache_root, client.hostname, repository, run_id, selected_attempt, policy
     )
@@ -108,6 +121,7 @@ def acquire_evidence(
                 policy=policy,
                 destination=destination,
                 run=run,
+                jobs=jobs,
             )
     else:
         manifest = capture_bundle(
@@ -118,6 +132,7 @@ def acquire_evidence(
             policy=policy,
             destination=destination,
             run=run,
+            jobs=jobs,
         )
         _, evidence = load_bundle(destination)
     return CapturedEvidence(manifest=manifest, evidence=evidence, path=destination)

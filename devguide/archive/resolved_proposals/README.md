@@ -20,6 +20,7 @@
 - [#2 — Formalize version 1 bundle, model, and report schemas](formalize_version_1_bundle_model_and_report_schemas.md) (`resolved`)
 - [#41 — Measure and freeze the adaptive log-capture policy for 1.0](freeze_adaptive_log_capture_policy.md) (`resolved`)
 - [#30 — Freeze version 1 contracts and migration policy](freeze_version_1_contracts_and_migration_policy.md) (`resolved`)
+- [#42 — Freeze watch polling and API-budget semantics for 1.0](freeze_watch_polling_and_api_budget_semantics_for_1_0.md) (`resolved`)
 - [#5 — Load trusted workflow rules from client repositories](load_trusted_workflow_rules_from_client_repositories.md) (`resolved`)
 - [#32 — Publish a same-revision reusable reporting workflow](publish_a_same_revision_reusable_reporting_workflow.md) (`resolved`)
 - [#26 — Publish and verify reproducible GitHub releases](publish_and_verify_reproducible_github_releases.md) (`resolved`)

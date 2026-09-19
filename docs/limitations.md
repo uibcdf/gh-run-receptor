@@ -49,10 +49,11 @@ local unless explicitly reviewed and sanitized.
 
 ## Watch and active runs
 
-`watch` polls GitHub, prints only transitions, and emits one final report. Its polling and
-API-budget behavior remains pre-1.0 while real rate-limit evidence is collected. Calling
-the embedded Action from the source run itself reports `PENDING`, because that run cannot
-be complete while the reporting step executes.
+`watch` polls GitHub, prints only transitions, and emits one final report. Its stable
+request formula depends on jobs pagination, historical-attempt selection, final evidence,
+and transient failures; it is not a fixed number for every workflow. Calling the embedded
+Action from the source run itself reports `PENDING`, because that run cannot be complete
+while the reporting step executes.
 
 ## Outcome corpus
 

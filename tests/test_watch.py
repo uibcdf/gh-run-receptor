@@ -1,7 +1,13 @@
 import pytest
 
 from gh_run_receptor.errors import AcquisitionError
-from gh_run_receptor.watch import JobState, RunState, fetch_state, transitions, watch_run
+from gh_run_receptor.watch import (
+    JobState,
+    RunState,
+    fetch_snapshot,
+    transitions,
+    watch_run,
+)
 
 
 def _state(status, job_status, conclusion=None, job_conclusion=None):
@@ -83,6 +89,9 @@ def test_watch_emits_only_changes_and_backs_off_when_unchanged():
     )
 
     assert final.terminal
+    assert final.successful_snapshots == 4
+    assert final.successful_poll_requests == 8
+    assert final.snapshot.reusable_terminal_jobs is True
     assert delays == [2, 3.0, 2]
     assert messages == [
         "watch: uibcdf/molsysmt run=42 attempt=1 | status=in_progress | jobs=0/1",
@@ -106,16 +115,54 @@ def test_watch_of_completed_run_emits_no_redundant_transition():
     )
 
     assert final.conclusion == "failure"
+    assert final.successful_snapshots == 1
+    assert final.successful_poll_requests == 2
     assert messages == []
     assert delays == []
 
 
 def test_watch_uses_attempt_specific_run_state_for_a_historical_attempt():
-    state = fetch_state(HistoricalAttemptClient(), "uibcdf/example", 42, attempt=1)
+    snapshot = fetch_snapshot(HistoricalAttemptClient(), "uibcdf/example", 42, attempt=1)
+    state = snapshot.state
 
     assert state.attempt == 1
     assert state.conclusion == "failure"
     assert state.jobs[0].conclusion == "failure"
+    assert snapshot.api_requests == 3
+
+
+def test_snapshot_counts_each_returned_jobs_page():
+    class PaginatedClient:
+        def json(self, endpoint, *, paginate=False):
+            if "/jobs?" not in endpoint:
+                return {"status": "in_progress", "conclusion": None, "run_attempt": 1}
+            assert paginate is True
+            return [
+                {
+                    "total_count": 1,
+                    "jobs": [{"id": 7, "name": "first", "status": "completed"}],
+                },
+                {
+                    "total_count": 1,
+                    "jobs": [{"id": 8, "name": "second", "status": "in_progress"}],
+                },
+            ]
+
+    snapshot = fetch_snapshot(PaginatedClient(), "uibcdf/example", 42)
+
+    assert snapshot.api_requests == 3
+    assert [job.name for job in snapshot.state.jobs] == ["first", "second"]
+
+
+def test_terminal_snapshot_with_lagging_job_is_not_reusable():
+    snapshot = fetch_snapshot(
+        FakeClient([_state("completed", "in_progress", "success")]),
+        "uibcdf/example",
+        42,
+    )
+
+    assert snapshot.state.terminal is True
+    assert snapshot.reusable_terminal_jobs is False
 
 
 def test_watch_retries_transient_errors_without_repeating_state():
@@ -124,7 +171,7 @@ def test_watch_retries_transient_errors_without_repeating_state():
     client = FakeClient([running, completed], failures={2})
     messages = []
 
-    watch_run(
+    result = watch_run(
         client,
         "uibcdf/molsysmt",
         42,
@@ -136,6 +183,9 @@ def test_watch_retries_transient_errors_without_repeating_state():
 
     assert messages.count("job completed: build (linux-64) | conclusion=success") == 1
     assert any(message.startswith("watch degraded: attempt=1/3") for message in messages)
+    assert result.successful_snapshots == 2
+    assert result.successful_poll_requests == 4
+    assert client.run_calls == 3
 
 
 def test_transitions_escape_untrusted_job_name():

@@ -137,13 +137,26 @@ new failure, run completed, or evidence acquisition degraded. It never redraws t
 whole status tree. Polling backs off for long unchanged intervals. A final report is
 rendered once.
 
-The MVP accepts `--interval`, `--max-interval`, `--attempt`, and the final capture policy.
-It polls only run and paginated job metadata until terminal state, emits transitions to
-stderr, retries at most two consecutive transient acquisition failures, and performs one
-ordinary capture/report operation after completion. An already completed run skips the
-initial snapshot and transitions. Cancellation by the user returns 130. Live active-run
-behavior is validated by run `34027741137`: watch emitted one initial state, one job
-completion, one run completion, and one final report without repeated snapshots.
+The stable command accepts `--interval`, `--max-interval`, `--attempt`, and the final
+capture policy. Intervals are finite and at least one second; defaults are 10 and 60
+seconds. Unchanged successful polls back off by 1.5 up to the maximum, a transition resets
+the interval, and an acquisition failure backs off by 2. There is no jitter. The first two
+consecutive transient failures emit degraded state and the third aborts; any successful
+poll resets that counter.
+
+Polling requests only run and paginated job metadata. A current-attempt snapshot costs one
+run request plus one request per 100-job page; a historical attempt adds one
+attempt-specific run request. The terminal run and merged jobs response are identity
+checked and transferred to final capture instead of being requested twice. Workflow,
+artifact, producer-event, check-run, configuration, and policy-selected log evidence
+remain separate final-capture costs. See
+[the measured watch benchmark](benchmark_watch_2026-09-19.md) for the formula and native
+comparison.
+
+An already completed run skips the initial snapshot and transitions. Cancellation by the
+user returns 130. Live active runs `34027741137` and `35432811964` validate transition-only
+output; the latter reduced observed `cl100k_base` reader input by 73.2% relative to native
+compact watch while preserving the official terminal result.
 
 ### `compare`
 

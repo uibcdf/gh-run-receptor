@@ -137,6 +137,69 @@ def test_common_options_are_accepted_after_subcommand():
     assert args.format == "text"
 
 
+@pytest.mark.parametrize("value", ["nan", "inf", "-inf", "0.99"])
+def test_watch_rejects_non_finite_or_subsecond_intervals(value):
+    with pytest.raises(SystemExit) as captured:
+        _parser().parse_args(["watch", "42", "--interval", value])
+
+    assert captured.value.code == 64
+
+
+def test_watch_hands_terminal_poll_evidence_to_final_capture(monkeypatch):
+    from gh_run_receptor.watch import RunSnapshot, RunState, WatchResult
+
+    run = {"id": 42, "run_attempt": 1, "status": "completed", "conclusion": "success"}
+    jobs = {"total_count": 0, "jobs": []}
+    result = WatchResult(
+        snapshot=RunSnapshot(
+            state=RunState("completed", "success", 1, ()),
+            run=run,
+            jobs=jobs,
+            api_requests=2,
+        ),
+        successful_snapshots=1,
+        successful_poll_requests=2,
+    )
+    class Client:
+        pass
+
+    client = Client()
+    observed = {}
+
+    class ClientFactory:
+        def __new__(cls, hostname):
+            assert hostname == "github.com"
+            return client
+
+    def repository(explicit):
+        assert explicit == "uibcdf/example"
+        return explicit
+
+    def watch(received_client, repository_name, run_id, **kwargs):
+        assert (received_client, repository_name, run_id) == (client, "uibcdf/example", 42)
+        assert kwargs["interval"] == 10
+        assert kwargs["max_interval"] == 60
+        return result
+
+    def capture(args, **kwargs):
+        observed.update(kwargs)
+        return 0
+
+    monkeypatch.setattr("gh_run_receptor.cli.GitHubClient", ClientFactory)
+    monkeypatch.setattr(client, "repository", repository, raising=False)
+    monkeypatch.setattr("gh_run_receptor.cli.watch_run", watch)
+    monkeypatch.setattr("gh_run_receptor.cli._capture", capture)
+
+    assert main(["watch", "42", "--repo", "uibcdf/example"]) == 0
+    assert observed == {
+        "render": True,
+        "client": client,
+        "repository": "uibcdf/example",
+        "run": run,
+        "jobs": jobs,
+    }
+
+
 def test_ci_profile_is_an_explicit_cli_choice():
     args = _parser().parse_args(["replay", "bundle", "--profile", "ci"])
 

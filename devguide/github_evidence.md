@@ -164,7 +164,8 @@ resources behind 404, the user-facing category preserves that ambiguity.
 
 - Cache immutable completed-attempt responses by repository, run ID, attempt, URL, and
   ETag.
-- Refresh an active run with bounded exponential polling and jitter.
+- Refresh an active run with deterministic bounded backoff: 1.5 after unchanged state,
+  reset after a transition, and 2 after an acquisition failure.
 - Render only state transitions in watch mode.
 - In adaptive mode, do not fetch logs for any active or completed successful run.
 - In adaptive mode, request one complete attempt archive after GitHub confirms completion

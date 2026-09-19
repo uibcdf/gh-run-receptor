@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections.abc import Callable
 from dataclasses import dataclass
 from time import sleep as system_sleep
+from typing import Any
 
 from gh_run_receptor.errors import AcquisitionError
 from gh_run_receptor.github import GitHubClient, merge_pages
@@ -12,6 +13,11 @@ from gh_run_receptor.report import _safe_text
 
 Emit = Callable[[str], None]
 Sleep = Callable[[float], None]
+DEFAULT_POLL_INTERVAL = 10.0
+DEFAULT_MAX_POLL_INTERVAL = 60.0
+UNCHANGED_BACKOFF_FACTOR = 1.5
+ERROR_BACKOFF_FACTOR = 2.0
+DEFAULT_MAX_CONSECUTIVE_ERRORS = 3
 
 
 @dataclass(frozen=True)
@@ -38,10 +44,43 @@ class RunState:
         return self.status == "completed"
 
 
-def fetch_state(
+@dataclass(frozen=True)
+class RunSnapshot:
+    """Retaining one state together with its reusable source responses."""
+
+    state: RunState
+    run: dict[str, Any]
+    jobs: dict[str, Any]
+    api_requests: int
+
+    @property
+    def reusable_terminal_jobs(self) -> bool:
+        """Reporting whether all handed-off jobs agree with terminal run state."""
+        return self.state.terminal and all(job.status == "completed" for job in self.state.jobs)
+
+
+@dataclass(frozen=True)
+class WatchResult:
+    """Returning terminal evidence and the measured successful-poll budget."""
+
+    snapshot: RunSnapshot
+    successful_snapshots: int
+    successful_poll_requests: int
+
+    @property
+    def terminal(self) -> bool:
+        return self.snapshot.state.terminal
+
+    @property
+    def conclusion(self) -> str | None:
+        return self.snapshot.state.conclusion
+
+
+def fetch_snapshot(
     client: GitHubClient, repository: str, run_id: int, attempt: int | None = None
-) -> RunState:
-    """Fetching one run and job snapshot without logs or artifacts."""
+) -> RunSnapshot:
+    """Fetching one reusable run and job snapshot without logs or artifacts."""
+    api_requests = 1
     run = client.json(f"/repos/{repository}/actions/runs/{run_id}")
     if not isinstance(run, dict):
         raise AcquisitionError("workflow-run response is not an object")
@@ -53,13 +92,15 @@ def fetch_state(
         )
     if selected_attempt != current_attempt:
         run = client.json(f"/repos/{repository}/actions/runs/{run_id}/attempts/{selected_attempt}")
+        api_requests += 1
         if not isinstance(run, dict) or run.get("run_attempt") != selected_attempt:
             raise AcquisitionError("workflow-run attempt response has conflicting identity")
     payload = client.json(
         f"/repos/{repository}/actions/runs/{run_id}/attempts/{selected_attempt}/jobs?per_page=100",
         paginate=True,
     )
-    jobs = merge_pages(payload, "jobs")["jobs"]
+    api_requests += max(1, len(payload)) if isinstance(payload, list) else 1
+    jobs = merge_pages(payload, "jobs")
     states = tuple(
         sorted(
             (
@@ -69,17 +110,25 @@ def fetch_state(
                     status=job.get("status"),
                     conclusion=job.get("conclusion"),
                 )
-                for job in jobs
+                for job in jobs["jobs"]
             ),
             key=lambda item: item.job_id,
         )
     )
-    return RunState(
+    state = RunState(
         status=run.get("status"),
         conclusion=run.get("conclusion"),
         attempt=selected_attempt,
         jobs=states,
     )
+    return RunSnapshot(state=state, run=run, jobs=jobs, api_requests=api_requests)
+
+
+def fetch_state(
+    client: GitHubClient, repository: str, run_id: int, attempt: int | None = None
+) -> RunState:
+    """Fetching one run and job snapshot without logs or artifacts."""
+    return fetch_snapshot(client, repository, run_id, attempt).state
 
 
 def _job_transition(previous: JobState | None, current: JobState) -> str | None:
@@ -130,16 +179,23 @@ def watch_run(
     run_id: int,
     *,
     attempt: int | None = None,
-    interval: float = 10.0,
-    max_interval: float = 60.0,
+    interval: float = DEFAULT_POLL_INTERVAL,
+    max_interval: float = DEFAULT_MAX_POLL_INTERVAL,
     emit: Emit,
     sleep: Sleep = system_sleep,
-    max_consecutive_errors: int = 3,
-) -> RunState:
+    max_consecutive_errors: int = DEFAULT_MAX_CONSECUTIVE_ERRORS,
+) -> WatchResult:
     """Polling until terminal state while emitting each transition once."""
-    current = fetch_state(client, repository, run_id, attempt)
+    snapshot = fetch_snapshot(client, repository, run_id, attempt)
+    current = snapshot.state
+    successful_snapshots = 1
+    successful_poll_requests = snapshot.api_requests
     if current.terminal:
-        return current
+        return WatchResult(
+            snapshot=snapshot,
+            successful_snapshots=successful_snapshots,
+            successful_poll_requests=successful_poll_requests,
+        )
 
     completed = sum(job.status == "completed" for job in current.jobs)
     emit(
@@ -151,7 +207,7 @@ def watch_run(
     while not current.terminal:
         sleep(delay)
         try:
-            updated = fetch_state(client, repository, run_id, current.attempt)
+            updated_snapshot = fetch_snapshot(client, repository, run_id, current.attempt)
         except AcquisitionError as error:
             consecutive_errors += 1
             if consecutive_errors >= max_consecutive_errors:
@@ -160,13 +216,25 @@ def watch_run(
                 f"watch degraded: attempt={consecutive_errors}/{max_consecutive_errors} | "
                 f"{_safe_text(error)}"
             )
-            delay = min(max_interval, max(interval, delay * 2))
+            delay = min(max_interval, max(interval, delay * ERROR_BACKOFF_FACTOR))
             continue
 
         consecutive_errors = 0
+        successful_snapshots += 1
+        successful_poll_requests += updated_snapshot.api_requests
+        updated = updated_snapshot.state
         changes = transitions(current, updated)
         for change in changes:
             emit(change)
-        delay = interval if changes else min(max_interval, max(interval, delay * 1.5))
+        delay = (
+            interval
+            if changes
+            else min(max_interval, max(interval, delay * UNCHANGED_BACKOFF_FACTOR))
+        )
+        snapshot = updated_snapshot
         current = updated
-    return current
+    return WatchResult(
+        snapshot=snapshot,
+        successful_snapshots=successful_snapshots,
+        successful_poll_requests=successful_poll_requests,
+    )

@@ -155,6 +155,21 @@ minute of execution, watch emitted one initial `in_progress` state and no unchan
 snapshots. At completion it emitted the job transition, run transition, and one final
 report. The simulated-clock contract therefore agrees with observed remote behavior.
 
+## Stable watch contract
+
+Issue `uibcdf/gh-run-receptor#42` turns that first observation into a stable measured
+contract. Active validation run `35432811964` completed successfully with one job. Native
+`gh run watch --compact` emitted 38 lines and 321 `cl100k_base` tokens; the receptor emitted
+four lines and 86 tokens, a 73.2% reader-input reduction with matching terminal truth.
+
+The receptor made nine instrumented `gh api` invocations: two one-page snapshots and five
+fresh final-evidence calls. A completed successful run made seven after terminal handoff,
+versus nine before the change. Unit tests count pages, attempts and successful snapshots;
+cover deterministic unchanged, transition and failure backoff; reject non-finite
+intervals; and reject conflicting run, attempt, or job handoff identity. The complete
+formula and the negative completed-status token boundary are recorded in
+[benchmark_watch_2026-09-19.md](benchmark_watch_2026-09-19.md).
+
 This refutes the assumption that standard Actions job timeout generates the API's
 `timed_out` conclusion. GitHub documents the setting as automatic cancellation. The
 temporary manual workflow was therefore removed rather than retained as a redundant

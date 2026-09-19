@@ -31,6 +31,7 @@ page and retain only a concise decision record here.
 | Product portability | Runtime core and profiles are repository-agnostic; MolSysSuite identities remain fixtures, hosted evidence, or explicit client configuration | External public workflows must join the pre-1.0 corpus; UIBCDF-specific release/guide tooling is not product behavior |
 | Serialized contract evolution | Published major-schema resources are immutable; incompatible changes use a new integer version with explicit forward-only migration or documented retirement | Readers reject malformed, wrong-kind, retired, and future contracts; 0.18.0 freezes the first four v1 resources and 0.19.0 freezes the remaining three current v1 resources |
 | CLI process status | Freeze 0 success, 1 known failure, 2 other terminal non-success, 3 active, 4 incomplete, 5 receptor error, 64 usage error, and 130 interruption | Shell and agent callers can distinguish source truth from invocation and receptor failures without parsing text; command-specific semantics remain normative |
+| Watch behavior | Deterministic 10-to-60-second polling, 1.5 unchanged backoff, transition reset, 2 error backoff, abort on the third consecutive failure, transition-only progress, and identity-checked terminal run/jobs handoff | The request budget is calculable per jobs page and final evidence source; active-run output is measured against native compact watch without claiming savings for minimal completed status |
 
 ## Open decision gates
 
@@ -49,13 +50,6 @@ page and retain only a concise decision record here.
   examples, and administrative usability.
 - **Gate:** before implementing organization configuration.
 - **Current default:** built-ins plus trusted repository and explicit inline/CLI settings.
-
-### OD-005: Watch behavior
-
-- **Question:** polling intervals, event deltas, terminal refresh, and API budget?
-- **Needed evidence:** rate-limit measurements and comparison with `gh run watch --compact`.
-- **Gate:** before declaring `watch` stable.
-- **Current default:** emit only state changes and a final report; no repeated unchanged tree.
 
 ## Deferred, not forgotten
 

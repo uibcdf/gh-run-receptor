@@ -55,6 +55,26 @@ than a compact native multi-run projection, but it is not the smallest answer to
 question. Its value is a versioned collection assessment, source-by-source identity, and
 coverage summary.
 
+## Active watch output and API cost
+
+On 2026-09-19, both watchers observed the same active one-job validation run through
+completion. Native `gh run watch --compact` emitted 38 lines, 1,280 bytes, and 321
+`cl100k_base` tokens. GH Run Receptor emitted four transition/final-report lines, 286
+bytes, and 86 tokens: 73.2% less reader input without changing GitHub's successful
+terminal result.
+
+The receptor's API cost is separate from its output size. A successful current-attempt
+snapshot uses one run request plus one request per 100-job page. Fresh final capture adds
+the workflow, artifact, check, trusted-configuration, producer-event, and policy-selected
+log sources that exist for that run. Terminal run and jobs responses are identity checked
+and reused instead of requested twice. The measured active case made nine `gh api`
+invocations; an already-completed fresh-cache case fell from nine to seven after reuse.
+
+Native output remains smaller when a completed status is the only question: the measured
+compact native line used 20 tokens versus the receptor's richer 39-token report. See the
+[watch benchmark record](https://github.com/uibcdf/gh-run-receptor/blob/main/devguide/benchmark_watch_2026-09-19.md)
+for the schedule, request formula, commands, and limitations.
+
 ## What the measurements preserve
 
 The corpus checks that compact output keeps:

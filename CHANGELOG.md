@@ -17,6 +17,9 @@ All notable changes to this project will be documented in this file.
   non-success captures without retaining raw logs.
 - Preserve the original adaptive policy when sanitizing an unavailable-log capture;
   downgrade to metadata only when sanitization actually removes a retained log archive.
+- Freeze deterministic transition-only watch semantics and the per-page API formula,
+  reuse identity-checked terminal run/jobs evidence, and measure a 73.2% active-run token
+  reduction against native compact watch without claiming savings for minimal status.
 
 ## 0.21.1 - 2026-09-17
 

@@ -367,7 +367,11 @@ gh-run-receptor watch RUN_ID --repo OWNER/REPO --receptor=llm
 
 `watch` sends one initial progress line and only subsequent job/run transitions to stderr.
 When the run completes, stdout receives exactly one ordinary adaptive report. Calling it
-on an already completed successful run produces only the one-line final report.
+on an already completed successful run produces only the one-line final report. Defaults
+are a deterministic 10-second poll, 1.5 backoff for unchanged state, and a 60-second
+ceiling; terminal run/jobs evidence is reused rather than requested again. The
+[measured contract and API formula](devguide/benchmark_watch_2026-09-19.md) include both
+the useful active-run case and the boundary where a minimal native status view is smaller.
 
 The root `gh-run-receptor` launcher satisfies the GitHub CLI script-extension naming
 contract. A local checkout can also be installed with `gh extension install .` or exercised
