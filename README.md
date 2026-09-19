@@ -322,8 +322,8 @@ below 2.48.0, or version output that cannot be identified safely, yields
 
 ## Measured token reduction
 
-The first benchmark uses public MolSysMT Conda runs and compares against a competent
-filtered native workflow, not against deliberately dumping every log line:
+The benchmarks use public workflow runs and competent native baselines, not deliberately
+dumped log output:
 
 | Question | Native baseline | Receptor | Reduction (`cl100k_base`) |
 | --- | ---: | ---: | ---: |
@@ -335,6 +335,7 @@ filtered native workflow, not against deliberately dumping every log line:
 | Verify a successful MolSysMT documentation workflow | 254 tokens | 48 tokens | 81.1% |
 | Diagnose a failed MolSysViewer npm release workflow | 103 tokens | 93 tokens | 9.7% |
 | Verify a successful MolSysViewer npm release workflow | 95 tokens | 84 tokens | 11.6% |
+| Follow an active one-job workflow through completion | 321 tokens | 86 tokens | 73.2% |
 
 For the failed run, the receptor retained the official failure, identified both failed
 macOS jobs, and reported the Linux, Linux ARM, and Windows artifacts as reusable. These are
@@ -342,9 +343,10 @@ case measurements, not a general savings rate; see the
 [commands, tokenizer comparison, and limitations](devguide/benchmark_2026-09-04.md).
 
 If the only question is whether one completed run succeeded, native GitHub JSON is already
-smaller in the measured green case: 10 tokens versus the receptor's 39. Use the receptor
-when job, platform, artifact, failure, or evidence completeness matters—not to replace an
-already minimal status query.
+smaller in the measured green case: 10 tokens versus the receptor's 39. Completed native
+compact watch likewise measured 20 tokens versus 39. Use the receptor when live
+transition suppression or job, platform, artifact, failure, and evidence-completeness
+context matters—not to replace an already minimal status query.
 
 The CI measurement uses an already filtered native JSON baseline and therefore shows a
 modest saving. The receptor additionally retains CI role counts, artifact state, run URL,
