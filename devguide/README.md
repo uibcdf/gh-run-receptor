@@ -200,16 +200,19 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The immediate milestone is closing the remaining 1.0 evidence gaps. OD-002 has a measured
-stable adaptive capture rule, OD-005 has measured stable watch semantics, and the released
-0.22.0 client guide is synchronized across all twelve tracked repositories. Phase 1 now
-has complete evidence, including byte-identical CLI replay across temporal, filesystem,
-renderer, operating-system, and supported-Python contexts.
-Standard job timeout is now measured as cancellation; authentic
-`timed_out` evidence remains opportunistic because it must not be inferred from elapsed
-time or `timeout-minutes`. The release-profile authority map now identifies which facts
-need structured producer evidence or new capture sources rather than name inference.
+The defined 1.0 implementation and evidence gates now have full credit. OD-002 has a
+measured stable adaptive capture rule, OD-005 has measured stable watch semantics, and the
+released 0.22.0 client guide is synchronized across all twelve tracked repositories.
+Phase 1 includes byte-identical CLI replay across temporal, filesystem, renderer,
+operating-system, and supported-Python contexts. The release-profile authority map
+identifies which facts need structured producer evidence or new capture sources rather
+than name inference.
 
-The executable task list and exit criteria remain in
-[development_roadmap.md](development_roadmap.md). The configuration and report contracts
-remain provisional until this broader evidence gate is complete.
+Standard job timeout is measured as cancellation. Exact-source `timed_out` now passes the
+complete assessment, renderer, and process-status path under the documented
+non-generatable-outcome exception; authentic capture remains visibly absent and
+opportunistic. The next milestone is a 0.23.0 dogfooding candidate followed by the final
+scope/readiness audit for the 1.0 tag. Full evidence credit does not itself publish 1.0.
+
+The executable task list and release criteria remain in
+[development_roadmap.md](development_roadmap.md).

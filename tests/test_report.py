@@ -165,6 +165,44 @@ def test_cancelled_conda_run_preserves_platform_and_job_states():
     assert "successful=1 failed=1 cancelled=1 missing=0" in rendered
 
 
+def test_timed_out_source_reaches_assessment_renderers_and_exit_boundary():
+    evidence = _evidence(conclusion="timed_out")
+    evidence["jobs.json"]["jobs"] = [
+        {
+            "id": 20,
+            "name": "bounded operation",
+            "status": "completed",
+            "conclusion": "timed_out",
+            "started_at": "2026-09-04T10:00:00Z",
+            "completed_at": "2026-09-04T10:01:00Z",
+            "steps": [
+                {
+                    "number": 1,
+                    "name": "Upstream timed operation",
+                    "status": "completed",
+                    "conclusion": "timed_out",
+                }
+            ],
+        }
+    ]
+    evidence["artifacts.json"]["artifacts"] = []
+
+    report = build_report(_manifest(), evidence, profile="generic")
+    llm = render_llm(report)
+    human = render_human(report)
+
+    assert report["github"] == {"status": "completed", "conclusion": "timed_out"}
+    assert report["receptor"]["assessment"] == "TIMED_OUT"
+    assert report["jobs"][0]["conclusion"] == "timed_out"
+    assert report["jobs"][0]["steps"][0]["conclusion"] == "timed_out"
+    assert exit_code(report) == 2
+    assert llm.startswith("TIMED_OUT conclusion=timed_out status=completed")
+    assert "non-success jobs (1):" in llm
+    assert human.startswith("gh-run-receptor: TIMED_OUT")
+    assert len(llm.encode("utf-8")) < 1_000
+    assert len(human.encode("utf-8")) < 4_000
+
+
 @pytest.mark.parametrize(
     ("status", "conclusion", "expected"),
     [

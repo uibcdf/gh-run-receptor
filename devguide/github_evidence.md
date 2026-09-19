@@ -91,8 +91,11 @@ time or a configured job timeout. In measured run `34027741137`, GitHub applied
 `timeout-minutes: 1` by reporting the run, job, and interrupted step as `cancelled`.
 GitHub's workflow syntax likewise describes job timeout as automatic cancellation. A
 `timed_out` assessment therefore requires that exact source conclusion; synthetic coverage
-is retained until an authentic workflow-run example is observed. The upstream distinctions
-are documented in GitHub's [workflow syntax](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax),
+is retained until an authentic workflow-run example is observed. Under the conjunctive
+non-generatable-outcome rule in [Testing strategy](testing_strategy.md), that absent
+example is an explicit corpus limitation rather than an indefinite 1.0 blocker. The
+upstream distinctions are documented in GitHub's
+[workflow syntax](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax),
 [workflow-run REST API](https://docs.github.com/en/rest/actions/workflow-runs), and
 [Checks API guide](https://docs.github.com/en/rest/guides/using-the-rest-api-to-interact-with-checks).
 

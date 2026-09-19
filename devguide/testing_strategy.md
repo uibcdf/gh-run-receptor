@@ -88,6 +88,25 @@ GitHub's documented automatic-cancellation behavior, rather than `timed_out`. Th
 remains synthetically guarded and eligible for a sanitized real fixture if authentic
 read-only evidence becomes available.
 
+### Upstream outcomes without a safe generator
+
+An authentic fixture is not required for the 1.0 corpus only when all five conditions
+hold: the upstream read API documents the exact value; no safe bounded ordinary workflow
+or read-only mechanism can generate it reproducibly; the nearest safe live experiment
+records the distinct real outcome and guards against inference; exact-source synthetic
+evidence passes through normalization, assessment, every renderer, and the process-status
+boundary; and a later authentic read-only capture can be added without changing those
+semantics.
+
+This exception currently applies only to `timed_out`. It does not replace authentic
+fixtures for reproducible success, failure, cancellation, rerun, artifact, permission, or
+publication behavior. Synthetic evidence supplies the otherwise unreachable source value;
+it does not manufacture a claim that GitHub produced that value in the measured run. A
+2026-09-19 authenticated scan queried 889 deduplicated public repositories across ten
+popularity, ecosystem, Actions-topic, and organization cohorts with zero request errors
+and zero `status=timed_out` hits. That result justifies continued opportunistic capture;
+it does not prove global absence.
+
 ### Action and reusable-workflow tests
 
 The first Action slice has offline tests for metadata shape, pinned dependencies, input

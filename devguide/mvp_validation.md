@@ -155,6 +155,13 @@ minute of execution, watch emitted one initial `in_progress` state and no unchan
 snapshots. At completion it emitted the job transition, run transition, and one final
 report. The simulated-clock contract therefore agrees with observed remote behavior.
 
+On 2026-09-19 a broader authenticated scan queried 889 deduplicated public repositories
+from ten popularity, language, Actions-topic, and organization cohorts. Every request to
+the workflow-runs endpoint succeeded and every `status=timed_out` result had
+`total_count=0`. This does not establish global absence, but it strengthens the evidence
+that opportunistic read-only capture is a more honest policy than manufacturing a check
+or retaining an ineffective timeout generator.
+
 ## Stable watch contract
 
 Issue `uibcdf/gh-run-receptor#42` turns that first observation into a stable measured
@@ -827,7 +834,9 @@ full suite and installed-wheel smoke test on Ubuntu, macOS, and Windows with Pyt
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not
   yet a complete diagnosis engine.
-- The committed real-run corpus remains narrow; authentic `timed_out` remains a gap.
+- The committed real-run corpus remains narrow. Authentic `timed_out` remains absent and
+  opportunistic under the documented non-generatable-outcome exception; exact-source
+  synthetic evidence covers the complete product path without claiming a live source.
 - Private-repository and fork token behavior of the embedded Action is not established by
   the public and same-repository probes.
 - External registries, GitHub Releases, Git refs, and archive records are not queried by

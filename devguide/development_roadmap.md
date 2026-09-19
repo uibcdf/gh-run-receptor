@@ -35,7 +35,10 @@ Define an honest filtered-CLI baseline and measure bytes and tokens. Sanitize th
 that becomes a committed regression corpus.
 
 **Exit condition:** the required API resources, missing evidence, and log-association
-limitations are documented from real runs.
+limitations are documented from real runs. A documented upstream outcome without a safe
+reproducible generator may use the conjunctive exception in `testing_strategy.md`: exact
+synthetic source propagation plus measured negative no-inference evidence, with authentic
+capture remaining opportunistic.
 
 Deliverables are a private full corpus, an approved sanitized regression subset, an API
 probe report, native-command baselines, and a recommendation for the initial capture
@@ -105,7 +108,7 @@ its exit condition and deliverables are satisfied:
 
 | Phase | Weight toward 1.0 | Evidenced credit | Current state |
 | --- | ---: | ---: | --- |
-| Phase 0: corpus and feasibility | 15% | 14% | Measured sanitized fixtures cover native/noarch Conda, failing CI, successful/failing documentation and npm release workflows, cancellation, expired logs, paired reruns, paired full/adaptive acquisition, and a verified Zenodo release; a live experiment documents why standard job timeout cannot generate `timed_out`, which remains the authentic outcome gap |
+| Phase 0: corpus and feasibility | 15% | 15% | Measured sanitized fixtures cover native/noarch Conda, failing CI, successful/failing documentation and npm release workflows, cancellation, expired logs, paired reruns, paired full/adaptive acquisition, and a verified Zenodo release; `timed_out` satisfies the documented non-generatable-outcome exception through exact-source end-to-end coverage, a live negative no-inference experiment, and a zero-hit 889-repository public scan, while authentic capture remains explicitly absent and opportunistic |
 | Phase 1: generic CLI | 30% | 30% | Capture, strict validated replay, nine registered serialized boundaries with release-specific freezes, forward-only migration rules, source-referenced normalization, bounded reports, attempt-specific historical truth, the released non-overlapping CLI exit-code map, frozen adaptive log-acquisition truth table, degraded log analysis, structured redacted acquisition failures, and byte-identical CLI replay across temporal and filesystem contexts are tested |
 | Phase 2: rules and profiles | 20% | 20% | Initial native/noarch Conda, CI, documentation, and release interpretations plus repeated-failure grouping, strict trusted exact-match configuration, local discovery, non-overwriting `init`, hosted structured projection of action-internal Conda results, and an adversarially guarded release-claim authority map are tested; richer rules and external release verification remain post-1.0 extensions |
 | Phase 3: embedded Action | 15% | 15% | Composite publication, provenance, fail-open and active-run truth, trusted inline rules, public permission boundaries, live pull-request rejection, read-only terminal `workflow_run`, bounded report consumption, and verified source-to-reporter discovery pass adversarial and hosted validation; private-fork behavior remains an explicitly narrower unclaimed environment case |
@@ -113,10 +116,12 @@ its exit condition and deliverables are satisfied:
 | Cross-cutting release gate | 10% | 10% | Python packaging passes the nine OS/interpreter combinations; released wheel installation, script-extension installation, remote-source Action execution, terminal downstream reporting, published-report consumption, and strict public Sphinx documentation deployment pass; the checksum-pinned GitHub CLI 2.48.0 minimum, uninterrupted draft-first 0.22.0 publication, and independent Zenodo verification pass hosted gates, with all nine registered contracts frozen against published history |
 
 Design completion is reported separately from implementation progress. The evidenced
-implementation credit at this checkpoint is **99% toward 1.0**. This is not a schedule
-estimate: credit is deliberately withheld where a phase's required corpus, schema,
-platform, or distribution evidence is absent. Percentages change only with linked tests,
-builds, or benchmark evidence, not by subjective confidence.
+implementation credit at this checkpoint is **100% toward the defined 1.0 scope**. This is
+not a schedule estimate: credit is deliberately withheld where a phase's required corpus,
+schema, platform, or distribution evidence is absent. Percentages change only with linked
+tests, builds, or benchmark evidence, not by subjective confidence. The percentage means
+the documented implementation/evidence gates are satisfied; it does not mean that the 1.0
+tag has been published or that explicitly excluded future features have been implemented.
 
 ## Route to 1.0
 

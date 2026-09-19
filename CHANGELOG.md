@@ -9,6 +9,9 @@ All notable changes to this project will be documented in this file.
 - Freeze one release-profile evidence-authority map and add adversarial guards so
   successful tag, registry, GitHub Release, and Zenodo-shaped step names cannot become
   independent external-delivery verification.
+- Define the acceptance rule for non-generatable upstream outcomes and prove exact-source
+  `timed_out` propagation through assessment, human/LLM rendering, and process status 2
+  without claiming an authentic workflow-run fixture.
 
 ## 0.22.0 - 2026-09-19
 

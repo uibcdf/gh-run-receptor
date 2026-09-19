@@ -58,9 +58,12 @@ while the reporting step executes.
 ## Outcome corpus
 
 Success, failure, cancellation, action-required/stale semantics, incomplete evidence, and
-rerun attempts have deterministic coverage. Authentic GitHub `timed_out` evidence remains
-opportunistic: a normal job timeout has been observed as cancellation, so the receptor
-does not infer `TIMED_OUT` merely from elapsed time or a workflow timeout setting.
+rerun attempts have deterministic coverage. Exact-source `timed_out` evidence has
+end-to-end synthetic coverage through assessment, both text renderers, and process status
+2, but no authentic workflow-run fixture. A normal job timeout has been observed as
+cancellation, so the receptor does not infer `TIMED_OUT` merely from elapsed time or a
+workflow timeout setting. Authentic capture remains opportunistic and would strengthen
+the corpus without changing this conservative behavior.
 
 The release profile classifies untrusted job and step names only for presentation. A
 successful step can establish `step_success`, but cannot verify a Git tag, package
