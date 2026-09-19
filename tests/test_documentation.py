@@ -58,6 +58,20 @@ def test_readme_badges_reference_real_project_surfaces():
         assert target in readme
 
 
+def test_stable_release_surfaces_pin_one_version_and_maturity():
+    configuration = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
+    surfaces = [
+        (ROOT / "README.md").read_text(encoding="utf-8"),
+        (DOCS / "index.md").read_text(encoding="utf-8"),
+        (DOCS / "installation.md").read_text(encoding="utf-8"),
+        (ROOT / "standards" / "GH_RUN_RECEPTOR_GUIDE.md").read_text(encoding="utf-8"),
+    ]
+
+    assert "Development Status :: 5 - Production/Stable" in configuration["project"]["classifiers"]
+    assert all("1.0.0" in surface for surface in surfaces)
+    assert all("pre-1.0" not in surface and "preview tag" not in surface for surface in surfaces)
+
+
 def test_pages_workflow_separates_read_only_build_from_deployment_permissions():
     source = WORKFLOW.read_text(encoding="utf-8")
 

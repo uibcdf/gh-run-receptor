@@ -2,7 +2,7 @@
 
 ## Acquisition boundary
 
-The prototype delegates authentication and HTTP transport to the installed GitHub CLI.
+The client delegates authentication and HTTP transport to the installed GitHub CLI.
 The acquisition adapter invokes `gh api` with arguments, never through a shell command
 assembled from untrusted values. Tokens remain under GitHub CLI control and are never
 printed, placed in URLs, or stored in evidence bundles.

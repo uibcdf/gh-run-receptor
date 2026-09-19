@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 1.0.0 - 2026-09-19
+
+- Publish the audited read-only product boundary as stable without adding commands,
+  profiles, schemas, transports, permissions, or mutation capabilities.
+- Retain all nine serialized v1 resources against their original publishing tags and the
+  stable CLI process-status map established before 1.0.
+- Validate the stable package and embedded surfaces through the complete local,
+  cross-platform, exact-tag, public-release, Zenodo, documentation, client-guide, and
+  installed-product gates.
+
 ## 0.23.0 - 2026-09-19
 
 - Prove replay byte determinism at the CLI process boundary across distinct paths, file

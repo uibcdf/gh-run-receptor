@@ -19,7 +19,7 @@ API acquisition. Prefer the latest patched stable GitHub CLI for security mainte
 Python package index. Pin the release:
 
 ```bash
-gh extension install uibcdf/gh-run-receptor --pin 0.23.0
+gh extension install uibcdf/gh-run-receptor --pin 1.0.0
 gh run-receptor --version
 ```
 
@@ -28,7 +28,7 @@ install it again:
 
 ```bash
 gh extension remove run-receptor
-gh extension install uibcdf/gh-run-receptor --pin 0.23.0
+gh extension install uibcdf/gh-run-receptor --pin 1.0.0
 ```
 
 High-assurance environments may pin the complete release commit instead of the tag.
@@ -55,7 +55,7 @@ installation is useful for an isolated Python environment:
 
 ```bash
 python -m pip install \
-  https://github.com/uibcdf/gh-run-receptor/releases/download/0.23.0/gh_run_receptor-0.23.0-py3-none-any.whl
+  https://github.com/uibcdf/gh-run-receptor/releases/download/1.0.0/gh_run_receptor-1.0.0-py3-none-any.whl
 gh-run-receptor --version
 ```
 

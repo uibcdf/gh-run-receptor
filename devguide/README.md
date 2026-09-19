@@ -13,7 +13,7 @@ dogfooding, and a public Zenodo record. The stable 1.0 scope is frozen in
 published and no package-index artifact is claimed. All nine published serialized
 boundaries are frozen
 against their first publishing tags, including the `aggregate@1` boundary introduced in
-0.21.0, while the pre-1.0 product surface may still evolve. Release 0.22.0 adds the
+0.21.0. The 1.0 product boundary is frozen. Release 0.22.0 adds the
 public documentation site, freezes adaptive log acquisition, and stabilizes measured
 transition-only watch behavior without changing a serialized contract.
 The MVP
@@ -217,8 +217,9 @@ complete assessment, renderer, and process-status path under the documented
 non-generatable-outcome exception; authentic capture remains visibly absent and
 opportunistic. The stable scope, exact-commit gates, 0.23.0 publication, independent
 archive verification, client-guide synchronization, and installed public-version
-dogfooding now pass. The next milestone is the exact 1.0 candidate. Full evidence credit
-does not itself publish 1.0.
+dogfooding now pass. The 1.0.0 stable source surfaces and local gate are prepared; the
+next milestone is exact-commit and hosted candidate validation. Full evidence credit does
+not itself publish 1.0.
 
 The executable task list and release criteria remain in
 [development_roadmap.md](development_roadmap.md).

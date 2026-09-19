@@ -18,6 +18,11 @@ supersedes: []
 sequence closed `uibcdf/gh-run-receptor#47`.
 **Status:** Active; stable-version preparation is in progress.
 
+**Progress:** The stable surfaces, 1.0.0 pins, citation, release notes, maturity classifier,
+and preview-language guard are implemented. The local source gate passes 443 tests, Ruff,
+strict Sphinx, report-lifecycle validation, citation validation, and all nine frozen
+contracts. Exact-commit, hosted, tag, and public observations remain.
+
 ## What
 
 Publish 1.0.0 as the stable form of the already frozen, released, and dogfooded product

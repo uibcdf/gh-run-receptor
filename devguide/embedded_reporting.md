@@ -75,7 +75,7 @@ Enterprise Server installations.
 
 ## Action contract
 
-The implemented preview Action accepts:
+The stable Action accepts:
 
 - `run-id`: explicit source run, defaulting to the active current run;
 - `repository`: explicit source repository, defaulting to the current repository;
@@ -160,7 +160,7 @@ its generation and retrieval cost is materially lower than repeated full-log ins
 
 ## Distribution decision
 
-The preview is a thin composite Action around the shared dependency-free Python source and
+The implementation is a thin composite Action around the shared dependency-free Python source and
 the hosted runner's `gh` command. A commit-pinned `setup-python` provides Python 3.13 and a
 commit-pinned artifact action uploads the report. This avoids a second JavaScript model and
 the Linux-only boundary of a container Action. The report records Action repository and ref

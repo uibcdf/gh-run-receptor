@@ -193,6 +193,14 @@ boundary into a failed deployment job. Release 0.23.0 completed its independent 
 observation with version DOI `10.5281/zenodo.22848495` and the stable concept DOI
 `10.5281/zenodo.22843377`.
 
+The `1.0.0` gate publishes the boundary frozen in `release_readiness_1_0.md` without
+adding product capability. It replaces preview lifecycle wording and pins with the stable
+version, retains all nine serialized v1 resources and the stable process-status map, and
+repeats the complete 0.23.0 local, exact-commit, exact-tag, public-release, independent
+asset, Zenodo, Pages, client-guide, and installed-product observations. A desired excluded
+feature is not a release blocker; an unresolved critical or high defect in the documented
+boundary is.
+
 Installed-wheel verification must run outside the source checkout and assert that the
 imported module path belongs to the isolated installation target. A matching version string
 alone is not evidence that the wheel payload was imported.

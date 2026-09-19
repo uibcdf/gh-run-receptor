@@ -11,7 +11,7 @@ gh run-receptor COMMAND ...
 ```
 
 Both entry points call the same application and produce identical output. The Phase 1
-prototype requires Python 3.11--3.13 and authenticated GitHub CLI 2.48.0 or newer for networked
+client requires Python 3.11--3.13 and authenticated GitHub CLI 2.48.0 or newer for networked
 commands. `replay`, config validation, normalization, and rendering do not require
 network access.
 

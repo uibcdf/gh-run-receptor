@@ -31,8 +31,8 @@ contains client-specific exact identities.
 
 MolSysSuite repositories are the initial measured corpus and hosted integration laboratory.
 Their sanitized fixtures, public run IDs, workflow names, and guide synchronizer are
-development evidence, not public API defaults. Before 1.0, portability must also be
-measured against reviewed public workflows outside UIBCDF. A profile that needs a project
+development evidence, not public API defaults. Before 1.0, portability was also measured
+against reviewed public workflows outside UIBCDF. A profile that needs a project
 name in runtime logic fails this boundary and belongs in declarative client configuration.
 
 ## Delivery modes

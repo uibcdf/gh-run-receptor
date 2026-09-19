@@ -5,8 +5,8 @@ small print to discover after a release decision.
 
 ## Distribution and lifecycle
 
-- The project is pre-1.0 and is currently distributed as a GitHub CLI script extension and
-  verified GitHub Release artifacts, not through PyPI or Conda.
+- Version 1.0 is distributed as a GitHub CLI script extension and verified GitHub Release
+  artifacts, not through PyPI or Conda.
 - The public Python support window is 3.11 through 3.13. A standalone binary is not
   published.
 - GitHub CLI 2.48.0 is the tested network floor; alternate GitHub Enterprise Server and

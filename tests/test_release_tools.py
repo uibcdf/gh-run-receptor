@@ -15,7 +15,7 @@ from devtools.scripts.release_tools import (
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = "0.18.0"
-CURRENT_VERSION = "0.23.0"
+CURRENT_VERSION = "1.0.0"
 COMMIT = "a" * 40
 
 

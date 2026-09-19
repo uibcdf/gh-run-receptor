@@ -47,7 +47,7 @@ cross-component feedback, and issue ownership.
 
 ## Implementation baseline
 
-- The Phase 0 and Phase 1 prototype is a Python 3.11--3.13 package and CLI.
+- The stable implementation is a Python 3.11--3.13 package and CLI.
 - Keep the import package at repository root, matching the flat MolSysSuite layout; do not
   reintroduce a `src/` directory without a measured packaging reason.
 - Use the installed `gh` command for authentication and GitHub API transport. Do not add

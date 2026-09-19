@@ -8,9 +8,8 @@ GitHub CLI, keeps a replayable evidence bundle, and renders only the bounded res
 by a human, an agent, or another tool. It never changes the workflow run.
 
 ```{note}
-The project is pre-1.0 with its stable scope frozen: read-only evidence, exact workflow
-identities, and no pattern or organization-level configuration. Pin the exact `0.23.0`
-release and read
+Version 1.0 is the stable read-only evidence contract, with exact workflow identities and
+no pattern or organization-level configuration. Pin the exact `1.0.0` release and read
 [Compatibility and contracts](contracts.md) before depending on a serialized boundary.
 ```
 
@@ -49,9 +48,9 @@ benchmarks
 Install the exact GitHub CLI extension release:
 
 ```console
-$ gh extension install uibcdf/gh-run-receptor --pin 0.23.0
+$ gh extension install uibcdf/gh-run-receptor --pin 1.0.0
 $ gh run-receptor --version
-0.23.0
+1.0.0
 ```
 
 Then inspect a completed run:

@@ -894,6 +894,20 @@ artifacts, and one producer event. Finally, the canonical 0.23.0 guide was synch
 byte-for-byte in isolated `[skip ci]` commits across all twelve tracked clients; TopoMT's
 unrelated untracked smoke-test notebook remained untouched.
 
+## 1.0.0 stable candidate checkpoint
+
+Issue `uibcdf/gh-run-receptor#48` prepares the already frozen and dogfooded boundary as a
+stable release without adding product capability. Public install, Action, reusable
+workflow, validation-workflow, citation, and canonical-guide surfaces now pin 1.0.0;
+package metadata declares `Production/Stable`; and public documentation no longer calls
+the contract pre-1.0 or a preview. A repository guard requires those stable surfaces to
+agree on the version and maturity.
+
+The local source gate passed 443 tests on Python 3.13.14, Ruff lint and focused formatting,
+strict Sphinx 8.2.3, developer-report validation, citation and release-note validation, and
+all nine contract freezes against their first-publishing tags. No exact-commit, hosted,
+tag, GitHub Release, or Zenodo result is claimed at this checkpoint.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

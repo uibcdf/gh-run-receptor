@@ -1,8 +1,8 @@
 # Compatibility and contracts
 
-`gh-run-receptor` is pre-1.0, but published serialized contracts are already immutable at
-their integer schema version. Incompatible changes use a new integer version and an
-explicit migration or retirement decision.
+`gh-run-receptor` 1.0 treats every published serialized contract as immutable at its
+integer schema version. Incompatible changes use a new integer version and an explicit
+migration or retirement decision.
 
 List the installed reader inventory without network access:
 
