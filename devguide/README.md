@@ -214,8 +214,9 @@ than name inference.
 Standard job timeout is measured as cancellation. Exact-source `timed_out` now passes the
 complete assessment, renderer, and process-status path under the documented
 non-generatable-outcome exception; authentic capture remains visibly absent and
-opportunistic. The next milestone is a 0.23.0 dogfooding candidate followed by the final
-scope/readiness audit for the 1.0 tag. Full evidence credit does not itself publish 1.0.
+opportunistic. The stable scope is now frozen and the local 0.23.0 source gate passes; the
+next milestone is exact-commit and hosted candidate validation followed by publication and
+installed public-version dogfooding. Full evidence credit does not itself publish 1.0.
 
 The executable task list and release criteria remain in
 [development_roadmap.md](development_roadmap.md).

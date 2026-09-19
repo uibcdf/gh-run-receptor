@@ -847,6 +847,12 @@ baseline. Ruff formatting still reports the two pre-existing unrelated files rec
 the development checkpoint; the files changed for this increment pass their focused
 format check. No 0.23.0 hosted or public-release result is claimed yet.
 
+The subsequent 0.23.0 source preparation retained the same 442-test result and all nine
+contract freezes, passed citation and release-note validation, rebuilt the strict public
+documentation, and advanced the README, documentation, distributed gates, canonical
+client guide, and citation record to 0.23.0. These are local source-candidate results;
+exact-commit installation and hosted/public evidence remain unclaimed until observed.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

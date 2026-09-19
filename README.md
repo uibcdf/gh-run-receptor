@@ -13,12 +13,12 @@ the captured evidence.
 
 The project is in pre-1.0 development; no package has been published to a package index.
 The 1.0 scope is now frozen: it remains read-only, uses exact workflow identities, and
-does not include pattern or organization-level configuration. The `0.22.0` source release can inspect, watch,
+does not include pattern or organization-level configuration. The `0.23.0` source release can inspect, watch,
 replay, compare, and aggregate structured run evidence. Install the GitHub CLI extension at the exact
 preview tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 0.22.0
+gh extension install uibcdf/gh-run-receptor --pin 0.23.0
 gh run-receptor --version
 ```
 
@@ -78,7 +78,7 @@ jobs:
   report:
     runs-on: ubuntu-latest
     steps:
-      - uses: uibcdf/gh-run-receptor@0.22.0
+      - uses: uibcdf/gh-run-receptor@0.23.0
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
@@ -97,7 +97,7 @@ High-assurance consumers may pin the full release commit SHA instead of the tag.
 A small dedicated reporter can keep its full `config@1` policy beside the invocation:
 
 ```yaml
-      - uses: uibcdf/gh-run-receptor@0.22.0
+      - uses: uibcdf/gh-run-receptor@0.23.0
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
@@ -141,7 +141,7 @@ It explicitly labels the profile interpretation as published rather than indepen
 recomputed. Use `inspect SOURCE_RUN_ID` as the fallback when the artifact is absent,
 expired, or insufficient for the decision.
 
-Version `0.22.0` provides a reusable terminal reporter. A client keeps the
+Version `0.23.0` provides a reusable terminal reporter. A client keeps the
 `workflow_run` trigger and delegates the complete reporting job:
 
 ```yaml
@@ -158,7 +158,7 @@ permissions:
 
 jobs:
   report:
-    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@0.22.0
+    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@0.23.0
     with:
       run-id: ${{ github.event.workflow_run.id }}
       repository: ${{ github.repository }}
@@ -237,7 +237,7 @@ gh run-receptor config explain .github/workflows/build_conda.yaml
 Live capture reads repository policy only from the default branch and accepts Action-local
 policy only through the default-branch provenance gate. It stores the selected source,
 revision, and digest in the evidence bundle and fails if required platforms are absent.
-Version `0.22.0` accepts exact path, numeric ID, or display-name matches; it deliberately
+Version `0.23.0` accepts exact path, numeric ID, or display-name matches; it deliberately
 rejects patterns and unknown settings rather than silently ignoring them.
 
 An explicit `--attempt` reads the attempt-specific run, jobs, and logs endpoints. Bundle
@@ -245,7 +245,7 @@ loading rejects contradictory retained run identity rather than risking a false 
 If requested evidence such as retained logs is unavailable, the receptor preserves the
 official GitHub conclusion but reports `INCOMPLETE` and exits with status 4.
 
-Version `0.22.0` can compare two saved bundles without network access:
+Version `0.23.0` can compare two saved bundles without network access:
 
 ```text
 gh run-receptor compare LEFT_BUNDLE RIGHT_BUNDLE --receptor=llm
@@ -288,7 +288,7 @@ violation returns 1, and evidence insufficient for a requested rule returns 4. I
 unsafe policy input returns 5. Files are bounded strict JSON, reject duplicate keys and
 non-finite numbers, and are never executable configuration.
 
-Version `0.22.0` can summarize two to fifty independent bundles without network access:
+Version `0.23.0` can summarize two to fifty independent bundles without network access:
 
 ```text
 gh run-receptor aggregate CI_BUNDLE DOCS_BUNDLE CONDA_BUNDLE --receptor=llm
@@ -310,7 +310,7 @@ pending work, and incomplete evidence retain exit statuses 2, 3, and 4 respectiv
 Local and remote inputs cannot be mixed in one invocation. `aggregate@1` is frozen in
 0.21.0; incompatible changes require a new integer contract version.
 
-Version 0.22.0 also freezes the non-overlapping CLI process-status map: 0 success, 1 known
+Version 0.23.0 also retains the frozen non-overlapping CLI process-status map: 0 success, 1 known
 failure, 2 other terminal non-success, 3 active work, 4 incomplete evidence, 5 receptor
 error, 64 invalid usage, and 130 user interruption. In particular, malformed invocation
 no longer inherits argparse status 2 and cannot be confused with a GitHub run outcome.

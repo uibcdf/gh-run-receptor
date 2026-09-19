@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.23.0 - 2026-09-19
+
 - Prove replay byte determinism at the CLI process boundary across distinct paths, file
   times, capture timestamps, time zones, source-date epochs, and all three render modes.
 - Freeze one release-profile evidence-authority map and add adversarial guards so
@@ -15,6 +17,9 @@ All notable changes to this project will be documented in this file.
 - Freeze the stable 1.0 scope and evidence map: exact workflow identities and trusted
   repository/inline configuration remain supported, while pattern selectors and
   organization-level discovery are explicit post-1.0 capabilities.
+- Revalidate the release boundary for Python 3.11--3.13 on Linux, macOS, and Windows,
+  GitHub CLI 2.48.0 or newer, and `github.com`, while retaining exact GitHub Release and
+  extension installation as the supported distribution routes.
 
 ## 0.22.0 - 2026-09-19
 

@@ -21,11 +21,11 @@ progress.
 
 **Progress:** The normative scope/evidence map is implemented, OD-003 and OD-004 are
 explicitly post-1.0, and executable guards reject both deferred configuration shapes.
-The local scope-freeze gate passes 442 tests, Ruff lint, strict Sphinx, developer-report
-validation, and all nine frozen contracts. The 0.23.0 candidate and hosted/public release
-observations remain.
-
-Remove `severity` for proposals. The directory identifies the report kind.
+The 0.23.0 source candidate passes 442 tests, Ruff lint, strict Sphinx, citation and
+release-note validation, developer-report validation, and all nine frozen contracts.
+Public pins, the canonical guide, supported-platform release notes, and citation metadata
+now identify 0.23.0. Exact-commit build/install, hosted, and public-release observations
+remain.
 
 ## What
 
