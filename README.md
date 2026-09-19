@@ -11,6 +11,19 @@
 without hiding failures or uncertainty. It is read-only and retains a replayable path to
 the captured evidence.
 
+## Companion tool: pytest-receptor
+
+[`pytest-receptor`](https://github.com/uibcdf/pytest-receptor) solves the same token-economy
+problem one layer earlier. It makes pytest output compact and truth-preserving while tests
+run locally or inside CI; `gh-run-receptor` summarizes the complete GitHub Actions run
+afterwards, including jobs, matrices, artifacts, failures, and evidence completeness.
+
+The tools are independent and neither requires MolSysSuite or the other. Both were created
+while improving MolSysSuite development workflows, but they are general-purpose tools for
+any developer, repository, or coding agent. A typical combined workflow runs
+`pytest --receptor=ci` inside GitHub Actions and later inspects the resulting run with
+`gh run-receptor --receptor=llm inspect RUN_ID`.
+
 Version 1.0 is the stable read-only contract: it uses exact workflow identities and does
 not include pattern or organization-level configuration. No package has been published to
 a package index. The `1.0.0` source release can inspect, watch, replay, compare, and
