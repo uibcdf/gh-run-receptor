@@ -774,9 +774,18 @@ exact wheel and source-distribution names, a valid checksum manifest, and bounde
 notes. The wheel was installed outside the checkout, imported as version 0.22.0 from the
 isolated target, and returned status 64 for malformed usage.
 
-This is local pre-tag evidence, not publication evidence. The real tag, cross-platform
-compatibility, distributed Action, minimum GitHub CLI, exact-tag publication, public asset
-verification, and independent Zenodo observation remain separate gates.
+Five manual gates then passed at exact candidate commit
+`5b8615e66c3bb6c2d11b2e3ac2d406d67f1a1409`: compatibility run `35435442151` completed all
+nine operating-system/Python combinations; contract run `35435443429` retained all nine
+published freezes; adaptive-capture run `35435444536` repeated the offline and live policy
+checks; checkout-local Action run `35435445665` passed on Ubuntu, macOS, and Windows; and
+documentation run `35435447262` built and deployed the strict site. A five-source receptor
+aggregate first preserved the still-running compatibility matrix as `PENDING`, then the
+watch command reported its terminal nine-of-nine `PASS` without repeated snapshots.
+
+This is pre-tag evidence, not publication evidence. The real tag, distributed Action at
+that tag, minimum GitHub CLI extension, exact-tag publication, public asset verification,
+and independent Zenodo observation remain separate gates.
 
 ## What this does not prove
 
