@@ -89,8 +89,9 @@ feature does not block 1.0.
 
 ## Current checkpoint
 
-As of 2026-09-19, the 1.0 scope is frozen and all six final-sequence observations are
-complete through public 0.23.0. The public wheel preserved GitHub truth on a real MolSysMT
-Conda workflow, the canonical guide is synchronized across all twelve clients, and no open
-critical or high defect affects the stable boundary. This records eligibility to prepare
-the 1.0 candidate; it does not claim that the 1.0 tag has been published.
+As of 2026-09-19, the 1.0 scope is frozen, all six final-sequence observations pass, and
+1.0.0 is a public stable release. The public wheel preserved GitHub truth on a real
+MolSysMT Conda workflow, the canonical guide is synchronized across all twelve clients,
+and no open critical or high defect affects the stable boundary. Future additions follow
+the ordinary compatibility and contract-evolution rules; they do not retroactively widen
+the 1.0 promise.

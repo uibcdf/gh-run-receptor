@@ -1,13 +1,13 @@
 ---
 summary: Publish the frozen 1.0.0 stable contract
 issue: uibcdf/gh-run-receptor#48
-status: active
+status: resolved
 opened: 2026-09-19
-closed:
+closed: 2026-09-19
 verification: measured
 area: ['governance', 'packaging', 'tests', 'documentation']
 guard:
-normative:
+normative: release_readiness_1_0.md
 blocked_by: []
 supersedes: []
 ---
@@ -16,12 +16,14 @@ supersedes: []
 
 **Reported:** 2026-09-19, after the complete 0.23.0 readiness and public dogfooding
 sequence closed `uibcdf/gh-run-receptor#47`.
-**Status:** Active; stable-version preparation is in progress.
+**Status:** Resolved; 1.0.0 is public and every stable-release observation passes.
 
 **Progress:** The stable surfaces, 1.0.0 pins, citation, release notes, maturity classifier,
 and preview-language guard are implemented. The local source gate passes 443 tests, Ruff,
 strict Sphinx, report-lifecycle validation, citation validation, and all nine frozen
-contracts. Exact-commit, hosted, tag, and public observations remain.
+contracts. Exact-commit and exact-tag hosted gates, draft-first publication, independent
+assets, Zenodo, public-wheel MolSysMT dogfooding, and twelve-client guide synchronization
+all pass.
 
 ## What
 

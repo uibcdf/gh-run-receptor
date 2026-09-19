@@ -201,6 +201,11 @@ asset, Zenodo, Pages, client-guide, and installed-product observations. A desire
 feature is not a release blocker; an unresolved critical or high defect in the documented
 boundary is.
 
+Release 1.0.0 completed this gate at commit
+`95e63cbdfbc2a22b8cfecb011297331194e6a316`. Its independently observed Zenodo version
+DOI is `10.5281/zenodo.22849252`; the stable concept DOI remains
+`10.5281/zenodo.22843377`.
+
 Installed-wheel verification must run outside the source checkout and assert that the
 imported module path belongs to the isolated installation target. A matching version string
 alone is not evidence that the wheel payload was imported.

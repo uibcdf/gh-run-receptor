@@ -908,6 +908,40 @@ strict Sphinx 8.2.3, developer-report validation, citation and release-note vali
 all nine contract freezes against their first-publishing tags. No exact-commit, hosted,
 tag, GitHub Release, or Zenodo result is claimed at this checkpoint.
 
+Exact candidate commit `95e63cbdfbc2a22b8cfecb011297331194e6a316` passed hosted
+compatibility (`35464834220`), checkout-local Action (`35464835647`), frozen contracts
+(`35464837049`), strict documentation and Pages deployment (`35464838526`), reusable
+reporter (`35464840048`), and stable process statuses (`35464841437`). A clean temporary
+clone with a local-only 1.0.0 tag built both distributions, installed and imported the
+wheel outside the checkout, and reported all nine contracts against baseline 0.21.0.
+
+The lightweight `1.0.0` tag points to that exact commit. Exact-tag compatibility
+(`35464922545`), contracts (`35464924020`), distributed Action (`35464925489`),
+checksum-pinned GitHub CLI 2.48.0 (`35464927566`), reusable reporter (`35464929330`),
+strict documentation build with clean tag-deployment omission (`35464931260`), and
+process statuses (`35464932827`) all passed. The seven-run receptor aggregate preserved
+19 successful jobs, five artifacts, complete evidence, and `PASS` for every source.
+
+Draft-first release run `35465003094` published the stable non-draft, non-prerelease
+GitHub Release after verifying tag/ref/commit identity, citation, 443 tests, all contracts,
+build, isolated installation, manifest, notes, draft assets, and public assets. Independent
+download and installation repeated those checks. The public assets are:
+
+- `gh_run_receptor-1.0.0-py3-none-any.whl`, 87,238 bytes, SHA-256
+  `85cbb8ace58a109a613b0765a43804f4780d3a0479b4eec47408a4ffd81a89b6`;
+- `gh_run_receptor-1.0.0.tar.gz`, 132,580 bytes, SHA-256
+  `6dcd93a35371f8cf9ee253ac1b38b910bc5dc806ac510782cab4c09a54f72479`;
+- `SHA256SUMS`, 200 bytes, SHA-256
+  `cc51cadfd4b5492628e7327d72086055adfdc36194d581a5fe6a15e76b5ac9ff`.
+
+Zenodo gate `35465066636` and a separate public API query verified version DOI
+`10.5281/zenodo.22849252`, concept DOI `10.5281/zenodo.22843377`, and the 569,573-byte
+archived source ZIP. The independently installed public 1.0.0 wheel reproduced the same
+complete Conda `PASS` and exact GitHub source identity for MolSysMT run `35196968944` as
+0.23.0. The canonical stable guide was then synchronized byte-for-byte in isolated
+`[skip ci]` commits across all twelve clients while preserving TopoMT's unrelated untracked
+notebook. This closes the finite 1.0 readiness sequence without widening its scope.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

@@ -1,26 +1,25 @@
 # gh-run-receptor developer guide
 
 This directory is the development checkpoint for `gh-run-receptor`. It records the
-product boundary, architectural decisions, rule model, and route to a stable release.
+stable product boundary, architectural decisions, rule model, and post-1.0 route.
 Documents should distinguish settled decisions from hypotheses that still require
 evidence.
 
 ## Current state
 
-The project has verified `0.23.0` GitHub Release assets, public-version MolSysSuite
-dogfooding, and a public Zenodo record. The stable 1.0 scope is frozen in
-`release_readiness_1_0.md`, but its tag has not been
-published and no package-index artifact is claimed. All nine published serialized
-boundaries are frozen
+The project has published and independently verified stable `1.0.0` GitHub Release assets,
+MolSysSuite dogfooding, and a public Zenodo record. The stable scope is frozen in
+`release_readiness_1_0.md`; no package-index artifact is claimed. All nine published
+serialized boundaries are frozen
 against their first publishing tags, including the `aggregate@1` boundary introduced in
 0.21.0. The 1.0 product boundary is frozen. Release 0.22.0 adds the
 public documentation site, freezes adaptive log acquisition, and stabilizes measured
 transition-only watch behavior without changing a serialized contract.
-The MVP
+The stable product
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
 human, LLM, or JSON reports without changing the run or hiding its authoritative GitHub
-state. Broader log interpretation, deeper profile contracts, published packaging, and
-wider corpus validation remain open.
+state. Broader log interpretation, deeper profile contracts, package-index distribution,
+and wider corpus validation are possible post-1.0 work, not missing stable-release gates.
 
 The current MVP implements:
 
@@ -206,7 +205,7 @@ known design question; it does not mean that unimplemented behavior has been val
 
 The defined 1.0 implementation and evidence gates now have full credit. OD-002 has a
 measured stable adaptive capture rule, OD-005 has measured stable watch semantics, and the
-released 0.23.0 client guide is synchronized across all twelve tracked repositories.
+released 1.0.0 client guide is synchronized across all twelve tracked repositories.
 Phase 1 includes byte-identical CLI replay across temporal, filesystem, renderer,
 operating-system, and supported-Python contexts. The release-profile authority map
 identifies which facts need structured producer evidence or new capture sources rather
@@ -215,11 +214,11 @@ than name inference.
 Standard job timeout is measured as cancellation. Exact-source `timed_out` now passes the
 complete assessment, renderer, and process-status path under the documented
 non-generatable-outcome exception; authentic capture remains visibly absent and
-opportunistic. The stable scope, exact-commit gates, 0.23.0 publication, independent
+opportunistic. The stable scope, exact-commit gates, 1.0.0 publication, independent
 archive verification, client-guide synchronization, and installed public-version
-dogfooding now pass. The 1.0.0 stable source surfaces and local gate are prepared; the
-next milestone is exact-commit and hosted candidate validation. Full evidence credit does
-not itself publish 1.0.
+dogfooding now pass, and 1.0.0 is public. New work follows stable compatibility rules.
+The only current product proposal is the explicitly post-1.0 structured timeout evidence
+integration in `uibcdf/gh-run-receptor#46`, blocked on `uibcdf/molsyssuite#25`.
 
 The executable task list and release criteria remain in
 [development_roadmap.md](development_roadmap.md).
