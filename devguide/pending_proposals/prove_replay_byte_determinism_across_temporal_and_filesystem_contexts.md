@@ -4,9 +4,9 @@ issue: uibcdf/gh-run-receptor#43
 status: active
 opened: 2026-09-19
 closed:
-verification: inspected
+verification: measured
 area: ['tests']
-guard:
+guard: tests/test_cli.py
 normative:
 blocked_by: []
 supersedes: []
@@ -77,8 +77,31 @@ rg -n "replay|captured_at|datetime|now\\(|bundle_directory" gh_run_receptor test
 pytest --receptor=llm
 ```
 
-The full baseline suite and adversarial gate measurements will be recorded after
-implementation.
+The implemented guard parametrizes JSON, LLM, and human rendering. Its two subprocesses
+use distinct nested paths, file modification times, capture timestamps, POSIX timezone
+strings, and `SOURCE_DATE_EPOCH` values. All three cases returned the expected source
+failure status 1, empty stderr, and byte-identical stdout.
+
+Local validation passed:
+
+```text
+pytest --receptor=llm
+PASS exit=0 | 437 passed | 4.68s
+
+ruff check .
+All checks passed!
+
+python devtools/scripts/validate_contracts.py --baseline 0.21.0
+Contract compatibility: PASS — contracts=9 frozen=9 baseline=0.21.0
+
+python devtools/scripts/validate_devguide.py
+Developer report lifecycle is valid.
+
+sphinx-build -W --keep-going -b html docs docs/_build/html
+build succeeded.
+```
+
+The exact-revision nine-combination compatibility gate remains before closure.
 
 ## What was refuted
 
@@ -119,4 +142,5 @@ an optional named-zone database.
 Initial inspection ran on 2026-09-19 from the MolSysSuite development environment on
 Linux with Python 3.13.14 and pytest 8.4.2. The repository was clean at
 `0ceef84335be3f3f6fca5684c4190e77c7a3d1a5`, immediately after the verified 0.22.0
-rollout checkpoint.
+rollout checkpoint. Focused implementation validation ran three subprocess cases in
+0.83 seconds; the complete local suite then passed 437 tests in 4.68 seconds.

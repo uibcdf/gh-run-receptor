@@ -1,12 +1,20 @@
 import argparse
 import hashlib
 import json
+import os
+import shutil
+import subprocess
+import sys
+from pathlib import Path
 
 import pytest
 
 from gh_run_receptor.cli import _parser, _run_reference, main
 from gh_run_receptor.errors import AcquisitionError
 from gh_run_receptor.github import MINIMUM_GH_VERSION_TEXT
+
+ROOT = Path(__file__).resolve().parents[1]
+FIXTURES = Path(__file__).parent / "fixtures"
 
 
 def _bundle(path, conclusion="success"):
@@ -76,6 +84,64 @@ def test_replay_failure_returns_authoritative_failure(tmp_path, capsys):
     report = json.loads(capsys.readouterr().out)
     assert result == 1
     assert report["github"]["conclusion"] == "failure"
+
+
+def _replay_process(bundle: Path, options: tuple[str, ...], *, timezone: str, epoch: str):
+    environment = os.environ.copy()
+    environment.update(TZ=timezone, SOURCE_DATE_EPOCH=epoch, PYTHONUTF8="1")
+    return subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "gh_run_receptor",
+            "--profile",
+            "ci",
+            *options,
+            "replay",
+            str(bundle),
+        ],
+        cwd=ROOT,
+        env=environment,
+        capture_output=True,
+        check=False,
+    )
+
+
+def _set_bundle_context(bundle: Path, *, captured_at: str, mtime: int) -> None:
+    manifest_path = bundle / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["captured_at"] = captured_at
+    manifest_path.write_text(
+        json.dumps(manifest, sort_keys=True, separators=(",", ":")) + "\n",
+        encoding="utf-8",
+    )
+    for path in [*bundle.rglob("*"), bundle]:
+        os.utime(path, (mtime, mtime))
+
+
+@pytest.mark.parametrize(
+    "options",
+    [
+        pytest.param(("--format", "json"), id="json"),
+        pytest.param(("--receptor", "llm"), id="llm"),
+        pytest.param(("--receptor", "human"), id="human"),
+    ],
+)
+def test_replay_bytes_ignore_temporal_and_filesystem_context(tmp_path, options):
+    source = FIXTURES / "bundles" / "molsysviewer_ci_failure"
+    early = tmp_path / "early context" / "bundle"
+    late = tmp_path / "late-context" / "nested" / "bundle"
+    shutil.copytree(source, early)
+    shutil.copytree(source, late)
+    _set_bundle_context(early, captured_at="2000-01-01T00:00:00+00:00", mtime=946684800)
+    _set_bundle_context(late, captured_at="2040-01-01T00:00:00+00:00", mtime=1893456000)
+
+    first = _replay_process(early, options, timezone="UTC0", epoch="946684800")
+    second = _replay_process(late, options, timezone="EST5EDT", epoch="1893456000")
+
+    assert first.returncode == second.returncode == 1
+    assert first.stderr == second.stderr == b""
+    assert first.stdout == second.stdout
 
 
 def test_explicit_human_receptor_is_explanatory(tmp_path, capsys):
@@ -160,6 +226,7 @@ def test_watch_hands_terminal_poll_evidence_to_final_capture(monkeypatch):
         successful_snapshots=1,
         successful_poll_requests=2,
     )
+
     class Client:
         pass
 
