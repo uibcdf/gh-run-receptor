@@ -178,6 +178,29 @@ def test_parser_rejects_oversized_configuration():
         parse_config(CONFIG + b"#" * (64 * 1024))
 
 
+@pytest.mark.parametrize(
+    "text",
+    [
+        b"""schema_version: 1
+workflows:
+  - match:
+      pattern: CI-*
+    profile: ci
+""",
+        b"""schema_version: 1
+organization: uibcdf
+workflows:
+  - match:
+      name: CI
+    profile: ci
+""",
+    ],
+)
+def test_stable_1_0_configuration_rejects_deferred_scope(text):
+    with pytest.raises(ConfigError, match="unsupported"):
+        parse_config(text)
+
+
 class FakeClient:
     def __init__(self, data):
         self.data = data

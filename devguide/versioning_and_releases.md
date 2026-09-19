@@ -174,6 +174,17 @@ Release 0.22.0 completed that independent observation: its version DOI is
 `10.5281/zenodo.22843378` and the stable project concept DOI is
 `10.5281/zenodo.22843377`.
 
+The `0.23.0` gate is the final pre-1.0 dogfooding gate. It retains all nine contract
+freezes, publishes the stable scope and evidence map in `release_readiness_1_0.md`, and
+closes every decision gate that applies at or before 1.0. In addition to the ordinary
+exact-tag release checks, it repeats the nine Python/operating-system combinations,
+minimum GitHub CLI, distributed Action, reusable reporter, frozen-contract, and strict
+documentation gates. The public artifacts, hashes, isolated wheel import, and Zenodo
+record are then verified independently. At least one real MolSysSuite workflow is
+inspected with the installed public 0.23.0 product before 1.0 eligibility is declared.
+Desired post-1.0 features do not delay the stable tag unless their absence contradicts a
+documented 1.0 promise.
+
 Installed-wheel verification must run outside the source checkout and assert that the
 imported module path belongs to the isolated installation target. A matching version string
 alone is not evidence that the wheel payload was imported.

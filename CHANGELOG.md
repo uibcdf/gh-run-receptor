@@ -12,6 +12,9 @@ All notable changes to this project will be documented in this file.
 - Define the acceptance rule for non-generatable upstream outcomes and prove exact-source
   `timed_out` propagation through assessment, human/LLM rendering, and process status 2
   without claiming an authentic workflow-run fixture.
+- Freeze the stable 1.0 scope and evidence map: exact workflow identities and trusted
+  repository/inline configuration remain supported, while pattern selectors and
+  organization-level discovery are explicit post-1.0 capabilities.
 
 ## 0.22.0 - 2026-09-19
 

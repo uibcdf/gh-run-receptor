@@ -43,7 +43,8 @@ local unless explicitly reviewed and sanitized.
 - Automatic discovery uses conservative signals and falls back to `generic` rather than
   guessing a specialized profile.
 - Workflow rules support exact path, numeric ID, or exact display name. Patterns and
-  organization-level configuration are not implemented.
+  organization-level configuration are excluded from the stable 1.0 scope. Adding them
+  later requires explicit trust, precedence, evidence, and contract decisions.
 - Action-internal work needs structured producer events; Action inputs and artifact
   filenames alone are not proof.
 

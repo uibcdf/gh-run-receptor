@@ -830,6 +830,23 @@ validation, and strict Sphinx. Exact-revision compatibility run `35437166644` pa
 full suite and installed-wheel smoke test on Ubuntu, macOS, and Windows with Python 3.11,
 3.12, and 3.13 at commit `540015b78eea288e4a0233d9469244d24928e51a`.
 
+## 1.0 scope-freeze checkpoint
+
+Issue `uibcdf/gh-run-receptor#47` converted the completed implementation roadmap into a
+finite stable-release boundary. `release_readiness_1_0.md` maps every 1.0 requirement to
+an independent test, contract comparison, benchmark, hosted gate, or public-service
+observation. Pattern selectors and organization-level configuration discovery are
+explicit post-1.0 work rather than unresolved stable-release gates. Two behavioral tests
+now prove that `config@1` rejects both deferred shapes instead of silently accepting
+future-looking policy.
+
+At the scope-freeze commit, the complete local suite passed 442 tests on Python 3.13.14,
+Ruff lint passed, strict Sphinx 8.2.3 completed with warnings as errors, developer-report
+validation passed, and all nine contracts remained frozen against the 0.21.0 registry
+baseline. Ruff formatting still reports the two pre-existing unrelated files recorded by
+the development checkpoint; the files changed for this increment pass their focused
+format check. No 0.23.0 hosted or public-release result is claimed yet.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

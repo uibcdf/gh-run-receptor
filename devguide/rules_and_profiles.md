@@ -231,7 +231,8 @@ The implemented workflow matching order is:
 7. conservative auto-detection;
 8. the generic profile.
 
-Future organization configuration requires its own explicit trust and precedence gate.
+Post-1.0 organization configuration requires its own explicit trust, precedence, and
+contract gate. It is not part of the stable 1.0 boundary.
 Later layers may refine interpretation but cannot alter GitHub's authoritative states.
 Duplicate identities are a configuration error; list order is not an implicit tie-breaker.
 
@@ -262,9 +263,9 @@ Each profile defines its required, optional, and repeatable evidence. Missing re
 evidence produces `INCOMPLETE` or `UNKNOWN`; it never silently passes. Unknown jobs,
 dimensions, and artifacts remain visible in the generic remainder.
 
-## Rule capabilities
+## Post-1.0 rule capabilities
 
-The declarative language may define:
+A future declarative contract may define:
 
 - workflow matching;
 - job and step roles through exact names or bounded patterns;
@@ -275,7 +276,9 @@ The declarative language may define:
 - known failure signatures and their presentation;
 - accepted blocked states with explicit reasons.
 
-It must not provide shell execution, arbitrary imports, general template evaluation, or
+The 1.0 `config@1` contract implements only the exact workflow identities and bounded
+Conda settings described above. It does not implement the broader capability list. Any
+future contract must not provide shell execution, arbitrary imports, general template evaluation, or
 a way to turn failure, cancellation, or incompleteness into success. Unknown jobs and
 unmatched errors remain visible in the generic section.
 

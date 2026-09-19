@@ -125,6 +125,10 @@ tag has been published or that explicitly excluded future features have been imp
 
 ## Route to 1.0
 
+The exact stable boundary and the evidence that satisfies each item are frozen in
+`release_readiness_1_0.md`. Desired capabilities listed there as exclusions do not reduce
+the evidenced percentage or block the tag.
+
 The 1.0 contract requires:
 
 - a versioned normalized evidence and report schema;
@@ -157,3 +161,7 @@ and the following final checks agree:
 - documentation contains no behavior claimed solely from design intent;
 - every open decision whose gate is at or before 1.0 is closed or explicitly removes the
   affected feature from the release.
+
+The final pre-1.0 sequence is the 0.23.0 release and installed public-version dogfooding
+defined in `release_readiness_1_0.md`. These are release observations, not missing
+implementation credit.

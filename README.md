@@ -11,8 +11,9 @@
 without hiding failures or uncertainty. It is read-only and retains a replayable path to
 the captured evidence.
 
-The project is in pre-1.0 development; no package has been published to a package index and
-the public contract may still evolve. The `0.22.0` source release can inspect, watch,
+The project is in pre-1.0 development; no package has been published to a package index.
+The 1.0 scope is now frozen: it remains read-only, uses exact workflow identities, and
+does not include pattern or organization-level configuration. The `0.22.0` source release can inspect, watch,
 replay, compare, and aggregate structured run evidence. Install the GitHub CLI extension at the exact
 preview tag:
 

@@ -105,4 +105,5 @@ cross-component feedback, and issue ownership.
 - `devguide/mvp_validation.md`
 - `devguide/benchmark_2026-09-04.md`
 - `devguide/development_roadmap.md`
+- `devguide/release_readiness_1_0.md`
 - `standards/GH_RUN_RECEPTOR_GUIDE.md`

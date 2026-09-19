@@ -8,7 +8,9 @@ GitHub CLI, keeps a replayable evidence bundle, and renders only the bounded res
 by a human, an agent, or another tool. It never changes the workflow run.
 
 ```{note}
-The project is pre-1.0. Pin the exact `0.22.0` release and read
+The project is pre-1.0 with its stable scope frozen: read-only evidence, exact workflow
+identities, and no pattern or organization-level configuration. Pin the exact `0.22.0`
+release and read
 [Compatibility and contracts](contracts.md) before depending on a serialized boundary.
 ```
 

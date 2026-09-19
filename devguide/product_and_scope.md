@@ -89,6 +89,14 @@ documentation deployment, and release workflows.
 - Automatically rerunning, cancelling, approving, uploading, or deploying.
 - Providing a general-purpose log analytics platform.
 
+## Stable 1.0 boundary
+
+The initial non-goals above remain outside 1.0. Its configuration selects workflows only
+by exact path, positive numeric ID, or exact display name and is loaded only from trusted
+repository, inline, or explicit CLI input. Patterns and organization-level discovery are
+post-1.0 capabilities requiring new evidence and contract decisions. The complete support
+and exclusion boundary is normative in `release_readiness_1_0.md`.
+
 ## Success criteria
 
 - At least a 90% output-token reduction against an honestly filtered GitHub CLI

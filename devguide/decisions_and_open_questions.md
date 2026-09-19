@@ -32,24 +32,33 @@ page and retain only a concise decision record here.
 | Serialized contract evolution | Published major-schema resources are immutable; incompatible changes use a new integer version with explicit forward-only migration or documented retirement | Readers reject malformed, wrong-kind, retired, and future contracts; 0.18.0 freezes the first four v1 resources and 0.19.0 freezes the remaining three current v1 resources |
 | CLI process status | Freeze 0 success, 1 known failure, 2 other terminal non-success, 3 active, 4 incomplete, 5 receptor error, 64 usage error, and 130 interruption | Shell and agent callers can distinguish source truth from invocation and receptor failures without parsing text; command-specific semantics remain normative |
 | Watch behavior | Deterministic 10-to-60-second polling, 1.5 unchanged backoff, transition reset, 2 error backoff, abort on the third consecutive failure, transition-only progress, and identity-checked terminal run/jobs handoff | The request budget is calculable per jobs page and final evidence source; active-run output is measured against native compact watch without claiming savings for minimal completed status |
+| 1.0 workflow matching | Exact path, positive numeric ID, or exact display name only | Glob and regular-expression selectors are post-1.0 work and cannot be added to frozen `config@1` |
+| 1.0 configuration scope | Built-ins plus trusted default-branch repository and trusted inline/CLI configuration | Organization-level discovery and precedence are post-1.0 work |
 
 ## Open decision gates
 
-### OD-003: Pattern engine
+No open decision gate applies at or before 1.0. The stable scope and evidence map are
+normative in `release_readiness_1_0.md`.
+
+The following questions are retained for post-1.0 proposals. They do not block the stable
+release and their current answer is “not implemented.”
+
+### OD-003: Post-1.0 pattern engine
 
 - **Question:** glob-only, a safe regular-expression engine, or bounded host regex?
 - **Needed evidence:** real configuration needs, cross-platform packaging, worst-case
   behavior, and usability.
-- **Gate:** before accepting regex syntax in schema version 1.
-- **Current default:** exact names and anchored globs only.
+- **Gate:** before accepting any pattern syntax in a new configuration contract.
+- **1.0 decision:** exact path, positive numeric ID, and exact name only; globs and regular
+  expressions are rejected.
 
-### OD-004: Organization-level configuration
+### OD-004: Post-1.0 organization-level configuration
 
 - **Question:** how should shared rules be discovered, authenticated, and versioned?
 - **Needed evidence:** GitHub storage options, permission behavior in forks, precedence
   examples, and administrative usability.
-- **Gate:** before implementing organization configuration.
-- **Current default:** built-ins plus trusted repository and explicit inline/CLI settings.
+- **Gate:** before implementing organization discovery or precedence.
+- **1.0 decision:** built-ins plus trusted repository and explicit inline/CLI settings.
 
 ## Deferred, not forgotten
 

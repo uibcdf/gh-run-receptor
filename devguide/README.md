@@ -7,8 +7,9 @@ evidence.
 
 ## Current state
 
-The project has verified `0.22.0` GitHub Release assets and a public Zenodo record, but no
-published package-index artifact or stable 1.0 contract. All nine published serialized
+The project has verified `0.22.0` GitHub Release assets and a public Zenodo record. The
+stable 1.0 scope is frozen in `release_readiness_1_0.md`, but its tag has not been
+published and no package-index artifact is claimed. All nine published serialized
 boundaries are frozen
 against their first publishing tags, including the `aggregate@1` boundary introduced in
 0.21.0, while the pre-1.0 product surface may still evolve. Release 0.22.0 adds the
@@ -150,6 +151,7 @@ structured per-platform representation and a published 0.20.0 contract freeze.
 18. [MolSysMT Conda pilot benchmark](benchmark_2026-09-04.md)
 19. [Watch polling and output benchmark](benchmark_watch_2026-09-19.md)
 20. [Development roadmap](development_roadmap.md)
+21. [1.0 release readiness](release_readiness_1_0.md)
 
 These documents and the pending queue indexes are the current checkpoint. The
 [archive summary](archive/README.md) is the normal historical entry point. Routine
@@ -182,6 +184,7 @@ known design question; it does not mean that unimplemented behavior has been val
 | Measured native baseline and token reduction | `benchmark_2026-09-04.md` |
 | Watch polling, API budget, and native comparison | `benchmark_watch_2026-09-19.md` |
 | Ordered implementation plan and release gates | `development_roadmap.md` |
+| Stable 1.0 scope, exclusions, and evidence map | `release_readiness_1_0.md` |
 
 ## Settled direction
 

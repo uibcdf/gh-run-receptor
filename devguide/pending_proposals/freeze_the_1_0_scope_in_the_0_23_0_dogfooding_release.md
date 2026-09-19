@@ -19,6 +19,12 @@ reached full credit while the repository still had no stable 1.0 contract.
 **Status:** Active; the scope audit and reproducible 0.23.0 release candidate are in
 progress.
 
+**Progress:** The normative scope/evidence map is implemented, OD-003 and OD-004 are
+explicitly post-1.0, and executable guards reject both deferred configuration shapes.
+The local scope-freeze gate passes 442 tests, Ruff lint, strict Sphinx, developer-report
+validation, and all nine frozen contracts. The 0.23.0 candidate and hosted/public release
+observations remain.
+
 Remove `severity` for proposals. The directory identifies the report kind.
 
 ## What
@@ -149,6 +155,6 @@ inclusion.
 
 ## Provenance
 
-Initial audit: Linux development checkout, Python 3.13 development environment, GitHub
-CLI transport, 2026-09-19. Exact tool versions and hosted runner evidence will be recorded
-with the candidate validation results.
+Initial audit: Linux development checkout, Python 3.13.14, GitHub CLI 2.93.0, Sphinx
+8.2.3, 2026-09-19. Exact hosted runner evidence will be recorded with the candidate
+validation results.

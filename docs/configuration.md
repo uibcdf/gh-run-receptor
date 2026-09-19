@@ -49,7 +49,8 @@ workflows:
 Each rule has exactly one identity: exact `path`, positive numeric `id`, or exact display
 `name`. Path has precedence over ID, and ID over name, when several distinct rules match.
 Patterns, regular expressions, arbitrary settings, and executable expressions are
-rejected rather than ignored.
+rejected rather than ignored. Pattern selectors and organization-level discovery are not
+part of the stable 1.0 scope; adding either later requires a new explicit contract.
 
 ## Validate and explain
 
