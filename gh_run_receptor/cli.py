@@ -179,9 +179,7 @@ def _parser() -> argparse.ArgumentParser:
     watch.add_argument("run", type=_run_reference)
     watch.add_argument("--attempt", type=int)
     watch.add_argument("--interval", type=_positive_interval, default=DEFAULT_POLL_INTERVAL)
-    watch.add_argument(
-        "--max-interval", type=_positive_interval, default=DEFAULT_MAX_POLL_INTERVAL
-    )
+    watch.add_argument("--max-interval", type=_positive_interval, default=DEFAULT_MAX_POLL_INTERVAL)
     watch.add_argument("--capture", choices=("full", "adaptive", "metadata"), default="adaptive")
     watch.add_argument("--output", type=Path)
 

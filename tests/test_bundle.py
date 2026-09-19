@@ -305,9 +305,7 @@ def test_capture_rejects_handed_off_jobs_from_another_run(tmp_path):
     }
     jobs = {
         "total_count": 1,
-        "jobs": [
-            {"id": 11, "run_id": 99, "run_attempt": 1, "status": "completed"}
-        ],
+        "jobs": [{"id": 11, "run_id": 99, "run_attempt": 1, "status": "completed"}],
     }
 
     with pytest.raises(BundleError, match="jobs evidence has conflicting identity"):
