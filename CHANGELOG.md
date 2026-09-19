@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 0.22.0 - 2026-09-19
+
 - Publish task-oriented Sphinx/MyST documentation through a least-privilege, commit-pinned
   GitHub Pages workflow and expose the verified site from repository and package metadata.
 - Add the public repository tagline describing compact reports without hidden failures or

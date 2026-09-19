@@ -72,7 +72,7 @@ The Action accepts the same complete `config@1` document through its `rules` inp
 small dedicated reporter, but only when default-branch caller provenance is verified:
 
 ```yaml
-      - uses: uibcdf/gh-run-receptor@0.21.1
+      - uses: uibcdf/gh-run-receptor@0.22.0
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}

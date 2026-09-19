@@ -8,7 +8,7 @@ GitHub CLI, keeps a replayable evidence bundle, and renders only the bounded res
 by a human, an agent, or another tool. It never changes the workflow run.
 
 ```{note}
-The project is pre-1.0. Pin the exact `0.21.1` release and read
+The project is pre-1.0. Pin the exact `0.22.0` release and read
 [Compatibility and contracts](contracts.md) before depending on a serialized boundary.
 ```
 
@@ -47,9 +47,9 @@ benchmarks
 Install the exact GitHub CLI extension release:
 
 ```console
-$ gh extension install uibcdf/gh-run-receptor --pin 0.21.1
+$ gh extension install uibcdf/gh-run-receptor --pin 0.22.0
 $ gh run-receptor --version
-0.21.1
+0.22.0
 ```
 
 Then inspect a completed run:

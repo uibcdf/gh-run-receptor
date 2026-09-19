@@ -164,6 +164,13 @@ terminal non-success outcome. Its gate requires the local and hosted process-sta
 tables, an exact-tag installed-wheel usage check outside the checkout, and the minimum
 GitHub CLI extension installation check before the map becomes stable for CLI 1.0.
 
+The `0.22.0` gate retains all nine contract freezes and publishes the public documentation
+site, the stable adaptive log-acquisition truth table, and deterministic transition-only
+watch semantics. It requires the paired full/adaptive hosted benchmark, active-run watch
+measurement, strict Sphinx build, exact-tag distribution and extension checks, and the
+ordinary cross-platform and frozen-contract gates. Zenodo ingestion remains an independent
+post-publication observation and cannot be inferred from the GitHub Release workflow.
+
 Installed-wheel verification must run outside the source checkout and assert that the
 imported module path belongs to the isolated installation target. A matching version string
 alone is not evidence that the wheel payload was imported.

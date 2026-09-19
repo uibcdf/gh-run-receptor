@@ -10,7 +10,9 @@ evidence.
 The project has verified `0.21.1` GitHub Release assets, but no published package-index
 artifact or stable 1.0 contract. All nine published serialized boundaries are frozen
 against their first publishing tags, including the `aggregate@1` boundary introduced in
-0.21.0, while the pre-1.0 product surface may still evolve.
+0.21.0, while the pre-1.0 product surface may still evolve. The 0.22.0 candidate adds the
+public documentation site, freezes adaptive log acquisition, and stabilizes measured
+transition-only watch behavior without changing a serialized contract.
 The MVP
 can capture structured evidence for one GitHub Actions run, replay it offline, and render
 human, LLM, or JSON reports without changing the run or hiding its authoritative GitHub
@@ -194,10 +196,10 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The next milestone closes the remaining evidence gaps, led by real Zenodo verification
-and an authentic `timed_out` outcome. Publication and distribution validation of the
-0.21.0 multi-run contract is complete, and OD-002 now has a measured stable adaptive
-capture rule for the 0.22.0 candidate.
+The immediate milestone is exact-tag publication and distribution validation of 0.22.0,
+followed by independent observation of its first Zenodo record. OD-002 has a measured
+stable adaptive capture rule and OD-005 has measured stable watch semantics for this
+candidate.
 Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need

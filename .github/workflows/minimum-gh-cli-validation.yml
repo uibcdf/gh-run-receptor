@@ -37,8 +37,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh extension install uibcdf/gh-run-receptor --pin 0.21.1
-          test "$(gh run-receptor --version)" = "0.21.1"
+          gh extension install uibcdf/gh-run-receptor --pin 0.22.0
+          test "$(gh run-receptor --version)" = "0.22.0"
           set +e
           gh run-receptor invalid-command >"$RUNNER_TEMP/usage.out" 2>"$RUNNER_TEMP/usage.err"
           usage_status="$?"

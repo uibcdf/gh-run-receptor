@@ -762,6 +762,22 @@ passed at commit `5709a84`. Its committed-corpus phase validated 13 bundles; its
 phase reproduced two full/adaptive pairs, 13,678 observed bytes saved, and zero missing
 diagnoses without uploading an artifact. OD-002 is settled for the 0.22.0 candidate.
 
+## 0.22.0 pre-tag candidate checkpoint
+
+The candidate combines the public Sphinx site, adaptive capture policy, and stable watch
+contract without adding or changing a serialized resource. The complete local gate passed
+434 tests, Ruff, strict Sphinx with warnings as errors, developer-report validation,
+citation validation, and all nine contracts frozen against 0.21.0. A clean temporary clone
+was committed and tagged locally as 0.22.0; using the already installed build toolchain
+because this development environment has no package-index network access, it produced the
+exact wheel and source-distribution names, a valid checksum manifest, and bounded release
+notes. The wheel was installed outside the checkout, imported as version 0.22.0 from the
+isolated target, and returned status 64 for malformed usage.
+
+This is local pre-tag evidence, not publication evidence. The real tag, cross-platform
+compatibility, distributed Action, minimum GitHub CLI, exact-tag publication, public asset
+verification, and independent Zenodo observation remain separate gates.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not
