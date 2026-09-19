@@ -21,6 +21,7 @@
 - [#2 — Formalize version 1 bundle, model, and report schemas](formalize_version_1_bundle_model_and_report_schemas.md) (`resolved`)
 - [#41 — Measure and freeze the adaptive log-capture policy for 1.0](freeze_adaptive_log_capture_policy.md) (`resolved`)
 - [#44 — Freeze release-profile evidence authority before 1.0](freeze_release_profile_evidence_authority_before_1_0.md) (`resolved`)
+- [#47 — Freeze the 1.0 scope in the 0.23.0 dogfooding release](freeze_the_1_0_scope_in_the_0_23_0_dogfooding_release.md) (`resolved`)
 - [#30 — Freeze version 1 contracts and migration policy](freeze_version_1_contracts_and_migration_policy.md) (`resolved`)
 - [#42 — Freeze watch polling and API-budget semantics for 1.0](freeze_watch_polling_and_api_budget_semantics_for_1_0.md) (`resolved`)
 - [#5 — Load trusted workflow rules from client repositories](load_trusted_workflow_rules_from_client_repositories.md) (`resolved`)

@@ -868,6 +868,9 @@ run `35459899594` rebuilt the strict site successfully; GitHub then rejected onl
 deployment before runner allocation because the protected `github-pages` environment
 allows `main`. The workflow now encodes that authority boundary and reserves deployment
 for `refs/heads/main` while tags remain buildable.
+Hosted run `35464444035` then passed both the strict build and protected deployment from
+the corrected `main` workflow, confirming that the guard narrows authority without
+disabling publication.
 
 Draft-first release run `35460155218` published a non-draft, non-prerelease GitHub Release
 after checking exact tag identity, citation, the complete suite, all contracts, both

@@ -1,13 +1,13 @@
 ---
 summary: Freeze the 1.0 scope in the 0.23.0 dogfooding release
 issue: uibcdf/gh-run-receptor#47
-status: active
+status: resolved
 opened: 2026-09-19
-closed:
+closed: 2026-09-19
 verification: inspected
 area: ['governance', 'packaging', 'tests']
 guard:
-normative:
+normative: release_readiness_1_0.md
 blocked_by: []
 supersedes: []
 ---
@@ -16,8 +16,8 @@ supersedes: []
 
 **Reported:** 2026-09-19, after the defined 1.0 implementation and evidence roadmap
 reached full credit while the repository still had no stable 1.0 contract.
-**Status:** Active; the scope audit and reproducible 0.23.0 release candidate are in
-progress.
+**Status:** Resolved; the stable scope is normative and the complete 0.23.0 dogfooding
+sequence is observed.
 
 **Progress:** The normative scope/evidence map is implemented, OD-003 and OD-004 are
 explicitly post-1.0, and executable guards reject both deferred configuration shapes.
@@ -25,7 +25,8 @@ The 0.23.0 source candidate passes 442 tests, Ruff lint, strict Sphinx, citation
 release-note validation, developer-report validation, and all nine frozen contracts.
 Candidate and exact-tag hosted gates, draft-first publication, independent artifact and
 Zenodo verification, client-guide synchronization, and public-wheel MolSysMT dogfooding
-are complete. A final Pages branch guard and its hosted confirmation remain before closure.
+are complete. Pages run `35464444035` confirms that the explicit `main` authority guard
+retains the strict build and successful deployment while tags remain build-only.
 
 ## What
 
