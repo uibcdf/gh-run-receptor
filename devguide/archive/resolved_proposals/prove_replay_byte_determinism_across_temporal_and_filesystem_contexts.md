@@ -1,9 +1,9 @@
 ---
 summary: Prove replay byte determinism across temporal and filesystem contexts
 issue: uibcdf/gh-run-receptor#43
-status: active
+status: resolved
 opened: 2026-09-19
-closed:
+closed: 2026-09-19
 verification: measured
 area: ['tests']
 guard: tests/test_cli.py
@@ -16,8 +16,7 @@ supersedes: []
 
 **Reported:** 2026-09-19 while selecting the next actionable 1.0 evidence gap after the
 0.22.0 release.
-**Status:** Active; deterministic implementations and two narrower guards exist, but the
-remaining roadmap claim lacks one adversarial process-boundary gate.
+**Status:** Resolved; the adversarial local and nine-combination hosted gates pass.
 
 ## What
 
@@ -101,7 +100,11 @@ sphinx-build -W --keep-going -b html docs docs/_build/html
 build succeeded.
 ```
 
-The exact-revision nine-combination compatibility gate remains before closure.
+Exact-revision compatibility run `35437166644` passed at commit
+`540015b78eea288e4a0233d9469244d24928e51a`. All nine Ubuntu, macOS, and Windows jobs with
+Python 3.11, 3.12, and 3.13 completed successfully and therefore exercised the same
+subprocess byte-comparison guard through both the source suite and installed-wheel smoke
+path.
 
 ## What was refuted
 

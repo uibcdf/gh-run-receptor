@@ -55,6 +55,12 @@ The loader validates the manifest and cross-resource source identity before repl
 complete manifest means the requested capture policy completed, not that every possible
 GitHub or external fact exists forever.
 
+Replay output is independent of the bundle path, file modification times, retained capture
+timestamp, local timezone, source-date epoch, and invocation time. Equal semantic evidence
+produces byte-identical JSON, LLM, and human output within one gh-run-receptor version.
+Cross-version compatibility follows the versioned contracts and migration policy; it does
+not imply that every presentation byte is frozen forever.
+
 ## Producer and published artifacts
 
 `events@1` records observed work performed inside a composite Action. A canonical Action

@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+- Prove replay byte determinism at the CLI process boundary across distinct paths, file
+  times, capture timestamps, time zones, source-date epochs, and all three render modes.
+
 ## 0.22.0 - 2026-09-19
 
 - Publish task-oriented Sphinx/MyST documentation through a least-privilege, commit-pinned

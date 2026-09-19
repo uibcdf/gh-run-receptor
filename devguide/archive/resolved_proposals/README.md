@@ -22,6 +22,7 @@
 - [#30 — Freeze version 1 contracts and migration policy](freeze_version_1_contracts_and_migration_policy.md) (`resolved`)
 - [#42 — Freeze watch polling and API-budget semantics for 1.0](freeze_watch_polling_and_api_budget_semantics_for_1_0.md) (`resolved`)
 - [#5 — Load trusted workflow rules from client repositories](load_trusted_workflow_rules_from_client_repositories.md) (`resolved`)
+- [#43 — Prove replay byte determinism across temporal and filesystem contexts](prove_replay_byte_determinism_across_temporal_and_filesystem_contexts.md) (`resolved`)
 - [#32 — Publish a same-revision reusable reporting workflow](publish_a_same_revision_reusable_reporting_workflow.md) (`resolved`)
 - [#26 — Publish and verify reproducible GitHub releases](publish_and_verify_reproducible_github_releases.md) (`resolved`)
 - [#4 — Publish measured adoption guidance for client repositories](publish_measured_adoption_guidance_for_client_repositories.md) (`resolved`)

@@ -59,6 +59,13 @@ bounded public output, while semantic assertions independently verify conclusion
 completeness, provenance, and grouped causes. Updating a snapshot is never sufficient
 evidence that a behavior change is correct.
 
+The CLI determinism guard runs independent replay subprocesses over copies of one
+nontrivial sanitized failure bundle. It varies bundle path, file modification time,
+retained capture timestamp, timezone, and `SOURCE_DATE_EPOCH`, and requires identical
+exit status, stderr, and stdout bytes for JSON, LLM, and human rendering. The ordinary
+compatibility matrix repeats this guard on all nine supported operating-system/Python
+combinations.
+
 ### Live integration tests
 
 Live evidence comes from reviewed public UIBCDF workflows, deliberately dispatched

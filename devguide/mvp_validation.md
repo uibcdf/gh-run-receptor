@@ -809,6 +809,20 @@ twelve tracked repositories. Each repository received an isolated `[skip ci]` co
 changed only `GH_RUN_RECEPTOR_GUIDE.md`; the unrelated untracked TopoMT smoke-test notebook
 was preserved. The synchronizer's exact comparison passes across all twelve copies.
 
+## Replay determinism checkpoint
+
+Issue `uibcdf/gh-run-receptor#43` strengthened the replay claim from repeated construction
+in one context to a real CLI process-boundary guard. Two copies of the sanitized
+MolSysViewer CI failure bundle receive distinct nested paths, file modification times,
+capture timestamps, POSIX timezone strings, and `SOURCE_DATE_EPOCH` values. JSON, LLM, and
+human invocations each return the same source-failure status, empty stderr, and
+byte-identical stdout across both contexts.
+
+The complete local gate passed 437 tests, Ruff, all nine frozen contracts, developer-report
+validation, and strict Sphinx. Exact-revision compatibility run `35437166644` passed the
+full suite and installed-wheel smoke test on Ubuntu, macOS, and Windows with Python 3.11,
+3.12, and 3.13 at commit `540015b78eea288e4a0233d9469244d24928e51a`.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

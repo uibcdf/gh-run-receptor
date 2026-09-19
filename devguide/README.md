@@ -8,7 +8,8 @@ evidence.
 ## Current state
 
 The project has verified `0.22.0` GitHub Release assets and a public Zenodo record, but no
-published package-index artifact or stable 1.0 contract. All nine published serialized boundaries are frozen
+published package-index artifact or stable 1.0 contract. All nine published serialized
+boundaries are frozen
 against their first publishing tags, including the `aggregate@1` boundary introduced in
 0.21.0, while the pre-1.0 product surface may still evolve. Release 0.22.0 adds the
 public documentation site, freezes adaptive log acquisition, and stabilizes measured
@@ -198,7 +199,9 @@ known design question; it does not mean that unimplemented behavior has been val
 
 The immediate milestone is closing the remaining 1.0 evidence gaps. OD-002 has a measured
 stable adaptive capture rule, OD-005 has measured stable watch semantics, and the released
-0.22.0 client guide is synchronized across all twelve tracked repositories.
+0.22.0 client guide is synchronized across all twelve tracked repositories. Phase 1 now
+has complete evidence, including byte-identical CLI replay across temporal, filesystem,
+renderer, operating-system, and supported-Python contexts.
 Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need
