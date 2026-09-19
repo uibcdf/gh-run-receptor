@@ -762,7 +762,7 @@ passed at commit `5709a84`. Its committed-corpus phase validated 13 bundles; its
 phase reproduced two full/adaptive pairs, 13,678 observed bytes saved, and zero missing
 diagnoses without uploading an artifact. OD-002 is settled for the 0.22.0 candidate.
 
-## 0.22.0 pre-tag candidate checkpoint
+## 0.22.0 release checkpoint
 
 The candidate combines the public Sphinx site, adaptive capture policy, and stable watch
 contract without adding or changing a serialized resource. The complete local gate passed
@@ -783,16 +783,32 @@ documentation run `35435447262` built and deployed the strict site. A five-sourc
 aggregate first preserved the still-running compatibility matrix as `PENDING`, then the
 watch command reported its terminal nine-of-nine `PASS` without repeated snapshots.
 
-This is pre-tag evidence, not publication evidence. The real tag, distributed Action at
-that tag, minimum GitHub CLI extension, exact-tag publication, public asset verification,
-and independent Zenodo observation remain separate gates.
+Tag `0.22.0` points to commit `cbe269fcddfbcaaa6c5a691817221eca011935a8`.
+Five exact-tag gates passed before publication: compatibility run `35435894883`, frozen
+contract run `35435896629`, adaptive-capture run `35435898243`, distributed Action run
+`35435899693`, and checksum-pinned minimum GitHub CLI run `35435900814`. Draft-first
+release run `35435957227` then published a non-draft, non-prerelease GitHub Release after
+verifying tag identity, citation, the complete suite, distributions, checksums, notes, and
+both draft and public asset states. Independent download and installation repeated those
+checks. The public assets are:
+
+- `gh_run_receptor-0.22.0-py3-none-any.whl`, 85,880 bytes, SHA-256
+  `61c08ae07dbd71ce523292b59e4b6a6505e74f82b81d07b2dbb7c230e845081d`;
+- `gh_run_receptor-0.22.0.tar.gz`, 129,718 bytes, SHA-256
+  `7a2eff8b385a7a869d2649e75972d95a7bedd207af53b49f612224028405c457`;
+- `SHA256SUMS`, 202 bytes, SHA-256
+  `2509a53880d3c4046dc36559dffad810c391a59038d36a138233c66df89889ce`.
+
+Zenodo verification run `35436181206` passed on the first post-publication query. The
+public record contains version 0.22.0 and the archived source ZIP; the version DOI is
+`10.5281/zenodo.22843378` and the stable concept DOI is `10.5281/zenodo.22843377`. This is
+observed archival evidence, not an inference from the presence of a release webhook.
 
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not
   yet a complete diagnosis engine.
-- The committed real-run corpus remains narrow; authentic `timed_out` and real Zenodo
-  cases remain gaps.
+- The committed real-run corpus remains narrow; authentic `timed_out` remains a gap.
 - Private-repository and fork token behavior of the embedded Action is not established by
   the public and same-repository probes.
 - External registries, GitHub Releases, Git refs, and archive records are not queried by

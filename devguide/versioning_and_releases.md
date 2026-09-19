@@ -170,6 +170,9 @@ watch semantics. It requires the paired full/adaptive hosted benchmark, active-r
 measurement, strict Sphinx build, exact-tag distribution and extension checks, and the
 ordinary cross-platform and frozen-contract gates. Zenodo ingestion remains an independent
 post-publication observation and cannot be inferred from the GitHub Release workflow.
+Release 0.22.0 completed that independent observation: its version DOI is
+`10.5281/zenodo.22843378` and the stable project concept DOI is
+`10.5281/zenodo.22843377`.
 
 Installed-wheel verification must run outside the source checkout and assert that the
 imported module path belongs to the isolated installation target. A matching version string

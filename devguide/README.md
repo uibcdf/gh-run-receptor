@@ -7,10 +7,10 @@ evidence.
 
 ## Current state
 
-The project has verified `0.21.1` GitHub Release assets, but no published package-index
-artifact or stable 1.0 contract. All nine published serialized boundaries are frozen
+The project has verified `0.22.0` GitHub Release assets and a public Zenodo record, but no
+published package-index artifact or stable 1.0 contract. All nine published serialized boundaries are frozen
 against their first publishing tags, including the `aggregate@1` boundary introduced in
-0.21.0, while the pre-1.0 product surface may still evolve. The 0.22.0 candidate adds the
+0.21.0, while the pre-1.0 product surface may still evolve. Release 0.22.0 adds the
 public documentation site, freezes adaptive log acquisition, and stabilizes measured
 transition-only watch behavior without changing a serialized contract.
 The MVP
@@ -87,10 +87,10 @@ The current MVP implements:
   pre-acquisition rejection, offline independence, and checksum-pinned hosted validation
 - a hosted exact-tag GitHub Release path with consistent citation/Zenodo metadata,
   draft-first asset verification, public-release revalidation, and completed
-  uninterrupted publications through 0.21.1.
+  uninterrupted publications through 0.22.0.
 - a bounded read-only Zenodo verification gate with distinct absent, invalid, and verified
-  states plus an explicit maintainer activation handoff; an exact-tag 0.21.1 query confirms
-  that a real project record remains absent.
+  states plus an explicit maintainer activation handoff; the 0.22.0 record and both its
+  version and concept DOI have been independently observed.
 - a first portable live corpus spanning three non-UIBCDF repositories, including native
   conclusion parity, bounded output, and deterministic offline replay.
 - one runtime registry for nine serialized boundaries, formal configuration-capture
@@ -196,10 +196,9 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The immediate milestone is exact-tag publication and distribution validation of 0.22.0,
-followed by independent observation of its first Zenodo record. OD-002 has a measured
-stable adaptive capture rule and OD-005 has measured stable watch semantics for this
-candidate.
+The immediate milestone is synchronizing the released 0.22.0 client guide and then closing
+the remaining 1.0 evidence gaps. OD-002 has a measured stable adaptive capture rule and
+OD-005 has measured stable watch semantics.
 Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need

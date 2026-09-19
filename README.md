@@ -3,6 +3,7 @@
 [![MolSysSuite policy](https://github.com/uibcdf/gh-run-receptor/actions/workflows/molsyssuite-policy.yml/badge.svg?branch=main)](https://github.com/uibcdf/gh-run-receptor/actions/workflows/molsyssuite-policy.yml)
 [![Documentation](https://github.com/uibcdf/gh-run-receptor/actions/workflows/docs.yml/badge.svg?branch=main)](https://www.uibcdf.org/gh-run-receptor/)
 [![GitHub release](https://img.shields.io/github/v/release/uibcdf/gh-run-receptor?label=release)](https://github.com/uibcdf/gh-run-receptor/releases/latest)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22843377.svg)](https://doi.org/10.5281/zenodo.22843377)
 [![Python](https://img.shields.io/badge/python-3.11--3.13-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
