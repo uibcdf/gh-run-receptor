@@ -68,7 +68,7 @@ The current MVP implements:
   command, suite, build, wheel installation, and smoke path on Ubuntu, macOS, and Windows
   with Python 3.11 through 3.13.
 - strict repository policy deployed across eleven additional MolSysSuite clients, with 63
-  exact workflow rules accepted by the published parser, plus the canonical 0.21.1 guide
+  exact workflow rules accepted by the published parser, plus the canonical 0.22.0 guide
   synchronized byte-for-byte across twelve client repositories.
 - a first checkout-local composite Action implementation with bounded summaries, scalar
   outputs, canonical JSON artifacts, explicit publisher provenance, and offline tests;
@@ -196,9 +196,9 @@ known design question; it does not mean that unimplemented behavior has been val
 
 ## Immediate milestone
 
-The immediate milestone is synchronizing the released 0.22.0 client guide and then closing
-the remaining 1.0 evidence gaps. OD-002 has a measured stable adaptive capture rule and
-OD-005 has measured stable watch semantics.
+The immediate milestone is closing the remaining 1.0 evidence gaps. OD-002 has a measured
+stable adaptive capture rule, OD-005 has measured stable watch semantics, and the released
+0.22.0 client guide is synchronized across all twelve tracked repositories.
 Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
 time or `timeout-minutes`. The milestone must also identify which release facts need

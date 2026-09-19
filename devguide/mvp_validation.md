@@ -804,6 +804,11 @@ public record contains version 0.22.0 and the archived source ZIP; the version D
 `10.5281/zenodo.22843378` and the stable concept DOI is `10.5281/zenodo.22843377`. This is
 observed archival evidence, not an inference from the presence of a release webhook.
 
+After publication, the canonical 0.22.0 client guide was synchronized byte-for-byte to all
+twelve tracked repositories. Each repository received an isolated `[skip ci]` commit that
+changed only `GH_RUN_RECEPTOR_GUIDE.md`; the unrelated untracked TopoMT smoke-test notebook
+was preserved. The synchronizer's exact comparison passes across all twelve copies.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not
