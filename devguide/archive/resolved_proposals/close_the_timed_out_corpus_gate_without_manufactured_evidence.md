@@ -1,13 +1,13 @@
 ---
 summary: Close the timed-out corpus gate without manufactured evidence
 issue: uibcdf/gh-run-receptor#45
-status: active
+status: resolved
 opened: 2026-09-19
-closed:
+closed: 2026-09-19
 verification: measured
 area: ['tests', 'github']
-guard:
-normative:
+guard: tests/test_report.py
+normative: testing_strategy.md
 blocked_by: []
 supersedes: []
 ---
@@ -16,8 +16,8 @@ supersedes: []
 
 **Reported:** 2026-09-19, after the release-evidence authority audit left authentic
 `timed_out` as the only withheld roadmap percentage.
-**Status:** Active implementation backed by an upstream-contract review, a measured
-failed generator experiment, and an end-to-end exact-source guard.
+**Status:** Resolved through an upstream-contract review, two bounded negative searches,
+the measured failed generator experiment, and an end-to-end exact-source guard.
 
 ## What
 
@@ -143,7 +143,8 @@ opportunistic, never impossible.
 run, job, and step `timed_out` source values. It proves the report retains those values,
 derives `TIMED_OUT`, renders bounded human and LLM output, and returns the stable terminal
 non-success process status 2. No production module, serialized schema, workflow, or token
-permission changed.
+permission changed. Implementation commit `31f583b` contains the tested guard and
+normative policy.
 
 The policy was absorbed by `testing_strategy.md`, `github_evidence.md`, the public
 limitations, roadmap, and checkpoint. The roadmap now assigns Phase 0 its final evidence
