@@ -62,7 +62,7 @@ decision. No excluded capability may be smuggled into an existing frozen v1 reso
 | Repository-agnostic behavior | `tests/test_public_runs.py` and the non-UIBCDF corpus recorded in `mvp_validation.md` | Any new candidate-specific portability claim is observed, not inferred |
 | Contract migration rules | `tests/test_contract_compatibility.py`, the runtime registry, and `data_contracts.md` | All nine current resources remain byte-compatible; a new resource uses a new version |
 | External-release truth | `tests/test_release_tools.py`, `tests/test_zenodo_verification.py`, and the release authority-map guards | Draft/public assets, tag identity, hashes, installed wheel, and Zenodo are queried independently |
-| Documentation accuracy | `tests/test_documentation.py` and strict Sphinx build | Published site and canonical client guide name the public tag and current boundaries |
+| Documentation accuracy | `tests/test_documentation.py` and strict Sphinx build | Candidate `main` deploys the site; exact tags build without attempting the protected Pages deployment; the canonical client guide names the public tag and current boundaries |
 
 The detailed run IDs, candidate commits, artifact hashes, and public DOI observations live
 in `mvp_validation.md`. That evidence log is append-only in meaning: later results may
@@ -89,7 +89,8 @@ feature does not block 1.0.
 
 ## Current checkpoint
 
-As of 2026-09-19, the implementation/evidence rows are complete through published 0.22.0
-and the 1.0 scope is frozen. The 0.23.0 candidate, public-release observations, client-guide
-synchronization, and public-version dogfooding steps remain open. Therefore this document
-records a release-ready scope, not a published 1.0 release.
+As of 2026-09-19, the 1.0 scope is frozen and all six final-sequence observations are
+complete through public 0.23.0. The public wheel preserved GitHub truth on a real MolSysMT
+Conda workflow, the canonical guide is synchronized across all twelve clients, and no open
+critical or high defect affects the stable boundary. This records eligibility to prepare
+the 1.0 candidate; it does not claim that the 1.0 tag has been published.

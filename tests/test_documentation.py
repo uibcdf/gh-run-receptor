@@ -68,7 +68,7 @@ def test_pages_workflow_separates_read_only_build_from_deployment_permissions():
     assert "contents: read" in source
     assert "pages: write" in source
     assert "id-token: write" in source
-    assert "if: github.event_name != 'pull_request'" in source
+    assert "if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'" in source
     assert "timeout-minutes: 10" in source
     assert "timeout-minutes: 5" in source
     assert "sphinx-build -W --keep-going -b html docs docs/_build/html" in source

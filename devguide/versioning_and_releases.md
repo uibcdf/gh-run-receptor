@@ -185,6 +185,14 @@ inspected with the installed public 0.23.0 product before 1.0 eligibility is dec
 Desired post-1.0 features do not delay the stable tag unless their absence contradicts a
 documented 1.0 promise.
 
+GitHub Pages deployment is a candidate-commit `main` observation, not an exact-tag
+operation. The protected `github-pages` environment rejects tag deployments before a
+runner starts. Exact tags therefore repeat the strict documentation build while the
+workflow deploys only from `refs/heads/main`; a tag must not turn this expected protection
+boundary into a failed deployment job. Release 0.23.0 completed its independent Zenodo
+observation with version DOI `10.5281/zenodo.22848495` and the stable concept DOI
+`10.5281/zenodo.22843377`.
+
 Installed-wheel verification must run outside the source checkout and assert that the
 imported module path belongs to the isolated installation target. A matching version string
 alone is not evidence that the wheel payload was imported.

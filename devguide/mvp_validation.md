@@ -853,6 +853,44 @@ documentation, and advanced the README, documentation, distributed gates, canoni
 client guide, and citation record to 0.23.0. These are local source-candidate results;
 exact-commit installation and hosted/public evidence remain unclaimed until observed.
 
+Exact candidate commit `af653e524dc8e0a331d5cd0355d6523a291b43af` passed the
+nine-combination compatibility gate (`35459694807`), checkout-local Action gate on three
+operating systems (`35459696258`), frozen-contract gate (`35459697876`), complete strict
+documentation build and Pages deployment (`35459699508`), and reusable reporter gate
+(`35459701300`). A clean temporary clone tagged only locally built exact 0.23.0 wheel and
+source distribution, installed the wheel outside the checkout, imported it from the
+isolated target, and enumerated all nine contracts.
+
+Tag `0.23.0` points to that exact commit. Exact-tag compatibility (`35459890128`), frozen
+contracts (`35459891763`), distributed Action (`35459893475`), checksum-pinned GitHub CLI
+2.48.0 (`35459896122`), and reusable reporter (`35459898068`) all passed. Documentation
+run `35459899594` rebuilt the strict site successfully; GitHub then rejected only its tag
+deployment before runner allocation because the protected `github-pages` environment
+allows `main`. The workflow now encodes that authority boundary and reserves deployment
+for `refs/heads/main` while tags remain buildable.
+
+Draft-first release run `35460155218` published a non-draft, non-prerelease GitHub Release
+after checking exact tag identity, citation, the complete suite, all contracts, both
+distributions, isolated installation, checksum manifest, bounded notes, and draft/public
+asset parity. Independent download repeated tag, size, digest, manifest, isolated import,
+version, and usage-status checks. The public assets are:
+
+- `gh_run_receptor-0.23.0-py3-none-any.whl`, 87,274 bytes, SHA-256
+  `08c87149a136fec4e2e9431cbf2357ff7d9311f38f2ab527e96afb5bb4ed5923`;
+- `gh_run_receptor-0.23.0.tar.gz`, 132,410 bytes, SHA-256
+  `1ebb2e87cefb1df219c55e6257ac02153749e665ef1397e800c1af49a985aca4`;
+- `SHA256SUMS`, 202 bytes, SHA-256
+  `1ff2c7f2c3ca3921f066d68548c9edd03e89839fcf5aa5460a6441b3c408b22a`.
+
+Zenodo gate `35461399909` and a separate public API query verified version DOI
+`10.5281/zenodo.22848495`, concept DOI `10.5281/zenodo.22843377`, and the 564,782-byte
+archived source ZIP. The public wheel then inspected real MolSysMT Conda run `35196968944`:
+its `report@1` matched GitHub's completed/success state and exact source SHA, selected the
+Conda profile, returned `PASS` with sufficient evidence, and preserved two jobs, two
+artifacts, and one producer event. Finally, the canonical 0.23.0 guide was synchronized
+byte-for-byte in isolated `[skip ci]` commits across all twelve tracked clients; TopoMT's
+unrelated untracked smoke-test notebook remained untouched.
+
 ## What this does not prove
 
 - Log analysis currently recognizes a deliberately small generic signature set and is not

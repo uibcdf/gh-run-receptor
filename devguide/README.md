@@ -7,8 +7,9 @@ evidence.
 
 ## Current state
 
-The project has verified `0.22.0` GitHub Release assets and a public Zenodo record. The
-stable 1.0 scope is frozen in `release_readiness_1_0.md`, but its tag has not been
+The project has verified `0.23.0` GitHub Release assets, public-version MolSysSuite
+dogfooding, and a public Zenodo record. The stable 1.0 scope is frozen in
+`release_readiness_1_0.md`, but its tag has not been
 published and no package-index artifact is claimed. All nine published serialized
 boundaries are frozen
 against their first publishing tags, including the `aggregate@1` boundary introduced in
@@ -205,7 +206,7 @@ known design question; it does not mean that unimplemented behavior has been val
 
 The defined 1.0 implementation and evidence gates now have full credit. OD-002 has a
 measured stable adaptive capture rule, OD-005 has measured stable watch semantics, and the
-released 0.22.0 client guide is synchronized across all twelve tracked repositories.
+released 0.23.0 client guide is synchronized across all twelve tracked repositories.
 Phase 1 includes byte-identical CLI replay across temporal, filesystem, renderer,
 operating-system, and supported-Python contexts. The release-profile authority map
 identifies which facts need structured producer evidence or new capture sources rather
@@ -214,9 +215,10 @@ than name inference.
 Standard job timeout is measured as cancellation. Exact-source `timed_out` now passes the
 complete assessment, renderer, and process-status path under the documented
 non-generatable-outcome exception; authentic capture remains visibly absent and
-opportunistic. The stable scope is now frozen and the local 0.23.0 source gate passes; the
-next milestone is exact-commit and hosted candidate validation followed by publication and
-installed public-version dogfooding. Full evidence credit does not itself publish 1.0.
+opportunistic. The stable scope, exact-commit gates, 0.23.0 publication, independent
+archive verification, client-guide synchronization, and installed public-version
+dogfooding now pass. The next milestone is the exact 1.0 candidate. Full evidence credit
+does not itself publish 1.0.
 
 The executable task list and release criteria remain in
 [development_roadmap.md](development_roadmap.md).

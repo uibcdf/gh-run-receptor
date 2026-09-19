@@ -23,9 +23,9 @@ progress.
 explicitly post-1.0, and executable guards reject both deferred configuration shapes.
 The 0.23.0 source candidate passes 442 tests, Ruff lint, strict Sphinx, citation and
 release-note validation, developer-report validation, and all nine frozen contracts.
-Public pins, the canonical guide, supported-platform release notes, and citation metadata
-now identify 0.23.0. Exact-commit build/install, hosted, and public-release observations
-remain.
+Candidate and exact-tag hosted gates, draft-first publication, independent artifact and
+Zenodo verification, client-guide synchronization, and public-wheel MolSysMT dogfooding
+are complete. A final Pages branch guard and its hosted confirmation remain before closure.
 
 ## What
 
