@@ -1,13 +1,13 @@
 ---
 summary: Freeze release-profile evidence authority before 1.0
 issue: uibcdf/gh-run-receptor#44
-status: active
+status: resolved
 opened: 2026-09-19
-closed:
-verification: inspected
+closed: 2026-09-19
+verification: measured
 area: ['profiles']
-guard:
-normative:
+guard: tests/test_report.py
+normative: rules_and_profiles.md
 blocked_by: []
 supersedes: []
 ---
@@ -15,7 +15,8 @@ supersedes: []
 # Freezing release-profile evidence authority before 1.0
 
 **Reported:** 2026-09-19, during the final evidence audit before 1.0.
-**Status:** Active implementation with the current contract inspected and guarded.
+**Status:** Resolved; the authority map, adversarial guards, and public contract are in
+place without changing `report@1`.
 
 Remove `severity` for proposals. The directory identifies the report kind.
 
@@ -112,7 +113,8 @@ families to their evidence source, maximum assertion, fallback, and optional sou
 or step-facet binding. `_release_matrix` consumes this mapping for run identity and
 delivery-step evidence, while compact tag and aggregate external-delivery rendering use
 the same authority definitions. The `report@1` shape and rendered values remain
-unchanged.
+unchanged. Implementation commit `d83b800` contains the tested product and documentation
+change.
 
 `test_release_claim_authorities_cover_source_phase_and_external_boundaries` freezes the
 complete map. `test_successful_release_claim_names_cannot_invent_external_verification`
