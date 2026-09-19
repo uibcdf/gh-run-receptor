@@ -13,6 +13,12 @@ from gh_run_receptor.config import select_rule
 from gh_run_receptor.contracts import schema_id
 from gh_run_receptor.logs import extract_causes
 from gh_run_receptor.model import normalize_evidence
+from gh_run_receptor.release_profile import (
+    release_delivery_step_evidence,
+    release_external_delivery_state,
+    release_identity,
+    release_tag_display_state,
+)
 
 MAX_FAILURES = 10
 MAX_ARTIFACTS = 10
@@ -413,16 +419,8 @@ def _release_matrix(subject: dict[str, Any], jobs: list[dict[str, Any]]) -> dict
     }
     return {
         "kind": "release",
-        "identity": {
-            "event": subject.get("event"),
-            "head_ref": subject.get("head_ref"),
-            "head_sha": subject.get("head_sha"),
-            "tag_verification": "not_observed",
-        },
-        "verification": {
-            "registry": ("step_success" if "publish" in successful_step_facets else "not_observed"),
-            "archive": ("step_success" if "archive" in successful_step_facets else "not_observed"),
-        },
+        "identity": release_identity(subject),
+        "verification": release_delivery_step_evidence(successful_step_facets),
         "phases": phases,
     }
 
@@ -707,7 +705,7 @@ def _render_release_llm_failure(report: dict[str, Any]) -> str:
             f"release event={_safe_text(identity['event'])} "
             f"ref={_safe_text(identity['head_ref'])} "
             f"sha={_safe_text(identity['head_sha'])} "
-            "tag=unverified | "
+            f"tag={release_tag_display_state(identity['tag_verification'])} | "
             f"{_safe_text(subject['repository'])} run={subject['run_id']} "
             f"attempt={subject['run_attempt']}"
         ),
@@ -750,7 +748,7 @@ def _render_release_llm_failure(report: dict[str, Any]) -> str:
     lines.append(
         f"workflow={_safe_text(workflow)} | {state_field}={'; '.join(failures) or 'none'} | "
         f"phases={','.join(summaries) or 'none'} | "
-        f"external=not_observed artifacts={artifact_text}"
+        f"external={release_external_delivery_state()} artifacts={artifact_text}"
     )
     if report["causes"]:
         lines.append(f"root causes ({len(report['causes'])}):")
@@ -820,7 +818,7 @@ def render_llm(report: dict[str, Any]) -> str:
                     f"event={_safe_text(identity['event'])}",
                     f"ref={_safe_text(identity['head_ref'])}",
                     f"sha={_safe_text(identity['head_sha'])}",
-                    "tag=unverified",
+                    f"tag={release_tag_display_state(identity['tag_verification'])}",
                     f"phases={phases or 'none'}",
                     f"registry={verification['registry']}",
                     f"archive={verification['archive']}",

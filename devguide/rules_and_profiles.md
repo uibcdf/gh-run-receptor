@@ -110,6 +110,25 @@ an independent registry or archive query. External npm, Anaconda, GitHub Release
 and Zenodo verification; required gates; cross-workflow correlation; and package digest
 inspection remain future work.
 
+The authority contract is centralized in `gh_run_receptor.release_profile` and consumed
+by the release matrix. Version 1 freezes this table without changing `report@1`:
+
+| Reported claim | Evidence source | Maximum assertion | Fallback |
+| --- | --- | --- | --- |
+| Event, head ref, and head SHA | GitHub run API | Observed source fact | Original nullable source value |
+| Release phase and state | GitHub jobs API plus bounded name classification | Presentation facet with source state | No inferred result |
+| Git tag verification | No dedicated source | `not_observed` | `not_observed` |
+| Registry delivery | Name-classified workflow step | `step_success` | `not_observed` |
+| GitHub Release delivery | No dedicated source | `not_observed` | `not_observed` |
+| Citation or archive delivery | Name-classified workflow step | `step_success` | `not_observed` |
+| Actions artifact inventory | GitHub artifacts API | Current observed inventory only | `not_observed` |
+| Aggregate external delivery | No independent external query | `not_observed` | `not_observed` |
+
+`step_success` means only that GitHub reports success for a step whose untrusted name was
+classified into the corresponding phase. Neither a step name nor its log text can prove
+delivery. A future stronger assertion requires a dedicated structured source, an explicit
+contract change, and its own source-identity and incompleteness tests.
+
 ## Repository configuration
 
 Profile selection follows GitHub-visible evidence. The operational decision is:

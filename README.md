@@ -361,6 +361,8 @@ an artifact never existed or that the Conda channel was or was not updated.
 The release measurements retain event, observed ref, exact SHA, material steps, artifact
 inventory, and run identity. `tag=unverified` and `archive=not_observed` are deliberate:
 the first release slice does not query Git refs, registries, GitHub Releases, or Zenodo.
+Successful publish or archive steps are therefore reported only as `step_success`; names
+such as `Publish to PyPI` or `Zenodo DOI created` never become independent delivery proof.
 
 Long-running workflows can be observed without redrawing their complete job tree:
 

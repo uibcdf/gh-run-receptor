@@ -6,6 +6,9 @@ All notable changes to this project will be documented in this file.
 
 - Prove replay byte determinism at the CLI process boundary across distinct paths, file
   times, capture timestamps, time zones, source-date epochs, and all three render modes.
+- Freeze one release-profile evidence-authority map and add adversarial guards so
+  successful tag, registry, GitHub Release, and Zenodo-shaped step names cannot become
+  independent external-delivery verification.
 
 ## 0.22.0 - 2026-09-19
 

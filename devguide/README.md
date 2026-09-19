@@ -94,6 +94,9 @@ The current MVP implements:
   version and concept DOI have been independently observed.
 - a first portable live corpus spanning three non-UIBCDF repositories, including native
   conclusion parity, bounded output, and deterministic offline replay.
+- one centralized release-claim authority map separating GitHub source facts,
+  name-derived presentation facets, workflow-step success, Actions artifact inventory,
+  and unavailable external delivery, with adversarial claim-name guards.
 - one runtime registry for nine serialized boundaries, formal configuration-capture
   schema, offline compatibility introspection, forward-only migration rules, and a release
   gate retaining the four v1 freezes from 0.18.0, three from 0.19.0, and the producer-event
@@ -204,8 +207,8 @@ has complete evidence, including byte-identical CLI replay across temporal, file
 renderer, operating-system, and supported-Python contexts.
 Standard job timeout is now measured as cancellation; authentic
 `timed_out` evidence remains opportunistic because it must not be inferred from elapsed
-time or `timeout-minutes`. The milestone must also identify which release facts need
-structured producer evidence or new capture sources rather than name inference.
+time or `timeout-minutes`. The release-profile authority map now identifies which facts
+need structured producer evidence or new capture sources rather than name inference.
 
 The executable task list and exit criteria remain in
 [development_roadmap.md](development_roadmap.md). The configuration and report contracts

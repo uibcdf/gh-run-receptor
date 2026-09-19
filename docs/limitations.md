@@ -62,6 +62,11 @@ rerun attempts have deterministic coverage. Authentic GitHub `timed_out` evidenc
 opportunistic: a normal job timeout has been observed as cancellation, so the receptor
 does not infer `TIMED_OUT` merely from elapsed time or a workflow timeout setting.
 
+The release profile classifies untrusted job and step names only for presentation. A
+successful step can establish `step_success`, but cannot verify a Git tag, package
+registry, GitHub Release, DOI, or archive record. Those claims remain `not_observed`
+without a dedicated structured source.
+
 ## No mutation
 
 The product does not rerun jobs, cancel workflows, approve environments, publish packages,

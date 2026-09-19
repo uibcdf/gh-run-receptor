@@ -2,6 +2,10 @@ import zipfile
 
 import pytest
 
+from gh_run_receptor.release_profile import (
+    RELEASE_CLAIM_AUTHORITIES,
+    release_external_delivery_state,
+)
 from gh_run_receptor.report import build_report, exit_code, render_human, render_llm
 
 
@@ -859,3 +863,76 @@ def test_release_job_fallback_does_not_invent_successful_publication_step():
     assert report["matrix"]["phases"][0]["name"] == "publish"
     assert report["matrix"]["phases"][0]["evidence"][0]["kind"] == "job"
     assert report["matrix"]["verification"]["registry"] == "not_observed"
+
+
+def test_release_claim_authorities_cover_source_phase_and_external_boundaries():
+    assert set(RELEASE_CLAIM_AUTHORITIES) == {
+        "event",
+        "head_ref",
+        "head_sha",
+        "phase_state",
+        "tag_verification",
+        "registry_delivery",
+        "github_release_delivery",
+        "archive_delivery",
+        "actions_artifact_inventory",
+        "external_delivery",
+    }
+    assert {
+        key: authority.maximum_assertion for key, authority in RELEASE_CLAIM_AUTHORITIES.items()
+    } == {
+        "event": "observed_source_fact",
+        "head_ref": "observed_source_fact",
+        "head_sha": "observed_source_fact",
+        "phase_state": "presentation_facet_with_source_state",
+        "tag_verification": "not_observed",
+        "registry_delivery": "step_success",
+        "github_release_delivery": "not_observed",
+        "archive_delivery": "step_success",
+        "actions_artifact_inventory": "observed_inventory_only",
+        "external_delivery": "not_observed",
+    }
+
+
+def test_successful_release_claim_names_cannot_invent_external_verification():
+    evidence = _release_evidence(conclusion="success")
+    evidence["jobs.json"]["jobs"][0]["steps"] = [
+        {
+            "number": 1,
+            "name": "Git tag verified",
+            "status": "completed",
+            "conclusion": "success",
+        },
+        {
+            "number": 2,
+            "name": "Publish to PyPI, npm, and the Conda registry",
+            "status": "completed",
+            "conclusion": "success",
+        },
+        {
+            "number": 3,
+            "name": "GitHub Release created and release assets verified",
+            "status": "completed",
+            "conclusion": "success",
+        },
+        {
+            "number": 4,
+            "name": "Zenodo DOI created and verified",
+            "status": "completed",
+            "conclusion": "success",
+        },
+    ]
+
+    report = build_report(_manifest(), evidence, profile="release")
+    rendered = render_llm(report)
+
+    assert report["matrix"]["identity"]["tag_verification"] == "not_observed"
+    assert report["matrix"]["verification"] == {
+        "registry": "step_success",
+        "archive": "step_success",
+    }
+    assert release_external_delivery_state() == "not_observed"
+    assert "tag=unverified" in rendered
+    assert "registry=step_success" in rendered
+    assert "archive=step_success" in rendered
+    assert "external=verified" not in rendered

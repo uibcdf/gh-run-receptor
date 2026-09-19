@@ -54,5 +54,23 @@ build and again as deployment. Release reports similarly distinguish an observed
 command from independent registry delivery, and a Git tag from a verified GitHub Release
 or Zenodo archive.
 
+The release profile freezes the following authority boundary for 1.0:
+
+| Reported claim | Evidence source | Strongest allowed statement |
+| :--- | :--- | :--- |
+| Event, head ref, and head SHA | GitHub run API | Observed source fact |
+| Release phase and state | GitHub jobs API plus bounded name classification | Presentation facet with the original job or step state |
+| Git tag verification | No dedicated source | `not_observed` (`tag=unverified` in compact output) |
+| Registry delivery | Name-classified workflow step | `step_success`; never independent registry verification |
+| GitHub Release delivery | No dedicated source | `not_observed` |
+| Citation or archive delivery | Name-classified workflow step | `step_success`; never independent archive verification |
+| Actions artifact inventory | GitHub artifacts API | Current observed inventory only |
+| Aggregate external delivery | No independent external query | `not_observed` |
+
+Names and log messages are untrusted presentation evidence. A successful step named
+`Publish to PyPI`, `Git tag verified`, or `Zenodo DOI created` cannot strengthen any row
+beyond the limit above. Registry, Git-ref, GitHub Release, or Zenodo verification requires
+a future dedicated structured source.
+
 Select `generic` and inspect natively when no profile represents the visible evidence
 faithfully.

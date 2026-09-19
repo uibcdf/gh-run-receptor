@@ -1,7 +1,7 @@
 ---
 summary: Freeze release-profile evidence authority before 1.0
 issue: uibcdf/gh-run-receptor#44
-status: open
+status: active
 opened: 2026-09-19
 closed:
 verification: inspected
@@ -15,7 +15,7 @@ supersedes: []
 # Freezing release-profile evidence authority before 1.0
 
 **Reported:** 2026-09-19, during the final evidence audit before 1.0.
-**Status:** Open proposal with the current implementation and contract inspected.
+**Status:** Active implementation with the current contract inspected and guarded.
 
 Remove `severity` for proposals. The directory identifies the report kind.
 
@@ -105,8 +105,39 @@ There is no external dependency. The main risk is terminology that accidentally 
 `step_success` sound like external verification; the public table and adversarial tests
 must make the distinction explicit.
 
+## Implementation and validation
+
+`gh_run_receptor.release_profile` now owns an immutable mapping from ten release-claim
+families to their evidence source, maximum assertion, fallback, and optional source-field
+or step-facet binding. `_release_matrix` consumes this mapping for run identity and
+delivery-step evidence, while compact tag and aggregate external-delivery rendering use
+the same authority definitions. The `report@1` shape and rendered values remain
+unchanged.
+
+`test_release_claim_authorities_cover_source_phase_and_external_boundaries` freezes the
+complete map. `test_successful_release_claim_names_cannot_invent_external_verification`
+then supplies four successful adversarial names covering Git tags, three package
+registries, GitHub Releases, and Zenodo DOI records. The report retains
+`tag_verification=not_observed`, bounds publish/archive evidence at `step_success`, and
+keeps independent external delivery `not_observed`.
+
+The local gate on 2026-09-19 produced:
+
+- `python -m pytest --receptor=llm`: 439 passed;
+- `ruff check .`: passed;
+- focused `ruff format --check` for all changed Python files: passed;
+- `python devtools/scripts/validate_contracts.py`: nine contracts passed against the
+  0.21.0 frozen baseline;
+- `sphinx-build -W --keep-going -b html docs ...`: ten pages built without warnings;
+- `python devtools/scripts/validate_devguide.py`: passed; and
+- `git diff --check`: passed.
+
+The repository-wide format check also identified pre-existing formatting changes in
+`gh_run_receptor/cli.py` and `tests/test_bundle.py`. This increment does not touch those
+files; the applicable changed-file format gate passes.
+
 ## Provenance
 
-Inspection was performed on 2026-09-19 against `main` after release 0.22.0, at commit
-`05bac06985bf045f1be6999c724dc0c7fa86d921`. Validation versions and final commands will
-be recorded when implementation is complete.
+Inspection was performed on 2026-09-19 against `main` after release 0.22.0, starting at
+commit `05bac06985bf045f1be6999c724dc0c7fa86d921`. Validation used Python 3.13.14,
+pytest with pytest-receptor, Ruff 0.16.1, and Sphinx 8.2.3.
