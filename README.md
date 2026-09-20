@@ -1,11 +1,12 @@
 # gh-run-receptor
 
+[![MolSysSuite: Developer Tool](https://img.shields.io/badge/MolSysSuite-developer%20tool-6f42c1?labelColor=24292f)](https://github.com/uibcdf/molsyssuite/blob/main/devguide/repository_badges.md#developer-tool)
 [![MolSysSuite policy](https://github.com/uibcdf/gh-run-receptor/actions/workflows/molsyssuite-policy.yml/badge.svg?branch=main)](https://github.com/uibcdf/gh-run-receptor/actions/workflows/molsyssuite-policy.yml)
+[![Python 3.11 | 3.12 | 3.13](https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13-3776AB?logo=python&logoColor=white)](https://github.com/uibcdf/molsyssuite/blob/main/devguide/python_policy.md)
+[![License](https://img.shields.io/github/license/uibcdf/gh-run-receptor)](https://github.com/uibcdf/gh-run-receptor/blob/main/LICENSE)
 [![Documentation](https://github.com/uibcdf/gh-run-receptor/actions/workflows/docs.yml/badge.svg?branch=main)](https://www.uibcdf.org/gh-run-receptor/)
-[![GitHub release](https://img.shields.io/github/v/release/uibcdf/gh-run-receptor?label=release)](https://github.com/uibcdf/gh-run-receptor/releases/latest)
+[![GitHub release](https://img.shields.io/github/v/release/uibcdf/gh-run-receptor)](https://github.com/uibcdf/gh-run-receptor/releases/latest)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22843377.svg)](https://doi.org/10.5281/zenodo.22843377)
-[![Python](https://img.shields.io/badge/python-3.11--3.13-blue.svg)](https://www.python.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 `gh-run-receptor` is a GitHub Actions evidence receptor for coding agents: compact reports
 without hiding failures or uncertainty. It is read-only and retains a replayable path to
