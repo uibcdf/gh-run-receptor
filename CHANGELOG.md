@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 1.1.1 - 2026-09-21
+
+- Name failed pytest tests in compact CI causes instead of selecting the generic runner
+  exit epilogue, including bounded recognition of pytest-receptor's printed rerun hint.
+- Preserve GitHub's authoritative failed conclusion, redact and bound the inferred test
+  name, and retain the generic fallback when no reliable match is present.
+
 ## 1.1.0 - 2026-09-21
 
 - Support Python 3.14 through the complete twelve-cell Ubuntu, macOS, and Windows

@@ -25,6 +25,8 @@ SMonitor failure while preserving GitHub's failed conclusion. The 451-test local
 Ruff, and developer-guide validation passed; the
 [archived bug report](archive/resolved_bugs/pytest_failures_hidden_by_runner_exit.md)
 records the evidence boundary and the opt-in artifact alternative.
+Patch 1.1.1 is being prepared to distribute that fix; until its exact tag and release
+are verified, 1.1.0 remains the latest published version.
 
 ## Current state
 

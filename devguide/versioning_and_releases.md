@@ -38,6 +38,14 @@ Python 3.14 environment. Future platform-support changes still require the hoste
 and installed-product verification before updating public claims. Keep the 1.0.0 evidence
 and historical guidance scoped to their actual tag.
 
+Patch candidate 1.1.1 carries the log-cause correction tracked by
+`uibcdf/gh-run-receptor#50`. Its local gate includes the full suite, Ruff, frozen-contract
+validation, citation agreement, wheel/sdist construction, and an isolated installed-wheel
+check. The original Ackredit and SMonitor failures must name their tests while retaining
+GitHub's failed conclusion. This patch does not change Python support, serialized
+contracts, or the GitHub Action/reusable-workflow interface. A tag and GitHub Release are
+separate decisions; public distribution still requires the exact-tag draft-first workflow.
+
 A tag identifies source but does not by itself publish a package or GitHub Release. Those
 are separate, explicit release steps.
 
