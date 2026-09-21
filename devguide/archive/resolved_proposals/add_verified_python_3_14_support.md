@@ -1,12 +1,12 @@
 ---
 summary: Add verified Python 3.14 support
 issue: uibcdf/gh-run-receptor#49
-status: active
+status: resolved
 opened: 2026-09-20
-closed:
+closed: 2026-09-21
 verification: measured
 area: [packaging, tests]
-guard:
+guard: tests/test_packaging.py
 normative:
 blocked_by: []
 supersedes: []
@@ -16,9 +16,9 @@ supersedes: []
 
 **Reported:** 2026-09-20 during the progressive MolSysSuite Python 3.14 rollout tracked
 by `uibcdf/molsyssuite#29`.
-**Status:** Active. Linux source compatibility is measured; the public support contract,
-hosted platform matrix, installed artifacts, and canonical client guide still stop at
-Python 3.13.
+**Status:** Resolved. The public 1.1.0 release, hosted twelve-cell matrix, installed
+artifacts, canonical client guide, synchronized client copies, and central admission
+establish the Python 3.11--3.14 contract.
 
 ## What
 
@@ -77,9 +77,8 @@ The source was a clean local clone of commit `61d9a4e`. Installation used
 `>=3.11,<3.14`. That override is feasibility scaffolding, not a user installation route or
 support claim. The environment solved the current test dependencies on Python 3.14.
 
-Assumed pending measurement: GitHub-hosted macOS and Windows runners can install the same
-development dependencies and execute the existing complete compatibility contract under
-Python 3.14. This must be replaced by hosted evidence.
+The original pending hosted macOS and Windows measurement was replaced by the twelve-cell
+hosted runs recorded below.
 
 On 2026-09-21 the first transition candidate updated Python metadata and classifiers,
 the twelve-cell compatibility workflow, package contract tests, and source documentation.
@@ -122,10 +121,10 @@ claimed. The 1.0.0 release remains historically limited to Python 3.11--3.13.
 
 ## Scope and exclusions
 
-This proposal widens only Python interpreter support. It does not change serialized v1
+This proposal widened only Python interpreter support. It did not change serialized v1
 contracts, GitHub CLI requirements, supported GitHub hosts, workflow selection, profiles,
 permissions, release publication authority, or the stable read-only product boundary. It
-does not publish a release, tag, package-index artifact, or Conda artifact.
+published the 1.1.0 GitHub Release, but not a package-index or Conda artifact.
 
 Historical release measurements remain true for the versions they describe and are not
 rewritten. Current normative and public surfaces will describe the new range after the
@@ -152,6 +151,16 @@ gates pass.
 The policy dependency is `uibcdf/molsyssuite#29`. The principal risk is a hosted
 operating-system or test dependency that does not yet support 3.14. A failed matrix cell
 is compatibility evidence and must not be bypassed or converted into a support claim.
+
+## Resolution
+
+Release 1.1.0 was published from the exact tested commit after all twelve hosted
+platform/interpreter cells passed. The public wheel and pinned GitHub CLI extension were
+independently installed on Python 3.14, the canonical guide was synchronized to client
+repositories, and MolSysSuite admitted the component in `uibcdf/molsyssuite#29`.
+`tests/test_packaging.py` fails if the declared Python range or 3.14 classifier regresses;
+`tests/test_compatibility_workflow.py` independently checks the twelve-cell matrix.
+Neither local guard substitutes for the recorded hosted and installed-artifact evidence.
 
 ## Provenance
 

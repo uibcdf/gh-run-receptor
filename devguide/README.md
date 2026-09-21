@@ -10,10 +10,13 @@ support after 445 local tests with 12 workers and an exact-commit hosted compati
 matrix (run 35573910621, 12/12). Draft-first release run 35574071616 passed. The wheel,
 sdist and checksum manifest were downloaded and verified independently; a fresh Python
 3.14.7 installation of the public wheel and an isolated pinned CLI extension both
-reported 1.1.0. The canonical guide and public badge now describe the delivered contract;
-historical release 1.0.0 remains scoped to 3.11--3.13. Resume at
-[`pending_proposals/add_verified_python_3_14_support.md`](pending_proposals/add_verified_python_3_14_support.md)
-and `uibcdf/gh-run-receptor#49` to close the local report and synchronize client copies.
+reported 1.1.0. The canonical guide, all registered client copies, public badge, and
+central admission now describe the delivered contract. The
+[`archived transition report`](archive/resolved_proposals/add_verified_python_3_14_support.md)
+records the evidence; historical release 1.0.0 remains scoped to 3.11--3.13.
+The separate suite-wide release-version rollout in `uibcdf/molsyssuite#32` must repair
+its unsupported versioningit filter before this repository adopts that new gate; it does
+not revoke the independently verified Python 3.14 product support.
 
 ## Current state
 
