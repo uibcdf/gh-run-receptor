@@ -31,8 +31,9 @@ original failure cases were independently verified. Zenodo record
 `10.5281/zenodo.22871415` was also verified, with one source ZIP rather than the GitHub
 Release assets. See [versioning and releases](versioning_and_releases.md) for that
 inventory and the unchanged compatibility boundary.
-The 1.1.1 canonical client guide has been byte-synchronized to eleven clean sibling
-repositories. MolSysViewer was deliberately excluded because its guide already has
+The 1.1.1 canonical client guide has been byte-synchronized to twelve sibling
+repositories, including Ackredit without staging its unrelated code changes.
+MolSysViewer was deliberately excluded because its guide already has
 uncommitted changes from another workstream and its checkout is behind `origin/main`;
 do not overwrite that work. Its 1.1.1 guide sync remains a coordination follow-up.
 Manual Pages run `35583954868` built and deployed both documentation jobs, and the
