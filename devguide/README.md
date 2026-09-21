@@ -18,6 +18,14 @@ The separate suite-wide release-version rollout in `uibcdf/molsyssuite#32` must 
 its unsupported versioningit filter before this repository adopts that new gate; it does
 not revoke the independently verified Python 3.14 product support.
 
+**Resolved defect (2026-09-21):** `uibcdf/gh-run-receptor#50` addressed a compact CI
+diagnosis that selected the runner's generic exit line instead of a failed pytest test.
+Bounded log-text recognition names the test on the original Ackredit run and a second
+SMonitor failure while preserving GitHub's failed conclusion. The 451-test local suite,
+Ruff, and developer-guide validation passed; the
+[archived bug report](archive/resolved_bugs/pytest_failures_hidden_by_runner_exit.md)
+records the evidence boundary and the opt-in artifact alternative.
+
 ## Current state
 
 The project has published and independently verified stable `1.0.0` GitHub Release assets,

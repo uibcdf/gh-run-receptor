@@ -15,6 +15,7 @@ MAX_MEMBER_BYTES = 32 * 1024 * 1024
 MAX_EXPANDED_BYTES = 256 * 1024 * 1024
 MAX_LINE_BYTES = 16 * 1024
 MAX_CAUSE_CHARACTERS = 500
+MAX_PYTEST_SUMMARY_LINES = 128
 
 _ANSI = re.compile(r"\x1b(?:\[[0-?]*[ -/]*[@-~]|\][^\x07]*(?:\x07|\x1b\\))")
 _TIMESTAMP = re.compile(r"^\d{4}-\d{2}-\d{2}T\S+Z\s+")
@@ -28,6 +29,10 @@ _STRUCTURED_DIAGNOSTIC = re.compile(
     r"INCOMPLETE|UNKNOWN)\b",
     re.IGNORECASE,
 )
+_PYTEST_FAILED = re.compile(r"^FAILED\s+(\S+::\S+)\s+-\s+\S")
+_PYTEST_RECEPTOR_FAILURE = re.compile(r"^FAIL exit=[1-9][0-9]*\s*\|")
+# Match the command suggestion printed by pytest-receptor; never execute it.
+_PYTEST_RECEPTOR_RERUN = re.compile(r"^\s*rerun:\s+(?:uv run )?pytest\s+(\S+::\S+)(?:\s|$)")
 _GITHUB_TOKEN = re.compile(r"\bgh[pousr]_[A-Za-z0-9_]{20,}\b")
 _AUTHORIZATION = re.compile(r"(?i)\b(authorization\s*:\s*(?:bearer|token)\s+)\S+")
 _CREDENTIAL_ASSIGNMENT = re.compile(
@@ -53,6 +58,9 @@ def _clean_line(raw: bytes) -> str:
 
 
 def _candidate(message: str, line: int) -> Candidate | None:
+    if match := _PYTEST_FAILED.match(message):
+        nodeid = match.group(1).replace("\\", "/")
+        return Candidate(75, line, "pytest_test", f"pytest failed: {nodeid}")
     lowered = message.lower()
     command_missing = (
         "command not found" in lowered
@@ -149,9 +157,26 @@ def extract_causes(
                     continue
                 candidates: list[Candidate] = []
                 previous: tuple[str, int] | None = None
+                receptor_failure_line: int | None = None
                 with zipped.open(info) as stream:
                     for line_number, raw in _bounded_lines(stream):
                         message = _clean_line(raw)
+                        if _PYTEST_RECEPTOR_FAILURE.match(message):
+                            receptor_failure_line = line_number
+                        elif (
+                            receptor_failure_line is not None
+                            and line_number - receptor_failure_line <= MAX_PYTEST_SUMMARY_LINES
+                            and (rerun := _PYTEST_RECEPTOR_RERUN.match(message))
+                        ):
+                            nodeid = rerun.group(1).replace("\\", "/")
+                            candidates.append(
+                                Candidate(
+                                    75,
+                                    line_number,
+                                    "pytest_test",
+                                    f"pytest failed: {nodeid}",
+                                )
+                            )
                         if candidate := _candidate(message, line_number):
                             candidates.append(candidate)
                             if (

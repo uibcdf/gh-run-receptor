@@ -86,6 +86,30 @@ def test_failed_run_preserves_official_state_and_failed_step():
     assert "| steps: Build" not in rendered
 
 
+def test_pytest_failure_is_named_without_changing_official_failure(tmp_path):
+    evidence = _evidence()
+    evidence["jobs.json"]["jobs"][0]["name"] = "Test on Windows, Python 3.12"
+    with zipfile.ZipFile(tmp_path / "logs.zip", "w") as zipped:
+        zipped.writestr(
+            "2_Test on Windows, Python 3.12.txt",
+            "FAIL exit=1 | 1 failed, 463 passed | 6.00s | 1 root cause\n"
+            "    rerun: pytest tests\\test_core.py::test_frame_time -q\n"
+            "##[error]Process completed with exit code 1.\n",
+        )
+    manifest = _manifest()
+    manifest["members"] = [{"path": "logs.zip"}]
+
+    report = build_report(manifest, evidence, bundle_directory=tmp_path, profile="ci")
+    rendered = render_llm(report)
+
+    assert report["github"] == {"status": "completed", "conclusion": "failure"}
+    assert report["receptor"]["assessment"] == "FAIL"
+    assert exit_code(report) == 1
+    assert "pytest failed: tests/test_core.py::test_frame_time" in rendered
+    assert "Process completed with exit code" not in rendered
+    assert len(rendered.encode("utf-8")) < 2_000
+
+
 def test_incomplete_evidence_has_precedence_in_exit_code():
     report = build_report(_manifest(complete=False), _evidence())
 

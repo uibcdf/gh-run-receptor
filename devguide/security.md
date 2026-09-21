@@ -84,6 +84,11 @@ and credential-shaped assignments before storage in a report. A structured workf
 verdict is eligible only when immediately adjacent to a generic process-exit marker;
 arbitrary neighboring log text does not become causal evidence. This deterministic
 allow-list supplements but does not replace GitHub's masking of registered secrets.
+For a GitHub-failed job, an anchored pytest `FAILED <nodeid> - <reason>` line or a
+pytest-receptor `FAIL exit=...` verdict with a `rerun: pytest <nodeid>` line within 128
+log lines may identify one failed test. This remains a redacted, bounded inference from
+untrusted log text, not a replacement for GitHub's conclusion. A `rerun:` line is read
+as text; the receptor never executes it.
 
 The Action HTML-escapes untrusted report text before writing the Markdown summary, rejects
 multiline scalar outputs and unsafe report names, bounds the summary to 32 KiB and report
