@@ -35,6 +35,8 @@ The 1.1.1 canonical client guide has been byte-synchronized to eleven clean sibl
 repositories. MolSysViewer was deliberately excluded because its guide already has
 uncommitted changes from another workstream and its checkout is behind `origin/main`;
 do not overwrite that work. Its 1.1.1 guide sync remains a coordination follow-up.
+Manual Pages run `35583954868` built and deployed both documentation jobs, and the
+public installation page was fetched independently with the 1.1.1 wheel URL present.
 
 ## Current state
 
