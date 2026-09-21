@@ -2,7 +2,7 @@
 
 [![MolSysSuite: Developer Tool](https://img.shields.io/badge/MolSysSuite-developer%20tool-6f42c1?labelColor=24292f)](https://github.com/uibcdf/molsyssuite/blob/main/devguide/repository_badges.md#developer-tool)
 [![MolSysSuite policy](https://github.com/uibcdf/gh-run-receptor/actions/workflows/molsyssuite-policy.yml/badge.svg?branch=main)](https://github.com/uibcdf/gh-run-receptor/actions/workflows/molsyssuite-policy.yml)
-[![Python 3.11 | 3.12 | 3.13](https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13-3776AB?logo=python&logoColor=white)](https://github.com/uibcdf/molsyssuite/blob/main/devguide/python_policy.md)
+[![Python 3.11 | 3.12 | 3.13 | 3.14](https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-3776AB?logo=python&logoColor=white)](https://github.com/uibcdf/molsyssuite/blob/main/devguide/python_policy.md)
 [![License](https://img.shields.io/github/license/uibcdf/gh-run-receptor)](https://github.com/uibcdf/gh-run-receptor/blob/main/LICENSE)
 [![Documentation](https://github.com/uibcdf/gh-run-receptor/actions/workflows/docs.yml/badge.svg?branch=main)](https://www.uibcdf.org/gh-run-receptor/)
 [![GitHub release](https://img.shields.io/github/v/release/uibcdf/gh-run-receptor)](https://github.com/uibcdf/gh-run-receptor/releases/latest)
@@ -14,11 +14,11 @@ the captured evidence.
 
 Version 1.0 is the stable read-only contract: it uses exact workflow identities and does
 not include pattern or organization-level configuration. No package has been published to
-a package index. The `1.0.0` source release can inspect, watch, replay, compare, and
+a package index. The `1.1.0` source release can inspect, watch, replay, compare, and
 aggregate structured run evidence. Install the GitHub CLI extension at the exact tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 1.0.0
+gh extension install uibcdf/gh-run-receptor --pin 1.1.0
 gh run-receptor --version
 ```
 
@@ -78,7 +78,7 @@ jobs:
   report:
     runs-on: ubuntu-latest
     steps:
-      - uses: uibcdf/gh-run-receptor@1.0.0
+      - uses: uibcdf/gh-run-receptor@1.1.0
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
@@ -97,7 +97,7 @@ High-assurance consumers may pin the full release commit SHA instead of the tag.
 A small dedicated reporter can keep its full `config@1` policy beside the invocation:
 
 ```yaml
-      - uses: uibcdf/gh-run-receptor@1.0.0
+      - uses: uibcdf/gh-run-receptor@1.1.0
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
@@ -141,7 +141,7 @@ It explicitly labels the profile interpretation as published rather than indepen
 recomputed. Use `inspect SOURCE_RUN_ID` as the fallback when the artifact is absent,
 expired, or insufficient for the decision.
 
-Version `1.0.0` provides a reusable terminal reporter. A client keeps the
+Version `1.1.0` provides a reusable terminal reporter. A client keeps the
 `workflow_run` trigger and delegates the complete reporting job:
 
 ```yaml
@@ -158,7 +158,7 @@ permissions:
 
 jobs:
   report:
-    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@1.0.0
+    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@1.1.0
     with:
       run-id: ${{ github.event.workflow_run.id }}
       repository: ${{ github.repository }}
@@ -388,9 +388,9 @@ Python package index remains a future distribution mode.
 The source compatibility gate checked the Python console command, full test
 suite, wheel and source-distribution build, wheel installation, and an outside-checkout
 smoke test on GitHub-hosted Ubuntu, macOS, and Windows with Python 3.11, 3.12, 3.13, and
-3.14 (hosted run 35573590298, 12/12 passed). The published 1.0.0 release retains its
-original Python 3.11--3.13 claim until the new release is publicly delivered and
-verified. The GitHub CLI script-extension and
+3.14 (exact-tag candidate run 35573910621, 12/12 passed). Release 1.1.0 publishes the
+Python 3.11--3.14 contract; the historical 1.0.0 release remains limited to 3.11--3.13.
+The GitHub CLI script-extension and
 Action paths are also validated on all three operating systems; the minimum GitHub CLI
 binary gate is Linux amd64 because it tests a transport version, not an OS support matrix.
 

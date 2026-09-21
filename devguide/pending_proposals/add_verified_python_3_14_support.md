@@ -99,6 +99,17 @@ console command outside the checkout. The public 1.0.0 release remains scoped to
 3.11--3.13. The immutable 1.1.0 GitHub Release, public asset checks, and an independent
 clean Python 3.14 installed-product check are still required for admission.
 
+The final release commit `d4a639b5a9eb3ce5a72daa407b42f8fe8e69b285` passed all
+twelve cells again in run `35573910621`. The exact 1.1.0 tag built one wheel and sdist;
+its draft-first GitHub publication run `35574071616` passed. Independent release
+inspection found exactly the wheel, sdist, and SHA256SUMS, with GitHub asset digests;
+downloading them and running `sha256sum -c SHA256SUMS` verified both distributions.
+A fresh CPython 3.14.7 virtual environment installed the public wheel, imported version
+1.1.0 from `site-packages` with `Requires-Python: <3.15,>=3.11`, and executed the console
+command. A pinned 1.1.0 GitHub CLI extension installed into a separate XDG data directory
+also reported 1.1.0 and resolved the exact release SHA. No PyPI or Conda distribution is
+claimed. The 1.0.0 release remains historically limited to Python 3.11--3.13.
+
 ## What was refuted
 
 - A new Conda publication workflow is not required. The stable product deliberately makes

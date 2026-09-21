@@ -23,7 +23,7 @@ jobs:
   report:
     runs-on: ubuntu-latest
     steps:
-      - uses: uibcdf/gh-run-receptor@1.0.0
+      - uses: uibcdf/gh-run-receptor@1.1.0
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
@@ -56,7 +56,7 @@ permissions:
 
 jobs:
   report:
-    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@1.0.0
+    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@1.1.0
     with:
       run-id: ${{ github.event.workflow_run.id }}
       repository: ${{ github.repository }}

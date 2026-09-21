@@ -51,7 +51,7 @@ def test_readme_badges_reference_real_project_surfaces():
         "actions/workflows/molsyssuite-policy.yml/badge.svg?branch=main",
         "actions/workflows/docs.yml/badge.svg?branch=main",
         "img.shields.io/github/v/release/uibcdf/gh-run-receptor",
-        "img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13-3776AB",
+        "img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-3776AB",
         "img.shields.io/github/license/uibcdf/gh-run-receptor",
     )
     for target in expected_targets:
@@ -68,7 +68,7 @@ def test_stable_release_surfaces_pin_one_version_and_maturity():
     ]
 
     assert "Development Status :: 5 - Production/Stable" in configuration["project"]["classifiers"]
-    assert all("1.0.0" in surface for surface in surfaces)
+    assert all("1.1.0" in surface for surface in surfaces)
     assert all("pre-1.0" not in surface and "preview tag" not in surface for surface in surfaces)
 
 

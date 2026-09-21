@@ -47,7 +47,8 @@ cross-component feedback, and issue ownership.
 
 ## Implementation baseline
 
-- The stable implementation is a Python 3.11--3.13 package and CLI.
+- Release 1.1.0 supports Python 3.11--3.14 as a package and CLI; older 1.0.0 artifacts
+  retain their original 3.11--3.13 support boundary.
 - Keep the import package at repository root, matching the flat MolSysSuite layout; do not
   reintroduce a `src/` directory without a measured packaging reason.
 - Use the installed `gh` command for authentication and GitHub API transport. Do not add

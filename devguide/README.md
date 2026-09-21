@@ -5,15 +5,15 @@ stable product boundary, architectural decisions, rule model, and post-1.0 route
 Documents should distinguish settled decisions from hypotheses that still require
 evidence.
 
-**Current transition checkpoint (2026-09-21):** The source candidate for Python 3.14
-aligns package metadata, twelve-cell hosted configuration, and local contract tests;
-445 tests passed with 12 workers after stabilizing generated IDs for malicious ZIP
-fixtures. Hosted compatibility run 35573590298 passed all 12/12 cells. The immutable
-release, public artifact installation, and synchronized client guide remain pending.
-Release 1.0.0 and the public Python badge
-still claim only 3.11--3.13. Resume at
+**Current transition checkpoint (2026-09-21):** Release 1.1.0 published Python 3.14
+support after 445 local tests with 12 workers and an exact-commit hosted compatibility
+matrix (run 35573910621, 12/12). Draft-first release run 35574071616 passed. The wheel,
+sdist and checksum manifest were downloaded and verified independently; a fresh Python
+3.14.7 installation of the public wheel and an isolated pinned CLI extension both
+reported 1.1.0. The canonical guide and public badge now describe the delivered contract;
+historical release 1.0.0 remains scoped to 3.11--3.13. Resume at
 [`pending_proposals/add_verified_python_3_14_support.md`](pending_proposals/add_verified_python_3_14_support.md)
-and `uibcdf/gh-run-receptor#49`; do not mark support admitted before public delivery.
+and `uibcdf/gh-run-receptor#49` to close the local report and synchronize client copies.
 
 ## Current state
 
