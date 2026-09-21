@@ -340,6 +340,14 @@ def test_artifact_inventory_and_digest_fail_closed(artifact_overrides, message):
         (_archive(b'{"schema":"x","schema":"y"}'), "duplicate JSON key"),
         (_archive(b"not json"), "invalid JSON"),
     ],
+    ids=(
+        "path-traversal",
+        "extra-member",
+        "wrong-name",
+        "symlink",
+        "duplicate-key",
+        "invalid-json",
+    ),
 )
 def test_hostile_or_malformed_archives_fail_closed(archive, message):
     with pytest.raises(BundleError, match=message):

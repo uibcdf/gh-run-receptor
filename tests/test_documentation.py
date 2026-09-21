@@ -51,8 +51,8 @@ def test_readme_badges_reference_real_project_surfaces():
         "actions/workflows/molsyssuite-policy.yml/badge.svg?branch=main",
         "actions/workflows/docs.yml/badge.svg?branch=main",
         "img.shields.io/github/v/release/uibcdf/gh-run-receptor",
-        "img.shields.io/badge/python-3.11--3.13-blue.svg",
-        "img.shields.io/badge/License-MIT-yellow.svg",
+        "img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13-3776AB",
+        "img.shields.io/github/license/uibcdf/gh-run-receptor",
     )
     for target in expected_targets:
         assert target in readme

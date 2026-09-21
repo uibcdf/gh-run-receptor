@@ -7,8 +7,9 @@ small print to discover after a release decision.
 
 - Version 1.0 is distributed as a GitHub CLI script extension and verified GitHub Release
   artifacts, not through PyPI or Conda.
-- The public Python support window is 3.11 through 3.13. A standalone binary is not
-  published.
+- Current source candidates cover Python 3.11 through 3.14. The public 1.0.0 artifact
+  retains its original 3.11--3.13 claim until a new release passes the twelve-cell
+  compatibility gate. A standalone binary is not published.
 - GitHub CLI 2.48.0 is the tested network floor; alternate GitHub Enterprise Server and
   older runner behavior is not broadly claimed.
 

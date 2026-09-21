@@ -4,12 +4,14 @@
 
 | Component | Supported boundary |
 | :--- | :--- |
-| Python | 3.11, 3.12, or 3.13 |
+| Python | Current source: 3.11, 3.12, 3.13, or 3.14; release 1.0.0: 3.11--3.13 |
 | GitHub CLI | 2.48.0 or newer for network commands |
 | Operating systems | Linux, macOS, and Windows |
 | GitHub host | `github.com`; alternate hostnames may be selected explicitly |
 
-The Python and operating-system combinations are exercised in a nine-job hosted matrix.
+The current source contract requests a twelve-job hosted matrix. Release 1.0.0
+retains the nine-job Python 3.11--3.13 evidence recorded at publication; Python 3.14 is
+not a claim for that historical artifact.
 GitHub CLI 2.48.0 is tested independently as the functional floor required for paginated
 API acquisition. Prefer the latest patched stable GitHub CLI for security maintenance.
 

@@ -4,6 +4,9 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+- Extend the source candidate and twelve-cell compatibility contract through Python 3.14
+  while retaining Python 3.11 and every stable 1.0 product and serialization boundary.
+
 ## 1.0.0 - 2026-09-19
 
 - Publish the audited read-only product boundary as stable without adding commands,

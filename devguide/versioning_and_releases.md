@@ -31,6 +31,14 @@ wheel installation, and outside-checkout console smoke test on Ubuntu, macOS, an
 with Python 3.11, 3.12, and 3.13. This is evidence for the Python package and console
 entry point; script-extension support requires its own installation gate.
 
+For the Python 3.14 transition tracked by `uibcdf/gh-run-receptor#49`, the candidate
+matrix contains twelve cells (three operating systems times Python 3.11--3.14). Passing
+that matrix and testing a source wheel authorizes release preparation, not a public
+support claim. Publish the exact tag through the draft-first workflow and independently
+install its public wheel and pinned GitHub CLI extension on a clean Python 3.14
+environment before changing the public badge, canonical client guide, or suite registry
+to 3.14. Keep the 1.0.0 evidence and historical guidance scoped to their actual tag.
+
 A tag identifies source but does not by itself publish a package or GitHub Release. Those
 are separate, explicit release steps.
 

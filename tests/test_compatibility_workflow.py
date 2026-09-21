@@ -14,10 +14,10 @@ def test_compatibility_workflow_is_manual_bounded_and_complete():
     assert "permissions:\n  contents: read" in source
     assert "fail-fast: false" in source
     assert "timeout-minutes: 15" in source
-    assert source.count("os: ubuntu-latest") == 3
-    assert source.count("os: macos-latest") == 3
-    assert source.count("os: windows-latest") == 3
-    for python in ("3.11", "3.12", "3.13"):
+    assert source.count("os: ubuntu-latest") == 4
+    assert source.count("os: macos-latest") == 4
+    assert source.count("os: windows-latest") == 4
+    for python in ("3.11", "3.12", "3.13", "3.14"):
         assert source.count(f'python: "{python}"') == 3
     assert "python -m pytest --receptor=llm" in source
     assert "python -m build" in source

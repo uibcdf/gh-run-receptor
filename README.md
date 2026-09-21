@@ -385,9 +385,11 @@ directly with `./gh-run-receptor --help`. Starting with 0.17.0, each GitHub Rele
 the exact wheel, source distribution, and `SHA256SUMS` manifest built from its tag. A
 Python package index remains a future distribution mode.
 
-The Python console command, full test suite, wheel and source-distribution build, wheel
-installation, and an outside-checkout smoke test are verified on GitHub-hosted Ubuntu,
-macOS, and Windows with Python 3.11, 3.12, and 3.13. The GitHub CLI script-extension and
+The candidate source compatibility gate checks the Python console command, full test
+suite, wheel and source-distribution build, wheel installation, and an outside-checkout
+smoke test on GitHub-hosted Ubuntu, macOS, and Windows with Python 3.11, 3.12, 3.13, and
+3.14. The published 1.0.0 release retains its original Python 3.11--3.13 claim until a
+new release completes that twelve-cell gate. The GitHub CLI script-extension and
 Action paths are also validated on all three operating systems; the minimum GitHub CLI
 binary gate is Linux amd64 because it tests a transport version, not an OS support matrix.
 

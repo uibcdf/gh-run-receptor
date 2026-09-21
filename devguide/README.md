@@ -5,6 +5,15 @@ stable product boundary, architectural decisions, rule model, and post-1.0 route
 Documents should distinguish settled decisions from hypotheses that still require
 evidence.
 
+**Current transition checkpoint (2026-09-21):** The source candidate for Python 3.14
+aligns package metadata, twelve-cell hosted configuration, and local contract tests;
+445 tests passed with 12 workers after stabilizing generated IDs for malicious ZIP
+fixtures. The hosted compatibility matrix, immutable release, public artifact installation,
+and synchronized client guide remain pending. Release 1.0.0 and the public Python badge
+still claim only 3.11--3.13. Resume at
+[`pending_proposals/add_verified_python_3_14_support.md`](pending_proposals/add_verified_python_3_14_support.md)
+and `uibcdf/gh-run-receptor#49`; do not mark support admitted before public delivery.
+
 ## Current state
 
 The project has published and independently verified stable `1.0.0` GitHub Release assets,
