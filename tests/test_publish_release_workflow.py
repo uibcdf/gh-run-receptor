@@ -27,7 +27,7 @@ def test_release_workflow_checks_exact_tag_before_building():
     assert "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7" in source
     assert "actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7" in source
     assert "ref: ${{ inputs.tag }}" in source
-    assert "^[0-9]+\\.[0-9]+\\.[0-9]+$" in source
+    assert "^(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)\\.(0|[1-9][0-9]*)$" in source
     assert 'test "$GITHUB_REF" = "refs/tags/$RELEASE_TAG"' in source
     assert 'git tag --points-at HEAD --list "$RELEASE_TAG"' in source
     assert 'git rev-list -n 1 "$RELEASE_TAG"' in source

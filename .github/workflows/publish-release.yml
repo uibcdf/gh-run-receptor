@@ -39,7 +39,7 @@ jobs:
       - name: Verify exact tag identity
         shell: bash
         run: |
-          if [[ ! "$RELEASE_TAG" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          if [[ ! "$RELEASE_TAG" =~ ^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
             printf 'Release tag must use X.Y.Z without a prefix: %s\n' "$RELEASE_TAG" >&2
             exit 1
           fi
