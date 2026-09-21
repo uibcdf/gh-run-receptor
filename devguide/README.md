@@ -25,8 +25,16 @@ SMonitor failure while preserving GitHub's failed conclusion. The 451-test local
 Ruff, and developer-guide validation passed; the
 [archived bug report](archive/resolved_bugs/pytest_failures_hidden_by_runner_exit.md)
 records the evidence boundary and the opt-in artifact alternative.
-Patch 1.1.1 is being prepared to distribute that fix; until its exact tag and release
-are verified, 1.1.0 remains the latest published version.
+Release 1.1.1 is now public. Draft-first run `35582734192` passed; the exact tag, all
+three GitHub assets and their hashes, isolated public-wheel import, and replay of both
+original failure cases were independently verified. Zenodo record
+`10.5281/zenodo.22871415` was also verified, with one source ZIP rather than the GitHub
+Release assets. See [versioning and releases](versioning_and_releases.md) for that
+inventory and the unchanged compatibility boundary.
+The 1.1.1 canonical client guide has been byte-synchronized to eleven clean sibling
+repositories. MolSysViewer was deliberately excluded because its guide already has
+uncommitted changes from another workstream and its checkout is behind `origin/main`;
+do not overwrite that work. Its 1.1.1 guide sync remains a coordination follow-up.
 
 ## Current state
 

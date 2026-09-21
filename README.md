@@ -14,11 +14,11 @@ the captured evidence.
 
 Version 1.0 is the stable read-only contract: it uses exact workflow identities and does
 not include pattern or organization-level configuration. No package has been published to
-a package index. The `1.1.0` source release can inspect, watch, replay, compare, and
+a package index. The `1.1.1` source release can inspect, watch, replay, compare, and
 aggregate structured run evidence. Install the GitHub CLI extension at the exact tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 1.1.0
+gh extension install uibcdf/gh-run-receptor --pin 1.1.1
 gh run-receptor --version
 ```
 
@@ -78,7 +78,7 @@ jobs:
   report:
     runs-on: ubuntu-latest
     steps:
-      - uses: uibcdf/gh-run-receptor@1.1.0
+      - uses: uibcdf/gh-run-receptor@1.1.1
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
@@ -97,7 +97,7 @@ High-assurance consumers may pin the full release commit SHA instead of the tag.
 A small dedicated reporter can keep its full `config@1` policy beside the invocation:
 
 ```yaml
-      - uses: uibcdf/gh-run-receptor@1.1.0
+      - uses: uibcdf/gh-run-receptor@1.1.1
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
@@ -141,7 +141,7 @@ It explicitly labels the profile interpretation as published rather than indepen
 recomputed. Use `inspect SOURCE_RUN_ID` as the fallback when the artifact is absent,
 expired, or insufficient for the decision.
 
-Version `1.1.0` provides a reusable terminal reporter. A client keeps the
+Version `1.1.1` provides a reusable terminal reporter. A client keeps the
 `workflow_run` trigger and delegates the complete reporting job:
 
 ```yaml
@@ -158,7 +158,7 @@ permissions:
 
 jobs:
   report:
-    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@1.1.0
+    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@1.1.1
     with:
       run-id: ${{ github.event.workflow_run.id }}
       repository: ${{ github.repository }}

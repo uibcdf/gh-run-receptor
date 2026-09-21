@@ -40,7 +40,10 @@ local unless explicitly reviewed and sanitized.
 ## Interpretation coverage
 
 - Built-in profiles are initial vertical slices, not general CI semantics for every tool.
-- Generic log diagnosis recognizes a deliberately small bounded signature set.
+- Generic log diagnosis recognizes a deliberately small bounded signature set. Since
+  1.1.1, it can name a failed pytest test from an anchored pytest summary or a bounded
+  pytest-receptor `FAIL` plus printed `rerun:` hint; this is untrusted log inference,
+  not structured test-result ingestion or an instruction to execute the hint.
 - Automatic discovery uses conservative signals and falls back to `generic` rather than
   guessing a specialized profile.
 - Workflow rules support exact path, numeric ID, or exact display name. Patterns and

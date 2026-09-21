@@ -68,7 +68,7 @@ def test_stable_release_surfaces_pin_one_version_and_maturity():
     ]
 
     assert "Development Status :: 5 - Production/Stable" in configuration["project"]["classifiers"]
-    assert all("1.1.0" in surface for surface in surfaces)
+    assert all("1.1.1" in surface for surface in surfaces)
     assert all("pre-1.0" not in surface and "preview tag" not in surface for surface in surfaces)
 
 

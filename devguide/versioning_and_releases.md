@@ -38,13 +38,22 @@ Python 3.14 environment. Future platform-support changes still require the hoste
 and installed-product verification before updating public claims. Keep the 1.0.0 evidence
 and historical guidance scoped to their actual tag.
 
-Patch candidate 1.1.1 carries the log-cause correction tracked by
-`uibcdf/gh-run-receptor#50`. Its local gate includes the full suite, Ruff, frozen-contract
-validation, citation agreement, wheel/sdist construction, and an isolated installed-wheel
-check. The original Ackredit and SMonitor failures must name their tests while retaining
-GitHub's failed conclusion. This patch does not change Python support, serialized
-contracts, or the GitHub Action/reusable-workflow interface. A tag and GitHub Release are
-separate decisions; public distribution still requires the exact-tag draft-first workflow.
+Release 1.1.1 carries the log-cause correction tracked by
+`uibcdf/gh-run-receptor#50`. Its local gate passed 451 tests with twelve workers, Ruff,
+all nine frozen-contract checks, citation agreement, strict documentation, exact-tag
+wheel/sdist construction, and an isolated installed-wheel check. The tag points to
+`3ff6d3c29a8b12ddc86a4ef2a02b6367f2c774c9`. Draft-first publication run
+`35582734192` passed; the public release contained exactly the wheel, source archive,
+and checksum manifest, which were independently downloaded and hash-verified. The public
+wheel replayed the original Ackredit and SMonitor failures, named their tests, and retained
+GitHub's failed conclusion. This patch changes neither Python support nor serialized
+contracts nor the GitHub Action/reusable-workflow interface.
+
+Zenodo independently archived version 1.1.1 as DOI `10.5281/zenodo.22871415` under
+concept DOI `10.5281/zenodo.22843377`. Its observed file inventory is exactly one
+GitHub-generated source ZIP, `uibcdf/gh-run-receptor-1.1.1.zip` (582,251 bytes); do not
+claim that Zenodo archived the three GitHub Release assets. The GitHub Release remains
+the authoritative wheel/sdist download surface.
 
 A tag identifies source but does not by itself publish a package or GitHub Release. Those
 are separate, explicit release steps.

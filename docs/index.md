@@ -9,7 +9,7 @@ by a human, an agent, or another tool. It never changes the workflow run.
 
 ```{note}
 Version 1.0 is the stable read-only evidence contract, with exact workflow identities and
-no pattern or organization-level configuration. Pin the exact `1.1.0` release and read
+no pattern or organization-level configuration. Pin the exact `1.1.1` release and read
 [Compatibility and contracts](contracts.md) before depending on a serialized boundary.
 ```
 
@@ -48,9 +48,9 @@ benchmarks
 Install the exact GitHub CLI extension release:
 
 ```console
-$ gh extension install uibcdf/gh-run-receptor --pin 1.1.0
+$ gh extension install uibcdf/gh-run-receptor --pin 1.1.1
 $ gh run-receptor --version
-1.1.0
+1.1.1
 ```
 
 Then inspect a completed run:
