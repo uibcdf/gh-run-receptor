@@ -8,8 +8,9 @@ evidence.
 **Current transition checkpoint (2026-09-21):** The source candidate for Python 3.14
 aligns package metadata, twelve-cell hosted configuration, and local contract tests;
 445 tests passed with 12 workers after stabilizing generated IDs for malicious ZIP
-fixtures. The hosted compatibility matrix, immutable release, public artifact installation,
-and synchronized client guide remain pending. Release 1.0.0 and the public Python badge
+fixtures. Hosted compatibility run 35573590298 passed all 12/12 cells. The immutable
+release, public artifact installation, and synchronized client guide remain pending.
+Release 1.0.0 and the public Python badge
 still claim only 3.11--3.13. Resume at
 [`pending_proposals/add_verified_python_3_14_support.md`](pending_proposals/add_verified_python_3_14_support.md)
 and `uibcdf/gh-run-receptor#49`; do not mark support admitted before public delivery.

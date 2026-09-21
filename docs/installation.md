@@ -9,9 +9,10 @@
 | Operating systems | Linux, macOS, and Windows |
 | GitHub host | `github.com`; alternate hostnames may be selected explicitly |
 
-The current source contract requests a twelve-job hosted matrix. Release 1.0.0
+The current source contract passed a twelve-job hosted matrix in run 35573590298.
+Release 1.0.0
 retains the nine-job Python 3.11--3.13 evidence recorded at publication; Python 3.14 is
-not a claim for that historical artifact.
+not a claim for that historical artifact or for an unpublished 1.1.0 candidate.
 GitHub CLI 2.48.0 is tested independently as the functional floor required for paginated
 API acquisition. Prefer the latest patched stable GitHub CLI for security maintenance.
 
