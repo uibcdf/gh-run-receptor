@@ -48,6 +48,9 @@ and checksum manifest, which were independently downloaded and hash-verified. Th
 wheel replayed the original Ackredit and SMonitor failures, named their tests, and retained
 GitHub's failed conclusion. This patch changes neither Python support nor serialized
 contracts nor the GitHub Action/reusable-workflow interface.
+An isolated GitHub CLI extension installed from the public `1.1.1` tag resolved to the
+same commit, reported version 1.1.1, and named the Ackredit test in its compact report
+while retaining process status 1.
 
 Zenodo independently archived version 1.1.1 as DOI `10.5281/zenodo.22871415` under
 concept DOI `10.5281/zenodo.22843377`. Its observed file inventory is exactly one
