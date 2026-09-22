@@ -108,3 +108,5 @@ cross-component feedback, and issue ownership.
 - `devguide/development_roadmap.md`
 - `devguide/release_readiness_1_0.md`
 - `standards/GH_RUN_RECEPTOR_GUIDE.md`
+- `PYTEST_RECEPTOR_GUIDE.md` — synchronized, read-only contract for the pytest renderer
+  used by this repository's test commands.
