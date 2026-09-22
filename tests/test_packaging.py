@@ -17,9 +17,9 @@ def test_python_support_metadata_matches_the_authorized_transition():
     } <= set(project["classifiers"])
 
 
-def test_transition_uses_the_transition_aware_suite_policy():
+def test_suite_policy_caller_pins_current_release():
     workflow = (ROOT / ".github" / "workflows" / "molsyssuite-policy.yml").read_text(
         encoding="utf-8"
     )
 
-    assert "check-python-repository.yaml@policy-v1.3.0" in workflow
+    assert "check-python-repository.yaml@policy-v1.4.6" in workflow
