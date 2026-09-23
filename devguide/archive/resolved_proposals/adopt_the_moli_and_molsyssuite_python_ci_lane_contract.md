@@ -1,12 +1,12 @@
 ---
 summary: Adopt the MOLI and MolSysSuite Python CI lane contract
 issue: uibcdf/gh-run-receptor#52
-status: open
+status: resolved
 opened: 2026-09-23
-closed:
-verification: inspected
+closed: 2026-09-23
+verification: measured
 area: [tests, governance]
-guard:
+guard: tests/test_python_ci_lanes.py
 normative:
 blocked_by: []
 supersedes: []
@@ -131,3 +131,18 @@ The MolSysSuite repository checker passed, and its CI lane inventory detected th
 routine push and pull-request jobs and all 12 scheduled and dispatch matrix cells
 as gating test lanes. Hosted results and the first manual weekly dispatch remain
 required before this issue can be closed.
+
+## Resolution evidence (2026-09-23)
+
+Commit `579ca8687f0258193f12fccfd58d27749cd2c6d4` published the new
+workflows, the `policy-v1.4.9` caller, and the synchronized governance guide.
+The [routine push run](https://github.com/uibcdf/gh-run-receptor/actions/runs/35907780043)
+and [MolSysSuite policy run](https://github.com/uibcdf/gh-run-receptor/actions/runs/35907780798)
+completed successfully. The first manually dispatched
+[weekly matrix](https://github.com/uibcdf/gh-run-receptor/actions/runs/35907790354)
+completed successfully on the same commit: all 12 Linux, macOS, and Windows
+jobs for Python 3.11–3.14 passed, including the complete package-suite step.
+The local regression guard is `tests/test_python_ci_lanes.py`; the existing
+`tests/test_compatibility_workflow.py` protects the separate manual workflow.
+The recurring schedule itself has not yet elapsed, so only its configured
+trigger and first manual execution are established.

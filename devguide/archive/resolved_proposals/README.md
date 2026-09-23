@@ -10,6 +10,7 @@
 - [#10 — Add workflow discovery and safe configuration initialization](add_workflow_discovery_and_safe_configuration_initialization.md) (`resolved`)
 - [#22 — Adopt the shared MolSysSuite policy and Ruff quality gate](adopt_molsyssuite_policy_v1.md) (`resolved`)
 - [#1 — Adopt MolSysSuite repository lifecycle and packaging conventions](adopt_molsyssuite_repository_lifecycle_and_packaging_conventions.md) (`resolved`)
+- [#52 — Adopt the MOLI and MolSysSuite Python CI lane contract](adopt_the_moli_and_molsyssuite_python_ci_lane_contract.md) (`resolved`)
 - [#38 — Aggregate multiple workflow runs without merging source truth](aggregate_multiple_workflow_runs_without_merging_source_truth.md) (`resolved`)
 - [#15 — Classify and redact GitHub acquisition failures](classify_and_redact_github_acquisition_failures.md) (`resolved`)
 - [#45 — Close the timed-out corpus gate without manufactured evidence](close_the_timed_out_corpus_gate_without_manufactured_evidence.md) (`resolved`)
