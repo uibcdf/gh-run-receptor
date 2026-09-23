@@ -22,4 +22,4 @@ def test_suite_policy_caller_pins_current_release():
         encoding="utf-8"
     )
 
-    assert "check-python-repository.yaml@policy-v1.4.6" in workflow
+    assert "check-python-repository.yaml@policy-v1.4.9" in workflow

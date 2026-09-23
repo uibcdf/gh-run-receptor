@@ -116,3 +116,18 @@ explicit replacement.
 Source and workflow inspection on 2026-09-23 in the local Linux checkout;
 the MolSysSuite inventory ran under the Python 3.13 development environment.
 No hosted run outcome is claimed in this opening report.
+
+## Implementation checkpoint (2026-09-23)
+
+The component now has separate routine and weekly workflows. `python-routine.yml`
+runs the complete package suite on Linux Python 3.13 for every push and pull request.
+`python-weekly.yml` runs the complete suite on Python 3.11–3.14 across Linux, macOS,
+and Windows each Tuesday at 05:17 UTC and allows manual dispatch. The existing
+manual compatibility workflow remains unchanged, including its build and installed
+command smoke tests. The MolSysSuite policy caller now pins `policy-v1.4.9`.
+
+Local `python -m pytest --receptor=llm` passed 453 tests; Ruff lint and format passed.
+The MolSysSuite repository checker passed, and its CI lane inventory detected the
+routine push and pull-request jobs and all 12 scheduled and dispatch matrix cells
+as gating test lanes. Hosted results and the first manual weekly dispatch remain
+required before this issue can be closed.
