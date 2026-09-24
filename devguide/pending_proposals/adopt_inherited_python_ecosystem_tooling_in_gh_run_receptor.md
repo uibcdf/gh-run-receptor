@@ -17,8 +17,8 @@ supersedes: []
 **Reported:** 2026-09-24 during the MolSysSuite rollout of the pinned MOLI
 Python ecosystem policies.
 
-**Status:** Active; developer-tool changes await hosted verification and the
-support-library applicability review remains open.
+**Status:** Active; developer-tool CI is verified and the support-library
+applicability review remains open.
 
 ## What
 
@@ -95,8 +95,9 @@ review will not be marked adopted from these CI changes alone.
 
 ## Dependencies and risks
 
-The full 12-cell weekly matrix must confirm that the exact published release
-installs on Python 3.11 through 3.14 on all three operating systems. Product
+The full 12-cell weekly matrix was required to confirm that the exact
+published release installs on Python 3.11 through 3.14 on all three systems;
+run `36032624692` supplied that evidence. Product
 runtime integration of support libraries may affect the deliberately small
 dependency surface and needs its own review before implementation.
 
@@ -106,4 +107,17 @@ Inspected on 2026-09-24 from a Linux checkout based on
 `uibcdf/gh-run-receptor@11d33a6`. Local verification used Python 3.13.15,
 Ruff 0.16.5, and a locally installed pytest-receptor development build
 `1.1.0+13.g43d37d6`; this does not verify that hosted CI resolves the newly
-pinned public `1.1.0`. Hosted results will be added after execution.
+pinned public `1.1.0`.
+
+## Hosted checkpoint
+
+Commit `fc7986a` passed the routine Python test run `36026686868` and the
+MolSysSuite policy gate `36026687941`. A manual dispatch of the weekly
+matrix, run `36032624692`, passed all twelve Linux, macOS and Windows jobs
+for Python 3.11 through 3.14. GH Run Receptor inspected each run and
+reported the authoritative successful conclusion and expected job counts.
+This verifies that the exact public pytest-receptor `1.1.0` dependency
+resolves and its `ci` profile works throughout the supported CI matrix.
+The developer-tool review can now be marked adopted in MolSysSuite; this
+member issue stays open for the independent support-library applicability
+review.
