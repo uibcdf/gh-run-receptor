@@ -31,7 +31,7 @@ def test_release_workflow_checks_exact_tag_before_building():
     assert 'test "$GITHUB_REF" = "refs/tags/$RELEASE_TAG"' in source
     assert 'git tag --points-at HEAD --list "$RELEASE_TAG"' in source
     assert 'git rev-list -n 1 "$RELEASE_TAG"' in source
-    assert "python -m pytest --receptor=llm" in source
+    assert "python -m pytest --receptor=ci" in source
     assert "validate_contracts.py --baseline 0.21.0" in source
     assert "python -m build" in source
 

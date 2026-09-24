@@ -19,7 +19,7 @@ def test_compatibility_workflow_is_manual_bounded_and_complete():
     assert source.count("os: windows-latest") == 4
     for python in ("3.11", "3.12", "3.13", "3.14"):
         assert source.count(f'python: "{python}"') == 3
-    assert "python -m pytest --receptor=llm" in source
+    assert "python -m pytest --receptor=ci" in source
     assert "python -m build" in source
     assert "working-directory: ${{ runner.temp }}" in source
     assert "0+unknown" in source

@@ -16,7 +16,7 @@ def _assert_gating_pytest(job: dict) -> None:
     assert "if" not in job
     assert "continue-on-error" not in job
     assert "strategy" not in job or job["strategy"].get("fail-fast") == "false"
-    assert any("python -m pytest --receptor=llm" in step.get("run", "") for step in job["steps"])
+    assert any("python -m pytest --receptor=ci" in step.get("run", "") for step in job["steps"])
     assert any('".[test]"' in step.get("run", "") for step in job["steps"])
 
 

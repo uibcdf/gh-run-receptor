@@ -54,7 +54,7 @@ jobs:
         run: |
           python devtools/scripts/release_tools.py citation "$RELEASE_TAG"
           python devtools/scripts/validate_contracts.py --baseline 0.21.0
-          python -m pytest --receptor=llm
+          python -m pytest --receptor=ci
 
       - name: Build and verify distributions
         shell: bash
