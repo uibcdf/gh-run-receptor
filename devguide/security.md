@@ -89,6 +89,13 @@ pytest-receptor `FAIL exit=...` verdict with a `rerun: pytest <nodeid>` line wit
 log lines may identify one failed test. This remains a redacted, bounded inference from
 untrusted log text, not a replacement for GitHub's conclusion. A `rerun:` line is read
 as text; the receptor never executes it.
+For a failed job, a Python exception is selected only when a bounded traceback contains
+a source frame and terminal exception; the summary retains the exception and source
+filename/line. A Conda solver cause is selected only when a bounded libmamba failure block
+names packages that do not exist in the selected channels. At most four such package
+constraints are retained per job. Later process-exit or setup-cleanup errors do not
+replace these primary lines. Missing, truncated, or unfamiliar logs remain unknown rather
+than supplying a guessed cause.
 
 The Action HTML-escapes untrusted report text before writing the Markdown summary, rejects
 multiline scalar outputs and unsafe report names, bounds the summary to 32 KiB and report

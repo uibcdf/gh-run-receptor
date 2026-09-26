@@ -16,6 +16,9 @@ MAX_EXPANDED_BYTES = 256 * 1024 * 1024
 MAX_LINE_BYTES = 16 * 1024
 MAX_CAUSE_CHARACTERS = 500
 MAX_PYTEST_SUMMARY_LINES = 128
+MAX_TRACEBACK_LINES = 128
+MAX_SOLVER_PACKAGES = 4
+MAX_SOLVER_LINES = 128
 
 _ANSI = re.compile(r"\x1b(?:\[[0-?]*[ -/]*[@-~]|\][^\x07]*(?:\x07|\x1b\\))")
 _TIMESTAMP = re.compile(r"^\d{4}-\d{2}-\d{2}T\S+Z\s+")
@@ -33,6 +36,13 @@ _PYTEST_FAILED = re.compile(r"^FAILED\s+(\S+::\S+)\s+-\s+\S")
 _PYTEST_RECEPTOR_FAILURE = re.compile(r"^FAIL exit=[1-9][0-9]*\s*\|")
 # Match the command suggestion printed by pytest-receptor; never execute it.
 _PYTEST_RECEPTOR_RERUN = re.compile(r"^\s*rerun:\s+(?:uv run )?pytest\s+(\S+::\S+)(?:\s|$)")
+_PYTHON_FRAME = re.compile(r'^\s+File "([^"]+)", line (\d+)')
+_PYTHON_EXCEPTION = re.compile(r"^([A-Za-z_][\w.]*(?:Error|Exception)):\s+\S")
+_SOLVER_MISSING = re.compile(
+    r"\b([A-Za-z0-9][A-Za-z0-9_.-]*)\s+([=<>!~][^,;]{0,200}),\s+"
+    r"which does not exist\b",
+    re.IGNORECASE,
+)
 _GITHUB_TOKEN = re.compile(r"\bgh[pousr]_[A-Za-z0-9_]{20,}\b")
 _AUTHORIZATION = re.compile(r"(?i)\b(authorization\s*:\s*(?:bearer|token)\s+)\S+")
 _CREDENTIAL_ASSIGNMENT = re.compile(
@@ -158,9 +168,54 @@ def extract_causes(
                 candidates: list[Candidate] = []
                 previous: tuple[str, int] | None = None
                 receptor_failure_line: int | None = None
+                traceback_line: int | None = None
+                traceback_frame: str | None = None
+                solver_start: int | None = None
+                solver_packages: list[str] = []
+                solver_line: int | None = None
                 with zipped.open(info) as stream:
                     for line_number, raw in _bounded_lines(stream):
                         message = _clean_line(raw)
+                        if message == "Traceback (most recent call last):":
+                            traceback_line = line_number
+                            traceback_frame = None
+                        if traceback_line is not None:
+                            if line_number - traceback_line > MAX_TRACEBACK_LINES:
+                                traceback_line = None
+                                traceback_frame = None
+                            elif frame := _PYTHON_FRAME.match(message):
+                                frame_path = frame.group(1).replace("\\", "/")
+                                traceback_frame = (
+                                    f"{PurePosixPath(frame_path).name}:{frame.group(2)}"
+                                )
+                            elif traceback_frame and _PYTHON_EXCEPTION.match(message):
+                                candidates.append(
+                                    Candidate(
+                                        115,
+                                        line_number,
+                                        "python_exception",
+                                        f"{message} | at {traceback_frame}",
+                                    )
+                                )
+                                traceback_line = None
+                                traceback_frame = None
+                        if "libmamba Could not solve for environment specs" in message:
+                            solver_start = line_number
+                        elif solver_start is not None and (
+                            message.startswith("##[error]")
+                            or line_number - solver_start > MAX_SOLVER_LINES
+                        ):
+                            solver_start = None
+                        if (
+                            solver_start is not None
+                            and len(solver_packages) < MAX_SOLVER_PACKAGES
+                            and (missing := _SOLVER_MISSING.search(message))
+                        ):
+                            constraint = re.sub(r"\s+\*$", "", missing.group(2)).strip()
+                            package = f"{missing.group(1)} {constraint}"
+                            if package not in solver_packages:
+                                solver_packages.append(package)
+                                solver_line = line_number
                         if _PYTEST_RECEPTOR_FAILURE.match(message):
                             receptor_failure_line = line_number
                         elif (
@@ -186,6 +241,15 @@ def extract_causes(
                             ):
                                 candidates.append(adjacent)
                         previous = (message, line_number)
+                if solver_packages:
+                    candidates.append(
+                        Candidate(
+                            110,
+                            solver_line or 1,
+                            "conda_solver",
+                            "conda packages unavailable: " + ", ".join(solver_packages),
+                        )
+                    )
                 if not candidates:
                     warnings.append(f"no causal line found for failed job: {job_name}")
                     continue

@@ -1,0 +1,8 @@
+error    libmamba Could not solve for environment specs
+    The following packages are incompatible
+    ├─ molsysmt =0.22.0 * is not installable because it requires
+    │  └─ argdigest >=0.12.1 *, which does not exist (perhaps a missing channel);
+    └─ molsysviewer =0.23.1 * is not installable because it requires
+       └─ depdigest =* *, which does not exist (perhaps a missing channel).
+##[error]The process '/runner/micromamba' failed with exit code 1
+##[error]ENOENT: no such file or directory, lstat '/runner/micromamba-shell'

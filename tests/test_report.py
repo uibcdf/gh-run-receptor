@@ -1,4 +1,5 @@
 import zipfile
+from pathlib import Path
 
 import pytest
 
@@ -6,7 +7,9 @@ from gh_run_receptor.release_profile import (
     RELEASE_CLAIM_AUTHORITIES,
     release_external_delivery_state,
 )
-from gh_run_receptor.report import build_report, exit_code, render_human, render_llm
+from gh_run_receptor.report import build_report, exit_code, render_human, render_json, render_llm
+
+_PUBLIC_LOG_EXCERPTS = Path(__file__).parent / "fixtures" / "logs"
 
 
 def _evidence(conclusion="failure", status="completed"):
@@ -125,6 +128,51 @@ def test_pytest_failure_is_named_without_changing_official_failure(tmp_path):
     assert "pytest failed: tests/test_core.py::test_frame_time" in rendered
     assert "Process completed with exit code" not in rendered
     assert len(rendered.encode("utf-8")) < 2_000
+
+
+def test_public_conda_failure_excerpts_retain_fifteen_failed_jobs(tmp_path):
+    evidence = _evidence()
+    evidence["jobs.json"]["jobs"] = []
+    with zipfile.ZipFile(tmp_path / "logs.zip", "w") as zipped:
+        for platform, count, excerpt in (
+            ("linux-64", 9, "python"),
+            ("linux-aarch64", 3, "arm"),
+            ("win-64", 3, "win"),
+        ):
+            body = (_PUBLIC_LOG_EXCERPTS / f"molsysmt_35499866604_{excerpt}.txt").read_text()
+            for number in range(count):
+                job_id = len(evidence["jobs.json"]["jobs"]) + 1
+                name = f"{platform} · Python 3.{11 + number % 3} · batch {number}"
+                evidence["jobs.json"]["jobs"].append(
+                    {
+                        "id": job_id,
+                        "name": name,
+                        "status": "completed",
+                        "conclusion": "failure",
+                        "steps": [],
+                    }
+                )
+                zipped.writestr(f"{job_id}_{name}.txt", body)
+    manifest = _manifest()
+    manifest["members"] = [{"path": "logs.zip"}]
+
+    report = build_report(manifest, evidence, bundle_directory=tmp_path, profile="conda")
+    llm = render_llm(report)
+    human = render_human(report)
+    machine = render_json(report)
+
+    assert report["github"]["conclusion"] == "failure"
+    assert report["receptor"]["assessment"] == "FAIL"
+    assert exit_code(report) == 1
+    assert report["job_counts"]["failure"] == 15
+    assert sorted(len(cause["occurrences"]) for cause in report["causes"]) == [3, 3, 9]
+    for rendered in (llm, human, machine):
+        assert "molsysviewer version is 0.23.1+0.g736e8274.dirty" in rendered
+        assert "argdigest >=0.12.1" in rendered
+        assert "depdigest =*" in rendered
+        assert "pyunitwizard >=0.24.0" in rendered
+        assert "micromamba-shell" not in rendered
+    assert len(llm.encode("utf-8")) < 2_500
 
 
 def test_incomplete_evidence_has_precedence_in_exit_code():
