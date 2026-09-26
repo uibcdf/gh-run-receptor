@@ -111,6 +111,19 @@ def _positive_interval(value: str) -> float:
     return interval
 
 
+def _expected_platforms(value: str) -> list[str]:
+    platforms = [item.strip() for item in value.split(",")]
+    if (
+        not platforms
+        or any(not item for item in platforms)
+        or len(platforms) != len(set(platforms))
+    ):
+        raise argparse.ArgumentTypeError(
+            "expected platforms must be a nonempty, unique comma-separated list"
+        )
+    return platforms
+
+
 def _add_common_options(
     parser: argparse.ArgumentParser, *, suppress_defaults: bool = False
 ) -> None:
@@ -150,6 +163,11 @@ def _parser() -> argparse.ArgumentParser:
     inspect.add_argument("--attempt", type=int)
     inspect.add_argument("--capture", choices=("full", "adaptive", "metadata"), default="adaptive")
     inspect.add_argument("--output", type=Path)
+    inspect.add_argument(
+        "--expected-platforms",
+        type=_expected_platforms,
+        help="assert a comma-separated workflow_dispatch platform subset for this report",
+    )
 
     capture = subparsers.add_parser("capture", help="capture one workflow run")
     _add_common_options(capture, suppress_defaults=True)
@@ -161,6 +179,11 @@ def _parser() -> argparse.ArgumentParser:
     replay = subparsers.add_parser("replay", help="render a saved evidence bundle")
     _add_common_options(replay, suppress_defaults=True)
     replay.add_argument("bundle", type=Path)
+    replay.add_argument(
+        "--expected-platforms",
+        type=_expected_platforms,
+        help="assert a comma-separated workflow_dispatch platform subset for this report",
+    )
     published = subparsers.add_parser(
         "published", help="verify and render one Action report artifact"
     )
@@ -182,6 +205,11 @@ def _parser() -> argparse.ArgumentParser:
     watch.add_argument("--max-interval", type=_positive_interval, default=DEFAULT_MAX_POLL_INTERVAL)
     watch.add_argument("--capture", choices=("full", "adaptive", "metadata"), default="adaptive")
     watch.add_argument("--output", type=Path)
+    watch.add_argument(
+        "--expected-platforms",
+        type=_expected_platforms,
+        help="assert a comma-separated workflow_dispatch platform subset for this report",
+    )
 
     compare = subparsers.add_parser(
         "compare", help="compare two bundles, runs, or attempts without merging evidence"
@@ -292,6 +320,7 @@ def _capture(
         evidence,
         profile=args.profile or "auto",
         bundle_directory=destination,
+        expected_platforms_override=args.expected_platforms,
     )
     print(_render(report, args.format, args.receptor), end="")
     return exit_code(report)
@@ -596,6 +625,7 @@ def main(arguments: list[str] | None = None) -> int:
             evidence,
             profile=args.profile or "auto",
             bundle_directory=args.bundle,
+            expected_platforms_override=args.expected_platforms,
         )
         print(_render(report, args.format, args.receptor), end="")
         return exit_code(report)

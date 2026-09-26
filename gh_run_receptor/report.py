@@ -11,6 +11,7 @@ from typing import Any
 from gh_run_receptor import exit_codes
 from gh_run_receptor.config import select_rule
 from gh_run_receptor.contracts import schema_id
+from gh_run_receptor.errors import BundleError
 from gh_run_receptor.logs import extract_causes
 from gh_run_receptor.model import normalize_evidence
 from gh_run_receptor.release_profile import (
@@ -466,6 +467,7 @@ def build_report(
     bundle_directory: Path | None = None,
     config_override: dict[str, Any] | None = None,
     config_source_override: dict[str, Any] | None = None,
+    expected_platforms_override: list[str] | None = None,
 ) -> dict[str, Any]:
     """Building a generic report without changing source conclusions."""
     model = normalize_evidence(manifest, evidence)
@@ -503,6 +505,29 @@ def build_report(
     settings = selected_rule.get("settings", {}) if selected_rule else {}
     expected_platforms = settings.get("expected_platforms")
     package_kind = settings.get("package_kind", "native")
+    invocation_override = None
+    if expected_platforms_override is not None:
+        selected = expected_platforms_override
+        if selected_profile != "conda" or package_kind != "native":
+            raise BundleError("expected-platform override requires a native Conda profile")
+        if evidence["run.json"].get("event") != "workflow_dispatch":
+            raise BundleError("expected-platform override requires a workflow_dispatch run")
+        if not expected_platforms:
+            raise BundleError("expected-platform override requires configured expected_platforms")
+        if (
+            not selected
+            or len(selected) != len(set(selected))
+            or not set(selected) <= set(expected_platforms)
+        ):
+            raise BundleError(
+                "expected-platform override must be a unique, nonempty configured subset"
+            )
+        expected_platforms = list(selected)
+        invocation_override = {
+            "source": "explicit_cli",
+            "platforms": list(selected),
+            "configured_platforms": list(settings["expected_platforms"]),
+        }
 
     failed_jobs = [job for job in jobs if job["conclusion"] == "failure"]
     log_member = next(
@@ -579,7 +604,20 @@ def build_report(
     ):
         assessment = "FAIL"
 
-    return {
+    warnings = [*model["warnings"], *analysis_warnings]
+    if invocation_override is not None:
+        warnings.append(
+            "expected platforms explicitly overridden for this workflow_dispatch run: "
+            + ", ".join(invocation_override["platforms"])
+        )
+    elif evidence["run.json"].get("event") == "workflow_dispatch" and missing_platforms:
+        warnings.append(
+            "workflow_dispatch inputs are unavailable in run evidence; missing configured "
+            "platforms may reflect intentional targeting; verify scope before interpreting "
+            "the expectation failure"
+        )
+
+    report = {
         "schema": schema_id("report", 1),
         "subject": model["subject"],
         "github": model["github"],
@@ -609,8 +647,11 @@ def build_report(
         "matrix": matrix,
         "causes": causes,
         "unknowns": model["unknowns"],
-        "warnings": [*model["warnings"], *analysis_warnings],
+        "warnings": warnings,
     }
+    if invocation_override is not None:
+        report["expectation_override"] = invocation_override
+    return report
 
 
 def render_json(report: dict[str, Any]) -> str:
@@ -869,6 +910,8 @@ def render_llm(report: dict[str, Any]) -> str:
             )
         if report["expectations"]["missing_platforms"]:
             fields.append("missing=" + ",".join(report["expectations"]["missing_platforms"]))
+        if override := report.get("expectation_override"):
+            fields.append("expected_platforms_override=" + ",".join(override["platforms"]))
         if receptor["profile"] != "release":
             fields.append(f"jobs={successful_jobs}/{len(report['jobs'])}")
         consumer_verification = report.get("consumer_verification")
@@ -911,6 +954,8 @@ def render_llm(report: dict[str, Any]) -> str:
         ),
         f"workflow: {_safe_text(subject['workflow'])} | jobs: {len(report['jobs'])} ({counts})",
     ]
+    if override := report.get("expectation_override"):
+        lines.append("expected platforms override: " + ", ".join(override["platforms"]))
 
     lines.extend(_non_success_job_lines(report))
 
@@ -1027,6 +1072,8 @@ def render_human(report: dict[str, Any]) -> str:
         "",
         f"Jobs ({len(report['jobs'])})",
     ]
+    if override := report.get("expectation_override"):
+        lines.insert(-2, "Expected platforms override: " + ", ".join(override["platforms"]))
     for job in report["jobs"][:MAX_HUMAN_JOBS]:
         duration = _format_duration(job["duration_seconds"]).removeprefix("duration=")
         state = _safe_text(job["conclusion"] or job["status"] or "unknown")

@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 
+from gh_run_receptor.errors import BundleError
 from gh_run_receptor.release_profile import (
     RELEASE_CLAIM_AUTHORITIES,
     release_external_delivery_state,
@@ -509,6 +510,76 @@ def test_repository_rule_selects_profile_and_enforces_expected_platforms():
     assert exit_code(report) == 1
     assert "missing expected: osx-arm64" in render_llm(report)
     assert "Source: .github/gh-run-receptor.yaml at main" in render_human(report)
+
+
+def test_dispatch_platform_override_preserves_full_matrix_rule():
+    evidence = _evidence(conclusion="success")
+    evidence["run.json"]["event"] = "workflow_dispatch"
+    job = evidence["jobs.json"]["jobs"][0]
+    job.update(name="build (linux-aarch64)", conclusion="success", steps=[])
+    evidence["jobs.json"]["jobs"] = [job]
+    evidence["artifacts.json"]["artifacts"][0]["name"] = "molsysmt-linux-aarch64"
+    configured = ["linux-64", "linux-aarch64", "osx-64", "osx-arm64", "win-64"]
+    config = {
+        "schema": "gh-run-receptor.config@1",
+        "schema_version": 1,
+        "workflows": [
+            {
+                "match": {"path": ".github/workflows/conda.yaml"},
+                "profile": "conda",
+                "settings": {"expected_platforms": configured},
+            }
+        ],
+    }
+
+    targeted = build_report(
+        _manifest(),
+        evidence,
+        profile="auto",
+        config_override=config,
+        expected_platforms_override=["linux-aarch64"],
+    )
+    missing_target = build_report(
+        _manifest(),
+        evidence,
+        profile="auto",
+        config_override=config,
+        expected_platforms_override=["osx-arm64"],
+    )
+    full_matrix = build_report(_manifest(), evidence, profile="auto", config_override=config)
+
+    assert targeted["github"]["conclusion"] == "success"
+    assert targeted["receptor"]["assessment"] == "PASS"
+    assert targeted["expectations"] == {"satisfied": True, "missing_platforms": []}
+    assert targeted["configuration"]["settings"]["expected_platforms"] == configured
+    assert targeted["expectation_override"] == {
+        "source": "explicit_cli",
+        "platforms": ["linux-aarch64"],
+        "configured_platforms": configured,
+    }
+    assert "expected_platforms_override=linux-aarch64" in render_llm(targeted)
+    assert "explicitly overridden" in render_human(targeted)
+    assert "explicit_cli" in render_json(targeted)
+    assert exit_code(targeted) == 0
+    assert missing_target["expectations"]["missing_platforms"] == ["osx-arm64"]
+    assert missing_target["receptor"]["assessment"] == "FAIL"
+    assert exit_code(missing_target) == 1
+    assert sorted(full_matrix["expectations"]["missing_platforms"]) == sorted(
+        set(configured) - {"linux-aarch64"}
+    )
+    assert full_matrix["receptor"]["assessment"] == "FAIL"
+    assert "inputs are unavailable" in render_llm(full_matrix)
+    assert exit_code(full_matrix) == 1
+
+    evidence["run.json"]["event"] = "push"
+    with pytest.raises(BundleError, match="workflow_dispatch"):
+        build_report(
+            _manifest(),
+            evidence,
+            profile="auto",
+            config_override=config,
+            expected_platforms_override=["linux-aarch64"],
+        )
 
 
 def test_explicit_profile_overrides_repository_profile_but_preserves_settings():

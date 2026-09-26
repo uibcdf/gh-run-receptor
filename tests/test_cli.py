@@ -17,6 +17,20 @@ ROOT = Path(__file__).resolve().parents[1]
 FIXTURES = Path(__file__).parent / "fixtures"
 
 
+@pytest.mark.parametrize("command", ["inspect", "watch", "replay"])
+def test_expected_platform_override_is_available_on_report_commands(command):
+    args = _parser().parse_args([command, "42", "--expected-platforms", "linux-aarch64"])
+
+    assert args.expected_platforms == ["linux-aarch64"]
+
+
+def test_expected_platform_override_rejects_duplicate_or_empty_members():
+    for value in ("linux-64,linux-64", "linux-64,", ""):
+        with pytest.raises(SystemExit) as error:
+            _parser().parse_args(["replay", "bundle", "--expected-platforms", value])
+        assert error.value.code != 0
+
+
 def _bundle(path, conclusion="success"):
     path.mkdir()
     values = {

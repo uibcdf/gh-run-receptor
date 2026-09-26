@@ -10,5 +10,6 @@
 - [#50 — Name failed pytest tests instead of the runner exit epilogue](pytest_failures_hidden_by_runner_exit.md) (`resolved`)
 - [#36 — Release wheel verification can import the checkout](release_wheel_verification_can_import_the_checkout.md) (`resolved`)
 - [#3 — Script extension reports an unknown source version](script_extension_reports_an_unknown_source_version.md) (`resolved`)
+- [#54 — Targeted Conda dispatch is misclassified by the full matrix rule](targeted_dispatch_misclassified_by_full_matrix.md) (`resolved`)
 - [#51 — A tolerated job failure disappears from the LLM report](tolerated_failure_disappears_from_llm_report.md) (`resolved`)
 <!-- /generated -->

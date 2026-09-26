@@ -176,6 +176,19 @@ on stderr, and retains ambiguous workflows as `generic`. Preview is the default;
 settings. Package kind is `native` or `noarch`; a noarch rule cannot require native
 platforms. Unknown fields fail validation instead of being ignored.
 
+For a targeted `workflow_dispatch` native Conda run, `inspect`, `watch`, and `replay`
+accept `--expected-platforms linux-aarch64` (or a comma-separated subset). This is an
+explicit assertion for one report invocation. It requires a matching Conda rule with
+configured `expected_platforms`, accepts only a nonempty subset of that rule, and leaves
+the trusted rule unchanged. The report records the asserted subset and original full list
+in the optional `expectation_override` extension, and both text views disclose the
+override. Replaying the same bundle without this flag applies the full configured list.
+The GitHub workflow-run API does not supply dispatch inputs in the captured run evidence;
+the receptor therefore does not infer a target from job names. A dispatch with omitted
+configured platforms and no explicit override retains the full-matrix failure verdict,
+with a warning that the missing platforms may have been intentionally excluded. Release
+gates that require the full matrix should use the default assessment.
+
 A Conda filename without source evidence is not enough for discovery to propose the
 Conda profile. Recognized action-internal platform inputs fall back to `generic` because
 their requested values do not prove outcomes. A reviewed repository rule may select
