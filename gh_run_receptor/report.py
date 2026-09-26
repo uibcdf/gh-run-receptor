@@ -761,6 +761,49 @@ def _render_release_llm_failure(report: dict[str, Any]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def _non_success_job_lines(report: dict[str, Any]) -> list[str]:
+    """Name bounded non-success job evidence for compact reports."""
+    failed = [
+        job
+        for job in report["jobs"]
+        if job["conclusion"] not in (None, "success", "skipped", "neutral")
+    ]
+    lines: list[str] = []
+    if failed and report["receptor"]["profile"] == "ci":
+        groups = _ci_failure_groups(report["jobs"])
+        lines.append(f"{_non_success_label(failed, 'groups')} ({len(groups)}, {len(failed)} jobs):")
+        for group in groups[:MAX_FAILURES]:
+            members = group["jobs"]
+            steps = ", ".join(_safe_text(step) for step in group["steps"])
+            step_suffix = f" | steps: {steps}" if steps else ""
+            if len(members) == 1:
+                member = members[0]
+                lines.append(
+                    f"- {_safe_text(member['name'])} | {_safe_text(group['conclusion'])}"
+                    f"{step_suffix}"
+                )
+            else:
+                lines.append(
+                    f"- {len(members)} jobs | {_safe_text(group['conclusion'])}{step_suffix} | "
+                    f"sample: {_safe_text(members[0]['name'])} (+{len(members) - 1})"
+                )
+        if len(groups) > MAX_FAILURES:
+            lines.append(f"- ... {len(groups) - MAX_FAILURES} more groups in JSON report")
+    elif failed:
+        label = _non_success_label(failed, "jobs")
+        lines.append(f"{label} ({len(failed)}):")
+        for job in failed[:MAX_FAILURES]:
+            steps = ", ".join(_safe_text(step["name"] or "unnamed") for step in job["failed_steps"])
+            suffix = f" | steps: {steps}" if steps else ""
+            duration = _format_duration(job["duration_seconds"])
+            name = _safe_text(job["name"])
+            conclusion = _safe_text(job["conclusion"])
+            lines.append(f"- {name} | {conclusion} | {duration}{suffix}")
+        if len(failed) > MAX_FAILURES:
+            lines.append(f"- ... {len(failed) - MAX_FAILURES} more {label} in JSON report")
+    return lines
+
+
 def render_llm(report: dict[str, Any]) -> str:
     """Rendering a compact report intended for low-token inspection."""
     subject = report["subject"]
@@ -844,7 +887,14 @@ def render_llm(report: dict[str, Any]) -> str:
                 f"{_safe_text(subject['repository'])} run={subject['run_id']}",
             ]
         )
-        return " | ".join(fields) + "\n"
+        non_success = _non_success_job_lines(report)
+        if non_success:
+            non_success_count = sum(
+                job["conclusion"] not in (None, "success", "skipped", "neutral")
+                for job in report["jobs"]
+            )
+            fields.append(f"non_success_jobs={non_success_count}")
+        return " | ".join(fields) + "\n" + ("\n".join(non_success) + "\n" if non_success else "")
 
     if receptor["profile"] == "docs":
         return _render_docs_llm_failure(report)
@@ -862,43 +912,7 @@ def render_llm(report: dict[str, Any]) -> str:
         f"workflow: {_safe_text(subject['workflow'])} | jobs: {len(report['jobs'])} ({counts})",
     ]
 
-    failed = [
-        job
-        for job in report["jobs"]
-        if job["conclusion"] not in (None, "success", "skipped", "neutral")
-    ]
-    if failed and receptor["profile"] == "ci":
-        groups = _ci_failure_groups(report["jobs"])
-        lines.append(f"{_non_success_label(failed, 'groups')} ({len(groups)}, {len(failed)} jobs):")
-        for group in groups[:MAX_FAILURES]:
-            members = group["jobs"]
-            steps = ", ".join(_safe_text(step) for step in group["steps"])
-            step_suffix = f" | steps: {steps}" if steps else ""
-            if len(members) == 1:
-                member = members[0]
-                lines.append(
-                    f"- {_safe_text(member['name'])} | {_safe_text(group['conclusion'])}"
-                    f"{step_suffix}"
-                )
-            else:
-                lines.append(
-                    f"- {len(members)} jobs | {_safe_text(group['conclusion'])}{step_suffix} | "
-                    f"sample: {_safe_text(members[0]['name'])} (+{len(members) - 1})"
-                )
-        if len(groups) > MAX_FAILURES:
-            lines.append(f"- ... {len(groups) - MAX_FAILURES} more groups in JSON report")
-    elif failed:
-        label = _non_success_label(failed, "jobs")
-        lines.append(f"{label} ({len(failed)}):")
-        for job in failed[:MAX_FAILURES]:
-            steps = ", ".join(_safe_text(step["name"] or "unnamed") for step in job["failed_steps"])
-            suffix = f" | steps: {steps}" if steps else ""
-            duration = _format_duration(job["duration_seconds"])
-            name = _safe_text(job["name"])
-            conclusion = _safe_text(job["conclusion"])
-            lines.append(f"- {name} | {conclusion} | {duration}{suffix}")
-        if len(failed) > MAX_FAILURES:
-            lines.append(f"- ... {len(failed) - MAX_FAILURES} more {label} in JSON report")
+    lines.extend(_non_success_job_lines(report))
 
     if report["matrix"].get("kind") == "conda":
         if report["matrix"].get("package_kind") == "noarch":

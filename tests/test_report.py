@@ -86,6 +86,23 @@ def test_failed_run_preserves_official_state_and_failed_step():
     assert "| steps: Build" not in rendered
 
 
+@pytest.mark.parametrize("profile", ["generic", "ci"])
+def test_successful_run_names_tolerated_failed_job_in_llm_report(profile):
+    report = build_report(_manifest(), _evidence(conclusion="success"), profile=profile)
+
+    assert report["github"] == {"status": "completed", "conclusion": "success"}
+    assert report["receptor"]["assessment"] == "PASS"
+    assert exit_code(report) == 0
+    rendered = render_llm(report)
+    assert rendered.startswith("PASS conclusion=success")
+    assert "non_success_jobs=1" in rendered
+    expected_section = "failed groups (1, 1 jobs):" if profile == "ci" else "failed jobs (1):"
+    assert expected_section in rendered
+    assert "build (win-64) | failure" in rendered
+    assert "Upload" in rendered
+    assert len(rendered.encode("utf-8")) < 1_000
+
+
 def test_pytest_failure_is_named_without_changing_official_failure(tmp_path):
     evidence = _evidence()
     evidence["jobs.json"]["jobs"][0]["name"] = "Test on Windows, Python 3.12"

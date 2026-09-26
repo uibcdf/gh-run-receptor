@@ -274,10 +274,12 @@ A collection is labelled `failed jobs` only when every selected job has GitHub c
 rewrites cancellation, timeout, or an unknown future conclusion as failure.
 
 A complete successful LLM report collapses to one line containing conclusion, profile,
-job and platform coverage where available, artifact count, repository, and run ID. Human
-and JSON output retain the full inventory. If requested evidence is incomplete, the
-assessment is `INCOMPLETE`, never `PASS`, even though the separate GitHub conclusion may
-be `success`.
+job and platform coverage where available, artifact count, repository, and run ID when
+every observed job succeeds, skips, or is neutral. If a successful run has a tolerated
+non-success job, the compact report also names each such job and its failed steps within
+the normal output bound, and includes `non_success_jobs` in the summary. Human and JSON
+output retain the full inventory. If requested evidence is incomplete, the assessment is
+`INCOMPLETE`, never `PASS`, even though the separate GitHub conclusion may be `success`.
 
 ## Official facts and receptor assessment
 
