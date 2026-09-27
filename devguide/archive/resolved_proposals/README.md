@@ -8,6 +8,7 @@
 - [#9 — Add the first release workflow profile](add_the_first_release_workflow_profile.md) (`resolved`)
 - [#49 — Add verified Python 3.14 support](add_verified_python_3_14_support.md) (`resolved`)
 - [#10 — Add workflow discovery and safe configuration initialization](add_workflow_discovery_and_safe_configuration_initialization.md) (`resolved`)
+- [#55 — Review MolSysSuite Python ecosystem policy in GH Run Receptor](adopt_inherited_python_ecosystem_tooling_in_gh_run_receptor.md) (`resolved`)
 - [#22 — Adopt the shared MolSysSuite policy and Ruff quality gate](adopt_molsyssuite_policy_v1.md) (`resolved`)
 - [#1 — Adopt MolSysSuite repository lifecycle and packaging conventions](adopt_molsyssuite_repository_lifecycle_and_packaging_conventions.md) (`resolved`)
 - [#52 — Adopt the MOLI and MolSysSuite Python CI lane contract](adopt_the_moli_and_molsyssuite_python_ci_lane_contract.md) (`resolved`)

@@ -6,12 +6,12 @@ Documents should distinguish settled decisions from hypotheses that still requir
 evidence.
 
 **MolSysSuite policy review (2026-09-27):** The suite owns member engineering
-policy at `policy-v1.5.2`. Developer-tool adoption is verified in
-`uibcdf/gh-run-receptor#55`; the [member applicability
-decisions](python_ecosystem_policy_adoption.md) review all four support
-libraries without adding a runtime dependency. The policy-caller update
-exposed a stale version assertion in `tests/test_packaging.py`; its correction
-needs exact-commit hosted validation before the review closes.
+policy at `policy-v1.5.2`. Developer-tool and support-library decisions are
+complete in the [local applicability record](python_ecosystem_policy_adoption.md)
+and [archived review](archive/resolved_proposals/adopt_inherited_python_ecosystem_tooling_in_gh_run_receptor.md)
+for `uibcdf/gh-run-receptor#55`. The policy-caller update exposed a stale
+version assertion in `tests/test_packaging.py`; its correction passed 464
+local tests and exact-commit hosted routine and policy gates.
 
 **Current transition checkpoint (2026-09-21):** Release 1.1.0 published Python 3.14
 support after 445 local tests with 12 workers and an exact-commit hosted compatibility

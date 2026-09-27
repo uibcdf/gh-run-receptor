@@ -1,13 +1,13 @@
 ---
 summary: Review MolSysSuite Python ecosystem policy in GH Run Receptor
 issue: uibcdf/gh-run-receptor#55
-status: active
+status: resolved
 opened: 2026-09-24
-closed:
+closed: 2026-09-27
 verification: measured
 area: [governance, tests]
 guard:
-normative:
+normative: python_ecosystem_policy_adoption.md
 blocked_by: []
 supersedes: []
 ---
@@ -16,8 +16,8 @@ supersedes: []
 
 **Reported:** 2026-09-24 during the MolSysSuite Python ecosystem rollout.
 
-**Status:** Developer-tool CI and the support-library decisions are recorded.
-The current policy-caller assertion needs an exact-commit hosted rerun before closure.
+**Status:** Resolved. Developer-tool CI, the current policy caller and all four
+support-library applicability decisions have evidence below.
 
 ## What
 
@@ -129,5 +129,20 @@ passed the shared policy gate but exposed a stale local assertion that still
 expected policy-v1.4.9. GH Run Receptor identified
 `tests/test_packaging.py::test_suite_policy_caller_pins_current_release` as
 the failed test in routine run `36310571084`. The assertion now names the
-current reviewed release. The focused local test passes; the complete suite
-and exact-commit hosted gates remain to be verified before closure.
+current reviewed release. The complete local suite passed 464 tests, Ruff
+check and format passed, the developer-guide validator passed, and the
+MolSysSuite repository checker passed. Exact source commit `b0e04d3` passed
+[routine run `36333697901`](https://github.com/uibcdf/gh-run-receptor/actions/runs/36333697901)
+and [policy run `36333698541`](https://github.com/uibcdf/gh-run-receptor/actions/runs/36333698541).
+GH Run Receptor reported authoritative `PASS` for both.
+
+## Resolution
+
+The verified pytest-receptor pin and hosted `ci` profile satisfy the
+developer-tool rule. ArgDigest, DepDigest, SMonitor, and PyUnitWizard have no
+applicable runtime boundary in this product's current design; the local
+[applicability decision](../../python_ecosystem_policy_adoption.md) records the
+source and tests for each and the triggers to reassess. The stale version
+assertion was corrected without changing product behavior. MolSysSuite can
+record developer tools and support libraries as separately adopted under
+`uibcdf/gh-run-receptor#55`.
