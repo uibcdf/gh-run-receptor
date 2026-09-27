@@ -5,6 +5,14 @@ stable product boundary, architectural decisions, rule model, and post-1.0 route
 Documents should distinguish settled decisions from hypotheses that still require
 evidence.
 
+**MolSysSuite policy review (2026-09-27):** The suite owns member engineering
+policy at `policy-v1.5.2`. Developer-tool adoption is verified in
+`uibcdf/gh-run-receptor#55`; the [member applicability
+decisions](python_ecosystem_policy_adoption.md) review all four support
+libraries without adding a runtime dependency. The policy-caller update
+exposed a stale version assertion in `tests/test_packaging.py`; its correction
+needs exact-commit hosted validation before the review closes.
+
 **Current transition checkpoint (2026-09-21):** Release 1.1.0 published Python 3.14
 support after 445 local tests with 12 workers and an exact-commit hosted compatibility
 matrix (run 35573910621, 12/12). Draft-first release run 35574071616 passed. The wheel,

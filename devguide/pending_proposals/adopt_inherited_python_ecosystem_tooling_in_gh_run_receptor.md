@@ -1,10 +1,10 @@
 ---
-summary: Adopt inherited Python ecosystem tooling in GH Run Receptor
+summary: Review MolSysSuite Python ecosystem policy in GH Run Receptor
 issue: uibcdf/gh-run-receptor#55
 status: active
 opened: 2026-09-24
 closed:
-verification: inspected
+verification: measured
 area: [governance, tests]
 guard:
 normative:
@@ -12,21 +12,20 @@ blocked_by: []
 supersedes: []
 ---
 
-# Adopt inherited Python ecosystem tooling in GH Run Receptor
+# Review MolSysSuite Python ecosystem policy in GH Run Receptor
 
-**Reported:** 2026-09-24 during the MolSysSuite rollout of the pinned MOLI
-Python ecosystem policies.
+**Reported:** 2026-09-24 during the MolSysSuite Python ecosystem rollout.
 
-**Status:** Active; developer-tool CI is verified and the support-library
-applicability review remains open.
+**Status:** Developer-tool CI and the support-library decisions are recorded.
+The current policy-caller assertion needs an exact-commit hosted rerun before closure.
 
 ## What
 
-The `origin/main` snapshot at `11d33a6` runs the local-agent
+The historical `origin/main` snapshot at `11d33a6` ran the local-agent
 `--receptor=llm` profile in four hosted pytest workflows: routine, weekly,
 compatibility, and release publication. The `[test]` and `[dev]` extras
 specify `pytest-receptor` without an exact release. This conflicts with the
-inherited rule to use a published exact receptor release in CI and its `ci`
+suite rule to use a published exact receptor release in CI and its `ci`
 profile for ephemeral hosted logs.
 
 ## How
@@ -39,18 +38,17 @@ workflow contract assertions. Run the component suite through the local
 MolSysSuite component checker before publishing. Verify hosted routine and
 weekly lanes before claiming developer-tool adoption.
 
-Review the four support-library applicability boundaries separately. In
-particular, the CLI and public embedded API validate untrusted GitHub data
-and report user-visible failures; whether ArgDigest or SMonitor should replace
-the product's bounded local parsers and report model requires a product
-decision and evidence. No physical-quantity conversion or optional runtime
-backend has been identified in this initial inspection.
+Review the four support-library applicability boundaries separately. The CLI
+and public embedded API validate untrusted GitHub data and report user-visible
+failures. Preserve their bounded parsing, source-truth, and diagnostic
+contracts when deciding whether a support library adds an applicable
+capability.
 
 ## Why
 
 An LLM profile may refer to a local overflow file unavailable to readers of
 a hosted log. An unpinned test extra can select a different release on the
-next CI run. The inherited policy requires a member-local review before the
+next CI run. The MolSysSuite policy requires a member-local review before the
 suite's inventory can claim adoption or a bounded exception.
 
 ## What is measured and what is assumed
@@ -58,7 +56,7 @@ suite's inventory can claim adoption or a bounded exception.
 The four commands and dependency declarations were inspected at
 `origin/main` commit `11d33a6` using `git grep` and `git show`. The
 published pytest-receptor `1.1.0` tag is present in its local repository.
-The new workflows have not yet been executed on GitHub. The behavior of the
+At that checkpoint the new workflows had not yet run on GitHub. The behavior of the
 `ci` profile is described in the canonical `PYTEST_RECEPTOR_GUIDE.md`; it is
 not being inferred from a passing local LLM-profile run.
 The changed checkout passed `PYTHONPATH=. pytest --receptor=llm` with 453
@@ -74,14 +72,14 @@ An installed receptor alone does not change pytest's output. The component
 guide's instruction to use `--receptor=llm` remains appropriate for local
 agent work; changing it to `ci` would conflate local and hosted contexts.
 The previously closed `uibcdf/gh-run-receptor#52` established the routine and
-weekly Python CI lanes, but did not settle the later MOLI receptor policy.
+weekly Python CI lanes, but did not settle the later ecosystem policy.
 
 ## Scope and exclusions
 
-This review changes developer test tooling and records applicability. It does
-not alter GH Run Receptor's GitHub status authority, schema, runtime
-dependencies, product CLI semantics, or release tag. The support-library
-review will not be marked adopted from these CI changes alone.
+This review records developer tooling and support-library applicability. It
+does not alter GH Run Receptor's GitHub status authority, schema, runtime
+dependencies, product CLI semantics, or release tag. Support-library adoption
+rests on the separate boundary decisions, not the CI-profile change alone.
 
 ## Acceptance criteria
 
@@ -118,6 +116,18 @@ for Python 3.11 through 3.14. GH Run Receptor inspected each run and
 reported the authoritative successful conclusion and expected job counts.
 This verifies that the exact public pytest-receptor `1.1.0` dependency
 resolves and its `ci` profile works throughout the supported CI matrix.
-The developer-tool review can now be marked adopted in MolSysSuite; this
-member issue stays open for the independent support-library applicability
-review.
+The developer-tool review is adopted in MolSysSuite. The four support-library
+decisions are documented in
+`devguide/python_ecosystem_policy_adoption.md`: CLI options use argparse,
+untrusted documents use bounded parsers and schema checks, the `gh`
+executable is required transport rather than an optional backend, receptor
+itself owns its diagnostic outputs, and no quantity conversion boundary
+exists. No runtime library is added merely to satisfy the inventory.
+
+The 2026-09-27 policy-v1.5.2 caller commits `4e75153` and `f7fdd9f`
+passed the shared policy gate but exposed a stale local assertion that still
+expected policy-v1.4.9. GH Run Receptor identified
+`tests/test_packaging.py::test_suite_policy_caller_pins_current_release` as
+the failed test in routine run `36310571084`. The assertion now names the
+current reviewed release. The focused local test passes; the complete suite
+and exact-commit hosted gates remain to be verified before closure.
