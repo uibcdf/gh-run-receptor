@@ -394,6 +394,11 @@ The GitHub CLI script-extension and
 Action paths are also validated on all three operating systems; the minimum GitHub CLI
 binary gate is Linux amd64 because it tests a transport version, not an OS support matrix.
 
+Current macOS support is limited to Apple Silicon (arm64). Intel-based macOS
+(x86_64) is outside the supported matrix; concrete user demand may reopen
+[the MolSysSuite decision](https://github.com/uibcdf/molsyssuite/issues/59).
+Historical release and benchmark evidence retains its original scope.
+
 Public installation, usage, integration, contract, security, and limitation documentation
 is published at [www.uibcdf.org/gh-run-receptor](https://www.uibcdf.org/gh-run-receptor/).
 

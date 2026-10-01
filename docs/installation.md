@@ -6,8 +6,12 @@
 | :--- | :--- |
 | Python | Release 1.1.1: 3.11--3.14; historical release 1.0.0: 3.11--3.13 |
 | GitHub CLI | 2.48.0 or newer for network commands |
-| Operating systems | Linux, macOS, and Windows |
+| Operating systems | Linux, macOS Apple Silicon (arm64), and Windows |
 | GitHub host | `github.com`; alternate hostnames may be selected explicitly |
+
+Intel-based macOS (x86_64) is outside the current supported matrix. A concrete
+user need may reopen [the MolSysSuite decision](https://github.com/uibcdf/molsyssuite/issues/59).
+Historical release evidence retains its original scope.
 
 The exact 1.1.0 source commit passed the twelve-job hosted matrix in run 35573910621.
 Release 1.0.0 retains its nine-job Python 3.11--3.13 evidence. The public 1.1.0 wheel
