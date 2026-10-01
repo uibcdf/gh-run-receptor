@@ -4,6 +4,7 @@
 [![MolSysSuite policy](https://github.com/uibcdf/gh-run-receptor/actions/workflows/molsyssuite-policy.yml/badge.svg?branch=main)](https://github.com/uibcdf/gh-run-receptor/actions/workflows/molsyssuite-policy.yml)
 [![Python 3.11 | 3.12 | 3.13 | 3.14](https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-3776AB?logo=python&logoColor=white)](https://github.com/uibcdf/molsyssuite/blob/main/devguide/python_policy.md)
 [![License](https://img.shields.io/github/license/uibcdf/gh-run-receptor)](https://github.com/uibcdf/gh-run-receptor/blob/main/LICENSE)
+[![Codecov](https://codecov.io/gh/uibcdf/gh-run-receptor/branch/main/graph/badge.svg)](https://app.codecov.io/gh/uibcdf/gh-run-receptor)
 [![Documentation](https://github.com/uibcdf/gh-run-receptor/actions/workflows/docs.yml/badge.svg?branch=main)](https://www.uibcdf.org/gh-run-receptor/)
 [![GitHub release](https://img.shields.io/github/v/release/uibcdf/gh-run-receptor)](https://github.com/uibcdf/gh-run-receptor/releases/latest)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22843377.svg)](https://doi.org/10.5281/zenodo.22843377)
@@ -11,6 +12,14 @@
 `gh-run-receptor` is a GitHub Actions evidence receptor for coding agents: compact reports
 without hiding failures or uncertainty. It is read-only and retains a replayable path to
 the captured evidence.
+
+
+Coverage measures `gh_run_receptor` in the parent process of the existing
+Linux/Python 3.13 test lane. Child-process
+coverage is not combined. The badge shows the last accepted `main` report and
+can lag lightweight or `[skip ci]` pushes; it does not establish coverage of later
+commits or scientific consumer suites. See the [coverage reporting contract](devguide/coverage_reporting.md).
+
 
 Version 1.0 is the stable read-only contract: it uses exact workflow identities and does
 not include pattern or organization-level configuration. No package has been published to

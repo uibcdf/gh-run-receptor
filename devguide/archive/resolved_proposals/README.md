@@ -17,6 +17,7 @@
 - [#45 — Close the timed-out corpus gate without manufactured evidence](close_the_timed_out_corpus_gate_without_manufactured_evidence.md) (`resolved`)
 - [#31 — Compare workflow runs and rerun attempts](compare_workflow_runs_and_rerun_attempts.md) (`resolved`)
 - [#19 — Consume and verify published Action reports](consume_and_verify_published_action_reports.md) (`resolved`)
+- [#57 — Publish owned default-branch coverage from the existing tool suite.](default_branch_coverage_reporting.md) (`resolved`)
 - [#25 — Define and validate the minimum supported GitHub CLI](define_and_validate_the_minimum_supported_github_cli.md) (`resolved`)
 - [#17 — Deliver the first embedded GitHub Action vertical slice](deliver_the_first_embedded_github_action_vertical_slice.md) (`resolved`)
 - [#21 — Discover a trusted published report from its source run](discover_a_trusted_published_report_from_its_source_run.md) (`resolved`)
