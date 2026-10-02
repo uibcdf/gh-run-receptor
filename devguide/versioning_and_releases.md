@@ -69,6 +69,86 @@ GitHub-generated source ZIP, `uibcdf/gh-run-receptor-1.1.1.zip` (582,251 bytes);
 claim that Zenodo archived the three GitHub Release assets. The GitHub Release remains
 the authoritative wheel/sdist download surface.
 
+## Verified release 1.2.0 — 2026-10-02
+
+The lightweight tag `1.2.0` identifies
+`c3df5ad87f7bab95c53be3f7b0b3007f59d7abf3`. This minor release adds the
+source-preserving annotation reader in `uibcdf/gh-run-receptor#46` and the
+targeted Conda inspection capability, together with the #56 silent-failure
+correction and intervening compact/primary failure-diagnostic fixes. Python
+bounds, dependency-free runtime, the stable process-status map and all nine
+frozen serialized resource bytes remain unchanged. No producer contract or new
+distribution index is introduced.
+
+The pre-tag candidate receipt was recorded outside the source checkout with
+exact commit, intended version, route, metadata/resource hashes, tool versions,
+candidate artifact digests and gate scopes. The temporary staging tag was never
+pushed from its isolated clone. Local Python 3.13.14 ran 565 passing tests with
+the installed development pytest-receptor 1.2.0 renderer; hosted gates installed
+the committed published test pin `pytest-receptor==1.1.0`. Local build inputs
+were build 1.5.0, setuptools 80.10.2, versioningit 3.3.0 and wheel 0.47.0.
+Ruff 0.16.5 lint/format, strict Sphinx 8.2.3, citation, developer-guide and
+all nine frozen-contract checks passed for the exact candidate.
+
+The staged wheel and sdist both carried version 1.2.0, the new reader modules
+and nine unchanged runtime schemas. Isolated installed-wheel replay preserved
+the original #56 failure, exit 1 and three exit-code occurrences; #46 retained
+native cancellation, exit 2, unknown cause and an unverified execution-limit
+hint. Negative in-memory payload checks rejected a stale embedded version and
+a missing runtime schema without changing either distribution.
+
+Exact-source hosted evidence:
+
+- [Compatibility run 37073452071](https://github.com/uibcdf/gh-run-receptor/actions/runs/37073452071):
+  all twelve Ubuntu/macOS Apple Silicon/Windows and Python 3.11--3.14 cells
+  passed the complete suite, build, wheel install and outside-checkout smoke test.
+- [Policy run 37073454392](https://github.com/uibcdf/gh-run-receptor/actions/runs/37073454392): passed.
+- [Publication run 37073949431](https://github.com/uibcdf/gh-run-receptor/actions/runs/37073949431):
+  the exact-tag build, tests, draft verification and public verification passed.
+- [Pages run 37073952158](https://github.com/uibcdf/gh-run-receptor/actions/runs/37073952158):
+  build and deployment passed on the candidate `main` commit. An independent
+  fetch of the public installation page contained the 1.2.0 wheel URL.
+
+The public [GitHub Release](https://github.com/uibcdf/gh-run-receptor/releases/tag/1.2.0)
+contains exactly these downloaded and independently verified assets:
+
+| Asset | Bytes | SHA-256 |
+| --- | ---: | --- |
+| `gh_run_receptor-1.2.0-py3-none-any.whl` | 94,594 | `a69b4ce158eb5c74a9b165847279d12f6867ddd41e9fdaa47b3de11463cf210c` |
+| `gh_run_receptor-1.2.0.tar.gz` | 149,532 | `7574499f7b8e62c281a5aaf0ba7ea7b6233116e1a3b1e09c3be9852649bfbc37` |
+| `SHA256SUMS` | 200 | `16a4c497a390387da37f85330ab22b90eedb6c24cb6dead0d9b66153b2042fbb` |
+
+These hosted-build assets have their own digests; they are not claimed to be
+byte-identical to the locally staged archives. Their metadata, new modules and
+all nine frozen schemas were independently checked after download. A fresh
+Linux/Python 3.13.14 venv installed only the public wheel with `--no-deps` outside
+the checkout and repeated both original issue replays and the usage-status-64
+check. The imported module belonged to that isolated installation. The hosted
+matrix above is source-build/install evidence, not an assertion that the
+downloaded public wheel was independently installed on all twelve platforms.
+
+An isolated XDG data directory received the public CLI extension with
+`gh extension install uibcdf/gh-run-receptor --pin 1.2.0`. Its checkout resolved
+to the exact release commit, version output was 1.2.0 and #46 replay preserved
+exit 2 and its unverified hint. The maintainer's existing pinned extension was
+preserved. Authenticated transport remained the existing installed GitHub CLI.
+
+Zenodo independently verified version DOI
+[`10.5281/zenodo.23112015`](https://doi.org/10.5281/zenodo.23112015) under
+concept DOI `10.5281/zenodo.22843377`. Its observed inventory is exactly
+`uibcdf/gh-run-receptor-1.2.0.zip`, 651,072 bytes, checksum
+`md5:f44d7949eee12757c359a2d3c37f0c6b`. Zenodo records its publication date as
+2026-10-03; GitHub records publication at 2026-10-02T22:43:23Z and the source
+citation date is 2026-10-02. The archive is a GitHub-generated source ZIP;
+the GitHub wheel and sdist are not claimed to be Zenodo files.
+
+The release and package handoff is `uibcdf/molsyssuite#75`. It requests central
+triage of registered client-guide synchronization, appropriate consumer pins
+and inventory updates using the canonical 1.2.0 guide. No sibling worktree was
+changed by this publication. The independently delivered timeout assessment in
+`uibcdf/molsyssuite#25` is now available in the published package; any later
+operation-supervisor trust/compatibility decision still belongs there.
+
 A tag identifies source but does not by itself publish a package or GitHub Release. Those
 are separate, explicit release steps.
 

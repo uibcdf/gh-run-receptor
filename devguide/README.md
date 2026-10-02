@@ -5,26 +5,29 @@ stable product boundary, architectural decisions, rule model, and post-1.0 route
 Documents should distinguish settled decisions from hypotheses that still require
 evidence.
 
-**Release preparation (2026-10-02):** Candidate `1.2.0` collects the annotation
-reader in `uibcdf/gh-run-receptor#46`, the silent-failure correction in #56,
-and the intervening compact-report and targeted-dispatch improvements. The
-ordinary exact-source, staged distribution and hosted publication gates apply.
-Publication and independent public-artifact verification remain pending until
-observed; [versioning and releases](versioning_and_releases.md) owns the receipt.
+**Release 1.2.0 (2026-10-02):** Lightweight tag `1.2.0` points to
+`c3df5ad87f7bab95c53be3f7b0b3007f59d7abf3`. The 565-test local gate,
+12-cell compatibility run `37073452071`, policy run `37073454392` and
+draft-first publication `37073949431` passed. Public wheel/sdist/checksums,
+isolated installed-wheel replay of #56/#46, the exact-tag CLI extension,
+Pages run `37073952158` and Zenodo DOI `10.5281/zenodo.23112015` were
+independently verified. [Versioning and releases](versioning_and_releases.md)
+owns the receipt. Central adoption is handed off through `uibcdf/molsyssuite#75`;
+registered guide copies and consumer pins remain coordination work.
 
 **Timeout diagnosis (2026-10-02):** `uibcdf/gh-run-receptor#46` adds bounded
 job-linked check annotations and explicit unknown cancellation causes. Fresh
 capture of the one-minute timeout experiment reports `CANCELLED`, exit 2, and
 an unverified execution-limit hint. [Timeout diagnosis](timeout_diagnosis.md)
 records the measured audit, additive fields, guard and residual evidence requirement
-for `uibcdf/molsyssuite#25`. This source improvement is not yet released.
+for `uibcdf/molsyssuite#25`. This improvement is included in release 1.2.0.
 
 **Diagnostic correction (2026-10-02):** `uibcdf/gh-run-receptor#56` excludes
 positive `PASS` output from adjacent failure-diagnostic selection. Fresh capture
 and replay of the original three-job MolSysViewer failure retain the failed step
 and exit-1 marker. The [resolved record](archive/resolved_bugs/positive_verdict_selected_after_silent_failure.md)
 documents the regression guard and 470-test local gate. This source correction
-has not been published in a new product release.
+is included in release 1.2.0.
 
 **MolSysSuite policy review (2026-09-27):** The suite owns member engineering
 policy at `policy-v1.5.2`. Developer-tool and support-library decisions are

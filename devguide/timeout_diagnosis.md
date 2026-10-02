@@ -2,7 +2,7 @@
 
 This contract records the reader improvement and measured assessment for
 uibcdf/gh-run-receptor#46, handed back to uibcdf/molsyssuite#25. It describes
-the reader included in the 1.2.0 candidate. Publication evidence is recorded in
+the reader delivered in release 1.2.0. Publication evidence is recorded in
 [versioning and releases](versioning_and_releases.md); no producer contract is claimed.
 
 ## Source authority and available evidence
