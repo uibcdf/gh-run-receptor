@@ -1,6 +1,8 @@
 import zipfile
 from pathlib import Path
 
+import pytest
+
 from gh_run_receptor.logs import MAX_CAUSE_CHARACTERS, extract_causes
 
 _PUBLIC_EXCERPTS = Path(__file__).parent / "fixtures" / "logs"
@@ -110,6 +112,32 @@ def test_arbitrary_adjacent_output_does_not_replace_process_exit(tmp_path):
     causes, _ = extract_causes(archive, _jobs()[:1])
 
     assert causes[0]["kind"] == "exit_code"
+
+
+@pytest.mark.parametrize("verdict", ["PASS", "pass", "Pass"])
+def test_positive_verdict_before_silent_failure_keeps_process_exit(tmp_path, verdict):
+    body = (_PUBLIC_EXCERPTS / "molsysviewer_36920527376_silent_failure.txt").read_text()
+    archive = tmp_path / "logs.zip"
+    with zipfile.ZipFile(archive, "w") as zipped:
+        zipped.writestr("2_osx-64 · Rattler · LTO true.txt", body.replace("PASS", verdict))
+
+    causes, warnings = extract_causes(archive, _jobs()[:1])
+
+    assert warnings == []
+    assert causes[0]["kind"] == "exit_code"
+    assert causes[0]["message"] == "Process completed with exit code 1."
+    assert causes[0]["occurrences"][0]["line"] == 2
+
+
+def test_positive_verdict_without_failure_diagnostic_remains_unknown(tmp_path):
+    archive = tmp_path / "logs.zip"
+    with zipfile.ZipFile(archive, "w") as zipped:
+        zipped.writestr("2_osx-64 · Rattler · LTO true.txt", "Build gate: PASS\n")
+
+    causes, warnings = extract_causes(archive, _jobs()[:1])
+
+    assert causes == []
+    assert warnings == ["no causal line found for failed job: osx-64 · Rattler · LTO true"]
 
 
 def test_explicit_error_outranks_adjacent_structured_diagnostic(tmp_path):

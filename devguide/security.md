@@ -81,9 +81,12 @@ permission state.
 
 Selected log causes are also bounded and redact GitHub-token shapes, authorization values,
 and credential-shaped assignments before storage in a report. A structured workflow
-verdict is eligible only when immediately adjacent to a generic process-exit marker;
+non-success verdict is eligible only when immediately adjacent to a generic process-exit marker;
 arbitrary neighboring log text does not become causal evidence. This deterministic
 allow-list supplements but does not replace GitHub's masking of registered secrets.
+Positive `PASS` output never replaces a later nonzero process-exit marker. A silent
+failure retains that marker and the API's failed step; the underlying cause remains
+unestablished when no more specific diagnostic is available.
 For a GitHub-failed job, an anchored pytest `FAILED <nodeid> - <reason>` line or a
 pytest-receptor `FAIL exit=...` verdict with a `rerun: pytest <nodeid>` line within 128
 log lines may identify one failed test. This remains a redacted, bounded inference from

@@ -1,0 +1,2 @@
+Python wheel runtime contract: PASS (source, 0.23.4)
+##[error]Process completed with exit code 1.

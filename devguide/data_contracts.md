@@ -303,7 +303,9 @@ evidence reference.
 The MVP log analyzer records cause kind, normalized message, stable fingerprint, and every
 job/member/line occurrence. It chooses the most specific bounded causal candidate rather
 than treating a generic final exit-code marker as root cause. An immediately preceding
-structured verdict may replace that generic marker, but arbitrary adjacent output cannot.
+structured non-success verdict may replace that generic marker, but positive `PASS`
+output and arbitrary adjacent output cannot. A retained `exit_code` cause records the
+observed process exit only; it does not establish why a silent command failed.
 Concrete import, file, fatal, and explicit error evidence remains stronger. Normalization
 may remove a volatile temporary script path; messages are credential-redacted and bounded
 before they enter the report or an occurrence.

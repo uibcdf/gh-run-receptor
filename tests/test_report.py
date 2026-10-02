@@ -131,6 +131,43 @@ def test_pytest_failure_is_named_without_changing_official_failure(tmp_path):
     assert len(rendered.encode("utf-8")) < 2_000
 
 
+def test_positive_verdict_is_not_the_cause_of_a_failed_ci_step(tmp_path):
+    evidence = _evidence()
+    evidence["jobs.json"]["jobs"] = []
+    step_name = "Validate and locally tag the exact Viewer source candidate"
+    body = (_PUBLIC_LOG_EXCERPTS / "molsysviewer_36920527376_silent_failure.txt").read_text()
+    with zipfile.ZipFile(tmp_path / "logs.zip", "w") as zipped:
+        for job_id, platform in enumerate(("Linux", "macOS", "Windows"), start=1):
+            name = f"Test on {platform}, Python 3.14"
+            evidence["jobs.json"]["jobs"].append(
+                {
+                    "id": job_id,
+                    "name": name,
+                    "status": "completed",
+                    "conclusion": "failure",
+                    "steps": [{"number": 1, "name": step_name, "conclusion": "failure"}],
+                }
+            )
+            zipped.writestr(f"{job_id}_{name}.txt", body)
+    manifest = _manifest()
+    manifest["members"] = [{"path": "logs.zip"}]
+
+    report = build_report(manifest, evidence, bundle_directory=tmp_path, profile="ci")
+
+    assert report["github"] == {"status": "completed", "conclusion": "failure"}
+    assert report["receptor"]["assessment"] == "FAIL"
+    assert exit_code(report) == 1
+    assert len(report["causes"]) == 1
+    assert report["causes"][0]["kind"] == "exit_code"
+    assert len(report["causes"][0]["occurrences"]) == 3
+    for renderer in (render_llm, render_human, render_json):
+        rendered = renderer(report)
+        assert step_name in rendered
+        assert "Process completed with exit code 1." in rendered
+        assert "runtime contract: PASS" not in rendered
+        assert len(rendered.encode("utf-8")) < 10_000
+
+
 def test_public_conda_failure_excerpts_retain_fifteen_failed_jobs(tmp_path):
     evidence = _evidence()
     evidence["jobs.json"]["jobs"] = []

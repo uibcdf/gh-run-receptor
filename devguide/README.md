@@ -5,6 +5,13 @@ stable product boundary, architectural decisions, rule model, and post-1.0 route
 Documents should distinguish settled decisions from hypotheses that still require
 evidence.
 
+**Diagnostic correction (2026-10-02):** `uibcdf/gh-run-receptor#56` excludes
+positive `PASS` output from adjacent failure-diagnostic selection. Fresh capture
+and replay of the original three-job MolSysViewer failure retain the failed step
+and exit-1 marker. The [resolved record](archive/resolved_bugs/positive_verdict_selected_after_silent_failure.md)
+documents the regression guard and 470-test local gate. This source correction
+has not been published in a new product release.
+
 **MolSysSuite policy review (2026-09-27):** The suite owns member engineering
 policy at `policy-v1.5.2`. Developer-tool and support-library decisions are
 complete in the [local applicability record](python_ecosystem_policy_adoption.md)
