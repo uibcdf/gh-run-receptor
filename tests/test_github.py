@@ -102,6 +102,25 @@ def test_merge_pages_preserves_every_item():
     }
 
 
+@pytest.mark.parametrize("limit,accepted", [(3, True), (2, False)])
+def test_json_transport_enforces_a_caller_specific_byte_limit(monkeypatch, limit, accepted):
+    process = _process(b"[]\n")
+    terminated = []
+    process.terminate = lambda: terminated.append(True)
+    monkeypatch.setattr(
+        "gh_run_receptor.github.subprocess.Popen", lambda command, stdout, stderr: process
+    )
+    client = GitHubClient()
+    client._cli_version_checked = True
+    if accepted:
+        assert client.json("/example", max_bytes=limit) == []
+        assert terminated == []
+    else:
+        with pytest.raises(AcquisitionError, match="2-byte limit"):
+            client.json("/example", max_bytes=limit)
+        assert terminated == [True]
+
+
 def test_merge_pages_rejects_wrong_shape():
     with pytest.raises(AcquisitionError, match="unexpected paginated response"):
         merge_pages([{"items": []}], "jobs")

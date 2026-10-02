@@ -1,0 +1,38 @@
+{
+  "jobs": [
+    {
+      "check_run_url": "https://api.github.com/repos/uibcdf/gh-run-receptor/check-runs/101471629872",
+      "completed_at": "2026-09-06T10:34:38Z",
+      "conclusion": "cancelled",
+      "head_sha": "a87e5b9748ceaf1d6c5277a34dd2d533eca11865",
+      "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/34027741137/job/101471629872",
+      "id": 101471629872,
+      "name": "timed-out",
+      "run_attempt": 1,
+      "run_id": 34027741137,
+      "started_at": "2026-09-06T10:33:24Z",
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "status": "completed"
+        },
+        {
+          "conclusion": "cancelled",
+          "name": "Wait beyond the job timeout",
+          "number": 2,
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 3,
+          "status": "completed"
+        }
+      ]
+    }
+  ],
+  "total_count": 1
+}

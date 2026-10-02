@@ -100,6 +100,13 @@ constraints are retained per job. Later process-exit or setup-cleanup errors do 
 replace these primary lines. Missing, truncated, or unfamiliar logs remain unknown rather
 than supplying a guessed cause.
 
+Check annotation text is equally untrusted: workflow commands can emit error
+annotations. Exact execution-limit wording is only an unverified hint, even for
+the GitHub Actions app. Unique same-repository job/check linkage, SHA, suite and
+available attempt identity are validated before attribution. The narrow check
+request budget, 2 MiB pages, count/message bounds, redaction, display escaping and
+unknown-cause rules are defined in [timeout diagnosis](timeout_diagnosis.md).
+
 The Action HTML-escapes untrusted report text before writing the Markdown summary, rejects
 multiline scalar outputs and unsafe report names, bounds the summary to 32 KiB and report
 to 8 MiB, and reuses the same credential-redacted error boundary as the CLI.

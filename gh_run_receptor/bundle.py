@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from gh_run_receptor import __version__
+from gh_run_receptor.checks import capture_termination_annotations
 from gh_run_receptor.config import capture_repository_config, validate_config_capture
 from gh_run_receptor.contracts import schema_id, upgrade_contract
 from gh_run_receptor.errors import AcquisitionError, BundleError, ConfigError, ContractError
@@ -271,6 +272,7 @@ def capture_bundle(
                 paginate=True,
             )
             checks = merge_pages(checks_payload, "check_runs")
+        warnings.extend(capture_termination_annotations(client, repository, run, jobs, checks))
         members.append(_write_member(temporary, "checks.json", checks, "github.check_runs"))
 
         config_capture = capture_repository_config(client, repository)

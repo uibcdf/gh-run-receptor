@@ -312,6 +312,12 @@ replace or soften the official conclusion.
 `PARTIAL` is not success. The header always retains `conclusion=failure` or the relevant
 official conclusion.
 
+Cancellation and exact native timeout also receive the shared bounded
+`termination` section described in [timeout diagnosis](timeout_diagnosis.md).
+Cancellation retains `cause=unknown`; a source-linked execution-limit annotation
+is displayed as `hint (unverified)`. All profiles and renderers share this
+interpretation. Annotations never change the native conclusion or exit-code map.
+
 ## Exit codes
 
 The stable exit-code contract separates run outcome from receptor failure:

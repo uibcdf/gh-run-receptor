@@ -1,0 +1,34 @@
+{
+  "check_runs": [
+    {
+      "annotations": [
+        {
+          "annotation_level": "failure",
+          "end_line": 1,
+          "message": "The job has exceeded the maximum execution time of 1m0s",
+          "path": ".github",
+          "start_line": 1
+        },
+        {
+          "annotation_level": "failure",
+          "end_line": 5,
+          "message": "The operation was canceled.",
+          "path": ".github",
+          "start_line": 5
+        }
+      ],
+      "annotations_state": "complete",
+      "check_suite": {
+        "id": 92196732709
+      },
+      "conclusion": "cancelled",
+      "head_sha": "a87e5b9748ceaf1d6c5277a34dd2d533eca11865",
+      "id": 101471629872,
+      "output": {
+        "annotations_count": 2
+      },
+      "status": "completed"
+    }
+  ],
+  "total_count": 1
+}

@@ -70,6 +70,15 @@ cancellation, so the receptor does not infer `TIMED_OUT` merely from elapsed tim
 workflow timeout setting. Authentic capture remains opportunistic and would strengthen
 the corpus without changing this conservative behavior.
 
+The source checkout after release 1.1.1 adds bounded job-linked check annotations
+for cancelled/timed-out jobs. An execution-limit message appears as
+`hint (unverified)` with its source reference; cancellation remains
+`cause=unknown`. Workflow commands can emit annotations, so the message does not
+authenticate a timeout supervisor. Requested unavailable or truncated annotation
+evidence makes capture incomplete while preserving GitHub's conclusion. Older
+bundles require a fresh capture to acquire annotations. This improvement has not
+yet been published in a product release.
+
 The release profile classifies untrusted job and step names only for presentation. A
 successful step can establish `step_success`, but cannot verify a Git tag, package
 registry, GitHub Release, DOI, or archive record. Those claims remain `not_observed`

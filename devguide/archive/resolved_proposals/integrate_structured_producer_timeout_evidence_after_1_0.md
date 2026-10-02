@@ -1,18 +1,56 @@
 ---
 summary: Assess and improve timeout diagnosis before choosing producer instrumentation.
 issue: uibcdf/gh-run-receptor#46
-status: open
+status: resolved
 opened: 2026-09-19
-closed:
+closed: 2026-10-02
 verification: measured
 area: [github, profiles]
-guard:
-normative:
+guard: tests/test_termination.py
+normative: timeout_diagnosis.md
 blocked_by: []
 supersedes: []
 ---
 
 # Assessing timeout diagnosis before choosing producer instrumentation
+
+## Resolution — 2026-10-02
+
+The provider audit and reader improvement are complete. Native run/job/step facts,
+exact-suite check output, previously uncaptured annotations, full logs, artifact
+inventory and existing producer-event support were inspected. Fresh full and
+metadata captures of run `34027741137` preserve `cancelled`; the exact linked
+check supplies a bounded, unverified execution-limit hint with source pointer.
+Cancellation cause remains `unknown`, the interrupted step stays visible, and
+complete replay exits 2. Requested unavailable or partial evidence remains
+explicit and follows ordinary incomplete capture semantics.
+
+The durable contract and precise provisional residual evidence requirement are
+in [timeout diagnosis](../../timeout_diagnosis.md). It identifies operation scope,
+invocation identity, supervisor observation, enforced limit/units, elapsed and
+independent child outcome, durable bounded evidence and trust limitations. That
+assessment is returned to uibcdf/molsyssuite#25; a later interoperability decision
+belongs there. No producer owner, new Action, schema, execution or release was
+selected. Source changes remain unpublished.
+
+The guard `tests/test_termination.py` directly asserts the measured public case,
+all five profiles, source-outcome truth tables, annotation availability, hostile
+markers, mismatched/duplicate identity, capture-to-replay behavior and bounded
+goldens. Removing the reader hint or promoting annotation text to verified timeout
+would fail those assertions. `tests/test_checks.py` also protects malformed,
+truncated, unknown-field and exact size boundaries and the 50-request budget.
+Frozen model/report extension points accept the added fields without schema edits.
+
+Validation: 565 tests passed with `python -m pytest --receptor=llm`; Ruff lint
+and formatting, developer-guide lifecycle/index checks, all nine frozen serialized
+contracts and strict Sphinx HTML compilation passed. Fresh metadata replay of the
+public experiment retains exit 2, with 593-byte LLM, 657-byte human and 4,520-byte
+JSON output. Raw captures are outside the repository; the reviewed structured
+fixture and all three deterministic goldens are committed.
+
+The cross-component workspace preflight found existing MolSysViewer changes;
+the handoff uses public issue/evidence sources and preserves that worktree.
+The original request and its redirection are retained below as decision history.
 
 ## Current decision — 2026-10-02
 

@@ -114,7 +114,9 @@ class GitHubClient:
             )
         self._cli_version_checked = True
 
-    def _run(self, arguments: list[str], *, check_cli: bool = True) -> str:
+    def _run(
+        self, arguments: list[str], *, check_cli: bool = True, max_bytes: int = MAX_JSON_BYTES
+    ) -> str:
         if check_cli:
             self._ensure_supported_cli()
         command = ["gh", *arguments]
@@ -126,11 +128,11 @@ class GitHubClient:
                 size = 0
                 while chunk := process.stdout.read(READ_CHUNK_BYTES):
                     size += len(chunk)
-                    if size > MAX_JSON_BYTES:
+                    if size > max_bytes:
                         process.terminate()
                         process.wait()
                         raise AcquisitionError(
-                            f"GitHub CLI response exceeded the {MAX_JSON_BYTES}-byte limit"
+                            f"GitHub CLI response exceeded the {max_bytes}-byte limit"
                         )
                     chunks.append(chunk)
                 return_code = process.wait()
@@ -160,7 +162,7 @@ class GitHubClient:
             raise AcquisitionError("could not infer the current GitHub repository")
         return repository
 
-    def json(self, endpoint: str, *, paginate: bool = False) -> Any:
+    def json(self, endpoint: str, *, paginate: bool = False, max_bytes: int | None = None) -> Any:
         """Fetching one JSON resource through ``gh api``."""
         arguments = [
             "api",
@@ -172,7 +174,9 @@ class GitHubClient:
         if paginate:
             arguments.extend(["--paginate", "--slurp"])
         arguments.append(endpoint)
-        output = self._run(arguments)
+        output = (
+            self._run(arguments) if max_bytes is None else self._run(arguments, max_bytes=max_bytes)
+        )
         try:
             return json.loads(output)
         except json.JSONDecodeError as error:

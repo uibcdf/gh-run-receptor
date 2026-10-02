@@ -170,6 +170,20 @@
       "expected_github_conclusion": "success",
       "expected_assessment": "PASS",
       "upstream_retention": "The public GitHub run and logs are subject to GitHub retention; this fixture is self-contained metadata."
+    },
+    {
+      "path": "bundles/gh_run_receptor_job_limit_cancelled",
+      "repository": "uibcdf/gh-run-receptor",
+      "run_id": 34027741137,
+      "run_attempt": 1,
+      "captured_at": "2026-10-02",
+      "reason": "A one-minute job deadline reported natively as cancellation, with a linked check execution-limit annotation retained as an unverified diagnostic hint.",
+      "sanitization": "Retained public run/attempt/SHA/check-suite identity, job-to-check API URL, source outcomes and steps, and two reviewed check annotations with member provenance. Removed actors, runner details, check app and owner metadata, pull requests, raw logs, config and unrelated API fields. The retained same-repository check URL is public provenance, without credentials or signed query parameters.",
+      "profile": "generic",
+      "expected_github_conclusion": "cancelled",
+      "expected_assessment": "CANCELLED",
+      "expected_exit_code": 2,
+      "upstream_retention": "The public run and check annotations are subject to GitHub retention; this sanitized capture replays offline."
     }
   ]
 }

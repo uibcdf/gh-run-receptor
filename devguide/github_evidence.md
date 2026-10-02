@@ -38,6 +38,12 @@ The exact request URL, response status, pagination state, ETag when available, c
 type, byte length, and SHA-256 digest belong in the manifest. Acquisition follows
 pagination until completion or records the capture as incomplete.
 
+For completed cancelled/timed-out jobs, bounded job-linked check annotations are
+now stored inside `checks.json`. This requires at most 50 additional read requests,
+one page of 100 annotations and 2 MiB per check. Other jobs incur no annotation
+requests. Identity, truncation and uncertainty follow
+[timeout diagnosis](timeout_diagnosis.md); textual hints never rewrite native conclusions.
+
 Official references:
 
 - [Workflow runs](https://docs.github.com/en/rest/actions/workflow-runs)

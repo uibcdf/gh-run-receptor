@@ -5,6 +5,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Any
 
+from gh_run_receptor.checks import annotation_completeness, job_check_id, normalize_checks
 from gh_run_receptor.contracts import schema_id
 from gh_run_receptor.errors import BundleError
 
@@ -130,7 +131,16 @@ def normalize_evidence(manifest: dict[str, Any], evidence: dict[str, Any]) -> di
     artifacts_source = _array_member(
         _object(evidence, "artifacts.json"), "artifacts", "artifacts.json"
     )
-    _array_member(_object(evidence, "checks.json"), "check_runs", "checks.json")
+    checks = normalize_checks(
+        _array_member(_object(evidence, "checks.json"), "check_runs", "checks.json")
+    )
+    annotations_state = annotation_completeness(checks)
+    annotations_complete = annotations_state in {"complete", "not_requested"}
+    completeness = _completeness(manifest, workflow)
+    completeness["check_annotations"] = annotations_state
+    warnings = list(manifest["warnings"])
+    if manifest["complete"] and not annotations_complete:
+        warnings.append(f"check annotations {annotations_state} in captured evidence")
 
     jobs = []
     counts: dict[str, int] = {}
@@ -212,6 +222,18 @@ def normalize_evidence(manifest: dict[str, Any], evidence: dict[str, Any]) -> di
             }
         )
 
+    for normalized_job, source_job in zip(jobs, jobs_source, strict=True):
+        check_id = job_check_id(
+            source_job, manifest["repository"], manifest.get("hostname", "github.com")
+        )
+        if (
+            check_id is not None
+            and source_job.get("run_id", manifest["run_id"]) == manifest["run_id"]
+            and source_job.get("run_attempt", manifest["run_attempt"]) == manifest["run_attempt"]
+            and source_job.get("head_sha", manifest.get("head_sha")) == manifest.get("head_sha")
+        ):
+            normalized_job["check_run_id"] = check_id
+
     artifacts = [
         {
             "id": artifact.get("id"),
@@ -234,17 +256,19 @@ def normalize_evidence(manifest: dict[str, Any], evidence: dict[str, Any]) -> di
             "run_id": manifest["run_id"],
             "run_attempt": manifest["run_attempt"],
             "head_sha": manifest.get("head_sha"),
+            "check_suite_id": run.get("check_suite_id"),
             "event": run.get("event"),
             "head_ref": run.get("head_branch"),
             "url": run.get("html_url"),
         },
         "github": {"status": run.get("status"), "conclusion": run.get("conclusion")},
-        "bundle_complete": manifest["complete"],
-        "completeness": _completeness(manifest, workflow),
+        "bundle_complete": manifest["complete"] and annotations_complete,
+        "completeness": completeness,
         "jobs": jobs,
+        "checks": checks,
         "job_counts": dict(sorted(counts.items())),
         "artifacts": artifacts,
         "producer_events": _producer_events(manifest, evidence),
         "unknowns": unknowns,
-        "warnings": list(manifest["warnings"]),
+        "warnings": warnings,
     }

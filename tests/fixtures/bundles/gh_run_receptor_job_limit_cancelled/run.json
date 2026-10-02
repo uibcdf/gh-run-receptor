@@ -1,0 +1,12 @@
+{
+  "check_suite_id": 92196732709,
+  "conclusion": "cancelled",
+  "event": "workflow_dispatch",
+  "head_branch": "main",
+  "head_sha": "a87e5b9748ceaf1d6c5277a34dd2d533eca11865",
+  "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/34027741137",
+  "id": 34027741137,
+  "name": "Fixture - timed out",
+  "run_attempt": 1,
+  "status": "completed"
+}

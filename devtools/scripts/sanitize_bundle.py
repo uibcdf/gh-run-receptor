@@ -16,7 +16,9 @@ def _canonical(value: Any) -> bytes:
     return (json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n").encode()
 
 
-def _selected_evidence(evidence: dict[str, Any], *, include_config: bool = True) -> dict[str, Any]:
+def _selected_evidence(
+    evidence: dict[str, Any], *, include_config: bool = True, include_annotations: bool = False
+) -> dict[str, Any]:
     run = evidence["run.json"]
     workflow = evidence["workflow.json"]
     jobs = evidence["jobs.json"]["jobs"]
@@ -76,6 +78,42 @@ def _selected_evidence(evidence: dict[str, Any], *, include_config: bool = True)
             ],
         },
     }
+    if include_annotations:
+        selected["run.json"]["check_suite_id"] = run.get("check_suite_id")
+        for source_job, selected_job in zip(jobs, selected["jobs.json"]["jobs"], strict=True):
+            for key in ("check_run_url", "run_id", "run_attempt", "head_sha"):
+                if key in source_job:
+                    selected_job[key] = source_job[key]
+        checks = []
+        for check in evidence["checks.json"]["check_runs"]:
+            if "annotations" not in check:
+                continue
+            checks.append(
+                {
+                    **{
+                        key: check.get(key)
+                        for key in ("id", "head_sha", "status", "conclusion", "annotations_state")
+                    },
+                    "check_suite": {"id": check.get("check_suite", {}).get("id")},
+                    "output": {
+                        "annotations_count": check.get("output", {}).get("annotations_count")
+                    },
+                    "annotations": [
+                        {
+                            key: annotation.get(key)
+                            for key in (
+                                "annotation_level",
+                                "message",
+                                "path",
+                                "start_line",
+                                "end_line",
+                            )
+                        }
+                        for annotation in check["annotations"]
+                    ],
+                }
+            )
+        selected["checks.json"] = {"total_count": len(checks), "check_runs": checks}
     if include_config and "config.json" in evidence:
         selected["config.json"] = evidence["config.json"]
     for name, value in evidence.items():
@@ -84,13 +122,21 @@ def _selected_evidence(evidence: dict[str, Any], *, include_config: bool = True)
     return selected
 
 
-def sanitize(source: Path, destination: Path, *, include_config: bool = True) -> None:
+def sanitize(
+    source: Path,
+    destination: Path,
+    *,
+    include_config: bool = True,
+    include_annotations: bool = False,
+) -> None:
     manifest, evidence = load_bundle(source)
     if destination.exists():
         raise ValueError(f"destination already exists: {destination}")
     destination.mkdir(parents=True)
     members = []
-    selected = _selected_evidence(evidence, include_config=include_config)
+    selected = _selected_evidence(
+        evidence, include_config=include_config, include_annotations=include_annotations
+    )
     for name, value in selected.items():
         data = _canonical(value)
         (destination / name).write_bytes(data)
@@ -139,8 +185,18 @@ def main() -> int:
         action="store_true",
         help="omit captured repository rules when they do not define the fixture behavior",
     )
+    parser.add_argument(
+        "--with-check-annotations",
+        action="store_true",
+        help="retain reviewed public check annotations and their job/attempt identity",
+    )
     args = parser.parse_args()
-    sanitize(args.source, args.destination, include_config=not args.without_config)
+    sanitize(
+        args.source,
+        args.destination,
+        include_config=not args.without_config,
+        include_annotations=args.with_check_annotations,
+    )
     return 0
 
 

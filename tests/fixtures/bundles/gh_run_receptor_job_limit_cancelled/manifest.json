@@ -1,0 +1,51 @@
+{
+  "api_version": "2022-11-28",
+  "capture_policy": "metadata",
+  "captured_at": "2026-10-02T21:41:27.958589+00:00",
+  "complete": true,
+  "head_sha": "a87e5b9748ceaf1d6c5277a34dd2d533eca11865",
+  "hostname": "github.com",
+  "members": [
+    {
+      "bytes": 363,
+      "complete": true,
+      "kind": "github.workflow_run",
+      "path": "run.json",
+      "sha256": "86b7cd842ade394bd84ca3db99c48cf77a9960496c2a1a8df87badc3ff1ebb46"
+    },
+    {
+      "bytes": 56,
+      "complete": true,
+      "kind": "github.workflow",
+      "path": "workflow.json",
+      "sha256": "394f54263c767a8ee8cea1f0e95c139a45443fb06d9537630ccceaf095d0ba9c"
+    },
+    {
+      "bytes": 1053,
+      "complete": true,
+      "kind": "github.jobs",
+      "path": "jobs.json",
+      "sha256": "a24ba425e012264d0735e591415700d83db25ddbfde0961d13e09bbaad0274f3"
+    },
+    {
+      "bytes": 809,
+      "complete": true,
+      "kind": "github.check_runs",
+      "path": "checks.json",
+      "sha256": "514852fb88317026521d838dde4cd19a9f6ce9ad7259c738515e4cba884492b0"
+    },
+    {
+      "bytes": 42,
+      "complete": true,
+      "kind": "github.artifacts",
+      "path": "artifacts.json",
+      "sha256": "733015529a249a421892ec83190af9d23593d1877609d3653ae94f945a220490"
+    }
+  ],
+  "receptor_version": "1.1.1+54.gde98007.dirty",
+  "repository": "uibcdf/gh-run-receptor",
+  "run_attempt": 1,
+  "run_id": 34027741137,
+  "schema": "gh-run-receptor.bundle@1",
+  "warnings": []
+}

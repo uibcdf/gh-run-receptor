@@ -20,6 +20,7 @@ from gh_run_receptor.release_profile import (
     release_identity,
     release_tag_display_state,
 )
+from gh_run_receptor.termination import termination_diagnostics
 
 MAX_FAILURES = 10
 MAX_ARTIFACTS = 10
@@ -641,6 +642,7 @@ def build_report(
             "missing_platforms": missing_platforms,
         },
         "jobs": jobs,
+        "checks": model["checks"],
         "job_counts": model["job_counts"],
         "artifacts": artifacts,
         "producer_events": model["producer_events"],
@@ -651,6 +653,9 @@ def build_report(
     }
     if invocation_override is not None:
         report["expectation_override"] = invocation_override
+    termination = termination_diagnostics(model)
+    if termination is not None:
+        report["termination"] = termination
     return report
 
 
@@ -731,6 +736,7 @@ def _render_docs_llm_failure(report: dict[str, Any]) -> str:
             )
     for warning in report["warnings"][:5]:
         lines.append(f"warning: {_safe_text(warning)}")
+    lines.extend(_termination_lines(report))
     return "\n".join(lines) + "\n"
 
 
@@ -799,6 +805,7 @@ def _render_release_llm_failure(report: dict[str, Any]) -> str:
             )
     for warning in report["warnings"][:5]:
         lines.append(f"warning: {_safe_text(warning)}")
+    lines.extend(_termination_lines(report))
     return "\n".join(lines) + "\n"
 
 
@@ -842,6 +849,33 @@ def _non_success_job_lines(report: dict[str, Any]) -> list[str]:
             lines.append(f"- {name} | {conclusion} | {duration}{suffix}")
         if len(failed) > MAX_FAILURES:
             lines.append(f"- ... {len(failed) - MAX_FAILURES} more {label} in JSON report")
+    return lines
+
+
+def _termination_lines(report: dict[str, Any]) -> list[str]:
+    """Rendering bounded termination facts and explicitly unverified hints."""
+    termination = report.get("termination")
+    if termination is None:
+        return []
+    lines = [
+        f"termination: source={_safe_text(termination['source_conclusion'])} "
+        f"cause={_safe_text(termination['cause'])}"
+    ]
+    jobs = termination["jobs"]
+    for job in jobs[:MAX_FAILURES]:
+        lines.append(
+            f"- {_safe_text(job['job_name'])} | {_safe_text(job['conclusion'])} "
+            f"cause={_safe_text(job['cause'])} "
+            f"annotations={_safe_text(job['annotation_evidence'])}"
+        )
+        for hint in job["hints"][:1]:
+            source = hint["source"]
+            lines.append(
+                f"  hint (unverified): {_safe_text(hint['message'])} | evidence: "
+                f"{_safe_text(source['member'])}:{_safe_text(source['json_pointer'])}"
+            )
+    if len(jobs) > MAX_FAILURES:
+        lines.append(f"- ... {len(jobs) - MAX_FAILURES} more termination records in JSON report")
     return lines
 
 
@@ -937,6 +971,7 @@ def render_llm(report: dict[str, Any]) -> str:
                 for job in report["jobs"]
             )
             fields.append(f"non_success_jobs={non_success_count}")
+        non_success.extend(_termination_lines(report))
         return " | ".join(fields) + "\n" + ("\n".join(non_success) + "\n" if non_success else "")
 
     if receptor["profile"] == "docs":
@@ -1049,6 +1084,7 @@ def render_llm(report: dict[str, Any]) -> str:
         lines.append(f"warning: {_safe_text(warning)}")
     if subject.get("url"):
         lines.append(f"run: {_safe_text(subject['url'])}")
+    lines.extend(_termination_lines(report))
     return "\n".join(lines) + "\n"
 
 
@@ -1189,6 +1225,7 @@ def render_human(report: dict[str, Any]) -> str:
         lines.extend(f"  {_safe_text(warning)}" for warning in report["warnings"][:5])
     if subject.get("url"):
         lines.extend(["", f"GitHub run: {_safe_text(subject['url'])}"])
+    lines.extend(_termination_lines(report))
     return "\n".join(lines) + "\n"
 
 

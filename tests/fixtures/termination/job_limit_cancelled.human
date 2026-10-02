@@ -1,0 +1,20 @@
+gh-run-receptor: CANCELLED
+
+Repository:  uibcdf/gh-run-receptor
+Workflow:    .github/workflows/fixture_timed_out.yml
+Run:         34027741137 (attempt 1)
+GitHub:      status=completed, conclusion=cancelled
+Evidence:    complete
+Profile:     generic
+
+Jobs (1)
+  cancelled       1m14s  timed-out
+      failed step 2: Wait beyond the job timeout
+
+Artifacts (0)
+  None
+
+GitHub run: https://github.com/uibcdf/gh-run-receptor/actions/runs/34027741137
+termination: source=cancelled cause=unknown
+- timed-out | cancelled cause=unknown annotations=complete
+  hint (unverified): job execution limit reported (1m0s) | evidence: checks.json:/check_runs/0/annotations/0

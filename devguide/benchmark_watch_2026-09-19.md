@@ -104,3 +104,12 @@ Raw outputs, debug files, caches, and the temporary counting wrapper stayed unde
 and are not committed. Deterministic tests independently guard schedule changes, page
 counting, historical-attempt cost, transient failure behavior, terminal identity, and the
 absence of duplicate terminal run/jobs acquisition.
+
+## 2026-10-02 acquisition update
+
+The original measurements above remain historical. The source improvement for
+uibcdf/gh-run-receptor#46 adds up to 50 bounded job-linked check-annotation reads
+to a fresh terminal capture, one page per cancelled/timed-out job check. Active
+polls do not acquire annotations. Zero advertised annotations, successful jobs
+and old offline bundles add no requests. See [timeout diagnosis](timeout_diagnosis.md)
+for identity checks, byte limits and partial-evidence behavior.

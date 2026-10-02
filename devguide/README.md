@@ -5,6 +5,13 @@ stable product boundary, architectural decisions, rule model, and post-1.0 route
 Documents should distinguish settled decisions from hypotheses that still require
 evidence.
 
+**Timeout diagnosis (2026-10-02):** `uibcdf/gh-run-receptor#46` adds bounded
+job-linked check annotations and explicit unknown cancellation causes. Fresh
+capture of the one-minute timeout experiment reports `CANCELLED`, exit 2, and
+an unverified execution-limit hint. [Timeout diagnosis](timeout_diagnosis.md)
+records the measured audit, additive fields, guard and residual evidence requirement
+for `uibcdf/molsyssuite#25`. This source improvement is not yet released.
+
 **Diagnostic correction (2026-10-02):** `uibcdf/gh-run-receptor#56` excludes
 positive `PASS` output from adjacent failure-diagnostic selection. Fresh capture
 and replay of the original three-job MolSysViewer failure retain the failed step
@@ -201,6 +208,7 @@ structured per-platform representation and a published 0.20.0 contract freeze.
 19. [Watch polling and output benchmark](benchmark_watch_2026-09-19.md)
 20. [Development roadmap](development_roadmap.md)
 21. [1.0 release readiness](release_readiness_1_0.md)
+22. [Timeout and cancellation diagnosis](timeout_diagnosis.md)
 
 These documents and the pending queue indexes are the current checkpoint. The
 [archive summary](archive/README.md) is the normal historical entry point. Routine
@@ -219,6 +227,7 @@ known design question; it does not mean that unimplemented behavior has been val
 | Origin, baseline, and prior art | `motivation_and_evidence.md` |
 | Component boundaries and data flow | `architecture.md` |
 | GitHub endpoints, permissions, and limitations | `github_evidence.md` |
+| Native termination, annotation hints, and residual producer evidence | `timeout_diagnosis.md` |
 | Commands, verdicts, exit codes, and channels | `cli_and_output_contract.md` |
 | Bundle, event, report, and producer schemas | `data_contracts.md` |
 | Workflow selection, profiles, rules, and precedence | `rules_and_profiles.md` |
@@ -266,10 +275,11 @@ non-generatable-outcome exception; authentic capture remains visibly absent and
 opportunistic. The stable scope, exact-commit gates, 1.0.0 publication, independent
 archive verification, client-guide synchronization, and installed public-version
 dogfooding now pass, and 1.0.0 is public. New work follows stable compatibility rules.
-The timeout follow-up `uibcdf/gh-run-receptor#46` now requests assessment and
-improvement of diagnosis from existing evidence before a producer decision.
-It is ready for provider investigation; `uibcdf/molsyssuite#25` waits for that
-assessment. See the [current report](pending_proposals/integrate_structured_producer_timeout_evidence_after_1_0.md).
+The assessment in `uibcdf/gh-run-receptor#46` now supplies an independently useful
+reader improvement and a concrete residual evidence requirement to
+`uibcdf/molsyssuite#25`. Any later producer/trust/compatibility decision remains
+central. See [timeout diagnosis](timeout_diagnosis.md) and the
+[resolved report](archive/resolved_proposals/integrate_structured_producer_timeout_evidence_after_1_0.md).
 
 The executable task list and release criteria remain in
 [development_roadmap.md](development_roadmap.md).

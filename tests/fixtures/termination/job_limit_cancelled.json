@@ -1,0 +1,175 @@
+{
+  "artifacts": [],
+  "causes": [],
+  "checks": [
+    {
+      "annotation_evidence": "complete",
+      "annotations": [
+        {
+          "level": "failure",
+          "message": "The job has exceeded the maximum execution time of 1m0s",
+          "source": {
+            "json_pointer": "/check_runs/0/annotations/0",
+            "member": "checks.json"
+          }
+        },
+        {
+          "level": "failure",
+          "message": "The operation was canceled.",
+          "source": {
+            "json_pointer": "/check_runs/0/annotations/1",
+            "member": "checks.json"
+          }
+        }
+      ],
+      "check_suite_id": 92196732709,
+      "conclusion": "cancelled",
+      "head_sha": "a87e5b9748ceaf1d6c5277a34dd2d533eca11865",
+      "id": 101471629872,
+      "source": {
+        "json_pointer": "/check_runs/0",
+        "member": "checks.json"
+      },
+      "status": "completed"
+    }
+  ],
+  "completeness": {
+    "artifact_content": "not_requested",
+    "artifact_inventory": "complete",
+    "check_annotations": "complete",
+    "checks": "complete",
+    "jobs": "complete",
+    "logs": "not_requested",
+    "metadata": "complete",
+    "producer_events": "not_requested",
+    "workflow": "complete"
+  },
+  "configuration": {
+    "match": null,
+    "matched": false,
+    "profile": null,
+    "settings": {},
+    "source": null
+  },
+  "expectations": {
+    "missing_platforms": [],
+    "satisfied": true
+  },
+  "github": {
+    "conclusion": "cancelled",
+    "status": "completed"
+  },
+  "job_counts": {
+    "cancelled": 1
+  },
+  "jobs": [
+    {
+      "check_run_id": 101471629872,
+      "conclusion": "cancelled",
+      "duration_seconds": 74,
+      "failed_steps": [
+        {
+          "conclusion": "cancelled",
+          "name": "Wait beyond the job timeout",
+          "number": 2,
+          "source": {
+            "json_pointer": "/jobs/0/steps/1",
+            "member": "jobs.json"
+          },
+          "status": "completed"
+        }
+      ],
+      "id": 101471629872,
+      "name": "timed-out",
+      "source": {
+        "json_pointer": "/jobs/0",
+        "member": "jobs.json"
+      },
+      "status": "completed",
+      "steps": [
+        {
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "source": {
+            "json_pointer": "/jobs/0/steps/0",
+            "member": "jobs.json"
+          },
+          "status": "completed"
+        },
+        {
+          "conclusion": "cancelled",
+          "name": "Wait beyond the job timeout",
+          "number": 2,
+          "source": {
+            "json_pointer": "/jobs/0/steps/1",
+            "member": "jobs.json"
+          },
+          "status": "completed"
+        },
+        {
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 3,
+          "source": {
+            "json_pointer": "/jobs/0/steps/2",
+            "member": "jobs.json"
+          },
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/34027741137/job/101471629872"
+    }
+  ],
+  "matrix": {},
+  "producer_events": [],
+  "receptor": {
+    "assessment": "CANCELLED",
+    "cause_evidence": "not_captured",
+    "evidence_sufficient": true,
+    "profile": "generic",
+    "profile_version": 1
+  },
+  "schema": "gh-run-receptor.report@1",
+  "subject": {
+    "check_suite_id": 92196732709,
+    "event": "workflow_dispatch",
+    "head_ref": "main",
+    "head_sha": "a87e5b9748ceaf1d6c5277a34dd2d533eca11865",
+    "repository": "uibcdf/gh-run-receptor",
+    "run_attempt": 1,
+    "run_id": 34027741137,
+    "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/34027741137",
+    "workflow": ".github/workflows/fixture_timed_out.yml"
+  },
+  "termination": {
+    "cause": "unknown",
+    "jobs": [
+      {
+        "annotation_evidence": "complete",
+        "cause": "unknown",
+        "conclusion": "cancelled",
+        "hints": [
+          {
+            "kind": "job_execution_limit",
+            "message": "job execution limit reported (1m0s)",
+            "source": {
+              "json_pointer": "/check_runs/0/annotations/0",
+              "member": "checks.json"
+            },
+            "verification": "diagnostic_hint"
+          }
+        ],
+        "job_id": 101471629872,
+        "job_name": "timed-out",
+        "source": {
+          "json_pointer": "/jobs/0",
+          "member": "jobs.json"
+        }
+      }
+    ],
+    "source_conclusion": "cancelled"
+  },
+  "unknowns": [],
+  "warnings": []
+}

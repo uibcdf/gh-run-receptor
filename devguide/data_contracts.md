@@ -133,6 +133,14 @@ workflow-run record. `head_ref` is an observed GitHub value, not independently v
 branch or tag identity. Profiles that require a real tag must record that verification
 separately rather than infer it from a version-shaped ref.
 
+The additive normalized subject `check_suite_id`, job `check_run_id` and root
+`checks` retain bounded job-linked annotation facts. An optional report
+`termination` separates native outcomes, explicit unknown cancellation causes,
+annotation availability and unverified source-linked hints. These additions use
+existing extension points without changing frozen schema bytes. Their field
+semantics, identity checks and limits are normative in
+[timeout diagnosis](timeout_diagnosis.md#additive-normalized-and-report-fields).
+
 ## Time and duration
 
 Source timestamps are retained in UTC ISO 8601 form. Durations are integer milliseconds

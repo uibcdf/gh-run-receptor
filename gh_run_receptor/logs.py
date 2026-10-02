@@ -112,6 +112,11 @@ def _adjacent_diagnostic(message: str, line: int) -> Candidate | None:
     return None
 
 
+def safe_diagnostic_text(message: str) -> str:
+    """Redacting and bounding untrusted diagnostic text before derived storage."""
+    return _safe_cause(message)
+
+
 def _safe_member(info: zipfile.ZipInfo) -> bool:
     path = PurePosixPath(info.filename)
     mode = info.external_attr >> 16

@@ -953,3 +953,14 @@ notebook. This closes the finite 1.0 readiness sequence without widening its sco
   the public and same-repository probes.
 - External registries, GitHub Releases, Git refs, and archive records are not queried by
   the first release profile.
+
+## Timeout reader assessment — 2026-10-02
+
+Fresh full and metadata captures of public run `34027741137`, attempt 1, retain
+native cancellation and obtain the job-linked execution-limit annotation. Offline
+replay shows the unverified hint, exact interrupted step and source pointer with
+`CANCELLED` and exit 2. The inspected logs contain the canceled operation message;
+the artifact inventory is empty. [Timeout diagnosis](timeout_diagnosis.md) records
+which distinctions remain unknown and the residual evidence requirement for
+uibcdf/molsyssuite#25. No authentic native `timed_out` fixture or generic supervisor
+producer is claimed.
