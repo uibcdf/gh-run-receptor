@@ -259,8 +259,10 @@ non-generatable-outcome exception; authentic capture remains visibly absent and
 opportunistic. The stable scope, exact-commit gates, 1.0.0 publication, independent
 archive verification, client-guide synchronization, and installed public-version
 dogfooding now pass, and 1.0.0 is public. New work follows stable compatibility rules.
-The only current product proposal is the explicitly post-1.0 structured timeout evidence
-integration in `uibcdf/gh-run-receptor#46`, blocked on `uibcdf/molsyssuite#25`.
+The timeout follow-up `uibcdf/gh-run-receptor#46` now requests assessment and
+improvement of diagnosis from existing evidence before a producer decision.
+It is ready for provider investigation; `uibcdf/molsyssuite#25` waits for that
+assessment. See the [current report](pending_proposals/integrate_structured_producer_timeout_evidence_after_1_0.md).
 
 The executable task list and release criteria remain in
 [development_roadmap.md](development_roadmap.md).

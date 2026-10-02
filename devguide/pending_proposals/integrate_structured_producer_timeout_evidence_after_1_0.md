@@ -1,124 +1,131 @@
 ---
-summary: Integrate structured producer timeout evidence after 1.0
+summary: Assess and improve timeout diagnosis before choosing producer instrumentation.
 issue: uibcdf/gh-run-receptor#46
-status: blocked
+status: open
 opened: 2026-09-19
 closed:
 verification: measured
-area: ['github', 'profiles']
+area: [github, profiles]
 guard:
 normative:
-blocked_by: [uibcdf/molsyssuite#25]
+blocked_by: []
 supersedes: []
 ---
 
-# Integrating structured producer timeout evidence after 1.0
+# Assessing timeout diagnosis before choosing producer instrumentation
 
-**Reported:** 2026-09-19, after issue #45 closed the native `timed_out` evidence gate and
-identified a separate producer-observability opportunity.
-**Status:** Blocked until gh-run-receptor 1.0 is published and
-`uibcdf/molsyssuite#25` selects the producer's ownership and contract direction.
+## Current decision — 2026-10-02
 
-Remove `severity` for proposals. The directory identifies the report kind.
+The principal MolSysSuite maintainer requests that GH Run Receptor first assess
+and improve diagnosis using available evidence. Only an established residual
+need should lead to a producer contract, external Action changes or a new Action.
+This issue is ready for provider investigation; it is no longer blocked by
+uibcdf/molsyssuite#25 or by the already published 1.0 release. MolSysSuite #25
+now waits for this assessment. The report path retains its original identity.
+
+The earlier scope concerned consuming a future structured operation-timeout
+producer after a central ownership decision. That ordering is superseded by
+this maintainer decision. No producer, schema or execution feature was accepted
+by the earlier design. Potential future producer consumption remains conditional
+on the assessment; it is not a prerequisite for starting this issue.
 
 ## What
 
-Track the gh-run-receptor side of a future structured operation-timeout producer. The
-central proposal `uibcdf/molsyssuite#25` evaluates whether that producer should be an
-existing-Action integration, a new small Action, or functionality owned elsewhere.
-gh-run-receptor's role would be to consume and report the versioned event without
-replacing GitHub's authoritative run, job, or step conclusion.
+Determine how much reliable timeout/cancellation diagnosis GH Run Receptor can
+provide from the evidence it already captures or can acquire through existing
+read-only mechanisms. Improve the reader and reports where justified. Identify
+which remaining distinctions require evidence emitted by a cooperating workflow.
 
-## How
+The outcome must separate confirmed source facts, diagnostic hints and unknown
+causes, without rewriting GitHub run, job or step conclusions. This is a request
+for an independently useful provider capability and assessment, not a prescribed
+new Action or an expansion into command execution.
 
-After 1.0 and central acceptance, add a dedicated source-bound evidence path modeled on
-the existing producer-event safeguards: exact repository, run, attempt, job, producer,
-artifact name, digest, schema, and size identity; bounded parsing; explicit incomplete and
-contradictory states; and deterministic offline replay.
+## Consumer evidence and why
 
-The report vocabulary must distinguish the two layers:
+uibcdf/molsyssuite#25 coordinates the need to diagnose long tests, Conda builds
+and other expensive workflow operations. Its initial recommendation to create a
+dedicated producer preceded a demonstrated assessment of the existing reader.
+The principal maintainer explicitly changed that order on 2026-10-02.
 
-```text
-CANCELLED source | producer_timeout operation=tests limit=20m
-```
+The existing measured evidence in uibcdf/gh-run-receptor#45 establishes:
 
-`TIMED_OUT` remains available only when GitHub supplies the exact source conclusion.
-Neither elapsed time, `timeout-minutes`, a job name, nor a printed marker may produce it.
-The future event may use a provisional name such as `producer-outcome@1`; this issue does
-not reserve that schema name before the central design is accepted.
+- Repository-owned run `34027741137`, with a one-minute job timeout, reported
+  the run, job and interrupted step as `cancelled`, not `timed_out`.
+- A bounded scan of 889 public repositories found no authentic `timed_out`
+  workflow-run fixture; exact synthetic source `timed_out` still passes the
+  assessment, renderers and process-status path.
+- Cancellation alone does not distinguish an enforced deadline, manual
+  cancellation, concurrency replacement, matrix fail-fast or runner loss.
 
-## Why
+These historical measurements motivate investigation. They do not prove that
+all relevant native fields or evidence sources lack the information needed for
+better diagnosis in every case.
 
-Developers arriving in this repository need one visible route for the timeout
-observability gap. Without it, the absence of an authentic `timed_out` fixture can invite
-ad hoc log parsing or reclassification of ordinary GitHub cancellation. Linking the
-post-1.0 design now preserves the read-only 1.0 scope while preventing that historical
-context from being lost.
+At inspected source `1f378f2ccd0e8cf8c0d4cbb73431c712611955b1`,
+`gh_run_receptor.events` and `gh_run_receptor.bundle` already select bounded
+producer artifacts, validate digest/ZIP/JSON and support offline replay.
+The strict existing `events@1` accepts `conda.package`, not generic timeout
+events. That scope is a compatibility fact, not evidence that a new schema is
+necessary. GH Run Receptor 1.0.0 was published on 2026-09-19; implementation
+no longer waits for that release milestone.
 
-Structured producer evidence would also let gh-run-receptor serve long scientific tests,
-Conda builds, documentation jobs, and community workflows with a more useful diagnosis
-than source cancellation alone.
+## Requested investigation and delivery
 
-## What is measured and what is assumed
-
-Issue #45 records two measurements: a standard one-minute Actions job timeout produced
-`cancelled`, and a later authenticated scan of 889 public repositories returned zero
-errors and zero `status=timed_out` runs. The exact synthetic source value nevertheless
-passes normalization, assessment, human/LLM rendering, and process status 2 in 440 local
-tests.
-
-The existing `events@1` path proves that bounded producer artifacts can be tied to source
-identity and consumed offline. Reuse of that schema is not assumed: a generic operation
-outcome has different semantics from the current Conda platform event and requires an
-explicit compatibility decision.
-
-## What was refuted
-
-- Printed `TIMED_OUT` log markers are rejected as authoritative evidence because logs are
-  untrusted and spoofable.
-- Inferring timeout from duration or `timeout-minutes` is rejected because the measured
-  GitHub conclusion is cancellation and cancellation has several causes.
-- A write-capable GitHub App is not assumed to solve the workflow-run case. It can create
-  check-level conclusions but adds a distinct mutation and credential boundary.
-- Implementing a producer inside gh-run-receptor before 1.0 is rejected because the 1.0
-  product boundary is a stable read-only consumer.
-
-## Scope and exclusions
-
-This report covers only gh-run-receptor consumption, validation, rendering, and replay of
-an accepted future producer contract. Producer ownership, component admission, execution,
-process-tree termination, and suite-wide pilots belong to `uibcdf/molsyssuite#25` and its
-future implementation issue.
-
-It excludes native GitHub state mutation, whole-workflow cancellation, log inference, and
-evidence recovery after a runner is killed before publication.
+1. Audit native run, job, step and other available structured evidence through
+   the existing acquisition adapter. Record which sources are already captured,
+   which can be acquired read-only and which are unavailable or ambiguous.
+2. Review bounded logs and existing artifact paths as supplementary evidence.
+   Keep untrusted text and command outputs distinct from authoritative source
+   facts; do not promote a matching marker to verified causality.
+3. Identify and implement reporting/acquisition improvements that current
+   evidence actually supports, using reusable owner-local operations and
+   preserving existing versioned public contracts.
+4. State unknown/ambiguous causes explicitly. Configured `timeout-minutes`,
+   elapsed duration, exit 124 or a printed `TIMED_OUT` token alone cannot confirm
+   a supervised deadline or change native cancellation into `TIMED_OUT`.
+5. Test source preservation, available/unavailable evidence, cancellation
+   ambiguity, exact native timeout, hostile markers and bounded outputs with
+   sanitized deterministic fixtures. Record actual observed results separately
+   from proposed implementation behavior.
+6. Return a precise residual evidence requirement to uibcdf/molsyssuite#25 if
+   the reader cannot establish a useful distinction from current sources.
+   Include the consuming case, why the missing fact matters, what a workflow
+   must emit, and reuse or extension options. Do not select a producer owner,
+   schema or new component merely because a cause is unknown.
 
 ## Acceptance criteria
 
-- gh-run-receptor 1.0 is published and `uibcdf/molsyssuite#25` accepts an owner and event
-  contract before this report becomes active.
-- The consumer verifies source and producer identity, schema, digest, bounds, and
-  completeness independently.
-- Contradictory, duplicated, malformed, untrusted-PR, missing, and oversized events fail
-  closed without hiding GitHub source truth.
-- JSON, human, and LLM reports use a distinct `producer_timeout`-style fact and never
-  upgrade it to GitHub `TIMED_OUT`.
-- Offline fixtures cover success, producer timeout, ordinary failure, missing publication,
-  source cancellation, and hostile artifact cases.
-- Hosted Linux, macOS, and Windows pilots preserve exact run/attempt/job identity.
-- Public documentation names the producer assertion, trust boundary, native fallback,
-  and cases where abrupt runner termination prevents evidence.
+- A verified capability/limitation assessment names inspected sources and
+  concrete evidence, including the measured cancellation example.
+- Justified improvements from available evidence have documented contracts and
+  relevant source-preserving regression guards, or the assessment demonstrates
+  that current reporting is already sufficient for the obtainable facts.
+- Reports distinguish confirmed source outcomes, supplementary hints and
+  unknown causes. No elapsed-time or spoofable marker inference rewrites source
+  conclusions or reports incomplete work as success.
+- Any residual producer evidence requirement is concrete and linked back to
+  uibcdf/molsyssuite#25, with reuse options and maintenance/compatibility impact.
+- Public limitations and this report match the delivered capability. Resolution
+  names a relevant durable guard or normative record and archives this report.
 
-## Dependencies and risks
+## Scope and exclusions
 
-The design is blocked by `uibcdf/molsyssuite#25`; implementation is additionally scheduled
-after the 1.0 release milestone. Risks include coupling the consumer to one Action,
-accepting a producer assertion as external truth, schema overlap with `events@1`, artifact
-substitution, pull-request self-attestation, and adding unbounded output or downloads.
+GH Run Receptor owns acquisition, validation, normalization, rendering and
+replay improvements. MolSysSuite owns any later interoperability decision,
+producer ownership or component admission. This issue begins without a central
+producer choice and does not admit a new Action, implement command supervision,
+mutate GitHub state, launch scientific suites or publish packages.
+
+Future structured producer consumption may be appropriate after the measured
+assessment. An additional serialized contract requires its own explicit version,
+compatibility and trust review; the current `events@1` identifier cannot silently
+acquire incompatible semantics.
 
 ## Provenance
 
-Opened on 2026-09-19 from the outcome evidence work archived by
-`uibcdf/gh-run-receptor#45` and the central project proposal
-`uibcdf/molsyssuite#25`. No production behavior, schema, workflow, permission, or
-dependency changed.
+The original report was opened on 2026-09-19 from uibcdf/gh-run-receptor#45 and
+uibcdf/molsyssuite#25. The 2026-10-02 redirection follows the principal maintainer's
+explicit request to establish provider capabilities and needs before deciding
+whether another Action is necessary. The issue is reused to preserve one coherent
+timeout-observability theme, rather than opening a duplicate.
