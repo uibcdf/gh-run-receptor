@@ -25,6 +25,17 @@ Before creating a release tag:
 5. verify that the built metadata version equals the intended tag;
 6. create and push the lightweight tag without moving an existing tag.
 
+For the 1.2.0 candidate, build from an isolated clone at the exact release commit
+with a temporary local 1.2.0 tag. That staging tag is not pushed. Verify the
+wheel/sdist metadata, frozen runtime schemas and a clean installed-wheel replay
+before creating the same lightweight tag in the authoritative checkout. Record
+the exact commit, tool/dependency versions, artifact digests, tested scope and
+hosted run identities in a reviewable candidate receipt outside the source tree;
+after publication incorporate the observed receipt into this guide. A release
+metadata edit creates a new candidate and invalidates its consuming gate evidence.
+The public route remains the existing GitHub Release assets and pinned CLI
+extension; package-index and Conda publication are separate unclaimed routes.
+
 For a release that changes a platform-support claim, manually dispatch
 `.github/workflows/compatibility.yml`. Its explicit matrix must pass the full suite, build,
 wheel installation, and outside-checkout console smoke test on Ubuntu, macOS, and Windows

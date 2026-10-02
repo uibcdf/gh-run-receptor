@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 1.2.0 - 2026-10-02
+
+- Capture bounded, job-linked check annotations for cancelled and timed-out jobs.
+  Reports preserve native conclusions, show explicit unknown cancellation causes,
+  and label execution-limit text as unverified hints with evidence references.
+- Keep positive `PASS` output from replacing the later nonzero process-exit
+  diagnostic after a silent shell failure.
+- Show tolerated non-success jobs in compact successful-run reports while
+  retaining GitHub's authoritative successful run conclusion.
+- Prefer bounded primary Conda solver and Python traceback diagnostics over
+  generic exit and cleanup messages.
+- Allow an explicit expected-platform override for targeted Conda
+  `workflow_dispatch` inspections, with invocation provenance and warnings.
+- Retain dependency-free Python 3.11--3.14 support, all nine frozen serialized
+  contracts, the stable process-status map and read-only GitHub transport.
+- Publish routine package coverage through the adopted MolSysSuite tooling lane.
+
 ## 1.1.1 - 2026-09-21
 
 - Name failed pytest tests in compact CI causes instead of selecting the generic runner

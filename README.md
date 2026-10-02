@@ -23,11 +23,11 @@ commits or scientific consumer suites. See the [coverage reporting contract](dev
 
 Version 1.0 is the stable read-only contract: it uses exact workflow identities and does
 not include pattern or organization-level configuration. No package has been published to
-a package index. The `1.1.1` source release can inspect, watch, replay, compare, and
+a package index. The `1.2.0` source release can inspect, watch, replay, compare, and
 aggregate structured run evidence. Install the GitHub CLI extension at the exact tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 1.1.1
+gh extension install uibcdf/gh-run-receptor --pin 1.2.0
 gh run-receptor --version
 ```
 
@@ -87,7 +87,7 @@ jobs:
   report:
     runs-on: ubuntu-latest
     steps:
-      - uses: uibcdf/gh-run-receptor@1.1.1
+      - uses: uibcdf/gh-run-receptor@1.2.0
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
@@ -106,7 +106,7 @@ High-assurance consumers may pin the full release commit SHA instead of the tag.
 A small dedicated reporter can keep its full `config@1` policy beside the invocation:
 
 ```yaml
-      - uses: uibcdf/gh-run-receptor@1.1.1
+      - uses: uibcdf/gh-run-receptor@1.2.0
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
@@ -150,7 +150,7 @@ It explicitly labels the profile interpretation as published rather than indepen
 recomputed. Use `inspect SOURCE_RUN_ID` as the fallback when the artifact is absent,
 expired, or insufficient for the decision.
 
-Version `1.1.1` provides a reusable terminal reporter. A client keeps the
+Version `1.2.0` provides a reusable terminal reporter. A client keeps the
 `workflow_run` trigger and delegates the complete reporting job:
 
 ```yaml
@@ -167,7 +167,7 @@ permissions:
 
 jobs:
   report:
-    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@1.1.1
+    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@1.2.0
     with:
       run-id: ${{ github.event.workflow_run.id }}
       repository: ${{ github.repository }}
@@ -194,6 +194,12 @@ without claiming external delivery. Use `--profile=generic`, `--profile=ci`,
 Cause selection prefers concrete errors over GitHub's generic process-exit marker. When a
 tool emits an immediately adjacent bounded structured verdict such as `Build: FAIL` or
 `Archive: ABSENT`, that diagnostic is retained with credential-shaped text redacted.
+Positive `PASS` output is never used to explain a later silent shell failure.
+
+Version 1.2.0 also reads bounded job-linked check annotations for cancelled or
+timed-out jobs. Execution-limit text appears as an unverified hint with its source
+reference; cancellation remains `cause=unknown` and never becomes `TIMED_OUT`
+through text, configured limits or elapsed-time inference.
 
 A client repository can generate a reviewable starting point without changing the
 checkout:

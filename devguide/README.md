@@ -5,6 +5,13 @@ stable product boundary, architectural decisions, rule model, and post-1.0 route
 Documents should distinguish settled decisions from hypotheses that still require
 evidence.
 
+**Release preparation (2026-10-02):** Candidate `1.2.0` collects the annotation
+reader in `uibcdf/gh-run-receptor#46`, the silent-failure correction in #56,
+and the intervening compact-report and targeted-dispatch improvements. The
+ordinary exact-source, staged distribution and hosted publication gates apply.
+Publication and independent public-artifact verification remain pending until
+observed; [versioning and releases](versioning_and_releases.md) owns the receipt.
+
 **Timeout diagnosis (2026-10-02):** `uibcdf/gh-run-receptor#46` adds bounded
 job-linked check annotations and explicit unknown cancellation causes. Fresh
 capture of the one-minute timeout experiment reports `CANCELLED`, exit 2, and

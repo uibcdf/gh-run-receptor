@@ -42,7 +42,7 @@ JSON keeps these layers separate:
 Consumers must not replace GitHub's conclusion with the assessment. A report can validly
 contain `assessment=PARTIAL` and `conclusion=failure`.
 
-Source changes after 1.1.1 add optional termination diagnostics through existing
+Version 1.2.0 adds optional termination diagnostics through existing
 schema extension points. Native `timed_out` is retained as a source fact;
 cancellation causes remain unknown, with check text displayed only as unverified
 hints. Frozen schema resources and process-status meanings are unchanged.
