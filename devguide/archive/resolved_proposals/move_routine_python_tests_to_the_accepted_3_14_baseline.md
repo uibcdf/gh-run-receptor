@@ -1,10 +1,10 @@
 ---
 summary: Move routine package tests to the accepted Python 3.14 baseline.
 issue: uibcdf/gh-run-receptor#58
-status: active
+status: resolved
 opened: 2026-10-03
-closed:
-verification: inspected
+closed: 2026-10-03
+verification: measured
 area: [governance]
 guard: tests/test_python_ci_lanes.py
 normative:
@@ -43,5 +43,18 @@ neither publishes a package nor changes released action behavior.
 
 ## Evidence
 
-Local and hosted verification will be recorded before closure. Source-level
-configuration alone is not passing hosted evidence.
+At exact source 5da9bc2, hosted routine run
+[37122879093](https://github.com/uibcdf/gh-run-receptor/actions/runs/37122879093)
+passes the complete package suite on Python 3.14.7 and its independent
+default-branch coverage publisher. Policy run
+[37122877185](https://github.com/uibcdf/gh-run-receptor/actions/runs/37122877185)
+passes the immutable 1.5.4 gate on the same source. The first routine run
+37122618885 failed because the packaging guard still expected 1.5.2; the
+corrected guard expects 1.5.4. The failed receipt is retained, not renamed green.
+
+Five focused local lane/packaging tests pass. The existing lane guard asserts
+the actual routine setup interpreter, unfiltered push/PR/manual events and
+gating package-suite command. It also protects all twelve weekly cells and
+coverage publisher permissions/ordering. Reverting the routine interpreter to
+3.13 violates that assertion. The weekly workflow is unchanged; no new weekly
+execution, platform certification or package publication is claimed.
