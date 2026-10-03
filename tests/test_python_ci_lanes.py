@@ -25,13 +25,13 @@ def _assert_gating_pytest(job: dict) -> None:
     assert any('".[test]"' in step.get("run", "") for step in job["steps"])
 
 
-def test_routine_linux_python_313_runs_on_push_and_pull_request():
+def test_routine_linux_python_314_runs_on_push_and_pull_request():
     workflow = _workflow("python-routine.yml")
     assert set(workflow["on"]) == {"push", "pull_request", "workflow_dispatch"}
     assert all(not value for value in workflow["on"].values())
     job = workflow["jobs"]["test"]
     assert job["runs-on"] == "ubuntu-latest"
-    assert job["steps"][1]["with"]["python-version"] == "3.13"
+    assert job["steps"][1]["with"]["python-version"] == "3.14"
     _assert_gating_pytest(job)
 
 

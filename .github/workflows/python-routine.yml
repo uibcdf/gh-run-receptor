@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   test:
-    name: Linux Python 3.13
+    name: Linux Python 3.14
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -21,7 +21,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
         with:
-          python-version: "3.13"
+          python-version: "3.14"
       - name: Install package and test tools
         run: python -m pip install ".[test]" "coverage==7.16.0"
       - name: Run the complete package suite
