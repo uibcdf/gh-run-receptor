@@ -79,8 +79,8 @@ cross-component feedback, and issue ownership.
 ## Git and changes
 
 - Keep commits focused and do not add attribution trailers.
-- Include `[skip ci]` in commits that have been verified locally unless the purpose of
-  the push is explicitly to exercise CI.
+- Select batching and any permitted interim CI skip conditionally through the
+  common checkpoint route; local validation does not imply skipping every push.
 - Do not use destructive Git commands or force pushes.
 - Preserve unrelated user changes in a dirty worktree.
 - Do not commit raw evidence bundles, credentials, caches, downloaded logs, or private
@@ -110,6 +110,21 @@ cross-component feedback, and issue ownership.
 - `standards/GH_RUN_RECEPTOR_GUIDE.md`
 - `PYTEST_RECEPTOR_GUIDE.md` — synchronized, read-only contract for the pytest renderer
   used by this repository's test commands.
+
+## Direct pushes and scoped local validation
+
+Follow [the common checkpoint policy](MOLSYSSUITE_GUIDE.md#direct-pushes-and-validation-checkpoints)
+for authorized internal direct pushes by `dprada` and `LMMV`. Batch focused local
+commits when remote visibility is unnecessary; a permitted interim CI skip is
+conditional, never the default after every locally checked change. Retain local
+results while tested code, inputs, environment and scope remain applicable.
+Normally finish with an unskipped head and inspect its applicable CI, or explicitly
+execute and verify those exact-head gates manually. Record missing evidence,
+untested scope, owning issue and recovery route; administrative checks do not
+clear full-suite backlog. External PRs, admission and publication require all
+mandatory executed gates for the exact candidate and required installed file.
+An authorized manual qualification retains the original producer and artifact
+bytes/digest; a marker alone neither waives a gate nor disqualifies that evidence.
 
 ## Modular reusable tools
 
