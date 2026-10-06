@@ -13,6 +13,12 @@ from pathlib import Path
 
 import yaml
 
+if __package__:
+    from .distribution_archives import verify_distributions
+else:
+    from distribution_archives import verify_distributions
+
+ROOT = Path(__file__).resolve().parents[2]
 REPOSITORY = "uibcdf/gh-run-receptor"
 REPOSITORY_URL = f"https://github.com/{REPOSITORY}"
 PROJECT_TITLE = "gh-run-receptor"
@@ -196,6 +202,7 @@ def verify_release(
     commit: str,
     asset_dir: Path,
     state: str,
+    repo: Path = ROOT,
 ) -> list[str]:
     """Return violations in GitHub Release identity and local asset parity."""
 
@@ -232,6 +239,8 @@ def verify_release(
             errors.append(f"missing local release asset: {name}")
     manifest = local["SHA256SUMS"]
     distributions_exist = all(local[name].is_file() for name in distribution_names(version))
+    if distributions_exist:
+        errors.extend(verify_distributions(asset_dir, version=version, repo=repo))
     if (
         manifest.is_file()
         and distributions_exist
@@ -368,6 +377,11 @@ def main() -> int:
     manifest.add_argument("version")
     manifest.add_argument("--directory", type=Path, default=Path("dist"))
 
+    archives = subparsers.add_parser("archives")
+    archives.add_argument("version")
+    archives.add_argument("--directory", type=Path, default=Path("dist"))
+    archives.add_argument("--repo", type=Path, default=ROOT)
+
     citation = subparsers.add_parser("citation")
     citation.add_argument("version")
     citation.add_argument("--repo", type=Path, default=Path.cwd())
@@ -384,6 +398,7 @@ def main() -> int:
     verify.add_argument("--release-json", type=Path, required=True)
     verify.add_argument("--tag-json", type=Path, required=True)
     verify.add_argument("--state", choices=("draft", "published"), required=True)
+    verify.add_argument("--repo", type=Path, default=ROOT)
 
     zenodo = subparsers.add_parser("zenodo")
     zenodo.add_argument("version")
@@ -400,6 +415,14 @@ def main() -> int:
         elif args.command == "manifest":
             path = write_checksum_manifest(args.directory, args.version)
             print(f"Release checksums: PASS — {path}")
+        elif args.command == "archives":
+            distribution_names(args.version)
+            errors = verify_distributions(
+                args.directory, version=args.version, repo=args.repo.resolve()
+            )
+            if errors:
+                raise ValueError("; ".join(errors))
+            print(f"Release archive payloads: PASS — {args.version}")
         elif args.command == "citation":
             errors = validate_citation(args.repo.resolve(), args.version)
             if errors:
@@ -416,6 +439,7 @@ def main() -> int:
                 commit=args.commit,
                 asset_dir=args.asset_dir,
                 state=args.state,
+                repo=args.repo.resolve(),
             )
             if errors:
                 raise ValueError("; ".join(errors))

@@ -130,3 +130,39 @@ publishing a candidate. Existing action-pin and Python-lane tests now identify
 actions by identity rather than assuming the SDK checkout is the Python step.
 These measurements prepare the source route; future installed/candidate evidence
 is still required before a public Conda claim.
+
+### Maintained GitHub archive checks — 2026-10-06
+
+Inspection found that the original GitHub asset verifier checked tag identity,
+asset sizes and digests but did not inspect internal distribution contents.
+The original release-specific inspection remains historical evidence. The owner
+now provides `devtools/scripts/distribution_archives.py::inspect_distribution`,
+called by `release_tools.py archives` before upload and by the existing draft/public
+verifier. It binds both archives to the same reviewed required paths and frozen
+schema digests already used by the additional Conda route. No new public
+format or shared policy is introduced.
+
+The regression guard is `tests/test_release_tools.py`: valid outer names and
+recomputed asset/manifest digests still fail for wrong or ambiguous internal
+versions, project identity, Python bounds, missing code/resources and altered
+schema bytes. Both formats reject unsafe/duplicate paths, links and count,
+member and total-size violations; missing/truncated archives return failures.
+`tests/test_publish_release_workflow.py` keeps this gate before installation or
+any upload. The publisher's inventory hash is consciously refreshed for the
+new mandatory operation; all other workflow hashes and CI lane semantics stay
+as reviewed.
+
+The existing public 1.2.0 wheel and sdist pass the new read-only inspection;
+they have not been rebuilt or replaced. Build tools normalize Requires-Python
+specifier order, so metadata comparison uses equivalent specifier sets rather
+than string order. Owner-specific GitHub validation stays local; central
+uibcdf/molsyssuite#45 tracks the missing general wheel/sdist SDK profile for
+any future second consumer. Conda source/artifact/installed/public evidence
+remains separately pending.
+
+Qualified source verification after this addition: **627 passed / one explicit
+installed-only skip**; Ruff 0.16.5 lint/format passes all 192 files. The reviewed
+27-route preflight, guide lifecycle/index and whitespace checks pass. Python
+3.14.7 and the participating editable import origins remain as above, with the
+same seven tracked environment findings. This is source and read-only archive
+evidence; it is not an installed candidate, release run or twelve-cell claim.

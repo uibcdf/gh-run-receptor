@@ -25,6 +25,27 @@ Before creating a release tag:
 5. verify that the built metadata version equals the intended tag;
 6. create and push the lightweight tag without moving an existing tag.
 
+The maintained GitHub archive guard is
+`python devtools/scripts/release_tools.py archives X.Y.Z --directory dist`.
+It checks both wheel and sdist without extraction or payload execution, using
+`devtools/scripts/distribution_archives.py::inspect_distribution` and the owner
+inventory in `devtools/conda-build/resources.toml`. Required runtime paths,
+generated and metadata versions, Python bounds and all nine frozen schema
+digests must agree. The sdist's root and egg-info metadata are both checked;
+the wheel must contain exactly its expected distribution metadata. Unsafe or
+duplicate paths, links, truncated archives and bounded size/count violations fail.
+The limits are 64 MiB compressed/total payload, 2 MiB per member and 2,048 members.
+If legitimate payload growth exceeds those limits, review the limit and its
+regression evidence before publishing; do not bypass the check.
+
+The manual publisher runs this guard before installing or uploading any asset;
+`release_tools.py verify` repeats it for both draft and public verification in
+addition to the original tag/source/API size/digest checks. Checksums alone do
+not qualify payload contents. `--repo` selects the reviewed owner inventory for
+an independently downloaded file. These checks establish archive integrity,
+not an installed cross-platform matrix or Conda authorization. The historical
+1.2.0 files retain their bytes and original evidence scope.
+
 For the 1.2.0 candidate, build from an isolated clone at the exact release commit
 with a temporary local 1.2.0 tag. That staging tag is not pushed. Verify the
 wheel/sdist metadata, frozen runtime schemas and a clean installed-wheel replay

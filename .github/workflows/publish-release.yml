@@ -60,6 +60,7 @@ jobs:
         shell: bash
         run: |
           python -m build
+          python devtools/scripts/release_tools.py archives "$RELEASE_TAG"
           python devtools/scripts/release_tools.py manifest "$RELEASE_TAG"
           python -m pip install --no-deps --target "$RUNNER_TEMP/install" \
             "dist/gh_run_receptor-${RELEASE_TAG}-py3-none-any.whl"

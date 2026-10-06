@@ -79,6 +79,13 @@ public Conda delivery is claimed. The
 and [operational handoff](../devtools/conda-build/README.md) separate source
 readiness from the first twelve-cell installed qualification.
 
+**GitHub archive guards (2026-10-06):** The same distribution review adds a
+maintained, bounded wheel/sdist payload guard before upload and within draft/public
+verification. It reuses the owner runtime/resource inventory; generated versions,
+metadata and frozen schema bytes are checked independently of asset digests.
+[Versioning and releases](versioning_and_releases.md) owns the command and limits.
+This does not choose the first Conda release or qualify an installed candidate.
+
 ## Current state
 
 The project has published and independently verified stable `1.0.0` GitHub Release assets,

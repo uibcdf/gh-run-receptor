@@ -62,3 +62,12 @@ def test_release_workflow_verifies_draft_before_publication_and_rechecks_public_
     assert "release_tools.py manifest" in source
     assert "release_tools.py citation" in source
     assert "release_tools.py notes" in source
+
+
+def test_release_workflow_checks_payloads_before_install_or_any_upload():
+    source = _source()
+    payloads = source.index('release_tools.py archives "$RELEASE_TAG"')
+    assert source.index("python -m build") < payloads
+    assert payloads < source.index("release_tools.py manifest")
+    assert payloads < source.index("python -m pip install --no-deps --target")
+    assert payloads < source.index("gh release create")
