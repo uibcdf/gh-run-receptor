@@ -451,3 +451,12 @@ while improving MolSysSuite development workflows, but they are general-purpose 
 any developer, repository, or coding agent. A typical combined workflow runs
 `pytest --receptor=ci` inside GitHub Actions and later inspects the resulting run with
 `gh run-receptor --receptor=llm inspect RUN_ID`.
+
+
+## Prepared Conda distribution
+
+An additional `noarch: python` Conda route is prepared for a future release,
+with a separately supplied GitHub CLI dependency. No public Conda package is
+claimed yet. The owner review is
+[GH Run Receptor #60](https://github.com/uibcdf/gh-run-receptor/issues/60).
+Existing extension, Action and GitHub wheel/sdist installation remain available.

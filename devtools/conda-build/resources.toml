@@ -1,0 +1,47 @@
+import_name = "gh_run_receptor"
+version_file = "site-packages/gh_run_receptor/_version.py"
+reason = "Pure Python CLI with frozen JSON schemas; gh is a separately solved native executable, never a bundled payload."
+external_run_requirements = ["gh>=2.48.0"]
+external_run_reason = "Network acquisition uses the existing GitHub adapter and its minimum gh version. Offline replay remains independent of gh."
+required_paths = [
+  "site-packages/gh_run_receptor/__init__.py",
+  "site-packages/gh_run_receptor/__main__.py",
+  "site-packages/gh_run_receptor/_version.py",
+  "site-packages/gh_run_receptor/cli.py",
+  "site-packages/gh_run_receptor/github.py",
+  "site-packages/gh_run_receptor/source_version.py",
+  "site-packages/gh_run_receptor/contracts.py",
+  "site-packages/gh_run_receptor/schemas/aggregate-v1.schema.json",
+  "site-packages/gh_run_receptor/schemas/bundle-v1.schema.json",
+  "site-packages/gh_run_receptor/schemas/comparison-policy-v1.schema.json",
+  "site-packages/gh_run_receptor/schemas/comparison-v1.schema.json",
+  "site-packages/gh_run_receptor/schemas/config-capture-v1.schema.json",
+  "site-packages/gh_run_receptor/schemas/config-v1.schema.json",
+  "site-packages/gh_run_receptor/schemas/events-v1.schema.json",
+  "site-packages/gh_run_receptor/schemas/model-v1.schema.json",
+  "site-packages/gh_run_receptor/schemas/report-v1.schema.json",
+]
+
+[installed_gate]
+workflow = ".github/workflows/test-staged-conda.yml"
+platforms = ["linux-64", "osx-arm64", "win-64"]
+python_versions = ["3.11", "3.12", "3.13", "3.14"]
+prepare_job = "installed / prepare"
+job_template = "installed / {platform} · Python {python}"
+required_steps = ["Install exact artifact", "Validate installed files", "Run installed tests", "Recheck installed provenance after scientific tests"]
+
+[installed_tests]
+paths = ["tests"]
+pytest_args = ["--receptor=ci", "--deselect=tests/test_source_version.py::test_repository_checkout_has_a_source_version", "--deselect=tests/test_source_version.py::test_source_launcher_does_not_borrow_installed_distribution_version"]
+conda_dependencies = ["jsonschema>=4.23,<5"]
+
+[schema_sha256]
+"aggregate-v1.schema.json" = "61c8e6fdaf04c610b1f335baac42cc8b4a0680014f16686f3a949cf7590a8b67"
+"bundle-v1.schema.json" = "02baeb92b98a22509760e483b17941602f985e6ae79a9a116555ecfcc73d086b"
+"comparison-policy-v1.schema.json" = "aedef7a2d526b3cd5089cb586963a3786bad43903bf4e365995fd85517ce10dd"
+"comparison-v1.schema.json" = "85969edc14a8248f43a03d6d4b93db3daac5ddfb4093fe62a70947d1048641fc"
+"config-capture-v1.schema.json" = "73cd5e990519222e536e3abad78e8052c57f5f814cd466c09665c249c2535ea6"
+"config-v1.schema.json" = "467d0bab5aee4c910eb95e7777fe928103fc50043f14fad7948ea093209a237d"
+"events-v1.schema.json" = "30f785e79f6bde0a6a94e2d3b6ed0d2eaedad8b21072f249e1331c482700f7a0"
+"model-v1.schema.json" = "1a52a7e2cb48ebb7cc94559c5e14f674f1888fa8d36f770e94a307bdc2860a70"
+"report-v1.schema.json" = "4d1c2873c017e6cebfb4062699c70160a9412eff6859af1731c646bac26972c1"

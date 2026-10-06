@@ -106,6 +106,7 @@ def _replay_process(bundle: Path, options: tuple[str, ...], *, timezone: str, ep
     return subprocess.run(
         [
             sys.executable,
+            "-P",
             "-m",
             "gh_run_receptor",
             "--profile",

@@ -1,0 +1,47 @@
+# Onboarding example only. No candidate, release version or publication is authorized.
+# Copy to release_plan.toml and commit the reviewed owner decision before dispatch.
+schema = "molsyssuite.conda-plan@1"
+package = "gh-run-receptor"
+version = "0.0.0"
+build_number = 0
+route = "staged"
+profile = "noarch-python"
+reason = "First Conda distribution: qualify one immutable file before adding a public label."
+decision_by = "TEMPLATE ONLY; replace with the maintainer and decision date"
+artifact_subdirs = ["noarch"]
+test_platforms = ["linux-64", "osx-arm64", "win-64"]
+python_versions = ["3.11", "3.12", "3.13", "3.14"]
+required_workflows = [".github/workflows/python-routine.yml", ".github/workflows/compatibility.yml", ".github/workflows/molsyssuite-policy.yml", ".github/workflows/validate-contracts.yml", ".github/workflows/docs.yml", ".github/workflows/conda-policy.yml"]
+requires_installed_gate = true
+new_compatibility_surface = true
+coupled_release = false
+dependencies_public = true
+
+[gate_jobs.".github/workflows/python-routine.yml"]
+"Linux Python 3.14" = ["Check distribution inputs", "Run the complete package suite"]
+
+[gate_jobs.".github/workflows/compatibility.yml"]
+"ubuntu-latest · Python 3.11" = ["Check distribution inputs", "Run the complete local suite", "Build wheel and source distribution", "Verify and install the wheel", "Smoke test the installed command outside the checkout"]
+"ubuntu-latest · Python 3.12" = ["Check distribution inputs", "Run the complete local suite", "Build wheel and source distribution", "Verify and install the wheel", "Smoke test the installed command outside the checkout"]
+"ubuntu-latest · Python 3.13" = ["Check distribution inputs", "Run the complete local suite", "Build wheel and source distribution", "Verify and install the wheel", "Smoke test the installed command outside the checkout"]
+"ubuntu-latest · Python 3.14" = ["Check distribution inputs", "Run the complete local suite", "Build wheel and source distribution", "Verify and install the wheel", "Smoke test the installed command outside the checkout"]
+"macos-latest · Python 3.11" = ["Check distribution inputs", "Run the complete local suite", "Build wheel and source distribution", "Verify and install the wheel", "Smoke test the installed command outside the checkout"]
+"macos-latest · Python 3.12" = ["Check distribution inputs", "Run the complete local suite", "Build wheel and source distribution", "Verify and install the wheel", "Smoke test the installed command outside the checkout"]
+"macos-latest · Python 3.13" = ["Check distribution inputs", "Run the complete local suite", "Build wheel and source distribution", "Verify and install the wheel", "Smoke test the installed command outside the checkout"]
+"macos-latest · Python 3.14" = ["Check distribution inputs", "Run the complete local suite", "Build wheel and source distribution", "Verify and install the wheel", "Smoke test the installed command outside the checkout"]
+"windows-latest · Python 3.11" = ["Check distribution inputs", "Run the complete local suite", "Build wheel and source distribution", "Verify and install the wheel", "Smoke test the installed command outside the checkout"]
+"windows-latest · Python 3.12" = ["Check distribution inputs", "Run the complete local suite", "Build wheel and source distribution", "Verify and install the wheel", "Smoke test the installed command outside the checkout"]
+"windows-latest · Python 3.13" = ["Check distribution inputs", "Run the complete local suite", "Build wheel and source distribution", "Verify and install the wheel", "Smoke test the installed command outside the checkout"]
+"windows-latest · Python 3.14" = ["Check distribution inputs", "Run the complete local suite", "Build wheel and source distribution", "Verify and install the wheel", "Smoke test the installed command outside the checkout"]
+
+[gate_jobs.".github/workflows/molsyssuite-policy.yml"]
+"policy / conformance" = ["Check repository conformance", "Check Python lint and imports", "Check Python formatting"]
+
+[gate_jobs.".github/workflows/validate-contracts.yml"]
+"validate" = ["Compare registered contracts with published baselines"]
+
+[gate_jobs.".github/workflows/docs.yml"]
+"build-docs" = ["Build strict HTML documentation"]
+
+[gate_jobs.".github/workflows/conda-policy.yml"]
+"policy / check" = ["Check publication workflow controls", "Check declared noarch recipe and resources without building"]

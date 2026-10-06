@@ -71,6 +71,14 @@ do not overwrite that work. Its 1.1.1 guide sync remains a coordination follow-u
 Manual Pages run `35583954868` built and deployed both documentation jobs, and the
 public installation page was fetched independently with the 1.1.1 wheel URL present.
 
+**Additional Conda route (2026-10-06):** uibcdf/gh-run-receptor#60 prepares
+an additive `noarch: python` route with an external gh dependency and immutable
+shared stage/installed/promotion workflows. No release version, credentials or
+public Conda delivery is claimed. The
+[active distribution report](pending_proposals/prepare_additional_noarch_conda_distribution.md)
+and [operational handoff](../devtools/conda-build/README.md) separate source
+readiness from the first twelve-cell installed qualification.
+
 ## Current state
 
 The project has published and independently verified stable `1.0.0` GitHub Release assets,

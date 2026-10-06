@@ -1,0 +1,144 @@
+schema = "molsyssuite.dependency-routes@2"
+reason = "Review every current Python/source/GitHub route and the additive official noarch Conda route, preserving external gh and frozen schemas."
+source_routes = []
+source_reason = "There are no required Python runtime providers to replace with sibling source; gh is an independently distributed external executable."
+
+[shared_tool]
+commit = "38db709ecc07451ff36ea84573d585f9af6b4df7"
+
+[[recipes]]
+path = "devtools/conda-build/meta.yaml"
+kind = "shared-noarch"
+plan = "devtools/conda-build/release_plan.example.toml"
+resources = "devtools/conda-build/resources.toml"
+reason = "Onboarding context only; stage/promote additionally require a committed real release_plan.toml and executed exact-candidate gates."
+
+[[workflows]]
+path = ".github/workflows/action-distribution-validation.yml"
+sha256 = "cc3edab729ff3e66e49eea284ce8657eb322b0d04824cfb027f8d41b60b72fd0"
+reason = "Manual public 1.0.0 Action regression on three OS; historical consumer pin remains explicit, not a new Conda qualification."
+
+[[workflows]]
+path = ".github/workflows/action-validation.yml"
+sha256 = "d701e9162af1fddccf28e7e33d501dd2cd9fcd3ae7112756d81064b6df5ee711"
+reason = "Manual checkout-local gh extension and composite Action validation using hosted gh; authentication remains GitHub-owned."
+
+[[workflows]]
+path = ".github/workflows/compatibility.yml"
+sha256 = "678f2cb13ccbb98da5c8bbec446bbbaad330d5253dc2b9d658515fdc2bed7121"
+reason = "Twelve Python/OS source pip-test, wheel-build/install and outside-checkout smoke cells; runs the pinned input review before tests, distinct from one-file Conda installation."
+
+[[workflows]]
+path = ".github/workflows/conda-policy.yml"
+sha256 = "0b76e4ba2d2355657e405ac2d37c4fa0d4b49f622508098c6ce02f4817b9829c"
+reason = "Read-only immutable shared Conda workflow/resource audit on push, PR and dispatch; no build or publication credential."
+
+[[workflows]]
+path = ".github/workflows/docs.yml"
+sha256 = "36cd7354d8427f1332a79bdcb95e2176ba4cc6a8f921c61194a5472ae76a501f"
+reason = "Source pip docs extras and strict Sphinx build; protected main Pages deployment is separate from candidate build evidence."
+
+[[workflows]]
+path = ".github/workflows/gh-run-receptor-report.yml"
+sha256 = "88fedb5720016cdbdda6e91de1cba6f0501768dfd4257e0c8a9c597b0d275d94"
+reason = "Read-only downstream reporter using the existing Action contract; no source CI or channel publication claim."
+
+[[workflows]]
+path = ".github/workflows/inline-rules-pr-boundary.yml"
+sha256 = "16d90983e5284a4a23960c403a23b292bdbe59af8d1ddb07cc2644fd816970ec"
+reason = "Manual security-boundary consumer experiment; pinned existing Action and ephemeral GitHub token, not package production."
+
+[[workflows]]
+path = ".github/workflows/minimum-gh-cli-validation.yml"
+sha256 = "091582c9adedaaef28c97fcc783cf71149e37eb283e2266ebde3d804ca6f02b5"
+reason = "Manual exact checksum-pinned minimum external GitHub CLI experiment; source extension transport validation, not an extra Python dependency."
+
+[[workflows]]
+path = ".github/workflows/molsyssuite-policy.yml"
+sha256 = "6cc62208156f765ca0456e3bc5f398934263e03afc7063c69afa692c5dafdffd"
+reason = "Existing published suite policy-v1.5.4 source conformance; no publisher secret or automatic extra test matrix."
+
+[[workflows]]
+path = ".github/workflows/permission-boundary-validation.yml"
+sha256 = "713bdbff23cf8cb4d676a407c112b82533718eabf60ded2aaeecc13176536358"
+reason = "Manual least-privilege consumer experiment at existing Action pins; provider permissions remain separate from package qualification."
+
+[[workflows]]
+path = ".github/workflows/promote-conda.yml"
+sha256 = "89f2c6cc47ddea44d094da37b54f007f848379bdb00ea8d89fb99e747cb8d044"
+reason = "Manual owner input review then immutable shared exact-source/installed-matrix verifier and same-file label promotion; no rebuild."
+
+[[workflows]]
+path = ".github/workflows/publish-release.yml"
+sha256 = "c37326dd91a4d1496618c956ce23f9cde2a195049f4747431f6de621d10e3dac"
+reason = "Retained manual exact-tag wheel/sdist and GitHub draft-first publisher; complete local suite, frozen-contract and exact release metadata checks; no Conda claim."
+
+[[workflows]]
+path = ".github/workflows/published-report-validation.yml"
+sha256 = "5c232e1c5c071a3546374eb1661b3ed7baa25c48084170bd79e6dbac0142691e"
+reason = "Manual published-report/source-first consumer validation with the existing gh extension; no Conda credentials."
+
+[[workflows]]
+path = ".github/workflows/python-routine.yml"
+sha256 = "0c6251069d3ea30a8b95e874ab04e5cc214e7274aa166c21fbe9a6b2614ab318"
+reason = "Linux/Python 3.14 source pip test extras; pinned SDK reviews all input routes before full pytest; dependent default-branch coverage publication stays separate."
+
+[[workflows]]
+path = ".github/workflows/python-weekly.yml"
+sha256 = "0388fe9d97f63c0fa5a575d6677143e11b783b8332401792e45f2959ee8ade03"
+reason = "Twelve source pip/test-extra cells over Python 3.11-3.14 and three OS; pinned SDK review before full pytest; source evidence only."
+
+[[workflows]]
+path = ".github/workflows/reusable-report.yml"
+sha256 = "61192b7dc1dd7a7820144ed39390fa3528650afea0246e554195e0135b6b888d"
+reason = "Read-only reusable report consumer contract; uses the shared receptor implementation rather than a Conda build."
+
+[[workflows]]
+path = ".github/workflows/stage-conda.yml"
+sha256 = "1c8bf9722582c799efbba8086ba56eda8f34d623378f8e3161c3818b526e9f8c"
+reason = "Manual reviewed candidate SHA/version, owner preflight and immutable shared single-file staged build; committed real plan and executed source gates required."
+
+[[workflows]]
+path = ".github/workflows/test-staged-conda.yml"
+sha256 = "20bbdcb4414ed35e11dca878d5416c82b3622bdd38bf9baec2007cf3f05c03e4"
+reason = "Manual immutable producer SHA/file/digest qualification through the shared twelve-cell installed workflow; public dependency resolution and no publication credential."
+
+[[workflows]]
+path = ".github/workflows/validate-aggregation.yml"
+sha256 = "b45c498864649d80d92d9d1d6449d3dd1a6448b2aeb8975daccd861bd5bb3d70"
+reason = "Targeted manual aggregation semantics and sanitized evidence checks; source-mode runtime has no required Python providers."
+
+[[workflows]]
+path = ".github/workflows/validate-capture-policy.yml"
+sha256 = "8212a51da8a9933e8c70e18777d9171e1747c07ff18a789f7a07036a2d31b165"
+reason = "Targeted manual offline/live capture-policy measurements; existing external gh transport, separate from an installed-file matrix."
+
+[[workflows]]
+path = ".github/workflows/validate-comparison.yml"
+sha256 = "a0942cd000006f8d093860d6380cf7542359f09ffbaa7a8b45858817581c9404"
+reason = "Targeted manual comparison semantics on source CLI and fixtures; no Conda publishing route."
+
+[[workflows]]
+path = ".github/workflows/validate-contracts.yml"
+sha256 = "4a9d328c2d474214953f31fa2f5e2c2fca48071f0734ccd73ec4d9d2af4e0bb8"
+reason = "Manual stdlib frozen-schema comparison to original immutable tags; retained exact-source release gate."
+
+[[workflows]]
+path = ".github/workflows/validate-exit-codes.yml"
+sha256 = "d3eec64ffa2c09a504ff785cf6b3b54ae1e30fd9c9c042c592d43e60a3d9dd67"
+reason = "Targeted manual source CLI exit-code truth-table checks; safe-path subprocesses retain installed origins when applicable."
+
+[[workflows]]
+path = ".github/workflows/validate-portability.yml"
+sha256 = "d7412be5f9ecf39bd1b97f1d87dcd2d9c5bcbd2f1549c22fcf0dfad7a43a2c0c"
+reason = "Manual non-UIBCDF read-only live corpus; source CLI and fixed manifest, no channel mutation."
+
+[[workflows]]
+path = ".github/workflows/validate-reusable-report.yml"
+sha256 = "87b326efb9e66cf1073daf644390086e1963006d303e4410875a81f0269c54da"
+reason = "Manual same-revision reusable reporter experiment; existing provider contract and no package publication."
+
+[[workflows]]
+path = ".github/workflows/verify-zenodo-release.yml"
+sha256 = "1af1c592f2f25ec56f14fdbc535aad425948a05452d8d67f6a76228b34489104"
+reason = "Read-only public Zenodo poststate verifier with PyYAML tooling; archival availability independent of GitHub/Conda delivery."

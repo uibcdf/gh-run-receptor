@@ -327,3 +327,16 @@ DOI is `10.5281/zenodo.22849252`; the stable concept DOI remains
 Installed-wheel verification must run outside the source checkout and assert that the
 imported module path belongs to the isolated installation target. A matching version string
 alone is not evidence that the wheel payload was imported.
+
+
+## Additional Conda distribution
+
+The noarch Python route accepted under uibcdf/gh-run-receptor#60 is prepared
+separately from GitHub release assets. Follow the
+[committed route handoff](../devtools/conda-build/README.md) for the actual plan,
+external gh constraint, candidate gates, staging and twelve installed cells.
+Only `release_plan.toml` can authorize a candidate; the example plan cannot.
+Public files and existing tags are immutable. Promotion retains original source
+and tested bytes; a newer administrative workflow gets a separate qualification
+identity. Current source readiness, credential access, artifact installation and
+public delivery are separate claims. The first Conda release remains pending.

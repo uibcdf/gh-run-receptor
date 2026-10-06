@@ -1,0 +1,67 @@
+name: Promote the same qualified noarch Conda archive
+on:
+  workflow_dispatch:
+    inputs:
+      candidate_sha:
+        description: Full original producer SHA
+        required: true
+        type: string
+      version:
+        description: Version in the original committed release plan
+        required: true
+        type: string
+      sha256:
+        description: SHA-256 of the same staged file qualified by installed tests
+        required: true
+        type: string
+      installed_run_id:
+        description: Existing successful complete installed matrix run
+        required: true
+        type: string
+      qualification_sha:
+        description: Optional reviewed administrative workflow correction; producer identity stays original
+        required: false
+        default: ''
+        type: string
+permissions:
+  contents: read
+  actions: read
+jobs:
+  review-inputs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ inputs.candidate_sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          repository: uibcdf/molsyssuite
+          ref: 38db709ecc07451ff36ea84573d585f9af6b4df7
+          path: .molsyssuite
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.14"
+      - name: Bootstrap distribution checks
+        run: python -m pip install 'PyYAML>=6,<7' 'Jinja2>=3,<4' 'packaging>=24'
+      - name: Review the exact committed candidate inputs
+        env:
+          CANDIDATE_SHA: ${{ inputs.candidate_sha }}
+          VERSION: ${{ inputs.version }}
+        run: >-
+          python devtools/check_distribution_inputs.py --suite-root .molsyssuite
+          --candidate-sha "$CANDIDATE_SHA" --version "$VERSION"
+  promote:
+    needs: review-inputs
+    uses: uibcdf/molsyssuite/.github/workflows/promote-noarch-conda.yaml@38db709ecc07451ff36ea84573d585f9af6b4df7
+    with:
+      candidate_sha: ${{ inputs.candidate_sha }}
+      version: ${{ inputs.version }}
+      sha256: ${{ inputs.sha256 }}
+      installed_run_id: ${{ inputs.installed_run_id }}
+      qualification_sha: ${{ inputs.qualification_sha }}
+    secrets:
+      ANACONDA_TOKEN: ${{ secrets.ANACONDA_UIBCDF_TOKEN }}

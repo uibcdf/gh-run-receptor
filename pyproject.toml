@@ -34,9 +34,11 @@ Changelog = "https://github.com/uibcdf/gh-run-receptor/blob/main/CHANGELOG.md"
 gh-run-receptor = "gh_run_receptor.cli:main"
 
 [project.optional-dependencies]
-test = ["jsonschema>=4.23", "pytest", "pytest-receptor==1.1.0", "PyYAML>=6.0"]
+test = ["Jinja2>=3,<4", "jsonschema>=4.23", "packaging>=24", "pytest", "pytest-receptor==1.1.0", "PyYAML>=6.0"]
 docs = ["myst-parser>=4,<5", "sphinx>=8,<10", "sphinx-rtd-theme>=3,<4"]
 dev = [
+  "Jinja2>=3,<4",
+  "packaging>=24",
   "jsonschema>=4.23",
   "myst-parser>=4,<5",
   "pytest",

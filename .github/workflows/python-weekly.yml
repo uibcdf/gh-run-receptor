@@ -34,11 +34,22 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 0
+      - name: Check out the reviewed distribution SDK
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          repository: uibcdf/molsyssuite
+          ref: 38db709ecc07451ff36ea84573d585f9af6b4df7
+          path: .molsyssuite
+          persist-credentials: false
+
       - name: Set up Python
         uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
         with:
           python-version: ${{ matrix.python }}
       - name: Install package and test tools
         run: python -m pip install ".[test]"
+      - name: Check distribution inputs
+        run: python devtools/check_distribution_inputs.py --suite-root .molsyssuite
+
       - name: Run the complete package suite
         run: python -m pytest --receptor=ci

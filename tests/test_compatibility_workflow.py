@@ -29,10 +29,16 @@ def test_compatibility_workflow_pins_every_external_action():
     source = (ROOT / ".github/workflows/compatibility.yml").read_text(encoding="utf-8")
     action_lines = [line.strip() for line in source.splitlines() if "uses:" in line]
 
-    assert action_lines == [
-        "uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7",
-        "uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7",
-    ]
+    expected = {
+        "actions/checkout": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+        "actions/setup-python": "5fda3b95a4ea91299a34e894583c3862153e4b97",
+    }
+    observed = set()
+    for line in action_lines:
+        action, commit = line.removeprefix("uses: ").split()[0].split("@")
+        assert commit == expected[action]
+        observed.add(action)
+    assert observed == set(expected)
 
 
 def test_byte_exact_fixtures_are_checked_out_with_lf_on_every_platform():

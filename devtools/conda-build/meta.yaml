@@ -1,0 +1,42 @@
+package:
+  name: gh-run-receptor
+  version: "{{ environ.get('MOLSYSSUITE_CONDA_VERSION', '0.0.0') }}"
+
+source:
+  path: ../..
+
+build:
+  number: {{ environ.get('MOLSYSSUITE_CONDA_BUILD_NUMBER', '0') }}
+  string: py_{{ environ.get('MOLSYSSUITE_CONDA_BUILD_NUMBER', '0') }}
+  noarch: python
+  entry_points:
+    - gh-run-receptor = gh_run_receptor.cli:main
+
+requirements:
+  host:
+    - python >=3.11,<3.15
+    - pip
+    - setuptools >=77.0
+    - versioningit >=3.0
+  run:
+    - python >=3.11,<3.15
+    - gh >=2.48.0
+
+test:
+  imports:
+    - gh_run_receptor
+    - gh_run_receptor.schemas
+  source_files:
+    - devtools/installed_smoke.py
+    - devtools/conda-build/resources.toml
+  commands:
+    - python devtools/installed_smoke.py --expected-version {{ environ.get('MOLSYSSUITE_CONDA_VERSION', '0.0.0') }}
+    - gh-run-receptor --help
+
+about:
+  home: https://github.com/uibcdf/gh-run-receptor
+  license: MIT
+  license_file: LICENSE
+  summary: Compact truth-preserving reports for GitHub Actions runs.
+  dev_url: https://github.com/uibcdf/gh-run-receptor
+  doc_url: https://www.uibcdf.org/gh-run-receptor/

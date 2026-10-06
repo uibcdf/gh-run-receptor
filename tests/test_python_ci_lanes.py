@@ -23,6 +23,23 @@ def _assert_gating_pytest(job: dict) -> None:
         for step in job["steps"]
     )
     assert any('".[test]"' in step.get("run", "") for step in job["steps"])
+    checks = [
+        i for i, step in enumerate(job["steps"]) if step.get("name") == "Check distribution inputs"
+    ]
+    assert len(checks) == 1
+    preflight = job["steps"][checks[0]]
+    assert "if" not in preflight and "continue-on-error" not in preflight
+    assert checks[0] < next(
+        i for i, step in enumerate(job["steps"]) if "-m pytest" in step.get("run", "")
+    )
+
+
+def _python_setup(job: dict) -> dict:
+    steps = [
+        step for step in job["steps"] if step.get("uses", "").startswith("actions/setup-python@")
+    ]
+    assert len(steps) == 1
+    return steps[0]
 
 
 def test_routine_linux_python_314_runs_on_push_and_pull_request():
@@ -31,7 +48,7 @@ def test_routine_linux_python_314_runs_on_push_and_pull_request():
     assert all(not value for value in workflow["on"].values())
     job = workflow["jobs"]["test"]
     assert job["runs-on"] == "ubuntu-latest"
-    assert job["steps"][1]["with"]["python-version"] == "3.14"
+    assert _python_setup(job)["with"]["python-version"] == "3.14"
     _assert_gating_pytest(job)
 
 
@@ -41,7 +58,7 @@ def test_weekly_full_supported_range_has_manual_dispatch_and_platform_evidence()
     assert workflow["on"]["schedule"][0]["cron"]
     job = workflow["jobs"]["test"]
     assert job["runs-on"] == "${{ matrix.os }}"
-    assert job["steps"][1]["with"]["python-version"] == "${{ matrix.python }}"
+    assert _python_setup(job)["with"]["python-version"] == "${{ matrix.python }}"
     assert {(entry["os"], entry["python"]) for entry in job["strategy"]["matrix"]["include"]} == {
         (os_name, python)
         for os_name in ("ubuntu-latest", "macos-latest", "windows-latest")

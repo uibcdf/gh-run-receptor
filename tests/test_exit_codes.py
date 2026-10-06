@@ -14,7 +14,7 @@ WORKFLOW = ROOT / ".github" / "workflows" / "validate-exit-codes.yml"
 
 def _command(*arguments: str) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
-        [sys.executable, "-m", "gh_run_receptor", *arguments],
+        [sys.executable, "-P", "-m", "gh_run_receptor", *arguments],
         cwd=ROOT,
         check=False,
         capture_output=True,
