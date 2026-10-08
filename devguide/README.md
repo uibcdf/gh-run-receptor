@@ -86,6 +86,12 @@ metadata and frozen schema bytes are checked independently of asset digests.
 [Versioning and releases](versioning_and_releases.md) owns the command and limits.
 This does not choose the first Conda release or qualify an installed candidate.
 
+**Acquisition resource ownership (2026-10-07):** uibcdf/gh-run-receptor#63
+protects aborted capture staging, interrupted refresh rollback and transport child/pipe
+cleanup. [Resource review](resource_lifecycle_review.md) separates inspected tools,
+executed local regressions, hosted evidence and pending retrospective owner cleanup.
+[Data contracts](data_contracts.md) records the unchanged serialized/output boundary.
+
 ## Current state
 
 The project has published and independently verified stable `1.0.0` GitHub Release assets,

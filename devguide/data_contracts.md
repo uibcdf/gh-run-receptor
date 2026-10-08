@@ -91,6 +91,14 @@ is recaptured and validated before atomically replacing its cache entry, so repe
 inspection cannot freeze an active snapshot. An explicit output path is accepted only
 when its manifest identity exactly matches the request.
 
+Unpublished capture staging belongs to the acquisition operation and is removed
+on ordinary failure, permission failure or interruption. Failed/interrupted refresh
+restores the prior destination; completed caller evidence is not disposable staging.
+JSON and binary acquisition reap a failed child and close its stdout pipe; partial
+aborted downloads are removed. Cleanup failures remain visible. User interruption
+still maps to exit 130. These lifecycle corrections do not change bundle@1 bytes or
+GitHub source facts (uibcdf/gh-run-receptor#63).
+
 ## Evidence references
 
 Every normalized or interpreted fact can cite an evidence reference:

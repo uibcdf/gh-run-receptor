@@ -61,7 +61,8 @@ def _refresh_bundle(
         destination.rename(stale)
         try:
             replacement.rename(destination)
-        except Exception:
+        except BaseException:
+            # Restore caller evidence even when installation is interrupted.
             stale.rename(destination)
             raise
         _discard_bundle(stale)

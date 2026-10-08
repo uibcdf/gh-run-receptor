@@ -2,6 +2,7 @@
 
 <!-- generated: devguide_index -->
 - [#37 — Active-run inspect silently reuses a stale evidence bundle](active_run_inspect_silently_reuses_a_stale_evidence_bundle.md) (`resolved`)
+- [#63 — Clean resources after aborted GitHub evidence capture](clean_aborted_bundle_staging_on_interruption_and_permission_failure.md) (`resolved`)
 - [#53 — Conda and Python primary causes are hidden by generic process errors](conda_and_python_primary_causes_hidden.md) (`resolved`)
 - [#12 — Conda summaries erase cancelled platform state](conda_summaries_erase_cancelled_platform_state.md) (`resolved`)
 - [#20 — Expose published interpretation trust in compact success output](expose_published_interpretation_trust_in_compact_success_output.md) (`resolved`)

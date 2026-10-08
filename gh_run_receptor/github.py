@@ -6,10 +6,28 @@ import json
 import re
 import subprocess
 import tempfile
+from collections.abc import Iterator
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any
 
 from gh_run_receptor.errors import AcquisitionError
+
+
+@contextmanager
+def _owned_process(command: list[str], *, stderr: Any) -> Iterator[subprocess.Popen]:
+    """Reap a failed/interrupted child and close its stdout; caller owns stderr."""
+    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=stderr)
+    try:
+        yield process
+    except BaseException:
+        process.terminate()
+        process.wait()
+        raise
+    finally:
+        if process.stdout is not None:
+            process.stdout.close()
+
 
 API_VERSION = "2022-11-28"
 MINIMUM_GH_VERSION = (2, 48, 0)
@@ -121,16 +139,16 @@ class GitHubClient:
             self._ensure_supported_cli()
         command = ["gh", *arguments]
         try:
-            with tempfile.TemporaryFile() as stderr:
-                process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=stderr)
+            with (
+                tempfile.TemporaryFile() as stderr,
+                _owned_process(command, stderr=stderr) as process,
+            ):
                 assert process.stdout is not None
                 chunks: list[bytes] = []
                 size = 0
                 while chunk := process.stdout.read(READ_CHUNK_BYTES):
                     size += len(chunk)
                     if size > max_bytes:
-                        process.terminate()
-                        process.wait()
                         raise AcquisitionError(
                             f"GitHub CLI response exceeded the {max_bytes}-byte limit"
                         )
@@ -210,15 +228,16 @@ class GitHubClient:
             endpoint,
         ]
         try:
-            with destination.open("wb") as stream, tempfile.TemporaryFile() as stderr:
-                process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=stderr)
+            with (
+                destination.open("wb") as stream,
+                tempfile.TemporaryFile() as stderr,
+                _owned_process(command, stderr=stderr) as process,
+            ):
                 assert process.stdout is not None
                 size = 0
                 while chunk := process.stdout.read(READ_CHUNK_BYTES):
                     size += len(chunk)
                     if size > max_bytes:
-                        process.terminate()
-                        process.wait()
                         raise AcquisitionError(
                             f"GitHub download exceeded the {max_bytes}-byte limit"
                         )
@@ -229,7 +248,7 @@ class GitHubClient:
         except (FileNotFoundError, OSError) as error:
             destination.unlink(missing_ok=True)
             raise AcquisitionError(f"could not download GitHub evidence: {error}") from error
-        except AcquisitionError:
+        except BaseException:
             destination.unlink(missing_ok=True)
             raise
         if return_code:

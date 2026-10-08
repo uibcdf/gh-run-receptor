@@ -172,11 +172,11 @@ def capture_bundle(
     parent = destination.parent
     parent.mkdir(parents=True, exist_ok=True)
     temporary = Path(tempfile.mkdtemp(prefix=f".{destination.name}-", dir=parent))
-    os.chmod(temporary, 0o700)
     members: list[dict[str, Any]] = []
     warnings: list[str] = []
 
     try:
+        os.chmod(temporary, 0o700)
         members.append(_write_member(temporary, "run.json", run, "github.workflow_run"))
         workflow_id = run.get("workflow_id")
         workflow = (
@@ -333,7 +333,8 @@ def capture_bundle(
             raise BundleError(f"bundle already exists: {destination}")
         temporary.replace(destination)
         return manifest
-    except Exception:
+    except BaseException:
+        # Only this capture's unpublished staging is owned here, including on interruption.
         for child in temporary.iterdir():
             child.unlink()
         temporary.rmdir()
