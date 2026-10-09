@@ -166,3 +166,40 @@ installed-only skip**; Ruff 0.16.5 lint/format passes all 192 files. The reviewe
 3.14.7 and the participating editable import origins remain as above, with the
 same seven tracked environment findings. This is source and read-only archive
 evidence; it is not an installed candidate, release run or twelve-cell claim.
+
+
+### Governance adoption before first Conda release — 2026-10-09
+
+The existing MolSysSuite Member review contract permits policy adoption before
+first publication when CI/recipe controls are ready, installation claims remain
+truthful and access is explicitly unknown. The earlier partial-central-adoption
+statements above combined governance with future delivery; this dated correction
+supersedes that classification without qualifying a Conda artifact.
+
+Central uibcdf/molsyssuite#45 now records governance adopted / CI-recipe ready /
+Conda publication access unknown. This owner issue remains partial solely for
+its first actual delivery. The developer still chooses the version, real plan
+and release timing; no new release is required to adopt governance.
+
+Read-only comparison from executed archive-control source
+`ec42d211b5288db395ca07928e62127d520e55ba` to reviewed main
+`cb202db78f539e1185ba03de26e57233ad5c9e80` finds 39 distribution input,
+workflow, recipe and regression-guard files byte-identical. Later acquisition
+resource corrections remain distinct runtime work. Independent fresh verification
+of native routine `37733511777`, policy `37733512289` and Conda governance
+`37733512337` binds exact source
+`f19fcf94bb2735f61ef79cd9c2629dede715e700`, workflow, push event, attempt,
+complete job inventories and mandatory actually executed steps. The only delta
+from that source to reviewed main is the synchronized suite guide. These are
+source/control results, not a current twelve-cell or installed Conda claim.
+
+Future delivery still requires the owner-reviewed real plan and unused coordinate,
+authorized credentials, all exact-candidate source gates, one original staged
+archive/digest, twelve native exact-file installed cells, same-byte promotion and
+independent public registry/index plus clean user installation. Keep optional
+SDK notices separate; existing accepted pins need no migration for this review.
+Original GitHub 1.2.0 and historical source/archive receipts retain their scope.
+Central durable receipt: `devguide/rollouts/gh_run_receptor_governance_45_20261009.json`
+in uibcdf/molsyssuite. The qualified caller environment and its seven #82 closure
+findings are unchanged. No archive build, installation, upload, promotion,
+version/tag selection or credential confirmation is performed.

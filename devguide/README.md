@@ -79,6 +79,13 @@ public Conda delivery is claimed. The
 and [operational handoff](../devtools/conda-build/README.md) separate source
 readiness from the first twelve-cell installed qualification.
 
+**Distribution governance (2026-10-09):** The existing pre-publication Member
+review contract permits adopted governance with ready CI/recipe and explicitly
+unknown Conda access. Central uibcdf/molsyssuite#45 records that disposition;
+uibcdf/gh-run-receptor#60 remains partial for its first developer-owned delivery.
+The active distribution report retains historical observations and the dated
+correction. No version, public archive or installed qualification is selected.
+
 **GitHub archive guards (2026-10-06):** The same distribution review adds a
 maintained, bounded wheel/sdist payload guard before upload and within draft/public
 verification. It reuses the owner runtime/resource inventory; generated versions,

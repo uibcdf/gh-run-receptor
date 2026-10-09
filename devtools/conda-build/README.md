@@ -73,7 +73,7 @@ and no Conda runtime/development environment files to classify.
    adds `main` to the same staged file, then independently verifies the public
    label and solver index. It never rebuilds or replaces bytes.
 7. Save source, producer, installed and public receipts separately; only then
-   advertise a public Conda installation command and update central adoption.
+   advertise a public Conda installation command and record actual delivery evidence.
 
 The installed selection keeps all package/runtime tests and administrative
 checks. Two functions in `tests/test_source_version.py` are explicitly deselected:
@@ -102,3 +102,15 @@ These were solver dry runs, not native package installations. All public
 GitHub 1.2.0 files and their original evidence remain untouched. Installed Conda
 qualification, first authorized delivery and independently verified public
 poststate are pending and owned by uibcdf/gh-run-receptor#60.
+
+
+## Governance and first delivery — 2026-10-09
+
+Governance adoption under uibcdf/molsyssuite#45 precedes the first release:
+CI/recipe are ready and Conda publication access remains explicitly unknown.
+uibcdf/gh-run-receptor#60 stays open for the actual developer-owned delivery
+above, including candidate-specific source gates and all twelve exact-file
+installed cells. Source/control acceptance does not permit a public Conda
+installation claim. Version, plan, credential confirmation and timing remain
+with the developer. Existing provider pins and original artifact evidence retain
+their own scope.
