@@ -35,12 +35,19 @@ _STRUCTURED_DIAGNOSTIC = re.compile(
 _PYTEST_FAILED = re.compile(r"^FAILED\s+(\S+::\S+)\s+-\s+\S")
 _PYTEST_RECEPTOR_FAILURE = re.compile(r"^FAIL exit=[1-9][0-9]*\s*\|")
 # Match the command suggestion printed by pytest-receptor; never execute it.
-_PYTEST_RECEPTOR_RERUN = re.compile(r"^\s*rerun:\s+(?:uv run )?pytest\s+(\S+::\S+)(?:\s|$)")
+_PYTEST_RECEPTOR_RERUN = re.compile(
+    r"^\s*rerun:\s+(?:(?:uv run )?pytest|python -m pytest)\s+(\S+::\S+)(?:\s|$)"
+)
+_PYTEST_GROUP = re.compile(r"^\[[1-9][0-9]*\]\s+([\w.]+)\s*\|\s+[1-9][0-9]* tests?\s*\|")
+_PYTEST_LOCATION = re.compile(r"^((?:[A-Za-z]:)?[^:<>|\r\n]+\.py):([1-9][0-9]*)$")
+_PYTEST_NODE = re.compile(r"^\S+\.py::\S+$")
+_CURL_FAILURE = re.compile(r"^curl:\s+\([1-9][0-9]{0,2}\)\s+\S")
+_REJECTED_DIAGNOSTIC = re.compile(r"^[A-Za-z][A-Za-z0-9 ._/-]{0,79} rejected:\s+\S")
 _PYTHON_FRAME = re.compile(r'^\s+File "([^"]+)", line (\d+)')
 _PYTHON_EXCEPTION = re.compile(r"^([A-Za-z_][\w.]*(?:Error|Exception)):\s+\S")
 _SOLVER_MISSING = re.compile(
-    r"\b([A-Za-z0-9][A-Za-z0-9_.-]*)\s+([=<>!~][^,;]{0,200}),\s+"
-    r"which does not exist\b",
+    r"\b([A-Za-z0-9][A-Za-z0-9_.-]*)\s+([=<>!~][^,;]{0,200}?)"
+    r"(?:,\s+which)?\s+does not exist\b",
     re.IGNORECASE,
 )
 _GITHUB_TOKEN = re.compile(r"\bgh[pousr]_[A-Za-z0-9_]{20,}\b")
@@ -60,6 +67,78 @@ class Candidate:
     line: int
     kind: str
     message: str
+    context: tuple[Candidate, ...] = ()
+
+
+def _retain_candidate(candidates: dict[str, Candidate], candidate: Candidate) -> None:
+    old = candidates.get(candidate.kind)
+    if old is None or (candidate.priority, candidate.line) >= (old.priority, old.line):
+        candidates[candidate.kind] = candidate
+
+
+class _PytestSummary:
+    """Read a bounded failed receptor group without executing suggested commands."""
+
+    def __init__(self):
+        self.start: int | None = None
+        self.group: str | None = None
+        self.location: str | None = None
+        self.location_line: int | None = None
+        self.exception: Candidate | None = None
+        self.tests: list[Candidate] = []
+        self.in_tests = False
+
+    def feed(self, message: str, line: int) -> Candidate | None:
+        text = message.strip()
+        if _PYTEST_RECEPTOR_FAILURE.match(text):
+            self.__init__()
+            self.start = line
+        if self.start is None or line - self.start > MAX_PYTEST_SUMMARY_LINES:
+            return None
+        if text.startswith("PASS exit="):
+            self.__init__()
+            return None
+        if group := _PYTEST_GROUP.match(text):
+            self.group = group.group(1).split(".")[-1]
+            self.location = None
+            self.location_line = None
+            self.exception = None
+            self.tests = []
+            self.in_tests = False
+        elif (
+            self.group and self.location is None and (location := _PYTEST_LOCATION.fullmatch(text))
+        ):
+            path = location.group(1).replace("\\", "/")
+            if path.startswith("/") or re.match(r"^[A-Za-z]:/", path):
+                path = PurePosixPath(path).name
+            self.location = f"{path}:{location.group(2)}"
+            self.location_line = line
+        elif self.group and self.location and self.exception is None:
+            if (match := _PYTHON_EXCEPTION.match(text)) and match.group(1).split(".")[
+                -1
+            ] == self.group:
+                self.exception = Candidate(120, line, "pytest_failure", text)
+        if text == "tests:":
+            self.in_tests = True
+        node = text if self.in_tests and _PYTEST_NODE.fullmatch(text) else None
+        if rerun := _PYTEST_RECEPTOR_RERUN.match(text):
+            node = rerun.group(1)
+        if node and len(self.tests) < 2:
+            node = node.replace("\\", "/")
+            if node not in {item.message for item in self.tests}:
+                self.tests.append(Candidate(0, line, "test", node))
+        if self.exception is None:
+            return None
+        frame = Candidate(
+            0, self.location_line or self.exception.line, "frame", self.location or ""
+        )
+        return Candidate(
+            120,
+            self.exception.line,
+            "pytest_failure",
+            f"{self.exception.message} | at {self.location}",
+            (frame, *self.tests),
+        )
 
 
 def _clean_line(raw: bytes) -> str:
@@ -68,6 +147,8 @@ def _clean_line(raw: bytes) -> str:
 
 
 def _candidate(message: str, line: int) -> Candidate | None:
+    if _CURL_FAILURE.match(message):
+        return Candidate(110, line, "download_error", message)
     if match := _PYTEST_FAILED.match(message):
         nodeid = match.group(1).replace("\\", "/")
         return Candidate(75, line, "pytest_test", f"pytest failed: {nodeid}")
@@ -107,7 +188,7 @@ def _safe_cause(message: str) -> str:
 
 
 def _adjacent_diagnostic(message: str, line: int) -> Candidate | None:
-    if _STRUCTURED_DIAGNOSTIC.search(message):
+    if _STRUCTURED_DIAGNOSTIC.search(message) or _REJECTED_DIAGNOSTIC.match(message):
         return Candidate(20, line, "structured_diagnostic", message)
     return None
 
@@ -170,7 +251,9 @@ def extract_causes(
                 job_name = _job_name(info.filename)
                 if job_name not in failed_by_name:
                     continue
-                candidates: list[Candidate] = []
+                candidates: dict[str, Candidate] = {}
+
+                summary = _PytestSummary()
                 previous: tuple[str, int] | None = None
                 receptor_failure_line: int | None = None
                 traceback_line: int | None = None
@@ -194,13 +277,14 @@ def extract_causes(
                                     f"{PurePosixPath(frame_path).name}:{frame.group(2)}"
                                 )
                             elif traceback_frame and _PYTHON_EXCEPTION.match(message):
-                                candidates.append(
+                                _retain_candidate(
+                                    candidates,
                                     Candidate(
                                         115,
                                         line_number,
                                         "python_exception",
                                         f"{message} | at {traceback_frame}",
-                                    )
+                                    ),
                                 )
                                 traceback_line = None
                                 traceback_frame = None
@@ -221,6 +305,8 @@ def extract_causes(
                             if package not in solver_packages:
                                 solver_packages.append(package)
                                 solver_line = line_number
+                        if detailed := summary.feed(message, line_number):
+                            _retain_candidate(candidates, detailed)
                         if _PYTEST_RECEPTOR_FAILURE.match(message):
                             receptor_failure_line = line_number
                         elif (
@@ -229,38 +315,50 @@ def extract_causes(
                             and (rerun := _PYTEST_RECEPTOR_RERUN.match(message))
                         ):
                             nodeid = rerun.group(1).replace("\\", "/")
-                            candidates.append(
+                            _retain_candidate(
+                                candidates,
                                 Candidate(
                                     75,
                                     line_number,
                                     "pytest_test",
                                     f"pytest failed: {nodeid}",
-                                )
+                                ),
                             )
                         if candidate := _candidate(message, line_number):
-                            candidates.append(candidate)
+                            _retain_candidate(candidates, candidate)
                             if (
                                 candidate.kind == "exit_code"
                                 and previous is not None
+                                and line_number - previous[1] <= 3
                                 and (adjacent := _adjacent_diagnostic(*previous))
                             ):
-                                candidates.append(adjacent)
-                        previous = (message, line_number)
+                                _retain_candidate(candidates, adjacent)
+                        if message.strip():
+                            previous = (message, line_number)
                 if solver_packages:
-                    candidates.append(
+                    _retain_candidate(
+                        candidates,
                         Candidate(
                             110,
                             solver_line or 1,
                             "conda_solver",
                             "conda packages unavailable: " + ", ".join(solver_packages),
-                        )
+                        ),
                     )
                 if not candidates:
                     warnings.append(f"no causal line found for failed job: {job_name}")
                     continue
-                best = max(candidates, key=lambda item: (item.priority, item.line))
+                best = max(candidates.values(), key=lambda item: (item.priority, item.line))
                 safe_message = _safe_cause(best.message)
                 normalized = _normalized(safe_message)
+                context = list(best.context)
+                later = candidates.get("missing_file")
+                if (
+                    best.kind in {"download_error", "conda_solver"}
+                    and later is not None
+                    and 0 < later.line - best.line <= MAX_SOLVER_LINES
+                ):
+                    context.append(Candidate(0, later.line, "later diagnostic", later.message))
                 occurrences.append(
                     {
                         "job_id": failed_by_name[job_name].get("id"),
@@ -270,6 +368,21 @@ def extract_causes(
                         "kind": best.kind,
                         "message": safe_message,
                         "normalized": normalized,
+                        **(
+                            {
+                                "context": [
+                                    {
+                                        "member": info.filename,
+                                        "line": item.line,
+                                        "kind": item.kind,
+                                        "message": _safe_cause(item.message),
+                                    }
+                                    for item in context[:3]
+                                ]
+                            }
+                            if context
+                            else {}
+                        ),
                     }
                 )
     except (OSError, zipfile.BadZipFile, RuntimeError) as error:

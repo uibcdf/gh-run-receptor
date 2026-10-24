@@ -12,7 +12,7 @@ from gh_run_receptor import exit_codes
 from gh_run_receptor.config import select_rule
 from gh_run_receptor.contracts import schema_id
 from gh_run_receptor.errors import BundleError
-from gh_run_receptor.logs import extract_causes
+from gh_run_receptor.logs import extract_causes, safe_diagnostic_text
 from gh_run_receptor.model import normalize_evidence
 from gh_run_receptor.release_profile import (
     release_delivery_step_evidence,
@@ -659,6 +659,32 @@ def build_report(
     return report
 
 
+def _cause_context_lines(cause: dict[str, Any]) -> list[str]:
+    """Bound optional additive context, including externally published reports."""
+    occurrences = cause.get("occurrences", [])
+    if not occurrences:
+        return []
+    context = occurrences[0].get("context", [])
+    if not isinstance(context, list):
+        return []
+    lines = []
+    for item in context[:3]:
+        if (
+            not isinstance(item, dict)
+            or item.get("kind") not in ("frame", "test", "later diagnostic")
+            or not isinstance(item.get("message"), str)
+            or not isinstance(item.get("member"), str)
+            or type(item.get("line")) is not int
+            or not 0 < item["line"] <= 1_000_000_000
+        ):
+            continue
+        lines.append(
+            f"    {item['kind']}: {_safe_text(safe_diagnostic_text(item['message']))}"
+            f" | evidence: {_safe_text(item['member'])}:{item['line']}"
+        )
+    return lines
+
+
 def render_json(report: dict[str, Any]) -> str:
     """Rendering canonical human-readable JSON."""
     return json.dumps(report, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
@@ -734,6 +760,7 @@ def _render_docs_llm_failure(report: dict[str, Any]) -> str:
             lines.append(
                 f"[{index}] {_safe_text(cause['message'])} | jobs={len(cause['occurrences'])}"
             )
+            lines.extend(_cause_context_lines(cause))
     for warning in report["warnings"][:5]:
         lines.append(f"warning: {_safe_text(warning)}")
     lines.extend(_termination_lines(report))
@@ -803,6 +830,7 @@ def _render_release_llm_failure(report: dict[str, Any]) -> str:
             lines.append(
                 f"[{index}] {_safe_text(cause['message'])} | jobs={len(cause['occurrences'])}"
             )
+            lines.extend(_cause_context_lines(cause))
     for warning in report["warnings"][:5]:
         lines.append(f"warning: {_safe_text(warning)}")
     lines.extend(_termination_lines(report))
@@ -1069,6 +1097,7 @@ def render_llm(report: dict[str, Any]) -> str:
             )
             sample = cause["occurrences"][0]
             lines.append(f"    evidence: {_safe_text(sample['member'])}:{sample['line']}")
+            lines.extend(_cause_context_lines(cause))
 
     artifacts = report["artifacts"]
     if artifacts:
@@ -1219,6 +1248,7 @@ def render_human(report: dict[str, Any]) -> str:
                     f"    {_safe_text(occurrence['job_name'])}: "
                     f"{_safe_text(occurrence['member'])}:{occurrence['line']}"
                 )
+            lines.extend(_cause_context_lines(cause))
 
     if report["warnings"]:
         lines.extend(["", "Warnings"])

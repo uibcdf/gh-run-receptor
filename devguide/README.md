@@ -106,6 +106,13 @@ records the reproduced CRLF failure, original ZIP spelling guard and successful
 12-cell native matrix `40122316456` at `8e55485`. Diagnostic ranking issues
 #59/#61/#62/#64/#66 are being addressed separately.
 
+**Diagnostic ranking (2026-10-24):** Active issues #59/#61/#62/#64/#66 share
+one bounded parser correction and six original-run regressions. The
+[selection contract](diagnostic_selection.md) defines typed pytest groups, solver
+constraint variants, primary download evidence and explicit rejection context.
+Human/LLM goldens and source-parity assertions complement original-bundle replay;
+native exact-source qualification remains pending. These changes are unreleased.
+
 ## Current state
 
 The project has published and independently verified stable `1.0.0` GitHub Release assets,

@@ -81,7 +81,7 @@ permission state.
 
 Selected log causes are also bounded and redact GitHub-token shapes, authorization values,
 and credential-shaped assignments before storage in a report. A structured workflow
-non-success verdict is eligible only when immediately adjacent to a generic process-exit marker;
+non-success verdict is eligible only when separated from a generic process-exit marker by at most two empty lines;
 arbitrary neighboring log text does not become causal evidence. This deterministic
 allow-list supplements but does not replace GitHub's masking of registered secrets.
 Positive `PASS` output never replaces a later nonzero process-exit marker. A silent
@@ -178,3 +178,11 @@ credential-shaped text, huge lines, malformed JSON, archive traversal, unsafe li
 decompression limits, pathological patterns, pagination exhaustion, mixed attempts, and
 untrusted pull-request configuration. Security failures must be distinguishable from a
 workflow's own failure.
+
+## Diagnostic selection extensions
+
+[Diagnostic selection](diagnostic_selection.md) defines bounded typed pytest
+failure groups, explicit tool rejections and nonzero curl diagnostics, including
+their negative/window/redaction guards. Optional occurrence context retains
+failed-test and later-diagnostic locators; it never authenticates log text or
+changes source facts. All profiles and renderers share that operation.

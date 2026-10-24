@@ -95,3 +95,14 @@ If the only question is whether one completed run succeeded, a minimal native Gi
 query can be smaller than a receptor report. Use the receptor when job, matrix, artifact,
 failure, completeness, comparison, or replay evidence matters. Use native inspection when
 the report explicitly tells you its model is insufficient.
+
+## Diagnostic context in current development source
+
+The unreleased source correction for issues #59/#61/#62/#64/#66 recognizes bounded
+pytest-receptor failure groups and both libmamba missing-constraint variants,
+and keeps initial curl failures ahead of later missing signatures. Explicit
+preflight rejection can precede the runner exit across up to two blank lines.
+Reports retain a primary frame with at most two failed-test identifiers, or a later diagnostic with
+its original log location. These are untrusted diagnostic candidates; GitHub
+conclusions remain authoritative, and unfamiliar or incomplete evidence still
+requires native logs. This source statement does not qualify a public artifact.

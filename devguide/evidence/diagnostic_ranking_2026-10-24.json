@@ -1,0 +1,333 @@
+{
+  "python": "3.14.7",
+  "source_hashes": {
+    "gh_run_receptor/logs.py": "6daa16e8e352e513e321c3178312d9a94349b340c748ca8d5f9112a493478e11",
+    "gh_run_receptor/report.py": "91a30cbb1e9a0085347d1d772265b51f1543003fb33b799deed84601c4a77c82"
+  },
+  "runs": [
+    {
+      "run_id": 37279215592,
+      "attempt": 1,
+      "head_sha": "1a49a5c73f0893cd5c2ae55958851647ead71244",
+      "modes": [
+        {
+          "profile": "generic",
+          "mode": "llm",
+          "exit": 1,
+          "bytes": 682,
+          "deterministic": true
+        },
+        {
+          "profile": "generic",
+          "mode": "human",
+          "exit": 1,
+          "bytes": 1683,
+          "deterministic": true
+        },
+        {
+          "profile": "generic",
+          "mode": "json",
+          "exit": 1,
+          "bytes": 60653,
+          "deterministic": true
+        },
+        {
+          "profile": "ci",
+          "mode": "llm",
+          "exit": 1,
+          "bytes": 761,
+          "deterministic": true
+        },
+        {
+          "profile": "ci",
+          "mode": "human",
+          "exit": 1,
+          "bytes": 1824,
+          "deterministic": true
+        },
+        {
+          "profile": "ci",
+          "mode": "json",
+          "exit": 1,
+          "bytes": 61553,
+          "deterministic": true
+        }
+      ]
+    },
+    {
+      "run_id": 37538525423,
+      "attempt": 1,
+      "head_sha": "6c4ddba31c289a27f761576c07fa641603c4392e",
+      "modes": [
+        {
+          "profile": "generic",
+          "mode": "llm",
+          "exit": 1,
+          "bytes": 1418,
+          "deterministic": true
+        },
+        {
+          "profile": "generic",
+          "mode": "human",
+          "exit": 1,
+          "bytes": 2240,
+          "deterministic": true
+        },
+        {
+          "profile": "generic",
+          "mode": "json",
+          "exit": 1,
+          "bytes": 55911,
+          "deterministic": true
+        },
+        {
+          "profile": "ci",
+          "mode": "llm",
+          "exit": 1,
+          "bytes": 928,
+          "deterministic": true
+        },
+        {
+          "profile": "ci",
+          "mode": "human",
+          "exit": 1,
+          "bytes": 2313,
+          "deterministic": true
+        },
+        {
+          "profile": "ci",
+          "mode": "json",
+          "exit": 1,
+          "bytes": 56414,
+          "deterministic": true
+        }
+      ]
+    },
+    {
+      "run_id": 37629258208,
+      "attempt": 1,
+      "head_sha": "513391c134b24c34969efae770015eab3f3f3fb2",
+      "modes": [
+        {
+          "profile": "generic",
+          "mode": "llm",
+          "exit": 1,
+          "bytes": 922,
+          "deterministic": true
+        },
+        {
+          "profile": "generic",
+          "mode": "human",
+          "exit": 1,
+          "bytes": 1559,
+          "deterministic": true
+        },
+        {
+          "profile": "generic",
+          "mode": "json",
+          "exit": 1,
+          "bytes": 52120,
+          "deterministic": true
+        },
+        {
+          "profile": "ci",
+          "mode": "llm",
+          "exit": 1,
+          "bytes": 978,
+          "deterministic": true
+        },
+        {
+          "profile": "ci",
+          "mode": "human",
+          "exit": 1,
+          "bytes": 1654,
+          "deterministic": true
+        },
+        {
+          "profile": "ci",
+          "mode": "json",
+          "exit": 1,
+          "bytes": 52671,
+          "deterministic": true
+        }
+      ]
+    },
+    {
+      "run_id": 37994715796,
+      "attempt": 1,
+      "head_sha": "b16b032c0d9ea177307f12991ca96d9fc6c956b8",
+      "modes": [
+        {
+          "profile": "generic",
+          "mode": "llm",
+          "exit": 1,
+          "bytes": 918,
+          "deterministic": true
+        },
+        {
+          "profile": "generic",
+          "mode": "human",
+          "exit": 1,
+          "bytes": 2018,
+          "deterministic": true
+        },
+        {
+          "profile": "generic",
+          "mode": "json",
+          "exit": 1,
+          "bytes": 70984,
+          "deterministic": true
+        },
+        {
+          "profile": "ci",
+          "mode": "llm",
+          "exit": 1,
+          "bytes": 680,
+          "deterministic": true
+        },
+        {
+          "profile": "ci",
+          "mode": "human",
+          "exit": 1,
+          "bytes": 2102,
+          "deterministic": true
+        },
+        {
+          "profile": "ci",
+          "mode": "json",
+          "exit": 1,
+          "bytes": 71607,
+          "deterministic": true
+        }
+      ]
+    },
+    {
+      "run_id": 38037422889,
+      "attempt": 1,
+      "head_sha": "bbf539cd533b703028029956fc06d52075b03c1c",
+      "modes": [
+        {
+          "profile": "generic",
+          "mode": "llm",
+          "exit": 1,
+          "bytes": 1515,
+          "deterministic": true
+        },
+        {
+          "profile": "generic",
+          "mode": "human",
+          "exit": 1,
+          "bytes": 2182,
+          "deterministic": true
+        },
+        {
+          "profile": "generic",
+          "mode": "json",
+          "exit": 1,
+          "bytes": 52018,
+          "deterministic": true
+        },
+        {
+          "profile": "ci",
+          "mode": "llm",
+          "exit": 1,
+          "bytes": 1281,
+          "deterministic": true
+        },
+        {
+          "profile": "ci",
+          "mode": "human",
+          "exit": 1,
+          "bytes": 2289,
+          "deterministic": true
+        },
+        {
+          "profile": "ci",
+          "mode": "json",
+          "exit": 1,
+          "bytes": 52601,
+          "deterministic": true
+        }
+      ]
+    },
+    {
+      "run_id": 40013378053,
+      "attempt": 1,
+      "head_sha": "646ce84bfb14da6e5ec86bbeef1693ac5f41e1fe",
+      "modes": [
+        {
+          "profile": "generic",
+          "mode": "llm",
+          "exit": 1,
+          "bytes": 2754,
+          "deterministic": true
+        },
+        {
+          "profile": "generic",
+          "mode": "human",
+          "exit": 1,
+          "bytes": 3746,
+          "deterministic": true
+        },
+        {
+          "profile": "generic",
+          "mode": "json",
+          "exit": 1,
+          "bytes": 69734,
+          "deterministic": true
+        },
+        {
+          "profile": "ci",
+          "mode": "llm",
+          "exit": 1,
+          "bytes": 2508,
+          "deterministic": true
+        },
+        {
+          "profile": "ci",
+          "mode": "human",
+          "exit": 1,
+          "bytes": 3898,
+          "deterministic": true
+        },
+        {
+          "profile": "ci",
+          "mode": "json",
+          "exit": 1,
+          "bytes": 70658,
+          "deterministic": true
+        }
+      ]
+    }
+  ],
+  "date": "2026-10-24",
+  "scope": "Unreleased source diagnosis and original-attempt offline replay; not public-artifact qualification.",
+  "local_suite": {
+    "passed": 707,
+    "skipped": 1,
+    "skip_reason": "Installed Conda qualification only; no Conda archive installed here"
+  },
+  "tools": {
+    "pytest": "9.1.1",
+    "pytest-receptor": "1.2.1+22.g00a31c4",
+    "ruff": "0.16.5"
+  },
+  "frozen_contracts": {
+    "count": 9,
+    "baseline": "0.21.0",
+    "result": "pass"
+  },
+  "distribution_preflight": {
+    "routes": 27,
+    "provider": "6d6172d6cd00c5ac2d4ebadb71df554ec5b7fa26",
+    "result": "pass"
+  },
+  "environment_limits": {
+    "shared_pip_check": "Fails on seven previously reported external AmberTools/third-party findings in uibcdf/molsyssuite#82; no shared dependency changed.",
+    "local_docs": "Strict Sphinx could not start: shared environment lacks optional sphinx_rtd_theme; exact-source hosted docs gate remains required."
+  },
+  "input_digests": {
+    "tests/fixtures/logs/diagnostic_ranking.json": "c5a6e5f69ce687de7ae09312465020ecf73753723c004f893b4f161237afeae0",
+    "tests/fixtures/logs/diagnostic_ranking_golden.json": "ca48525a2389022e9ec386cb1e41d4b04c56f87ede9cfd7b0d0b37aa18fcdf9a"
+  }
+}

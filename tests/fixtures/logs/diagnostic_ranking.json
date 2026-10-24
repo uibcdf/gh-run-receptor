@@ -1,0 +1,5996 @@
+{
+  "reviewed_on": "2026-10-24",
+  "sanitization": "Public diagnostic excerpts only. Actors, auth, pull-request content, timestamps, environment dumps, unrelated logs and object addresses omitted. Sparse excerpts preserve original member and physical line numbers. API run/job/step conclusions are copied unchanged. This is a diagnostic fixture, not a complete evidence bundle or release receipt.",
+  "cases": [
+    {
+      "issue": 59,
+      "repository": "uibcdf/sabueso",
+      "run_id": 37279215592,
+      "run_attempt": 1,
+      "head_sha": "1a49a5c73f0893cd5c2ae55958851647ead71244",
+      "run": {
+        "status": "completed",
+        "conclusion": "failure",
+        "name": "CI",
+        "html_url": "https://github.com/uibcdf/sabueso/actions/runs/37279215592"
+      },
+      "workflow": {
+        "id": 365010614,
+        "name": "CI",
+        "path": ".github/workflows/ci.yml"
+      },
+      "jobs": [
+        {
+          "id": 111663102573,
+          "name": "Ackredit public-package pilot (Python 3.12)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install the consumer with the public provider",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Verify installed imports outside both checkouts",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Exercise the installed required provider and consumer",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Run the public offline workflow",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111663102640,
+          "name": "Offline tests (ubuntu-latest, Python 3.14)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify Apple Silicon macOS runner",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 4,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Sabueso with public runtime dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Smoke the installed package outside the checkout",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Environment",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Run offline tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Retain measured coverage XML",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111663102721,
+          "name": "Offline tests (macos-26, Python 3.14)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify Apple Silicon macOS runner",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Sabueso with public runtime dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Smoke the installed package outside the checkout",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Environment",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Run offline tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Retain measured coverage XML",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 17,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111663102748,
+          "name": "Ackredit public-package pilot (Python 3.11)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install the consumer with the public provider",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Verify installed imports outside both checkouts",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Exercise the installed required provider and consumer",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Run the public offline workflow",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111663102758,
+          "name": "Offline tests (ubuntu-latest, Python 3.13)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify Apple Silicon macOS runner",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 4,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Sabueso with public runtime dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Smoke the installed package outside the checkout",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Environment",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Run offline tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Retain measured coverage XML",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 17,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111663102759,
+          "name": "Ackredit public-package pilot (Python 3.13)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install the consumer with the public provider",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Verify installed imports outside both checkouts",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Exercise the installed required provider and consumer",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Run the public offline workflow",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111663102764,
+          "name": "Offline tests (windows-latest, Python 3.13)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify Apple Silicon macOS runner",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 4,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Sabueso with public runtime dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Smoke the installed package outside the checkout",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Environment",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Run offline tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Retain measured coverage XML",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 17,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111663102771,
+          "name": "Offline tests (windows-latest, Python 3.12)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify Apple Silicon macOS runner",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 4,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Sabueso with public runtime dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Smoke the installed package outside the checkout",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Environment",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Run offline tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Retain measured coverage XML",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 17,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111663102784,
+          "name": "Offline tests (ubuntu-latest, Python 3.12)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify Apple Silicon macOS runner",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 4,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Sabueso with public runtime dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Smoke the installed package outside the checkout",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Environment",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Run offline tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Retain measured coverage XML",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 17,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111663102789,
+          "name": "Offline tests (ubuntu-latest, Python 3.11)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify Apple Silicon macOS runner",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 4,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Sabueso with public runtime dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Smoke the installed package outside the checkout",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Environment",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Run offline tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Retain measured coverage XML",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 17,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111663102792,
+          "name": "Offline tests (windows-latest, Python 3.14)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify Apple Silicon macOS runner",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 4,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Sabueso with public runtime dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Smoke the installed package outside the checkout",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Environment",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Run offline tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Retain measured coverage XML",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 17,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111663102815,
+          "name": "Ackredit public-package pilot (Python 3.14)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install the consumer with the public provider",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Verify installed imports outside both checkouts",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Exercise the installed required provider and consumer",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Run the public offline workflow",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111663102823,
+          "name": "Offline tests (windows-latest, Python 3.11)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify Apple Silicon macOS runner",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 4,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Sabueso with public runtime dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Smoke the installed package outside the checkout",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Environment",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Run offline tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Retain measured coverage XML",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 17,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111663102825,
+          "name": "Ruff",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run actions/setup-python@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Dependency-contract preflight",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install quality tooling",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Ruff format",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Ruff lint",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Post Run actions/setup-python@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 111666298812,
+          "name": "Publish default-branch coverage",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run actions/download-artifact@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Upload the measured report to Codecov",
+              "conclusion": "failure"
+            },
+            {
+              "number": 8,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ],
+      "logs": [
+        {
+          "member": "0_Publish default-branch coverage.txt",
+          "job_id": 111666298812,
+          "fragments": [
+            {
+              "start_line": 397,
+              "lines": [
+                "curl: (35) OpenSSL/3.0.13: error:0A000410:SSL routines::sslv3 alert handshake failure"
+              ]
+            },
+            {
+              "start_line": 411,
+              "lines": [
+                "gpg: can't open './codecov.SHA256SUM.sig': No such file or directory",
+                "gpg: verify signatures failed: No such file or directory"
+              ]
+            },
+            {
+              "start_line": 415,
+              "lines": [
+                "##[error]Process completed with exit code 1."
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "kind": "download_error",
+        "message": "curl: (35)"
+      }
+    },
+    {
+      "issue": 61,
+      "repository": "uibcdf/molsysviewer",
+      "run_id": 37538525423,
+      "run_attempt": 1,
+      "head_sha": "6c4ddba31c289a27f761576c07fa641603c4392e",
+      "run": {
+        "status": "completed",
+        "conclusion": "failure",
+        "name": "CI",
+        "html_url": "https://github.com/uibcdf/molsysviewer/actions/runs/37538525423"
+      },
+      "workflow": {
+        "id": 213643550,
+        "name": "CI",
+        "path": ".github/workflows/CI.yaml"
+      },
+      "jobs": [
+        {
+          "id": 112525519402,
+          "name": "Test on macos-15, Python 3.12",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Setup conda env",
+              "conclusion": "failure"
+            },
+            {
+              "number": 6,
+              "name": "Validate and locally tag the staged Viewer candidate",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 8,
+              "name": "Record published pytest tool versions",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Install JS build dependencies for Python distribution tests",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Test import module",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 12,
+              "name": "Resolve documented Python API calls",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 13,
+              "name": "Run tests",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 14,
+              "name": "JS unit tests (Node)",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 15,
+              "name": "Check coverage",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 16,
+              "name": "Upload coverage reports to Codecov",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 17,
+              "name": "Upload test results to Codecov",
+              "conclusion": "success"
+            },
+            {
+              "number": 32,
+              "name": "Post Setup conda env",
+              "conclusion": "failure"
+            },
+            {
+              "number": 33,
+              "name": "Post Set up Python",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 34,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 35,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 112525519457,
+          "name": "Test on ubuntu-latest, Python 3.12",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Setup conda env",
+              "conclusion": "failure"
+            },
+            {
+              "number": 6,
+              "name": "Validate and locally tag the staged Viewer candidate",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 8,
+              "name": "Record published pytest tool versions",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Install JS build dependencies for Python distribution tests",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Test import module",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 12,
+              "name": "Resolve documented Python API calls",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 13,
+              "name": "Run tests",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 14,
+              "name": "JS unit tests (Node)",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 15,
+              "name": "Check coverage",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 16,
+              "name": "Upload coverage reports to Codecov",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 17,
+              "name": "Upload test results to Codecov",
+              "conclusion": "success"
+            },
+            {
+              "number": 32,
+              "name": "Post Setup conda env",
+              "conclusion": "failure"
+            },
+            {
+              "number": 33,
+              "name": "Post Set up Python",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 34,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 35,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 112525519516,
+          "name": "Test on macos-15, Python 3.11",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Setup conda env",
+              "conclusion": "failure"
+            },
+            {
+              "number": 6,
+              "name": "Validate and locally tag the staged Viewer candidate",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 8,
+              "name": "Record published pytest tool versions",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Install JS build dependencies for Python distribution tests",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Test import module",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 12,
+              "name": "Resolve documented Python API calls",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 13,
+              "name": "Run tests",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 14,
+              "name": "JS unit tests (Node)",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 15,
+              "name": "Check coverage",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 16,
+              "name": "Upload coverage reports to Codecov",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 17,
+              "name": "Upload test results to Codecov",
+              "conclusion": "success"
+            },
+            {
+              "number": 32,
+              "name": "Post Setup conda env",
+              "conclusion": "failure"
+            },
+            {
+              "number": 33,
+              "name": "Post Set up Python",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 34,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 35,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 112525519546,
+          "name": "Qt pipeline completes (Xvfb, software WebGL)",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Setup conda env with the Qt stack",
+              "conclusion": "failure"
+            },
+            {
+              "number": 4,
+              "name": "Validate and locally tag the staged Viewer candidate",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 5,
+              "name": "Record published pytest tool versions",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 6,
+              "name": "Install package",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Xvfb and the software GL stack",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 8,
+              "name": "Qt transport round-trip in a real Qt process",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 9,
+              "name": "The structure finishes loading through WebGL",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 17,
+              "name": "Post Setup conda env with the Qt stack",
+              "conclusion": "failure"
+            },
+            {
+              "number": 18,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 112525519571,
+          "name": "Test on macos-15, Python 3.13",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Setup conda env",
+              "conclusion": "failure"
+            },
+            {
+              "number": 6,
+              "name": "Validate and locally tag the staged Viewer candidate",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 8,
+              "name": "Record published pytest tool versions",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Install JS build dependencies for Python distribution tests",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Test import module",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 12,
+              "name": "Resolve documented Python API calls",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 13,
+              "name": "Run tests",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 14,
+              "name": "JS unit tests (Node)",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 15,
+              "name": "Check coverage",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 16,
+              "name": "Upload coverage reports to Codecov",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 17,
+              "name": "Upload test results to Codecov",
+              "conclusion": "success"
+            },
+            {
+              "number": 32,
+              "name": "Post Setup conda env",
+              "conclusion": "failure"
+            },
+            {
+              "number": 33,
+              "name": "Post Set up Python",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 34,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 35,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 112525519613,
+          "name": "Test on ubuntu-latest, Python 3.13",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Setup conda env",
+              "conclusion": "failure"
+            },
+            {
+              "number": 6,
+              "name": "Validate and locally tag the staged Viewer candidate",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 8,
+              "name": "Record published pytest tool versions",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Install JS build dependencies for Python distribution tests",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Test import module",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 12,
+              "name": "Resolve documented Python API calls",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 13,
+              "name": "Run tests",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 14,
+              "name": "JS unit tests (Node)",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 15,
+              "name": "Check coverage",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 16,
+              "name": "Upload coverage reports to Codecov",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 17,
+              "name": "Upload test results to Codecov",
+              "conclusion": "success"
+            },
+            {
+              "number": 32,
+              "name": "Post Setup conda env",
+              "conclusion": "failure"
+            },
+            {
+              "number": 33,
+              "name": "Post Set up Python",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 34,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 35,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 112525519638,
+          "name": "Test on ubuntu-latest, Python 3.11",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Setup conda env",
+              "conclusion": "failure"
+            },
+            {
+              "number": 6,
+              "name": "Validate and locally tag the staged Viewer candidate",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 8,
+              "name": "Record published pytest tool versions",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Install JS build dependencies for Python distribution tests",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Test import module",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 12,
+              "name": "Resolve documented Python API calls",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 13,
+              "name": "Run tests",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 14,
+              "name": "JS unit tests (Node)",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 15,
+              "name": "Check coverage",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 16,
+              "name": "Upload coverage reports to Codecov",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 17,
+              "name": "Upload test results to Codecov",
+              "conclusion": "success"
+            },
+            {
+              "number": 32,
+              "name": "Post Setup conda env",
+              "conclusion": "failure"
+            },
+            {
+              "number": 33,
+              "name": "Post Set up Python",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 34,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 35,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 112525552961,
+          "name": "Check skipped-commit backlog",
+          "status": "completed",
+          "conclusion": "skipped",
+          "steps": []
+        },
+        {
+          "id": 112525866410,
+          "name": "PR full suite",
+          "status": "completed",
+          "conclusion": "skipped",
+          "steps": []
+        }
+      ],
+      "logs": [
+        {
+          "member": "3_Test on macos-15, Python 3.12.txt",
+          "job_id": 112525519402,
+          "fragments": [
+            {
+              "start_line": 269,
+              "lines": [
+                "Resolving Environment                                                                     ✔ Done (0.6 sec)",
+                "error    libmamba Could not solve for environment specs",
+                "The following package could not be installed",
+                "└─ molsysmt >=0.23.0 * does not exist (perhaps a typo or a missing channel).",
+                "critical libmamba Could not solve for environment specs",
+                "##[error]The process '/Users/runner/micromamba-bin/micromamba' failed with exit code 1"
+              ]
+            },
+            {
+              "start_line": 319,
+              "lines": [
+                "##[group]Deinitialize micromamba for bash",
+                "##[error]ENOENT: no such file or directory, lstat '/Users/runner/work/_temp/setup-micromamba/micromamba-shell'",
+                "Post job cleanup."
+              ]
+            }
+          ]
+        },
+        {
+          "member": "6_Test on ubuntu-latest, Python 3.12.txt",
+          "job_id": 112525519457,
+          "fragments": [
+            {
+              "start_line": 271,
+              "lines": [
+                "Resolving Environment                                                                     ✔ Done (0.5 sec)",
+                "error    libmamba Could not solve for environment specs",
+                "The following package could not be installed",
+                "└─ molsysmt >=0.23.0 * does not exist (perhaps a typo or a missing channel).",
+                "critical libmamba Could not solve for environment specs",
+                "##[error]The process '/home/runner/micromamba-bin/micromamba' failed with exit code 1"
+              ]
+            },
+            {
+              "start_line": 320,
+              "lines": [
+                "##[group]Deinitialize micromamba for bash",
+                "##[error]ENOENT: no such file or directory, lstat '/home/runner/work/_temp/setup-micromamba/micromamba-shell'",
+                "Post job cleanup."
+              ]
+            }
+          ]
+        },
+        {
+          "member": "7_Test on macos-15, Python 3.11.txt",
+          "job_id": 112525519516,
+          "fragments": [
+            {
+              "start_line": 269,
+              "lines": [
+                "Resolving Environment                                                                     ✔ Done (0.4 sec)",
+                "error    libmamba Could not solve for environment specs",
+                "The following package could not be installed",
+                "└─ molsysmt >=0.23.0 * does not exist (perhaps a typo or a missing channel).",
+                "critical libmamba Could not solve for environment specs",
+                "##[error]The process '/Users/runner/micromamba-bin/micromamba' failed with exit code 1"
+              ]
+            },
+            {
+              "start_line": 319,
+              "lines": [
+                "##[group]Deinitialize micromamba for bash",
+                "##[error]ENOENT: no such file or directory, lstat '/Users/runner/work/_temp/setup-micromamba/micromamba-shell'",
+                "Post job cleanup."
+              ]
+            }
+          ]
+        },
+        {
+          "member": "5_Qt pipeline completes (Xvfb, software WebGL).txt",
+          "job_id": 112525519546,
+          "fragments": [
+            {
+              "start_line": 242,
+              "lines": [
+                "Resolving Environment                                                                     ✔ Done (0.5 sec)",
+                "error    libmamba Could not solve for environment specs",
+                "The following package could not be installed",
+                "└─ molsysmt >=0.23.0 * does not exist (perhaps a typo or a missing channel).",
+                "critical libmamba Could not solve for environment specs",
+                "##[error]The process '/home/runner/micromamba-bin/micromamba' failed with exit code 1"
+              ]
+            },
+            {
+              "start_line": 251,
+              "lines": [
+                "##[group]Deinitialize micromamba for bash",
+                "##[error]ENOENT: no such file or directory, lstat '/home/runner/work/_temp/setup-micromamba/micromamba-shell'",
+                "Post job cleanup."
+              ]
+            }
+          ]
+        },
+        {
+          "member": "2_Test on macos-15, Python 3.13.txt",
+          "job_id": 112525519571,
+          "fragments": [
+            {
+              "start_line": 269,
+              "lines": [
+                "Resolving Environment                                                                     ✔ Done (0.3 sec)",
+                "error    libmamba Could not solve for environment specs",
+                "The following package could not be installed",
+                "└─ molsysmt >=0.23.0 * does not exist (perhaps a typo or a missing channel).",
+                "critical libmamba Could not solve for environment specs",
+                "##[error]The process '/Users/runner/micromamba-bin/micromamba' failed with exit code 1"
+              ]
+            },
+            {
+              "start_line": 316,
+              "lines": [
+                "##[group]Deinitialize micromamba for bash",
+                "##[error]ENOENT: no such file or directory, lstat '/Users/runner/work/_temp/setup-micromamba/micromamba-shell'",
+                "Post job cleanup."
+              ]
+            }
+          ]
+        },
+        {
+          "member": "1_Test on ubuntu-latest, Python 3.13.txt",
+          "job_id": 112525519613,
+          "fragments": [
+            {
+              "start_line": 270,
+              "lines": [
+                "Resolving Environment                                                                     ✔ Done (0.5 sec)",
+                "error    libmamba Could not solve for environment specs",
+                "The following package could not be installed",
+                "└─ molsysmt >=0.23.0 * does not exist (perhaps a typo or a missing channel).",
+                "critical libmamba Could not solve for environment specs",
+                "##[error]The process '/home/runner/micromamba-bin/micromamba' failed with exit code 1"
+              ]
+            },
+            {
+              "start_line": 322,
+              "lines": [
+                "##[group]Deinitialize micromamba for bash",
+                "##[error]ENOENT: no such file or directory, lstat '/home/runner/work/_temp/setup-micromamba/micromamba-shell'",
+                "Post job cleanup."
+              ]
+            }
+          ]
+        },
+        {
+          "member": "4_Test on ubuntu-latest, Python 3.11.txt",
+          "job_id": 112525519638,
+          "fragments": [
+            {
+              "start_line": 270,
+              "lines": [
+                "Resolving Environment                                                                     ✔ Done (0.7 sec)",
+                "error    libmamba Could not solve for environment specs",
+                "The following package could not be installed",
+                "└─ molsysmt >=0.23.0 * does not exist (perhaps a typo or a missing channel).",
+                "critical libmamba Could not solve for environment specs",
+                "##[error]The process '/home/runner/micromamba-bin/micromamba' failed with exit code 1"
+              ]
+            },
+            {
+              "start_line": 319,
+              "lines": [
+                "##[group]Deinitialize micromamba for bash",
+                "##[error]ENOENT: no such file or directory, lstat '/home/runner/work/_temp/setup-micromamba/micromamba-shell'",
+                "Post job cleanup."
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "kind": "conda_solver",
+        "message": "molsysmt >=0.23.0"
+      }
+    },
+    {
+      "issue": 62,
+      "repository": "uibcdf/molsysviewer",
+      "run_id": 37629258208,
+      "run_attempt": 1,
+      "head_sha": "513391c134b24c34969efae770015eab3f3f3fb2",
+      "run": {
+        "status": "completed",
+        "conclusion": "failure",
+        "name": "CI",
+        "html_url": "https://github.com/uibcdf/molsysviewer/actions/runs/37629258208"
+      },
+      "workflow": {
+        "id": 213643550,
+        "name": "CI",
+        "path": ".github/workflows/CI.yaml"
+      },
+      "jobs": [
+        {
+          "id": 112818924390,
+          "name": "Check skipped-commit backlog",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Decide whether to run the full matrix",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 112819120092,
+          "name": "Qt pipeline completes (Xvfb, software WebGL)",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Setup conda env with the Qt stack",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Validate and locally tag the staged Viewer candidate",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 5,
+              "name": "Record published pytest tool versions",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Install package",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Remove the temporary Viewer tag after installation",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 8,
+              "name": "Xvfb and the software GL stack",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Qt transport round-trip in a real Qt process",
+              "conclusion": "failure"
+            },
+            {
+              "number": 10,
+              "name": "The structure finishes loading through WebGL",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 19,
+              "name": "Post Setup conda env with the Qt stack",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 112819120296,
+          "name": "Test on macos-15, Python 3.11",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Validate and locally tag the staged Viewer candidate",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Record published pytest tool versions",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Remove the temporary Viewer tag after installation",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Install JS build dependencies for Python distribution tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Test import module",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Resolve documented Python API calls",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 14,
+              "name": "Run tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "JS unit tests (Node)",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 16,
+              "name": "Check coverage",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Upload coverage reports to Codecov",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 18,
+              "name": "Upload test results to Codecov",
+              "conclusion": "success"
+            },
+            {
+              "number": 34,
+              "name": "Post Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 35,
+              "name": "Post Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 36,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 37,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 112819120301,
+          "name": "Test on macos-15, Python 3.12",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Validate and locally tag the staged Viewer candidate",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Record published pytest tool versions",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Remove the temporary Viewer tag after installation",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Install JS build dependencies for Python distribution tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Test import module",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Resolve documented Python API calls",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 14,
+              "name": "Run tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "JS unit tests (Node)",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 16,
+              "name": "Check coverage",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Upload coverage reports to Codecov",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 18,
+              "name": "Upload test results to Codecov",
+              "conclusion": "success"
+            },
+            {
+              "number": 34,
+              "name": "Post Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 35,
+              "name": "Post Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 36,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 37,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 112819120319,
+          "name": "Test on ubuntu-latest, Python 3.11",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Validate and locally tag the staged Viewer candidate",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Record published pytest tool versions",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Remove the temporary Viewer tag after installation",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Install JS build dependencies for Python distribution tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Test import module",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Resolve documented Python API calls",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 14,
+              "name": "Run tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "JS unit tests (Node)",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 16,
+              "name": "Check coverage",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Upload coverage reports to Codecov",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 18,
+              "name": "Upload test results to Codecov",
+              "conclusion": "success"
+            },
+            {
+              "number": 34,
+              "name": "Post Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 35,
+              "name": "Post Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 36,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 37,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 112819120360,
+          "name": "Test on ubuntu-latest, Python 3.12",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Validate and locally tag the staged Viewer candidate",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Record published pytest tool versions",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Remove the temporary Viewer tag after installation",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Install JS build dependencies for Python distribution tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Test import module",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Resolve documented Python API calls",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 14,
+              "name": "Run tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "JS unit tests (Node)",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 16,
+              "name": "Check coverage",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Upload coverage reports to Codecov",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 18,
+              "name": "Upload test results to Codecov",
+              "conclusion": "success"
+            },
+            {
+              "number": 34,
+              "name": "Post Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 35,
+              "name": "Post Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 36,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 37,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 112819120408,
+          "name": "Test on ubuntu-latest, Python 3.13",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Validate and locally tag the staged Viewer candidate",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Record published pytest tool versions",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Remove the temporary Viewer tag after installation",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Install JS build dependencies for Python distribution tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Test import module",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Resolve documented Python API calls",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Run tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "JS unit tests (Node)",
+              "conclusion": "success"
+            },
+            {
+              "number": 16,
+              "name": "Check coverage",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Upload coverage reports to Codecov",
+              "conclusion": "success"
+            },
+            {
+              "number": 18,
+              "name": "Upload test results to Codecov",
+              "conclusion": "success"
+            },
+            {
+              "number": 34,
+              "name": "Post Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 35,
+              "name": "Post Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 36,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 37,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 112819120624,
+          "name": "Test on macos-15, Python 3.13",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Validate and locally tag the staged Viewer candidate",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Record published pytest tool versions",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Remove the temporary Viewer tag after installation",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Install JS build dependencies for Python distribution tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Test import module",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Resolve documented Python API calls",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 14,
+              "name": "Run tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "JS unit tests (Node)",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 16,
+              "name": "Check coverage",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Upload coverage reports to Codecov",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 18,
+              "name": "Upload test results to Codecov",
+              "conclusion": "success"
+            },
+            {
+              "number": 34,
+              "name": "Post Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 35,
+              "name": "Post Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 36,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 37,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 112827057258,
+          "name": "PR full suite",
+          "status": "completed",
+          "conclusion": "skipped",
+          "steps": []
+        }
+      ],
+      "logs": [
+        {
+          "member": "7_Qt pipeline completes (Xvfb, software WebGL).txt",
+          "job_id": 112819120092,
+          "fragments": [
+            {
+              "start_line": 1373,
+              "lines": [
+                "FAIL exit=1 | 1 failed, 2910 deselected | 11.85s | 1 warnings | 1 root cause",
+                "",
+                "[1] AssertionError | 1 test | call",
+                "tests/test_standalone.py:1951",
+                "AssertionError: Qt message bridge failed to become ready. Status: Frontend error: Exported scene has no WebGL canvas.",
+                "assert False is True",
+                "+  where False = <molsysviewer.standalone_qt.utils.QtMessageBridge object at <address>>.ready",
+                "captured stderr (tests/test_standalone.py::test_qt_live_model_smoke_real_window):",
+                "WARNING: H5MSM 0.4 is deprecated; reading remains supported. (Hint: Convert a copy to H5MSM 0.5 with molsysmt.h5msm.migrate_to_05(source, output). Docs: https://www.uibcdf.org/MolSysMT)",
+                "Sandboxing disabled by user.",
+                "This plugin does not support createPlatformVulkanInstance",
+                "QVulkanInstance: Failed to initialize Vulkan",
+                "[4455:4489:1007/133405.408269:ERROR:../../../src/3rdparty/chromium/dbus/bus.cc:408] Failed to connect to the bus: Failed to connect to socket /home/runner/micromamba/envs/test/var/run/dbus/system_bus_socket: No such file or directory",
+                "GPUInfo not initialized on GpuInfoUpdate",
+                "js: Error: Could not create a WebGL rendering context",
+                "js: [MolSysViewer] Failed to init Mol* viewer",
+                "js: [MolSysViewer] unknown op: set_trajectory_summary [object Object]",
+                "js: [MolSysViewer docs] Init error: Error: Exported scene has no WebGL canvas.",
+                "js: Uncaught (in promise) Error: Could not create a WebGL rendering context",
+                "js: [MolSysViewer docs] Failed to load runtime. TypeError: Failed to fetch dynamically imported module: https://cdn.jsdelivr.net/npm/@uibcdf/molsysviewer/dist/viewer.js",
+                "rerun: python -m pytest tests/test_standalone.py::test_qt_live_model_smoke_real_window -q"
+              ]
+            },
+            {
+              "start_line": 1398,
+              "lines": [
+                "##[error]Process completed with exit code 1."
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "kind": "pytest_failure",
+        "message": "AssertionError: Qt message bridge"
+      }
+    },
+    {
+      "issue": 64,
+      "repository": "uibcdf/smonitor",
+      "run_id": 37994715796,
+      "run_attempt": 1,
+      "head_sha": "b16b032c0d9ea177307f12991ca96d9fc6c956b8",
+      "run": {
+        "status": "completed",
+        "conclusion": "failure",
+        "name": "CI Full Matrix",
+        "html_url": "https://github.com/uibcdf/smonitor/actions/runs/37994715796"
+      },
+      "workflow": {
+        "id": 239176753,
+        "name": "CI Full Matrix",
+        "path": ".github/workflows/CI_full_matrix.yaml"
+      },
+      "jobs": [
+        {
+          "id": 114037701369,
+          "name": "Full test on macos-latest, Python 3.13",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check distribution inputs",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Test import module",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Run linter",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Run tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Post Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Post Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 24,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 25,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114037701533,
+          "name": "Full test on macos-latest, Python 3.12",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check distribution inputs",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Test import module",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Run linter",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Run tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Post Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Post Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 24,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 25,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114037701625,
+          "name": "Full test on macos-latest, Python 3.11",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check distribution inputs",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Test import module",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Run linter",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Run tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Post Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Post Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 24,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 25,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114037701634,
+          "name": "Full test on ubuntu-latest, Python 3.13",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check distribution inputs",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Test import module",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Run linter",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Run tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Post Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Post Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 24,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 25,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114037701648,
+          "name": "Full test on windows-latest, Python 3.11",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check distribution inputs",
+              "conclusion": "failure"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Test import module",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Run linter",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 12,
+              "name": "Run tests",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 21,
+              "name": "Post Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Set up Python",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 23,
+              "name": "Post Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 24,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 25,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114037701657,
+          "name": "Full test on ubuntu-latest, Python 3.11",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check distribution inputs",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Test import module",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Run linter",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Run tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Post Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Post Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 24,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 25,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114037701660,
+          "name": "Full test on ubuntu-latest, Python 3.14",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check distribution inputs",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Test import module",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Run linter",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Run tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Post Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Post Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 24,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 25,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114037701673,
+          "name": "Full test on macos-latest, Python 3.14",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check distribution inputs",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Test import module",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Run linter",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Run tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Post Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Post Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 24,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 25,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114037701682,
+          "name": "Full test on windows-latest, Python 3.14",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check distribution inputs",
+              "conclusion": "failure"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Test import module",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Run linter",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 12,
+              "name": "Run tests",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 21,
+              "name": "Post Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Set up Python",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 23,
+              "name": "Post Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 24,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 25,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114037701703,
+          "name": "Full test on ubuntu-latest, Python 3.12",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check distribution inputs",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Test import module",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Run linter",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Run tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Post Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 23,
+              "name": "Post Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 24,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 25,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114037701843,
+          "name": "Full test on windows-latest, Python 3.13",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check distribution inputs",
+              "conclusion": "failure"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Test import module",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Run linter",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 12,
+              "name": "Run tests",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 21,
+              "name": "Post Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Set up Python",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 23,
+              "name": "Post Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 24,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 25,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114037702127,
+          "name": "Check skipped-commit backlog",
+          "status": "completed",
+          "conclusion": "skipped",
+          "steps": []
+        },
+        {
+          "id": 114037702746,
+          "name": "Full test on windows-latest, Python 3.12",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Additional info about the build",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Set up Python",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Info conda",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check distribution inputs",
+              "conclusion": "failure"
+            },
+            {
+              "number": 9,
+              "name": "Install package",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 10,
+              "name": "Test import module",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 11,
+              "name": "Run linter",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 12,
+              "name": "Run tests",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 21,
+              "name": "Post Setup conda env",
+              "conclusion": "success"
+            },
+            {
+              "number": 22,
+              "name": "Post Set up Python",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 23,
+              "name": "Post Check out reviewed distribution tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 24,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 25,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ],
+      "logs": [
+        {
+          "member": "8_Full test on windows-latest, Python 3.11.txt",
+          "job_id": 114037701648,
+          "fragments": [
+            {
+              "start_line": 657,
+              "lines": [
+                "Dependency routes rejected: .github/workflows/CI.yaml: reviewed workflow changed; classify its actual routes again",
+                "",
+                "##[error]Process completed with exit code 1."
+              ]
+            }
+          ]
+        },
+        {
+          "member": "2_Full test on windows-latest, Python 3.14.txt",
+          "job_id": 114037701682,
+          "fragments": [
+            {
+              "start_line": 657,
+              "lines": [
+                "Dependency routes rejected: .github/workflows/CI.yaml: reviewed workflow changed; classify its actual routes again",
+                "",
+                "##[error]Process completed with exit code 1."
+              ]
+            }
+          ]
+        },
+        {
+          "member": "3_Full test on windows-latest, Python 3.13.txt",
+          "job_id": 114037701843,
+          "fragments": [
+            {
+              "start_line": 653,
+              "lines": [
+                "Dependency routes rejected: .github/workflows/CI.yaml: reviewed workflow changed; classify its actual routes again",
+                "",
+                "##[error]Process completed with exit code 1."
+              ]
+            }
+          ]
+        },
+        {
+          "member": "0_Full test on windows-latest, Python 3.12.txt",
+          "job_id": 114037702746,
+          "fragments": [
+            {
+              "start_line": 657,
+              "lines": [
+                "Dependency routes rejected: .github/workflows/CI.yaml: reviewed workflow changed; classify its actual routes again",
+                "",
+                "##[error]Process completed with exit code 1."
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "kind": "structured_diagnostic",
+        "message": "Dependency routes rejected:"
+      }
+    },
+    {
+      "issue": 66,
+      "repository": "uibcdf/dockingmt",
+      "run_id": 38037422889,
+      "run_attempt": 1,
+      "head_sha": "bbf539cd533b703028029956fc06d52075b03c1c",
+      "run": {
+        "status": "completed",
+        "conclusion": "failure",
+        "name": "CI",
+        "html_url": "https://github.com/uibcdf/dockingmt/actions/runs/38037422889"
+      },
+      "workflow": {
+        "id": 363776838,
+        "name": "CI",
+        "path": ".github/workflows/ci.yml"
+      },
+      "jobs": [
+        {
+          "id": 114170670985,
+          "name": "Distribution governance on Linux Python 3.14",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Check out immutable dependency SDK",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Run actions/setup-python@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install administrative tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Validate report records and generated indexes",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Review declared dependency routes",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Test distribution controls",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Post Run actions/setup-python@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Post Check out immutable dependency SDK",
+              "conclusion": "success"
+            },
+            {
+              "number": 16,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 17,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114170671070,
+          "name": "Quality on ubuntu-latest",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run actions/setup-python@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Run python -m pip install ruff==0.16.5",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Check Ruff lint",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Check Ruff format",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Post Run actions/setup-python@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114170671091,
+          "name": "Test on ubuntu-latest, Python 3.14",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Check out compatible ArgDigest source",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 4,
+              "name": "Check out compatible ArgDigest source for Python 3.14",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Check out compatible MolSysMT source",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 6,
+              "name": "Check out compatible MolSysMT source for Python 3.14",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Check out compatible MolSysViewer source",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 8,
+              "name": "Check out compatible MolSysViewer source for Python 3.14",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Setup micromamba",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Install compatible scientific sibling sources",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Install dockingmt",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Check out immutable dependency SDK",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Prepare isolated preflight tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Check dependency routes and installed clone context",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Verify ordinary installed package",
+              "conclusion": "success"
+            },
+            {
+              "number": 16,
+              "name": "Run tests with pytest-receptor",
+              "conclusion": "failure"
+            },
+            {
+              "number": 17,
+              "name": "Retain measured Python coverage",
+              "conclusion": "success"
+            },
+            {
+              "number": 29,
+              "name": "Post Check out immutable dependency SDK",
+              "conclusion": "success"
+            },
+            {
+              "number": 30,
+              "name": "Post Setup micromamba",
+              "conclusion": "success"
+            },
+            {
+              "number": 31,
+              "name": "Post Check out compatible MolSysViewer source for Python 3.14",
+              "conclusion": "success"
+            },
+            {
+              "number": 32,
+              "name": "Post Check out compatible MolSysMT source for Python 3.14",
+              "conclusion": "success"
+            },
+            {
+              "number": 33,
+              "name": "Post Check out compatible ArgDigest source for Python 3.14",
+              "conclusion": "success"
+            },
+            {
+              "number": 34,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 35,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114170671100,
+          "name": "Test on ubuntu-latest, Python 3.11",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Check out compatible ArgDigest source",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Check out compatible ArgDigest source for Python 3.14",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 5,
+              "name": "Check out compatible MolSysMT source",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Check out compatible MolSysMT source for Python 3.14",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Check out compatible MolSysViewer source",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check out compatible MolSysViewer source for Python 3.14",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 9,
+              "name": "Setup micromamba",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Install compatible scientific sibling sources",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Install dockingmt",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Check out immutable dependency SDK",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Prepare isolated preflight tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Check dependency routes and installed clone context",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Verify ordinary installed package",
+              "conclusion": "success"
+            },
+            {
+              "number": 16,
+              "name": "Run tests with pytest-receptor",
+              "conclusion": "failure"
+            },
+            {
+              "number": 17,
+              "name": "Retain measured Python coverage",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 29,
+              "name": "Post Check out immutable dependency SDK",
+              "conclusion": "success"
+            },
+            {
+              "number": 30,
+              "name": "Post Setup micromamba",
+              "conclusion": "success"
+            },
+            {
+              "number": 31,
+              "name": "Post Check out compatible MolSysViewer source",
+              "conclusion": "success"
+            },
+            {
+              "number": 32,
+              "name": "Post Check out compatible MolSysMT source",
+              "conclusion": "success"
+            },
+            {
+              "number": 33,
+              "name": "Post Check out compatible ArgDigest source",
+              "conclusion": "success"
+            },
+            {
+              "number": 34,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 35,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114170671142,
+          "name": "Test on ubuntu-latest, Python 3.12",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Check out compatible ArgDigest source",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Check out compatible ArgDigest source for Python 3.14",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 5,
+              "name": "Check out compatible MolSysMT source",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Check out compatible MolSysMT source for Python 3.14",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Check out compatible MolSysViewer source",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check out compatible MolSysViewer source for Python 3.14",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 9,
+              "name": "Setup micromamba",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Install compatible scientific sibling sources",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Install dockingmt",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Check out immutable dependency SDK",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Prepare isolated preflight tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Check dependency routes and installed clone context",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Verify ordinary installed package",
+              "conclusion": "success"
+            },
+            {
+              "number": 16,
+              "name": "Run tests with pytest-receptor",
+              "conclusion": "failure"
+            },
+            {
+              "number": 17,
+              "name": "Retain measured Python coverage",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 29,
+              "name": "Post Check out immutable dependency SDK",
+              "conclusion": "success"
+            },
+            {
+              "number": 30,
+              "name": "Post Setup micromamba",
+              "conclusion": "success"
+            },
+            {
+              "number": 31,
+              "name": "Post Check out compatible MolSysViewer source",
+              "conclusion": "success"
+            },
+            {
+              "number": 32,
+              "name": "Post Check out compatible MolSysMT source",
+              "conclusion": "success"
+            },
+            {
+              "number": 33,
+              "name": "Post Check out compatible ArgDigest source",
+              "conclusion": "success"
+            },
+            {
+              "number": 34,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 35,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114170671255,
+          "name": "Test on ubuntu-latest, Python 3.13",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Check out compatible ArgDigest source",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Check out compatible ArgDigest source for Python 3.14",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 5,
+              "name": "Check out compatible MolSysMT source",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Check out compatible MolSysMT source for Python 3.14",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 7,
+              "name": "Check out compatible MolSysViewer source",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check out compatible MolSysViewer source for Python 3.14",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 9,
+              "name": "Setup micromamba",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Install compatible scientific sibling sources",
+              "conclusion": "success"
+            },
+            {
+              "number": 11,
+              "name": "Install dockingmt",
+              "conclusion": "success"
+            },
+            {
+              "number": 12,
+              "name": "Check out immutable dependency SDK",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Prepare isolated preflight tools",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Check dependency routes and installed clone context",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Verify ordinary installed package",
+              "conclusion": "success"
+            },
+            {
+              "number": 16,
+              "name": "Run tests with pytest-receptor",
+              "conclusion": "failure"
+            },
+            {
+              "number": 17,
+              "name": "Retain measured Python coverage",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 29,
+              "name": "Post Check out immutable dependency SDK",
+              "conclusion": "success"
+            },
+            {
+              "number": 30,
+              "name": "Post Setup micromamba",
+              "conclusion": "success"
+            },
+            {
+              "number": 31,
+              "name": "Post Check out compatible MolSysViewer source",
+              "conclusion": "success"
+            },
+            {
+              "number": 32,
+              "name": "Post Check out compatible MolSysMT source",
+              "conclusion": "success"
+            },
+            {
+              "number": 33,
+              "name": "Post Check out compatible ArgDigest source",
+              "conclusion": "success"
+            },
+            {
+              "number": 34,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 35,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 114172527217,
+          "name": "Publish default-branch Python coverage",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Download the measured Python report",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Upload the measured report to Codecov",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ],
+      "logs": [
+        {
+          "member": "3_Test on ubuntu-latest, Python 3.14.txt",
+          "job_id": 114170671091,
+          "fragments": [
+            {
+              "start_line": 1567,
+              "lines": [
+                "ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts."
+              ]
+            },
+            {
+              "start_line": 1611,
+              "lines": [
+                "FAIL exit=1 | 2 failed, 1066 passed | 298.39s | 848 warnings | 1 root cause",
+                "",
+                "[1] ArgumentError | 2 tests | call",
+                "dockingmt/preparation/_molsys.py:148",
+                "dockingmt._private.smonitor.ArgumentError: Invalid argument 'molecular_system': Named MolSysMT AutoDock4 types are required. Supply a valid preassigned system from msm.build.assign_autodock_atom_types, or pass typing_options={'typing_scheme': 'autodock4', 'method': '<explicit method>'}. The selected method requires its declared chemistry and indexed hydrogen inventory; DockingMT does not infer types or choose a model.",
+                "frames: tests/test_redocking_evaluation.py:305 -> devtools/qualify_redocking_evaluation.py:49 -> tests/test_redocking_evaluation.py:300 -> smonitor/core/decorator.py:326 (ext) -> ... -> dockingmt/dock.py:42 -> smonitor/core/decorator.py:326 (ext) -> ... -> dockingmt/engines/vina.py:280 -> smonitor/core/decorator.py:326 (ext) -> ... -> dockingmt/preparation/receptor.py:198 -> dockingmt/preparation/_molsys.py:148",
+                "tests:",
+                "tests/test_redocking_evaluation.py::test_native_181l_external_1iep_and_displaced_box_reports",
+                "tests/test_redocking_replay.py::test_file_backed_181l_manifest_replays_without_original_objects",
+                "rerun: pytest tests/test_redocking_evaluation.py tests/test_redocking_replay.py -q"
+              ]
+            },
+            {
+              "start_line": 1638,
+              "lines": [
+                "##[error]Process completed with exit code 1."
+              ]
+            }
+          ]
+        },
+        {
+          "member": "5_Test on ubuntu-latest, Python 3.11.txt",
+          "job_id": 114170671100,
+          "fragments": [
+            {
+              "start_line": 1576,
+              "lines": [
+                "ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts."
+              ]
+            },
+            {
+              "start_line": 1618,
+              "lines": [
+                "FAIL exit=1 | 2 failed, 1066 passed | 424.49s | 848 warnings | 1 root cause",
+                "",
+                "[1] ArgumentError | 2 tests | call",
+                "dockingmt/preparation/_molsys.py:148",
+                "dockingmt._private.smonitor.ArgumentError: Invalid argument 'molecular_system': Named MolSysMT AutoDock4 types are required. Supply a valid preassigned system from msm.build.assign_autodock_atom_types, or pass typing_options={'typing_scheme': 'autodock4', 'method': '<explicit method>'}. The selected method requires its declared chemistry and indexed hydrogen inventory; DockingMT does not infer types or choose a model.",
+                "frames: tests/test_redocking_evaluation.py:305 -> devtools/qualify_redocking_evaluation.py:49 -> tests/test_redocking_evaluation.py:300 -> smonitor/core/decorator.py:326 (ext) -> ... -> dockingmt/dock.py:42 -> smonitor/core/decorator.py:326 (ext) -> ... -> dockingmt/engines/vina.py:280 -> smonitor/core/decorator.py:326 (ext) -> ... -> dockingmt/preparation/receptor.py:198 -> dockingmt/preparation/_molsys.py:148",
+                "tests:",
+                "tests/test_redocking_evaluation.py::test_native_181l_external_1iep_and_displaced_box_reports",
+                "tests/test_redocking_replay.py::test_file_backed_181l_manifest_replays_without_original_objects",
+                "rerun: pytest tests/test_redocking_evaluation.py tests/test_redocking_replay.py -q"
+              ]
+            },
+            {
+              "start_line": 1641,
+              "lines": [
+                "##[error]Process completed with exit code 1."
+              ]
+            }
+          ]
+        },
+        {
+          "member": "2_Test on ubuntu-latest, Python 3.12.txt",
+          "job_id": 114170671142,
+          "fragments": [
+            {
+              "start_line": 1591,
+              "lines": [
+                "ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts."
+              ]
+            },
+            {
+              "start_line": 1633,
+              "lines": [
+                "FAIL exit=1 | 2 failed, 1066 passed | 472.97s | 848 warnings | 1 root cause",
+                "",
+                "[1] ArgumentError | 2 tests | call",
+                "dockingmt/preparation/_molsys.py:148",
+                "dockingmt._private.smonitor.ArgumentError: Invalid argument 'molecular_system': Named MolSysMT AutoDock4 types are required. Supply a valid preassigned system from msm.build.assign_autodock_atom_types, or pass typing_options={'typing_scheme': 'autodock4', 'method': '<explicit method>'}. The selected method requires its declared chemistry and indexed hydrogen inventory; DockingMT does not infer types or choose a model.",
+                "frames: tests/test_redocking_evaluation.py:305 -> devtools/qualify_redocking_evaluation.py:49 -> tests/test_redocking_evaluation.py:300 -> smonitor/core/decorator.py:326 (ext) -> ... -> dockingmt/dock.py:42 -> smonitor/core/decorator.py:326 (ext) -> ... -> dockingmt/engines/vina.py:280 -> smonitor/core/decorator.py:326 (ext) -> ... -> dockingmt/preparation/receptor.py:198 -> dockingmt/preparation/_molsys.py:148",
+                "tests:",
+                "tests/test_redocking_evaluation.py::test_native_181l_external_1iep_and_displaced_box_reports",
+                "tests/test_redocking_replay.py::test_file_backed_181l_manifest_replays_without_original_objects",
+                "rerun: pytest tests/test_redocking_evaluation.py tests/test_redocking_replay.py -q"
+              ]
+            },
+            {
+              "start_line": 1656,
+              "lines": [
+                "##[error]Process completed with exit code 1."
+              ]
+            }
+          ]
+        },
+        {
+          "member": "1_Test on ubuntu-latest, Python 3.13.txt",
+          "job_id": 114170671255,
+          "fragments": [
+            {
+              "start_line": 1567,
+              "lines": [
+                "ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts."
+              ]
+            },
+            {
+              "start_line": 1611,
+              "lines": [
+                "FAIL exit=1 | 2 failed, 1066 passed | 316.14s | 848 warnings | 1 root cause",
+                "",
+                "[1] ArgumentError | 2 tests | call",
+                "dockingmt/preparation/_molsys.py:148",
+                "dockingmt._private.smonitor.ArgumentError: Invalid argument 'molecular_system': Named MolSysMT AutoDock4 types are required. Supply a valid preassigned system from msm.build.assign_autodock_atom_types, or pass typing_options={'typing_scheme': 'autodock4', 'method': '<explicit method>'}. The selected method requires its declared chemistry and indexed hydrogen inventory; DockingMT does not infer types or choose a model.",
+                "frames: tests/test_redocking_evaluation.py:305 -> devtools/qualify_redocking_evaluation.py:49 -> tests/test_redocking_evaluation.py:300 -> smonitor/core/decorator.py:326 (ext) -> ... -> dockingmt/dock.py:42 -> smonitor/core/decorator.py:326 (ext) -> ... -> dockingmt/engines/vina.py:280 -> smonitor/core/decorator.py:326 (ext) -> ... -> dockingmt/preparation/receptor.py:198 -> dockingmt/preparation/_molsys.py:148",
+                "tests:",
+                "tests/test_redocking_evaluation.py::test_native_181l_external_1iep_and_displaced_box_reports",
+                "tests/test_redocking_replay.py::test_file_backed_181l_manifest_replays_without_original_objects",
+                "rerun: pytest tests/test_redocking_evaluation.py tests/test_redocking_replay.py -q"
+              ]
+            },
+            {
+              "start_line": 1634,
+              "lines": [
+                "##[error]Process completed with exit code 1."
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "kind": "pytest_failure",
+        "message": "ArgumentError: Invalid argument"
+      }
+    },
+    {
+      "issue": 66,
+      "repository": "uibcdf/sabueso",
+      "run_id": 40013378053,
+      "run_attempt": 1,
+      "head_sha": "646ce84bfb14da6e5ec86bbeef1693ac5f41e1fe",
+      "run": {
+        "status": "completed",
+        "conclusion": "failure",
+        "name": "CI",
+        "html_url": "https://github.com/uibcdf/sabueso/actions/runs/40013378053"
+      },
+      "workflow": {
+        "id": 365010614,
+        "name": "CI",
+        "path": ".github/workflows/ci.yml"
+      },
+      "jobs": [
+        {
+          "id": 120619139227,
+          "name": "Ackredit public-package pilot (Python 3.14)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install the consumer with the public provider",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Verify installed imports outside both checkouts",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Exercise the installed required provider and consumer",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Run the public offline workflow",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 120619139291,
+          "name": "Ackredit public-package pilot (Python 3.12)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install the consumer with the public provider",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Verify installed imports outside both checkouts",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Exercise the installed required provider and consumer",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Run the public offline workflow",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 120619139335,
+          "name": "Offline tests (windows-latest, Python 3.11)",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify Apple Silicon macOS runner",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 4,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Sabueso with public runtime dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Smoke the installed package outside the checkout",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Environment",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check reviewed fixture publication scope",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Run repository-input offline tests",
+              "conclusion": "failure"
+            },
+            {
+              "number": 10,
+              "name": "Retain measured coverage XML",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 19,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 120619139357,
+          "name": "Offline tests (windows-latest, Python 3.14)",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify Apple Silicon macOS runner",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 4,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Sabueso with public runtime dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Smoke the installed package outside the checkout",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Environment",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check reviewed fixture publication scope",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Run repository-input offline tests",
+              "conclusion": "failure"
+            },
+            {
+              "number": 10,
+              "name": "Retain measured coverage XML",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 19,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 120619139364,
+          "name": "Offline tests (ubuntu-latest, Python 3.14)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify Apple Silicon macOS runner",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 4,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Sabueso with public runtime dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Smoke the installed package outside the checkout",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Environment",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check reviewed fixture publication scope",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Run repository-input offline tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Retain measured coverage XML",
+              "conclusion": "success"
+            },
+            {
+              "number": 19,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 120619139369,
+          "name": "Offline tests (ubuntu-latest, Python 3.12)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify Apple Silicon macOS runner",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 4,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Sabueso with public runtime dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Smoke the installed package outside the checkout",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Environment",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check reviewed fixture publication scope",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Run repository-input offline tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Retain measured coverage XML",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 19,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 120619139382,
+          "name": "Ackredit public-package pilot (Python 3.11)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install the consumer with the public provider",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Verify installed imports outside both checkouts",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Exercise the installed required provider and consumer",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Run the public offline workflow",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 120619139394,
+          "name": "Offline tests (windows-latest, Python 3.12)",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify Apple Silicon macOS runner",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 4,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Sabueso with public runtime dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Smoke the installed package outside the checkout",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Environment",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check reviewed fixture publication scope",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Run repository-input offline tests",
+              "conclusion": "failure"
+            },
+            {
+              "number": 10,
+              "name": "Retain measured coverage XML",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 19,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 120619139412,
+          "name": "Offline tests (ubuntu-latest, Python 3.11)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify Apple Silicon macOS runner",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 4,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Sabueso with public runtime dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Smoke the installed package outside the checkout",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Environment",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check reviewed fixture publication scope",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Run repository-input offline tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Retain measured coverage XML",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 19,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 120619139432,
+          "name": "Offline tests (windows-latest, Python 3.13)",
+          "status": "completed",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify Apple Silicon macOS runner",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 4,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Sabueso with public runtime dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Smoke the installed package outside the checkout",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Environment",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check reviewed fixture publication scope",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Run repository-input offline tests",
+              "conclusion": "failure"
+            },
+            {
+              "number": 10,
+              "name": "Retain measured coverage XML",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 19,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 120619139448,
+          "name": "Offline tests (macos-26, Python 3.14)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify Apple Silicon macOS runner",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Sabueso with public runtime dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Smoke the installed package outside the checkout",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Environment",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check reviewed fixture publication scope",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Run repository-input offline tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Retain measured coverage XML",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 19,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 120619139556,
+          "name": "Ackredit public-package pilot (Python 3.13)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Install the consumer with the public provider",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Verify installed imports outside both checkouts",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Exercise the installed required provider and consumer",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Run the public offline workflow",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 120619139611,
+          "name": "Offline tests (ubuntu-latest, Python 3.13)",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Verify Apple Silicon macOS runner",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 4,
+              "name": "Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install Sabueso with public runtime dependencies",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Smoke the installed package outside the checkout",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Environment",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Check reviewed fixture publication scope",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Run repository-input offline tests",
+              "conclusion": "success"
+            },
+            {
+              "number": 10,
+              "name": "Retain measured coverage XML",
+              "conclusion": "skipped"
+            },
+            {
+              "number": 19,
+              "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+              "conclusion": "success"
+            },
+            {
+              "number": 20,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 21,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 120619139617,
+          "name": "Ruff",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run actions/setup-python@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Dependency-contract preflight",
+              "conclusion": "success"
+            },
+            {
+              "number": 5,
+              "name": "Install quality tooling",
+              "conclusion": "success"
+            },
+            {
+              "number": 6,
+              "name": "Ruff format",
+              "conclusion": "success"
+            },
+            {
+              "number": 7,
+              "name": "Ruff lint",
+              "conclusion": "success"
+            },
+            {
+              "number": 13,
+              "name": "Post Run actions/setup-python@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 14,
+              "name": "Post Run actions/checkout@v6",
+              "conclusion": "success"
+            },
+            {
+              "number": 15,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 120633139452,
+          "name": "Publish default-branch coverage",
+          "status": "completed",
+          "conclusion": "success",
+          "steps": [
+            {
+              "number": 1,
+              "name": "Set up job",
+              "conclusion": "success"
+            },
+            {
+              "number": 2,
+              "name": "Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 3,
+              "name": "Run actions/download-artifact@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 4,
+              "name": "Upload the measured report to Codecov",
+              "conclusion": "success"
+            },
+            {
+              "number": 8,
+              "name": "Post Run actions/checkout@v4",
+              "conclusion": "success"
+            },
+            {
+              "number": 9,
+              "name": "Complete job",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ],
+      "logs": [
+        {
+          "member": "7_Offline tests (windows-latest, Python 3.11).txt",
+          "job_id": 120619139335,
+          "fragments": [
+            {
+              "start_line": 566,
+              "lines": [
+                "FAIL exit=1 | 2 failed, 5365 passed, 10 skipped, 26 deselected | 1778.81s | 9 warnings | 1 root cause",
+                "",
+                "[1] NotADirectoryError | 2 tests | call",
+                "C:\\Users\\runneradmin\\micromamba\\envs\\test\\Lib\\subprocess.py:1538",
+                "NotADirectoryError: [WinError 267] The directory name is invalid",
+                "frames: tests\\core\\test_card_saved_science_offline.py:476 -> C:\\Users\\runneradmin\\micromamba\\envs\\test\\Lib\\subprocess.py:548 -> C:\\Users\\runneradmin\\micromamba\\envs\\test\\Lib\\subprocess.py:1026 -> C:\\Users\\runneradmin\\micromamba\\envs\\test\\Lib\\subprocess.py:1538",
+                "tests:",
+                "tests\\core\\test_card_saved_science_offline.py::test_independent_reader_uses_no_current_rules_or_card_factory[coverage]",
+                "tests\\core\\test_card_saved_science_offline.py::test_independent_reader_uses_no_current_rules_or_card_factory[structures]",
+                "rerun: pytest tests\\core\\test_card_saved_science_offline.py -q"
+              ]
+            },
+            {
+              "start_line": 587,
+              "lines": [
+                "##[error]Process completed with exit code 1."
+              ]
+            }
+          ]
+        },
+        {
+          "member": "11_Offline tests (windows-latest, Python 3.14).txt",
+          "job_id": 120619139357,
+          "fragments": [
+            {
+              "start_line": 572,
+              "lines": [
+                "FAIL exit=1 | 2 failed, 5365 passed, 10 skipped, 26 deselected | 1076.15s | 9 warnings | 1 root cause",
+                "",
+                "[1] NotADirectoryError | 2 tests | call",
+                "C:\\Users\\runneradmin\\micromamba\\envs\\test\\Lib\\subprocess.py:1553",
+                "NotADirectoryError: [WinError 267] The directory name is invalid",
+                "frames: tests\\core\\test_card_saved_science_offline.py:476 -> C:\\Users\\runneradmin\\micromamba\\envs\\test\\Lib\\subprocess.py:555 -> C:\\Users\\runneradmin\\micromamba\\envs\\test\\Lib\\subprocess.py:1039 -> C:\\Users\\runneradmin\\micromamba\\envs\\test\\Lib\\subprocess.py:1553",
+                "tests:",
+                "tests\\core\\test_card_saved_science_offline.py::test_independent_reader_uses_no_current_rules_or_card_factory[coverage]",
+                "tests\\core\\test_card_saved_science_offline.py::test_independent_reader_uses_no_current_rules_or_card_factory[structures]",
+                "rerun: pytest tests\\core\\test_card_saved_science_offline.py -q"
+              ]
+            },
+            {
+              "start_line": 593,
+              "lines": [
+                "##[error]Process completed with exit code 1."
+              ]
+            }
+          ]
+        },
+        {
+          "member": "14_Offline tests (windows-latest, Python 3.12).txt",
+          "job_id": 120619139394,
+          "fragments": [
+            {
+              "start_line": 566,
+              "lines": [
+                "FAIL exit=1 | 2 failed, 5365 passed, 10 skipped, 26 deselected | 1795.42s | 9 warnings | 1 root cause",
+                "",
+                "[1] NotADirectoryError | 2 tests | call",
+                "C:\\Users\\runneradmin\\micromamba\\envs\\test\\Lib\\subprocess.py:1538",
+                "NotADirectoryError: [WinError 267] The directory name is invalid",
+                "frames: tests\\core\\test_card_saved_science_offline.py:476 -> C:\\Users\\runneradmin\\micromamba\\envs\\test\\Lib\\subprocess.py:548 -> C:\\Users\\runneradmin\\micromamba\\envs\\test\\Lib\\subprocess.py:1026 -> C:\\Users\\runneradmin\\micromamba\\envs\\test\\Lib\\subprocess.py:1538",
+                "tests:",
+                "tests\\core\\test_card_saved_science_offline.py::test_independent_reader_uses_no_current_rules_or_card_factory[coverage]",
+                "tests\\core\\test_card_saved_science_offline.py::test_independent_reader_uses_no_current_rules_or_card_factory[structures]",
+                "rerun: pytest tests\\core\\test_card_saved_science_offline.py -q"
+              ]
+            },
+            {
+              "start_line": 587,
+              "lines": [
+                "##[error]Process completed with exit code 1."
+              ]
+            }
+          ]
+        },
+        {
+          "member": "13_Offline tests (windows-latest, Python 3.13).txt",
+          "job_id": 120619139432,
+          "fragments": [
+            {
+              "start_line": 569,
+              "lines": [
+                "FAIL exit=1 | 2 failed, 5365 passed, 10 skipped, 26 deselected | 1407.20s | 11 warnings | 1 root cause",
+                "",
+                "[1] NotADirectoryError | 2 tests | call",
+                "C:\\Users\\runneradmin\\micromamba\\envs\\test\\Lib\\subprocess.py:1555",
+                "NotADirectoryError: [WinError 267] The directory name is invalid",
+                "frames: tests\\core\\test_card_saved_science_offline.py:476 -> C:\\Users\\runneradmin\\micromamba\\envs\\test\\Lib\\subprocess.py:555 -> C:\\Users\\runneradmin\\micromamba\\envs\\test\\Lib\\subprocess.py:1040 -> C:\\Users\\runneradmin\\micromamba\\envs\\test\\Lib\\subprocess.py:1555",
+                "tests:",
+                "tests\\core\\test_card_saved_science_offline.py::test_independent_reader_uses_no_current_rules_or_card_factory[coverage]",
+                "tests\\core\\test_card_saved_science_offline.py::test_independent_reader_uses_no_current_rules_or_card_factory[structures]",
+                "rerun: pytest tests\\core\\test_card_saved_science_offline.py -q"
+              ]
+            },
+            {
+              "start_line": 591,
+              "lines": [
+                "##[error]Process completed with exit code 1."
+              ]
+            }
+          ]
+        }
+      ],
+      "expected": {
+        "kind": "pytest_failure",
+        "message": "NotADirectoryError: [WinError 267]"
+      }
+    }
+  ]
+}

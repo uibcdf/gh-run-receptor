@@ -209,7 +209,9 @@ def test_public_conda_failure_excerpts_retain_fifteen_failed_jobs(tmp_path):
         assert "argdigest >=0.12.1" in rendered
         assert "depdigest =*" in rendered
         assert "pyunitwizard >=0.24.0" in rendered
-        assert "micromamba-shell" not in rendered
+        assert "micromamba-shell" in rendered
+    assert all("micromamba-shell" not in c["message"] for c in report["causes"])
+    assert "later diagnostic:" in llm
     assert len(llm.encode("utf-8")) < 2_500
 
 

@@ -443,3 +443,11 @@ unknown schema identifier rather than guessing compatibility.
 - No production migration is currently registered because version 1 is the first and
   current version for every family. A future v2 is incomplete until its semantic fixtures
   and v1-to-v2 decision land with it, or v1 is explicitly retired.
+
+## Optional diagnostic context
+
+Cause occurrences may add the bounded `context` extension documented in
+[diagnostic selection](diagnostic_selection.md). Entries retain their own log
+member/line, diagnostic kind and redacted text. At most two failed tests with their primary frame, or one
+later diagnostic, accompany a primary cause; context never changes API facts,
+process status or root-cause counts. No frozen schema bytes are modified.
