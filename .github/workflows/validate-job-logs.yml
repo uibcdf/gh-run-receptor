@@ -13,13 +13,15 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Produce an intentional typed failure
-        run: python -c "raise NotADirectoryError('active job probe')"
+        run: |
+          python -c "raise NotADirectoryError('active job probe')"
   completed-success:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
       - name: Produce success with untrusted failed-looking text
-        run: python -c "print('NotADirectoryError: untrusted success output')"
+        run: |
+          python -c "print('NotADirectoryError: untrusted success output')"
   observe:
     if: always()
     needs: [completed-failure, completed-success]

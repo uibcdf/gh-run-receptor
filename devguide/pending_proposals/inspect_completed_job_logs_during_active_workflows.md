@@ -78,3 +78,9 @@ comparison with SMonitor, ArgDigest, DepDigest and Pytest Receptor confirms the
 same committed-plan/source/staged/exact-file installed/promotion contract; their
 provider pins and custom versus shared wrappers differ. GHR uses its existing
 shared callers. No PyPI route is added.
+
+The first native dispatch at source 28cd0af was refused by GitHub: the success
+producer's inline YAML scalar contained an unquoted colon-space. No probe run
+executed and no active-window success is credited. Both producer commands now
+use literal block scalars; a safe-loader/manual-only/read-permission guard covers
+the actual workflow. Its route hash is refreshed after this source-only review.

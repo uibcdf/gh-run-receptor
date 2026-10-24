@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 import pytest
+import yaml
 
 from devtools.scripts.sanitize_bundle import sanitize
 from gh_run_receptor import cli, job_logs, logs
@@ -364,3 +365,13 @@ def test_invalid_job_selection_cannot_reach_transport_or_create_cache_paths(tmp_
             job_id=job_id,
         )
     assert client.requests == [] and client.downloads == [] and not list(tmp_path.iterdir())
+
+
+def test_intentional_native_failure_probe_is_valid_yaml_and_manual_only():
+    root = Path(__file__).resolve().parents[1]
+    workflow = yaml.safe_load((root / ".github/workflows/validate-job-logs.yml").read_text())
+    assert workflow.get("on", workflow.get(True)) == {"workflow_dispatch": None}
+    assert workflow["permissions"] == {"contents": "read", "actions": "read"}
+    assert workflow["jobs"]["observe"]["needs"] == ["completed-failure", "completed-success"]
+    assert workflow["jobs"]["observe"]["if"] == "always()"
+    assert all(job["timeout-minutes"] <= 5 for job in workflow["jobs"].values())

@@ -150,5 +150,5 @@ reason = "Read-only immutable shared Zenodo discovery after publication, on a fi
 
 [[workflows]]
 path = ".github/workflows/validate-job-logs.yml"
-sha256 = "b2dd30bef52f5a78a1b475b769a989a3ac14bed267491fa2c0424deadb8c8500"
+sha256 = "246cfe83b86ddc19fae57040040d6d0c23379cd69dae17a026028d582947e045"
 reason = "Manual bounded native completed-success/failure job-log receiving during an active workflow; expected failed producer and successful observer stay distinct, raw evidence uses managed temporary storage and sanitized receipt retains 30 days. No channel mutation or additional Python dependencies."
