@@ -75,6 +75,8 @@ The reader now validates `orig_filename` before trusting its normalized spelling
 the negative fixture deliberately preserves the original filename bytes when
 writing. The archive rejection contract is retained, not relaxed to accept a
 metadata failure. `tests/test_release_tools.py` guards the original unsafe names
-for both wheel and sdist; focused local archive cases pass. A new exact-source
+for both wheel and sdist. An initial writer adjustment accidentally disabled
+compression and failed the existing compressed-size negative control locally;
+explicit DEFLATE preserves that control without relaxing its bound. A new exact-source
 native matrix is still required before closure. This failed first matrix remains
 failed evidence and is not replaced by a local pass.

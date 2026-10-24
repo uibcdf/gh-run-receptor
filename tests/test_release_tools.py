@@ -57,7 +57,7 @@ def _write_archive(tmp_path: Path, kind: str, data: dict[str, bytes]) -> Path:
                 member = zipfile.ZipInfo(name)
                 # Keep adversarial bytes even when ZipInfo normalizes native separators.
                 member.filename = name
-                archive.writestr(member, raw)
+                archive.writestr(member, raw, compress_type=zipfile.ZIP_DEFLATED)
     else:
         path = tmp_path / f"gh_run_receptor-{VERSION}.tar.gz"
         with tarfile.open(path, "w:gz") as archive:
