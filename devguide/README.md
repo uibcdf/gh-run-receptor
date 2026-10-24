@@ -104,14 +104,19 @@ conversion of frozen schemas and reviewed workflows and adopts the accepted
 portable distribution SDK correction. The [resolved report](archive/resolved_bugs/preserve_frozen_source_bytes_in_windows_checkouts.md)
 records the reproduced CRLF failure, original ZIP spelling guard and successful
 12-cell native matrix `40122316456` at `8e55485`. Diagnostic ranking issues
-#59/#61/#62/#64/#66 are being addressed separately.
+#59/#61/#62/#64/#66 are resolved in source as recorded below.
 
-**Diagnostic ranking (2026-10-24):** Active issues #59/#61/#62/#64/#66 share
-one bounded parser correction and six original-run regressions. The
-[selection contract](diagnostic_selection.md) defines typed pytest groups, solver
-constraint variants, primary download evidence and explicit rejection context.
-Human/LLM goldens and source-parity assertions complement original-bundle replay;
-native exact-source qualification remains pending. These changes are unreleased.
+**Diagnostic ranking (2026-10-24):** Issues #59/#61/#62/#64/#66 are resolved
+in source `754410e46eb9fb6704b0c960fe129b803f06efa7`, with 707 tests, all twelve
+native cells in `40124573976`, exact-source routine/policy/Conda governance and
+strict docs/Pages `40124749130` passing. The [selection contract](diagnostic_selection.md)
+defines typed pytest groups, solver variants, primary download evidence and
+explicit rejection context. Six original-attempt bundles replay deterministically
+in all three renderers and generic/CI profiles with native failure/exit 1 retained.
+[Local](evidence/diagnostic_ranking_2026-10-24.json) and
+[hosted](evidence/diagnostic_ranking_hosted_2026-10-24.json) receipts distinguish
+source qualification from a future public artifact. Consumer impact is handed
+to `uibcdf/molsyssuite#136`; no new package or consumer pin is claimed.
 
 ## Current state
 

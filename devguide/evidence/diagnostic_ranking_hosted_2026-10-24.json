@@ -1,0 +1,407 @@
+{
+  "date": "2026-10-24",
+  "source_sha": "754410e46eb9fb6704b0c960fe129b803f06efa7",
+  "scope": "Exact-source native/admin/docs evidence; no public artifact or new release qualification.",
+  "consumer_notice": "uibcdf/molsyssuite#136",
+  "gates": [
+    {
+      "kind": "matrix",
+      "run": {
+        "conclusion": "success",
+        "event": "workflow_dispatch",
+        "head_sha": "754410e46eb9fb6704b0c960fe129b803f06efa7",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40124573976",
+        "id": 40124573976,
+        "path": ".github/workflows/python-weekly.yml",
+        "run_attempt": 1,
+        "status": "completed"
+      },
+      "jobs": [
+        {
+          "id": 120963146066,
+          "name": "ubuntu-latest · Python 3.12",
+          "status": "completed",
+          "conclusion": "success",
+          "required_steps": [
+            {
+              "conclusion": "success",
+              "name": "Check distribution inputs",
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Run the complete package suite",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "id": 120963146097,
+          "name": "macos-latest · Python 3.11",
+          "status": "completed",
+          "conclusion": "success",
+          "required_steps": [
+            {
+              "conclusion": "success",
+              "name": "Check distribution inputs",
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Run the complete package suite",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "id": 120963146118,
+          "name": "macos-latest · Python 3.12",
+          "status": "completed",
+          "conclusion": "success",
+          "required_steps": [
+            {
+              "conclusion": "success",
+              "name": "Check distribution inputs",
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Run the complete package suite",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "id": 120963146131,
+          "name": "macos-latest · Python 3.13",
+          "status": "completed",
+          "conclusion": "success",
+          "required_steps": [
+            {
+              "conclusion": "success",
+              "name": "Check distribution inputs",
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Run the complete package suite",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "id": 120963146162,
+          "name": "ubuntu-latest · Python 3.14",
+          "status": "completed",
+          "conclusion": "success",
+          "required_steps": [
+            {
+              "conclusion": "success",
+              "name": "Check distribution inputs",
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Run the complete package suite",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "id": 120963146175,
+          "name": "macos-latest · Python 3.14",
+          "status": "completed",
+          "conclusion": "success",
+          "required_steps": [
+            {
+              "conclusion": "success",
+              "name": "Check distribution inputs",
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Run the complete package suite",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "id": 120963146177,
+          "name": "windows-latest · Python 3.13",
+          "status": "completed",
+          "conclusion": "success",
+          "required_steps": [
+            {
+              "conclusion": "success",
+              "name": "Check distribution inputs",
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Run the complete package suite",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "id": 120963146183,
+          "name": "ubuntu-latest · Python 3.13",
+          "status": "completed",
+          "conclusion": "success",
+          "required_steps": [
+            {
+              "conclusion": "success",
+              "name": "Check distribution inputs",
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Run the complete package suite",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "id": 120963146249,
+          "name": "windows-latest · Python 3.12",
+          "status": "completed",
+          "conclusion": "success",
+          "required_steps": [
+            {
+              "conclusion": "success",
+              "name": "Check distribution inputs",
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Run the complete package suite",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "id": 120963146262,
+          "name": "windows-latest · Python 3.14",
+          "status": "completed",
+          "conclusion": "success",
+          "required_steps": [
+            {
+              "conclusion": "success",
+              "name": "Check distribution inputs",
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Run the complete package suite",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "id": 120963146272,
+          "name": "windows-latest · Python 3.11",
+          "status": "completed",
+          "conclusion": "success",
+          "required_steps": [
+            {
+              "conclusion": "success",
+              "name": "Check distribution inputs",
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Run the complete package suite",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "id": 120963146354,
+          "name": "ubuntu-latest · Python 3.11",
+          "status": "completed",
+          "conclusion": "success",
+          "required_steps": [
+            {
+              "conclusion": "success",
+              "name": "Check distribution inputs",
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Run the complete package suite",
+              "status": "completed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "routine",
+      "run": {
+        "conclusion": "success",
+        "event": "push",
+        "head_sha": "754410e46eb9fb6704b0c960fe129b803f06efa7",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40124525987",
+        "id": 40124525987,
+        "path": ".github/workflows/python-routine.yml",
+        "run_attempt": 1,
+        "status": "completed"
+      },
+      "jobs": [
+        {
+          "id": 120962991875,
+          "name": "Linux Python 3.14",
+          "status": "completed",
+          "conclusion": "success",
+          "required_steps": [
+            {
+              "conclusion": "success",
+              "name": "Check distribution inputs",
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Run the complete package suite",
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Retain the measured coverage XML",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "id": 120963111060,
+          "name": "Publish default-branch coverage",
+          "status": "completed",
+          "conclusion": "success",
+          "required_steps": [
+            {
+              "conclusion": "success",
+              "name": "Upload the measured report to Codecov",
+              "status": "completed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "policy",
+      "run": {
+        "conclusion": "success",
+        "event": "push",
+        "head_sha": "754410e46eb9fb6704b0c960fe129b803f06efa7",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40124526200",
+        "id": 40124526200,
+        "path": ".github/workflows/molsyssuite-policy.yml",
+        "run_attempt": 1,
+        "status": "completed"
+      },
+      "jobs": [
+        {
+          "id": 120962992457,
+          "name": "policy / conformance",
+          "status": "completed",
+          "conclusion": "success",
+          "required_steps": [
+            {
+              "conclusion": "success",
+              "name": "Check repository conformance",
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Check Python lint and imports",
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Check Python formatting",
+              "status": "completed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "conda-governance",
+      "run": {
+        "conclusion": "success",
+        "event": "push",
+        "head_sha": "754410e46eb9fb6704b0c960fe129b803f06efa7",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40124526278",
+        "id": 40124526278,
+        "path": ".github/workflows/conda-policy.yml",
+        "run_attempt": 1,
+        "status": "completed"
+      },
+      "jobs": [
+        {
+          "id": 120962993267,
+          "name": "policy / check",
+          "status": "completed",
+          "conclusion": "success",
+          "required_steps": [
+            {
+              "conclusion": "success",
+              "name": "Check publication workflow controls",
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Check declared noarch recipe and resources without building",
+              "status": "completed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "docs",
+      "run": {
+        "conclusion": "success",
+        "event": "workflow_dispatch",
+        "head_sha": "754410e46eb9fb6704b0c960fe129b803f06efa7",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40124749130",
+        "id": 40124749130,
+        "path": ".github/workflows/docs.yml",
+        "run_attempt": 1,
+        "status": "completed"
+      },
+      "jobs": [
+        {
+          "id": 120963680155,
+          "name": "build-docs",
+          "status": "completed",
+          "conclusion": "success",
+          "required_steps": [
+            {
+              "conclusion": "success",
+              "name": "Build strict HTML documentation",
+              "status": "completed"
+            },
+            {
+              "conclusion": "success",
+              "name": "Upload Pages artifact",
+              "status": "completed"
+            }
+          ]
+        },
+        {
+          "id": 120963762630,
+          "name": "deploy-docs",
+          "status": "completed",
+          "conclusion": "success",
+          "required_steps": [
+            {
+              "conclusion": "success",
+              "name": "Deploy to GitHub Pages",
+              "status": "completed"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

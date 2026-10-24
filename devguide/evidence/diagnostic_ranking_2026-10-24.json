@@ -324,10 +324,12 @@
   },
   "environment_limits": {
     "shared_pip_check": "Fails on seven previously reported external AmberTools/third-party findings in uibcdf/molsyssuite#82; no shared dependency changed.",
-    "local_docs": "Strict Sphinx could not start: shared environment lacks optional sphinx_rtd_theme; exact-source hosted docs gate remains required."
+    "local_docs": "Local strict Sphinx could not start because the shared environment lacks optional sphinx_rtd_theme. Independent exact-source hosted strict build and Pages run 40124749130 pass; this does not repair or qualify the shared environment."
   },
   "input_digests": {
     "tests/fixtures/logs/diagnostic_ranking.json": "c5a6e5f69ce687de7ae09312465020ecf73753723c004f893b4f161237afeae0",
     "tests/fixtures/logs/diagnostic_ranking_golden.json": "ca48525a2389022e9ec386cb1e41d4b04c56f87ede9cfd7b0d0b37aa18fcdf9a"
-  }
+  },
+  "hosted_receipt": "devguide/evidence/diagnostic_ranking_hosted_2026-10-24.json",
+  "consumer_notice": "uibcdf/molsyssuite#136"
 }
