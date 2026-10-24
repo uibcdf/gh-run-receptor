@@ -1,0 +1,23 @@
+gh-run-receptor: PENDING
+
+Repository:  example/project
+Workflow:    .github/workflows/ci.yml
+Run:         42 (attempt 2)
+GitHub:      status=in_progress, conclusion=None
+Evidence:    complete
+Profile:     ci
+logs: job-only job=9; attempt archive not captured
+
+Jobs (2)
+  in_progress         ?  Linux
+  failure             ?  Windows
+
+Artifacts (0)
+  None
+
+CI roles
+  other        2 jobs (failure=1, in_progress=1)
+
+Root causes (1)
+  NotADirectoryError: [WinError 267] invalid directory | at reader.py:17 (1 jobs)
+    Windows: job-9.log:3

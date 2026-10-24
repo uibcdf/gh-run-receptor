@@ -411,3 +411,21 @@ Suggested commands are inert text. They include the repository when the current 
 directory may not resolve it and use the database job ID required by GitHub CLI. A
 suggestion is emitted only when evidence identifies a valid target. The receptor never
 executes it in the read-only product.
+
+## Explicit job-log selection (1.3.0 candidate)
+
+`inspect RUN --job JOB_ID` renders a completed job's log diagnosis before the
+workflow archive becomes available. `capture RUN --job JOB_ID` saves the same
+replayable subset; `--attempt N` selects its historical attempt. Both retain all
+structured workflow/job facts and use existing profiles/renderers. `--capture
+metadata` suppresses the selected log; full/adaptive both request only that log.
+The job must have completed and belong uniquely to the selected attempt.
+
+Available job-only logs are labeled explicitly and remain partial workflow-log
+evidence. An active workflow remains PENDING/exit 3 even when the selected job
+failed; requested unavailable logs produce incomplete evidence/exit 4. Existing
+terminal workflow and capture-only exit rules remain unchanged. Offline `replay`
+uses the saved scope and performs no network requests. See
+[GitHub evidence](github_evidence.md#explicit-completed-job-logs-130-candidate)
+for identity, cache, bounds and availability contracts. Native/installed delivery
+is provisional under #68 until its measured receipts are recorded.

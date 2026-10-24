@@ -211,3 +211,53 @@ source conclusion/process-status contracts are unchanged. No new retry loop is
 added: watch retains its documented consecutive-failure budget. This resolves
 observability in uibcdf/gh-run-receptor#67; it does not claim a network outage was
 fixed or that a later successful request reproduces the original incident.
+
+## Explicit completed-job logs (1.3.0 candidate)
+
+`inspect RUN --job JOB_ID` and `capture RUN --job JOB_ID` select one completed
+job's plain-text log while retaining all structured facts for the selected run
+attempt. This additive capability is provisional until native/installed receiving
+is recorded under uibcdf/gh-run-receptor#68. It does not change the default
+full/adaptive/metadata truth table or the Action/reusable workflow defaults.
+
+The attempt-qualified jobs collection must contain exactly one matching numeric
+job ID, with matching run ID and any supplied attempt/SHA. Missing, duplicate,
+conflicting or active jobs are refused before download. Missing optional job
+`run_attempt` is accepted only because collection membership was obtained through
+the selected attempt endpoint. The repository is bound by that request, not an
+untrusted log URL. Historical jobs are never looked up in the latest-attempt list.
+The selected workflow status and conclusion remain unchanged, including an absent
+active conclusion. Logs cannot invent a terminal workflow outcome.
+
+The independently reusable `job_logs.completed_job`, `capture_job_log` and
+`validate_job_log_scope` operations own selection, bounded acquisition and replay
+validation. The existing gh adapter follows the job-log redirect with credentials
+kept under gh control. At most one additional log request is made, with a 32 MiB
+byte limit. No attempt ZIP is requested, even for explicit full capture.
+Metadata-only selection downloads no logs. Raw bytes remain private bundle
+members; the shared bounded stream analyzer handles plain and archived logs.
+Timestamp removal preserves traceback indentation. A plain job log provides
+job/line provenance, without fabricating archive members or step attribution.
+
+`log_scope: {kind: job, job_id: N}` marks this subset in the manifest/report.
+Members use `job-N.log`, kind `github.job_log`, exact job/run/attempt IDs, byte
+count and SHA-256. Replay rejects conflicting or ambiguous scope, an accompanying
+attempt ZIP, oversized logs and logs in metadata-only captures. Cache identity
+adds `job-N` before the existing policy directory; ordinary attempt caches and
+other selected jobs cannot satisfy this request. Active run snapshots still
+refresh atomically and rollback on failure.
+
+Run-log completeness is `partial` when the selected log is available, never
+`complete`. Cause evidence is likewise partial even if this is the only failed
+job. A fully acquired requested subset may have `evidence_sufficient: true`;
+that does not assert complete workflow logs or terminal execution. Selected
+successful/unknown-conclusion jobs retain their logs without inferring a failed
+cause from text. Acquisition errors retain structured category/HTTP status in
+`job_log_error`; 403 maps to `not_permitted`, 410 to `expired`, and ambiguous
+404 remains `unavailable`. An unavailable requested log produces incomplete
+capture and exit 4, with native source facts preserved. Available logs on an
+active workflow retain PENDING/exit 3; terminal source exit rules are unchanged.
+All text renderers label the job-only scope and JSON retains it explicitly.
+
+Regression guard: `tests/test_job_logs.py`; diagnostic ranking and the nine
+published schema resources remain shared and byte-frozen.

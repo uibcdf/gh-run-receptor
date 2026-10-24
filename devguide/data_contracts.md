@@ -451,3 +451,13 @@ Cause occurrences may add the bounded `context` extension documented in
 member/line, diagnostic kind and redacted text. At most two failed tests with their primary frame, or one
 later diagnostic, accompany a primary cause; context never changes API facts,
 process status or root-cause counts. No frozen schema bytes are modified.
+
+## Job-only log extension (1.3.0 candidate)
+
+The existing bundle@1/report@1 extension points admit optional `log_scope` and
+`job_log_error`, plus one `github.job_log` member. No frozen schema changes.
+The exact identity, subset/completeness meaning, unavailable states and offline
+rejection rules are normative in
+[GitHub evidence](github_evidence.md#explicit-completed-job-logs-130-candidate).
+Consumers without support retain unknown optional data, but do not gain a claim
+that they diagnose these logs. Default attempt evidence remains unchanged.

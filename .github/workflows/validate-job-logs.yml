@@ -1,0 +1,51 @@
+name: Validate completed-job logs during an active workflow
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  completed-failure:
+    runs-on: windows-latest
+    timeout-minutes: 5
+    steps:
+      - name: Produce an intentional typed failure
+        run: python -c "raise NotADirectoryError('active job probe')"
+  completed-success:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Produce success with untrusted failed-looking text
+        run: python -c "print('NotADirectoryError: untrusted success output')"
+  observe:
+    if: always()
+    needs: [completed-failure, completed-success]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: "3.14"
+      - name: Verify native active-window evidence and offline replay
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          SOURCE_RUN_ID: ${{ github.run_id }}
+          SOURCE_ATTEMPT: ${{ github.run_attempt }}
+        run: >-
+          python -m devtools.scripts.validate_job_logs
+          --repository "$REPOSITORY" --run-id "$SOURCE_RUN_ID"
+          --attempt "$SOURCE_ATTEMPT" --output "$RUNNER_TEMP/job-log-receipt.json"
+      - name: Preserve sanitized receiving evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: job-log-receipt
+          path: ${{ runner.temp }}/job-log-receipt.json
+          retention-days: 30
+          if-no-files-found: error

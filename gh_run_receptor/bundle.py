@@ -23,6 +23,8 @@ from gh_run_receptor.events import (
     verify_event_archive_digest,
 )
 from gh_run_receptor.github import API_VERSION, GitHubClient, merge_pages
+from gh_run_receptor.job_logs import capture_job_log, completed_job, validate_job_log_scope
+from gh_run_receptor.logs import MAX_MEMBER_BYTES
 
 REQUIRED_STRUCTURED_MEMBERS = (
     "run.json",
@@ -148,6 +150,7 @@ def capture_bundle(
     destination: Path,
     run: dict[str, Any] | None = None,
     jobs: dict[str, Any] | None = None,
+    job_id: int | None = None,
 ) -> dict[str, Any]:
     """Capturing one run attempt atomically into ``destination``."""
     if policy not in _CAPTURE_POLICIES:
@@ -174,6 +177,7 @@ def capture_bundle(
     temporary = Path(tempfile.mkdtemp(prefix=f".{destination.name}-", dir=parent))
     members: list[dict[str, Any]] = []
     warnings: list[str] = []
+    job_log_error: dict[str, Any] | None = None
 
     try:
         os.chmod(temporary, 0o700)
@@ -211,6 +215,10 @@ def capture_bundle(
             ):
                 raise BundleError("provided jobs evidence has conflicting identity")
         members.append(_write_member(temporary, "jobs.json", jobs, "github.jobs"))
+        if job_id is not None:
+            completed_job(
+                jobs, job_id, run_id=run_id, attempt=selected_attempt, head_sha=run.get("head_sha")
+            )
 
         artifacts_payload = client.json(
             f"/repos/{repository}/actions/runs/{run_id}/artifacts?per_page=100", paginate=True
@@ -291,7 +299,22 @@ def capture_bundle(
             status=run.get("status"),
             conclusion=run.get("conclusion"),
         )
-        if fetch_logs:
+        if job_id is not None and policy != "metadata":
+            try:
+                members.append(
+                    capture_job_log(
+                        client,
+                        repository,
+                        job_id,
+                        temporary,
+                        run_id=run_id,
+                        attempt=selected_attempt,
+                    )
+                )
+            except AcquisitionError as error:
+                warnings.append(f"job logs unavailable: {error}")
+                job_log_error = {"category": error.category, "http_status": error.http_status}
+        elif job_id is None and fetch_logs:
             try:
                 log_path = temporary / "logs.zip"
                 client.download(
@@ -327,6 +350,10 @@ def capture_bundle(
             "members": members,
             "warnings": warnings,
         }
+        if job_id is not None:
+            manifest["log_scope"] = {"kind": "job", "job_id": job_id}
+            if job_log_error is not None:
+                manifest["job_log_error"] = job_log_error
         (temporary / "manifest.json").write_bytes(_canonical_json(manifest))
 
         if destination.exists():
@@ -373,7 +400,13 @@ def load_bundle(directory: Path) -> tuple[dict[str, Any], dict[str, Any]]:
         seen.add(name)
         path = directory / name
         try:
-            data = path.read_bytes()
+            if member["kind"] == "github.job_log":
+                if member["bytes"] > MAX_MEMBER_BYTES:
+                    raise BundleError("job log exceeds the byte limit")
+                with path.open("rb") as stream:
+                    data = stream.read(MAX_MEMBER_BYTES + 1)
+            else:
+                data = path.read_bytes()
         except OSError as error:
             raise BundleError(f"missing bundle member: {name}") from error
         if len(data) != member["bytes"]:
@@ -424,4 +457,5 @@ def load_bundle(directory: Path) -> tuple[dict[str, Any], dict[str, Any]]:
         and source_head_sha != manifest["head_sha"]
     ):
         raise BundleError("run.json head SHA conflicts with the bundle manifest")
+    validate_job_log_scope(manifest, evidence)
     return manifest, evidence

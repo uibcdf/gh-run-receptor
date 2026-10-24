@@ -21,7 +21,7 @@ MAX_SOLVER_PACKAGES = 4
 MAX_SOLVER_LINES = 128
 
 _ANSI = re.compile(r"\x1b(?:\[[0-?]*[ -/]*[@-~]|\][^\x07]*(?:\x07|\x1b\\))")
-_TIMESTAMP = re.compile(r"^\d{4}-\d{2}-\d{2}T\S+Z\s+")
+_TIMESTAMP = re.compile(r"^\d{4}-\d{2}-\d{2}T\S+Z[ \t]")
 _JOB_PREFIX = re.compile(r"^\d+_")
 _TEMP_SCRIPT = re.compile(
     r"(?:[A-Za-z]:[\\/]|/)[^:\n]*?(?:_temp|Temp)[\\/][0-9A-Fa-f-]+\.(?:sh|ps1|cmd|bat)"
@@ -229,6 +229,137 @@ def _job_name(filename: str) -> str | None:
     return _JOB_PREFIX.sub("", path.stem)
 
 
+def _job_occurrence(stream: Any, job: dict[str, Any], member: str) -> dict[str, Any] | None:
+    """Analyze one bounded original log stream with shared diagnostic ranking."""
+    candidates: dict[str, Candidate] = {}
+
+    summary = _PytestSummary()
+    previous: tuple[str, int] | None = None
+    receptor_failure_line: int | None = None
+    traceback_line: int | None = None
+    traceback_frame: str | None = None
+    solver_start: int | None = None
+    solver_packages: list[str] = []
+    solver_line: int | None = None
+    for line_number, raw in _bounded_lines(stream):
+        message = _clean_line(raw)
+        if message == "Traceback (most recent call last):":
+            traceback_line = line_number
+            traceback_frame = None
+        if traceback_line is not None:
+            if line_number - traceback_line > MAX_TRACEBACK_LINES:
+                traceback_line = None
+                traceback_frame = None
+            elif frame := _PYTHON_FRAME.match(message):
+                frame_path = frame.group(1).replace("\\", "/")
+                traceback_frame = f"{PurePosixPath(frame_path).name}:{frame.group(2)}"
+            elif traceback_frame and _PYTHON_EXCEPTION.match(message):
+                _retain_candidate(
+                    candidates,
+                    Candidate(
+                        115,
+                        line_number,
+                        "python_exception",
+                        f"{message} | at {traceback_frame}",
+                    ),
+                )
+                traceback_line = None
+                traceback_frame = None
+        if "libmamba Could not solve for environment specs" in message:
+            solver_start = line_number
+        elif solver_start is not None and (
+            message.startswith("##[error]") or line_number - solver_start > MAX_SOLVER_LINES
+        ):
+            solver_start = None
+        if (
+            solver_start is not None
+            and len(solver_packages) < MAX_SOLVER_PACKAGES
+            and (missing := _SOLVER_MISSING.search(message))
+        ):
+            constraint = re.sub(r"\s+\*$", "", missing.group(2)).strip()
+            package = f"{missing.group(1)} {constraint}"
+            if package not in solver_packages:
+                solver_packages.append(package)
+                solver_line = line_number
+        if detailed := summary.feed(message, line_number):
+            _retain_candidate(candidates, detailed)
+        if _PYTEST_RECEPTOR_FAILURE.match(message):
+            receptor_failure_line = line_number
+        elif (
+            receptor_failure_line is not None
+            and line_number - receptor_failure_line <= MAX_PYTEST_SUMMARY_LINES
+            and (rerun := _PYTEST_RECEPTOR_RERUN.match(message))
+        ):
+            nodeid = rerun.group(1).replace("\\", "/")
+            _retain_candidate(
+                candidates,
+                Candidate(
+                    75,
+                    line_number,
+                    "pytest_test",
+                    f"pytest failed: {nodeid}",
+                ),
+            )
+        if candidate := _candidate(message, line_number):
+            _retain_candidate(candidates, candidate)
+            if (
+                candidate.kind == "exit_code"
+                and previous is not None
+                and line_number - previous[1] <= 3
+                and (adjacent := _adjacent_diagnostic(*previous))
+            ):
+                _retain_candidate(candidates, adjacent)
+        if message.strip():
+            previous = (message, line_number)
+    if solver_packages:
+        _retain_candidate(
+            candidates,
+            Candidate(
+                110,
+                solver_line or 1,
+                "conda_solver",
+                "conda packages unavailable: " + ", ".join(solver_packages),
+            ),
+        )
+    if not candidates:
+        return None
+    best = max(candidates.values(), key=lambda item: (item.priority, item.line))
+    safe_message = _safe_cause(best.message)
+    normalized = _normalized(safe_message)
+    context = list(best.context)
+    later = candidates.get("missing_file")
+    if (
+        best.kind in {"download_error", "conda_solver"}
+        and later is not None
+        and 0 < later.line - best.line <= MAX_SOLVER_LINES
+    ):
+        context.append(Candidate(0, later.line, "later diagnostic", later.message))
+    return {
+        "job_id": job.get("id"),
+        "job_name": job.get("name"),
+        "member": member,
+        "line": best.line,
+        "kind": best.kind,
+        "message": safe_message,
+        "normalized": normalized,
+        **(
+            {
+                "context": [
+                    {
+                        "member": member,
+                        "line": item.line,
+                        "kind": item.kind,
+                        "message": _safe_cause(item.message),
+                    }
+                    for item in context[:3]
+                ]
+            }
+            if context
+            else {}
+        ),
+    }
+
+
 def extract_causes(
     archive: Path, failed_jobs: list[dict[str, Any]]
 ) -> tuple[list[dict], list[str]]:
@@ -251,143 +382,19 @@ def extract_causes(
                 job_name = _job_name(info.filename)
                 if job_name not in failed_by_name:
                     continue
-                candidates: dict[str, Candidate] = {}
-
-                summary = _PytestSummary()
-                previous: tuple[str, int] | None = None
-                receptor_failure_line: int | None = None
-                traceback_line: int | None = None
-                traceback_frame: str | None = None
-                solver_start: int | None = None
-                solver_packages: list[str] = []
-                solver_line: int | None = None
                 with zipped.open(info) as stream:
-                    for line_number, raw in _bounded_lines(stream):
-                        message = _clean_line(raw)
-                        if message == "Traceback (most recent call last):":
-                            traceback_line = line_number
-                            traceback_frame = None
-                        if traceback_line is not None:
-                            if line_number - traceback_line > MAX_TRACEBACK_LINES:
-                                traceback_line = None
-                                traceback_frame = None
-                            elif frame := _PYTHON_FRAME.match(message):
-                                frame_path = frame.group(1).replace("\\", "/")
-                                traceback_frame = (
-                                    f"{PurePosixPath(frame_path).name}:{frame.group(2)}"
-                                )
-                            elif traceback_frame and _PYTHON_EXCEPTION.match(message):
-                                _retain_candidate(
-                                    candidates,
-                                    Candidate(
-                                        115,
-                                        line_number,
-                                        "python_exception",
-                                        f"{message} | at {traceback_frame}",
-                                    ),
-                                )
-                                traceback_line = None
-                                traceback_frame = None
-                        if "libmamba Could not solve for environment specs" in message:
-                            solver_start = line_number
-                        elif solver_start is not None and (
-                            message.startswith("##[error]")
-                            or line_number - solver_start > MAX_SOLVER_LINES
-                        ):
-                            solver_start = None
-                        if (
-                            solver_start is not None
-                            and len(solver_packages) < MAX_SOLVER_PACKAGES
-                            and (missing := _SOLVER_MISSING.search(message))
-                        ):
-                            constraint = re.sub(r"\s+\*$", "", missing.group(2)).strip()
-                            package = f"{missing.group(1)} {constraint}"
-                            if package not in solver_packages:
-                                solver_packages.append(package)
-                                solver_line = line_number
-                        if detailed := summary.feed(message, line_number):
-                            _retain_candidate(candidates, detailed)
-                        if _PYTEST_RECEPTOR_FAILURE.match(message):
-                            receptor_failure_line = line_number
-                        elif (
-                            receptor_failure_line is not None
-                            and line_number - receptor_failure_line <= MAX_PYTEST_SUMMARY_LINES
-                            and (rerun := _PYTEST_RECEPTOR_RERUN.match(message))
-                        ):
-                            nodeid = rerun.group(1).replace("\\", "/")
-                            _retain_candidate(
-                                candidates,
-                                Candidate(
-                                    75,
-                                    line_number,
-                                    "pytest_test",
-                                    f"pytest failed: {nodeid}",
-                                ),
-                            )
-                        if candidate := _candidate(message, line_number):
-                            _retain_candidate(candidates, candidate)
-                            if (
-                                candidate.kind == "exit_code"
-                                and previous is not None
-                                and line_number - previous[1] <= 3
-                                and (adjacent := _adjacent_diagnostic(*previous))
-                            ):
-                                _retain_candidate(candidates, adjacent)
-                        if message.strip():
-                            previous = (message, line_number)
-                if solver_packages:
-                    _retain_candidate(
-                        candidates,
-                        Candidate(
-                            110,
-                            solver_line or 1,
-                            "conda_solver",
-                            "conda packages unavailable: " + ", ".join(solver_packages),
-                        ),
-                    )
-                if not candidates:
+                    occurrence = _job_occurrence(stream, failed_by_name[job_name], info.filename)
+                if occurrence is None:
                     warnings.append(f"no causal line found for failed job: {job_name}")
-                    continue
-                best = max(candidates.values(), key=lambda item: (item.priority, item.line))
-                safe_message = _safe_cause(best.message)
-                normalized = _normalized(safe_message)
-                context = list(best.context)
-                later = candidates.get("missing_file")
-                if (
-                    best.kind in {"download_error", "conda_solver"}
-                    and later is not None
-                    and 0 < later.line - best.line <= MAX_SOLVER_LINES
-                ):
-                    context.append(Candidate(0, later.line, "later diagnostic", later.message))
-                occurrences.append(
-                    {
-                        "job_id": failed_by_name[job_name].get("id"),
-                        "job_name": job_name,
-                        "member": info.filename,
-                        "line": best.line,
-                        "kind": best.kind,
-                        "message": safe_message,
-                        "normalized": normalized,
-                        **(
-                            {
-                                "context": [
-                                    {
-                                        "member": info.filename,
-                                        "line": item.line,
-                                        "kind": item.kind,
-                                        "message": _safe_cause(item.message),
-                                    }
-                                    for item in context[:3]
-                                ]
-                            }
-                            if context
-                            else {}
-                        ),
-                    }
-                )
+                else:
+                    occurrences.append(occurrence)
     except (OSError, zipfile.BadZipFile, RuntimeError) as error:
         return [], [f"could not analyze log archive: {error}"]
 
+    return _group_causes(occurrences), warnings
+
+
+def _group_causes(occurrences: list[dict[str, Any]]) -> list[dict[str, Any]]:
     grouped: dict[tuple[str, str], list[dict[str, Any]]] = {}
     for occurrence in occurrences:
         key = (occurrence["kind"], occurrence["normalized"])
@@ -407,4 +414,20 @@ def extract_causes(
             }
         )
     causes.sort(key=lambda item: (-len(item["occurrences"]), item["fingerprint"]))
-    return causes, warnings
+    return causes
+
+
+def extract_job_causes(path: Path, job: dict[str, Any]) -> tuple[list[dict], list[str]]:
+    """Diagnose one identity-validated plain job log without inventing step attribution."""
+    try:
+        if path.stat().st_size > MAX_MEMBER_BYTES:
+            return [], ["job log exceeds the byte limit"]
+        if job.get("conclusion") != "failure":
+            return [], []
+        with path.open("rb") as stream:
+            occurrence = _job_occurrence(stream, job, path.name)
+        if occurrence is None:
+            return [], [f"no causal line found for failed job: {job.get('name')}"]
+        return _group_causes([occurrence]), []
+    except OSError as error:
+        return [], [f"could not analyze job log: {error}"]

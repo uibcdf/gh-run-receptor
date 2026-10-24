@@ -12,7 +12,8 @@ from gh_run_receptor import exit_codes
 from gh_run_receptor.config import select_rule
 from gh_run_receptor.contracts import schema_id
 from gh_run_receptor.errors import BundleError
-from gh_run_receptor.logs import extract_causes, safe_diagnostic_text
+from gh_run_receptor.job_logs import completed_job, validate_job_log_scope
+from gh_run_receptor.logs import extract_causes, extract_job_causes, safe_diagnostic_text
 from gh_run_receptor.model import normalize_evidence
 from gh_run_receptor.release_profile import (
     release_delivery_step_evidence,
@@ -472,6 +473,7 @@ def build_report(
 ) -> dict[str, Any]:
     """Building a generic report without changing source conclusions."""
     model = normalize_evidence(manifest, evidence)
+    validate_job_log_scope(manifest, evidence)
     jobs = model["jobs"]
     artifacts = model["artifacts"]
     workflow = evidence["workflow.json"]
@@ -543,6 +545,22 @@ def build_report(
             occurrence["job_id"] for cause in causes for occurrence in cause["occurrences"]
         }
         cause_evidence = "complete" if len(diagnosed_jobs) == len(failed_jobs) else "partial"
+    if scope := manifest.get("log_scope"):
+        job = completed_job(
+            evidence["jobs.json"],
+            scope["job_id"],
+            run_id=manifest["run_id"],
+            attempt=manifest["run_attempt"],
+            head_sha=manifest.get("head_sha"),
+        )
+        job_member = next(
+            (m for m in manifest["members"] if m.get("kind") == "github.job_log"), None
+        )
+        if job_member and bundle_directory is not None:
+            causes, analysis_warnings = extract_job_causes(
+                bundle_directory / job_member["path"], job
+            )
+            cause_evidence = "partial"
 
     if selected_profile == "conda":
         matrix = _conda_matrix(
@@ -653,6 +671,10 @@ def build_report(
     }
     if invocation_override is not None:
         report["expectation_override"] = invocation_override
+    if manifest.get("log_scope") is not None:
+        report["log_scope"] = dict(manifest["log_scope"])
+        if manifest.get("job_log_error") is not None:
+            report["job_log_error"] = dict(manifest["job_log_error"])
     termination = termination_diagnostics(model)
     if termination is not None:
         report["termination"] = termination
@@ -908,6 +930,19 @@ def _termination_lines(report: dict[str, Any]) -> list[str]:
 
 
 def render_llm(report: dict[str, Any]) -> str:
+    """Render the shared compact report with explicit partial-log scope when selected."""
+    text = _render_llm_body(report)
+    if scope := report.get("log_scope"):
+        first, _, rest = text.partition("\n")
+        return first + "\n" + _job_scope_note(scope) + "\n" + rest
+    return text
+
+
+def _job_scope_note(scope: dict[str, Any]) -> str:
+    return f"logs: job-only job={_safe_text(scope['job_id'])}; attempt archive not captured"
+
+
+def _render_llm_body(report: dict[str, Any]) -> str:
     """Rendering a compact report intended for low-token inspection."""
     subject = report["subject"]
     github = report["github"]
@@ -1139,6 +1174,8 @@ def render_human(report: dict[str, Any]) -> str:
     ]
     if override := report.get("expectation_override"):
         lines.insert(-2, "Expected platforms override: " + ", ".join(override["platforms"]))
+    if scope := report.get("log_scope"):
+        lines.insert(-2, _job_scope_note(scope))
     for job in report["jobs"][:MAX_HUMAN_JOBS]:
         duration = _format_duration(job["duration_seconds"]).removeprefix("duration=")
         state = _safe_text(job["conclusion"] or job["status"] or "unknown")

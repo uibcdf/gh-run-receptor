@@ -9,6 +9,7 @@ required_paths = [
   "site-packages/gh_run_receptor/_version.py",
   "site-packages/gh_run_receptor/cli.py",
   "site-packages/gh_run_receptor/github.py",
+  "site-packages/gh_run_receptor/job_logs.py",
   "site-packages/gh_run_receptor/source_version.py",
   "site-packages/gh_run_receptor/contracts.py",
   "site-packages/gh_run_receptor/schemas/aggregate-v1.schema.json",

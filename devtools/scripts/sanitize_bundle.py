@@ -114,6 +114,10 @@ def _selected_evidence(
                 }
             )
         selected["checks.json"] = {"total_count": len(checks), "check_runs": checks}
+    for source_job, selected_job in zip(jobs, selected["jobs.json"]["jobs"], strict=True):
+        for key in ("run_id", "run_attempt", "head_sha"):
+            if key in source_job:
+                selected_job[key] = source_job[key]
     if include_config and "config.json" in evidence:
         selected["config.json"] = evidence["config.json"]
     for name, value in evidence.items():
@@ -157,7 +161,10 @@ def sanitize(
             if key in source_member:
                 member[key] = source_member[key]
         members.append(member)
-    removed_logs = any(member.get("path") == "logs.zip" for member in manifest["members"])
+    removed_logs = any(
+        member.get("path") == "logs.zip" or member.get("kind") == "github.job_log"
+        for member in manifest["members"]
+    )
     sanitized_manifest = {
         "schema": "gh-run-receptor.bundle@1",
         "repository": manifest["repository"],
@@ -173,6 +180,9 @@ def sanitize(
         "members": members,
         "warnings": manifest["warnings"],
     }
+    if manifest.get("log_scope") is not None:
+        sanitized_manifest["log_scope"] = manifest["log_scope"]
+        sanitized_manifest["capture_policy"] = "metadata"
     (destination / "manifest.json").write_bytes(_canonical(sanitized_manifest))
 
 

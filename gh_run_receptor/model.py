@@ -54,7 +54,14 @@ def _completeness(manifest: dict[str, Any], workflow: dict[str, Any]) -> dict[st
     log_captured = any(member.get("path") == "logs.zip" for member in manifest["members"])
     policy = manifest["capture_policy"]
     log_warning = any(str(item).startswith("logs unavailable:") for item in manifest["warnings"])
-    if log_captured:
+    job_log_captured = any(m.get("kind") == "github.job_log" for m in manifest["members"])
+    job_log_warning = any(w.startswith("job logs unavailable:") for w in manifest["warnings"])
+    if job_log_captured:
+        logs = "partial"
+    elif job_log_warning:
+        code = manifest.get("job_log_error", {}).get("http_status")
+        logs = {403: "not_permitted", 410: "expired"}.get(code, "unavailable")
+    elif log_captured:
         logs = "complete"
     elif log_warning:
         logs = "unavailable"

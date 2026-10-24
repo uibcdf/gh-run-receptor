@@ -1,0 +1,10 @@
+PENDING conclusion=None status=in_progress | example/project | run=42 attempt=2 | profile=ci
+logs: job-only job=9; attempt archive not captured
+workflow: .github/workflows/ci.yml | jobs: 2 (failure=1, in_progress=1)
+failed groups (1, 1 jobs):
+- Windows | failure
+ci roles: other=2(failure:1,in_progress:1)
+root causes (1):
+[1] NotADirectoryError: [WinError 267] invalid directory | at reader.py:17 | jobs=1
+    evidence: job-9.log:3
+artifacts: none

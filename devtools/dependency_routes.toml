@@ -147,3 +147,8 @@ reason = "Read-only public Zenodo poststate verifier with PyYAML tooling; archiv
 path = ".github/workflows/zenodo-recovery.yml"
 sha256 = "0260744b4214c2d82e45eb4eb98a2a53cbbf19eaaecb6f53523f2101ea4bfa95"
 reason = "Read-only immutable shared Zenodo discovery after publication, on a fixed six-hour schedule and exact-tag manual route; no package, release or account mutation."
+
+[[workflows]]
+path = ".github/workflows/validate-job-logs.yml"
+sha256 = "b2dd30bef52f5a78a1b475b769a989a3ac14bed267491fa2c0424deadb8c8500"
+reason = "Manual bounded native completed-success/failure job-log receiving during an active workflow; expected failed producer and successful observer stay distinct, raw evidence uses managed temporary storage and sanitized receipt retains 30 days. No channel mutation or additional Python dependencies."

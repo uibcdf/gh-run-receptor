@@ -1,0 +1,124 @@
+{
+  "artifacts": [],
+  "causes": [
+    {
+      "fingerprint": "9f524eb256ed7390",
+      "kind": "python_exception",
+      "message": "NotADirectoryError: [WinError 267] invalid directory | at reader.py:17",
+      "occurrences": [
+        {
+          "job_id": 9,
+          "job_name": "Windows",
+          "kind": "python_exception",
+          "line": 3,
+          "member": "job-9.log",
+          "message": "NotADirectoryError: [WinError 267] invalid directory | at reader.py:17",
+          "normalized": "NotADirectoryError: [WinError 267] invalid directory | at reader.py:17"
+        }
+      ]
+    }
+  ],
+  "checks": [],
+  "completeness": {
+    "artifact_content": "not_requested",
+    "artifact_inventory": "complete",
+    "check_annotations": "not_requested",
+    "checks": "complete",
+    "jobs": "complete",
+    "logs": "partial",
+    "metadata": "complete",
+    "producer_events": "not_requested",
+    "workflow": "complete"
+  },
+  "configuration": {
+    "match": null,
+    "matched": false,
+    "profile": null,
+    "settings": {},
+    "source": null
+  },
+  "expectations": {
+    "missing_platforms": [],
+    "satisfied": true
+  },
+  "github": {
+    "conclusion": null,
+    "status": "in_progress"
+  },
+  "job_counts": {
+    "failure": 1,
+    "in_progress": 1
+  },
+  "jobs": [
+    {
+      "conclusion": null,
+      "duration_seconds": null,
+      "failed_steps": [],
+      "id": 10,
+      "name": "Linux",
+      "source": {
+        "json_pointer": "/jobs/1",
+        "member": "jobs.json"
+      },
+      "status": "in_progress",
+      "steps": [],
+      "url": null
+    },
+    {
+      "conclusion": "failure",
+      "duration_seconds": null,
+      "failed_steps": [],
+      "id": 9,
+      "name": "Windows",
+      "source": {
+        "json_pointer": "/jobs/0",
+        "member": "jobs.json"
+      },
+      "status": "completed",
+      "steps": [],
+      "url": null
+    }
+  ],
+  "log_scope": {
+    "job_id": 9,
+    "kind": "job"
+  },
+  "matrix": {
+    "kind": "ci",
+    "roles": [
+      {
+        "counts": {
+          "failure": 1,
+          "in_progress": 1
+        },
+        "job_ids": [
+          10,
+          9
+        ],
+        "name": "other"
+      }
+    ]
+  },
+  "producer_events": [],
+  "receptor": {
+    "assessment": "PENDING",
+    "cause_evidence": "partial",
+    "evidence_sufficient": true,
+    "profile": "ci",
+    "profile_version": 1
+  },
+  "schema": "gh-run-receptor.report@1",
+  "subject": {
+    "check_suite_id": null,
+    "event": null,
+    "head_ref": null,
+    "head_sha": "abc",
+    "repository": "example/project",
+    "run_attempt": 2,
+    "run_id": 42,
+    "url": null,
+    "workflow": ".github/workflows/ci.yml"
+  },
+  "unknowns": [],
+  "warnings": []
+}

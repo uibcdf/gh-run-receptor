@@ -11,6 +11,7 @@ from uuid import uuid4
 from gh_run_receptor.bundle import capture_bundle, default_bundle_path, load_bundle
 from gh_run_receptor.errors import BundleError
 from gh_run_receptor.github import GitHubClient
+from gh_run_receptor.job_logs import job_log_name
 from gh_run_receptor.report import build_report
 
 
@@ -41,6 +42,7 @@ def _refresh_bundle(
     destination: Path,
     run: dict[str, Any],
     jobs: dict[str, Any] | None,
+    job_id: int | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Replacing one nonterminal cache entry after validating fresh evidence."""
     nonce = uuid4().hex
@@ -56,6 +58,7 @@ def _refresh_bundle(
             destination=replacement,
             run=run,
             jobs=jobs,
+            **({"job_id": job_id} if job_id is not None else {}),
         )
         load_bundle(replacement)
         destination.rename(stale)
@@ -82,8 +85,10 @@ def acquire_evidence(
     output: Path | None = None,
     run: dict[str, Any] | None = None,
     jobs: dict[str, Any] | None = None,
+    job_id: int | None = None,
 ) -> CapturedEvidence:
     """Acquiring or reusing one identity-checked evidence bundle."""
+    job_directory = job_log_name(job_id).removesuffix(".log") if job_id is not None else None
     handed_off_run = run is not None
     run = run if run is not None else client.json(f"/repos/{repository}/actions/runs/{run_id}")
     if not isinstance(run, dict):
@@ -99,6 +104,8 @@ def acquire_evidence(
     destination = output or default_bundle_path(
         cache_root, client.hostname, repository, run_id, selected_attempt, policy
     )
+    if job_id is not None and output is None:
+        destination = destination.parent / job_directory / policy
     if destination.exists():
         manifest, evidence = load_bundle(destination)
         expected = (repository, run_id, selected_attempt, policy)
@@ -112,6 +119,9 @@ def acquire_evidence(
             raise BundleError(
                 "existing bundle identity or capture policy does not match the request"
             )
+        expected_scope = {"kind": "job", "job_id": job_id} if job_id is not None else None
+        if manifest.get("log_scope") != expected_scope:
+            raise BundleError("existing bundle log scope does not match the request")
         retained_run = evidence.get("run.json")
         if not isinstance(retained_run, dict) or retained_run.get("status") != "completed":
             manifest, evidence = _refresh_bundle(
@@ -123,6 +133,7 @@ def acquire_evidence(
                 destination=destination,
                 run=run,
                 jobs=jobs,
+                **({"job_id": job_id} if job_id is not None else {}),
             )
     else:
         manifest = capture_bundle(
@@ -134,6 +145,7 @@ def acquire_evidence(
             destination=destination,
             run=run,
             jobs=jobs,
+            **({"job_id": job_id} if job_id is not None else {}),
         )
         _, evidence = load_bundle(destination)
     return CapturedEvidence(manifest=manifest, evidence=evidence, path=destination)

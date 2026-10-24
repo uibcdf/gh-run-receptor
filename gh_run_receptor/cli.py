@@ -163,6 +163,7 @@ def _parser() -> argparse.ArgumentParser:
     inspect.add_argument("--attempt", type=int)
     inspect.add_argument("--capture", choices=("full", "adaptive", "metadata"), default="adaptive")
     inspect.add_argument("--output", type=Path)
+    inspect.add_argument("--job", type=int, help="capture only this completed job's log")
     inspect.add_argument(
         "--expected-platforms",
         type=_expected_platforms,
@@ -175,6 +176,7 @@ def _parser() -> argparse.ArgumentParser:
     capture.add_argument("--attempt", type=int)
     capture.add_argument("--capture", choices=("full", "adaptive", "metadata"), default="full")
     capture.add_argument("--output", type=Path)
+    capture.add_argument("--job", type=int, help="capture only this completed job's log")
 
     replay = subparsers.add_parser("replay", help="render a saved evidence bundle")
     _add_common_options(replay, suppress_defaults=True)
@@ -302,6 +304,7 @@ def _capture(
         output=args.output,
         run=run,
         jobs=jobs,
+        **({"job_id": args.job} if getattr(args, "job", None) is not None else {}),
     )
     manifest = captured.manifest
     evidence = captured.evidence

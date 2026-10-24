@@ -125,3 +125,20 @@ or when the decision requires evidence outside the documented dimensions:
 gh run view RUN_ID --repo OWNER/REPO \
   --json status,conclusion,jobs,artifacts,headSha,url
 ```
+
+## Inspect a completed job before the workflow finishes
+
+The 1.3.0 candidate adds explicit completed-job selection:
+
+```bash
+gh run-receptor inspect RUN_ID --repo OWNER/REPO --job JOB_ID --profile ci
+gh run-receptor capture RUN_ID --repo OWNER/REPO --attempt 1 --job JOB_ID --output ./job-evidence
+gh run-receptor replay ./job-evidence
+```
+
+Select a completed job from the requested attempt. Reports retain all structured
+workflow facts and label the log as job-only. A failed completed job does not make
+an active workflow terminal: available evidence still returns PENDING (exit 3).
+Unavailable requested logs return incomplete evidence (exit 4). Metadata capture
+requests no log. Existing invocation defaults are unchanged. Native/installed
+qualification is tracked in issue #68 before release delivery.

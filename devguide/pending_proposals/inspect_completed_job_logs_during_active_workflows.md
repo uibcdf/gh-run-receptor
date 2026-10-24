@@ -6,7 +6,7 @@ opened: 2026-10-24
 closed:
 verification: inspected
 area: [github, cli]
-guard:
+guard: tests/test_job_logs.py
 normative: github_evidence.md
 blocked_by: []
 supersedes: []
@@ -45,3 +45,36 @@ active-window observation and installed release evidence are separate gates.
 All new task-only environments, SDK clones and live probes belong to
 `/tmp/ghrr-1.3.0-z8LfuC` through final receiving. Existing caller caches,
 environments, pins, unrelated work and historical task paths remain preserved.
+
+## Source implementation and initial guards
+
+The selection, original-byte acquisition and replay validator live in
+`gh_run_receptor/job_logs.py`; archive and plain logs call the same stream
+analyzer and cause grouping. Timestamp stripping now removes only its one
+separator, preserving Python traceback indentation. Existing diagnostic/log/report
+regressions and new truth/identity/privacy/schema guards pass together (196
+focused tests). This is source evidence, not a completed release/native receipt.
+The clean task environment uses Python 3.14.7, Ruff 0.16.5 and the committed
+pytest-receptor 1.1.0; no caller environment is replaced. Conda secret availability
+remains unconfirmed: the repository has no repository secrets and the authenticated
+account cannot list organization secrets. A maintainer clarification is pending;
+no secret values were read or requested in chat.
+
+## Qualification checkpoint — 2026-10-24
+
+Full clean local source suite: 805 passed/one installed-Conda-only skip. Ruff
+lint/format, 29-route input preflight, all nine frozen contracts and strict
+Sphinx pass. The known published pytest renderer warning remains visible. New
+native `validate-job-logs.yml` deliberately creates a Windows typed failure and
+a Linux success; its observer must pass while the overall workflow is still
+active. The expected producer failure remains a failed native workflow, never a
+green product gate. No waiting/keepalive runner is needed: the observer is active.
+Native receiving and installed delivery remain pending.
+
+The maintainer confirms organizational ANACONDA_UIBCDF_TOKEN availability for
+this repository (2026-10-24); actual authorized upload is still independently
+verified by #60. Cross-component advance notice: uibcdf/molsyssuite#141. Read-only
+comparison with SMonitor, ArgDigest, DepDigest and Pytest Receptor confirms the
+same committed-plan/source/staged/exact-file installed/promotion contract; their
+provider pins and custom versus shared wrappers differ. GHR uses its existing
+shared callers. No PyPI route is added.
