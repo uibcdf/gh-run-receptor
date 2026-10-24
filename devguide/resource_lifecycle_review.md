@@ -78,3 +78,37 @@ handoff; this statement does not assert unobserved runner disposal or expiry.
 Caller environments, authentication, extension pins, other tasks and old paths
 remain protected. The broader Diego/Liliana review stays partial under #65 and
 `uibcdf/molsyssuite#104`, target 2026-11-07.
+
+## Complete component-owner disposition — 2026-10-24 (#65)
+
+The maintainer authorizes completing the remaining component review alongside
+#60/#68 and a conditional 1.3.0 release. This section supersedes the earlier
+pending owner-review checkpoints for this component. It does not close central
+#104 for other members or certify unobserved cleanup on every platform.
+
+| Applicable operation family | Owner disposition and useful lifetime | Verification / remaining limits |
+| --- | --- | --- |
+| Runtime transport, capture, cache refresh and new explicit job logs | Operations own private streams, subprocesses and unpublished staging; success transfers a validated bundle to caller cache/output. Aborted job downloads are removed by the owner operation as well as the transport. Active refresh rolls back before deleting obsolete generations. | Existing #63 process/pipe/interruption/rollback regressions plus #68 partial-download, bounds and refusal tests execute locally; native source matrix separately qualifies OS behavior. |
+| Config loading/discovery and installed-origin/version introspection | Readers allocate only bounded in-memory data or context-managed file handles. Non-overwriting config creation owns its temporary file; committed/output config is persistent caller data. | Existing source tests cover malformed inputs, atomic nonreplacement and safety. No caller config/cache is treated as temporary task garbage. |
+| Logs/checks/events/normalization/profiles/rendering/comparison/aggregation/watch | File/archive contexts or bounded in-memory transforms; renderers do not own temporary workspaces or children. Watch uses the same caller-owned acquisition cache. | Source inventory covers all runtime modules; existing semantics/security/resource tests execute. No scientific, Qt or browser execution engine exists in this CLI, so those tool families are not applicable here. |
+| Published report download/verification | TemporaryDirectory owns the bounded artifact ZIP; validated report data escapes, raw download does not. Context exit cleans success/failure; removal errors propagate. | Published-reader/source tests retained; native receiving remains distinct from claims about retention expiry. |
+| Sanitized fixtures and public-corpus validation | Sanitizer input remains unchanged; explicit fixture destination is persistent caller-reviewed output, including diagnostic partial output. Validator owns managed raw captures and synchronous children, with visible failures. Job-log sanitizer drops raw logs and preserves reviewed subset identity as metadata. | Corpus/sanitizer guards plus new job-scope regression; no raw/private bundles committed. |
+| Benchmarks, frozen contracts, distribution/archive/input/installed checks | Read-only source/resource/fixture/archive operations. They do not extract or execute archive payloads. Caller-specified receipts are persistent outputs; SDK clones belong to the invoking task. | Existing adversarial/archive/source guards retained. Conda installed/promotion/public qualification is owned separately by #60, not silently credited by this review. |
+| Index/report/issue/canonical-guide maintenance | Repository reports/generated indexes and explicitly selected guide destinations are persistent outputs. Subprocess commands are synchronous. These tools allocate no disposable environments or raw capture trees. | Lifecycle/index and repository convention checks. Guide synchronization remains a deliberate centrally coordinated operation; sibling sources are untouched. |
+| Local testing/docs/build/release experiments | Invoking developer owns pytest fixtures/cache, documentation build directories, distributions and disposable environments. Pytest manages its own temporary fixture retention; a publication task uses an explicit private root and retains exact files until qualification/receipts finish. | Current root `/tmp/ghrr-1.3.0-z8LfuC` remains useful through #60/#68 and release receiving, then obsolete task copies are removed. Caller editable environments, caches and primary/sibling clones remain persistent and protected. |
+| Hosted source/admin/native/Action/Conda/release/DOI workflows | Runner workspace, temporary environments/files and SDK checkouts are job-owned. Public distributions/DOI records are persistent, immutable delivery. Sanitized Actions artifacts have explicit workflow retention (job-log/DOI receipts: 30 days). | Source controls inspected; required executed native/installed/public evidence remains separately recorded by each owning delivery. No assertion that expiry or runner disposal was directly measured. Failed drafts/staging files require explicit owner disposition; no automatic overwrite/deletion. |
+
+All locally applicable operation families now have an owner and lifetime;
+no additional component implementation exception was identified by this review.
+The known published pytest renderer warning remains provider-owned rather than a
+new GHR runtime leak. This disposition does not claim a universal platform audit
+or complete inventory of a shared machine.
+
+The [explicit path receipt](evidence/resource_owner_review_2026-10-24.json)
+rechecks the ten GHR-owned historical paths registered by central #104: all are
+absent. Attribution remains unknown; none was deleted by this review. The prior
+1.2.1 task root was removed by its own recorded closeout. No age/prefix scan,
+shared-cache deletion or removal of other sessions is authorized. Current task
+retention is ordinary useful work, with disposal after final durable receipts,
+not an unbounded exception. Central #104 receives this component's disposition
+through its owning issue/report after the local record is pushed.

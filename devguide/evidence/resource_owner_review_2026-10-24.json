@@ -1,0 +1,76 @@
+{
+  "owner_issue": "uibcdf/gh-run-receptor#65",
+  "observed_date": "2026-10-24",
+  "source_before_review": "c130667",
+  "registry_source": "uibcdf/molsyssuite:devguide/rollouts/resource_owner_review_104_20261010.json",
+  "registry_sha256": "d575195709dda0f60ec7a6f4350b7f1b6ef471b295c9903e0aa97a1d614739f9",
+  "historical_paths": [
+    {
+      "path": "/tmp/molsyssuite104-ghr-review",
+      "exists_or_symlink": false,
+      "deleted_by_this_review": false
+    },
+    {
+      "path": "/tmp/molsyssuite104-ghr-review-after",
+      "exists_or_symlink": false,
+      "deleted_by_this_review": false
+    },
+    {
+      "path": "/tmp/molsyssuite104-ghr-review-before",
+      "exists_or_symlink": false,
+      "deleted_by_this_review": false
+    },
+    {
+      "path": "/tmp/molsyssuite104-ghr-review-before-complete",
+      "exists_or_symlink": false,
+      "deleted_by_this_review": false
+    },
+    {
+      "path": "/tmp/molsyssuite104-ghr-review-capture-qualified",
+      "exists_or_symlink": false,
+      "deleted_by_this_review": false
+    },
+    {
+      "path": "/tmp/molsyssuite104-ghr-review-final",
+      "exists_or_symlink": false,
+      "deleted_by_this_review": false
+    },
+    {
+      "path": "/tmp/molsyssuite104-ghr-review-qualified",
+      "exists_or_symlink": false,
+      "deleted_by_this_review": false
+    },
+    {
+      "path": "/tmp/molsyssuite104-ghr-review-refresh-before",
+      "exists_or_symlink": false,
+      "deleted_by_this_review": false
+    },
+    {
+      "path": "/tmp/molsyssuite104-ghr-review-sdk",
+      "exists_or_symlink": false,
+      "deleted_by_this_review": false
+    },
+    {
+      "path": "/tmp/molsyssuite104-ghr-review-transport-before",
+      "exists_or_symlink": false,
+      "deleted_by_this_review": false
+    }
+  ],
+  "attribution": "Absence does not establish who removed historical paths or imply a complete host inventory.",
+  "active_task": {
+    "path": "/tmp/ghrr-1.3.0-z8LfuC",
+    "owner": "Current authorized #60/#65/#68 and 1.3.0 qualification task",
+    "retained": true,
+    "purpose": "Source/SDK/test/installed/public verification and handoff; remove obsolete task copies after durable receipts."
+  },
+  "prior_release_task": {
+    "path": "/tmp/ghrr-release-1.2.1-J5EVaN",
+    "exists_or_symlink": false,
+    "removed_by_prior_release_closeout": true
+  },
+  "limits": [
+    "No system-wide discovery or age/prefix deletion.",
+    "Shared caller caches/environments/authentication and unrelated sessions preserved.",
+    "Source inspection, executed regressions, historical absence and hosted retention remain separate claims."
+  ]
+}
