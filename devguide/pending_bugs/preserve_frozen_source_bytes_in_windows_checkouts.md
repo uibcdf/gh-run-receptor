@@ -64,3 +64,17 @@ all four supported Python minors, and preserve ordinary Linux/macOS gates.
 Archive this report only after the exact-source native matrix is inspected.
 
 The owning assertion is `test_windows_checkout_preserves_frozen_schema_and_reviewed_workflow_bytes`; it runs a real CRLF-enabled Git checkout and compares every frozen schema and reviewed workflow with its original bytes.
+
+## Native execution exposed a second portability defect
+
+Exact-source weekly run `40121815534` at `c18e9b531fa4d21128b82ad60db57045d7ef0c38`
+passes preflight on all twelve cells and the full suite on eight Linux/macOS
+cells. All four Windows suites now execute and expose one archive-path test
+failure: the wheel writer and reader normalize a raw backslash through ZipInfo.
+The reader now validates `orig_filename` before trusting its normalized spelling;
+the negative fixture deliberately preserves the original filename bytes when
+writing. The archive rejection contract is retained, not relaxed to accept a
+metadata failure. `tests/test_release_tools.py` guards the original unsafe names
+for both wheel and sdist; focused local archive cases pass. A new exact-source
+native matrix is still required before closure. This failed first matrix remains
+failed evidence and is not replaced by a local pass.

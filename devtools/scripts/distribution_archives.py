@@ -57,7 +57,8 @@ def _read_files(path: Path) -> dict[str, bytes]:
             if len(members) > MAX_MEMBERS:
                 raise ValueError("Archive exceeds member count bound")
             for member in members:
-                name = member.filename.removesuffix("/")
+                # ZipInfo normalizes backslashes on Windows; validate the source spelling.
+                name = member.orig_filename.removesuffix("/")
                 _check_path(name, seen)
                 mode = stat.S_IFMT(member.external_attr >> 16)
                 if mode not in {0, stat.S_IFREG, stat.S_IFDIR} or member.flag_bits & 1:
