@@ -55,3 +55,15 @@ reported in `uibcdf/molsyssuite#82`; no dependency was changed here. Local stric
 Sphinx cannot start without its optional theme; hosted exact-source docs and
 native matrix remain pending. Local unit/replay evidence does not certify the
 entire shared environment, another OS or any published package.
+
+## First native candidate and fixture encoding
+
+Source `3d39896dbc426b8e35b3c508eef88cc7568c19a2` passes ordinary routine,
+policy, Conda governance and strict hosted docs/Pages gates. Weekly matrix
+`40123972682` passes eight Linux/macOS cells; Windows executes 705 passing cases
+but fails the two long-message goldens because fixture loading used the locale
+encoding for a UTF-8 ellipsis. Both input and golden JSON readers now explicitly
+use UTF-8. The existing owning cases also pass with UTF-8 mode and locale coercion
+disabled under an ASCII locale. No expected output, source parser, diagnostic,
+assertion or bound is changed to accommodate Windows. A new exact-source native
+matrix remains required; the first matrix stays recorded as failed.

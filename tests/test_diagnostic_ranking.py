@@ -10,7 +10,7 @@ from gh_run_receptor.logs import extract_causes
 from gh_run_receptor.report import build_report, exit_code, render_human, render_json, render_llm
 
 FIXTURES = Path(__file__).parent / "fixtures/logs"
-CASES = json.loads((FIXTURES / "diagnostic_ranking.json").read_text())["cases"]
+CASES = json.loads((FIXTURES / "diagnostic_ranking.json").read_text(encoding="utf-8"))["cases"]
 
 
 def archive_for_case(tmp_path, case):
@@ -91,7 +91,7 @@ def test_public_diagnosis_preserves_api_truth_and_bounded_deterministic_renderin
 @pytest.mark.parametrize("profile", ["generic", "ci"])
 @pytest.mark.parametrize("case", CASES, ids=lambda c: str(c["run_id"]))
 def test_public_diagnostic_rendering_matches_reviewed_goldens(tmp_path, case, profile):
-    goldens = json.loads((FIXTURES / "diagnostic_ranking_golden.json").read_text())
+    goldens = json.loads((FIXTURES / "diagnostic_ranking_golden.json").read_text(encoding="utf-8"))
     report = report_for_case(tmp_path, case, profile)
     expected = goldens[str(case["run_id"])][profile]
     assert render_llm(report) == expected["llm"]
