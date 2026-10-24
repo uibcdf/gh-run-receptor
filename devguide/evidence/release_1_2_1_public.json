@@ -1,0 +1,189 @@
+{
+  "observed_date": "2026-10-24",
+  "source_sha": "a23e1910be1c4640135ccfe5a693cca08c1480d9",
+  "release": {
+    "assets": [
+      {
+        "browser_download_url": "https://github.com/uibcdf/gh-run-receptor/releases/download/1.2.1/gh_run_receptor-1.2.1-py3-none-any.whl",
+        "content_type": "application/octet-stream",
+        "digest": "sha256:f87b17c0071985f321a529b7a3499c2dc8d2d9415469d4b0fc012b7f30adb1c9",
+        "id": 673312702,
+        "name": "gh_run_receptor-1.2.1-py3-none-any.whl",
+        "size": 97049,
+        "state": "uploaded"
+      },
+      {
+        "browser_download_url": "https://github.com/uibcdf/gh-run-receptor/releases/download/1.2.1/gh_run_receptor-1.2.1.tar.gz",
+        "content_type": "application/x-gtar",
+        "digest": "sha256:a51c1e2e96557183fb696e31ce1f5cacc4328802fd9d27027e517598d3ebdbd0",
+        "id": 673312706,
+        "name": "gh_run_receptor-1.2.1.tar.gz",
+        "size": 165393,
+        "state": "uploaded"
+      },
+      {
+        "browser_download_url": "https://github.com/uibcdf/gh-run-receptor/releases/download/1.2.1/SHA256SUMS",
+        "content_type": "application/octet-stream",
+        "digest": "sha256:dd00ca3d2b433960e571e4d9995f4eec9c7369b145cd7419a7b7ebffc6ea43ad",
+        "id": 673312701,
+        "name": "SHA256SUMS",
+        "size": 200,
+        "state": "uploaded"
+      }
+    ],
+    "draft": false,
+    "html_url": "https://github.com/uibcdf/gh-run-receptor/releases/tag/1.2.1",
+    "id": 422981901,
+    "name": "1.2.1",
+    "prerelease": false,
+    "published_at": "2026-10-24T21:05:53Z",
+    "tag_name": "1.2.1",
+    "target_commitish": "main"
+  },
+  "tag": {
+    "object": {
+      "sha": "a23e1910be1c4640135ccfe5a693cca08c1480d9",
+      "type": "commit",
+      "url": "https://api.github.com/repos/uibcdf/gh-run-receptor/git/commits/a23e1910be1c4640135ccfe5a693cca08c1480d9"
+    },
+    "ref": "refs/tags/1.2.1"
+  },
+  "publisher": {
+    "run_id": 40132672999,
+    "source_sha": "a23e1910be1c4640135ccfe5a693cca08c1480d9",
+    "attempt": 1,
+    "workflow": ".github/workflows/publish-release.yml",
+    "result": "success",
+    "mandatory_steps_executed": true,
+    "full_suite": {
+      "passed": 729,
+      "skipped": 1,
+      "skip_reason": "Installed Conda qualification only"
+    }
+  },
+  "tag_gates": {
+    "routine": 40132592254,
+    "policy": 40132592479,
+    "conda_governance": 40132592497
+  },
+  "installed_public_wheel": {
+    "version": "1.2.1",
+    "python": "3.14.7",
+    "module": "$TASK_ROOT/public-install/lib/python3.14/site-packages/gh_run_receptor/__init__.py",
+    "frozen_schemas": 9,
+    "original_diagnostic_runs": [
+      37279215592,
+      37538525423,
+      37629258208,
+      37994715796,
+      38037422889,
+      40013378053
+    ],
+    "cli_truth": {
+      "argdigest_ci_rerun_attempt_1": 1,
+      "argdigest_ci_rerun_attempt_2": 0,
+      "molsysmt_conda_cancelled": 2,
+      "pyunitwizard_ci_incomplete_logs": 4
+    },
+    "acquisition_modes": [
+      "api.json",
+      "api.download"
+    ],
+    "usage_exit": 64,
+    "runtime_dependencies": []
+  },
+  "public_extension": {
+    "tag": "1.2.1",
+    "head_sha": "a23e1910be1c4640135ccfe5a693cca08c1480d9",
+    "version": "1.2.1",
+    "scope": "Isolated XDG checkout; existing caller authentication/configuration/pin preserved.",
+    "offline_failed_run_replay_exit": 1
+  },
+  "public_docs": {
+    "url": "https://www.uibcdf.org/gh-run-receptor/installation.html",
+    "wheel_url_observed": "https://github.com/uibcdf/gh-run-receptor/releases/download/1.2.1/gh_run_receptor-1.2.1-py3-none-any.whl",
+    "candidate_source_run": 40131999016
+  },
+  "zenodo": {
+    "native_run": 40132825451,
+    "artifact_id": 12575708110,
+    "artifact_sha256": "0a12f55a5b614b864f53735bdcc520e841d0f872b4bcae8060684454b7cae70f",
+    "report": {
+      "repository": "uibcdf/gh-run-receptor",
+      "observed_at": "2026-10-24T21:07:35.866965+00:00",
+      "exit_status": 0,
+      "results": [
+        {
+          "repository": "uibcdf/gh-run-receptor",
+          "tag": "1.2.1",
+          "version": "1.2.1",
+          "published_at": "2026-10-24T21:05:53Z",
+          "observed_at": "2026-10-24T21:07:35.866965+00:00",
+          "age_hours": 0.029,
+          "archive_coverage": "source-snapshot",
+          "escalation_required": false,
+          "state": "verified",
+          "record_id": 23627112,
+          "concept_doi": "10.5281/zenodo.22843377",
+          "version_doi": "10.5281/zenodo.23627112",
+          "files": [
+            {
+              "key": "uibcdf/gh-run-receptor-1.2.1.zip",
+              "size": 761878,
+              "checksum": "md5:8151ad8b0f485fcb94369011291cb21f"
+            }
+          ]
+        }
+      ]
+    },
+    "independent_local_verifier": "VERIFIED 1.2.1 doi=10.5281/zenodo.23627112",
+    "discovery_scan": {
+      "run_id": 40133571409,
+      "event": "workflow_dispatch",
+      "tag_input": "",
+      "fixed_cutoff": "2026-10-24T00:00:00Z",
+      "source_sha": "a23e1910be1c4640135ccfe5a693cca08c1480d9",
+      "attempt": 1,
+      "mandatory_steps_executed": true,
+      "artifact_id": 12575274782,
+      "artifact_sha256": "c610af63a9eaf602f081ca60c4df60b91559e1e8cac21e73115a5f522ba79d8c",
+      "report": {
+        "repository": "uibcdf/gh-run-receptor",
+        "observed_at": "2026-10-24T21:17:46.132128+00:00",
+        "exit_status": 0,
+        "results": [
+          {
+            "repository": "uibcdf/gh-run-receptor",
+            "tag": "1.2.1",
+            "version": "1.2.1",
+            "published_at": "2026-10-24T21:05:53Z",
+            "observed_at": "2026-10-24T21:17:46.132128+00:00",
+            "age_hours": 0.198,
+            "archive_coverage": "source-snapshot",
+            "escalation_required": false,
+            "state": "verified",
+            "record_id": 23627112,
+            "concept_doi": "10.5281/zenodo.22843377",
+            "version_doi": "10.5281/zenodo.23627112",
+            "files": [
+              {
+                "key": "uibcdf/gh-run-receptor-1.2.1.zip",
+                "size": 761878,
+                "checksum": "md5:8151ad8b0f485fcb94369011291cb21f"
+              }
+            ]
+          }
+        ]
+      },
+      "scope": "Manual execution of scheduled discovery mode; no cron execution claimed."
+    }
+  },
+  "central_notice": "uibcdf/molsyssuite#138",
+  "limits": [
+    "Native compatibility cells qualify source-built wheels, not installation of this public file on all twelve cells.",
+    "Independent downloaded public-wheel installation is Linux/Python 3.14.7.",
+    "Zenodo inventory is one source ZIP, not the GitHub wheel/sdist/checksum assets.",
+    "No Conda/PyPI publication or automatic consumer pin/guide update.",
+    "Broader resource review remains uibcdf/gh-run-receptor#65."
+  ]
+}

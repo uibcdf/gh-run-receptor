@@ -65,3 +65,16 @@ last needed artifact/probe is recorded. Retain useful evidence until then; expos
 cleanup failures. Do not delete old release/task paths or shared caches by age or
 prefix. Broader owner disposition remains #65/#104, with review target 2026-11-07;
 this is neither a new cleaner nor a release-gate waiver.
+
+## Executed release scope — 2026-10-24
+
+Exact-source qualification, isolated installed probes, the public writer,
+independent public downloads and bounded non-extracting archival receipt reads
+completed successfully for source `a23e1910be1c4640135ccfe5a693cca08c1480d9`.
+The durable candidate/public receipts under `devguide/evidence/` preserve distinct
+original staged/public hashes and measured limits. The public release and DOI
+are persistent outputs. Task-root disposal follows the final receipt push and
+handoff; this statement does not assert unobserved runner disposal or expiry.
+Caller environments, authentication, extension pins, other tasks and old paths
+remain protected. The broader Diego/Liliana review stays partial under #65 and
+`uibcdf/molsyssuite#104`, target 2026-11-07.

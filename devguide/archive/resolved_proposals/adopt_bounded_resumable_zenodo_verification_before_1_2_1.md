@@ -1,10 +1,10 @@
 ---
 summary: Adopt bounded resumable Zenodo verification before 1.2.1.
 issue: uibcdf/gh-run-receptor#70
-status: active
+status: resolved
 opened: 2026-10-24
-closed:
-verification: inspected
+closed: 2026-10-24
+verification: measured
 area: [governance, github]
 guard: tests/test_zenodo_recovery_workflow.py
 normative: versioning_and_releases.md
@@ -35,3 +35,24 @@ The pinned provider's local exact-tag read-only probe independently verifies the
 existing 1.2.0 record with its original publication age (over 500 hours), without
 resetting the clock. This is tool receiving evidence, not archival of 1.2.1;
 the hosted caller and first new-version observation remain pending.
+
+## Measured receiving — 2026-10-24
+
+The released caller at `a23e1910be1c4640135ccfe5a693cca08c1480d9` passed its
+workflow guard and 28-route source preflight. Native historical receiving
+`40131690998` verified 1.2.0 without resetting its publication age. Exact-tag
+1.2.1 receiving `40132825451` and manual empty-tag discovery `40133571409`
+executed the pinned provider and preserved verified public JSON receipts.
+The scan discovered 1.2.1 after the fixed cutoff. Cron execution and future
+ingestion-pending/overdue incidents are not claimed as observed.
+
+Bounded, digest-checked, non-extracting receipt reads and an independent anonymous
+semantic check verify version DOI `10.5281/zenodo.23627112`, concept DOI
+`10.5281/zenodo.22843377`, publication date 2026-10-24 and exactly one source ZIP:
+`uibcdf/gh-run-receptor-1.2.1.zip`, 761878 bytes,
+`md5:8151ad8b0f485fcb94369011291cb21f`. No wheel/sdist archival is inferred.
+The [public receipt](../../evidence/release_1_2_1_public.json) preserves both
+new-version observations and actual artifact identities. The
+[normative release guide](../../versioning_and_releases.md) owns ongoing recovery;
+`uibcdf/molsyssuite#138` receives the public facts. Earlier pending statements
+above describe preparation history. Adoption and first receiving are complete.

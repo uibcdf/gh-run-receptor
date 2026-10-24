@@ -388,3 +388,89 @@ are inspection evidence, not queue persistence. The component maintainer owns
 manual overdue follow-up under #70/the version-specific central notice. No
 account connection, hook replay, deposit or release mutation is performed.
 The existing exact-version local verifier remains an independent semantic check.
+
+## Verified 1.2.1 publication — 2026-10-24
+
+The lightweight tag `1.2.1` is permanently attached to
+`a23e1910be1c4640135ccfe5a693cca08c1480d9`. The stable public
+[release](https://github.com/uibcdf/gh-run-receptor/releases/tag/1.2.1), titled
+exactly `1.2.1`, was published at `2026-10-24T21:05:53Z` by the sole draft-first
+[producer run 40132672999](https://github.com/uibcdf/gh-run-receptor/actions/runs/40132672999),
+attempt 1. All mandatory source, preflight, build, payload, installed-file,
+draft and public verification steps executed successfully. The source suite
+passed 729 tests with one explicit installed-Conda-only skip; the pinned SDK
+preflight checked 28 routes and all nine frozen schemas.
+
+### Public file inventory
+
+All three public files were independently downloaded. API inventory, original
+file sizes, SHA-256 values, checksum manifest and both archive payloads agree.
+
+| File | Bytes | SHA-256 |
+| --- | ---: | --- |
+| `gh_run_receptor-1.2.1-py3-none-any.whl` | 97049 | `f87b17c0071985f321a529b7a3499c2dc8d2d9415469d4b0fc012b7f30adb1c9` |
+| `gh_run_receptor-1.2.1.tar.gz` | 165393 | `a51c1e2e96557183fb696e31ce1f5cacc4328802fd9d27027e517598d3ebdbd0` |
+| `SHA256SUMS` | 200 | `dd00ca3d2b433960e571e4d9995f4eec9c7369b145cd7419a7b7ebffc6ea43ad` |
+
+The [sealed candidate receipt](evidence/release_1_2_1_candidate.json) preserves
+its pre-authoritative-tag phase, tool/input inventory and local build digests.
+Its `authoritative_tag_created: false` records that earlier phase, not current
+publication state. Candidate and hosted/public files have distinct original
+hashes; no rebuilt file substitutes for a registered artifact. The
+[public receipt](evidence/release_1_2_1_public.json) records delivered identities,
+public digests, installed probes and archival evidence.
+
+### Qualification scope
+
+At the exact release source, compatibility run `40131690745` passed all twelve
+OS/Python cells, each executing the full suite, build, wheel installation and
+outside-checkout smoke. These are separately source-built wheels. They do not
+claim that the subsequently downloaded public wheel was installed on all twelve
+cells. Independent public-file installation used a fresh dependency-free Linux
+Python 3.14.7 environment outside source. Installed metadata/version, module
+origin, every runtime Python file, nine schema hashes, all six original diagnostic
+cases, deterministic generic/CI reports in human/LLM/JSON, acquisition-error
+privacy/cleanup and CLI truth cases (0/1/2/4; invalid usage 64) passed.
+
+Action/extension run `40131690922` passed on all three operating systems;
+same-revision reusable `40131690808`, minimum-gh `40131690763` (Linux), and native
+exit-code `40131690975` passed. Strict docs/Pages `40131999016` passed and the
+public installation page was fetched with the actual 1.2.1 wheel URL present.
+Exact-tag routine `40132592254`, policy `40132592479` and Conda governance
+`40132592497` passed. Structured source, attempt, job and required-step states
+were inspected rather than inferred from green badges. An isolated public
+`gh` extension checkout resolved to the release source, reported 1.2.1 and
+preserved a failed-run replay with exit 1; caller configuration/pins were preserved.
+
+The committed pytest-receptor 1.1.0 renderer still emits the known late-terminal
+`/dev/null` ResourceWarning owned by `uibcdf/pytest-receptor#4`. It remains visible;
+this is not evidence of a GH Run Receptor runtime leak or a suppressed gate.
+A prior source policy run `40131540956` failed Ruff on a long regression assertion;
+that intermediate failure is preserved. The corrected exact release source passed
+its required checks; no failed run is presented as release qualification.
+
+### Archival receiving and handoff
+
+Historical exact-tag receiving run `40131690998` verified 1.2.0 using its original
+publication age. Native 1.2.1 recovery run `40132825451` and empty-tag discovery
+run `40133571409` both executed the pinned provider and preserved verified JSON
+receipts. The latter manually exercised the fixed-cutoff scan interface; this
+is not a claim that cron has executed. The bounded artifact downloads were
+hash-checked and read without extraction. A separate anonymous local semantic
+check also verified the public record.
+
+Version DOI [10.5281/zenodo.23627112](https://doi.org/10.5281/zenodo.23627112)
+belongs to concept `10.5281/zenodo.22843377`, publication date 2026-10-24.
+The observed inventory is exactly one source snapshot,
+`uibcdf/gh-run-receptor-1.2.1.zip`, 761878 bytes,
+`md5:8151ad8b0f485fcb94369011291cb21f`. This inventory does not archive the
+GitHub wheel/sdist/checksum files.
+
+Release-specific receiving is owned by `uibcdf/molsyssuite#138`, supplementing
+advance impact notice #136. The canonical 1.2.1 guide and actual file receipts
+are available for deliberate consumer receiving. No sibling checkout, pin,
+registered guide copy, PyPI or Conda publication is advanced automatically.
+Python 3.11--3.14, gh >=2.48.0, no runtime dependencies, read-only GitHub access,
+source status/conclusion/exit semantics and all frozen contracts are preserved.
+Resource review #65 remains partial for the broader owner review; #60 first
+Conda delivery and #68 active-workflow job logs remain separate work.

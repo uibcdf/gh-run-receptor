@@ -118,12 +118,19 @@ in all three renderers and generic/CI profiles with native failure/exit 1 retain
 source qualification from a future public artifact. Consumer impact is handed
 to `uibcdf/molsyssuite#136`; no new package or consumer pin is claimed.
 
-**1.2.1 preparation (2026-10-24):** uibcdf/gh-run-receptor#67 adds safe failed-
-request identity and retains useful network diagnostics without changing status,
-exit codes or retry budgets. The release-scoped #65 resource review preserves
-caller state and keeps broader review partial. #70 adopts the required bounded
-read-only Zenodo recovery route. All release/public-artifact evidence remains
-pending until observed; the [release guide](versioning_and_releases.md) owns it.
+**Release 1.2.1 (2026-10-24):** Lightweight tag `1.2.1` preserves source
+`a23e1910be1c4640135ccfe5a693cca08c1480d9`. The 729-test suite, twelve native
+compatibility cells, Action/reusable/CLI gates and strict docs passed. Draft-first
+publisher `40132672999` delivered the public wheel, sdist and checksums; independent
+downloads, payload guards, a clean Linux/Python 3.14.7 public-wheel installation,
+diagnostic/exit-code replays and an isolated exact-tag extension all passed.
+Zenodo DOI `10.5281/zenodo.23627112` is verified for one source ZIP. #67 adds safe
+failed-request identity without changing source truth or retry budgets; #70 adds
+bounded read-only archival recovery. #65 remains partial for broader resource
+review. The [release guide](versioning_and_releases.md),
+[candidate receipt](evidence/release_1_2_1_candidate.json) and
+[public receipt](evidence/release_1_2_1_public.json) distinguish evidence scopes.
+Central receiving is handed off through `uibcdf/molsyssuite#138`.
 
 ## Current state
 

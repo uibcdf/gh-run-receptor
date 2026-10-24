@@ -1,10 +1,10 @@
 ---
 summary: Publish and independently verify the 1.2.1 patch release.
 issue: uibcdf/gh-run-receptor#71
-status: active
+status: resolved
 opened: 2026-10-24
-closed:
-verification: inspected
+closed: 2026-10-24
+verification: measured
 area: [packaging, github]
 guard: tests/test_release_tools.py
 normative: versioning_and_releases.md
@@ -62,3 +62,23 @@ would skip inside the publisher even though the separate compatibility matrix
 executes them. This closes that publication-scope gap without changing the public
 route, credentials, runtime dependencies or archive truth controls. The inventory
 hash is refreshed after reviewing this explicit preflight-only addition.
+
+## Measured closeout — 2026-10-24
+
+Tag 1.2.1 preserves `a23e1910be1c4640135ccfe5a693cca08c1480d9`.
+Publisher `40132672999` succeeded through public verification with 729 tests
+and one installed-Conda-only skip. Twelve native source-build/install cells
+and the applicable Action/reusable/minimum-gh/exit/docs/policy gates passed.
+Public wheel/sdist/checksums were independently downloaded and verified;
+a fresh Linux/Python 3.14.7 public-wheel installation and isolated exact-tag
+extension passed the diagnostic, schema, source-origin and process-status probes.
+Zenodo record `10.5281/zenodo.23627112` is independently verified for one source
+ZIP. Central receiving notice is `uibcdf/molsyssuite#138`; broad resource review
+#65 and independent #60/#68 remain open. Preparation observations above are
+historical phases, superseded by these measured results.
+
+The [normative receipt](../../versioning_and_releases.md#verified-121-publication--2026-10-24),
+[candidate evidence](../../evidence/release_1_2_1_candidate.json) and
+[public evidence](../../evidence/release_1_2_1_public.json) preserve exact bytes,
+source/run identities, qualification limits and the distinction between staged
+and delivered files. This closes release delivery, not ecosystem-wide adoption.

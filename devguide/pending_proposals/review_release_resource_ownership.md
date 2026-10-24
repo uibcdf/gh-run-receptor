@@ -43,3 +43,16 @@ provider issue `uibcdf/pytest-receptor#4` owns that late-terminal stream defect;
 this observation does not establish a GHR runtime leak. The test result remains
 729 passed/one installed-only skip, and the diagnostic is retained rather than
 suppressed. Test-tool adoption is separate from runtime/public package behavior.
+
+## Executed release scope — 2026-10-24
+
+Exact-source qualification, isolated installed probes, the public writer,
+independent public downloads and bounded non-extracting archival receipt reads
+completed successfully for source `a23e1910be1c4640135ccfe5a693cca08c1480d9`.
+The durable candidate/public receipts under `devguide/evidence/` preserve distinct
+original staged/public hashes and measured limits. The public release and DOI
+are persistent outputs. Task-root disposal follows the final receipt push and
+handoff; this statement does not assert unobserved runner disposal or expiry.
+Caller environments, authentication, extension pins, other tasks and old paths
+remain protected. The broader Diego/Liliana review stays partial under #65 and
+`uibcdf/molsyssuite#104`, target 2026-11-07.
