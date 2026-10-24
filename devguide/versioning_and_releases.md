@@ -370,3 +370,21 @@ bytes before preflight or packaging. The source, installed and archive guards
 continue to compare exact digests; no newline normalization is applied by a
 guard and no historical schema or artifact digest is refreshed for checkout
 conversion. uibcdf/gh-run-receptor#69 records the reproduction and native recovery.
+
+## Resumable archival receiving from 1.2.1
+
+The auxiliary project elects continued Zenodo archival for 1.2.1. Under
+uibcdf/gh-run-receptor#70, `zenodo-recovery.yml` calls the accepted immutable
+MolSysSuite provider `6d6172d6cd00c5ac2d4ebadb71df554ec5b7fa26`. It uses concept
+DOI `10.5281/zenodo.22843377`, fixed adoption cutoff `2026-10-24T00:00:00Z`,
+public-release events, nominal six-hour scans and a manual exact-tag route.
+Earlier releases are checked only explicitly; no historical backfill is implied.
+
+The provider enforces bounded pagination/requests and the original-publication
+72-hour window. `ingestion_pending` is operational success without archival proof;
+invalid, overdue absent and unavailable evidence stay distinct. Only a verified
+public record/file inventory permits a DOI claim. Thirty-day sanitized artifacts
+are inspection evidence, not queue persistence. The component maintainer owns
+manual overdue follow-up under #70/the version-specific central notice. No
+account connection, hook replay, deposit or release mutation is performed.
+The existing exact-version local verifier remains an independent semantic check.

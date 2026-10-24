@@ -96,13 +96,18 @@ query can be smaller than a receptor report. Use the receptor when job, matrix, 
 failure, completeness, comparison, or replay evidence matters. Use native inspection when
 the report explicitly tells you its model is insufficient.
 
-## Diagnostic context in current development source
+## Diagnostic context in 1.2.1
 
-The unreleased source correction for issues #59/#61/#62/#64/#66 recognizes bounded
+Version 1.2.1 recognizes bounded
 pytest-receptor failure groups and both libmamba missing-constraint variants,
 and keeps initial curl failures ahead of later missing signatures. Explicit
 preflight rejection can precede the runner exit across up to two blank lines.
 Reports retain a primary frame with at most two failed-test identifiers, or a later diagnostic with
 its original log location. These are untrusted diagnostic candidates; GitHub
 conclusions remain authoritative, and unfamiliar or incomplete evidence still
-requires native logs. This source statement does not qualify a public artifact.
+requires native logs. Release availability and artifact verification are recorded separately.
+
+Acquisition errors identify the failed adapter operation and safe relative API
+path. Query data, absolute URLs and credentials remain redacted. A useful network
+diagnostic is retained ahead of the generic connectivity footer; no new automatic
+transport retry loop is added and GitHub source conclusions remain authoritative.

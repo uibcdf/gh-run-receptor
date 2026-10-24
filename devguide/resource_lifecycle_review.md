@@ -38,3 +38,30 @@ The primary local clone and caller Conda environment remain untouched. This sour
 cannot assign ownership or safe disposal to every historical cache/output. Retrospective
 review remains pending with Diego/Liliana under the existing #104 member coordination;
 no blanket /tmp or home-cache removal, new cleaner or automatic expiry is introduced.
+
+## Release-scoped receiving review — 2026-10-24
+
+Owner follow-up: uibcdf/gh-run-receptor#65; release: 1.2.1. This review covers the
+actual publication route and does not close the broader retrospective review.
+
+| Operation/resource | Owner and useful lifetime | Protection and evidence |
+| --- | --- | --- |
+| Source/SDK staging clones | Release task, under `/tmp/ghrr-release-1.2.1-J5EVaN`, through final qualification and handoff | Original checkout and sibling sources are read-only inputs; only a temporary local candidate tag is used in staging. |
+| Build/test/installed environments | Release task in that same explicit root, through candidate/public-file checks | Caller Conda environment and dependencies are not modified. A clean venv supplies the committed test pin and optional docs/build tools. |
+| Candidate distributions, downloaded public files and receipts | Release task until public digest/payload/install verification and durable receipts are recorded | Candidate and hosted/public bytes keep distinct hashes. No rebuild is substituted for an original registered file or a promotion. |
+| Archive validation | Owner-maintained bounded non-extracting reader | ZIP/tar streams close through contexts; AST reads literal versions without executing payloads. Unsafe names, links, truncation and size/count controls remain guarded. |
+| Publisher `dist` and runner-temporary install/notes/API JSON | Hosted publication job | `RUNNER_TEMP`/workspace lifetime is job-owned. Draft/public GitHub assets are persistent release outputs, never temporary cleanup targets. Draft failures require explicit inspection, not automatic deletion or overwrite. |
+| Public CLI extension probe | Release task, isolated XDG data root | Existing authentication remains with gh. Caller configuration, extension and pins are preserved; only the isolated checkout is removed at closeout. |
+| Zenodo recovery receipt | Shared pinned verifier and hosted run | Bounded public GETs write an explicit JSON output; hosted sanitized evidence retains 30 days. Discovery does not depend on retention or a sleeping process. No hook/account/deposit mutation. |
+
+Existing `tests/test_bundle_resources.py`, `tests/test_github.py` and
+`tests/test_release_tools.py` guard process/stream cleanup, incomplete downloads,
+caller-resource protection and archive refusal. New transport context preserves
+those semantics. Source inspection is distinct from executed native/installed
+qualification and from unobserved hosted-runner disposal or retention expiry.
+
+At closeout, review and remove only the explicitly owned task root after its
+last needed artifact/probe is recorded. Retain useful evidence until then; expose
+cleanup failures. Do not delete old release/task paths or shared caches by age or
+prefix. Broader owner disposition remains #65/#104, with review target 2026-11-07;
+this is neither a new cleaner nor a release-gate waiver.

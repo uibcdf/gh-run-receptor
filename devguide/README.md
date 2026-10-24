@@ -118,6 +118,13 @@ in all three renderers and generic/CI profiles with native failure/exit 1 retain
 source qualification from a future public artifact. Consumer impact is handed
 to `uibcdf/molsyssuite#136`; no new package or consumer pin is claimed.
 
+**1.2.1 preparation (2026-10-24):** uibcdf/gh-run-receptor#67 adds safe failed-
+request identity and retains useful network diagnostics without changing status,
+exit codes or retry budgets. The release-scoped #65 resource review preserves
+caller state and keeps broader review partial. #70 adopts the required bounded
+read-only Zenodo recovery route. All release/public-artifact evidence remains
+pending until observed; the [release guide](versioning_and_releases.md) owns it.
+
 ## Current state
 
 The project has published and independently verified stable `1.0.0` GitHub Release assets,

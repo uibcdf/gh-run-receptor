@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 1.2.1 - 2026-10-24
+
+- Prefer initial curl/TLS and libmamba solver diagnostics over later missing
+  signature or setup-cleanup errors, retaining their separate source locations.
+- Read bounded typed pytest-receptor failure groups with primary frames and up
+  to two failed tests instead of selecting DBus stderr, tolerated pip warnings
+  or a generic runner exit.
+- Preserve explicit dependency-preflight rejection across up to two blank lines
+  before the runner failure marker.
+- Identify failed GitHub acquisition operations and safe relative request paths,
+  retain actionable transport diagnostics and redact URLs and credentials without
+  changing HTTP categories, exit codes or retry budgets.
+- Preserve exact frozen schema/workflow bytes on Windows, validate original ZIP
+  names before native normalization and adopt the reviewed portable SDK.
+- Add bounded read-only Zenodo recovery with fixed-cutoff scheduled discovery and
+  exact-tag manual verification. Archival still requires a verified public record.
+- Retain dependency-free Python 3.11--3.14 support, the read-only product boundary,
+  all nine frozen schema resources and the stable process-status contract.
+
 ## 1.2.0 - 2026-10-02
 
 - Capture bounded, job-linked check annotations for cancelled and timed-out jobs.

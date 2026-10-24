@@ -142,3 +142,8 @@ reason = "Manual same-revision reusable reporter experiment; existing provider c
 path = ".github/workflows/verify-zenodo-release.yml"
 sha256 = "1af1c592f2f25ec56f14fdbc535aad425948a05452d8d67f6a76228b34489104"
 reason = "Read-only public Zenodo poststate verifier with PyYAML tooling; archival availability independent of GitHub/Conda delivery."
+
+[[workflows]]
+path = ".github/workflows/zenodo-recovery.yml"
+sha256 = "0260744b4214c2d82e45eb4eb98a2a53cbbf19eaaecb6f53523f2101ea4bfa95"
+reason = "Read-only immutable shared Zenodo discovery after publication, on a fixed six-hour schedule and exact-tag manual route; no package, release or account mutation."

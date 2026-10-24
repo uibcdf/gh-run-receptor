@@ -22,7 +22,7 @@ from devtools.scripts.release_tools import (
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = "0.18.0"
-CURRENT_VERSION = "1.2.0"
+CURRENT_VERSION = "1.2.1"
 COMMIT = "a" * 40
 
 
