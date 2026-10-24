@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 1.3.0 - 2026-10-24
+
+- Inspect or capture one completed job's log with `--job JOB_ID` while its
+  workflow remains active. Retain exact attempt/job identity, original evidence,
+  explicit job-only scope and deterministic offline replay.
+- Preserve active workflow status/conclusion and exit 3 despite a failed
+  completed job; unavailable requested logs remain incomplete with exit 4.
+- Reuse bounded diagnostic ranking for plain and archived logs, preserving
+  timestamped traceback indentation and safe derived output.
+- Support ANSI-bearing original downloads with modern gh's explicit raw-byte
+  flag only in private file capture, retaining compatibility with gh 2.48.0.
+- Add the reviewed official noarch Conda delivery plan with exact-file staging,
+  twelve native installed cells and same-byte promotion before public claims.
+- Complete component resource-owner/lifetime disposition and explicit historical
+  path review without deleting caller caches or other tasks.
+- Preserve Python 3.11--3.14, dependency-free Python runtime, read-only GitHub
+  access, all nine frozen serialized schemas and existing Action/reusable defaults.
+
 ## 1.2.1 - 2026-10-24
 
 - Prefer initial curl/TLS and libmamba solver diagnostics over later missing

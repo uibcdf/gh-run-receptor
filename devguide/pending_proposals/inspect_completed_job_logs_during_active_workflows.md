@@ -93,3 +93,22 @@ into original raw bytes only for private file downloads on gh >=2.97.0, where
 the upstream API flag exists. JSON/terminal safety, the 2.48.0 floor, no-retry
 budget and incomplete-file cleanup remain unchanged; boundary and real receiving
 checks are separate. The failed observer remains visible historical evidence.
+
+## Authentic receiving — 2026-10-24
+
+Native run `40142448058`, attempt 1, source
+`cc5ad3c437763b1783535c93b088d2d8dbb2a505` passed observer job `121016868087`
+and all its acquisition/replay/artifact steps. The producer Windows job failed
+intentionally and the Linux producer succeeded; the workflow conclusion remains
+failure. The digest-checked sanitized artifact `12579605432` confirms both actual
+job-only captures during status in_progress/conclusion null, exit 3, deterministic
+three-renderer replay and disposal of managed raw temporary captures. The typed
+Windows failure is selected; successful failed-looking text produces no cause.
+`devguide/evidence/job_log_receiving_2026-10-24.json` records that exact scope.
+
+An independent terminal reread of original Sabueso run 40013378053/attempt 1/job
+120619139357 retains all fifteen structured jobs, native failure/exit 1 and the
+NotADirectoryError/WinError 267 cause plus both failed test nodes. It does not
+reconstruct the original active window. Its sanitized receipt is
+`devguide/evidence/job_log_original_sabueso_2026-10-24.json`. Native twelve-cell
+candidate compatibility and installed release qualification remain under #72.

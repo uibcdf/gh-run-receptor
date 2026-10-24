@@ -203,3 +203,21 @@ Central durable receipt: `devguide/rollouts/gh_run_receptor_governance_45_202610
 in uibcdf/molsyssuite. The qualified caller environment and its seven #82 closure
 findings are unchanged. No archive build, installation, upload, promotion,
 version/tag selection or credential confirmation is performed.
+
+## First delivery authorized — 2026-10-24
+
+The maintainer authorizes completing #60/#65/#68 and publishing 1.3.0 after all
+three are resolved. The real committed `release_plan.toml` selects unused
+version 1.3.0/build 0, staged route, Linux/macOS arm64/Windows × Python 3.11–3.14
+and explicit native job/step source gates. The maintainer confirms the existing
+organizational ANACONDA_UIBCDF_TOKEN is available to this repository; no value
+was inspected. Anonymous public package inventory returned 404 before this first
+build. Actual upload/access and public poststate remain unverified until observed.
+
+The existing accepted shared provider is retained at 6d6172d6cd00c5ac2d4ebadb71df554ec5b7fa26.
+Read-only sibling comparison confirms the same contract in SMonitor, ArgDigest,
+DepDigest and Pytest Receptor despite their different pins/custom wrappers. PyPI
+is excluded. The resource inventory adds the new job-log owner module. Native
+source, original producer, twelve same-file installed cells and public index/user
+installation receipts must remain separate; no rebuilding or tag movement.
+Release ownership: uibcdf/gh-run-receptor#72; advance notice: uibcdf/molsyssuite#141.

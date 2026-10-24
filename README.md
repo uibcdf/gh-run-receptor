@@ -23,11 +23,11 @@ commits or scientific consumer suites. See the [coverage reporting contract](dev
 
 Version 1.0 is the stable read-only contract: it uses exact workflow identities and does
 not include pattern or organization-level configuration. No package has been published to
-a package index. The `1.2.1` source release can inspect, watch, replay, compare, and
+a package index. The `1.3.0` source release can inspect, watch, replay, compare, and
 aggregate structured run evidence. Install the GitHub CLI extension at the exact tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 1.2.1
+gh extension install uibcdf/gh-run-receptor --pin 1.3.0
 gh run-receptor --version
 ```
 
@@ -87,7 +87,7 @@ jobs:
   report:
     runs-on: ubuntu-latest
     steps:
-      - uses: uibcdf/gh-run-receptor@1.2.1
+      - uses: uibcdf/gh-run-receptor@1.3.0
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
@@ -106,7 +106,7 @@ High-assurance consumers may pin the full release commit SHA instead of the tag.
 A small dedicated reporter can keep its full `config@1` policy beside the invocation:
 
 ```yaml
-      - uses: uibcdf/gh-run-receptor@1.2.1
+      - uses: uibcdf/gh-run-receptor@1.3.0
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
@@ -150,7 +150,7 @@ It explicitly labels the profile interpretation as published rather than indepen
 recomputed. Use `inspect SOURCE_RUN_ID` as the fallback when the artifact is absent,
 expired, or insufficient for the decision.
 
-Version `1.2.1` provides a reusable terminal reporter. A client keeps the
+Version `1.3.0` provides a reusable terminal reporter. A client keeps the
 `workflow_run` trigger and delegates the complete reporting job:
 
 ```yaml
@@ -167,7 +167,7 @@ permissions:
 
 jobs:
   report:
-    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@1.2.1
+    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@1.3.0
     with:
       run-id: ${{ github.event.workflow_run.id }}
       repository: ${{ github.repository }}
@@ -460,3 +460,17 @@ with a separately supplied GitHub CLI dependency. No public Conda package is
 claimed yet. The owner review is
 [GH Run Receptor #60](https://github.com/uibcdf/gh-run-receptor/issues/60).
 Existing extension, Action and GitHub wheel/sdist installation remain available.
+
+### Completed-job logs and Conda delivery in 1.3.0
+
+Use `inspect RUN_ID --job JOB_ID` to diagnose one completed job before the
+workflow finishes; `capture` accepts the same selection for offline replay.
+The report labels job-only log coverage and keeps the workflow's actual state.
+A failed job does not make an active workflow terminal. Capture defaults are
+unchanged. See the [usage guide](https://www.uibcdf.org/gh-run-receptor/usage.html).
+
+The official Conda route uses one `noarch: python` file with Python >=3.11,<3.15
+and a separately solved `gh>=2.48.0`. Its first delivery requires staging,
+twelve exact-file installed cells and unchanged-file promotion; availability and
+measured receipts are tracked in [#60](https://github.com/uibcdf/gh-run-receptor/issues/60).
+Existing GitHub release assets, extension, Action and reusable modes remain.

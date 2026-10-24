@@ -1,0 +1,64 @@
+{
+  "runtime_source_sha": "cc5ad3c437763b1783535c93b088d2d8dbb2a505",
+  "scope": "Terminal reread of the original job; its earlier active-window evidence is not reconstructed.",
+  "subject": {
+    "repository": "uibcdf/sabueso",
+    "workflow": ".github/workflows/ci.yml",
+    "run_id": 40013378053,
+    "run_attempt": 1,
+    "head_sha": "646ce84bfb14da6e5ec86bbeef1693ac5f41e1fe",
+    "check_suite_id": 108459657719,
+    "event": "push",
+    "head_ref": "main",
+    "url": "https://github.com/uibcdf/sabueso/actions/runs/40013378053"
+  },
+  "github": {
+    "status": "completed",
+    "conclusion": "failure"
+  },
+  "exit_status": 1,
+  "log_scope": {
+    "job_id": 120619139357,
+    "kind": "job"
+  },
+  "causes": [
+    {
+      "fingerprint": "23acd1d01d5126a4",
+      "kind": "pytest_failure",
+      "message": "NotADirectoryError: [WinError 267] The directory name is invalid | at subprocess.py:1553",
+      "occurrences": [
+        {
+          "job_id": 120619139357,
+          "job_name": "Offline tests (windows-latest, Python 3.14)",
+          "member": "job-120619139357.log",
+          "line": 576,
+          "kind": "pytest_failure",
+          "message": "NotADirectoryError: [WinError 267] The directory name is invalid | at subprocess.py:1553",
+          "normalized": "NotADirectoryError: [WinError 267] The directory name is invalid | at subprocess.py:1553",
+          "context": [
+            {
+              "member": "job-120619139357.log",
+              "line": 575,
+              "kind": "frame",
+              "message": "subprocess.py:1553"
+            },
+            {
+              "member": "job-120619139357.log",
+              "line": 579,
+              "kind": "test",
+              "message": "tests/core/test_card_saved_science_offline.py::test_independent_reader_uses_no_current_rules_or_card_factory[coverage]"
+            },
+            {
+              "member": "job-120619139357.log",
+              "line": 580,
+              "kind": "test",
+              "message": "tests/core/test_card_saved_science_offline.py::test_independent_reader_uses_no_current_rules_or_card_factory[structures]"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "original_log_sha256": "6664b750b10687f7016d03dee26aeee38b58138d33401a6a115d1f4c6cdf974b",
+  "all_structured_jobs_retained": 15
+}
