@@ -101,9 +101,10 @@ executed local regressions, hosted evidence and pending retrospective owner clea
 
 **Windows recovery (2026-10-24):** uibcdf/gh-run-receptor#69 fixes checkout
 conversion of frozen schemas and reviewed workflows and adopts the accepted
-portable distribution SDK correction. The [active report](pending_bugs/preserve_frozen_source_bytes_in_windows_checkouts.md)
-records the reproduced CRLF failure, unchanged byte guards and pending native
-Windows execution. Diagnostic ranking issues #59/#61/#62/#64/#66 are next.
+portable distribution SDK correction. The [resolved report](archive/resolved_bugs/preserve_frozen_source_bytes_in_windows_checkouts.md)
+records the reproduced CRLF failure, original ZIP spelling guard and successful
+12-cell native matrix `40122316456` at `8e55485`. Diagnostic ranking issues
+#59/#61/#62/#64/#66 are being addressed separately.
 
 ## Current state
 

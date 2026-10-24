@@ -1,9 +1,9 @@
 ---
 summary: Preserve frozen source bytes in Windows checkouts.
 issue: uibcdf/gh-run-receptor#69
-status: active
+status: resolved
 opened: 2026-10-24
-closed:
+closed: 2026-10-24
 severity: high
 verification: reproduced
 area: [packaging, tests]
@@ -80,3 +80,14 @@ compression and failed the existing compressed-size negative control locally;
 explicit DEFLATE preserves that control without relaxing its bound. A new exact-source
 native matrix is still required before closure. This failed first matrix remains
 failed evidence and is not replaced by a local pass.
+
+## Verified native recovery
+
+Source `8e55485ee73702ad83f1ef7273e4e58c4ebf3907` passes exact-source
+[weekly matrix 40122316456](https://github.com/uibcdf/gh-run-receptor/actions/runs/40122316456):
+all twelve native cells and their required preflight/full-suite steps execute
+successfully, including all four Windows Python minors. Routine `40122277329`,
+policy `40122277545` and Conda governance `40122277518` also pass for that SHA.
+The failed intermediate routine `40122172657` retains the compression-fixture
+failure before its correction. These are source gates, not qualification of a
+public wheel or Conda archive. No byte guard, digest or publication gate was waived.
