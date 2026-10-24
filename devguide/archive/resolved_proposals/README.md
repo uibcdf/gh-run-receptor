@@ -29,6 +29,7 @@
 - [#47 — Freeze the 1.0 scope in the 0.23.0 dogfooding release](freeze_the_1_0_scope_in_the_0_23_0_dogfooding_release.md) (`resolved`)
 - [#30 — Freeze version 1 contracts and migration policy](freeze_version_1_contracts_and_migration_policy.md) (`resolved`)
 - [#42 — Freeze watch polling and API-budget semantics for 1.0](freeze_watch_polling_and_api_budget_semantics_for_1_0.md) (`resolved`)
+- [#68 — Inspect one completed job log without waiting for the workflow archive.](inspect_completed_job_logs_during_active_workflows.md) (`resolved`)
 - [#46 — Assess and improve timeout diagnosis before choosing producer instrumentation.](integrate_structured_producer_timeout_evidence_after_1_0.md) (`resolved`)
 - [#5 — Load trusted workflow rules from client repositories](load_trusted_workflow_rules_from_client_repositories.md) (`resolved`)
 - [#58 — Move routine package tests to the accepted Python 3.14 baseline.](move_routine_python_tests_to_the_accepted_3_14_baseline.md) (`resolved`)

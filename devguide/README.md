@@ -132,10 +132,10 @@ review. The [release guide](versioning_and_releases.md),
 [public receipt](evidence/release_1_2_1_public.json) distinguish evidence scopes.
 Central receiving is handed off through `uibcdf/molsyssuite#138`.
 
-**1.3.0 work in progress (2026-10-24):** The component resource review #65 is complete. The user authorizes
-#68's explicit completed-job logs and #60's first
+**1.3.0 qualification (2026-10-24):** Component resource review #65 and explicit
+completed-job logs #68 are complete. The user authorizes #60's first
 verified Conda delivery before publishing 1.3.0. The
-[active job-log record](pending_proposals/inspect_completed_job_logs_during_active_workflows.md)
+[resolved job-log record](archive/resolved_proposals/inspect_completed_job_logs_during_active_workflows.md)
 tracks the additive subset/identity contract. Public 1.2.1 remains the delivered
 version until all required gates and public evidence are observed.
 

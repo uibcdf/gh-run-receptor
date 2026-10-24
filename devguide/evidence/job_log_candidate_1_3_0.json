@@ -1,0 +1,60 @@
+{
+  "source_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+  "run_id": 40142787091,
+  "run_attempt": 1,
+  "workflow": ".github/workflows/validate-job-logs.yml",
+  "native_conclusion": "failure",
+  "expected_failed_producer": true,
+  "observer_job_id": 121018011809,
+  "observer_conclusion": "success",
+  "artifact_id": 12580060487,
+  "artifact_sha256": "b58a525c9bb15acef28a2002836372f7420e853fae1ee06b4a1569d3ef35520e",
+  "report": {
+    "repository": "uibcdf/gh-run-receptor",
+    "run_id": 40142787091,
+    "run_attempt": 1,
+    "results": [
+      {
+        "job_id": 121017836203,
+        "job_name": "completed-failure",
+        "job_conclusion": "failure",
+        "github": {
+          "status": "in_progress",
+          "conclusion": null
+        },
+        "exit_status": 3,
+        "log_scope": {
+          "kind": "job",
+          "job_id": 121017836203
+        },
+        "causes": [
+          "NotADirectoryError: active job probe | at <string>:1"
+        ],
+        "log_sha256": "0e10d6db889792251a20b90f6074b92b6cc0db22596a861a2c9f57dfe2181622",
+        "deterministic_replay": true
+      },
+      {
+        "job_id": 121017836410,
+        "job_name": "completed-success",
+        "job_conclusion": "success",
+        "github": {
+          "status": "in_progress",
+          "conclusion": null
+        },
+        "exit_status": 3,
+        "log_scope": {
+          "kind": "job",
+          "job_id": 121017836410
+        },
+        "causes": [],
+        "log_sha256": "f9df3e97eba98ec9f33d610109a88caeb8a60793ae823bb7020cf958c3835fc0",
+        "deterministic_replay": true
+      }
+    ],
+    "raw_temporary_evidence_removed": true
+  },
+  "limits": [
+    "The native workflow intentionally fails; successful observer receiving is a separate fact.",
+    "No installed public-artifact qualification is inferred."
+  ]
+}

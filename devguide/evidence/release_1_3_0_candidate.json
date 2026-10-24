@@ -1,0 +1,1513 @@
+{
+  "phase": "Sealed local candidate before authoritative tagging; staged/public delivery is recorded separately.",
+  "source_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+  "version": "1.3.0",
+  "sealed_at_utc": "2026-10-24T23:33:12.035735+00:00",
+  "authoritative_tag_created": false,
+  "local_staging_tag": "1.3.0",
+  "source_suite": {
+    "passed": 814,
+    "skipped": 1,
+    "skip_reason": "Installed Conda qualification only"
+  },
+  "frozen_schemas": 9,
+  "distribution_routes": 29,
+  "sdk_sha": "6d6172d6cd00c5ac2d4ebadb71df554ec5b7fa26",
+  "artifacts": {
+    "SHA256SUMS": {
+      "bytes": 200,
+      "sha256": "c0d118a0079ce0d76389106386d84ce1a404519f52a5ff0fa98a7f2c188d9933"
+    },
+    "gh_run_receptor-1.3.0-py3-none-any.whl": {
+      "bytes": 100557,
+      "sha256": "2702195d8ba03386d5e2014012e8e6a284c499a75decb7c88688e28a00461566"
+    },
+    "gh_run_receptor-1.3.0.tar.gz": {
+      "bytes": 172463,
+      "sha256": "fc18344dbd835c2bef4cac65ea54b834ab3a852768f91bea652afc46f09e7bd5"
+    }
+  },
+  "input_sha256": {
+    "pyproject.toml": "9a804926124fc446d04afd6239e051de9e644e42685f0dae002e0d6341377c53",
+    "CITATION.cff": "51a3e3147e759e37ddf323824b052cc01672711c11044317477ca9564c1da9cd",
+    ".zenodo.json": "1275a9cf46012bc22dc6eb1198bf9587da5e3243563487d425a38a392d6eb4c7",
+    "CHANGELOG.md": "7ff4a0f17342fbbbc4f8f87dbe3096ea074e590272639c091e086978ce1b780e",
+    "devtools/dependency_routes.toml": "8476f2e6b7580c7c2e6492188c05b04a0e9c896ecec02ad648ce1e1547d9be38",
+    "devtools/conda-build/resources.toml": "b69911b83b51fe8903e418e99a8894ad0ece2cae68ab3faf18faa44a7a551f74",
+    "devtools/conda-build/release_plan.example.toml": "8f84db7d0a5bd4b02abf4c96c691dd13b1a66a6f77e024c39bf5dbbe8460577a",
+    "devtools/conda-build/meta.yaml": "4e6a8ded78afa802969a39a1557fdda6ce8874c0847b6ea6dcbfd9c47c86fae8",
+    "devtools/conda-build/README.md": "609ec37382bd0375e06bf19cc9676ad852faa7995beb17215c0c536c5f04d5f6",
+    "devtools/conda-build/release_plan.toml": "86cb27117ae66a736d19c8584cad1afc85791a1c2e03b2eb7e80e52428c42a82",
+    "devtools/conda-build/build.sh": "da3fcc8564bb780c240a1708cb38fad88dbcb6814118e5391b651f85179e41a6",
+    ".github/workflows/action-validation.yml": "d701e9162af1fddccf28e7e33d501dd2cd9fcd3ae7112756d81064b6df5ee711",
+    ".github/workflows/verify-zenodo-release.yml": "1af1c592f2f25ec56f14fdbc535aad425948a05452d8d67f6a76228b34489104",
+    ".github/workflows/gh-run-receptor-report.yml": "88fedb5720016cdbdda6e91de1cba6f0501768dfd4257e0c8a9c597b0d275d94",
+    ".github/workflows/molsyssuite-policy.yml": "6cc62208156f765ca0456e3bc5f398934263e03afc7063c69afa692c5dafdffd",
+    ".github/workflows/reusable-report.yml": "61192b7dc1dd7a7820144ed39390fa3528650afea0246e554195e0135b6b888d",
+    ".github/workflows/inline-rules-pr-boundary.yml": "16d90983e5284a4a23960c403a23b292bdbe59af8d1ddb07cc2644fd816970ec",
+    ".github/workflows/validate-contracts.yml": "4a9d328c2d474214953f31fa2f5e2c2fca48071f0734ccd73ec4d9d2af4e0bb8",
+    ".github/workflows/validate-capture-policy.yml": "8212a51da8a9933e8c70e18777d9171e1747c07ff18a789f7a07036a2d31b165",
+    ".github/workflows/validate-exit-codes.yml": "d3eec64ffa2c09a504ff785cf6b3b54ae1e30fd9c9c042c592d43e60a3d9dd67",
+    ".github/workflows/published-report-validation.yml": "5c232e1c5c071a3546374eb1661b3ed7baa25c48084170bd79e6dbac0142691e",
+    ".github/workflows/publish-release.yml": "cedc1c70ee37f072b9558e856ba934080bfd82ddf9dff3783c71557c9fa07b26",
+    ".github/workflows/docs.yml": "36cd7354d8427f1332a79bdcb95e2176ba4cc6a8f921c61194a5472ae76a501f",
+    ".github/workflows/validate-job-logs.yml": "246cfe83b86ddc19fae57040040d6d0c23379cd69dae17a026028d582947e045",
+    ".github/workflows/conda-policy.yml": "996d0d8cfdd290fd6a78ab6b17585d3ae5e66162145adf7b6fd0f50bf700ac3d",
+    ".github/workflows/zenodo-recovery.yml": "0260744b4214c2d82e45eb4eb98a2a53cbbf19eaaecb6f53523f2101ea4bfa95",
+    ".github/workflows/validate-portability.yml": "d7412be5f9ecf39bd1b97f1d87dcd2d9c5bcbd2f1549c22fcf0dfad7a43a2c0c",
+    ".github/workflows/test-staged-conda.yml": "574fd104a821ce9ba977c0e2446200772bd21dc163413be1982c083ebe049b93",
+    ".github/workflows/python-routine.yml": "c6458a8c7f665afb18a1089dc9a261f01d8eee6333b58a856467f89d3ca97d17",
+    ".github/workflows/minimum-gh-cli-validation.yml": "091582c9adedaaef28c97fcc783cf71149e37eb283e2266ebde3d804ca6f02b5",
+    ".github/workflows/validate-comparison.yml": "a0942cd000006f8d093860d6380cf7542359f09ffbaa7a8b45858817581c9404",
+    ".github/workflows/compatibility.yml": "bfb05ba42cce04a787c687d752bcd2e447a9a5bfcab59b35cf3794040469d2bb",
+    ".github/workflows/action-distribution-validation.yml": "cc3edab729ff3e66e49eea284ce8657eb322b0d04824cfb027f8d41b60b72fd0",
+    ".github/workflows/stage-conda.yml": "aa8cdec4e0c87cc5b24bd82e31cab74ad513f3e421e15fb6b229636f763008ea",
+    ".github/workflows/permission-boundary-validation.yml": "713bdbff23cf8cb4d676a407c112b82533718eabf60ded2aaeecc13176536358",
+    ".github/workflows/validate-reusable-report.yml": "87b326efb9e66cf1073daf644390086e1963006d303e4410875a81f0269c54da",
+    ".github/workflows/python-weekly.yml": "f2c538c206821b1aadb23d6a23e9e3b0146b329b411c62212549dc12cfa11b36",
+    ".github/workflows/validate-aggregation.yml": "b45c498864649d80d92d9d1d6449d3dd1a6448b2aeb8975daccd861bd5bb3d70",
+    ".github/workflows/promote-conda.yml": "baad0626da4e0f3b621d1ffb04400f286b7d17f9a16b29177901f3d554d76515",
+    "gh_run_receptor/exit_codes.py": "3286d198963ee77b0736fcaae6df743b61a8dc3b546ababf20468d15ff3c6147",
+    "gh_run_receptor/comparison_policy.py": "d183948f7994882f7095bee1a8ac16cb729d41764365d41b36da7ccc7b2db059",
+    "gh_run_receptor/service.py": "649a61da93d31bbe1bebcaf405fd0d772863f515ca9347e55283d2b8dc118b94",
+    "gh_run_receptor/watch.py": "818a02b6839e058bfc224cb059b449cc5f066623d0d20ac0a4ed72269d7123d7",
+    "gh_run_receptor/logs.py": "6b4a7a0eaa7793d6ce874d2779edd634f6a61226d7db1ba9986d00c7ca53e85c",
+    "gh_run_receptor/cli.py": "48f10f3b3f56859662330892a03adb0ba432e5fbc99e6fea847864056a611ada",
+    "gh_run_receptor/job_logs.py": "b050fe7cd700842cebd6e545bc6c422ebce8df9c2437e461b04bdfc607cf4bc8",
+    "gh_run_receptor/limits.py": "35f79d98d092c1a2b82f27788d3e58f9d82949011f50f371b59ca012b6ffa245",
+    "gh_run_receptor/bundle.py": "33c4d7e1e7810c708ab5aca9b3970aa9ebed5d6a5bdddeb49f3907a913bc6796",
+    "gh_run_receptor/config.py": "9cc0624e207850f74af6da09af63083021e71ffd53fb72127cf2c415b217b46f",
+    "gh_run_receptor/published.py": "e93963853b240ac04766d1727e485cf302f01973d9f1b942fea95f4319a3af98",
+    "gh_run_receptor/aggregation.py": "bbd6fb3a545002e6d7a40d712700c1a0f6ad4ed5fca8e9a48d140511112b9417",
+    "gh_run_receptor/errors.py": "0a637d4d732095e1cd43a5953d9ae87653bc692bf820f922e86ec1834b92856d",
+    "gh_run_receptor/github.py": "fe8ab9a9c6c7d9c4e8efda4924cb8d882c81ee317dc128d0bbc6fc4ec1deb579",
+    "gh_run_receptor/events.py": "380b4182c521ac4d1338f2603922f713c2e331f9647fa5429f7d19ad9e127e4d",
+    "gh_run_receptor/contracts.py": "319adaf8e3939acbbd7697c3f990692e3b6b877bc5ab3ccc47a603e5b95450e2",
+    "gh_run_receptor/checks.py": "7df8983f62df02bb51f093b853fff919d0dec4e3fd2869088048a1c17c81592b",
+    "gh_run_receptor/embedded.py": "99606ee4c4a7e69619e052a398189d09162a4901d46745625b023d908024a454",
+    "gh_run_receptor/comparison.py": "ea1dffd9252f64220d730cab8ef0f9876453d5997b44b26817f5ba20c922fe3d",
+    "gh_run_receptor/release_profile.py": "12a76ebe0458ce97084af34f7e17d8b26774ea8c2665c92cfae890331875fbbc",
+    "gh_run_receptor/termination.py": "4a13519750e0e61e3ff289e689baf390294b16e23cc1e00371e7b9739f48e89e",
+    "gh_run_receptor/__init__.py": "8eddae7c20c425941ed48c50ecadd1ececa03264b7326b3e59abe37002be3b96",
+    "gh_run_receptor/__main__.py": "ce1c8ee643a12be80ed7a0e935798c6d1b6f4bbfabbc125b8da0ddc94d064147",
+    "gh_run_receptor/report.py": "233bef253a2ea7f261c57af6abbdea62dcdbe13c3c510e46536fcc9428a97f8f",
+    "gh_run_receptor/model.py": "1d6a798e092e61add914b4a63e5fe668c52da3ab7fbab02368e076cb236e7ecd",
+    "gh_run_receptor/discovery.py": "9e7331319ff0d7b01a52bceeef96ebad28ee798145b0a3f725821b90277a7198",
+    "gh_run_receptor/source_version.py": "d31c398357992ad0e1a5cef7fb00688fb817d67ac101beeb6c89a43353de74f8"
+  },
+  "installed_candidate": {
+    "version": "1.3.0",
+    "python": "3.14.7",
+    "module": "$TASK_ROOT/candidate-install/lib/python3.14/site-packages/gh_run_receptor/__init__.py",
+    "runtime_sha256": {
+      "watch.py": "818a02b6839e058bfc224cb059b449cc5f066623d0d20ac0a4ed72269d7123d7",
+      "termination.py": "4a13519750e0e61e3ff289e689baf390294b16e23cc1e00371e7b9739f48e89e",
+      "source_version.py": "d31c398357992ad0e1a5cef7fb00688fb817d67ac101beeb6c89a43353de74f8",
+      "service.py": "649a61da93d31bbe1bebcaf405fd0d772863f515ca9347e55283d2b8dc118b94",
+      "report.py": "233bef253a2ea7f261c57af6abbdea62dcdbe13c3c510e46536fcc9428a97f8f",
+      "release_profile.py": "12a76ebe0458ce97084af34f7e17d8b26774ea8c2665c92cfae890331875fbbc",
+      "published.py": "e93963853b240ac04766d1727e485cf302f01973d9f1b942fea95f4319a3af98",
+      "model.py": "1d6a798e092e61add914b4a63e5fe668c52da3ab7fbab02368e076cb236e7ecd",
+      "logs.py": "6b4a7a0eaa7793d6ce874d2779edd634f6a61226d7db1ba9986d00c7ca53e85c",
+      "limits.py": "35f79d98d092c1a2b82f27788d3e58f9d82949011f50f371b59ca012b6ffa245",
+      "job_logs.py": "b050fe7cd700842cebd6e545bc6c422ebce8df9c2437e461b04bdfc607cf4bc8",
+      "github.py": "fe8ab9a9c6c7d9c4e8efda4924cb8d882c81ee317dc128d0bbc6fc4ec1deb579",
+      "exit_codes.py": "3286d198963ee77b0736fcaae6df743b61a8dc3b546ababf20468d15ff3c6147",
+      "events.py": "380b4182c521ac4d1338f2603922f713c2e331f9647fa5429f7d19ad9e127e4d",
+      "errors.py": "0a637d4d732095e1cd43a5953d9ae87653bc692bf820f922e86ec1834b92856d",
+      "embedded.py": "99606ee4c4a7e69619e052a398189d09162a4901d46745625b023d908024a454",
+      "discovery.py": "9e7331319ff0d7b01a52bceeef96ebad28ee798145b0a3f725821b90277a7198",
+      "contracts.py": "319adaf8e3939acbbd7697c3f990692e3b6b877bc5ab3ccc47a603e5b95450e2",
+      "config.py": "9cc0624e207850f74af6da09af63083021e71ffd53fb72127cf2c415b217b46f",
+      "comparison_policy.py": "d183948f7994882f7095bee1a8ac16cb729d41764365d41b36da7ccc7b2db059",
+      "comparison.py": "ea1dffd9252f64220d730cab8ef0f9876453d5997b44b26817f5ba20c922fe3d",
+      "cli.py": "48f10f3b3f56859662330892a03adb0ba432e5fbc99e6fea847864056a611ada",
+      "checks.py": "7df8983f62df02bb51f093b853fff919d0dec4e3fd2869088048a1c17c81592b",
+      "bundle.py": "33c4d7e1e7810c708ab5aca9b3970aa9ebed5d6a5bdddeb49f3907a913bc6796",
+      "aggregation.py": "bbd6fb3a545002e6d7a40d712700c1a0f6ad4ed5fca8e9a48d140511112b9417",
+      "__main__.py": "ce1c8ee643a12be80ed7a0e935798c6d1b6f4bbfabbc125b8da0ddc94d064147",
+      "__init__.py": "8eddae7c20c425941ed48c50ecadd1ececa03264b7326b3e59abe37002be3b96"
+    },
+    "schema_sha256": {
+      "report-v1.schema.json": "4d1c2873c017e6cebfb4062699c70160a9412eff6859af1731c646bac26972c1",
+      "model-v1.schema.json": "1a52a7e2cb48ebb7cc94559c5e14f674f1888fa8d36f770e94a307bdc2860a70",
+      "events-v1.schema.json": "30f785e79f6bde0a6a94e2d3b6ed0d2eaedad8b21072f249e1331c482700f7a0",
+      "config-v1.schema.json": "467d0bab5aee4c910eb95e7777fe928103fc50043f14fad7948ea093209a237d",
+      "config-capture-v1.schema.json": "73cd5e990519222e536e3abad78e8052c57f5f814cd466c09665c249c2535ea6",
+      "comparison-v1.schema.json": "85969edc14a8248f43a03d6d4b93db3daac5ddfb4093fe62a70947d1048641fc",
+      "comparison-policy-v1.schema.json": "aedef7a2d526b3cd5089cb586963a3786bad43903bf4e365995fd85517ce10dd",
+      "bundle-v1.schema.json": "02baeb92b98a22509760e483b17941602f985e6ae79a9a116555ecfcc73d086b",
+      "aggregate-v1.schema.json": "61c8e6fdaf04c610b1f335baac42cc8b4a0680014f16686f3a949cf7590a8b67"
+    },
+    "source_corpus": [
+      {
+        "run_id": 34709939550,
+        "exit_status": 0
+      },
+      {
+        "run_id": 33636046706,
+        "exit_status": 2
+      },
+      {
+        "run_id": 19058199598,
+        "exit_status": 4
+      },
+      {
+        "run_id": 22638022385,
+        "exit_status": 1
+      },
+      {
+        "run_id": 22638022385,
+        "exit_status": 0
+      },
+      {
+        "run_id": 31278635513,
+        "exit_status": 1
+      },
+      {
+        "run_id": 30998524379,
+        "exit_status": 0
+      },
+      {
+        "run_id": 33930667142,
+        "exit_status": 1
+      },
+      {
+        "run_id": 31781220979,
+        "exit_status": 0
+      },
+      {
+        "run_id": 20548716947,
+        "exit_status": 0
+      },
+      {
+        "run_id": 33923020037,
+        "exit_status": 1
+      },
+      {
+        "run_id": 33863426589,
+        "exit_status": 1
+      },
+      {
+        "run_id": 33849332945,
+        "exit_status": 0
+      },
+      {
+        "run_id": 34027741137,
+        "exit_status": 2
+      }
+    ],
+    "original_diagnostic_runs": [
+      37279215592,
+      37538525423,
+      37629258208,
+      37994715796,
+      38037422889,
+      40013378053
+    ],
+    "job_scope": [
+      {
+        "unavailable": false,
+        "exit_status": 3,
+        "partial_file_absent": null
+      },
+      {
+        "unavailable": true,
+        "exit_status": 4,
+        "partial_file_absent": true
+      }
+    ],
+    "managed_probe_resources_removed": true
+  },
+  "hosted": {
+    "routine": {
+      "run": {
+        "conclusion": "success",
+        "event": "push",
+        "head_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40142747716",
+        "id": 40142747716,
+        "path": ".github/workflows/python-routine.yml",
+        "run_attempt": 1,
+        "status": "completed"
+      },
+      "jobs": [
+        {
+          "id": 121017713391,
+          "name": "Linux Python 3.14",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Check out the exact source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install package and test tools",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete package suite",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Retain the measured coverage XML",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 121017814988,
+          "name": "Publish default-branch coverage",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/download-artifact@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Upload the measured report to Codecov",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    "policy": {
+      "run": {
+        "conclusion": "success",
+        "event": "push",
+        "head_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40142747921",
+        "id": 40142747921,
+        "path": ".github/workflows/molsyssuite-policy.yml",
+        "run_attempt": 1,
+        "status": "completed"
+      },
+      "jobs": [
+        {
+          "id": 121017714422,
+          "name": "policy / conformance",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Check out member repository",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up policy Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out MolSysSuite policy",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check repository conformance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install the policy Ruff version",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check Python lint and imports",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check Python formatting",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    "conda_governance": {
+      "run": {
+        "conclusion": "success",
+        "event": "push",
+        "head_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40142747920",
+        "id": 40142747920,
+        "path": ".github/workflows/conda-policy.yml",
+        "run_attempt": 1,
+        "status": "completed"
+      },
+      "jobs": [
+        {
+          "id": 121017714169,
+          "name": "policy / check",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run python -m pip install --disable-pip-version-check PyYAML==6.0.3 'Jinja2>=3,<4' 'packaging>=24'",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check publication workflow controls",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check declared noarch recipe and resources without building",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    "docs": {
+      "run": {
+        "conclusion": "success",
+        "event": "push",
+        "head_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40142747726",
+        "id": 40142747726,
+        "path": ".github/workflows/docs.yml",
+        "run_attempt": 1,
+        "status": "completed"
+      },
+      "jobs": [
+        {
+          "id": 121017713482,
+          "name": "build-docs",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install documentation dependencies",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build strict HTML documentation",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Upload Pages artifact",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 121017800642,
+          "name": "deploy-docs",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Deploy to GitHub Pages",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    "compatibility": {
+      "run": {
+        "conclusion": "success",
+        "event": "workflow_dispatch",
+        "head_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40142776163",
+        "id": 40142776163,
+        "path": ".github/workflows/compatibility.yml",
+        "run_attempt": 1,
+        "status": "completed"
+      },
+      "jobs": [
+        {
+          "id": 121017805028,
+          "name": "ubuntu-latest \u00b7 Python 3.12",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Check out the exact source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 121017805152,
+          "name": "macos-latest \u00b7 Python 3.13",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Check out the exact source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 121017805170,
+          "name": "macos-latest \u00b7 Python 3.14",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Check out the exact source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 121017805171,
+          "name": "windows-latest \u00b7 Python 3.14",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Check out the exact source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 121017805183,
+          "name": "ubuntu-latest \u00b7 Python 3.13",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Check out the exact source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 121017805206,
+          "name": "windows-latest \u00b7 Python 3.11",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Check out the exact source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 121017805214,
+          "name": "windows-latest \u00b7 Python 3.12",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Check out the exact source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 121017805216,
+          "name": "ubuntu-latest \u00b7 Python 3.14",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Check out the exact source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 121017805232,
+          "name": "windows-latest \u00b7 Python 3.13",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Check out the exact source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 121017805251,
+          "name": "macos-latest \u00b7 Python 3.12",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Check out the exact source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 121017805262,
+          "name": "macos-latest \u00b7 Python 3.11",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Check out the exact source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 121017805269,
+          "name": "ubuntu-latest \u00b7 Python 3.11",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Check out the exact source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    "action": {
+      "run": {
+        "conclusion": "success",
+        "event": "workflow_dispatch",
+        "head_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40142777722",
+        "id": 40142777722,
+        "path": ".github/workflows/action-validation.yml",
+        "run_attempt": 1,
+        "status": "completed"
+      },
+      "jobs": [
+        {
+          "id": 121017809495,
+          "name": "ubuntu-latest",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Check out the exact source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Validate the GitHub CLI script extension",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Report a completed successful run",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify completed-run outputs",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Report this still-active run",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify active-run truth",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Report a completed failed run without failing the reporter",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify failed-source separation",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 121017809675,
+          "name": "windows-latest",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Check out the exact source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Validate the GitHub CLI script extension",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Report a completed successful run",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify completed-run outputs",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Report this still-active run",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify active-run truth",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Report a completed failed run without failing the reporter",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Verify failed-source separation",
+              "status": "completed",
+              "conclusion": "skipped"
+            }
+          ]
+        },
+        {
+          "id": 121017809701,
+          "name": "macos-latest",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Check out the exact source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Validate the GitHub CLI script extension",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Report a completed successful run",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify completed-run outputs",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Report this still-active run",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify active-run truth",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Report a completed failed run without failing the reporter",
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Verify failed-source separation",
+              "status": "completed",
+              "conclusion": "skipped"
+            }
+          ]
+        }
+      ]
+    },
+    "reusable": {
+      "run": {
+        "conclusion": "success",
+        "event": "workflow_dispatch",
+        "head_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40142779608",
+        "id": 40142779608,
+        "path": ".github/workflows/validate-reusable-report.yml",
+        "run_attempt": 1,
+        "status": "completed"
+      },
+      "jobs": [
+        {
+          "id": 121017815778,
+          "name": "report / Report the completed source run",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Build the terminal source report",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 121017969019,
+          "name": "verify",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Verify durable called-workflow outputs",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify same-revision Action provenance",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    "minimum_gh": {
+      "run": {
+        "conclusion": "success",
+        "event": "workflow_dispatch",
+        "head_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40142781337",
+        "id": 40142781337,
+        "path": ".github/workflows/minimum-gh-cli-validation.yml",
+        "run_attempt": 1,
+        "status": "completed"
+      },
+      "jobs": [
+        {
+          "id": 121017821080,
+          "name": "GitHub CLI 2.48.0 \u00b7 Linux amd64",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Install the checksum-pinned minimum GitHub CLI",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify the selected GitHub CLI",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install the exact release as a GitHub CLI extension",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Inspect a real run through the minimum transport",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    "exit_codes": {
+      "run": {
+        "conclusion": "success",
+        "event": "workflow_dispatch",
+        "head_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40142783264",
+        "id": 40142783264,
+        "path": ".github/workflows/validate-exit-codes.yml",
+        "run_attempt": 1,
+        "status": "completed"
+      },
+      "jobs": [
+        {
+          "id": 121017826287,
+          "name": "validate",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Exercise every reproducible console category",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    "contracts": {
+      "run": {
+        "conclusion": "success",
+        "event": "workflow_dispatch",
+        "head_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40142784968",
+        "id": 40142784968,
+        "path": ".github/workflows/validate-contracts.yml",
+        "run_attempt": 1,
+        "status": "completed"
+      },
+      "jobs": [
+        {
+          "id": 121017831030,
+          "name": "validate",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Compare registered contracts with published baselines",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    "job_logs": {
+      "run": {
+        "conclusion": "failure",
+        "event": "workflow_dispatch",
+        "head_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40142787091",
+        "id": 40142787091,
+        "path": ".github/workflows/validate-job-logs.yml",
+        "run_attempt": 1,
+        "status": "completed"
+      },
+      "jobs": [
+        {
+          "id": 121017836203,
+          "name": "completed-failure",
+          "conclusion": "failure",
+          "steps": [
+            {
+              "name": "Produce an intentional typed failure",
+              "status": "completed",
+              "conclusion": "failure"
+            }
+          ]
+        },
+        {
+          "id": 121017836410,
+          "name": "completed-success",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Produce success with untrusted failed-looking text",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 121018011809,
+          "name": "observe",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify native active-window evidence and offline replay",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Preserve sanitized receiving evidence",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "central_advance_notice": "uibcdf/molsyssuite#141",
+  "central_release_notice": "uibcdf/molsyssuite#143",
+  "limits": [
+    "Candidate GitHub archive bytes keep their hashes distinct from later hosted/public builds.",
+    "Native compatibility cells build/install independent wheels; public-file installation is separately qualified.",
+    "Conda staging/installed/promotion/public evidence remains independently required under #60.",
+    "Expected failed producer in the active-job probe is never relabeled as a successful native workflow.",
+    "Known published pytest-receptor 1.1.0 late-terminal warning remains visible."
+  ],
+  "python": "3.14.7",
+  "tools": {
+    "build": "1.6.1",
+    "setuptools": "84.2.1",
+    "versioningit": "3.3.0",
+    "wheel": "0.48.0",
+    "pytest": "9.1.1",
+    "pytest-receptor": "1.1.0",
+    "ruff": "0.16.5",
+    "sphinx": "8.2.3"
+  },
+  "negative_archive_controls": [
+    {
+      "control": "wrong-version",
+      "rejected": true,
+      "reason": "Archive gh_run_receptor-1.3.0.dist-info/METADATA Version differs from the expected release"
+    },
+    {
+      "control": "missing-job-owner",
+      "rejected": true,
+      "reason": "Missing or empty required runtime file: gh_run_receptor/job_logs.py"
+    }
+  ]
+}

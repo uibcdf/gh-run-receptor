@@ -1,10 +1,10 @@
 ---
 summary: Inspect one completed job log without waiting for the workflow archive.
 issue: uibcdf/gh-run-receptor#68
-status: active
+status: resolved
 opened: 2026-10-24
-closed:
-verification: inspected
+closed: 2026-10-24
+verification: measured
 area: [github, cli]
 guard: tests/test_job_logs.py
 normative: github_evidence.md
@@ -112,3 +112,29 @@ NotADirectoryError/WinError 267 cause plus both failed test nodes. It does not
 reconstruct the original active window. Its sanitized receipt is
 `devguide/evidence/job_log_original_sabueso_2026-10-24.json`. Native twelve-cell
 candidate compatibility and installed release qualification remain under #72.
+
+## Exact-candidate completion — 2026-10-24
+
+Source `5a48759a399a17a16d923851b32519983a836f5f` passes 814 local tests with
+one explicit Conda-installed-only skip, Ruff, strict Sphinx and all nine frozen
+contracts. Native compatibility `40142776163` passes all twelve OS/Python cells,
+each executing preflight, full suite, build, wheel install and outside-source
+smoke. Exact-candidate Action `40142777722` passes three operating systems;
+reusable `40142779608`, gh floor `40142781337`, exit codes `40142783264`, frozen
+contracts `40142784968`, routine/policy/Conda governance and strict docs all pass.
+
+Exact-source active-window run `40142787091` preserves its intentional producer
+failure and passes observer job `121018011809`; artifact `12580060487` was bounded,
+digest-checked and read without extraction. Both completed job logs retain active
+run facts/exit 3 and deterministic offline replay; the failure's typed cause is
+present and success text creates no false cause. The sanitized receipt is
+`devguide/evidence/job_log_candidate_1_3_0.json`. A separately built local 1.3.0
+candidate wheel passes clean outside-source installed origin/runtime/nine-schema,
+fourteen corpus replay, all six original diagnostic, job-only active/unavailable,
+privacy/partial-cleanup and actual console status probes. It is not substituted
+for a future public wheel or the separate first Conda file.
+
+The implemented reusable owner operations and regression guards absorb this
+proposal. No default policy, public schema bytes, native conclusion or process
+status is changed. First Conda delivery and public release qualification remain
+independently owned by #60/#72; implementation closure does not claim publication.

@@ -63,3 +63,25 @@ persistent; obsolete owned task copies are removed only at closeout.
 No 1.3.0 tag, public package, installed Conda qualification or new DOI is claimed
 by this preparation record. Source test results, failed development attempts and
 actual hosted/native/public results remain distinct throughout the release.
+
+## Frozen candidate and source gates — 2026-10-24
+
+Candidate source is `5a48759a399a17a16d923851b32519983a836f5f`. Local 814-test
+source gate/one installed-only skip, Ruff, strict docs, nine frozen contracts,
+29-route and real-plan preflight pass. Exact-source compatibility `40142776163`
+passes all twelve cells and mandatory build/install/smoke steps. The full native
+source/job/attempt/step inventory is in `devguide/evidence/release_1_3_0_candidate.json`,
+with distinct original local archive hashes and clean installed-wheel probes.
+Wrong-version metadata and missing new job-owner module counterfactual wheels
+are refused. Exact-source live job receiving passes observer `121018011809`
+in expected-failed native run `40142787091`; #68 is complete in source.
+
+Staging producer `40143062622` uses that original candidate and has executed
+source preflight, build, archive inspection and staging upload. First exact-file
+installed/public receipts remain pending; skipped direct-upload/public steps in
+this staged route are not public qualification. A local invocation of the shared
+preflight correctly refused absent GH_TOKEN; no gh credential was extracted.
+The normal hosted route supplies its own read-only ephemeral token and executes
+that preflight successfully. Central version-specific notice is
+uibcdf/molsyssuite#143, separate from advance #141. The authoritative GitHub tag
+is still absent; do not move it or replace original staged bytes on recovery.
