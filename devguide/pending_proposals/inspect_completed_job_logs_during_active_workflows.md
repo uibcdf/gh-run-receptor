@@ -84,3 +84,12 @@ producer's inline YAML scalar contained an unquoted colon-space. No probe run
 executed and no active-window success is credited. Both producer commands now
 use literal block scalars; a safe-loader/manual-only/read-permission guard covers
 the actual workflow. Its route hash is refreshed after this source-only review.
+
+Native run `40142196406` at 54afb4c executed the intended Windows failure and
+Linux success, but the observer failed: modern gh rejected an ANSI-bearing plain
+log. Independent new-command diagnosis reproduces that bounded acquisition
+failure; no active-window receiving success is credited. The adapter now opts
+into original raw bytes only for private file downloads on gh >=2.97.0, where
+the upstream API flag exists. JSON/terminal safety, the 2.48.0 floor, no-retry
+budget and incomplete-file cleanup remain unchanged; boundary and real receiving
+checks are separate. The failed observer remains visible historical evidence.

@@ -195,3 +195,13 @@ redirects, are redacted entirely. Categories and HTTP statuses remain separate
 facts from safe text. [GitHub evidence](github_evidence.md#failed-acquisition-request-identity)
 defines the operation/path fields and bounds. No new authentication route,
 transport retry budget or permission is introduced.
+
+## Capturing ANSI-bearing raw logs
+
+For gh >=2.97 the acquisition adapter explicitly allows original escape bytes
+only on bounded download subprocess stdout captured in a private pipe and file.
+This is raw evidence custody, never terminal presentation. JSON requests and
+all derived log/report rendering keep their neutralization/redaction boundaries.
+Older supported gh receives no unsupported flag. See
+[GitHub evidence](github_evidence.md#raw-to-file-gh-compatibility) for the measured
+upstream compatibility boundary and regression guards.

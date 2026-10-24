@@ -261,3 +261,19 @@ All text renderers label the job-only scope and JSON retains it explicitly.
 
 Regression guard: `tests/test_job_logs.py`; diagnostic ranking and the nine
 published schema resources remain shared and byte-frozen.
+
+### Raw-to-file gh compatibility
+
+Native #68 receiving at source 54afb4c reproduced modern gh refusing a plain job
+log containing ANSI escapes. Since gh 2.97.0, `gh api` implements that explicit
+raw-output guard. The adapter records its already checked CLI version and passes
+`--allow-escape-sequences` only for bounded binary/plain downloads into its
+private stdout pipe and destination file. It never streams these bytes to the
+user terminal. JSON acquisition and rendered text retain their safety controls.
+Older supported gh 2.48.0--2.96.x do not receive an unknown flag. This adds no
+request/retry or authentication route and does not raise the functional floor.
+Tests cover both sides of the version boundary, exact ANSI byte preservation,
+no terminal output and the existing byte-limit/child/partial-file cleanup rules.
+
+Primary sources: [gh 2.97 API implementation](https://github.com/cli/cli/blob/v2.97.0/pkg/cmd/api/api.go)
+and [upstream terminal-output advisory](https://github.com/cli/cli/security/advisories/GHSA-3m3g-3wcr-px46).

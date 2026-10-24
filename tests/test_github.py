@@ -398,3 +398,37 @@ def test_safe_request_path_has_an_exact_size_boundary(length):
     error = _request_error(AcquisitionError("failed"), "api.json", path)
     assert error.request_path == path[:240]
     assert len(error.request_path) == min(length, 240)
+
+
+@pytest.mark.parametrize(
+    ("version", "raw_flag"),
+    [
+        ("2.48.0", False),
+        ("2.96.0", False),
+        ("2.97.0", True),
+        ("2.100.0", True),
+    ],
+)
+def test_raw_download_preserves_ansi_bytes_to_file_with_version_compatible_flag(
+    tmp_path, monkeypatch, capsys, version, raw_flag
+):
+    commands = []
+    payload = b"2026-10-24T00:00:00Z \x1b[31merror\x1b[0m\r\n"
+
+    def factory(command, stdout, stderr):
+        commands.append(command)
+        if command == ["gh", "--version"]:
+            return _process(f"gh version {version}\n".encode())
+        if command[-1] == "/json":
+            assert "--allow-escape-sequences" not in command
+            return _process(b"{}")
+        assert ("--allow-escape-sequences" in command) is raw_flag
+        return _process(payload)
+
+    monkeypatch.setattr("gh_run_receptor.github.subprocess.Popen", factory)
+    client = GitHubClient()
+    path = tmp_path / "original.log"
+    client.download("/job/logs", path, max_bytes=len(payload))
+    assert path.read_bytes() == payload and client.json("/json") == {}
+    assert commands.count(["gh", "--version"]) == 1
+    assert capsys.readouterr().out == ""

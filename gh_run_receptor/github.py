@@ -142,6 +142,7 @@ class GitHubClient:
     def __init__(self, hostname: str = "github.com") -> None:
         self.hostname = hostname
         self._cli_version_checked = False
+        self._cli_version = MINIMUM_GH_VERSION
 
     def _ensure_supported_cli(self) -> None:
         if self._cli_version_checked:
@@ -169,6 +170,7 @@ class GitHubClient:
                 category="unsupported_gh_cli",
                 operation="cli.version",
             )
+        self._cli_version = version
         self._cli_version_checked = True
 
     def _run(
@@ -282,6 +284,7 @@ class GitHubClient:
             self.hostname,
             "-H",
             f"X-GitHub-Api-Version: {API_VERSION}",
+            *(["--allow-escape-sequences"] if self._cli_version >= (2, 97, 0) else []),
             endpoint,
         ]
         try:
