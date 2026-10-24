@@ -221,3 +221,49 @@ is excluded. The resource inventory adds the new job-log owner module. Native
 source, original producer, twelve same-file installed cells and public index/user
 installation receipts must remain separate; no rebuilding or tag movement.
 Release ownership: uibcdf/gh-run-receptor#72; advance notice: uibcdf/molsyssuite#141.
+
+## Same-file qualification recovery — 2026-10-24
+
+Producer 40143062622 successfully staged the original
+`gh-run-receptor-1.3.0-py_0.tar.bz2`, 78037 bytes, SHA-256
+`65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3`, source
+`5a48759a399a17a16d923851b32519983a836f5f`. Independent staging download and
+owner SDK archive inspection agree. The original file remains retained; no
+rebuild, replacement, promotion or authoritative tag has occurred.
+
+First installed run 40143357716 installs and validates that file on Linux/macOS
+but cannot collect frozen administrative tests importing `devtools`. Windows
+cells fail earlier in setup-miniconda's `conda init --all` (`needs sudo`), a
+separate environment bootstrap failure. Both original failures remain visible.
+Provider feedback: uibcdf/molsyssuite#144. The new diagnostic job selector was
+used during the active matrix and correctly retained PENDING/exit 3 while naming
+the completed failed job's ModuleNotFoundError.
+
+A reviewed newer qualification workflow retains the original source/file/digest
+and unchanged declared test selection. It still calls pinned owner SDK
+prepare/download/install/verify/tests operations, including before/after installed
+runtime guards. GHR supplies only an administrative helper-binding context and
+explicit Conda activation; the source root is never added to sys.path. The
+helper namespaces are restricted to original committed `devtools`/`tests`, with
+collision/symlink/untracked-file/byte/origin checks and owned binding removal on
+all exits. Path-sensitive helpers retain their original __file__ semantics.
+No helper or runtime file is copied into or substituted for the installed payload.
+
+This is the qualified owner-equivalent route for path-sensitive support described
+by the shared support policy, not a provider implementation fork. Owner: GHR #60,
+maintainer-supervised authorization from this task; review 2026-11-07; removal
+condition: #144 supplies a reviewed shared interface and native same-file receiving
+passes. All twelve native installed cells and final provenance rechecks remain
+mandatory. The administrative workflow identity is separate from the producer;
+publication remains blocked until qualification actually succeeds.
+
+Local recovery rehearsal uses a separate clean installed 1.3.0 wheel environment
+with the SDK-declared pytest-receptor 1.2.0 tools, exact original source and pinned
+SDK. All frozen selected tests execute: 812 passed, one explicit Conda-record-only
+skip, two documented source-version deselections. No optional SDK cases skip.
+The shared before/after installed runtime checks and helper final byte/origin/
+binding cleanup pass. Two original administrative imports attempted to insert
+the runtime source root; the guarded list refuses those additions and records
+the count. A first local rehearsal correctly rejected that path drift rather
+than crediting the passing pytest line. Native Conda prefix/launcher and complete
+same-file installed qualification remain separately required.

@@ -114,3 +114,40 @@ installed cells. Source/control acceptance does not permit a public Conda
 installation claim. Version, plan, credential confirmation and timing remain
 with the developer. Existing provider pins and original artifact evidence retain
 their own scope.
+
+## Original-file qualification recovery (#60 / MolSysSuite #144)
+
+The first installed run 40143357716 exposed two administrative environment gaps:
+original tests import path-sensitive unshipped `devtools` helpers, and the older
+Windows bootstrap fails in `conda init --all` before installation. The registered
+1.3.0-py_0 file and original producer source remain immutable. A newer workflow
+ref may qualify those same bytes; its `qualification_sha` stays distinct from
+`candidate_sha` in source-binding receipts and promotion.
+
+The corrected consumer workflow still calls the original pinned SDK's
+prepare/tools/download/install/verify/tests operations. It supplies only bootstrap
+wiring: reviewed setup-miniconda v4 with profile initialization disabled, explicit
+shell activation and `devtools/scripts/installed_test_helpers.py` around the
+unchanged frozen tests. All twelve platform/Python cells, original test selection
+and final installed-file/provenance rechecks remain mandatory. No archive rebuild,
+source-root PYTHONPATH, dropped tests or manual green marker is permitted.
+
+The reusable local context binds only committed nonruntime `devtools` and `tests`
+namespace packages from the exact producer checkout. It rejects preexisting
+bindings, untracked/symlinked Python files, source/SDK mismatch, changed bytes and
+escaped helper origins. It retains original helper __file__ paths for repository
+checks, audits loaded modules and removes only owned bindings on success/failure.
+The test interpreter's guarded import path refuses legacy helper attempts to
+prepend the runtime source root; other SDK/admin paths remain available. Shared
+runtime prefix guards still execute before and after pytest. Administrative child
+scripts retain their original source-check role; they do not become installed
+runtime receipts. The per-cell helper artifact records hashes, checks, blocked
+source-path insertions, test exit and removal, with 30-day retention.
+
+This is the qualified owner-equivalent route for path-sensitive inputs permitted
+by the shared test-support contract. Owner issue #60 links provider feedback
+`uibcdf/molsyssuite#144`; review target 2026-11-07, removal when an accepted shared
+interface supplies this route and exact-file native receiving passes. No provider
+implementation is edited or copied, and the original distribution's runtime and
+resources are not changed. A passing local wheel rehearsal does not replace the
+native same-Conda-file matrix.

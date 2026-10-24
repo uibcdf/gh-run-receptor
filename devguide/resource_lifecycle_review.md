@@ -112,3 +112,16 @@ shared-cache deletion or removal of other sessions is authorized. Current task
 retention is ordinary useful work, with disposal after final durable receipts,
 not an unbounded exception. Central #104 receives this component's disposition
 through its owning issue/report after the local record is pushed.
+
+## Installed administrative helper receiving — 2026-10-24 (#60)
+
+The original-file Conda qualification recovery owns only temporary in-process
+`devtools`/`tests` bindings and an explicit caller receipt. Original committed
+helper files are read-only inputs. Collision/byte/path/origin guards and finally
+cleanup preserve caller bindings; the original sys.path/sys.argv objects are
+restored. A guarded temporary import-path list prevents legacy administrative
+helpers from exposing the runtime source root. No extra environment or source
+copy is created by that operation. Hosted qualification checkouts/environments
+remain job-owned; sanitized helper artifacts retain 30 days. The bounded owner-
+equivalent integration and removal condition belong to #60/central #144, separate
+from the already completed general owner disposition #65.

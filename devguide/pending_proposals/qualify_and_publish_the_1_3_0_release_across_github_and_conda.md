@@ -85,3 +85,16 @@ The normal hosted route supplies its own read-only ephemeral token and executes
 that preflight successfully. Central version-specific notice is
 uibcdf/molsyssuite#143, separate from advance #141. The authoritative GitHub tag
 is still absent; do not move it or replace original staged bytes on recovery.
+
+## Original Conda file retained during administrative recovery
+
+The first installed run 40143357716 fails after successful Linux/macOS exact-file
+installation/resource validation because original administrative test helpers
+are unavailable; Windows bootstrap independently fails before installation.
+Original producer 40143062622 and SHA-256
+`65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3` remain
+unchanged. #60/central #144 own a newer qualification workflow with original
+source/test/file binding, isolated path-sensitive helpers, explicit activation
+and all required prefix/test/recheck steps. No first-failure evidence is credited
+as a passed installed gate. Rebuilding or replacing the registered file is
+excluded. GitHub publication is still conditional on #60 delivery.
