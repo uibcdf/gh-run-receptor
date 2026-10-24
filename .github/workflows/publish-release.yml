@@ -36,6 +36,14 @@ jobs:
         with:
           python-version: "3.13"
 
+      - name: Check out the reviewed distribution SDK
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          repository: uibcdf/molsyssuite
+          ref: 6d6172d6cd00c5ac2d4ebadb71df554ec5b7fa26
+          path: .molsyssuite
+          persist-credentials: false
+
       - name: Verify exact tag identity
         shell: bash
         run: |
@@ -54,6 +62,7 @@ jobs:
         run: |
           python devtools/scripts/release_tools.py citation "$RELEASE_TAG"
           python devtools/scripts/validate_contracts.py --baseline 0.21.0
+          python devtools/check_distribution_inputs.py --suite-root .molsyssuite
           python -m pytest --receptor=ci
 
       - name: Build and verify distributions

@@ -55,3 +55,10 @@ and `not_found_or_inaccessible`; optional-404 behavior remains unchanged. This
 positive/request-context probe does not claim the earlier transient outage was
 reproduced or repaired. Strict Sphinx preparation build also passes in the clean
 task environment. Exact frozen-candidate gates remain a separate next step.
+
+The writer workflow now checks out the same reviewed SDK and executes the owner
+preflight before pytest. Without that checkout, optional SDK-dependent test cases
+would skip inside the publisher even though the separate compatibility matrix
+executes them. This closes that publication-scope gap without changing the public
+route, credentials, runtime dependencies or archive truth controls. The inventory
+hash is refreshed after reviewing this explicit preflight-only addition.

@@ -70,7 +70,7 @@ reason = "Manual owner input review then immutable shared exact-source/installed
 
 [[workflows]]
 path = ".github/workflows/publish-release.yml"
-sha256 = "6b16d14e28ec61ddc56eeae10433a4d69a035e62b13dd630c457ba1bff25f6d3"
+sha256 = "cedc1c70ee37f072b9558e856ba934080bfd82ddf9dff3783c71557c9fa07b26"
 reason = "Retained manual exact-tag wheel/sdist and GitHub draft-first publisher; complete local suite, frozen-contract, bounded wheel/sdist payload and exact release metadata checks before upload; no Conda claim."
 
 [[workflows]]
