@@ -7,4 +7,4 @@ permissions:
   contents: read
 jobs:
   policy:
-    uses: uibcdf/molsyssuite/.github/workflows/check-conda-publication.yaml@38db709ecc07451ff36ea84573d585f9af6b4df7
+    uses: uibcdf/molsyssuite/.github/workflows/check-conda-publication.yaml@6d6172d6cd00c5ac2d4ebadb71df554ec5b7fa26

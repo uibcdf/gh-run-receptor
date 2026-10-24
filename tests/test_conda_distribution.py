@@ -104,6 +104,41 @@ def test_owner_review_refuses_schema_drift_even_with_the_same_filename(member):
         check_owner_inputs(member)
 
 
+def test_windows_checkout_preserves_frozen_schema_and_reviewed_workflow_bytes(tmp_path):
+    """Exercise Git's actual checkout conversion, including a CRLF control."""
+    source = tmp_path / "source"
+    source.mkdir()
+    checkout = tmp_path / "checkout"
+    checkout.mkdir()
+    paths = [
+        *sorted((ROOT / "gh_run_receptor/schemas").glob("*-v*.schema.json")),
+        *sorted((ROOT / ".github/workflows").glob("*.y*ml")),
+    ]
+    for path in [ROOT / ".gitattributes", *paths]:
+        target = source / path.relative_to(ROOT)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(path.read_bytes())
+    (source / "control.txt").write_bytes(b"first\nsecond\n")
+    subprocess.run(["git", "init", str(source)], check=True, capture_output=True)
+    subprocess.run(["git", "add", "."], cwd=source, check=True, capture_output=True)
+    subprocess.run(
+        [
+            "git",
+            "-c",
+            "core.autocrlf=true",
+            "checkout-index",
+            "--all",
+            f"--prefix={checkout.as_posix()}/",
+        ],
+        cwd=source,
+        check=True,
+        capture_output=True,
+    )
+    assert (checkout / "control.txt").read_bytes() == b"first\r\nsecond\r\n"
+    for path in paths:
+        assert (checkout / path.relative_to(ROOT)).read_bytes() == path.read_bytes(), path
+
+
 def test_installed_schema_guard_refuses_wrong_bytes_and_missing_inventory():
     inventory = tomllib.loads((ROOT / RESOURCES).read_text())
     verify_schemas(inventory)

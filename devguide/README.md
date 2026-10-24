@@ -99,6 +99,12 @@ cleanup. [Resource review](resource_lifecycle_review.md) separates inspected too
 executed local regressions, hosted evidence and pending retrospective owner cleanup.
 [Data contracts](data_contracts.md) records the unchanged serialized/output boundary.
 
+**Windows recovery (2026-10-24):** uibcdf/gh-run-receptor#69 fixes checkout
+conversion of frozen schemas and reviewed workflows and adopts the accepted
+portable distribution SDK correction. The [active report](pending_bugs/preserve_frozen_source_bytes_in_windows_checkouts.md)
+records the reproduced CRLF failure, unchanged byte guards and pending native
+Windows execution. Diagnostic ranking issues #59/#61/#62/#64/#66 are next.
+
 ## Current state
 
 The project has published and independently verified stable `1.0.0` GitHub Release assets,

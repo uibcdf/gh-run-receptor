@@ -361,3 +361,12 @@ Public files and existing tags are immutable. Promotion retains original source
 and tested bytes; a newer administrative workflow gets a separate qualification
 identity. Current source readiness, credential access, artifact installation and
 public delivery are separate claims. The first Conda release remains pending.
+
+## Source checkout byte preservation
+
+Frozen JSON schemas and hash-reviewed workflow files use explicit LF checkout
+attributes. Windows automatic CRLF conversion must not change their source
+bytes before preflight or packaging. The source, installed and archive guards
+continue to compare exact digests; no newline normalization is applied by a
+guard and no historical schema or artifact digest is refreshed for checkout
+conversion. uibcdf/gh-run-receptor#69 records the reproduction and native recovery.

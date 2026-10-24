@@ -4,7 +4,7 @@ source_routes = []
 source_reason = "There are no required Python runtime providers to replace with sibling source; gh is an independently distributed external executable."
 
 [shared_tool]
-commit = "38db709ecc07451ff36ea84573d585f9af6b4df7"
+commit = "6d6172d6cd00c5ac2d4ebadb71df554ec5b7fa26"
 
 [[recipes]]
 path = "devtools/conda-build/meta.yaml"
@@ -25,12 +25,12 @@ reason = "Manual checkout-local gh extension and composite Action validation usi
 
 [[workflows]]
 path = ".github/workflows/compatibility.yml"
-sha256 = "678f2cb13ccbb98da5c8bbec446bbbaad330d5253dc2b9d658515fdc2bed7121"
+sha256 = "bfb05ba42cce04a787c687d752bcd2e447a9a5bfcab59b35cf3794040469d2bb"
 reason = "Twelve Python/OS source pip-test, wheel-build/install and outside-checkout smoke cells; runs the pinned input review before tests, distinct from one-file Conda installation."
 
 [[workflows]]
 path = ".github/workflows/conda-policy.yml"
-sha256 = "0b76e4ba2d2355657e405ac2d37c4fa0d4b49f622508098c6ce02f4817b9829c"
+sha256 = "996d0d8cfdd290fd6a78ab6b17585d3ae5e66162145adf7b6fd0f50bf700ac3d"
 reason = "Read-only immutable shared Conda workflow/resource audit on push, PR and dispatch; no build or publication credential."
 
 [[workflows]]
@@ -65,7 +65,7 @@ reason = "Manual least-privilege consumer experiment at existing Action pins; pr
 
 [[workflows]]
 path = ".github/workflows/promote-conda.yml"
-sha256 = "89f2c6cc47ddea44d094da37b54f007f848379bdb00ea8d89fb99e747cb8d044"
+sha256 = "baad0626da4e0f3b621d1ffb04400f286b7d17f9a16b29177901f3d554d76515"
 reason = "Manual owner input review then immutable shared exact-source/installed-matrix verifier and same-file label promotion; no rebuild."
 
 [[workflows]]
@@ -80,12 +80,12 @@ reason = "Manual published-report/source-first consumer validation with the exis
 
 [[workflows]]
 path = ".github/workflows/python-routine.yml"
-sha256 = "0c6251069d3ea30a8b95e874ab04e5cc214e7274aa166c21fbe9a6b2614ab318"
+sha256 = "c6458a8c7f665afb18a1089dc9a261f01d8eee6333b58a856467f89d3ca97d17"
 reason = "Linux/Python 3.14 source pip test extras; pinned SDK reviews all input routes before full pytest; dependent default-branch coverage publication stays separate."
 
 [[workflows]]
 path = ".github/workflows/python-weekly.yml"
-sha256 = "0388fe9d97f63c0fa5a575d6677143e11b783b8332401792e45f2959ee8ade03"
+sha256 = "f2c538c206821b1aadb23d6a23e9e3b0146b329b411c62212549dc12cfa11b36"
 reason = "Twelve source pip/test-extra cells over Python 3.11-3.14 and three OS; pinned SDK review before full pytest; source evidence only."
 
 [[workflows]]
@@ -95,12 +95,12 @@ reason = "Read-only reusable report consumer contract; uses the shared receptor 
 
 [[workflows]]
 path = ".github/workflows/stage-conda.yml"
-sha256 = "1c8bf9722582c799efbba8086ba56eda8f34d623378f8e3161c3818b526e9f8c"
+sha256 = "aa8cdec4e0c87cc5b24bd82e31cab74ad513f3e421e15fb6b229636f763008ea"
 reason = "Manual reviewed candidate SHA/version, owner preflight and immutable shared single-file staged build; committed real plan and executed source gates required."
 
 [[workflows]]
 path = ".github/workflows/test-staged-conda.yml"
-sha256 = "20bbdcb4414ed35e11dca878d5416c82b3622bdd38bf9baec2007cf3f05c03e4"
+sha256 = "574fd104a821ce9ba977c0e2446200772bd21dc163413be1982c083ebe049b93"
 reason = "Manual immutable producer SHA/file/digest qualification through the shared twelve-cell installed workflow; public dependency resolution and no publication credential."
 
 [[workflows]]

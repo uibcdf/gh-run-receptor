@@ -19,7 +19,7 @@ permissions:
   contents: read
 jobs:
   installed:
-    uses: uibcdf/molsyssuite/.github/workflows/test-installed-noarch-conda.yaml@38db709ecc07451ff36ea84573d585f9af6b4df7
+    uses: uibcdf/molsyssuite/.github/workflows/test-installed-noarch-conda.yaml@6d6172d6cd00c5ac2d4ebadb71df554ec5b7fa26
     with:
       candidate_sha: ${{ inputs.candidate_sha }}
       filename: ${{ inputs.filename }}
