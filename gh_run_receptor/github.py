@@ -36,6 +36,9 @@ MAX_JSON_BYTES = 64 * 1024 * 1024
 MAX_DOWNLOAD_BYTES = 512 * 1024 * 1024
 READ_CHUNK_BYTES = 64 * 1024
 MAX_ERROR_CHARACTERS = 500
+MAX_REQUEST_CHARACTERS = 240
+MAX_ACQUISITION_MESSAGE_CHARACTERS = 800
+_URL = re.compile(r"https?://[^\s<>\"']+")
 _HTTP_STATUS = re.compile(r"\bHTTP ([1-5][0-9]{2})\b")
 _GH_VERSION = re.compile(r"^gh version ([0-9]+)\.([0-9]+)\.([0-9]+)(?:\s|$)")
 _GITHUB_TOKEN = re.compile(r"\bgh[pousr]_[A-Za-z0-9_]{20,}\b")
@@ -67,13 +70,22 @@ def _safe_error_line(error_output: bytes) -> tuple[str, str, int | None]:
     if category == "authentication_required":
         detail = "GitHub CLI is not authenticated; run gh auth login"
     else:
-        lines = [line.strip() for line in text.splitlines() if line.strip()]
+        lines = [
+            line.strip()
+            for line in text.splitlines()
+            if line.strip()
+            and not line.strip()
+            .lower()
+            .startswith("check your internet connection or https://githubstatus.com")
+        ]
         detail = lines[-1] if lines else "unknown error"
         if detail.startswith("gh: "):
             detail = detail[4:]
     detail = _GITHUB_TOKEN.sub("[REDACTED]", detail)
     detail = _AUTHORIZATION.sub(r"\1[REDACTED]", detail)
     detail = _TOKEN_ASSIGNMENT.sub(r"\1=[REDACTED]", detail)
+    # Redirect URLs can contain signed credentials; the explicit request path is separate.
+    detail = _URL.sub("[REDACTED_URL]", detail)
     visible = []
     for character in detail:
         codepoint = ord(character)
@@ -88,6 +100,31 @@ def _safe_error_line(error_output: bytes) -> tuple[str, str, int | None]:
 def _cli_failure(prefix: str, error_output: bytes) -> AcquisitionError:
     category, detail, http_status = _safe_error_line(error_output)
     return AcquisitionError(f"{prefix}: {detail}", category=category, http_status=http_status)
+
+
+def _request_error(
+    error: AcquisitionError, operation: str, endpoint: str | None = None
+) -> AcquisitionError:
+    """Attach bounded safe request identity once, preserving the original failure."""
+    if error.operation is not None:
+        return error
+    path = None
+    if endpoint is not None:
+        candidate = endpoint.split("?", 1)[0].split("#", 1)[0]
+        if re.fullmatch(r"/?[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*", candidate):
+            _, path, _ = _safe_error_line(candidate.encode("utf-8"))
+            path = path[:MAX_REQUEST_CHARACTERS]
+        else:
+            path = "[REDACTED_ENDPOINT]"
+    _, detail, _ = _safe_error_line(str(error).encode("utf-8"))
+    identity = operation + (f" {path}" if path is not None else "")
+    return AcquisitionError(
+        f"{identity}: {detail}"[:MAX_ACQUISITION_MESSAGE_CHARACTERS],
+        category=error.category,
+        http_status=error.http_status,
+        operation=operation,
+        request_path=path,
+    )
 
 
 def _parse_gh_version(output: str) -> tuple[int, int, int] | None:
@@ -119,6 +156,7 @@ class GitHubClient:
             raise AcquisitionError(
                 message,
                 category="unsupported_gh_cli",
+                operation="cli.version",
             )
         if version < MINIMUM_GH_VERSION:
             observed = ".".join(str(part) for part in version)
@@ -129,6 +167,7 @@ class GitHubClient:
             raise AcquisitionError(
                 message,
                 category="unsupported_gh_cli",
+                operation="cli.version",
             )
         self._cli_version_checked = True
 
@@ -137,6 +176,12 @@ class GitHubClient:
     ) -> str:
         if check_cli:
             self._ensure_supported_cli()
+        operation = (
+            "api.json"
+            if arguments[:1] == ["api"]
+            else ("cli.version" if arguments == ["--version"] else "repository")
+        )
+        endpoint = arguments[-1] if operation == "api.json" else None
         command = ["gh", *arguments]
         try:
             with (
@@ -157,14 +202,24 @@ class GitHubClient:
                 stderr.seek(0)
                 error_output = stderr.read(MAX_JSON_BYTES)
         except OSError as error:
-            raise AcquisitionError(f"could not execute GitHub CLI: {error}") from error
+            raise _request_error(
+                AcquisitionError(f"could not execute GitHub CLI: {error}"), operation, endpoint
+            ) from error
+        except AcquisitionError as error:
+            raise _request_error(error, operation, endpoint) from error
 
         if return_code:
-            raise _cli_failure("GitHub CLI request failed", error_output)
+            raise _request_error(
+                _cli_failure("GitHub CLI request failed", error_output), operation, endpoint
+            )
         try:
             return b"".join(chunks).decode("utf-8", errors="strict")
         except UnicodeDecodeError as error:
-            raise AcquisitionError("GitHub CLI returned non-UTF-8 structured output") from error
+            raise _request_error(
+                AcquisitionError("GitHub CLI returned non-UTF-8 structured output"),
+                operation,
+                endpoint,
+            ) from error
 
     def repository(self, explicit: str | None) -> str:
         """Resolving an explicit or current repository name."""
@@ -198,7 +253,9 @@ class GitHubClient:
         try:
             return json.loads(output)
         except json.JSONDecodeError as error:
-            raise AcquisitionError(f"GitHub returned invalid JSON for {endpoint}") from error
+            raise _request_error(
+                AcquisitionError("GitHub returned invalid JSON"), "api.json", endpoint
+            ) from error
 
     def optional_json(self, endpoint: str) -> Any | None:
         """Fetching JSON while treating an HTTP 404 as an absent optional resource."""
@@ -247,13 +304,22 @@ class GitHubClient:
                 error_output = stderr.read(MAX_JSON_BYTES)
         except (FileNotFoundError, OSError) as error:
             destination.unlink(missing_ok=True)
-            raise AcquisitionError(f"could not download GitHub evidence: {error}") from error
+            raise _request_error(
+                AcquisitionError(f"could not download GitHub evidence: {error}"),
+                "api.download",
+                endpoint,
+            ) from error
+        except AcquisitionError as error:
+            destination.unlink(missing_ok=True)
+            raise _request_error(error, "api.download", endpoint) from error
         except BaseException:
             destination.unlink(missing_ok=True)
             raise
         if return_code:
             destination.unlink(missing_ok=True)
-            raise _cli_failure("GitHub CLI download failed", error_output)
+            raise _request_error(
+                _cli_failure("GitHub CLI download failed", error_output), "api.download", endpoint
+            )
 
 
 def merge_pages(payload: Any, collection: str) -> dict[str, Any]:

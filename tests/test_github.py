@@ -262,3 +262,139 @@ def test_download_enforces_a_caller_specific_byte_limit(tmp_path, monkeypatch):
         client.download("/artifact", destination, max_bytes=5)
 
     assert not destination.exists()
+
+
+@pytest.mark.parametrize("mode", ["json", "download"])
+@pytest.mark.parametrize(
+    "stderr, category, status",
+    [
+        (
+            b'Get "https://api.github.com/private?token=private-value": dial tcp: no such host\n'
+            b"check your internet connection or https://githubstatus.com\n",
+            "acquisition_failed",
+            None,
+        ),
+        (b"gh: Not Found (HTTP 404)\n", "not_found_or_inaccessible", 404),
+        (b"gh: permission denied (HTTP 403)\n", "permission_denied", 403),
+        (b"gh: Bad credentials (HTTP 401)\n", "authentication_failed", 401),
+        (b"gh: API rate limit exceeded (HTTP 429)\n", "rate_limited", 429),
+    ],
+)
+def test_failed_request_keeps_identity_status_diagnostic_and_no_retry(
+    tmp_path, monkeypatch, mode, stderr, category, status
+):
+    calls = []
+
+    def factory(command, stdout, stderr):
+        calls.append(command)
+        # Popen's named stderr argument is the private output stream.
+        stderr.write(error_bytes)
+        return _process(b"", 1)
+
+    error_bytes = stderr
+    monkeypatch.setattr("gh_run_receptor.github.subprocess.Popen", factory)
+    client = GitHubClient()
+    client._cli_version_checked = True
+    endpoint = "/repos/uibcdf/moli/actions/runs/39513025386?access_token=private-value"
+    output = tmp_path / "partial"
+    with pytest.raises(AcquisitionError) as captured:
+        if mode == "json":
+            client.json(endpoint)
+        else:
+            client.download(endpoint, output)
+    error = captured.value
+    assert error.category == category and error.http_status == status
+    assert error.operation == f"api.{mode}"
+    assert error.request_path == endpoint.split("?")[0]
+    assert error.request_path in str(error)
+    assert "private-value" not in str(error)
+    assert "check your internet connection" not in str(error)
+    if category == "acquisition_failed":
+        assert "dial tcp: no such host" in str(error)
+    assert len(calls) == 1
+    assert not output.exists()
+
+
+@pytest.mark.parametrize(
+    "endpoint",
+    [
+        "/api/" + "a" * 1000,
+        "https://user:secret@host/path?signature=secret",
+        "/repos/name\nTOKEN=secret",
+        "/api/%0a",
+    ],
+)
+def test_request_context_never_prints_credentials_or_control_characters(monkeypatch, endpoint):
+    def factory(command, stdout, stderr):
+        stderr.write(b"gh: rejected (HTTP 403)\n")
+        return _process(b"", 1)
+
+    monkeypatch.setattr("gh_run_receptor.github.subprocess.Popen", factory)
+    client = GitHubClient()
+    client._cli_version_checked = True
+    with pytest.raises(AcquisitionError) as captured:
+        client.json(endpoint)
+    assert "secret" not in str(captured.value)
+    assert "\n" not in str(captured.value)
+    assert len(captured.value.request_path) <= 240
+    assert len(str(captured.value)) <= 800
+
+
+@pytest.mark.parametrize(
+    "output, diagnostic", [(b"{truncated", "invalid JSON"), (b"\xff", "non-UTF-8")]
+)
+def test_malformed_response_retains_safe_request_context(monkeypatch, output, diagnostic):
+    monkeypatch.setattr(
+        "gh_run_receptor.github.subprocess.Popen", lambda *args, **kwargs: _process(output)
+    )
+    client = GitHubClient()
+    client._cli_version_checked = True
+    with pytest.raises(AcquisitionError, match=diagnostic) as captured:
+        client.json("/repos/example/project/actions/runs/1")
+    assert captured.value.operation == "api.json"
+    assert captured.value.request_path == "/repos/example/project/actions/runs/1"
+
+
+def test_version_failure_is_not_misattributed_to_an_api_request(monkeypatch):
+    def factory(command, stdout, stderr):
+        stderr.write(b"gh: cannot execute version probe\n")
+        return _process(b"", 1)
+
+    monkeypatch.setattr("gh_run_receptor.github.subprocess.Popen", factory)
+    with pytest.raises(AcquisitionError) as captured:
+        GitHubClient().json("/example")
+    assert captured.value.operation == "cli.version"
+    assert captured.value.request_path is None
+
+
+def test_cli_request_failure_keeps_exit_five_and_one_safe_line(monkeypatch, capsys):
+    from gh_run_receptor.cli import main
+
+    def factory(command, stdout, stderr):
+        if command == ["gh", "--version"]:
+            return _process(b"gh version 2.100.0\n")
+        stderr.write(
+            b"error connecting to api.github.com\ncheck your internet connection or https://githubstatus.com\n"
+        )
+        return _process(b"", 1)
+
+    monkeypatch.setattr("gh_run_receptor.github.subprocess.Popen", factory)
+    result = main(["inspect", "39513025386", "--repo", "uibcdf/moli", "--receptor", "llm"])
+    output = capsys.readouterr()
+    assert result == 5
+    assert output.out == ""
+    assert len(output.err.splitlines()) == 1
+    assert "category=acquisition_failed" in output.err
+    assert "api.json /repos/uibcdf/moli/actions/runs/39513025386" in output.err
+    assert "error connecting to api.github.com" in output.err
+    assert "check your internet connection" not in output.err
+
+
+@pytest.mark.parametrize("length", [239, 240, 241])
+def test_safe_request_path_has_an_exact_size_boundary(length):
+    from gh_run_receptor.github import _request_error
+
+    path = "/" + "a" * (length - 1)
+    error = _request_error(AcquisitionError("failed"), "api.json", path)
+    assert error.request_path == path[:240]
+    assert len(error.request_path) == min(length, 240)

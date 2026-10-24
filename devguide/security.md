@@ -186,3 +186,12 @@ failure groups, explicit tool rejections and nonzero curl diagnostics, including
 their negative/window/redaction guards. Optional occurrence context retains
 failed-test and later-diagnostic locators; it never authenticates log text or
 changes source facts. All profiles and renderers share that operation.
+
+## Acquisition failure context
+
+Failed request identities use only bounded relative paths; query/fragment data
+and absolute/unsafe endpoints are not exposed. Diagnostic URLs, including signed
+redirects, are redacted entirely. Categories and HTTP statuses remain separate
+facts from safe text. [GitHub evidence](github_evidence.md#failed-acquisition-request-identity)
+defines the operation/path fields and bounds. No new authentication route,
+transport retry budget or permission is introduced.

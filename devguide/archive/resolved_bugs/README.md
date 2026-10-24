@@ -7,6 +7,7 @@
 - [#12 — Conda summaries erase cancelled platform state](conda_summaries_erase_cancelled_platform_state.md) (`resolved`)
 - [#64 — Retain explicit preflight rejection across bounded blank lines.](dependency_rejection_hidden_by_process_exit.md) (`resolved`)
 - [#20 — Expose published interpretation trust in compact success output](expose_published_interpretation_trust_in_compact_success_output.md) (`resolved`)
+- [#67 — Identify the failed GitHub request without losing its actionable diagnostic.](failed_acquisition_request_context.md) (`resolved`)
 - [#11 — Historical attempt capture mixes source facts and can report false PASS](historical_attempt_capture_mixes_source_facts_and_can_report_false_pass.md) (`resolved`)
 - [#59 — Prefer the initial download failure over a later missing signature.](initial_download_failure_hidden_by_signature_error.md) (`resolved`)
 - [#61 — Retain direct libmamba constraints ahead of cleanup failures.](initial_solver_failure_hidden_by_cleanup.md) (`resolved`)

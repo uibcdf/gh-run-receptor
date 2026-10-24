@@ -192,3 +192,22 @@ GitHub.com commonly retains logs and artifacts for a bounded repository-configur
 period; 90 days is a common default, not a receptor guarantee. A bundle records expiry
 metadata when provided. Missing historical logs or artifacts yield a valid but
 explicitly incomplete bundle.
+
+## Failed acquisition request identity
+
+Transport failures retain the existing error category and HTTP status and add
+internal exception fields `operation` and `request_path`. Known operations are
+`api.json`, `api.download`, `cli.version` and `repository`. CLI/Action diagnostics
+name that operation and a bounded relative API path. Paths omit all query and
+fragment data and reject absolute/unsafe endpoints; paginated calls identify the
+collection, not an inferred failing internal page. No raw command/header/token
+or temporary redirect URL is printed.
+
+The known generic network footer no longer hides its preceding diagnostic.
+Transport details redact credential shapes, all URLs and control characters.
+Path/detail/context bounds are 240/500/800 characters respectively. Structured
+output decoding, size limits, optional HTTP-404 behavior, child cleanup and the
+source conclusion/process-status contracts are unchanged. No new retry loop is
+added: watch retains its documented consecutive-failure budget. This resolves
+observability in uibcdf/gh-run-receptor#67; it does not claim a network outage was
+fixed or that a later successful request reproduces the original incident.

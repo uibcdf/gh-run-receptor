@@ -14,10 +14,14 @@ class AcquisitionError(ReceptorError):
         *,
         category: str = "acquisition_failed",
         http_status: int | None = None,
+        operation: str | None = None,
+        request_path: str | None = None,
     ) -> None:
         super().__init__(message)
         self.category = category
         self.http_status = http_status
+        self.operation = operation
+        self.request_path = request_path
 
 
 class BundleError(ReceptorError):

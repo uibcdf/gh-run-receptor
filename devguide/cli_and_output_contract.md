@@ -336,7 +336,7 @@ The stable exit-code contract separates run outcome from receptor failure:
 Acquisition failures use one bounded stderr line while keeping exit status 5:
 
 ```text
-RECEPTOR_ERROR category=permission_denied: GitHub CLI request failed: ... (HTTP 403)
+RECEPTOR_ERROR category=permission_denied: api.json /repos/OWNER/REPO/actions/runs/ID: GitHub CLI request failed: ... (HTTP 403)
 ```
 
 An incompatible local transport fails before an API request:
