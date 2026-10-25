@@ -143,7 +143,7 @@ version until all required gates and public evidence are observed.
 
 The project has published and independently verified stable `1.0.0` GitHub Release assets,
 MolSysSuite dogfooding, and a public Zenodo record. The stable scope is frozen in
-`release_readiness_1_0.md`; no package-index artifact is claimed. All nine published
+`release_readiness_1_0.md`; the additional public Conda delivery is recorded below. All nine published
 serialized boundaries are frozen
 against their first publishing tags, including the `aggregate@1` boundary introduced in
 0.21.0. The 1.0 product boundary is frozen. Release 0.22.0 adds the
@@ -370,3 +370,15 @@ verify the same bytes in uibcdf/main. [Qualification](evidence/conda_1_3_0_quali
 and [public receipts](evidence/conda_1_3_0_public.json) preserve the separate
 producer/administrative identities and failed recovery history. #72 owns the
 remaining authoritative GitHub tag/release and archival receiving.
+
+
+**Published 1.3.0 (2026-10-24 local / 2026-10-25 UTC):** #60/#65/#68 are resolved.
+Tag `1.3.0` preserves original source `5a48759`. The draft-first GitHub publisher,
+original public wheel/sdist/checksums, twelve source compatibility cells, twelve
+same-file Conda installed cells, unchanged-byte public promotion, clean public
+installations, pinned extension and public docs are verified. Zenodo version DOI
+`10.5281/zenodo.23629443` archives one source ZIP. The
+[release guide](versioning_and_releases.md) and [public receipt](evidence/release_1_3_0_public.json)
+retain original digests, exact run/attempt/job/step proof, recovery history and
+scope limits. Central receiving is `uibcdf/molsyssuite#143`; #144 owns the bounded
+administrative helper follow-up. No consumer pins/guide copies change automatically.

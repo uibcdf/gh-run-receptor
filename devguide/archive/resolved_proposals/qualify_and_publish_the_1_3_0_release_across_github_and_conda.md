@@ -1,10 +1,10 @@
 ---
 summary: Qualify and publish the 1.3.0 release across GitHub and Conda.
 issue: uibcdf/gh-run-receptor#72
-status: active
+status: resolved
 opened: 2026-10-24
-closed:
-verification: inspected
+closed: 2026-10-24
+verification: measured
 area: [packaging, github]
 guard: tests/test_release_tools.py
 normative: versioning_and_releases.md
@@ -98,3 +98,42 @@ source/test/file binding, isolated path-sensitive helpers, explicit activation
 and all required prefix/test/recheck steps. No first-failure evidence is credited
 as a passed installed gate. Rebuilding or replacing the registered file is
 excluded. GitHub publication is still conditional on #60 delivery.
+
+
+## Verified completion — 2026-10-24 local / 2026-10-25 UTC
+
+All prerequisite issues #60/#65/#68 were actually closed before creating tag
+1.3.0 at original source `5a48759a399a17a16d923851b32519983a836f5f`.
+Conda producer 40143062622, original SHA-256
+`65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3`, twelve
+same-file installed cells 40144989781/qualification `08b83a0`, promotion
+40145282787 and clean public user installation pass. Prior failed administrative
+runs remain documented and are not credited; central #144 owns the reviewed
+helper-interface removal condition. There was no Conda rebuild/replacement.
+
+Draft-first GitHub producer 40145857846 executes every mandatory exact-tag gate,
+publishes release ID 423057511 titled exactly 1.3.0 at 2026-10-25T00:14:03Z and
+verifies public state. Original public wheel/sdist/checksums are independently
+downloaded and pass sizes/digests/manifest/payload checks. A fresh dependency-free
+Linux/Python 3.14.7 installation passes version/origin/runtime/schema, fourteen
+corpus, six original diagnostic/all-renderer, active-job/unavailable, output-size,
+privacy, cleanup and native CLI truth cases. Exact-tag routine/policy/Conda gates,
+isolated pinned extension and public docs pass; the tag-inapplicable default-branch
+coverage publisher correctly skips. Twelve source-built compatibility wheels
+and the later independent public-wheel installation retain their distinct scope.
+
+Archival receiving 40145906478 and a separate anonymous semantic check verify
+DOI 10.5281/zenodo.23629443/concept 10.5281/zenodo.22843377, publication date
+2026-10-25, exactly one 807015-byte source ZIP with
+md5:4a2f9f755f8d149ebc879097ddf94cf6. Wheel/sdist/Conda archival is not claimed.
+Citation/changelog 2026-10-24 is the maintainer's local date, distinct from UTC.
+
+Durable guards: `tests/test_release_tools.py`; normative rule:
+`devguide/versioning_and_releases.md`. Exact candidate, Conda qualification,
+Conda public and GitHub public receipts are under `devguide/evidence/` with
+version-specific names. Central notice #143 receives actual delivered files,
+digests, source/qualification identities, DOI and consumer ownership; advance
+#141 remains distinct. Caller/sibling state is preserved, PyPI excluded.
+Only this task's disposable root is removed after final receipt/CI/handoff;
+actual disposal is confirmed in the owning issue closeout. Final documentation
+head CI is inspected independently of original product-source qualification.

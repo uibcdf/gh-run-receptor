@@ -500,3 +500,69 @@ gh-run-receptor --version
 This package resolves gh separately and never registers a gh extension. The
 GitHub/PyPI/Zenodo states cannot be inferred from Conda delivery. Public promotion
 occurred 2026-10-25 UTC, still 2026-10-24 in the maintainer's local timezone.
+
+
+## Verified 1.3.0 publication — 2026-10-24 local / 2026-10-25 UTC
+
+The lightweight tag `1.3.0` permanently identifies source `5a48759a399a17a16d923851b32519983a836f5f`.
+The [public release](https://github.com/uibcdf/gh-run-receptor/releases/tag/1.3.0), titled exactly `1.3.0`,
+was published at `2026-10-25T00:14:03Z` by draft-first producer
+[40145857846](https://github.com/uibcdf/gh-run-receptor/actions/runs/40145857846),
+attempt 1. All exact-tag metadata, full-suite, distribution-input, build, archive,
+installed-wheel, draft and public verification steps executed successfully.
+Exact-tag routine 40145857782, policy 40145858016 and Conda governance 40145858048
+pass; only the tag-inapplicable default-branch coverage publisher skips.
+
+| Public original file | Bytes | SHA-256 |
+| --- | ---: | --- |
+| `gh_run_receptor-1.3.0-py3-none-any.whl` | 100557 | `3b710cba1e62113257645e60cc1d00cec9c9f4a119ff9b1e186ea0be04ca63c1` |
+| `gh_run_receptor-1.3.0.tar.gz` | 172287 | `4dcd0464fbf70c1a3479bea5701a4baccbba4763d22e2a685c00314b99eae069` |
+| `SHA256SUMS` | 200 | `86889f33c958f3a3cff14a8e762b25a03e726888de73c6b863b0c50074deec7c` |
+
+Independent original downloads agree with API inventory, sizes, digests,
+manifest and bounded payload guards. The [candidate receipt](evidence/release_1_3_0_candidate.json)
+retains its earlier pre-authoritative-tag phase and distinct local build hashes.
+The [public receipt](evidence/release_1_3_0_public.json) records actual delivery;
+no local rebuild substitutes for a hosted public asset.
+
+Exact-source compatibility 40142776163 passes twelve OS/Python cells, each
+executing the full 814-test suite (one explicit installed-Conda-only skip),
+build, wheel install and outside-checkout smoke. These are separately built
+wheels. A fresh independent public-wheel install uses dependency-free Linux
+Python 3.14.7 outside source: runtime/version/origin, nine frozen schemas,
+fourteen corpus replays, six original diagnostics, all renderers/profiles,
+job-only active exit 3/unavailable exit 4, privacy/cleanup and usage 64 pass.
+Action/extension 40142777722, reusable 40142779608, minimum-gh 40142781337,
+exit codes 40142783264 and contracts 40142784968 pass. Expected-failed native
+job receiving 40142787091 has a successful observer with two real active-window
+captures; its intentional Windows failure is retained. No failed badge is
+misrepresented as an overall successful workflow.
+
+The public Conda file/digest and twelve same-file installed cells are recorded
+above and in their separate receipts. Product source remains `5a48759a399a17a16d923851b32519983a836f5f`;
+administrative qualification `08b83a0` never replaces that producer identity.
+Public-wheel and same-file Conda native qualification scopes remain distinct.
+Strict docs/Pages 40145830257 passes; the deployed installation page was fetched
+with the actual 1.3.0 wheel URL and public Conda command. An isolated exact-tag
+extension resolves to the release source, reports 1.3.0 and preserves failed-run
+exit 1. Caller extension pins/configuration remain untouched.
+
+Read-only archival receiving 40145906478 executes the accepted provider at
+`6d6172d6cd00c5ac2d4ebadb71df554ec5b7fa26` and verifies its digest-checked
+artifact. A separate anonymous semantic check confirms version DOI
+[10.5281/zenodo.23629443](https://doi.org/10.5281/zenodo.23629443), concept
+`10.5281/zenodo.22843377`, publication date 2026-10-25. Actual inventory is
+one source snapshot `uibcdf/gh-run-receptor-1.3.0.zip`, 807015 bytes,
+`md5:4a2f9f755f8d149ebc879097ddf94cf6`; GitHub/Conda package archival is not
+claimed. Citation/changelog date 2026-10-24 is the maintainer's local date;
+GitHub and Zenodo publication occurred on 2026-10-25 UTC.
+
+Prerequisite #60/#65/#68 reports are resolved and archived. Release-specific
+central receiving is `uibcdf/molsyssuite#143`, supplementing advance #141;
+#144 retains the bounded administrative helper-interface follow-up. Python
+3.11–3.14, gh >=2.48.0, no Python runtime dependencies, read-only GitHub access,
+source status/conclusion/exit rules and all nine schema bytes remain unchanged.
+No sibling pins, guide copies or PyPI publication advance automatically. The
+known pytest-receptor warning remains visible under provider #4. Task-owned
+local copies remain useful through final receipt/CI/handoff, then are removed
+under the resource owner protocol; no global cache/other-session cleanup occurs.

@@ -1,0 +1,741 @@
+{
+  "phase": "verified-public-delivery-before-final-documentation-closeout",
+  "version": "1.3.0",
+  "source_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+  "tag_object": {
+    "sha": "5a48759a399a17a16d923851b32519983a836f5f",
+    "type": "commit",
+    "url": "https://api.github.com/repos/uibcdf/gh-run-receptor/git/commits/5a48759a399a17a16d923851b32519983a836f5f"
+  },
+  "release": {
+    "id": 423057511,
+    "name": "1.3.0",
+    "tag_name": "1.3.0",
+    "draft": false,
+    "prerelease": false,
+    "published_at": "2026-10-25T00:14:03Z",
+    "html_url": "https://github.com/uibcdf/gh-run-receptor/releases/tag/1.3.0"
+  },
+  "public_assets": [
+    {
+      "id": 673656736,
+      "name": "gh_run_receptor-1.3.0-py3-none-any.whl",
+      "size": 100557,
+      "digest": "sha256:3b710cba1e62113257645e60cc1d00cec9c9f4a119ff9b1e186ea0be04ca63c1",
+      "browser_download_url": "https://github.com/uibcdf/gh-run-receptor/releases/download/1.3.0/gh_run_receptor-1.3.0-py3-none-any.whl"
+    },
+    {
+      "id": 673656737,
+      "name": "gh_run_receptor-1.3.0.tar.gz",
+      "size": 172287,
+      "digest": "sha256:4dcd0464fbf70c1a3479bea5701a4baccbba4763d22e2a685c00314b99eae069",
+      "browser_download_url": "https://github.com/uibcdf/gh-run-receptor/releases/download/1.3.0/gh_run_receptor-1.3.0.tar.gz"
+    },
+    {
+      "id": 673656740,
+      "name": "SHA256SUMS",
+      "size": 200,
+      "digest": "sha256:86889f33c958f3a3cff14a8e762b25a03e726888de73c6b863b0c50074deec7c",
+      "browser_download_url": "https://github.com/uibcdf/gh-run-receptor/releases/download/1.3.0/SHA256SUMS"
+    }
+  ],
+  "independent_release_verifier": "passed: tag/release/assets/manifest/archives",
+  "hosted": [
+    {
+      "run": {
+        "id": 40145857846,
+        "head_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "path": ".github/workflows/publish-release.yml",
+        "event": "workflow_dispatch",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40145857846"
+      },
+      "jobs": [
+        {
+          "id": 121026920495,
+          "name": "Build, verify, and publish 1.3.0",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the exact tag",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify exact tag identity",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Validate release metadata and tests",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build and verify distributions",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Create and verify the draft release",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Publish and verify the public release",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the reviewed distribution SDK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Set up Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the exact tag",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run": {
+        "id": 40145857782,
+        "head_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "path": ".github/workflows/python-routine.yml",
+        "event": "push",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40145857782"
+      },
+      "jobs": [
+        {
+          "id": 121026918432,
+          "name": "Linux Python 3.14",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the exact source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install package and test tools",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete package suite",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Retain the measured coverage XML",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Set up Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the reviewed distribution SDK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the exact source",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 121026990243,
+          "name": "Publish default-branch coverage",
+          "conclusion": "skipped",
+          "steps": []
+        }
+      ]
+    },
+    {
+      "run": {
+        "id": 40145858016,
+        "head_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "path": ".github/workflows/molsyssuite-policy.yml",
+        "event": "push",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40145858016"
+      },
+      "jobs": [
+        {
+          "id": 121026918893,
+          "name": "policy / conformance",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out member repository",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up policy Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out MolSysSuite policy",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check repository conformance",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install the policy Ruff version",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check Python lint and imports",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check Python formatting",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out MolSysSuite policy",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Set up policy Python",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out member repository",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run": {
+        "id": 40145858048,
+        "head_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "path": ".github/workflows/conda-policy.yml",
+        "event": "push",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40145858048"
+      },
+      "jobs": [
+        {
+          "id": 121026919107,
+          "name": "policy / check",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run python -m pip install --disable-pip-version-check PyYAML==6.0.3 'Jinja2>=3,<4' 'packaging>=24'",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check publication workflow controls",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check declared noarch recipe and resources without building",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-python@v5",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run": {
+        "id": 40145830257,
+        "head_sha": "8bdfa46ebf9f12126eb4101dc45bf03ff59846bf",
+        "path": ".github/workflows/docs.yml",
+        "event": "push",
+        "run_attempt": 1,
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40145830257"
+      },
+      "jobs": [
+        {
+          "id": 121026832086,
+          "name": "build-docs",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install documentation dependencies",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build strict HTML documentation",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Upload Pages artifact",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 121026891853,
+          "name": "deploy-docs",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Deploy to GitHub Pages",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "public_installed_wheel": {
+    "version": "1.3.0",
+    "python": "3.14.7",
+    "module": "$TASK_ROOT/public-install/lib/python3.14/site-packages/gh_run_receptor/__init__.py",
+    "runtime_sha256": {
+      "watch.py": "818a02b6839e058bfc224cb059b449cc5f066623d0d20ac0a4ed72269d7123d7",
+      "termination.py": "4a13519750e0e61e3ff289e689baf390294b16e23cc1e00371e7b9739f48e89e",
+      "source_version.py": "d31c398357992ad0e1a5cef7fb00688fb817d67ac101beeb6c89a43353de74f8",
+      "service.py": "649a61da93d31bbe1bebcaf405fd0d772863f515ca9347e55283d2b8dc118b94",
+      "report.py": "233bef253a2ea7f261c57af6abbdea62dcdbe13c3c510e46536fcc9428a97f8f",
+      "release_profile.py": "12a76ebe0458ce97084af34f7e17d8b26774ea8c2665c92cfae890331875fbbc",
+      "published.py": "e93963853b240ac04766d1727e485cf302f01973d9f1b942fea95f4319a3af98",
+      "model.py": "1d6a798e092e61add914b4a63e5fe668c52da3ab7fbab02368e076cb236e7ecd",
+      "logs.py": "6b4a7a0eaa7793d6ce874d2779edd634f6a61226d7db1ba9986d00c7ca53e85c",
+      "limits.py": "35f79d98d092c1a2b82f27788d3e58f9d82949011f50f371b59ca012b6ffa245",
+      "job_logs.py": "b050fe7cd700842cebd6e545bc6c422ebce8df9c2437e461b04bdfc607cf4bc8",
+      "github.py": "fe8ab9a9c6c7d9c4e8efda4924cb8d882c81ee317dc128d0bbc6fc4ec1deb579",
+      "exit_codes.py": "3286d198963ee77b0736fcaae6df743b61a8dc3b546ababf20468d15ff3c6147",
+      "events.py": "380b4182c521ac4d1338f2603922f713c2e331f9647fa5429f7d19ad9e127e4d",
+      "errors.py": "0a637d4d732095e1cd43a5953d9ae87653bc692bf820f922e86ec1834b92856d",
+      "embedded.py": "99606ee4c4a7e69619e052a398189d09162a4901d46745625b023d908024a454",
+      "discovery.py": "9e7331319ff0d7b01a52bceeef96ebad28ee798145b0a3f725821b90277a7198",
+      "contracts.py": "319adaf8e3939acbbd7697c3f990692e3b6b877bc5ab3ccc47a603e5b95450e2",
+      "config.py": "9cc0624e207850f74af6da09af63083021e71ffd53fb72127cf2c415b217b46f",
+      "comparison_policy.py": "d183948f7994882f7095bee1a8ac16cb729d41764365d41b36da7ccc7b2db059",
+      "comparison.py": "ea1dffd9252f64220d730cab8ef0f9876453d5997b44b26817f5ba20c922fe3d",
+      "cli.py": "48f10f3b3f56859662330892a03adb0ba432e5fbc99e6fea847864056a611ada",
+      "checks.py": "7df8983f62df02bb51f093b853fff919d0dec4e3fd2869088048a1c17c81592b",
+      "bundle.py": "33c4d7e1e7810c708ab5aca9b3970aa9ebed5d6a5bdddeb49f3907a913bc6796",
+      "aggregation.py": "bbd6fb3a545002e6d7a40d712700c1a0f6ad4ed5fca8e9a48d140511112b9417",
+      "__main__.py": "ce1c8ee643a12be80ed7a0e935798c6d1b6f4bbfabbc125b8da0ddc94d064147",
+      "__init__.py": "8eddae7c20c425941ed48c50ecadd1ececa03264b7326b3e59abe37002be3b96"
+    },
+    "schema_sha256": {
+      "report-v1.schema.json": "4d1c2873c017e6cebfb4062699c70160a9412eff6859af1731c646bac26972c1",
+      "model-v1.schema.json": "1a52a7e2cb48ebb7cc94559c5e14f674f1888fa8d36f770e94a307bdc2860a70",
+      "events-v1.schema.json": "30f785e79f6bde0a6a94e2d3b6ed0d2eaedad8b21072f249e1331c482700f7a0",
+      "config-v1.schema.json": "467d0bab5aee4c910eb95e7777fe928103fc50043f14fad7948ea093209a237d",
+      "config-capture-v1.schema.json": "73cd5e990519222e536e3abad78e8052c57f5f814cd466c09665c249c2535ea6",
+      "comparison-v1.schema.json": "85969edc14a8248f43a03d6d4b93db3daac5ddfb4093fe62a70947d1048641fc",
+      "comparison-policy-v1.schema.json": "aedef7a2d526b3cd5089cb586963a3786bad43903bf4e365995fd85517ce10dd",
+      "bundle-v1.schema.json": "02baeb92b98a22509760e483b17941602f985e6ae79a9a116555ecfcc73d086b",
+      "aggregate-v1.schema.json": "61c8e6fdaf04c610b1f335baac42cc8b4a0680014f16686f3a949cf7590a8b67"
+    },
+    "source_corpus": [
+      {
+        "run_id": 34709939550,
+        "exit_status": 0
+      },
+      {
+        "run_id": 33636046706,
+        "exit_status": 2
+      },
+      {
+        "run_id": 19058199598,
+        "exit_status": 4
+      },
+      {
+        "run_id": 22638022385,
+        "exit_status": 1
+      },
+      {
+        "run_id": 22638022385,
+        "exit_status": 0
+      },
+      {
+        "run_id": 31278635513,
+        "exit_status": 1
+      },
+      {
+        "run_id": 30998524379,
+        "exit_status": 0
+      },
+      {
+        "run_id": 33930667142,
+        "exit_status": 1
+      },
+      {
+        "run_id": 31781220979,
+        "exit_status": 0
+      },
+      {
+        "run_id": 20548716947,
+        "exit_status": 0
+      },
+      {
+        "run_id": 33923020037,
+        "exit_status": 1
+      },
+      {
+        "run_id": 33863426589,
+        "exit_status": 1
+      },
+      {
+        "run_id": 33849332945,
+        "exit_status": 0
+      },
+      {
+        "run_id": 34027741137,
+        "exit_status": 2
+      }
+    ],
+    "original_diagnostic_runs": [
+      37279215592,
+      37538525423,
+      37629258208,
+      37994715796,
+      38037422889,
+      40013378053
+    ],
+    "job_scope": [
+      {
+        "unavailable": false,
+        "exit_status": 3,
+        "partial_file_absent": null
+      },
+      {
+        "unavailable": true,
+        "exit_status": 4,
+        "partial_file_absent": true
+      }
+    ],
+    "managed_probe_resources_removed": true
+  },
+  "public_extension": {
+    "version": "1.3.0",
+    "head_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+    "data_root": "$TASK_ROOT/extension-data",
+    "caller_extension_untouched": true,
+    "replay_run_id": 22638022385,
+    "replay_exit_status": 1,
+    "output_bytes": 325
+  },
+  "public_documentation": {
+    "url": "https://www.uibcdf.org/gh-run-receptor/installation.html",
+    "bytes": 13369,
+    "sha256": "a832fced9d2aa3a35b1555ffa34ad2bab9781122fe2cfad302d1d2f3e7c6a994",
+    "wheel_url_1_3_0_present": true,
+    "public_conda_command_present": true,
+    "pages_run_id": 40145830257
+  },
+  "conda_receipts": [
+    "conda_1_3_0_qualification.json",
+    "conda_1_3_0_public.json"
+  ],
+  "zenodo": {
+    "workflow_run": {
+      "id": 40145906478,
+      "head_sha": "8bdfa46ebf9f12126eb4101dc45bf03ff59846bf",
+      "run_attempt": 1,
+      "path": ".github/workflows/zenodo-recovery.yml",
+      "event": "workflow_dispatch",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40145906478"
+    },
+    "job": {
+      "id": 121027068990,
+      "name": "verify / verify",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Probe public archival evidence once",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Preserve sanitized evidence",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    "artifact": {
+      "id": 12581070953,
+      "node_id": "MDg6QXJ0aWZhY3QxMjU4MTA3MDk1Mw==",
+      "name": "zenodo-public-evidence",
+      "size_in_bytes": 511,
+      "url": "https://api.github.com/repos/uibcdf/gh-run-receptor/actions/artifacts/12581070953",
+      "archive_download_url": "https://api.github.com/repos/uibcdf/gh-run-receptor/actions/artifacts/12581070953/zip",
+      "expired": false,
+      "digest": "sha256:31593ff263c1bd931df9ad4469ba851ccd17c5e75cecc150a8ba40968fa9777c",
+      "created_at": "2026-10-25T00:14:28Z",
+      "updated_at": "2026-10-25T00:14:28Z",
+      "expires_at": "2026-11-24T00:14:27Z",
+      "workflow_run": {
+        "id": 40145906478,
+        "repository_id": 1357047998,
+        "head_repository_id": 1357047998,
+        "head_branch": "main",
+        "head_sha": "8bdfa46ebf9f12126eb4101dc45bf03ff59846bf"
+      }
+    },
+    "receiving_result": {
+      "repository": "uibcdf/gh-run-receptor",
+      "tag": "1.3.0",
+      "version": "1.3.0",
+      "published_at": "2026-10-25T00:14:03Z",
+      "observed_at": "2026-10-25T00:14:26.497199+00:00",
+      "age_hours": 0.007,
+      "archive_coverage": "source-snapshot",
+      "escalation_required": false,
+      "state": "verified",
+      "record_id": 23629443,
+      "concept_doi": "10.5281/zenodo.22843377",
+      "version_doi": "10.5281/zenodo.23629443",
+      "files": [
+        {
+          "key": "uibcdf/gh-run-receptor-1.3.0.zip",
+          "size": 807015,
+          "checksum": "md5:4a2f9f755f8d149ebc879097ddf94cf6"
+        }
+      ]
+    },
+    "independent_semantic_verifier": "verified",
+    "publication_date": "2026-10-25",
+    "files": [
+      {
+        "key": "uibcdf/gh-run-receptor-1.3.0.zip",
+        "size": 807015,
+        "checksum": "md5:4a2f9f755f8d149ebc879097ddf94cf6"
+      }
+    ]
+  },
+  "metadata_dates": {
+    "citation_and_changelog_date": "2026-10-24",
+    "meaning": "Maintainer local release date (America/Mexico_City). Public GitHub and Zenodo UTC date is 2026-10-25."
+  },
+  "coordination": {
+    "release_notice": "uibcdf/molsyssuite#143",
+    "advance_notice": "uibcdf/molsyssuite#141",
+    "administrative_helper_followup": "uibcdf/molsyssuite#144"
+  },
+  "limits": [
+    "Twelve source compatibility cells build/install their own wheels; the original public wheel was independently installed on Linux/Python 3.14.7.",
+    "Twelve separate installed Conda cells use the same original registered archive.",
+    "The tag routine coverage publisher is correctly skipped outside main; mandatory tests execute successfully.",
+    "Conda producer source and administrative qualification SHA are distinct.",
+    "Local pre-tag candidate GitHub hashes differ from original hosted public build hashes and are retained separately.",
+    "Zenodo archives exactly the listed source ZIP; wheel/sdist/checksum/Conda archival is not claimed.",
+    "Published pytest-receptor 1.1.0 late /dev/null warning remains visible under provider #4.",
+    "No PyPI publication, sibling pin/guide synchronization, caller environment/auth/extension modification or system-wide cleanup is claimed."
+  ]
+}

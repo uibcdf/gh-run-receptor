@@ -779,6 +779,16 @@
         }
       ],
       "managed_probe_resources_removed": true
+    },
+    "owner_installed_smoke": {
+      "commands": {
+        "gh": "$TASK_ROOT/user-conda/bin/gh",
+        "gh-run-receptor": "$TASK_ROOT/user-conda/bin/gh-run-receptor"
+      },
+      "origin": "$TASK_ROOT/user-conda/lib/python3.14/site-packages/gh_run_receptor/__init__.py",
+      "prefix": "$TASK_ROOT/user-conda",
+      "schemas": 9,
+      "version": "1.3.0"
     }
   },
   "limits": [
