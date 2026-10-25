@@ -120,6 +120,11 @@ def test_recovery_workflow_keeps_original_artifact_and_separate_administrative_i
     setup = next(s for s in job["steps"] if "setup-miniconda@" in s.get("uses", ""))
     assert setup["with"]["run-init"] == setup["with"]["remove-profiles"] == "false"
     steps = {s.get("name"): s for s in job["steps"]}
+    repair = steps["Repair Windows installer launcher metadata"]
+    assert repair["if"] == "runner.os == 'Windows'"
+    assert repair["env"]["CONDA_SAFETY_CHECKS"] == "enabled"
+    assert "--name base --force-reinstall" in repair["run"]
+    assert "conda-launchers" in repair["run"]
     assert "installed_test_helpers.py" in steps["Run installed tests"]["run"]
     assert " verify " in steps["Validate installed files"]["run"]
     assert " verify " in steps["Recheck installed provenance after scientific tests"]["run"]

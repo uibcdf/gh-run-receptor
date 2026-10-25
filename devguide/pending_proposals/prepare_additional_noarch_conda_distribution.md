@@ -267,3 +267,18 @@ the runtime source root; the guarded list refuses those additions and records
 the count. A first local rehearsal correctly rejected that path drift rather
 than crediting the passing pytest line. Native Conda prefix/launcher and complete
 same-file installed qualification remain separately required.
+
+Newer qualification run 40144488087 at 18e620a passes Linux and macOS installed
+cells, including original frozen tests, helper checks and final prefix/file
+rechecks. Windows now passes setup but fails installing test tools because the
+bootstrap Conda cannot find `share/conda-launchers/cli-64.exe` in its package
+metadata. This matches upstream `conda/conda-launchers#35`: installer-created
+paths_data can be empty even with original stub files present. No GHR archive
+installation or installed-test success is credited for those Windows cells.
+
+The next administrative correction re-installs only the runner base's
+`conda-launchers` package with safety checks enabled, the upstream reported
+repair. It does not patch metadata manually, disable safety checks, alter the
+staged candidate or skip any installed gate. The setup/run-init correction,
+original producer and exact file/digest remain unchanged. A new complete native
+matrix is required before promotion; the original failed run remains evidence.

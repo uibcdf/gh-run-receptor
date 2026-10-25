@@ -113,6 +113,15 @@ jobs:
           conda activate installed
           conda install --yes --override-channels --strict-channel-priority -c uibcdf -c conda-forge \
             "python=$PYTHON_MINOR" 'pyyaml>=6,<7' 'jinja2>=3,<4' 'packaging>=24'
+      - name: Repair Windows installer launcher metadata
+        if: runner.os == 'Windows'
+        env:
+          CONDA_SAFETY_CHECKS: enabled
+        run: |
+          source "$(cygpath -u "$CONDA" 2>/dev/null || echo "$CONDA")/etc/profile.d/conda.sh"
+          conda activate installed
+          conda install --yes --name base --force-reinstall --override-channels \
+            --strict-channel-priority -c conda-forge conda-launchers
       - name: Install committed qualification tools
         env:
           PYTHON_MINOR: ${{ matrix.python }}

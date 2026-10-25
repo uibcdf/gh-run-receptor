@@ -151,3 +151,10 @@ interface supplies this route and exact-file native receiving passes. No provide
 implementation is edited or copied, and the original distribution's runtime and
 resources are not changed. A passing local wheel rehearsal does not replace the
 native same-Conda-file matrix.
+
+The Windows bootstrap also repairs the installer's missing conda-launchers
+paths_data by re-installing that base tool with safety checks enabled before
+qualification tools are installed. This follows
+[conda/conda-launchers#35](https://github.com/conda/conda-launchers/issues/35);
+it does not alter the GHR artifact or manually forge environment metadata.
+The correction requires another full same-file native installed run.
