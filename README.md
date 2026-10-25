@@ -22,8 +22,8 @@ commits or scientific consumer suites. See the [coverage reporting contract](dev
 
 
 Version 1.0 is the stable read-only contract: it uses exact workflow identities and does
-not include pattern or organization-level configuration. No package has been published to
-a package index. The `1.3.0` source release can inspect, watch, replay, compare, and
+not include pattern or organization-level configuration. Version 1.3.0 is available
+from the uibcdf Conda channel. The `1.3.0` source release can inspect, watch, replay, compare, and
 aggregate structured run evidence. Install the GitHub CLI extension at the exact tag:
 
 ```text
@@ -453,12 +453,17 @@ any developer, repository, or coding agent. A typical combined workflow runs
 `gh run-receptor --receptor=llm inspect RUN_ID`.
 
 
-## Prepared Conda distribution
+## Conda installation
 
-An additional `noarch: python` Conda route is prepared for a future release,
-with a separately supplied GitHub CLI dependency. No public Conda package is
-claimed yet. The owner review is
-[GH Run Receptor #60](https://github.com/uibcdf/gh-run-receptor/issues/60).
+The public `noarch: python` package resolves GitHub CLI separately:
+
+```text
+conda install --override-channels --strict-channel-priority -c uibcdf -c conda-forge gh-run-receptor=1.3.0
+gh-run-receptor --version
+```
+
+The same original file passed twelve native installed cells before public promotion.
+See [delivery evidence](devguide/evidence/conda_1_3_0_public.json).
 Existing extension, Action and GitHub wheel/sdist installation remain available.
 
 ### Completed-job logs and Conda delivery in 1.3.0
@@ -470,7 +475,7 @@ A failed job does not make an active workflow terminal. Capture defaults are
 unchanged. See the [usage guide](https://www.uibcdf.org/gh-run-receptor/usage.html).
 
 The official Conda route uses one `noarch: python` file with Python >=3.11,<3.15
-and a separately solved `gh>=2.48.0`. Its first delivery requires staging,
-twelve exact-file installed cells and unchanged-file promotion; availability and
-measured receipts are tracked in [#60](https://github.com/uibcdf/gh-run-receptor/issues/60).
+and a separately solved `gh>=2.48.0`. Its first delivery passed staging,
+twelve exact-file installed cells and unchanged-file promotion; measured receipts
+are tracked in [#60](https://github.com/uibcdf/gh-run-receptor/issues/60).
 Existing GitHub release assets, extension, Action and reusable modes remain.

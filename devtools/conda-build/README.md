@@ -6,9 +6,8 @@ in `devtools/dependency_routes.toml`.
 
 ## Current scope
 
-This is a prepared, additive route. GitHub extension, Action, wheel/sdist and
-Zenodo modes remain. No Conda package, credential access or PyPI publication is
-claimed. `release_plan.example.toml` is an onboarding context, **not a release
+This is an additive route with verified public 1.3.0/build-0 delivery. GitHub
+extension, Action, wheel/sdist and Zenodo modes remain. PyPI is excluded. `release_plan.example.toml` is an onboarding context, **not a release
 plan**. Publication and promotion require a separately reviewed, committed
 `release_plan.toml`; the example cannot authorize them.
 
@@ -158,3 +157,18 @@ qualification tools are installed. This follows
 [conda/conda-launchers#35](https://github.com/conda/conda-launchers/issues/35);
 it does not alter the GHR artifact or manually forge environment metadata.
 The correction requires another full same-file native installed run.
+
+
+## First delivery verified — 2026-10-24 local
+
+The dated preparation/pending statements above retain their historical scope.
+Original producer 40143062622/source `5a48759a399a17a16d923851b32519983a836f5f`
+built the sole 78037-byte 1.3.0-py_0 file, SHA-256
+`65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3`.
+All twelve installed cells pass in 40144989781 at qualification commit
+`08b83a0e853aff5c563ad9b19d0ddffb15e030f8`. Promotion 40145282787 verifies
+main/index without rebuilding. An independent public download and clean user
+installation pass. See `devguide/evidence/conda_1_3_0_qualification.json`,
+`devguide/evidence/conda_1_3_0_public.json` and the release guide for exact scope.
+Historical failed matrices are not credited as qualification. #60 is resolved;
+central #144 retains the reviewed helper-interface follow-up.

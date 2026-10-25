@@ -33,6 +33,7 @@
 - [#46 — Assess and improve timeout diagnosis before choosing producer instrumentation.](integrate_structured_producer_timeout_evidence_after_1_0.md) (`resolved`)
 - [#5 — Load trusted workflow rules from client repositories](load_trusted_workflow_rules_from_client_repositories.md) (`resolved`)
 - [#58 — Move routine package tests to the accepted Python 3.14 baseline.](move_routine_python_tests_to_the_accepted_3_14_baseline.md) (`resolved`)
+- [#60 — Prepare an additional noarch Python Conda distribution with exact-file gates.](prepare_additional_noarch_conda_distribution.md) (`resolved`)
 - [#43 — Prove replay byte determinism across temporal and filesystem contexts](prove_replay_byte_determinism_across_temporal_and_filesystem_contexts.md) (`resolved`)
 - [#32 — Publish a same-revision reusable reporting workflow](publish_a_same_revision_reusable_reporting_workflow.md) (`resolved`)
 - [#71 — Publish and independently verify the 1.2.1 patch release.](publish_and_independently_verify_the_1_2_1_patch_release.md) (`resolved`)

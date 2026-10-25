@@ -75,7 +75,7 @@ public installation page was fetched independently with the 1.1.1 wheel URL pres
 an additive `noarch: python` route with an external gh dependency and immutable
 shared stage/installed/promotion workflows. No release version, credentials or
 public Conda delivery is claimed. The
-[active distribution report](pending_proposals/prepare_additional_noarch_conda_distribution.md)
+[active distribution report](archive/resolved_proposals/prepare_additional_noarch_conda_distribution.md)
 and [operational handoff](../devtools/conda-build/README.md) separate source
 readiness from the first twelve-cell installed qualification.
 
@@ -361,3 +361,12 @@ central. See [timeout diagnosis](timeout_diagnosis.md) and the
 
 The executable task list and release criteria remain in
 [development_roadmap.md](development_roadmap.md).
+
+
+**First Conda delivery (2026-10-24 local):** #60 is complete. Original file
+1.3.0-py_0 from source `5a48759` passes all twelve installed cells in 40144989781;
+promotion 40145282787 and an independent public download/clean user installation
+verify the same bytes in uibcdf/main. [Qualification](evidence/conda_1_3_0_qualification.json)
+and [public receipts](evidence/conda_1_3_0_public.json) preserve the separate
+producer/administrative identities and failed recovery history. #72 owns the
+remaining authoritative GitHub tag/release and archival receiving.

@@ -360,7 +360,7 @@ Only `release_plan.toml` can authorize a candidate; the example plan cannot.
 Public files and existing tags are immutable. Promotion retains original source
 and tested bytes; a newer administrative workflow gets a separate qualification
 identity. Current source readiness, credential access, artifact installation and
-public delivery are separate claims. The first Conda release remains pending.
+public delivery are separate claims. The first Conda release is verified below.
 
 ## Source checkout byte preservation
 
@@ -474,3 +474,29 @@ Python 3.11--3.14, gh >=2.48.0, no runtime dependencies, read-only GitHub access
 source status/conclusion/exit semantics and all frozen contracts are preserved.
 Resource review #65 remains partial for the broader owner review; #60 first
 Conda delivery and #68 active-workflow job logs remain separate work.
+
+
+## Verified first Conda distribution — 1.3.0
+
+The original noarch `gh-run-receptor-1.3.0-py_0.tar.bz2` is public in uibcdf/main:
+78037 bytes, SHA-256
+`65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3`.
+Producer 40143062622/source `5a48759a399a17a16d923851b32519983a836f5f` retains
+the original bytes. Installed run 40144989781 at separate qualification commit
+`08b83a0e853aff5c563ad9b19d0ddffb15e030f8` executes all required steps in twelve
+native cells. Promotion 40145282787 adds main without rebuilding and independently
+checks the public label/index. A separate public download and clean Linux/Python
+3.14.9 user install pass runtime/schema/diagnostic/CLI checks with gh 2.103.2.
+See [qualification](evidence/conda_1_3_0_qualification.json) and
+[public delivery](evidence/conda_1_3_0_public.json) for exact identities, hashes,
+earlier failures, administrative recovery and limits. Central #144 owns the
+temporary helper-interface follow-up; GitHub release #72 remains separate.
+
+```text
+conda install --override-channels --strict-channel-priority -c uibcdf -c conda-forge gh-run-receptor=1.3.0
+gh-run-receptor --version
+```
+
+This package resolves gh separately and never registers a gh extension. The
+GitHub/PyPI/Zenodo states cannot be inferred from Conda delivery. Public promotion
+occurred 2026-10-25 UTC, still 2026-10-24 in the maintainer's local timezone.

@@ -1,0 +1,790 @@
+{
+  "source_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+  "producer_run_id": 40143062622,
+  "qualification_sha": "08b83a0e853aff5c563ad9b19d0ddffb15e030f8",
+  "installed_run_id": 40144989781,
+  "original_file": {
+    "filename": "gh-run-receptor-1.3.0-py_0.tar.bz2",
+    "bytes": 78037,
+    "sha256": "65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3",
+    "url": "https://conda.anaconda.org/uibcdf/noarch/gh-run-receptor-1.3.0-py_0.tar.bz2",
+    "rebuilt": false
+  },
+  "promotion_run": {
+    "id": 40145282787,
+    "head_sha": "08b83a0e853aff5c563ad9b19d0ddffb15e030f8",
+    "run_attempt": 1,
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40145282787"
+  },
+  "promotion_jobs": [
+    {
+      "id": 121025185843,
+      "name": "review-inputs",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Bootstrap distribution checks",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Review the exact committed candidate inputs",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "id": 121025230037,
+      "name": "promote / promote",
+      "conclusion": "success",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Bootstrap administrative checks",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Acquire exact-source executed CI gates",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Bind installed matrix to the planned exact file",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Verify existing installed matrix and executed steps",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Run conda-incubator/setup-miniconda@v3",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Add public label to the same tested file without rebuilding",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Independently verify public label and solver index",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Retain source, installed, promotion and public receipts",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Post Run conda-incubator/setup-miniconda@v3",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success",
+          "status": "completed"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success",
+          "status": "completed"
+        }
+      ]
+    }
+  ],
+  "artifact": {
+    "id": 12579999932,
+    "node_id": "MDg6QXJ0aWZhY3QxMjU3OTk5OTkzMg==",
+    "name": "noarch-promotion-40145282787-1",
+    "size_in_bytes": 4108,
+    "url": "https://api.github.com/repos/uibcdf/gh-run-receptor/actions/artifacts/12579999932",
+    "archive_download_url": "https://api.github.com/repos/uibcdf/gh-run-receptor/actions/artifacts/12579999932/zip",
+    "expired": false,
+    "digest": "sha256:5e535dc86e635d0efddc3b9dbd0d387b26bf65ae5bd61aed48146ef046d52874",
+    "created_at": "2026-10-25T00:06:04Z",
+    "updated_at": "2026-10-25T00:06:04Z",
+    "expires_at": "2026-11-24T00:06:03Z",
+    "workflow_run": {
+      "id": 40145282787,
+      "repository_id": 1357047998,
+      "head_repository_id": 1357047998,
+      "head_branch": "main",
+      "head_sha": "08b83a0e853aff5c563ad9b19d0ddffb15e030f8"
+    }
+  },
+  "promotion_documents": {
+    "gh-run-receptor/gh-run-receptor/noarch-preflight.json": {
+      "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+      "checked_at": "2026-10-25T00:05:16.581893+00:00",
+      "checkout_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+      "decision_by": "Repository maintainer via Codex, 2026-10-24: complete #60/#65/#68 and then publish 1.3.0; organization secret availability confirmed.",
+      "event": "workflow_dispatch",
+      "gates": [
+        {
+          "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+          "conclusion": "success",
+          "executed_jobs": {
+            "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+            "jobs": [
+              {
+                "job_id": 121017713391,
+                "name": "Linux Python 3.14",
+                "required_steps": [
+                  "Check distribution inputs",
+                  "Run the complete package suite"
+                ]
+              }
+            ],
+            "run_attempt": 1,
+            "run_id": 40142747716,
+            "schema": "molsyssuite.native-gate@1",
+            "state": "verified",
+            "workflow": ".github/workflows/python-routine.yml"
+          },
+          "run_id": 40142747716,
+          "workflow": ".github/workflows/python-routine.yml"
+        },
+        {
+          "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+          "conclusion": "success",
+          "executed_jobs": {
+            "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+            "jobs": [
+              {
+                "job_id": 121017805269,
+                "name": "ubuntu-latest \u00b7 Python 3.11",
+                "required_steps": [
+                  "Check distribution inputs",
+                  "Run the complete local suite",
+                  "Build wheel and source distribution",
+                  "Verify and install the wheel",
+                  "Smoke test the installed command outside the checkout"
+                ]
+              },
+              {
+                "job_id": 121017805028,
+                "name": "ubuntu-latest \u00b7 Python 3.12",
+                "required_steps": [
+                  "Check distribution inputs",
+                  "Run the complete local suite",
+                  "Build wheel and source distribution",
+                  "Verify and install the wheel",
+                  "Smoke test the installed command outside the checkout"
+                ]
+              },
+              {
+                "job_id": 121017805183,
+                "name": "ubuntu-latest \u00b7 Python 3.13",
+                "required_steps": [
+                  "Check distribution inputs",
+                  "Run the complete local suite",
+                  "Build wheel and source distribution",
+                  "Verify and install the wheel",
+                  "Smoke test the installed command outside the checkout"
+                ]
+              },
+              {
+                "job_id": 121017805216,
+                "name": "ubuntu-latest \u00b7 Python 3.14",
+                "required_steps": [
+                  "Check distribution inputs",
+                  "Run the complete local suite",
+                  "Build wheel and source distribution",
+                  "Verify and install the wheel",
+                  "Smoke test the installed command outside the checkout"
+                ]
+              },
+              {
+                "job_id": 121017805262,
+                "name": "macos-latest \u00b7 Python 3.11",
+                "required_steps": [
+                  "Check distribution inputs",
+                  "Run the complete local suite",
+                  "Build wheel and source distribution",
+                  "Verify and install the wheel",
+                  "Smoke test the installed command outside the checkout"
+                ]
+              },
+              {
+                "job_id": 121017805251,
+                "name": "macos-latest \u00b7 Python 3.12",
+                "required_steps": [
+                  "Check distribution inputs",
+                  "Run the complete local suite",
+                  "Build wheel and source distribution",
+                  "Verify and install the wheel",
+                  "Smoke test the installed command outside the checkout"
+                ]
+              },
+              {
+                "job_id": 121017805152,
+                "name": "macos-latest \u00b7 Python 3.13",
+                "required_steps": [
+                  "Check distribution inputs",
+                  "Run the complete local suite",
+                  "Build wheel and source distribution",
+                  "Verify and install the wheel",
+                  "Smoke test the installed command outside the checkout"
+                ]
+              },
+              {
+                "job_id": 121017805170,
+                "name": "macos-latest \u00b7 Python 3.14",
+                "required_steps": [
+                  "Check distribution inputs",
+                  "Run the complete local suite",
+                  "Build wheel and source distribution",
+                  "Verify and install the wheel",
+                  "Smoke test the installed command outside the checkout"
+                ]
+              },
+              {
+                "job_id": 121017805206,
+                "name": "windows-latest \u00b7 Python 3.11",
+                "required_steps": [
+                  "Check distribution inputs",
+                  "Run the complete local suite",
+                  "Build wheel and source distribution",
+                  "Verify and install the wheel",
+                  "Smoke test the installed command outside the checkout"
+                ]
+              },
+              {
+                "job_id": 121017805214,
+                "name": "windows-latest \u00b7 Python 3.12",
+                "required_steps": [
+                  "Check distribution inputs",
+                  "Run the complete local suite",
+                  "Build wheel and source distribution",
+                  "Verify and install the wheel",
+                  "Smoke test the installed command outside the checkout"
+                ]
+              },
+              {
+                "job_id": 121017805232,
+                "name": "windows-latest \u00b7 Python 3.13",
+                "required_steps": [
+                  "Check distribution inputs",
+                  "Run the complete local suite",
+                  "Build wheel and source distribution",
+                  "Verify and install the wheel",
+                  "Smoke test the installed command outside the checkout"
+                ]
+              },
+              {
+                "job_id": 121017805171,
+                "name": "windows-latest \u00b7 Python 3.14",
+                "required_steps": [
+                  "Check distribution inputs",
+                  "Run the complete local suite",
+                  "Build wheel and source distribution",
+                  "Verify and install the wheel",
+                  "Smoke test the installed command outside the checkout"
+                ]
+              }
+            ],
+            "run_attempt": 1,
+            "run_id": 40142776163,
+            "schema": "molsyssuite.native-gate@1",
+            "state": "verified",
+            "workflow": ".github/workflows/compatibility.yml"
+          },
+          "run_id": 40142776163,
+          "workflow": ".github/workflows/compatibility.yml"
+        },
+        {
+          "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+          "conclusion": "success",
+          "executed_jobs": {
+            "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+            "jobs": [
+              {
+                "job_id": 121017714422,
+                "name": "policy / conformance",
+                "required_steps": [
+                  "Check repository conformance",
+                  "Check Python lint and imports",
+                  "Check Python formatting"
+                ]
+              }
+            ],
+            "run_attempt": 1,
+            "run_id": 40142747921,
+            "schema": "molsyssuite.native-gate@1",
+            "state": "verified",
+            "workflow": ".github/workflows/molsyssuite-policy.yml"
+          },
+          "run_id": 40142747921,
+          "workflow": ".github/workflows/molsyssuite-policy.yml"
+        },
+        {
+          "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+          "conclusion": "success",
+          "executed_jobs": {
+            "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+            "jobs": [
+              {
+                "job_id": 121017831030,
+                "name": "validate",
+                "required_steps": [
+                  "Compare registered contracts with published baselines"
+                ]
+              }
+            ],
+            "run_attempt": 1,
+            "run_id": 40142784968,
+            "schema": "molsyssuite.native-gate@1",
+            "state": "verified",
+            "workflow": ".github/workflows/validate-contracts.yml"
+          },
+          "run_id": 40142784968,
+          "workflow": ".github/workflows/validate-contracts.yml"
+        },
+        {
+          "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+          "conclusion": "success",
+          "executed_jobs": {
+            "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+            "jobs": [
+              {
+                "job_id": 121017713482,
+                "name": "build-docs",
+                "required_steps": [
+                  "Build strict HTML documentation"
+                ]
+              }
+            ],
+            "run_attempt": 1,
+            "run_id": 40142747726,
+            "schema": "molsyssuite.native-gate@1",
+            "state": "verified",
+            "workflow": ".github/workflows/docs.yml"
+          },
+          "run_id": 40142747726,
+          "workflow": ".github/workflows/docs.yml"
+        },
+        {
+          "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+          "conclusion": "success",
+          "executed_jobs": {
+            "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+            "jobs": [
+              {
+                "job_id": 121017714169,
+                "name": "policy / check",
+                "required_steps": [
+                  "Check publication workflow controls",
+                  "Check declared noarch recipe and resources without building"
+                ]
+              }
+            ],
+            "run_attempt": 1,
+            "run_id": 40142747920,
+            "schema": "molsyssuite.native-gate@1",
+            "state": "verified",
+            "workflow": ".github/workflows/conda-policy.yml"
+          },
+          "run_id": 40142747920,
+          "workflow": ".github/workflows/conda-policy.yml"
+        }
+      ],
+      "package": "gh-run-receptor",
+      "reason": "First official Conda delivery for completed-job log inspection: qualify one original noarch 1.3.0/build-0 file in all twelve installed cells before adding the public label. Preserve existing GitHub distributions and frozen contracts.",
+      "route": "staged",
+      "schema": "molsyssuite.conda-preflight@1",
+      "tag_sha": null,
+      "version": "1.3.0"
+    },
+    "gh-run-receptor/gh-run-receptor/noarch-installed-matrix.json": {
+      "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+      "checked_at": "2026-10-25T00:05:27.892616+00:00",
+      "jobs": [
+        {
+          "conclusion": "success",
+          "job_id": 121024307106,
+          "kind": "prepare",
+          "name": "installed / prepare"
+        },
+        {
+          "conclusion": "success",
+          "job_id": 121024361020,
+          "kind": "installed",
+          "name": "installed / linux-64 \u00b7 Python 3.13",
+          "platform": "linux-64",
+          "python": "3.13"
+        },
+        {
+          "conclusion": "success",
+          "job_id": 121024361023,
+          "kind": "installed",
+          "name": "installed / win-64 \u00b7 Python 3.13",
+          "platform": "win-64",
+          "python": "3.13"
+        },
+        {
+          "conclusion": "success",
+          "job_id": 121024361026,
+          "kind": "installed",
+          "name": "installed / linux-64 \u00b7 Python 3.11",
+          "platform": "linux-64",
+          "python": "3.11"
+        },
+        {
+          "conclusion": "success",
+          "job_id": 121024361035,
+          "kind": "installed",
+          "name": "installed / osx-arm64 \u00b7 Python 3.11",
+          "platform": "osx-arm64",
+          "python": "3.11"
+        },
+        {
+          "conclusion": "success",
+          "job_id": 121024361041,
+          "kind": "installed",
+          "name": "installed / osx-arm64 \u00b7 Python 3.13",
+          "platform": "osx-arm64",
+          "python": "3.13"
+        },
+        {
+          "conclusion": "success",
+          "job_id": 121024361064,
+          "kind": "installed",
+          "name": "installed / osx-arm64 \u00b7 Python 3.14",
+          "platform": "osx-arm64",
+          "python": "3.14"
+        },
+        {
+          "conclusion": "success",
+          "job_id": 121024361068,
+          "kind": "installed",
+          "name": "installed / linux-64 \u00b7 Python 3.14",
+          "platform": "linux-64",
+          "python": "3.14"
+        },
+        {
+          "conclusion": "success",
+          "job_id": 121024361082,
+          "kind": "installed",
+          "name": "installed / win-64 \u00b7 Python 3.14",
+          "platform": "win-64",
+          "python": "3.14"
+        },
+        {
+          "conclusion": "success",
+          "job_id": 121024361086,
+          "kind": "installed",
+          "name": "installed / win-64 \u00b7 Python 3.11",
+          "platform": "win-64",
+          "python": "3.11"
+        },
+        {
+          "conclusion": "success",
+          "job_id": 121024361101,
+          "kind": "installed",
+          "name": "installed / osx-arm64 \u00b7 Python 3.12",
+          "platform": "osx-arm64",
+          "python": "3.12"
+        },
+        {
+          "conclusion": "success",
+          "job_id": 121024361108,
+          "kind": "installed",
+          "name": "installed / win-64 \u00b7 Python 3.12",
+          "platform": "win-64",
+          "python": "3.12"
+        },
+        {
+          "conclusion": "success",
+          "job_id": 121024361129,
+          "kind": "installed",
+          "name": "installed / linux-64 \u00b7 Python 3.12",
+          "platform": "linux-64",
+          "python": "3.12"
+        }
+      ],
+      "qualification_sha": "08b83a0e853aff5c563ad9b19d0ddffb15e030f8",
+      "repository": "uibcdf/gh-run-receptor",
+      "run_attempt": 1,
+      "run_id": 40144989781,
+      "schema": "molsyssuite.installed-matrix@1",
+      "source_binding": {
+        "build_number": 0,
+        "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "filename": "gh-run-receptor-1.3.0-py_0.tar.bz2",
+        "matrix": "{\"include\": [{\"platform\": \"linux-64\", \"python\": \"3.11\", \"runner\": \"ubuntu-latest\"}, {\"platform\": \"linux-64\", \"python\": \"3.12\", \"runner\": \"ubuntu-latest\"}, {\"platform\": \"linux-64\", \"python\": \"3.13\", \"runner\": \"ubuntu-latest\"}, {\"platform\": \"linux-64\", \"python\": \"3.14\", \"runner\": \"ubuntu-latest\"}, {\"platform\": \"osx-arm64\", \"python\": \"3.11\", \"runner\": \"macos-15\"}, {\"platform\": \"osx-arm64\", \"python\": \"3.12\", \"runner\": \"macos-15\"}, {\"platform\": \"osx-arm64\", \"python\": \"3.13\", \"runner\": \"macos-15\"}, {\"platform\": \"osx-arm64\", \"python\": \"3.14\", \"runner\": \"macos-15\"}, {\"platform\": \"win-64\", \"python\": \"3.11\", \"runner\": \"windows-latest\"}, {\"platform\": \"win-64\", \"python\": \"3.12\", \"runner\": \"windows-latest\"}, {\"platform\": \"win-64\", \"python\": \"3.13\", \"runner\": \"windows-latest\"}, {\"platform\": \"win-64\", \"python\": \"3.14\", \"runner\": \"windows-latest\"}]}",
+        "package": "gh-run-receptor",
+        "profile": "{\"platforms\": [\"linux-64\", \"osx-arm64\", \"win-64\"], \"python_versions\": [\"3.11\", \"3.12\", \"3.13\", \"3.14\"], \"prepare_job\": \"installed / prepare\", \"required_steps\": [\"Install exact artifact\", \"Validate installed files\", \"Run installed tests\", \"Recheck installed provenance after scientific tests\"], \"job_template\": \"installed / {platform} \\u00b7 Python {python}\"}",
+        "qualification_sha": "08b83a0e853aff5c563ad9b19d0ddffb15e030f8",
+        "run_attempt": 1,
+        "run_id": 40144989781,
+        "schema": "molsyssuite.installed-source@1",
+        "sha256": "65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3",
+        "title": "Installed gh-run-receptor-1.3.0-py_0.tar.bz2 65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3",
+        "version": "1.3.0",
+        "workflow": ".github/workflows/test-staged-conda.yml"
+      },
+      "state": "verified",
+      "title": "Installed gh-run-receptor-1.3.0-py_0.tar.bz2 65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3",
+      "workflow": ".github/workflows/test-staged-conda.yml"
+    },
+    "gh-run-receptor/gh-run-receptor/noarch-promotion.json": {
+      "build_number": 0,
+      "filename": "gh-run-receptor-1.3.0-py_0.tar.bz2",
+      "package": "gh-run-receptor",
+      "profile": "{\"platforms\": [\"linux-64\", \"osx-arm64\", \"win-64\"], \"python_versions\": [\"3.11\", \"3.12\", \"3.13\", \"3.14\"], \"prepare_job\": \"installed / prepare\", \"required_steps\": [\"Install exact artifact\", \"Validate installed files\", \"Run installed tests\", \"Recheck installed provenance after scientific tests\"], \"job_template\": \"installed / {platform} \\u00b7 Python {python}\"}",
+      "route": "staged",
+      "title": "Installed gh-run-receptor-1.3.0-py_0.tar.bz2 65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3",
+      "version": "1.3.0",
+      "workflow": ".github/workflows/test-staged-conda.yml"
+    },
+    "_temp/conda-promotion-receipt.json": {
+      "package": "uibcdf/gh-run-receptor/1.3.0/noarch/gh-run-receptor-1.3.0-py_0.tar.bz2",
+      "schema": "uibcdf.conda-promotion@1",
+      "sha256": "65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3",
+      "source_label": "staging",
+      "status": "verified",
+      "target_label": "main"
+    },
+    "_temp/public-conda-9fCsSdIJ.json": {
+      "checked_at": "2026-10-25T00:06:03.139900+00:00",
+      "files": [
+        {
+          "filename": "gh-run-receptor-1.3.0-py_0.tar.bz2",
+          "main_label": "verified",
+          "owner": "uibcdf",
+          "package": "gh-run-receptor",
+          "sha256": "65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3",
+          "solver_index": "verified",
+          "subdir": "noarch",
+          "url": "https://conda.anaconda.org/uibcdf/noarch/gh-run-receptor-1.3.0-py_0.tar.bz2",
+          "version": "1.3.0"
+        }
+      ],
+      "schema": "molsyssuite.public-conda@1",
+      "state": "verified"
+    }
+  },
+  "independent_public_download": {
+    "bytes": 78037,
+    "sha256": "65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3"
+  },
+  "clean_user_install": {
+    "record": {
+      "name": "gh-run-receptor",
+      "version": "1.3.0",
+      "build": "py_0",
+      "sha256": "65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3",
+      "url": "https://conda.anaconda.org/uibcdf/noarch/gh-run-receptor-1.3.0-py_0.tar.bz2",
+      "channel": "https://conda.anaconda.org/uibcdf/noarch",
+      "subdir": "noarch"
+    },
+    "gh": "gh version 2.103.2",
+    "probe": {
+      "version": "1.3.0",
+      "python": "3.14.9",
+      "module": "$TASK_ROOT/user-conda/lib/python3.14/site-packages/gh_run_receptor/__init__.py",
+      "runtime_sha256": {
+        "watch.py": "818a02b6839e058bfc224cb059b449cc5f066623d0d20ac0a4ed72269d7123d7",
+        "termination.py": "4a13519750e0e61e3ff289e689baf390294b16e23cc1e00371e7b9739f48e89e",
+        "source_version.py": "d31c398357992ad0e1a5cef7fb00688fb817d67ac101beeb6c89a43353de74f8",
+        "service.py": "649a61da93d31bbe1bebcaf405fd0d772863f515ca9347e55283d2b8dc118b94",
+        "report.py": "233bef253a2ea7f261c57af6abbdea62dcdbe13c3c510e46536fcc9428a97f8f",
+        "release_profile.py": "12a76ebe0458ce97084af34f7e17d8b26774ea8c2665c92cfae890331875fbbc",
+        "published.py": "e93963853b240ac04766d1727e485cf302f01973d9f1b942fea95f4319a3af98",
+        "model.py": "1d6a798e092e61add914b4a63e5fe668c52da3ab7fbab02368e076cb236e7ecd",
+        "logs.py": "6b4a7a0eaa7793d6ce874d2779edd634f6a61226d7db1ba9986d00c7ca53e85c",
+        "limits.py": "35f79d98d092c1a2b82f27788d3e58f9d82949011f50f371b59ca012b6ffa245",
+        "job_logs.py": "b050fe7cd700842cebd6e545bc6c422ebce8df9c2437e461b04bdfc607cf4bc8",
+        "github.py": "fe8ab9a9c6c7d9c4e8efda4924cb8d882c81ee317dc128d0bbc6fc4ec1deb579",
+        "exit_codes.py": "3286d198963ee77b0736fcaae6df743b61a8dc3b546ababf20468d15ff3c6147",
+        "events.py": "380b4182c521ac4d1338f2603922f713c2e331f9647fa5429f7d19ad9e127e4d",
+        "errors.py": "0a637d4d732095e1cd43a5953d9ae87653bc692bf820f922e86ec1834b92856d",
+        "embedded.py": "99606ee4c4a7e69619e052a398189d09162a4901d46745625b023d908024a454",
+        "discovery.py": "9e7331319ff0d7b01a52bceeef96ebad28ee798145b0a3f725821b90277a7198",
+        "contracts.py": "319adaf8e3939acbbd7697c3f990692e3b6b877bc5ab3ccc47a603e5b95450e2",
+        "config.py": "9cc0624e207850f74af6da09af63083021e71ffd53fb72127cf2c415b217b46f",
+        "comparison_policy.py": "d183948f7994882f7095bee1a8ac16cb729d41764365d41b36da7ccc7b2db059",
+        "comparison.py": "ea1dffd9252f64220d730cab8ef0f9876453d5997b44b26817f5ba20c922fe3d",
+        "cli.py": "48f10f3b3f56859662330892a03adb0ba432e5fbc99e6fea847864056a611ada",
+        "checks.py": "7df8983f62df02bb51f093b853fff919d0dec4e3fd2869088048a1c17c81592b",
+        "bundle.py": "33c4d7e1e7810c708ab5aca9b3970aa9ebed5d6a5bdddeb49f3907a913bc6796",
+        "aggregation.py": "bbd6fb3a545002e6d7a40d712700c1a0f6ad4ed5fca8e9a48d140511112b9417",
+        "__main__.py": "ce1c8ee643a12be80ed7a0e935798c6d1b6f4bbfabbc125b8da0ddc94d064147",
+        "__init__.py": "8eddae7c20c425941ed48c50ecadd1ececa03264b7326b3e59abe37002be3b96"
+      },
+      "schema_sha256": {
+        "report-v1.schema.json": "4d1c2873c017e6cebfb4062699c70160a9412eff6859af1731c646bac26972c1",
+        "model-v1.schema.json": "1a52a7e2cb48ebb7cc94559c5e14f674f1888fa8d36f770e94a307bdc2860a70",
+        "events-v1.schema.json": "30f785e79f6bde0a6a94e2d3b6ed0d2eaedad8b21072f249e1331c482700f7a0",
+        "config-v1.schema.json": "467d0bab5aee4c910eb95e7777fe928103fc50043f14fad7948ea093209a237d",
+        "config-capture-v1.schema.json": "73cd5e990519222e536e3abad78e8052c57f5f814cd466c09665c249c2535ea6",
+        "comparison-v1.schema.json": "85969edc14a8248f43a03d6d4b93db3daac5ddfb4093fe62a70947d1048641fc",
+        "comparison-policy-v1.schema.json": "aedef7a2d526b3cd5089cb586963a3786bad43903bf4e365995fd85517ce10dd",
+        "bundle-v1.schema.json": "02baeb92b98a22509760e483b17941602f985e6ae79a9a116555ecfcc73d086b",
+        "aggregate-v1.schema.json": "61c8e6fdaf04c610b1f335baac42cc8b4a0680014f16686f3a949cf7590a8b67"
+      },
+      "source_corpus": [
+        {
+          "run_id": 34709939550,
+          "exit_status": 0
+        },
+        {
+          "run_id": 33636046706,
+          "exit_status": 2
+        },
+        {
+          "run_id": 19058199598,
+          "exit_status": 4
+        },
+        {
+          "run_id": 22638022385,
+          "exit_status": 1
+        },
+        {
+          "run_id": 22638022385,
+          "exit_status": 0
+        },
+        {
+          "run_id": 31278635513,
+          "exit_status": 1
+        },
+        {
+          "run_id": 30998524379,
+          "exit_status": 0
+        },
+        {
+          "run_id": 33930667142,
+          "exit_status": 1
+        },
+        {
+          "run_id": 31781220979,
+          "exit_status": 0
+        },
+        {
+          "run_id": 20548716947,
+          "exit_status": 0
+        },
+        {
+          "run_id": 33923020037,
+          "exit_status": 1
+        },
+        {
+          "run_id": 33863426589,
+          "exit_status": 1
+        },
+        {
+          "run_id": 33849332945,
+          "exit_status": 0
+        },
+        {
+          "run_id": 34027741137,
+          "exit_status": 2
+        }
+      ],
+      "original_diagnostic_runs": [
+        37279215592,
+        37538525423,
+        37629258208,
+        37994715796,
+        38037422889,
+        40013378053
+      ],
+      "job_scope": [
+        {
+          "unavailable": false,
+          "exit_status": 3,
+          "partial_file_absent": null
+        },
+        {
+          "unavailable": true,
+          "exit_status": 4,
+          "partial_file_absent": true
+        }
+      ],
+      "managed_probe_resources_removed": true
+    }
+  },
+  "limits": [
+    "The clean public-file installation is Linux/Python 3.14.9.",
+    "Twelve native installed cells qualify the original identical Conda file separately.",
+    "No caller environment, auth or extension pin is changed.",
+    "PyPI is excluded."
+  ]
+}

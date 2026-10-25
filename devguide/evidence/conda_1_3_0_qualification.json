@@ -1,0 +1,3115 @@
+{
+  "source_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+  "qualification_sha": "08b83a0e853aff5c563ad9b19d0ddffb15e030f8",
+  "producer_run_id": 40143062622,
+  "producer_attempt": 1,
+  "filename": "gh-run-receptor-1.3.0-py_0.tar.bz2",
+  "sha256": "65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3",
+  "bytes": 78037,
+  "staging_upload_state": "verified",
+  "staging_label": "staging",
+  "installed_run": {
+    "run": {
+      "conclusion": "success",
+      "event": "workflow_dispatch",
+      "head_sha": "08b83a0e853aff5c563ad9b19d0ddffb15e030f8",
+      "id": 40144989781,
+      "path": ".github/workflows/test-staged-conda.yml",
+      "run_attempt": 1,
+      "status": "completed"
+    },
+    "jobs": [
+      {
+        "id": 121024307106,
+        "name": "installed / prepare",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/setup-python@v5",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run python -m pip install 'PyYAML>=6,<7' 'Jinja2>=3,<4' 'packaging>=24'",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Bind exact file, source and complete installed matrix",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/upload-artifact@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/upload-artifact@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/setup-python@v5",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "status": "completed"
+          }
+        ]
+      },
+      {
+        "id": 121024361020,
+        "name": "installed / linux-64 \u00b7 Python 3.13",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Bootstrap qualification checks",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Repair Windows installer launcher metadata",
+            "conclusion": "skipped",
+            "status": "completed"
+          },
+          {
+            "name": "Install committed qualification tools",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Install exact artifact",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Validate installed files",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run installed tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Recheck installed provenance after scientific tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain qualification tool evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain administrative helper evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "status": "completed"
+          }
+        ]
+      },
+      {
+        "id": 121024361023,
+        "name": "installed / win-64 \u00b7 Python 3.13",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Bootstrap qualification checks",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Repair Windows installer launcher metadata",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Install committed qualification tools",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Install exact artifact",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Validate installed files",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run installed tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Recheck installed provenance after scientific tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain qualification tool evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain administrative helper evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "status": "completed"
+          }
+        ]
+      },
+      {
+        "id": 121024361026,
+        "name": "installed / linux-64 \u00b7 Python 3.11",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Bootstrap qualification checks",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Repair Windows installer launcher metadata",
+            "conclusion": "skipped",
+            "status": "completed"
+          },
+          {
+            "name": "Install committed qualification tools",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Install exact artifact",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Validate installed files",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run installed tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Recheck installed provenance after scientific tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain qualification tool evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain administrative helper evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "status": "completed"
+          }
+        ]
+      },
+      {
+        "id": 121024361035,
+        "name": "installed / osx-arm64 \u00b7 Python 3.11",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Bootstrap qualification checks",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Repair Windows installer launcher metadata",
+            "conclusion": "skipped",
+            "status": "completed"
+          },
+          {
+            "name": "Install committed qualification tools",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Install exact artifact",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Validate installed files",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run installed tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Recheck installed provenance after scientific tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain qualification tool evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain administrative helper evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "status": "completed"
+          }
+        ]
+      },
+      {
+        "id": 121024361041,
+        "name": "installed / osx-arm64 \u00b7 Python 3.13",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Bootstrap qualification checks",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Repair Windows installer launcher metadata",
+            "conclusion": "skipped",
+            "status": "completed"
+          },
+          {
+            "name": "Install committed qualification tools",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Install exact artifact",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Validate installed files",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run installed tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Recheck installed provenance after scientific tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain qualification tool evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain administrative helper evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "status": "completed"
+          }
+        ]
+      },
+      {
+        "id": 121024361064,
+        "name": "installed / osx-arm64 \u00b7 Python 3.14",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Bootstrap qualification checks",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Repair Windows installer launcher metadata",
+            "conclusion": "skipped",
+            "status": "completed"
+          },
+          {
+            "name": "Install committed qualification tools",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Install exact artifact",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Validate installed files",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run installed tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Recheck installed provenance after scientific tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain qualification tool evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain administrative helper evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "status": "completed"
+          }
+        ]
+      },
+      {
+        "id": 121024361068,
+        "name": "installed / linux-64 \u00b7 Python 3.14",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Bootstrap qualification checks",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Repair Windows installer launcher metadata",
+            "conclusion": "skipped",
+            "status": "completed"
+          },
+          {
+            "name": "Install committed qualification tools",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Install exact artifact",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Validate installed files",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run installed tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Recheck installed provenance after scientific tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain qualification tool evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain administrative helper evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "status": "completed"
+          }
+        ]
+      },
+      {
+        "id": 121024361082,
+        "name": "installed / win-64 \u00b7 Python 3.14",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Bootstrap qualification checks",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Repair Windows installer launcher metadata",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Install committed qualification tools",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Install exact artifact",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Validate installed files",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run installed tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Recheck installed provenance after scientific tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain qualification tool evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain administrative helper evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "status": "completed"
+          }
+        ]
+      },
+      {
+        "id": 121024361086,
+        "name": "installed / win-64 \u00b7 Python 3.11",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Bootstrap qualification checks",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Repair Windows installer launcher metadata",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Install committed qualification tools",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Install exact artifact",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Validate installed files",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run installed tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Recheck installed provenance after scientific tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain qualification tool evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain administrative helper evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "status": "completed"
+          }
+        ]
+      },
+      {
+        "id": 121024361101,
+        "name": "installed / osx-arm64 \u00b7 Python 3.12",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Bootstrap qualification checks",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Repair Windows installer launcher metadata",
+            "conclusion": "skipped",
+            "status": "completed"
+          },
+          {
+            "name": "Install committed qualification tools",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Install exact artifact",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Validate installed files",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run installed tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Recheck installed provenance after scientific tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain qualification tool evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain administrative helper evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "status": "completed"
+          }
+        ]
+      },
+      {
+        "id": 121024361108,
+        "name": "installed / win-64 \u00b7 Python 3.12",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Bootstrap qualification checks",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Repair Windows installer launcher metadata",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Install committed qualification tools",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Install exact artifact",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Validate installed files",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run installed tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Recheck installed provenance after scientific tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain qualification tool evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain administrative helper evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "status": "completed"
+          }
+        ]
+      },
+      {
+        "id": 121024361129,
+        "name": "installed / linux-64 \u00b7 Python 3.12",
+        "status": "completed",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Bootstrap qualification checks",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Repair Windows installer launcher metadata",
+            "conclusion": "skipped",
+            "status": "completed"
+          },
+          {
+            "name": "Install committed qualification tools",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Install exact artifact",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Validate installed files",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Run installed tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Recheck installed provenance after scientific tests",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain qualification tool evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Retain administrative helper evidence",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Post Run actions/checkout@v4",
+            "conclusion": "success",
+            "status": "completed"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "status": "completed"
+          }
+        ]
+      }
+    ]
+  },
+  "receiving_artifacts": [
+    {
+      "artifact": {
+        "id": 12580745187,
+        "name": "installed-admin-helpers-win-64-py3.12",
+        "digest": "sha256:cfb4e5abd3e7aa82b301465cd45be1cb9b5fb5d18ec2ab4eca3dbd2b7d811c53",
+        "size_in_bytes": 3587,
+        "expired": false
+      },
+      "report": {
+        "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "helper_files": 62,
+        "source_root_added_to_path": false,
+        "checks": 2,
+        "state": "verified-helpers",
+        "helper_sha256": {
+          "devtools\\check_distribution_inputs.py": "31f20ff509fb722b592a1141b17445d2d49ba359b69fe186613befbe6b8c67a7",
+          "devtools\\installed_smoke.py": "fa225eabeee068438fbfb92bc37f7cce4b163ac0c2da60c289d1ee2b7cfa5f71",
+          "devtools\\scripts\\benchmark_capture_policies.py": "a3dc4fb0df1a50dae6d89c4221a92e8cc54cfeb844b508cafbcc5456d20a55dd",
+          "devtools\\scripts\\devguide_index.py": "c15d400b0811df1ff61771827470ce782b5395d3a4106a7e360824e592be1198",
+          "devtools\\scripts\\devguide_issue.py": "1ba89b1a19666e20e323c36d1a4d8c9fa66162958c995de2c7fb9c35dacbd424",
+          "devtools\\scripts\\devguide_reports.py": "aa27c114f09bf4928b37366a402e41bf39b4ebc1afddaf2073dd7c26366d73f7",
+          "devtools\\scripts\\distribution_archives.py": "1a449d80eec17126cfa415c4dfc987d5b2aecce4996193d013b8632e7fb83fbd",
+          "devtools\\scripts\\release_tools.py": "c9a3183060cc65d7a93f26045446c58a551286cead7c33837e478863232ad51e",
+          "devtools\\scripts\\sanitize_bundle.py": "b76e6c891828e571a0514756f8688d73b7f33dbc582b0208b98357442b25bff1",
+          "devtools\\scripts\\sync_gh_run_receptor_guide.py": "15c015abac1f9f9aba63a4ba26069d16a3cd2ced7cd23bb864096421e0996206",
+          "devtools\\scripts\\validate_contracts.py": "fcb436a5e5cd708b8011582ccc4fcf37c32b2cd64b3e9388b30ae2b0c3870a22",
+          "devtools\\scripts\\validate_devguide.py": "07586703f0bbecd913b778626a4fc2c5d991c268d9c6d435a1dcdf90c5f27e60",
+          "devtools\\scripts\\validate_job_logs.py": "6d1625bfdac29ea4c48eaf71cedad750a19bd52edf16d98e0271aeb858af3830",
+          "devtools\\scripts\\validate_public_runs.py": "8c29f55c896c27a8442e4f00b22210fd8993380c2f8a05bc3bbb0d46cce810f1",
+          "tests\\test_action_distribution_workflow.py": "2ac5afe48dc05544df34d92816bff4e1deba5661488f690c3cbab5b706f1de02",
+          "tests\\test_action_metadata.py": "9a96cfc323ee8c9b4c3499e2fea181a2f397ebd1df0f49af366d93fe8755abf6",
+          "tests\\test_action_validation_workflow.py": "5d355aa563ab1fb8dcadd22e7cb3d4a7042046e2494e8a8ec828f626386bfc73",
+          "tests\\test_aggregation.py": "172f46390b5f116a37ea7781a563df4d77a4226f0f910f8faa65802ad98f52e1",
+          "tests\\test_bundle.py": "e92ba503941c92cea0cd8220132e3293c88b826d3d8e53cb9fe3d35a3037f79b",
+          "tests\\test_bundle_resources.py": "f5d056cc9cdbf583f34f2266003d63862d6f850be4ea389ccdc64e0138f77148",
+          "tests\\test_capture_policy_benchmark.py": "9b6d445239de39149dc8d1ea4a520cb537737784e3bd2bdcba7a84928eb474d2",
+          "tests\\test_capture_policy_workflow.py": "4fe1c7494a261ea821bb5882de4e2b6bec007e72bfc5ecfdf6b4fdaa1a1af951",
+          "tests\\test_checks.py": "7c5484dc9c3f8336e36a31237f92125512041cff1f0d7eda2085e0729bcca991",
+          "tests\\test_cli.py": "1a3ea435de192d2f464f8167db1d9473453a5712495cacd8532f29cc38bc3e9d",
+          "tests\\test_comparison.py": "896bc1cd677b3e7194e067e74125af5d50eeb38e8f1c2d05bab7e035551b8aa5",
+          "tests\\test_comparison_policy.py": "368c46d4157d083a0d0ccadb481c57deadc2f709ddc075a6d15815f8c7dcdfc3",
+          "tests\\test_compatibility_workflow.py": "2e5568b2e6d526c5dbad35314f27b7042fa52c609049b556b04f47ad684a2885",
+          "tests\\test_conda_distribution.py": "b4652e1f7ee2e3cf047f1509fc312b2734b1f278144cf281df068c496af9b4ab",
+          "tests\\test_config.py": "dab1e63b8ab54faf97194cf492b5e8b6b84c17c76568bd33ba3fd48ba49d375f",
+          "tests\\test_contract_compatibility.py": "343bde0c4658d37ef9f0c0dc45c857d1f0a8133483460fa31ee1675ef5a5bd83",
+          "tests\\test_contracts.py": "6a00092cf3f65b8589060ddc9c4b4dccb505f0c966cbefce1975e434fe0a647d",
+          "tests\\test_diagnostic_ranking.py": "6f6758453fc7f89aceef0bf93a3350b1436efbdf55224ec565bd22883cc67db0",
+          "tests\\test_discovery.py": "63fd379877a9c1c49bb104f0fe0429c0d166804f6c67721ee5a80541e976f848",
+          "tests\\test_documentation.py": "94eb51daedc5c3270420eea447874f0a4672ce8cf833b3fc29b8e6cfbee6781d",
+          "tests\\test_embedded.py": "770a0dc3577acb171cf1b830001045f91e23224138def214b76d462e07384d34",
+          "tests\\test_events.py": "2c73768ae30d21c0dd7e69dfa49b32559bcf56395613351cc5cce90d1535a670",
+          "tests\\test_exit_codes.py": "921e85d11ee50b3e82c60120013f779227838ffe83775f463bf1a2559e8a342a",
+          "tests\\test_github.py": "a46c0a4c26ae07ed6ad0889e506f48d10e240956c03e1ee21e703809183260c0",
+          "tests\\test_inline_rules_pr_workflow.py": "7d2e9aadd4024dd013b1399fb89df9b3163e2bdc77b0cf1957ef2b139fa955de",
+          "tests\\test_job_logs.py": "f1ab7d54ae0f5d8e84cf456bcb8a3a25ebe0e354d41f12c740e1a8983ab24e67",
+          "tests\\test_logs.py": "4fd2c45c4991353916a9fdd66f39e9ae65a6e54b6653c19bf9e393c329fdb1d5",
+          "tests\\test_minimum_gh_cli_workflow.py": "ef8ef9813c17699797ac99c4aa95e8236cbb920df98462056d46a560028c87fd",
+          "tests\\test_packaging.py": "035aa437334f560f80ee5ffa3eacc4d6c980fcff300859b39f78e3905394ad85",
+          "tests\\test_permission_boundary_workflow.py": "0d35605ccfad7ba9297118e776c8eab90669f881994c40e200e7c607a1b1a6b7",
+          "tests\\test_public_runs.py": "bc39112b40c4a7c4c0780f443c7f169f09fc397060c4f3ba479ed61c19cf260f",
+          "tests\\test_publish_release_workflow.py": "6f696fe3d6d322d9fe9f910d7ebf370480c4a825abbfe4a677e9990c5a9c74ba",
+          "tests\\test_published.py": "13e6dd3588409e52e37ce32ba9ac54f4094e1141baa243dbbaab31c56fa4f72c",
+          "tests\\test_published_validation_workflow.py": "5f1ce060428763ddb790588ea0612d2b4a70bd63eeb6cae6eccb82f29000907b",
+          "tests\\test_python_ci_lanes.py": "a1d9a90ef729c4efbfabbcb52853dfe8e4770a6c3647e83590cb3d2963b311fc",
+          "tests\\test_release_tools.py": "9d17827d9228b622775551aa97adc68e4ae8aa73008e6f23326e8d7e8757a1f7",
+          "tests\\test_report.py": "b40b8d0b6ac83bfc5ecdc77445551d165d3cba4ffc79e3d532bcdab17fb596b2",
+          "tests\\test_repository_conventions.py": "804d8d661182c3799edbeb0edea420b10820d335f76a07835a2ae643bc06c66e",
+          "tests\\test_reusable_report_workflow.py": "f5dad754cc886eb81b61348a1ce20e3c25625f1ffd517611f2a4dc31f738b0cf",
+          "tests\\test_service.py": "353aaae7c41ca48c397e3761f4ef73a3860d180956d3a1173b305289d94d86f9",
+          "tests\\test_source_version.py": "95c27bd5c16aa4c84e0f9fb7b45745412fd24f08b9633d4bf68c1f42f6b4c629",
+          "tests\\test_sync_guide.py": "66867cf22c5514220a783e90a364035b1920986599b12130d4f04e0edee266d0",
+          "tests\\test_termination.py": "0a1283579920245d13d18d98e9fc87ad98e3152d6412a1c2504ea0f7b4e8ebe4",
+          "tests\\test_watch.py": "351001748d4895d620b5d091576c089d970f92d3e5425c5872481e8b53fcdb7b",
+          "tests\\test_workflow_run_reporting.py": "f50ccdcac476da0013f209e72d049a07c5b721a05c233def21c1603b26a5aa47",
+          "tests\\test_zenodo_recovery_workflow.py": "d8a05a04ccb624e4ace2e9dddbe22e862f3183c8bab215aa2928277d6e38777f",
+          "tests\\test_zenodo_verification.py": "13c57264acd478ca313e2933afd80381bf8424602b179e149ae30ed53f662f09",
+          "tests\\test_zenodo_workflow.py": "607a093cccc38183c402e91fcd63fcfee50b5dd7a4ece1a5014d3cce520a687a"
+        },
+        "loaded": [
+          "devtools",
+          "devtools.check_distribution_inputs",
+          "devtools.installed_smoke",
+          "devtools.scripts",
+          "devtools.scripts.benchmark_capture_policies",
+          "devtools.scripts.distribution_archives",
+          "devtools.scripts.release_tools",
+          "devtools.scripts.sanitize_bundle",
+          "devtools.scripts.sync_gh_run_receptor_guide",
+          "devtools.scripts.validate_contracts",
+          "devtools.scripts.validate_public_runs",
+          "tests",
+          "tests.test_action_distribution_workflow",
+          "tests.test_action_metadata",
+          "tests.test_action_validation_workflow",
+          "tests.test_aggregation",
+          "tests.test_bundle",
+          "tests.test_bundle_resources",
+          "tests.test_capture_policy_benchmark",
+          "tests.test_capture_policy_workflow",
+          "tests.test_checks",
+          "tests.test_cli",
+          "tests.test_comparison",
+          "tests.test_comparison_policy",
+          "tests.test_compatibility_workflow",
+          "tests.test_conda_distribution",
+          "tests.test_config",
+          "tests.test_contract_compatibility",
+          "tests.test_contracts",
+          "tests.test_diagnostic_ranking",
+          "tests.test_discovery",
+          "tests.test_documentation",
+          "tests.test_embedded",
+          "tests.test_events",
+          "tests.test_exit_codes",
+          "tests.test_github",
+          "tests.test_inline_rules_pr_workflow",
+          "tests.test_job_logs",
+          "tests.test_logs",
+          "tests.test_minimum_gh_cli_workflow",
+          "tests.test_packaging",
+          "tests.test_permission_boundary_workflow",
+          "tests.test_public_runs",
+          "tests.test_publish_release_workflow",
+          "tests.test_published",
+          "tests.test_published_validation_workflow",
+          "tests.test_python_ci_lanes",
+          "tests.test_release_tools",
+          "tests.test_report",
+          "tests.test_repository_conventions",
+          "tests.test_reusable_report_workflow",
+          "tests.test_service",
+          "tests.test_source_version",
+          "tests.test_sync_guide",
+          "tests.test_termination",
+          "tests.test_watch",
+          "tests.test_workflow_run_reporting",
+          "tests.test_zenodo_recovery_workflow",
+          "tests.test_zenodo_verification",
+          "tests.test_zenodo_workflow"
+        ],
+        "test_exit_status": 0,
+        "blocked_source_path_additions": 2,
+        "bindings_removed": true
+      }
+    },
+    {
+      "artifact": {
+        "id": 12580600671,
+        "name": "installed-admin-helpers-osx-arm64-py3.12",
+        "digest": "sha256:99765d603f3ef1508f9e042259f476c86eec4aa1cc810db27a793a4906a98c84",
+        "size_in_bytes": 3583,
+        "expired": false
+      },
+      "report": {
+        "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "helper_files": 62,
+        "source_root_added_to_path": false,
+        "checks": 2,
+        "state": "verified-helpers",
+        "helper_sha256": {
+          "devtools/check_distribution_inputs.py": "0640d3d06a3ef409b166de8fa6e0a5ca25a59963aa682242f2b5c9f0fac9a345",
+          "devtools/installed_smoke.py": "65bb48220d463afb2676aeb916a4cb27f588473914da6c330ee3227c99c91cfb",
+          "devtools/scripts/benchmark_capture_policies.py": "617421f757b98a00b96ad54fa6b5cc621a212cbc0044a9677e4340138bc60e5a",
+          "devtools/scripts/devguide_index.py": "144660461865405ffce4f671e292bdc33fb700c35dc33e149cea7ba5512826d6",
+          "devtools/scripts/devguide_issue.py": "3121a02b2b09e8a157709c6ba3801a41814e96b20c898002ac131c45d9f9fa7c",
+          "devtools/scripts/devguide_reports.py": "50db83c969e69f3fd4dca04c9e7d1f1c89e4918b3f1c17c01ee861950396322d",
+          "devtools/scripts/distribution_archives.py": "6668a6b637cc41346d46a557d8abd8c28d370d26eb5a255c9167dff0fd7f2c48",
+          "devtools/scripts/release_tools.py": "f2073c3845537c5ae87b7724c7ef5b9b5ccf38e1792563a141af280eff87d0e5",
+          "devtools/scripts/sanitize_bundle.py": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+          "devtools/scripts/sync_gh_run_receptor_guide.py": "3dac1b889803581dcdd1b51fee32f897ec4de490bcb4787beeda9dbbd3f6bffa",
+          "devtools/scripts/validate_contracts.py": "1117a648d97fabc541b77fb6cc367aa82023fc60adccfe66ef5ec103e44ca769",
+          "devtools/scripts/validate_devguide.py": "318e8622f7a29130fc27ae912b712e1c49d7b658d8c7f5ceda979c2871949d18",
+          "devtools/scripts/validate_job_logs.py": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+          "devtools/scripts/validate_public_runs.py": "7b46c1091ef75448f8fb50b0df44ae37ef4e1820efb893c89fd968d532415b07",
+          "tests/test_action_distribution_workflow.py": "63f6da27069225e5c987340cb5f4866403570f9c06020dcffa7cc8b1113e06e4",
+          "tests/test_action_metadata.py": "25e92cff63dcfb3ae8e6bbc3b075fb1c40c08627f6403d9b6b4cc90836413d12",
+          "tests/test_action_validation_workflow.py": "11677b84a10364257762ebbc118430f9f597df0062e89376ec9ac18e295243c5",
+          "tests/test_aggregation.py": "cbf756e3a8820f1bbd28a3023c818cd18b9717192bcdf0355c29da6c9b21f459",
+          "tests/test_bundle.py": "32764eeb795a66f2afbc6cb705c08ca4785efd87db3939379d52da7db88919d1",
+          "tests/test_bundle_resources.py": "542ee412f0baa389fc1eb91d269e01de6af91280b1514161591f6064c59f12a2",
+          "tests/test_capture_policy_benchmark.py": "50881f34a2b60e13e3daae0d6a3d328f05c27feb085b90cb83a53e51319e7137",
+          "tests/test_capture_policy_workflow.py": "4fea8c9b891ef36868181422426f02ec8533878596a384688c417cd897c2f484",
+          "tests/test_checks.py": "aadee82734c1226525409f876e051e4b0967ca57c2e664b1f2cdc62be9047c3e",
+          "tests/test_cli.py": "4d51f28bb9c26b1509171b0faf6a9caeacf9e8ecceea12a7f19385d444e63fa7",
+          "tests/test_comparison.py": "65dc1d5f9325cb9ae8574335f2ae11b688f3a75683cfa6199985aad4837ef8d8",
+          "tests/test_comparison_policy.py": "f6e53f90bfb5ec59101a5747322fc038e0c276844ba65658660033cdf3d3048e",
+          "tests/test_compatibility_workflow.py": "fd4da8e9487adc842809103ce03873f0ba95c921ed5c722254c22fbb6132120f",
+          "tests/test_conda_distribution.py": "e27fb2ce60e6ea6be6d67ced66394ab916a2a287df1e7958e372e223c5af8bf8",
+          "tests/test_config.py": "356ff1b63eb0a35b8af76419de6b274d8e4766401789357b0e736d9a131f3c16",
+          "tests/test_contract_compatibility.py": "e3d3830573d46cc42423e508d24ade6231210af32a4a16659b27c99bfe0a1a29",
+          "tests/test_contracts.py": "73d9a8f75be11741af47ccdbe882132bb3fee3b71fe56a28662809f3cf3309b4",
+          "tests/test_diagnostic_ranking.py": "f65dc0c98fa881b02523413735e6ea9069e7faa19293539ab8837ec72fc4cae6",
+          "tests/test_discovery.py": "32075b575359c9efcabe99965d7b6ae37d18acc1ad11e6e0697e412478892fbe",
+          "tests/test_documentation.py": "c7dda5ac1046a270f392b20c42aef8fa909f2b0b78c6b27f607bf1f32eb7d0ee",
+          "tests/test_embedded.py": "491a56be98fd50ea061a53d2fed99270c6ba73d3adb45907f6c05564c6963122",
+          "tests/test_events.py": "80c653e72e3a7204da5180fa04e3434cca4b4834a91ccb489097172f667c104d",
+          "tests/test_exit_codes.py": "fda18570b372b608003a4d107dd4964c4c8ddd31c8106178acc350c39f619603",
+          "tests/test_github.py": "fd1341ef0d705f4c928e8885e3b122e96694b9c39df70febf0ec39fe98d36327",
+          "tests/test_inline_rules_pr_workflow.py": "d0a2676f25ceff589eabbdde014ef94c1516ea180a20bd1779c54aa72d0d4ae0",
+          "tests/test_job_logs.py": "d3cff6575c911aa1320876bb67b6ad9a11a87e008f6c7e9214425bd33fa90bc6",
+          "tests/test_logs.py": "df4416efab5e9c04c3956bc402ebd03b876d08a3be183c3c4119f6acc40a7a05",
+          "tests/test_minimum_gh_cli_workflow.py": "870217a358a582d694cf0ce2625ef0cd03e921832c3077d9f6e42fb14e89ed18",
+          "tests/test_packaging.py": "5c4d0985f234be46e9dbe3a7abd798b057ad630d812c29f2a791a338a1983051",
+          "tests/test_permission_boundary_workflow.py": "af766f4ae5392a68c434da7c63663e147d93cd725d665137195a377d75468a2a",
+          "tests/test_public_runs.py": "71f0cead59f7dc59a36cc9ea77df30f593be2882f666de893f36b25230ac100a",
+          "tests/test_publish_release_workflow.py": "25fac593aa097efad348d1a70714ca70100f1491a5152ee0e78307752316c413",
+          "tests/test_published.py": "c5bab362635442522be5bd4c2119fdc233cec8e70c2fb2c77c625e41b2841492",
+          "tests/test_published_validation_workflow.py": "0a1179ee2c09cc26fc0e6652825a5a68c58cc5d3d66a64f84a40c44f1dd9187e",
+          "tests/test_python_ci_lanes.py": "87743ed97acd8f12fbac920b9cfc62867d6d3077c533be7fac6307d4fa984108",
+          "tests/test_release_tools.py": "86e1962c0796ed8e2fcc7c7db0625ebafe19fbd339103cf533ac7c5270ac5d99",
+          "tests/test_report.py": "a5114250af7a99edd2ea1dd073eb216dc85cdeba7f0aac75a14123382154eb46",
+          "tests/test_repository_conventions.py": "141f9d94f629086a2efb9c98b25b5fe8fad8d283de45527eb45ad1c00f2a0c89",
+          "tests/test_reusable_report_workflow.py": "e4a1a60466679ff37ad3410e7910d54bec45e3a725dd62798a242e64be574204",
+          "tests/test_service.py": "2699b49baf2ad0083e5f7df9b6a377791d72fdf6a0bfd672eeb35562629e03c2",
+          "tests/test_source_version.py": "44abff8df6b6b778c86a44613916357da9a7d91c6a1162217eac7401493dae19",
+          "tests/test_sync_guide.py": "0f677b3fdf2ec09d0b5096ccd969d8b99ed4c640cad3a76e8def2f8f4e0aa759",
+          "tests/test_termination.py": "46de8c71848b99da78fc2d9e000f7d455e4b44b5324bfd511324ea86b08e70eb",
+          "tests/test_watch.py": "ce8c716ac30cfdeff06a33e2a4b18ea5f1751877c99a70b82e9333ba0586a7fe",
+          "tests/test_workflow_run_reporting.py": "ddf228e7f372e5e4a2602eb0e16ce29ff55f69775d4490d453114a9b40b6839c",
+          "tests/test_zenodo_recovery_workflow.py": "2193a1c85da77b255027c46f02ebb133f1a1b7a9c620fdd461da5da21ad7a0d9",
+          "tests/test_zenodo_verification.py": "7c27bd220d78725c43d18f0c98901197c3a0bf63f6adf74f7b04f4e3e3e6889c",
+          "tests/test_zenodo_workflow.py": "794317de60c1d0868fe21545b52fc1ce06a766e8ae169a44d51598f8670fe223"
+        },
+        "loaded": [
+          "devtools",
+          "devtools.check_distribution_inputs",
+          "devtools.installed_smoke",
+          "devtools.scripts",
+          "devtools.scripts.benchmark_capture_policies",
+          "devtools.scripts.distribution_archives",
+          "devtools.scripts.release_tools",
+          "devtools.scripts.sanitize_bundle",
+          "devtools.scripts.sync_gh_run_receptor_guide",
+          "devtools.scripts.validate_contracts",
+          "devtools.scripts.validate_public_runs",
+          "tests",
+          "tests.test_action_distribution_workflow",
+          "tests.test_action_metadata",
+          "tests.test_action_validation_workflow",
+          "tests.test_aggregation",
+          "tests.test_bundle",
+          "tests.test_bundle_resources",
+          "tests.test_capture_policy_benchmark",
+          "tests.test_capture_policy_workflow",
+          "tests.test_checks",
+          "tests.test_cli",
+          "tests.test_comparison",
+          "tests.test_comparison_policy",
+          "tests.test_compatibility_workflow",
+          "tests.test_conda_distribution",
+          "tests.test_config",
+          "tests.test_contract_compatibility",
+          "tests.test_contracts",
+          "tests.test_diagnostic_ranking",
+          "tests.test_discovery",
+          "tests.test_documentation",
+          "tests.test_embedded",
+          "tests.test_events",
+          "tests.test_exit_codes",
+          "tests.test_github",
+          "tests.test_inline_rules_pr_workflow",
+          "tests.test_job_logs",
+          "tests.test_logs",
+          "tests.test_minimum_gh_cli_workflow",
+          "tests.test_packaging",
+          "tests.test_permission_boundary_workflow",
+          "tests.test_public_runs",
+          "tests.test_publish_release_workflow",
+          "tests.test_published",
+          "tests.test_published_validation_workflow",
+          "tests.test_python_ci_lanes",
+          "tests.test_release_tools",
+          "tests.test_report",
+          "tests.test_repository_conventions",
+          "tests.test_reusable_report_workflow",
+          "tests.test_service",
+          "tests.test_source_version",
+          "tests.test_sync_guide",
+          "tests.test_termination",
+          "tests.test_watch",
+          "tests.test_workflow_run_reporting",
+          "tests.test_zenodo_recovery_workflow",
+          "tests.test_zenodo_verification",
+          "tests.test_zenodo_workflow"
+        ],
+        "test_exit_status": 0,
+        "blocked_source_path_additions": 2,
+        "bindings_removed": true
+      }
+    },
+    {
+      "artifact": {
+        "id": 12580590573,
+        "name": "installed-source-binding-40144989781-1",
+        "digest": "sha256:c5c814536626b6b3bbba925dce4e05addb82e4c7b35dc16a091d661b8ea54e32",
+        "size_in_bytes": 817,
+        "expired": false
+      },
+      "report": {
+        "build_number": 0,
+        "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "filename": "gh-run-receptor-1.3.0-py_0.tar.bz2",
+        "matrix": "{\"include\": [{\"platform\": \"linux-64\", \"python\": \"3.11\", \"runner\": \"ubuntu-latest\"}, {\"platform\": \"linux-64\", \"python\": \"3.12\", \"runner\": \"ubuntu-latest\"}, {\"platform\": \"linux-64\", \"python\": \"3.13\", \"runner\": \"ubuntu-latest\"}, {\"platform\": \"linux-64\", \"python\": \"3.14\", \"runner\": \"ubuntu-latest\"}, {\"platform\": \"osx-arm64\", \"python\": \"3.11\", \"runner\": \"macos-15\"}, {\"platform\": \"osx-arm64\", \"python\": \"3.12\", \"runner\": \"macos-15\"}, {\"platform\": \"osx-arm64\", \"python\": \"3.13\", \"runner\": \"macos-15\"}, {\"platform\": \"osx-arm64\", \"python\": \"3.14\", \"runner\": \"macos-15\"}, {\"platform\": \"win-64\", \"python\": \"3.11\", \"runner\": \"windows-latest\"}, {\"platform\": \"win-64\", \"python\": \"3.12\", \"runner\": \"windows-latest\"}, {\"platform\": \"win-64\", \"python\": \"3.13\", \"runner\": \"windows-latest\"}, {\"platform\": \"win-64\", \"python\": \"3.14\", \"runner\": \"windows-latest\"}]}",
+        "package": "gh-run-receptor",
+        "profile": "{\"platforms\": [\"linux-64\", \"osx-arm64\", \"win-64\"], \"python_versions\": [\"3.11\", \"3.12\", \"3.13\", \"3.14\"], \"prepare_job\": \"installed / prepare\", \"required_steps\": [\"Install exact artifact\", \"Validate installed files\", \"Run installed tests\", \"Recheck installed provenance after scientific tests\"], \"job_template\": \"installed / {platform} \\u00b7 Python {python}\"}",
+        "qualification_sha": "08b83a0e853aff5c563ad9b19d0ddffb15e030f8",
+        "run_attempt": 1,
+        "run_id": 40144989781,
+        "schema": "molsyssuite.installed-source@1",
+        "sha256": "65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3",
+        "title": "Installed gh-run-receptor-1.3.0-py_0.tar.bz2 65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3",
+        "version": "1.3.0",
+        "workflow": ".github/workflows/test-staged-conda.yml"
+      }
+    },
+    {
+      "artifact": {
+        "id": 12580490713,
+        "name": "installed-admin-helpers-linux-64-py3.12",
+        "digest": "sha256:c154822a14df65a50a9031d7826133174da14b34bd3b76393c92d6137d53ed37",
+        "size_in_bytes": 3583,
+        "expired": false
+      },
+      "report": {
+        "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "helper_files": 62,
+        "source_root_added_to_path": false,
+        "checks": 2,
+        "state": "verified-helpers",
+        "helper_sha256": {
+          "devtools/check_distribution_inputs.py": "0640d3d06a3ef409b166de8fa6e0a5ca25a59963aa682242f2b5c9f0fac9a345",
+          "devtools/installed_smoke.py": "65bb48220d463afb2676aeb916a4cb27f588473914da6c330ee3227c99c91cfb",
+          "devtools/scripts/benchmark_capture_policies.py": "617421f757b98a00b96ad54fa6b5cc621a212cbc0044a9677e4340138bc60e5a",
+          "devtools/scripts/devguide_index.py": "144660461865405ffce4f671e292bdc33fb700c35dc33e149cea7ba5512826d6",
+          "devtools/scripts/devguide_issue.py": "3121a02b2b09e8a157709c6ba3801a41814e96b20c898002ac131c45d9f9fa7c",
+          "devtools/scripts/devguide_reports.py": "50db83c969e69f3fd4dca04c9e7d1f1c89e4918b3f1c17c01ee861950396322d",
+          "devtools/scripts/distribution_archives.py": "6668a6b637cc41346d46a557d8abd8c28d370d26eb5a255c9167dff0fd7f2c48",
+          "devtools/scripts/release_tools.py": "f2073c3845537c5ae87b7724c7ef5b9b5ccf38e1792563a141af280eff87d0e5",
+          "devtools/scripts/sanitize_bundle.py": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+          "devtools/scripts/sync_gh_run_receptor_guide.py": "3dac1b889803581dcdd1b51fee32f897ec4de490bcb4787beeda9dbbd3f6bffa",
+          "devtools/scripts/validate_contracts.py": "1117a648d97fabc541b77fb6cc367aa82023fc60adccfe66ef5ec103e44ca769",
+          "devtools/scripts/validate_devguide.py": "318e8622f7a29130fc27ae912b712e1c49d7b658d8c7f5ceda979c2871949d18",
+          "devtools/scripts/validate_job_logs.py": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+          "devtools/scripts/validate_public_runs.py": "7b46c1091ef75448f8fb50b0df44ae37ef4e1820efb893c89fd968d532415b07",
+          "tests/test_action_distribution_workflow.py": "63f6da27069225e5c987340cb5f4866403570f9c06020dcffa7cc8b1113e06e4",
+          "tests/test_action_metadata.py": "25e92cff63dcfb3ae8e6bbc3b075fb1c40c08627f6403d9b6b4cc90836413d12",
+          "tests/test_action_validation_workflow.py": "11677b84a10364257762ebbc118430f9f597df0062e89376ec9ac18e295243c5",
+          "tests/test_aggregation.py": "cbf756e3a8820f1bbd28a3023c818cd18b9717192bcdf0355c29da6c9b21f459",
+          "tests/test_bundle.py": "32764eeb795a66f2afbc6cb705c08ca4785efd87db3939379d52da7db88919d1",
+          "tests/test_bundle_resources.py": "542ee412f0baa389fc1eb91d269e01de6af91280b1514161591f6064c59f12a2",
+          "tests/test_capture_policy_benchmark.py": "50881f34a2b60e13e3daae0d6a3d328f05c27feb085b90cb83a53e51319e7137",
+          "tests/test_capture_policy_workflow.py": "4fea8c9b891ef36868181422426f02ec8533878596a384688c417cd897c2f484",
+          "tests/test_checks.py": "aadee82734c1226525409f876e051e4b0967ca57c2e664b1f2cdc62be9047c3e",
+          "tests/test_cli.py": "4d51f28bb9c26b1509171b0faf6a9caeacf9e8ecceea12a7f19385d444e63fa7",
+          "tests/test_comparison.py": "65dc1d5f9325cb9ae8574335f2ae11b688f3a75683cfa6199985aad4837ef8d8",
+          "tests/test_comparison_policy.py": "f6e53f90bfb5ec59101a5747322fc038e0c276844ba65658660033cdf3d3048e",
+          "tests/test_compatibility_workflow.py": "fd4da8e9487adc842809103ce03873f0ba95c921ed5c722254c22fbb6132120f",
+          "tests/test_conda_distribution.py": "e27fb2ce60e6ea6be6d67ced66394ab916a2a287df1e7958e372e223c5af8bf8",
+          "tests/test_config.py": "356ff1b63eb0a35b8af76419de6b274d8e4766401789357b0e736d9a131f3c16",
+          "tests/test_contract_compatibility.py": "e3d3830573d46cc42423e508d24ade6231210af32a4a16659b27c99bfe0a1a29",
+          "tests/test_contracts.py": "73d9a8f75be11741af47ccdbe882132bb3fee3b71fe56a28662809f3cf3309b4",
+          "tests/test_diagnostic_ranking.py": "f65dc0c98fa881b02523413735e6ea9069e7faa19293539ab8837ec72fc4cae6",
+          "tests/test_discovery.py": "32075b575359c9efcabe99965d7b6ae37d18acc1ad11e6e0697e412478892fbe",
+          "tests/test_documentation.py": "c7dda5ac1046a270f392b20c42aef8fa909f2b0b78c6b27f607bf1f32eb7d0ee",
+          "tests/test_embedded.py": "491a56be98fd50ea061a53d2fed99270c6ba73d3adb45907f6c05564c6963122",
+          "tests/test_events.py": "80c653e72e3a7204da5180fa04e3434cca4b4834a91ccb489097172f667c104d",
+          "tests/test_exit_codes.py": "fda18570b372b608003a4d107dd4964c4c8ddd31c8106178acc350c39f619603",
+          "tests/test_github.py": "fd1341ef0d705f4c928e8885e3b122e96694b9c39df70febf0ec39fe98d36327",
+          "tests/test_inline_rules_pr_workflow.py": "d0a2676f25ceff589eabbdde014ef94c1516ea180a20bd1779c54aa72d0d4ae0",
+          "tests/test_job_logs.py": "d3cff6575c911aa1320876bb67b6ad9a11a87e008f6c7e9214425bd33fa90bc6",
+          "tests/test_logs.py": "df4416efab5e9c04c3956bc402ebd03b876d08a3be183c3c4119f6acc40a7a05",
+          "tests/test_minimum_gh_cli_workflow.py": "870217a358a582d694cf0ce2625ef0cd03e921832c3077d9f6e42fb14e89ed18",
+          "tests/test_packaging.py": "5c4d0985f234be46e9dbe3a7abd798b057ad630d812c29f2a791a338a1983051",
+          "tests/test_permission_boundary_workflow.py": "af766f4ae5392a68c434da7c63663e147d93cd725d665137195a377d75468a2a",
+          "tests/test_public_runs.py": "71f0cead59f7dc59a36cc9ea77df30f593be2882f666de893f36b25230ac100a",
+          "tests/test_publish_release_workflow.py": "25fac593aa097efad348d1a70714ca70100f1491a5152ee0e78307752316c413",
+          "tests/test_published.py": "c5bab362635442522be5bd4c2119fdc233cec8e70c2fb2c77c625e41b2841492",
+          "tests/test_published_validation_workflow.py": "0a1179ee2c09cc26fc0e6652825a5a68c58cc5d3d66a64f84a40c44f1dd9187e",
+          "tests/test_python_ci_lanes.py": "87743ed97acd8f12fbac920b9cfc62867d6d3077c533be7fac6307d4fa984108",
+          "tests/test_release_tools.py": "86e1962c0796ed8e2fcc7c7db0625ebafe19fbd339103cf533ac7c5270ac5d99",
+          "tests/test_report.py": "a5114250af7a99edd2ea1dd073eb216dc85cdeba7f0aac75a14123382154eb46",
+          "tests/test_repository_conventions.py": "141f9d94f629086a2efb9c98b25b5fe8fad8d283de45527eb45ad1c00f2a0c89",
+          "tests/test_reusable_report_workflow.py": "e4a1a60466679ff37ad3410e7910d54bec45e3a725dd62798a242e64be574204",
+          "tests/test_service.py": "2699b49baf2ad0083e5f7df9b6a377791d72fdf6a0bfd672eeb35562629e03c2",
+          "tests/test_source_version.py": "44abff8df6b6b778c86a44613916357da9a7d91c6a1162217eac7401493dae19",
+          "tests/test_sync_guide.py": "0f677b3fdf2ec09d0b5096ccd969d8b99ed4c640cad3a76e8def2f8f4e0aa759",
+          "tests/test_termination.py": "46de8c71848b99da78fc2d9e000f7d455e4b44b5324bfd511324ea86b08e70eb",
+          "tests/test_watch.py": "ce8c716ac30cfdeff06a33e2a4b18ea5f1751877c99a70b82e9333ba0586a7fe",
+          "tests/test_workflow_run_reporting.py": "ddf228e7f372e5e4a2602eb0e16ce29ff55f69775d4490d453114a9b40b6839c",
+          "tests/test_zenodo_recovery_workflow.py": "2193a1c85da77b255027c46f02ebb133f1a1b7a9c620fdd461da5da21ad7a0d9",
+          "tests/test_zenodo_verification.py": "7c27bd220d78725c43d18f0c98901197c3a0bf63f6adf74f7b04f4e3e3e6889c",
+          "tests/test_zenodo_workflow.py": "794317de60c1d0868fe21545b52fc1ce06a766e8ae169a44d51598f8670fe223"
+        },
+        "loaded": [
+          "devtools",
+          "devtools.check_distribution_inputs",
+          "devtools.installed_smoke",
+          "devtools.scripts",
+          "devtools.scripts.benchmark_capture_policies",
+          "devtools.scripts.distribution_archives",
+          "devtools.scripts.release_tools",
+          "devtools.scripts.sanitize_bundle",
+          "devtools.scripts.sync_gh_run_receptor_guide",
+          "devtools.scripts.validate_contracts",
+          "devtools.scripts.validate_public_runs",
+          "tests",
+          "tests.test_action_distribution_workflow",
+          "tests.test_action_metadata",
+          "tests.test_action_validation_workflow",
+          "tests.test_aggregation",
+          "tests.test_bundle",
+          "tests.test_bundle_resources",
+          "tests.test_capture_policy_benchmark",
+          "tests.test_capture_policy_workflow",
+          "tests.test_checks",
+          "tests.test_cli",
+          "tests.test_comparison",
+          "tests.test_comparison_policy",
+          "tests.test_compatibility_workflow",
+          "tests.test_conda_distribution",
+          "tests.test_config",
+          "tests.test_contract_compatibility",
+          "tests.test_contracts",
+          "tests.test_diagnostic_ranking",
+          "tests.test_discovery",
+          "tests.test_documentation",
+          "tests.test_embedded",
+          "tests.test_events",
+          "tests.test_exit_codes",
+          "tests.test_github",
+          "tests.test_inline_rules_pr_workflow",
+          "tests.test_job_logs",
+          "tests.test_logs",
+          "tests.test_minimum_gh_cli_workflow",
+          "tests.test_packaging",
+          "tests.test_permission_boundary_workflow",
+          "tests.test_public_runs",
+          "tests.test_publish_release_workflow",
+          "tests.test_published",
+          "tests.test_published_validation_workflow",
+          "tests.test_python_ci_lanes",
+          "tests.test_release_tools",
+          "tests.test_report",
+          "tests.test_repository_conventions",
+          "tests.test_reusable_report_workflow",
+          "tests.test_service",
+          "tests.test_source_version",
+          "tests.test_sync_guide",
+          "tests.test_termination",
+          "tests.test_watch",
+          "tests.test_workflow_run_reporting",
+          "tests.test_zenodo_recovery_workflow",
+          "tests.test_zenodo_verification",
+          "tests.test_zenodo_workflow"
+        ],
+        "test_exit_status": 0,
+        "blocked_source_path_additions": 2,
+        "bindings_removed": true
+      }
+    },
+    {
+      "artifact": {
+        "id": 12580436092,
+        "name": "installed-admin-helpers-win-64-py3.13",
+        "digest": "sha256:9cf3e5b6acbbc911407577f33521ae5f63d5163634a9e2b208515a3e485a95e4",
+        "size_in_bytes": 3587,
+        "expired": false
+      },
+      "report": {
+        "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "helper_files": 62,
+        "source_root_added_to_path": false,
+        "checks": 2,
+        "state": "verified-helpers",
+        "helper_sha256": {
+          "devtools\\check_distribution_inputs.py": "31f20ff509fb722b592a1141b17445d2d49ba359b69fe186613befbe6b8c67a7",
+          "devtools\\installed_smoke.py": "fa225eabeee068438fbfb92bc37f7cce4b163ac0c2da60c289d1ee2b7cfa5f71",
+          "devtools\\scripts\\benchmark_capture_policies.py": "a3dc4fb0df1a50dae6d89c4221a92e8cc54cfeb844b508cafbcc5456d20a55dd",
+          "devtools\\scripts\\devguide_index.py": "c15d400b0811df1ff61771827470ce782b5395d3a4106a7e360824e592be1198",
+          "devtools\\scripts\\devguide_issue.py": "1ba89b1a19666e20e323c36d1a4d8c9fa66162958c995de2c7fb9c35dacbd424",
+          "devtools\\scripts\\devguide_reports.py": "aa27c114f09bf4928b37366a402e41bf39b4ebc1afddaf2073dd7c26366d73f7",
+          "devtools\\scripts\\distribution_archives.py": "1a449d80eec17126cfa415c4dfc987d5b2aecce4996193d013b8632e7fb83fbd",
+          "devtools\\scripts\\release_tools.py": "c9a3183060cc65d7a93f26045446c58a551286cead7c33837e478863232ad51e",
+          "devtools\\scripts\\sanitize_bundle.py": "b76e6c891828e571a0514756f8688d73b7f33dbc582b0208b98357442b25bff1",
+          "devtools\\scripts\\sync_gh_run_receptor_guide.py": "15c015abac1f9f9aba63a4ba26069d16a3cd2ced7cd23bb864096421e0996206",
+          "devtools\\scripts\\validate_contracts.py": "fcb436a5e5cd708b8011582ccc4fcf37c32b2cd64b3e9388b30ae2b0c3870a22",
+          "devtools\\scripts\\validate_devguide.py": "07586703f0bbecd913b778626a4fc2c5d991c268d9c6d435a1dcdf90c5f27e60",
+          "devtools\\scripts\\validate_job_logs.py": "6d1625bfdac29ea4c48eaf71cedad750a19bd52edf16d98e0271aeb858af3830",
+          "devtools\\scripts\\validate_public_runs.py": "8c29f55c896c27a8442e4f00b22210fd8993380c2f8a05bc3bbb0d46cce810f1",
+          "tests\\test_action_distribution_workflow.py": "2ac5afe48dc05544df34d92816bff4e1deba5661488f690c3cbab5b706f1de02",
+          "tests\\test_action_metadata.py": "9a96cfc323ee8c9b4c3499e2fea181a2f397ebd1df0f49af366d93fe8755abf6",
+          "tests\\test_action_validation_workflow.py": "5d355aa563ab1fb8dcadd22e7cb3d4a7042046e2494e8a8ec828f626386bfc73",
+          "tests\\test_aggregation.py": "172f46390b5f116a37ea7781a563df4d77a4226f0f910f8faa65802ad98f52e1",
+          "tests\\test_bundle.py": "e92ba503941c92cea0cd8220132e3293c88b826d3d8e53cb9fe3d35a3037f79b",
+          "tests\\test_bundle_resources.py": "f5d056cc9cdbf583f34f2266003d63862d6f850be4ea389ccdc64e0138f77148",
+          "tests\\test_capture_policy_benchmark.py": "9b6d445239de39149dc8d1ea4a520cb537737784e3bd2bdcba7a84928eb474d2",
+          "tests\\test_capture_policy_workflow.py": "4fe1c7494a261ea821bb5882de4e2b6bec007e72bfc5ecfdf6b4fdaa1a1af951",
+          "tests\\test_checks.py": "7c5484dc9c3f8336e36a31237f92125512041cff1f0d7eda2085e0729bcca991",
+          "tests\\test_cli.py": "1a3ea435de192d2f464f8167db1d9473453a5712495cacd8532f29cc38bc3e9d",
+          "tests\\test_comparison.py": "896bc1cd677b3e7194e067e74125af5d50eeb38e8f1c2d05bab7e035551b8aa5",
+          "tests\\test_comparison_policy.py": "368c46d4157d083a0d0ccadb481c57deadc2f709ddc075a6d15815f8c7dcdfc3",
+          "tests\\test_compatibility_workflow.py": "2e5568b2e6d526c5dbad35314f27b7042fa52c609049b556b04f47ad684a2885",
+          "tests\\test_conda_distribution.py": "b4652e1f7ee2e3cf047f1509fc312b2734b1f278144cf281df068c496af9b4ab",
+          "tests\\test_config.py": "dab1e63b8ab54faf97194cf492b5e8b6b84c17c76568bd33ba3fd48ba49d375f",
+          "tests\\test_contract_compatibility.py": "343bde0c4658d37ef9f0c0dc45c857d1f0a8133483460fa31ee1675ef5a5bd83",
+          "tests\\test_contracts.py": "6a00092cf3f65b8589060ddc9c4b4dccb505f0c966cbefce1975e434fe0a647d",
+          "tests\\test_diagnostic_ranking.py": "6f6758453fc7f89aceef0bf93a3350b1436efbdf55224ec565bd22883cc67db0",
+          "tests\\test_discovery.py": "63fd379877a9c1c49bb104f0fe0429c0d166804f6c67721ee5a80541e976f848",
+          "tests\\test_documentation.py": "94eb51daedc5c3270420eea447874f0a4672ce8cf833b3fc29b8e6cfbee6781d",
+          "tests\\test_embedded.py": "770a0dc3577acb171cf1b830001045f91e23224138def214b76d462e07384d34",
+          "tests\\test_events.py": "2c73768ae30d21c0dd7e69dfa49b32559bcf56395613351cc5cce90d1535a670",
+          "tests\\test_exit_codes.py": "921e85d11ee50b3e82c60120013f779227838ffe83775f463bf1a2559e8a342a",
+          "tests\\test_github.py": "a46c0a4c26ae07ed6ad0889e506f48d10e240956c03e1ee21e703809183260c0",
+          "tests\\test_inline_rules_pr_workflow.py": "7d2e9aadd4024dd013b1399fb89df9b3163e2bdc77b0cf1957ef2b139fa955de",
+          "tests\\test_job_logs.py": "f1ab7d54ae0f5d8e84cf456bcb8a3a25ebe0e354d41f12c740e1a8983ab24e67",
+          "tests\\test_logs.py": "4fd2c45c4991353916a9fdd66f39e9ae65a6e54b6653c19bf9e393c329fdb1d5",
+          "tests\\test_minimum_gh_cli_workflow.py": "ef8ef9813c17699797ac99c4aa95e8236cbb920df98462056d46a560028c87fd",
+          "tests\\test_packaging.py": "035aa437334f560f80ee5ffa3eacc4d6c980fcff300859b39f78e3905394ad85",
+          "tests\\test_permission_boundary_workflow.py": "0d35605ccfad7ba9297118e776c8eab90669f881994c40e200e7c607a1b1a6b7",
+          "tests\\test_public_runs.py": "bc39112b40c4a7c4c0780f443c7f169f09fc397060c4f3ba479ed61c19cf260f",
+          "tests\\test_publish_release_workflow.py": "6f696fe3d6d322d9fe9f910d7ebf370480c4a825abbfe4a677e9990c5a9c74ba",
+          "tests\\test_published.py": "13e6dd3588409e52e37ce32ba9ac54f4094e1141baa243dbbaab31c56fa4f72c",
+          "tests\\test_published_validation_workflow.py": "5f1ce060428763ddb790588ea0612d2b4a70bd63eeb6cae6eccb82f29000907b",
+          "tests\\test_python_ci_lanes.py": "a1d9a90ef729c4efbfabbcb52853dfe8e4770a6c3647e83590cb3d2963b311fc",
+          "tests\\test_release_tools.py": "9d17827d9228b622775551aa97adc68e4ae8aa73008e6f23326e8d7e8757a1f7",
+          "tests\\test_report.py": "b40b8d0b6ac83bfc5ecdc77445551d165d3cba4ffc79e3d532bcdab17fb596b2",
+          "tests\\test_repository_conventions.py": "804d8d661182c3799edbeb0edea420b10820d335f76a07835a2ae643bc06c66e",
+          "tests\\test_reusable_report_workflow.py": "f5dad754cc886eb81b61348a1ce20e3c25625f1ffd517611f2a4dc31f738b0cf",
+          "tests\\test_service.py": "353aaae7c41ca48c397e3761f4ef73a3860d180956d3a1173b305289d94d86f9",
+          "tests\\test_source_version.py": "95c27bd5c16aa4c84e0f9fb7b45745412fd24f08b9633d4bf68c1f42f6b4c629",
+          "tests\\test_sync_guide.py": "66867cf22c5514220a783e90a364035b1920986599b12130d4f04e0edee266d0",
+          "tests\\test_termination.py": "0a1283579920245d13d18d98e9fc87ad98e3152d6412a1c2504ea0f7b4e8ebe4",
+          "tests\\test_watch.py": "351001748d4895d620b5d091576c089d970f92d3e5425c5872481e8b53fcdb7b",
+          "tests\\test_workflow_run_reporting.py": "f50ccdcac476da0013f209e72d049a07c5b721a05c233def21c1603b26a5aa47",
+          "tests\\test_zenodo_recovery_workflow.py": "d8a05a04ccb624e4ace2e9dddbe22e862f3183c8bab215aa2928277d6e38777f",
+          "tests\\test_zenodo_verification.py": "13c57264acd478ca313e2933afd80381bf8424602b179e149ae30ed53f662f09",
+          "tests\\test_zenodo_workflow.py": "607a093cccc38183c402e91fcd63fcfee50b5dd7a4ece1a5014d3cce520a687a"
+        },
+        "loaded": [
+          "devtools",
+          "devtools.check_distribution_inputs",
+          "devtools.installed_smoke",
+          "devtools.scripts",
+          "devtools.scripts.benchmark_capture_policies",
+          "devtools.scripts.distribution_archives",
+          "devtools.scripts.release_tools",
+          "devtools.scripts.sanitize_bundle",
+          "devtools.scripts.sync_gh_run_receptor_guide",
+          "devtools.scripts.validate_contracts",
+          "devtools.scripts.validate_public_runs",
+          "tests",
+          "tests.test_action_distribution_workflow",
+          "tests.test_action_metadata",
+          "tests.test_action_validation_workflow",
+          "tests.test_aggregation",
+          "tests.test_bundle",
+          "tests.test_bundle_resources",
+          "tests.test_capture_policy_benchmark",
+          "tests.test_capture_policy_workflow",
+          "tests.test_checks",
+          "tests.test_cli",
+          "tests.test_comparison",
+          "tests.test_comparison_policy",
+          "tests.test_compatibility_workflow",
+          "tests.test_conda_distribution",
+          "tests.test_config",
+          "tests.test_contract_compatibility",
+          "tests.test_contracts",
+          "tests.test_diagnostic_ranking",
+          "tests.test_discovery",
+          "tests.test_documentation",
+          "tests.test_embedded",
+          "tests.test_events",
+          "tests.test_exit_codes",
+          "tests.test_github",
+          "tests.test_inline_rules_pr_workflow",
+          "tests.test_job_logs",
+          "tests.test_logs",
+          "tests.test_minimum_gh_cli_workflow",
+          "tests.test_packaging",
+          "tests.test_permission_boundary_workflow",
+          "tests.test_public_runs",
+          "tests.test_publish_release_workflow",
+          "tests.test_published",
+          "tests.test_published_validation_workflow",
+          "tests.test_python_ci_lanes",
+          "tests.test_release_tools",
+          "tests.test_report",
+          "tests.test_repository_conventions",
+          "tests.test_reusable_report_workflow",
+          "tests.test_service",
+          "tests.test_source_version",
+          "tests.test_sync_guide",
+          "tests.test_termination",
+          "tests.test_watch",
+          "tests.test_workflow_run_reporting",
+          "tests.test_zenodo_recovery_workflow",
+          "tests.test_zenodo_verification",
+          "tests.test_zenodo_workflow"
+        ],
+        "test_exit_status": 0,
+        "blocked_source_path_additions": 2,
+        "bindings_removed": true
+      }
+    },
+    {
+      "artifact": {
+        "id": 12580421041,
+        "name": "installed-admin-helpers-win-64-py3.11",
+        "digest": "sha256:56ce56da9ae5c4e3f06b3df1bb3011c4e3e8b2a1af73b8e261052a2c590121c7",
+        "size_in_bytes": 3587,
+        "expired": false
+      },
+      "report": {
+        "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "helper_files": 62,
+        "source_root_added_to_path": false,
+        "checks": 2,
+        "state": "verified-helpers",
+        "helper_sha256": {
+          "devtools\\check_distribution_inputs.py": "31f20ff509fb722b592a1141b17445d2d49ba359b69fe186613befbe6b8c67a7",
+          "devtools\\installed_smoke.py": "fa225eabeee068438fbfb92bc37f7cce4b163ac0c2da60c289d1ee2b7cfa5f71",
+          "devtools\\scripts\\benchmark_capture_policies.py": "a3dc4fb0df1a50dae6d89c4221a92e8cc54cfeb844b508cafbcc5456d20a55dd",
+          "devtools\\scripts\\devguide_index.py": "c15d400b0811df1ff61771827470ce782b5395d3a4106a7e360824e592be1198",
+          "devtools\\scripts\\devguide_issue.py": "1ba89b1a19666e20e323c36d1a4d8c9fa66162958c995de2c7fb9c35dacbd424",
+          "devtools\\scripts\\devguide_reports.py": "aa27c114f09bf4928b37366a402e41bf39b4ebc1afddaf2073dd7c26366d73f7",
+          "devtools\\scripts\\distribution_archives.py": "1a449d80eec17126cfa415c4dfc987d5b2aecce4996193d013b8632e7fb83fbd",
+          "devtools\\scripts\\release_tools.py": "c9a3183060cc65d7a93f26045446c58a551286cead7c33837e478863232ad51e",
+          "devtools\\scripts\\sanitize_bundle.py": "b76e6c891828e571a0514756f8688d73b7f33dbc582b0208b98357442b25bff1",
+          "devtools\\scripts\\sync_gh_run_receptor_guide.py": "15c015abac1f9f9aba63a4ba26069d16a3cd2ced7cd23bb864096421e0996206",
+          "devtools\\scripts\\validate_contracts.py": "fcb436a5e5cd708b8011582ccc4fcf37c32b2cd64b3e9388b30ae2b0c3870a22",
+          "devtools\\scripts\\validate_devguide.py": "07586703f0bbecd913b778626a4fc2c5d991c268d9c6d435a1dcdf90c5f27e60",
+          "devtools\\scripts\\validate_job_logs.py": "6d1625bfdac29ea4c48eaf71cedad750a19bd52edf16d98e0271aeb858af3830",
+          "devtools\\scripts\\validate_public_runs.py": "8c29f55c896c27a8442e4f00b22210fd8993380c2f8a05bc3bbb0d46cce810f1",
+          "tests\\test_action_distribution_workflow.py": "2ac5afe48dc05544df34d92816bff4e1deba5661488f690c3cbab5b706f1de02",
+          "tests\\test_action_metadata.py": "9a96cfc323ee8c9b4c3499e2fea181a2f397ebd1df0f49af366d93fe8755abf6",
+          "tests\\test_action_validation_workflow.py": "5d355aa563ab1fb8dcadd22e7cb3d4a7042046e2494e8a8ec828f626386bfc73",
+          "tests\\test_aggregation.py": "172f46390b5f116a37ea7781a563df4d77a4226f0f910f8faa65802ad98f52e1",
+          "tests\\test_bundle.py": "e92ba503941c92cea0cd8220132e3293c88b826d3d8e53cb9fe3d35a3037f79b",
+          "tests\\test_bundle_resources.py": "f5d056cc9cdbf583f34f2266003d63862d6f850be4ea389ccdc64e0138f77148",
+          "tests\\test_capture_policy_benchmark.py": "9b6d445239de39149dc8d1ea4a520cb537737784e3bd2bdcba7a84928eb474d2",
+          "tests\\test_capture_policy_workflow.py": "4fe1c7494a261ea821bb5882de4e2b6bec007e72bfc5ecfdf6b4fdaa1a1af951",
+          "tests\\test_checks.py": "7c5484dc9c3f8336e36a31237f92125512041cff1f0d7eda2085e0729bcca991",
+          "tests\\test_cli.py": "1a3ea435de192d2f464f8167db1d9473453a5712495cacd8532f29cc38bc3e9d",
+          "tests\\test_comparison.py": "896bc1cd677b3e7194e067e74125af5d50eeb38e8f1c2d05bab7e035551b8aa5",
+          "tests\\test_comparison_policy.py": "368c46d4157d083a0d0ccadb481c57deadc2f709ddc075a6d15815f8c7dcdfc3",
+          "tests\\test_compatibility_workflow.py": "2e5568b2e6d526c5dbad35314f27b7042fa52c609049b556b04f47ad684a2885",
+          "tests\\test_conda_distribution.py": "b4652e1f7ee2e3cf047f1509fc312b2734b1f278144cf281df068c496af9b4ab",
+          "tests\\test_config.py": "dab1e63b8ab54faf97194cf492b5e8b6b84c17c76568bd33ba3fd48ba49d375f",
+          "tests\\test_contract_compatibility.py": "343bde0c4658d37ef9f0c0dc45c857d1f0a8133483460fa31ee1675ef5a5bd83",
+          "tests\\test_contracts.py": "6a00092cf3f65b8589060ddc9c4b4dccb505f0c966cbefce1975e434fe0a647d",
+          "tests\\test_diagnostic_ranking.py": "6f6758453fc7f89aceef0bf93a3350b1436efbdf55224ec565bd22883cc67db0",
+          "tests\\test_discovery.py": "63fd379877a9c1c49bb104f0fe0429c0d166804f6c67721ee5a80541e976f848",
+          "tests\\test_documentation.py": "94eb51daedc5c3270420eea447874f0a4672ce8cf833b3fc29b8e6cfbee6781d",
+          "tests\\test_embedded.py": "770a0dc3577acb171cf1b830001045f91e23224138def214b76d462e07384d34",
+          "tests\\test_events.py": "2c73768ae30d21c0dd7e69dfa49b32559bcf56395613351cc5cce90d1535a670",
+          "tests\\test_exit_codes.py": "921e85d11ee50b3e82c60120013f779227838ffe83775f463bf1a2559e8a342a",
+          "tests\\test_github.py": "a46c0a4c26ae07ed6ad0889e506f48d10e240956c03e1ee21e703809183260c0",
+          "tests\\test_inline_rules_pr_workflow.py": "7d2e9aadd4024dd013b1399fb89df9b3163e2bdc77b0cf1957ef2b139fa955de",
+          "tests\\test_job_logs.py": "f1ab7d54ae0f5d8e84cf456bcb8a3a25ebe0e354d41f12c740e1a8983ab24e67",
+          "tests\\test_logs.py": "4fd2c45c4991353916a9fdd66f39e9ae65a6e54b6653c19bf9e393c329fdb1d5",
+          "tests\\test_minimum_gh_cli_workflow.py": "ef8ef9813c17699797ac99c4aa95e8236cbb920df98462056d46a560028c87fd",
+          "tests\\test_packaging.py": "035aa437334f560f80ee5ffa3eacc4d6c980fcff300859b39f78e3905394ad85",
+          "tests\\test_permission_boundary_workflow.py": "0d35605ccfad7ba9297118e776c8eab90669f881994c40e200e7c607a1b1a6b7",
+          "tests\\test_public_runs.py": "bc39112b40c4a7c4c0780f443c7f169f09fc397060c4f3ba479ed61c19cf260f",
+          "tests\\test_publish_release_workflow.py": "6f696fe3d6d322d9fe9f910d7ebf370480c4a825abbfe4a677e9990c5a9c74ba",
+          "tests\\test_published.py": "13e6dd3588409e52e37ce32ba9ac54f4094e1141baa243dbbaab31c56fa4f72c",
+          "tests\\test_published_validation_workflow.py": "5f1ce060428763ddb790588ea0612d2b4a70bd63eeb6cae6eccb82f29000907b",
+          "tests\\test_python_ci_lanes.py": "a1d9a90ef729c4efbfabbcb52853dfe8e4770a6c3647e83590cb3d2963b311fc",
+          "tests\\test_release_tools.py": "9d17827d9228b622775551aa97adc68e4ae8aa73008e6f23326e8d7e8757a1f7",
+          "tests\\test_report.py": "b40b8d0b6ac83bfc5ecdc77445551d165d3cba4ffc79e3d532bcdab17fb596b2",
+          "tests\\test_repository_conventions.py": "804d8d661182c3799edbeb0edea420b10820d335f76a07835a2ae643bc06c66e",
+          "tests\\test_reusable_report_workflow.py": "f5dad754cc886eb81b61348a1ce20e3c25625f1ffd517611f2a4dc31f738b0cf",
+          "tests\\test_service.py": "353aaae7c41ca48c397e3761f4ef73a3860d180956d3a1173b305289d94d86f9",
+          "tests\\test_source_version.py": "95c27bd5c16aa4c84e0f9fb7b45745412fd24f08b9633d4bf68c1f42f6b4c629",
+          "tests\\test_sync_guide.py": "66867cf22c5514220a783e90a364035b1920986599b12130d4f04e0edee266d0",
+          "tests\\test_termination.py": "0a1283579920245d13d18d98e9fc87ad98e3152d6412a1c2504ea0f7b4e8ebe4",
+          "tests\\test_watch.py": "351001748d4895d620b5d091576c089d970f92d3e5425c5872481e8b53fcdb7b",
+          "tests\\test_workflow_run_reporting.py": "f50ccdcac476da0013f209e72d049a07c5b721a05c233def21c1603b26a5aa47",
+          "tests\\test_zenodo_recovery_workflow.py": "d8a05a04ccb624e4ace2e9dddbe22e862f3183c8bab215aa2928277d6e38777f",
+          "tests\\test_zenodo_verification.py": "13c57264acd478ca313e2933afd80381bf8424602b179e149ae30ed53f662f09",
+          "tests\\test_zenodo_workflow.py": "607a093cccc38183c402e91fcd63fcfee50b5dd7a4ece1a5014d3cce520a687a"
+        },
+        "loaded": [
+          "devtools",
+          "devtools.check_distribution_inputs",
+          "devtools.installed_smoke",
+          "devtools.scripts",
+          "devtools.scripts.benchmark_capture_policies",
+          "devtools.scripts.distribution_archives",
+          "devtools.scripts.release_tools",
+          "devtools.scripts.sanitize_bundle",
+          "devtools.scripts.sync_gh_run_receptor_guide",
+          "devtools.scripts.validate_contracts",
+          "devtools.scripts.validate_public_runs",
+          "tests",
+          "tests.test_action_distribution_workflow",
+          "tests.test_action_metadata",
+          "tests.test_action_validation_workflow",
+          "tests.test_aggregation",
+          "tests.test_bundle",
+          "tests.test_bundle_resources",
+          "tests.test_capture_policy_benchmark",
+          "tests.test_capture_policy_workflow",
+          "tests.test_checks",
+          "tests.test_cli",
+          "tests.test_comparison",
+          "tests.test_comparison_policy",
+          "tests.test_compatibility_workflow",
+          "tests.test_conda_distribution",
+          "tests.test_config",
+          "tests.test_contract_compatibility",
+          "tests.test_contracts",
+          "tests.test_diagnostic_ranking",
+          "tests.test_discovery",
+          "tests.test_documentation",
+          "tests.test_embedded",
+          "tests.test_events",
+          "tests.test_exit_codes",
+          "tests.test_github",
+          "tests.test_inline_rules_pr_workflow",
+          "tests.test_job_logs",
+          "tests.test_logs",
+          "tests.test_minimum_gh_cli_workflow",
+          "tests.test_packaging",
+          "tests.test_permission_boundary_workflow",
+          "tests.test_public_runs",
+          "tests.test_publish_release_workflow",
+          "tests.test_published",
+          "tests.test_published_validation_workflow",
+          "tests.test_python_ci_lanes",
+          "tests.test_release_tools",
+          "tests.test_report",
+          "tests.test_repository_conventions",
+          "tests.test_reusable_report_workflow",
+          "tests.test_service",
+          "tests.test_source_version",
+          "tests.test_sync_guide",
+          "tests.test_termination",
+          "tests.test_watch",
+          "tests.test_workflow_run_reporting",
+          "tests.test_zenodo_recovery_workflow",
+          "tests.test_zenodo_verification",
+          "tests.test_zenodo_workflow"
+        ],
+        "test_exit_status": 0,
+        "blocked_source_path_additions": 2,
+        "bindings_removed": true
+      }
+    },
+    {
+      "artifact": {
+        "id": 12580241310,
+        "name": "installed-admin-helpers-win-64-py3.14",
+        "digest": "sha256:a4044138e446740d07e3c966f3a57cebd76d1e1f8d3165b23982cb379c3159fa",
+        "size_in_bytes": 3587,
+        "expired": false
+      },
+      "report": {
+        "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "helper_files": 62,
+        "source_root_added_to_path": false,
+        "checks": 2,
+        "state": "verified-helpers",
+        "helper_sha256": {
+          "devtools\\check_distribution_inputs.py": "31f20ff509fb722b592a1141b17445d2d49ba359b69fe186613befbe6b8c67a7",
+          "devtools\\installed_smoke.py": "fa225eabeee068438fbfb92bc37f7cce4b163ac0c2da60c289d1ee2b7cfa5f71",
+          "devtools\\scripts\\benchmark_capture_policies.py": "a3dc4fb0df1a50dae6d89c4221a92e8cc54cfeb844b508cafbcc5456d20a55dd",
+          "devtools\\scripts\\devguide_index.py": "c15d400b0811df1ff61771827470ce782b5395d3a4106a7e360824e592be1198",
+          "devtools\\scripts\\devguide_issue.py": "1ba89b1a19666e20e323c36d1a4d8c9fa66162958c995de2c7fb9c35dacbd424",
+          "devtools\\scripts\\devguide_reports.py": "aa27c114f09bf4928b37366a402e41bf39b4ebc1afddaf2073dd7c26366d73f7",
+          "devtools\\scripts\\distribution_archives.py": "1a449d80eec17126cfa415c4dfc987d5b2aecce4996193d013b8632e7fb83fbd",
+          "devtools\\scripts\\release_tools.py": "c9a3183060cc65d7a93f26045446c58a551286cead7c33837e478863232ad51e",
+          "devtools\\scripts\\sanitize_bundle.py": "b76e6c891828e571a0514756f8688d73b7f33dbc582b0208b98357442b25bff1",
+          "devtools\\scripts\\sync_gh_run_receptor_guide.py": "15c015abac1f9f9aba63a4ba26069d16a3cd2ced7cd23bb864096421e0996206",
+          "devtools\\scripts\\validate_contracts.py": "fcb436a5e5cd708b8011582ccc4fcf37c32b2cd64b3e9388b30ae2b0c3870a22",
+          "devtools\\scripts\\validate_devguide.py": "07586703f0bbecd913b778626a4fc2c5d991c268d9c6d435a1dcdf90c5f27e60",
+          "devtools\\scripts\\validate_job_logs.py": "6d1625bfdac29ea4c48eaf71cedad750a19bd52edf16d98e0271aeb858af3830",
+          "devtools\\scripts\\validate_public_runs.py": "8c29f55c896c27a8442e4f00b22210fd8993380c2f8a05bc3bbb0d46cce810f1",
+          "tests\\test_action_distribution_workflow.py": "2ac5afe48dc05544df34d92816bff4e1deba5661488f690c3cbab5b706f1de02",
+          "tests\\test_action_metadata.py": "9a96cfc323ee8c9b4c3499e2fea181a2f397ebd1df0f49af366d93fe8755abf6",
+          "tests\\test_action_validation_workflow.py": "5d355aa563ab1fb8dcadd22e7cb3d4a7042046e2494e8a8ec828f626386bfc73",
+          "tests\\test_aggregation.py": "172f46390b5f116a37ea7781a563df4d77a4226f0f910f8faa65802ad98f52e1",
+          "tests\\test_bundle.py": "e92ba503941c92cea0cd8220132e3293c88b826d3d8e53cb9fe3d35a3037f79b",
+          "tests\\test_bundle_resources.py": "f5d056cc9cdbf583f34f2266003d63862d6f850be4ea389ccdc64e0138f77148",
+          "tests\\test_capture_policy_benchmark.py": "9b6d445239de39149dc8d1ea4a520cb537737784e3bd2bdcba7a84928eb474d2",
+          "tests\\test_capture_policy_workflow.py": "4fe1c7494a261ea821bb5882de4e2b6bec007e72bfc5ecfdf6b4fdaa1a1af951",
+          "tests\\test_checks.py": "7c5484dc9c3f8336e36a31237f92125512041cff1f0d7eda2085e0729bcca991",
+          "tests\\test_cli.py": "1a3ea435de192d2f464f8167db1d9473453a5712495cacd8532f29cc38bc3e9d",
+          "tests\\test_comparison.py": "896bc1cd677b3e7194e067e74125af5d50eeb38e8f1c2d05bab7e035551b8aa5",
+          "tests\\test_comparison_policy.py": "368c46d4157d083a0d0ccadb481c57deadc2f709ddc075a6d15815f8c7dcdfc3",
+          "tests\\test_compatibility_workflow.py": "2e5568b2e6d526c5dbad35314f27b7042fa52c609049b556b04f47ad684a2885",
+          "tests\\test_conda_distribution.py": "b4652e1f7ee2e3cf047f1509fc312b2734b1f278144cf281df068c496af9b4ab",
+          "tests\\test_config.py": "dab1e63b8ab54faf97194cf492b5e8b6b84c17c76568bd33ba3fd48ba49d375f",
+          "tests\\test_contract_compatibility.py": "343bde0c4658d37ef9f0c0dc45c857d1f0a8133483460fa31ee1675ef5a5bd83",
+          "tests\\test_contracts.py": "6a00092cf3f65b8589060ddc9c4b4dccb505f0c966cbefce1975e434fe0a647d",
+          "tests\\test_diagnostic_ranking.py": "6f6758453fc7f89aceef0bf93a3350b1436efbdf55224ec565bd22883cc67db0",
+          "tests\\test_discovery.py": "63fd379877a9c1c49bb104f0fe0429c0d166804f6c67721ee5a80541e976f848",
+          "tests\\test_documentation.py": "94eb51daedc5c3270420eea447874f0a4672ce8cf833b3fc29b8e6cfbee6781d",
+          "tests\\test_embedded.py": "770a0dc3577acb171cf1b830001045f91e23224138def214b76d462e07384d34",
+          "tests\\test_events.py": "2c73768ae30d21c0dd7e69dfa49b32559bcf56395613351cc5cce90d1535a670",
+          "tests\\test_exit_codes.py": "921e85d11ee50b3e82c60120013f779227838ffe83775f463bf1a2559e8a342a",
+          "tests\\test_github.py": "a46c0a4c26ae07ed6ad0889e506f48d10e240956c03e1ee21e703809183260c0",
+          "tests\\test_inline_rules_pr_workflow.py": "7d2e9aadd4024dd013b1399fb89df9b3163e2bdc77b0cf1957ef2b139fa955de",
+          "tests\\test_job_logs.py": "f1ab7d54ae0f5d8e84cf456bcb8a3a25ebe0e354d41f12c740e1a8983ab24e67",
+          "tests\\test_logs.py": "4fd2c45c4991353916a9fdd66f39e9ae65a6e54b6653c19bf9e393c329fdb1d5",
+          "tests\\test_minimum_gh_cli_workflow.py": "ef8ef9813c17699797ac99c4aa95e8236cbb920df98462056d46a560028c87fd",
+          "tests\\test_packaging.py": "035aa437334f560f80ee5ffa3eacc4d6c980fcff300859b39f78e3905394ad85",
+          "tests\\test_permission_boundary_workflow.py": "0d35605ccfad7ba9297118e776c8eab90669f881994c40e200e7c607a1b1a6b7",
+          "tests\\test_public_runs.py": "bc39112b40c4a7c4c0780f443c7f169f09fc397060c4f3ba479ed61c19cf260f",
+          "tests\\test_publish_release_workflow.py": "6f696fe3d6d322d9fe9f910d7ebf370480c4a825abbfe4a677e9990c5a9c74ba",
+          "tests\\test_published.py": "13e6dd3588409e52e37ce32ba9ac54f4094e1141baa243dbbaab31c56fa4f72c",
+          "tests\\test_published_validation_workflow.py": "5f1ce060428763ddb790588ea0612d2b4a70bd63eeb6cae6eccb82f29000907b",
+          "tests\\test_python_ci_lanes.py": "a1d9a90ef729c4efbfabbcb52853dfe8e4770a6c3647e83590cb3d2963b311fc",
+          "tests\\test_release_tools.py": "9d17827d9228b622775551aa97adc68e4ae8aa73008e6f23326e8d7e8757a1f7",
+          "tests\\test_report.py": "b40b8d0b6ac83bfc5ecdc77445551d165d3cba4ffc79e3d532bcdab17fb596b2",
+          "tests\\test_repository_conventions.py": "804d8d661182c3799edbeb0edea420b10820d335f76a07835a2ae643bc06c66e",
+          "tests\\test_reusable_report_workflow.py": "f5dad754cc886eb81b61348a1ce20e3c25625f1ffd517611f2a4dc31f738b0cf",
+          "tests\\test_service.py": "353aaae7c41ca48c397e3761f4ef73a3860d180956d3a1173b305289d94d86f9",
+          "tests\\test_source_version.py": "95c27bd5c16aa4c84e0f9fb7b45745412fd24f08b9633d4bf68c1f42f6b4c629",
+          "tests\\test_sync_guide.py": "66867cf22c5514220a783e90a364035b1920986599b12130d4f04e0edee266d0",
+          "tests\\test_termination.py": "0a1283579920245d13d18d98e9fc87ad98e3152d6412a1c2504ea0f7b4e8ebe4",
+          "tests\\test_watch.py": "351001748d4895d620b5d091576c089d970f92d3e5425c5872481e8b53fcdb7b",
+          "tests\\test_workflow_run_reporting.py": "f50ccdcac476da0013f209e72d049a07c5b721a05c233def21c1603b26a5aa47",
+          "tests\\test_zenodo_recovery_workflow.py": "d8a05a04ccb624e4ace2e9dddbe22e862f3183c8bab215aa2928277d6e38777f",
+          "tests\\test_zenodo_verification.py": "13c57264acd478ca313e2933afd80381bf8424602b179e149ae30ed53f662f09",
+          "tests\\test_zenodo_workflow.py": "607a093cccc38183c402e91fcd63fcfee50b5dd7a4ece1a5014d3cce520a687a"
+        },
+        "loaded": [
+          "devtools",
+          "devtools.check_distribution_inputs",
+          "devtools.installed_smoke",
+          "devtools.scripts",
+          "devtools.scripts.benchmark_capture_policies",
+          "devtools.scripts.distribution_archives",
+          "devtools.scripts.release_tools",
+          "devtools.scripts.sanitize_bundle",
+          "devtools.scripts.sync_gh_run_receptor_guide",
+          "devtools.scripts.validate_contracts",
+          "devtools.scripts.validate_public_runs",
+          "tests",
+          "tests.test_action_distribution_workflow",
+          "tests.test_action_metadata",
+          "tests.test_action_validation_workflow",
+          "tests.test_aggregation",
+          "tests.test_bundle",
+          "tests.test_bundle_resources",
+          "tests.test_capture_policy_benchmark",
+          "tests.test_capture_policy_workflow",
+          "tests.test_checks",
+          "tests.test_cli",
+          "tests.test_comparison",
+          "tests.test_comparison_policy",
+          "tests.test_compatibility_workflow",
+          "tests.test_conda_distribution",
+          "tests.test_config",
+          "tests.test_contract_compatibility",
+          "tests.test_contracts",
+          "tests.test_diagnostic_ranking",
+          "tests.test_discovery",
+          "tests.test_documentation",
+          "tests.test_embedded",
+          "tests.test_events",
+          "tests.test_exit_codes",
+          "tests.test_github",
+          "tests.test_inline_rules_pr_workflow",
+          "tests.test_job_logs",
+          "tests.test_logs",
+          "tests.test_minimum_gh_cli_workflow",
+          "tests.test_packaging",
+          "tests.test_permission_boundary_workflow",
+          "tests.test_public_runs",
+          "tests.test_publish_release_workflow",
+          "tests.test_published",
+          "tests.test_published_validation_workflow",
+          "tests.test_python_ci_lanes",
+          "tests.test_release_tools",
+          "tests.test_report",
+          "tests.test_repository_conventions",
+          "tests.test_reusable_report_workflow",
+          "tests.test_service",
+          "tests.test_source_version",
+          "tests.test_sync_guide",
+          "tests.test_termination",
+          "tests.test_watch",
+          "tests.test_workflow_run_reporting",
+          "tests.test_zenodo_recovery_workflow",
+          "tests.test_zenodo_verification",
+          "tests.test_zenodo_workflow"
+        ],
+        "test_exit_status": 0,
+        "blocked_source_path_additions": 2,
+        "bindings_removed": true
+      }
+    },
+    {
+      "artifact": {
+        "id": 12580108958,
+        "name": "installed-admin-helpers-osx-arm64-py3.11",
+        "digest": "sha256:9651bdbd83a665cdb090bae0a3f0ab3f1703767994c415091b2f6c001b66b8d4",
+        "size_in_bytes": 3583,
+        "expired": false
+      },
+      "report": {
+        "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "helper_files": 62,
+        "source_root_added_to_path": false,
+        "checks": 2,
+        "state": "verified-helpers",
+        "helper_sha256": {
+          "devtools/check_distribution_inputs.py": "0640d3d06a3ef409b166de8fa6e0a5ca25a59963aa682242f2b5c9f0fac9a345",
+          "devtools/installed_smoke.py": "65bb48220d463afb2676aeb916a4cb27f588473914da6c330ee3227c99c91cfb",
+          "devtools/scripts/benchmark_capture_policies.py": "617421f757b98a00b96ad54fa6b5cc621a212cbc0044a9677e4340138bc60e5a",
+          "devtools/scripts/devguide_index.py": "144660461865405ffce4f671e292bdc33fb700c35dc33e149cea7ba5512826d6",
+          "devtools/scripts/devguide_issue.py": "3121a02b2b09e8a157709c6ba3801a41814e96b20c898002ac131c45d9f9fa7c",
+          "devtools/scripts/devguide_reports.py": "50db83c969e69f3fd4dca04c9e7d1f1c89e4918b3f1c17c01ee861950396322d",
+          "devtools/scripts/distribution_archives.py": "6668a6b637cc41346d46a557d8abd8c28d370d26eb5a255c9167dff0fd7f2c48",
+          "devtools/scripts/release_tools.py": "f2073c3845537c5ae87b7724c7ef5b9b5ccf38e1792563a141af280eff87d0e5",
+          "devtools/scripts/sanitize_bundle.py": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+          "devtools/scripts/sync_gh_run_receptor_guide.py": "3dac1b889803581dcdd1b51fee32f897ec4de490bcb4787beeda9dbbd3f6bffa",
+          "devtools/scripts/validate_contracts.py": "1117a648d97fabc541b77fb6cc367aa82023fc60adccfe66ef5ec103e44ca769",
+          "devtools/scripts/validate_devguide.py": "318e8622f7a29130fc27ae912b712e1c49d7b658d8c7f5ceda979c2871949d18",
+          "devtools/scripts/validate_job_logs.py": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+          "devtools/scripts/validate_public_runs.py": "7b46c1091ef75448f8fb50b0df44ae37ef4e1820efb893c89fd968d532415b07",
+          "tests/test_action_distribution_workflow.py": "63f6da27069225e5c987340cb5f4866403570f9c06020dcffa7cc8b1113e06e4",
+          "tests/test_action_metadata.py": "25e92cff63dcfb3ae8e6bbc3b075fb1c40c08627f6403d9b6b4cc90836413d12",
+          "tests/test_action_validation_workflow.py": "11677b84a10364257762ebbc118430f9f597df0062e89376ec9ac18e295243c5",
+          "tests/test_aggregation.py": "cbf756e3a8820f1bbd28a3023c818cd18b9717192bcdf0355c29da6c9b21f459",
+          "tests/test_bundle.py": "32764eeb795a66f2afbc6cb705c08ca4785efd87db3939379d52da7db88919d1",
+          "tests/test_bundle_resources.py": "542ee412f0baa389fc1eb91d269e01de6af91280b1514161591f6064c59f12a2",
+          "tests/test_capture_policy_benchmark.py": "50881f34a2b60e13e3daae0d6a3d328f05c27feb085b90cb83a53e51319e7137",
+          "tests/test_capture_policy_workflow.py": "4fea8c9b891ef36868181422426f02ec8533878596a384688c417cd897c2f484",
+          "tests/test_checks.py": "aadee82734c1226525409f876e051e4b0967ca57c2e664b1f2cdc62be9047c3e",
+          "tests/test_cli.py": "4d51f28bb9c26b1509171b0faf6a9caeacf9e8ecceea12a7f19385d444e63fa7",
+          "tests/test_comparison.py": "65dc1d5f9325cb9ae8574335f2ae11b688f3a75683cfa6199985aad4837ef8d8",
+          "tests/test_comparison_policy.py": "f6e53f90bfb5ec59101a5747322fc038e0c276844ba65658660033cdf3d3048e",
+          "tests/test_compatibility_workflow.py": "fd4da8e9487adc842809103ce03873f0ba95c921ed5c722254c22fbb6132120f",
+          "tests/test_conda_distribution.py": "e27fb2ce60e6ea6be6d67ced66394ab916a2a287df1e7958e372e223c5af8bf8",
+          "tests/test_config.py": "356ff1b63eb0a35b8af76419de6b274d8e4766401789357b0e736d9a131f3c16",
+          "tests/test_contract_compatibility.py": "e3d3830573d46cc42423e508d24ade6231210af32a4a16659b27c99bfe0a1a29",
+          "tests/test_contracts.py": "73d9a8f75be11741af47ccdbe882132bb3fee3b71fe56a28662809f3cf3309b4",
+          "tests/test_diagnostic_ranking.py": "f65dc0c98fa881b02523413735e6ea9069e7faa19293539ab8837ec72fc4cae6",
+          "tests/test_discovery.py": "32075b575359c9efcabe99965d7b6ae37d18acc1ad11e6e0697e412478892fbe",
+          "tests/test_documentation.py": "c7dda5ac1046a270f392b20c42aef8fa909f2b0b78c6b27f607bf1f32eb7d0ee",
+          "tests/test_embedded.py": "491a56be98fd50ea061a53d2fed99270c6ba73d3adb45907f6c05564c6963122",
+          "tests/test_events.py": "80c653e72e3a7204da5180fa04e3434cca4b4834a91ccb489097172f667c104d",
+          "tests/test_exit_codes.py": "fda18570b372b608003a4d107dd4964c4c8ddd31c8106178acc350c39f619603",
+          "tests/test_github.py": "fd1341ef0d705f4c928e8885e3b122e96694b9c39df70febf0ec39fe98d36327",
+          "tests/test_inline_rules_pr_workflow.py": "d0a2676f25ceff589eabbdde014ef94c1516ea180a20bd1779c54aa72d0d4ae0",
+          "tests/test_job_logs.py": "d3cff6575c911aa1320876bb67b6ad9a11a87e008f6c7e9214425bd33fa90bc6",
+          "tests/test_logs.py": "df4416efab5e9c04c3956bc402ebd03b876d08a3be183c3c4119f6acc40a7a05",
+          "tests/test_minimum_gh_cli_workflow.py": "870217a358a582d694cf0ce2625ef0cd03e921832c3077d9f6e42fb14e89ed18",
+          "tests/test_packaging.py": "5c4d0985f234be46e9dbe3a7abd798b057ad630d812c29f2a791a338a1983051",
+          "tests/test_permission_boundary_workflow.py": "af766f4ae5392a68c434da7c63663e147d93cd725d665137195a377d75468a2a",
+          "tests/test_public_runs.py": "71f0cead59f7dc59a36cc9ea77df30f593be2882f666de893f36b25230ac100a",
+          "tests/test_publish_release_workflow.py": "25fac593aa097efad348d1a70714ca70100f1491a5152ee0e78307752316c413",
+          "tests/test_published.py": "c5bab362635442522be5bd4c2119fdc233cec8e70c2fb2c77c625e41b2841492",
+          "tests/test_published_validation_workflow.py": "0a1179ee2c09cc26fc0e6652825a5a68c58cc5d3d66a64f84a40c44f1dd9187e",
+          "tests/test_python_ci_lanes.py": "87743ed97acd8f12fbac920b9cfc62867d6d3077c533be7fac6307d4fa984108",
+          "tests/test_release_tools.py": "86e1962c0796ed8e2fcc7c7db0625ebafe19fbd339103cf533ac7c5270ac5d99",
+          "tests/test_report.py": "a5114250af7a99edd2ea1dd073eb216dc85cdeba7f0aac75a14123382154eb46",
+          "tests/test_repository_conventions.py": "141f9d94f629086a2efb9c98b25b5fe8fad8d283de45527eb45ad1c00f2a0c89",
+          "tests/test_reusable_report_workflow.py": "e4a1a60466679ff37ad3410e7910d54bec45e3a725dd62798a242e64be574204",
+          "tests/test_service.py": "2699b49baf2ad0083e5f7df9b6a377791d72fdf6a0bfd672eeb35562629e03c2",
+          "tests/test_source_version.py": "44abff8df6b6b778c86a44613916357da9a7d91c6a1162217eac7401493dae19",
+          "tests/test_sync_guide.py": "0f677b3fdf2ec09d0b5096ccd969d8b99ed4c640cad3a76e8def2f8f4e0aa759",
+          "tests/test_termination.py": "46de8c71848b99da78fc2d9e000f7d455e4b44b5324bfd511324ea86b08e70eb",
+          "tests/test_watch.py": "ce8c716ac30cfdeff06a33e2a4b18ea5f1751877c99a70b82e9333ba0586a7fe",
+          "tests/test_workflow_run_reporting.py": "ddf228e7f372e5e4a2602eb0e16ce29ff55f69775d4490d453114a9b40b6839c",
+          "tests/test_zenodo_recovery_workflow.py": "2193a1c85da77b255027c46f02ebb133f1a1b7a9c620fdd461da5da21ad7a0d9",
+          "tests/test_zenodo_verification.py": "7c27bd220d78725c43d18f0c98901197c3a0bf63f6adf74f7b04f4e3e3e6889c",
+          "tests/test_zenodo_workflow.py": "794317de60c1d0868fe21545b52fc1ce06a766e8ae169a44d51598f8670fe223"
+        },
+        "loaded": [
+          "devtools",
+          "devtools.check_distribution_inputs",
+          "devtools.installed_smoke",
+          "devtools.scripts",
+          "devtools.scripts.benchmark_capture_policies",
+          "devtools.scripts.distribution_archives",
+          "devtools.scripts.release_tools",
+          "devtools.scripts.sanitize_bundle",
+          "devtools.scripts.sync_gh_run_receptor_guide",
+          "devtools.scripts.validate_contracts",
+          "devtools.scripts.validate_public_runs",
+          "tests",
+          "tests.test_action_distribution_workflow",
+          "tests.test_action_metadata",
+          "tests.test_action_validation_workflow",
+          "tests.test_aggregation",
+          "tests.test_bundle",
+          "tests.test_bundle_resources",
+          "tests.test_capture_policy_benchmark",
+          "tests.test_capture_policy_workflow",
+          "tests.test_checks",
+          "tests.test_cli",
+          "tests.test_comparison",
+          "tests.test_comparison_policy",
+          "tests.test_compatibility_workflow",
+          "tests.test_conda_distribution",
+          "tests.test_config",
+          "tests.test_contract_compatibility",
+          "tests.test_contracts",
+          "tests.test_diagnostic_ranking",
+          "tests.test_discovery",
+          "tests.test_documentation",
+          "tests.test_embedded",
+          "tests.test_events",
+          "tests.test_exit_codes",
+          "tests.test_github",
+          "tests.test_inline_rules_pr_workflow",
+          "tests.test_job_logs",
+          "tests.test_logs",
+          "tests.test_minimum_gh_cli_workflow",
+          "tests.test_packaging",
+          "tests.test_permission_boundary_workflow",
+          "tests.test_public_runs",
+          "tests.test_publish_release_workflow",
+          "tests.test_published",
+          "tests.test_published_validation_workflow",
+          "tests.test_python_ci_lanes",
+          "tests.test_release_tools",
+          "tests.test_report",
+          "tests.test_repository_conventions",
+          "tests.test_reusable_report_workflow",
+          "tests.test_service",
+          "tests.test_source_version",
+          "tests.test_sync_guide",
+          "tests.test_termination",
+          "tests.test_watch",
+          "tests.test_workflow_run_reporting",
+          "tests.test_zenodo_recovery_workflow",
+          "tests.test_zenodo_verification",
+          "tests.test_zenodo_workflow"
+        ],
+        "test_exit_status": 0,
+        "blocked_source_path_additions": 2,
+        "bindings_removed": true
+      }
+    },
+    {
+      "artifact": {
+        "id": 12579994303,
+        "name": "installed-admin-helpers-linux-64-py3.14",
+        "digest": "sha256:14effa02e1dff6728fa22b5b0de0b955da88b22980cbe0f1ca15ce6c246bc0c8",
+        "size_in_bytes": 3583,
+        "expired": false
+      },
+      "report": {
+        "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "helper_files": 62,
+        "source_root_added_to_path": false,
+        "checks": 2,
+        "state": "verified-helpers",
+        "helper_sha256": {
+          "devtools/check_distribution_inputs.py": "0640d3d06a3ef409b166de8fa6e0a5ca25a59963aa682242f2b5c9f0fac9a345",
+          "devtools/installed_smoke.py": "65bb48220d463afb2676aeb916a4cb27f588473914da6c330ee3227c99c91cfb",
+          "devtools/scripts/benchmark_capture_policies.py": "617421f757b98a00b96ad54fa6b5cc621a212cbc0044a9677e4340138bc60e5a",
+          "devtools/scripts/devguide_index.py": "144660461865405ffce4f671e292bdc33fb700c35dc33e149cea7ba5512826d6",
+          "devtools/scripts/devguide_issue.py": "3121a02b2b09e8a157709c6ba3801a41814e96b20c898002ac131c45d9f9fa7c",
+          "devtools/scripts/devguide_reports.py": "50db83c969e69f3fd4dca04c9e7d1f1c89e4918b3f1c17c01ee861950396322d",
+          "devtools/scripts/distribution_archives.py": "6668a6b637cc41346d46a557d8abd8c28d370d26eb5a255c9167dff0fd7f2c48",
+          "devtools/scripts/release_tools.py": "f2073c3845537c5ae87b7724c7ef5b9b5ccf38e1792563a141af280eff87d0e5",
+          "devtools/scripts/sanitize_bundle.py": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+          "devtools/scripts/sync_gh_run_receptor_guide.py": "3dac1b889803581dcdd1b51fee32f897ec4de490bcb4787beeda9dbbd3f6bffa",
+          "devtools/scripts/validate_contracts.py": "1117a648d97fabc541b77fb6cc367aa82023fc60adccfe66ef5ec103e44ca769",
+          "devtools/scripts/validate_devguide.py": "318e8622f7a29130fc27ae912b712e1c49d7b658d8c7f5ceda979c2871949d18",
+          "devtools/scripts/validate_job_logs.py": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+          "devtools/scripts/validate_public_runs.py": "7b46c1091ef75448f8fb50b0df44ae37ef4e1820efb893c89fd968d532415b07",
+          "tests/test_action_distribution_workflow.py": "63f6da27069225e5c987340cb5f4866403570f9c06020dcffa7cc8b1113e06e4",
+          "tests/test_action_metadata.py": "25e92cff63dcfb3ae8e6bbc3b075fb1c40c08627f6403d9b6b4cc90836413d12",
+          "tests/test_action_validation_workflow.py": "11677b84a10364257762ebbc118430f9f597df0062e89376ec9ac18e295243c5",
+          "tests/test_aggregation.py": "cbf756e3a8820f1bbd28a3023c818cd18b9717192bcdf0355c29da6c9b21f459",
+          "tests/test_bundle.py": "32764eeb795a66f2afbc6cb705c08ca4785efd87db3939379d52da7db88919d1",
+          "tests/test_bundle_resources.py": "542ee412f0baa389fc1eb91d269e01de6af91280b1514161591f6064c59f12a2",
+          "tests/test_capture_policy_benchmark.py": "50881f34a2b60e13e3daae0d6a3d328f05c27feb085b90cb83a53e51319e7137",
+          "tests/test_capture_policy_workflow.py": "4fea8c9b891ef36868181422426f02ec8533878596a384688c417cd897c2f484",
+          "tests/test_checks.py": "aadee82734c1226525409f876e051e4b0967ca57c2e664b1f2cdc62be9047c3e",
+          "tests/test_cli.py": "4d51f28bb9c26b1509171b0faf6a9caeacf9e8ecceea12a7f19385d444e63fa7",
+          "tests/test_comparison.py": "65dc1d5f9325cb9ae8574335f2ae11b688f3a75683cfa6199985aad4837ef8d8",
+          "tests/test_comparison_policy.py": "f6e53f90bfb5ec59101a5747322fc038e0c276844ba65658660033cdf3d3048e",
+          "tests/test_compatibility_workflow.py": "fd4da8e9487adc842809103ce03873f0ba95c921ed5c722254c22fbb6132120f",
+          "tests/test_conda_distribution.py": "e27fb2ce60e6ea6be6d67ced66394ab916a2a287df1e7958e372e223c5af8bf8",
+          "tests/test_config.py": "356ff1b63eb0a35b8af76419de6b274d8e4766401789357b0e736d9a131f3c16",
+          "tests/test_contract_compatibility.py": "e3d3830573d46cc42423e508d24ade6231210af32a4a16659b27c99bfe0a1a29",
+          "tests/test_contracts.py": "73d9a8f75be11741af47ccdbe882132bb3fee3b71fe56a28662809f3cf3309b4",
+          "tests/test_diagnostic_ranking.py": "f65dc0c98fa881b02523413735e6ea9069e7faa19293539ab8837ec72fc4cae6",
+          "tests/test_discovery.py": "32075b575359c9efcabe99965d7b6ae37d18acc1ad11e6e0697e412478892fbe",
+          "tests/test_documentation.py": "c7dda5ac1046a270f392b20c42aef8fa909f2b0b78c6b27f607bf1f32eb7d0ee",
+          "tests/test_embedded.py": "491a56be98fd50ea061a53d2fed99270c6ba73d3adb45907f6c05564c6963122",
+          "tests/test_events.py": "80c653e72e3a7204da5180fa04e3434cca4b4834a91ccb489097172f667c104d",
+          "tests/test_exit_codes.py": "fda18570b372b608003a4d107dd4964c4c8ddd31c8106178acc350c39f619603",
+          "tests/test_github.py": "fd1341ef0d705f4c928e8885e3b122e96694b9c39df70febf0ec39fe98d36327",
+          "tests/test_inline_rules_pr_workflow.py": "d0a2676f25ceff589eabbdde014ef94c1516ea180a20bd1779c54aa72d0d4ae0",
+          "tests/test_job_logs.py": "d3cff6575c911aa1320876bb67b6ad9a11a87e008f6c7e9214425bd33fa90bc6",
+          "tests/test_logs.py": "df4416efab5e9c04c3956bc402ebd03b876d08a3be183c3c4119f6acc40a7a05",
+          "tests/test_minimum_gh_cli_workflow.py": "870217a358a582d694cf0ce2625ef0cd03e921832c3077d9f6e42fb14e89ed18",
+          "tests/test_packaging.py": "5c4d0985f234be46e9dbe3a7abd798b057ad630d812c29f2a791a338a1983051",
+          "tests/test_permission_boundary_workflow.py": "af766f4ae5392a68c434da7c63663e147d93cd725d665137195a377d75468a2a",
+          "tests/test_public_runs.py": "71f0cead59f7dc59a36cc9ea77df30f593be2882f666de893f36b25230ac100a",
+          "tests/test_publish_release_workflow.py": "25fac593aa097efad348d1a70714ca70100f1491a5152ee0e78307752316c413",
+          "tests/test_published.py": "c5bab362635442522be5bd4c2119fdc233cec8e70c2fb2c77c625e41b2841492",
+          "tests/test_published_validation_workflow.py": "0a1179ee2c09cc26fc0e6652825a5a68c58cc5d3d66a64f84a40c44f1dd9187e",
+          "tests/test_python_ci_lanes.py": "87743ed97acd8f12fbac920b9cfc62867d6d3077c533be7fac6307d4fa984108",
+          "tests/test_release_tools.py": "86e1962c0796ed8e2fcc7c7db0625ebafe19fbd339103cf533ac7c5270ac5d99",
+          "tests/test_report.py": "a5114250af7a99edd2ea1dd073eb216dc85cdeba7f0aac75a14123382154eb46",
+          "tests/test_repository_conventions.py": "141f9d94f629086a2efb9c98b25b5fe8fad8d283de45527eb45ad1c00f2a0c89",
+          "tests/test_reusable_report_workflow.py": "e4a1a60466679ff37ad3410e7910d54bec45e3a725dd62798a242e64be574204",
+          "tests/test_service.py": "2699b49baf2ad0083e5f7df9b6a377791d72fdf6a0bfd672eeb35562629e03c2",
+          "tests/test_source_version.py": "44abff8df6b6b778c86a44613916357da9a7d91c6a1162217eac7401493dae19",
+          "tests/test_sync_guide.py": "0f677b3fdf2ec09d0b5096ccd969d8b99ed4c640cad3a76e8def2f8f4e0aa759",
+          "tests/test_termination.py": "46de8c71848b99da78fc2d9e000f7d455e4b44b5324bfd511324ea86b08e70eb",
+          "tests/test_watch.py": "ce8c716ac30cfdeff06a33e2a4b18ea5f1751877c99a70b82e9333ba0586a7fe",
+          "tests/test_workflow_run_reporting.py": "ddf228e7f372e5e4a2602eb0e16ce29ff55f69775d4490d453114a9b40b6839c",
+          "tests/test_zenodo_recovery_workflow.py": "2193a1c85da77b255027c46f02ebb133f1a1b7a9c620fdd461da5da21ad7a0d9",
+          "tests/test_zenodo_verification.py": "7c27bd220d78725c43d18f0c98901197c3a0bf63f6adf74f7b04f4e3e3e6889c",
+          "tests/test_zenodo_workflow.py": "794317de60c1d0868fe21545b52fc1ce06a766e8ae169a44d51598f8670fe223"
+        },
+        "loaded": [
+          "devtools",
+          "devtools.check_distribution_inputs",
+          "devtools.installed_smoke",
+          "devtools.scripts",
+          "devtools.scripts.benchmark_capture_policies",
+          "devtools.scripts.distribution_archives",
+          "devtools.scripts.release_tools",
+          "devtools.scripts.sanitize_bundle",
+          "devtools.scripts.sync_gh_run_receptor_guide",
+          "devtools.scripts.validate_contracts",
+          "devtools.scripts.validate_public_runs",
+          "tests",
+          "tests.test_action_distribution_workflow",
+          "tests.test_action_metadata",
+          "tests.test_action_validation_workflow",
+          "tests.test_aggregation",
+          "tests.test_bundle",
+          "tests.test_bundle_resources",
+          "tests.test_capture_policy_benchmark",
+          "tests.test_capture_policy_workflow",
+          "tests.test_checks",
+          "tests.test_cli",
+          "tests.test_comparison",
+          "tests.test_comparison_policy",
+          "tests.test_compatibility_workflow",
+          "tests.test_conda_distribution",
+          "tests.test_config",
+          "tests.test_contract_compatibility",
+          "tests.test_contracts",
+          "tests.test_diagnostic_ranking",
+          "tests.test_discovery",
+          "tests.test_documentation",
+          "tests.test_embedded",
+          "tests.test_events",
+          "tests.test_exit_codes",
+          "tests.test_github",
+          "tests.test_inline_rules_pr_workflow",
+          "tests.test_job_logs",
+          "tests.test_logs",
+          "tests.test_minimum_gh_cli_workflow",
+          "tests.test_packaging",
+          "tests.test_permission_boundary_workflow",
+          "tests.test_public_runs",
+          "tests.test_publish_release_workflow",
+          "tests.test_published",
+          "tests.test_published_validation_workflow",
+          "tests.test_python_ci_lanes",
+          "tests.test_release_tools",
+          "tests.test_report",
+          "tests.test_repository_conventions",
+          "tests.test_reusable_report_workflow",
+          "tests.test_service",
+          "tests.test_source_version",
+          "tests.test_sync_guide",
+          "tests.test_termination",
+          "tests.test_watch",
+          "tests.test_workflow_run_reporting",
+          "tests.test_zenodo_recovery_workflow",
+          "tests.test_zenodo_verification",
+          "tests.test_zenodo_workflow"
+        ],
+        "test_exit_status": 0,
+        "blocked_source_path_additions": 2,
+        "bindings_removed": true
+      }
+    },
+    {
+      "artifact": {
+        "id": 12579809678,
+        "name": "installed-admin-helpers-osx-arm64-py3.13",
+        "digest": "sha256:42668ff84650ee7e60c8fa9f1289240fb232595aaed2f3f951feab5d365e6a67",
+        "size_in_bytes": 3583,
+        "expired": false
+      },
+      "report": {
+        "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "helper_files": 62,
+        "source_root_added_to_path": false,
+        "checks": 2,
+        "state": "verified-helpers",
+        "helper_sha256": {
+          "devtools/check_distribution_inputs.py": "0640d3d06a3ef409b166de8fa6e0a5ca25a59963aa682242f2b5c9f0fac9a345",
+          "devtools/installed_smoke.py": "65bb48220d463afb2676aeb916a4cb27f588473914da6c330ee3227c99c91cfb",
+          "devtools/scripts/benchmark_capture_policies.py": "617421f757b98a00b96ad54fa6b5cc621a212cbc0044a9677e4340138bc60e5a",
+          "devtools/scripts/devguide_index.py": "144660461865405ffce4f671e292bdc33fb700c35dc33e149cea7ba5512826d6",
+          "devtools/scripts/devguide_issue.py": "3121a02b2b09e8a157709c6ba3801a41814e96b20c898002ac131c45d9f9fa7c",
+          "devtools/scripts/devguide_reports.py": "50db83c969e69f3fd4dca04c9e7d1f1c89e4918b3f1c17c01ee861950396322d",
+          "devtools/scripts/distribution_archives.py": "6668a6b637cc41346d46a557d8abd8c28d370d26eb5a255c9167dff0fd7f2c48",
+          "devtools/scripts/release_tools.py": "f2073c3845537c5ae87b7724c7ef5b9b5ccf38e1792563a141af280eff87d0e5",
+          "devtools/scripts/sanitize_bundle.py": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+          "devtools/scripts/sync_gh_run_receptor_guide.py": "3dac1b889803581dcdd1b51fee32f897ec4de490bcb4787beeda9dbbd3f6bffa",
+          "devtools/scripts/validate_contracts.py": "1117a648d97fabc541b77fb6cc367aa82023fc60adccfe66ef5ec103e44ca769",
+          "devtools/scripts/validate_devguide.py": "318e8622f7a29130fc27ae912b712e1c49d7b658d8c7f5ceda979c2871949d18",
+          "devtools/scripts/validate_job_logs.py": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+          "devtools/scripts/validate_public_runs.py": "7b46c1091ef75448f8fb50b0df44ae37ef4e1820efb893c89fd968d532415b07",
+          "tests/test_action_distribution_workflow.py": "63f6da27069225e5c987340cb5f4866403570f9c06020dcffa7cc8b1113e06e4",
+          "tests/test_action_metadata.py": "25e92cff63dcfb3ae8e6bbc3b075fb1c40c08627f6403d9b6b4cc90836413d12",
+          "tests/test_action_validation_workflow.py": "11677b84a10364257762ebbc118430f9f597df0062e89376ec9ac18e295243c5",
+          "tests/test_aggregation.py": "cbf756e3a8820f1bbd28a3023c818cd18b9717192bcdf0355c29da6c9b21f459",
+          "tests/test_bundle.py": "32764eeb795a66f2afbc6cb705c08ca4785efd87db3939379d52da7db88919d1",
+          "tests/test_bundle_resources.py": "542ee412f0baa389fc1eb91d269e01de6af91280b1514161591f6064c59f12a2",
+          "tests/test_capture_policy_benchmark.py": "50881f34a2b60e13e3daae0d6a3d328f05c27feb085b90cb83a53e51319e7137",
+          "tests/test_capture_policy_workflow.py": "4fea8c9b891ef36868181422426f02ec8533878596a384688c417cd897c2f484",
+          "tests/test_checks.py": "aadee82734c1226525409f876e051e4b0967ca57c2e664b1f2cdc62be9047c3e",
+          "tests/test_cli.py": "4d51f28bb9c26b1509171b0faf6a9caeacf9e8ecceea12a7f19385d444e63fa7",
+          "tests/test_comparison.py": "65dc1d5f9325cb9ae8574335f2ae11b688f3a75683cfa6199985aad4837ef8d8",
+          "tests/test_comparison_policy.py": "f6e53f90bfb5ec59101a5747322fc038e0c276844ba65658660033cdf3d3048e",
+          "tests/test_compatibility_workflow.py": "fd4da8e9487adc842809103ce03873f0ba95c921ed5c722254c22fbb6132120f",
+          "tests/test_conda_distribution.py": "e27fb2ce60e6ea6be6d67ced66394ab916a2a287df1e7958e372e223c5af8bf8",
+          "tests/test_config.py": "356ff1b63eb0a35b8af76419de6b274d8e4766401789357b0e736d9a131f3c16",
+          "tests/test_contract_compatibility.py": "e3d3830573d46cc42423e508d24ade6231210af32a4a16659b27c99bfe0a1a29",
+          "tests/test_contracts.py": "73d9a8f75be11741af47ccdbe882132bb3fee3b71fe56a28662809f3cf3309b4",
+          "tests/test_diagnostic_ranking.py": "f65dc0c98fa881b02523413735e6ea9069e7faa19293539ab8837ec72fc4cae6",
+          "tests/test_discovery.py": "32075b575359c9efcabe99965d7b6ae37d18acc1ad11e6e0697e412478892fbe",
+          "tests/test_documentation.py": "c7dda5ac1046a270f392b20c42aef8fa909f2b0b78c6b27f607bf1f32eb7d0ee",
+          "tests/test_embedded.py": "491a56be98fd50ea061a53d2fed99270c6ba73d3adb45907f6c05564c6963122",
+          "tests/test_events.py": "80c653e72e3a7204da5180fa04e3434cca4b4834a91ccb489097172f667c104d",
+          "tests/test_exit_codes.py": "fda18570b372b608003a4d107dd4964c4c8ddd31c8106178acc350c39f619603",
+          "tests/test_github.py": "fd1341ef0d705f4c928e8885e3b122e96694b9c39df70febf0ec39fe98d36327",
+          "tests/test_inline_rules_pr_workflow.py": "d0a2676f25ceff589eabbdde014ef94c1516ea180a20bd1779c54aa72d0d4ae0",
+          "tests/test_job_logs.py": "d3cff6575c911aa1320876bb67b6ad9a11a87e008f6c7e9214425bd33fa90bc6",
+          "tests/test_logs.py": "df4416efab5e9c04c3956bc402ebd03b876d08a3be183c3c4119f6acc40a7a05",
+          "tests/test_minimum_gh_cli_workflow.py": "870217a358a582d694cf0ce2625ef0cd03e921832c3077d9f6e42fb14e89ed18",
+          "tests/test_packaging.py": "5c4d0985f234be46e9dbe3a7abd798b057ad630d812c29f2a791a338a1983051",
+          "tests/test_permission_boundary_workflow.py": "af766f4ae5392a68c434da7c63663e147d93cd725d665137195a377d75468a2a",
+          "tests/test_public_runs.py": "71f0cead59f7dc59a36cc9ea77df30f593be2882f666de893f36b25230ac100a",
+          "tests/test_publish_release_workflow.py": "25fac593aa097efad348d1a70714ca70100f1491a5152ee0e78307752316c413",
+          "tests/test_published.py": "c5bab362635442522be5bd4c2119fdc233cec8e70c2fb2c77c625e41b2841492",
+          "tests/test_published_validation_workflow.py": "0a1179ee2c09cc26fc0e6652825a5a68c58cc5d3d66a64f84a40c44f1dd9187e",
+          "tests/test_python_ci_lanes.py": "87743ed97acd8f12fbac920b9cfc62867d6d3077c533be7fac6307d4fa984108",
+          "tests/test_release_tools.py": "86e1962c0796ed8e2fcc7c7db0625ebafe19fbd339103cf533ac7c5270ac5d99",
+          "tests/test_report.py": "a5114250af7a99edd2ea1dd073eb216dc85cdeba7f0aac75a14123382154eb46",
+          "tests/test_repository_conventions.py": "141f9d94f629086a2efb9c98b25b5fe8fad8d283de45527eb45ad1c00f2a0c89",
+          "tests/test_reusable_report_workflow.py": "e4a1a60466679ff37ad3410e7910d54bec45e3a725dd62798a242e64be574204",
+          "tests/test_service.py": "2699b49baf2ad0083e5f7df9b6a377791d72fdf6a0bfd672eeb35562629e03c2",
+          "tests/test_source_version.py": "44abff8df6b6b778c86a44613916357da9a7d91c6a1162217eac7401493dae19",
+          "tests/test_sync_guide.py": "0f677b3fdf2ec09d0b5096ccd969d8b99ed4c640cad3a76e8def2f8f4e0aa759",
+          "tests/test_termination.py": "46de8c71848b99da78fc2d9e000f7d455e4b44b5324bfd511324ea86b08e70eb",
+          "tests/test_watch.py": "ce8c716ac30cfdeff06a33e2a4b18ea5f1751877c99a70b82e9333ba0586a7fe",
+          "tests/test_workflow_run_reporting.py": "ddf228e7f372e5e4a2602eb0e16ce29ff55f69775d4490d453114a9b40b6839c",
+          "tests/test_zenodo_recovery_workflow.py": "2193a1c85da77b255027c46f02ebb133f1a1b7a9c620fdd461da5da21ad7a0d9",
+          "tests/test_zenodo_verification.py": "7c27bd220d78725c43d18f0c98901197c3a0bf63f6adf74f7b04f4e3e3e6889c",
+          "tests/test_zenodo_workflow.py": "794317de60c1d0868fe21545b52fc1ce06a766e8ae169a44d51598f8670fe223"
+        },
+        "loaded": [
+          "devtools",
+          "devtools.check_distribution_inputs",
+          "devtools.installed_smoke",
+          "devtools.scripts",
+          "devtools.scripts.benchmark_capture_policies",
+          "devtools.scripts.distribution_archives",
+          "devtools.scripts.release_tools",
+          "devtools.scripts.sanitize_bundle",
+          "devtools.scripts.sync_gh_run_receptor_guide",
+          "devtools.scripts.validate_contracts",
+          "devtools.scripts.validate_public_runs",
+          "tests",
+          "tests.test_action_distribution_workflow",
+          "tests.test_action_metadata",
+          "tests.test_action_validation_workflow",
+          "tests.test_aggregation",
+          "tests.test_bundle",
+          "tests.test_bundle_resources",
+          "tests.test_capture_policy_benchmark",
+          "tests.test_capture_policy_workflow",
+          "tests.test_checks",
+          "tests.test_cli",
+          "tests.test_comparison",
+          "tests.test_comparison_policy",
+          "tests.test_compatibility_workflow",
+          "tests.test_conda_distribution",
+          "tests.test_config",
+          "tests.test_contract_compatibility",
+          "tests.test_contracts",
+          "tests.test_diagnostic_ranking",
+          "tests.test_discovery",
+          "tests.test_documentation",
+          "tests.test_embedded",
+          "tests.test_events",
+          "tests.test_exit_codes",
+          "tests.test_github",
+          "tests.test_inline_rules_pr_workflow",
+          "tests.test_job_logs",
+          "tests.test_logs",
+          "tests.test_minimum_gh_cli_workflow",
+          "tests.test_packaging",
+          "tests.test_permission_boundary_workflow",
+          "tests.test_public_runs",
+          "tests.test_publish_release_workflow",
+          "tests.test_published",
+          "tests.test_published_validation_workflow",
+          "tests.test_python_ci_lanes",
+          "tests.test_release_tools",
+          "tests.test_report",
+          "tests.test_repository_conventions",
+          "tests.test_reusable_report_workflow",
+          "tests.test_service",
+          "tests.test_source_version",
+          "tests.test_sync_guide",
+          "tests.test_termination",
+          "tests.test_watch",
+          "tests.test_workflow_run_reporting",
+          "tests.test_zenodo_recovery_workflow",
+          "tests.test_zenodo_verification",
+          "tests.test_zenodo_workflow"
+        ],
+        "test_exit_status": 0,
+        "blocked_source_path_additions": 2,
+        "bindings_removed": true
+      }
+    },
+    {
+      "artifact": {
+        "id": 12579729747,
+        "name": "installed-admin-helpers-linux-64-py3.13",
+        "digest": "sha256:a9b3e9b4ff1ef74e6544e536d76cfa7f0379ccb82c66a10f44372d5a347d4785",
+        "size_in_bytes": 3583,
+        "expired": false
+      },
+      "report": {
+        "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "helper_files": 62,
+        "source_root_added_to_path": false,
+        "checks": 2,
+        "state": "verified-helpers",
+        "helper_sha256": {
+          "devtools/check_distribution_inputs.py": "0640d3d06a3ef409b166de8fa6e0a5ca25a59963aa682242f2b5c9f0fac9a345",
+          "devtools/installed_smoke.py": "65bb48220d463afb2676aeb916a4cb27f588473914da6c330ee3227c99c91cfb",
+          "devtools/scripts/benchmark_capture_policies.py": "617421f757b98a00b96ad54fa6b5cc621a212cbc0044a9677e4340138bc60e5a",
+          "devtools/scripts/devguide_index.py": "144660461865405ffce4f671e292bdc33fb700c35dc33e149cea7ba5512826d6",
+          "devtools/scripts/devguide_issue.py": "3121a02b2b09e8a157709c6ba3801a41814e96b20c898002ac131c45d9f9fa7c",
+          "devtools/scripts/devguide_reports.py": "50db83c969e69f3fd4dca04c9e7d1f1c89e4918b3f1c17c01ee861950396322d",
+          "devtools/scripts/distribution_archives.py": "6668a6b637cc41346d46a557d8abd8c28d370d26eb5a255c9167dff0fd7f2c48",
+          "devtools/scripts/release_tools.py": "f2073c3845537c5ae87b7724c7ef5b9b5ccf38e1792563a141af280eff87d0e5",
+          "devtools/scripts/sanitize_bundle.py": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+          "devtools/scripts/sync_gh_run_receptor_guide.py": "3dac1b889803581dcdd1b51fee32f897ec4de490bcb4787beeda9dbbd3f6bffa",
+          "devtools/scripts/validate_contracts.py": "1117a648d97fabc541b77fb6cc367aa82023fc60adccfe66ef5ec103e44ca769",
+          "devtools/scripts/validate_devguide.py": "318e8622f7a29130fc27ae912b712e1c49d7b658d8c7f5ceda979c2871949d18",
+          "devtools/scripts/validate_job_logs.py": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+          "devtools/scripts/validate_public_runs.py": "7b46c1091ef75448f8fb50b0df44ae37ef4e1820efb893c89fd968d532415b07",
+          "tests/test_action_distribution_workflow.py": "63f6da27069225e5c987340cb5f4866403570f9c06020dcffa7cc8b1113e06e4",
+          "tests/test_action_metadata.py": "25e92cff63dcfb3ae8e6bbc3b075fb1c40c08627f6403d9b6b4cc90836413d12",
+          "tests/test_action_validation_workflow.py": "11677b84a10364257762ebbc118430f9f597df0062e89376ec9ac18e295243c5",
+          "tests/test_aggregation.py": "cbf756e3a8820f1bbd28a3023c818cd18b9717192bcdf0355c29da6c9b21f459",
+          "tests/test_bundle.py": "32764eeb795a66f2afbc6cb705c08ca4785efd87db3939379d52da7db88919d1",
+          "tests/test_bundle_resources.py": "542ee412f0baa389fc1eb91d269e01de6af91280b1514161591f6064c59f12a2",
+          "tests/test_capture_policy_benchmark.py": "50881f34a2b60e13e3daae0d6a3d328f05c27feb085b90cb83a53e51319e7137",
+          "tests/test_capture_policy_workflow.py": "4fea8c9b891ef36868181422426f02ec8533878596a384688c417cd897c2f484",
+          "tests/test_checks.py": "aadee82734c1226525409f876e051e4b0967ca57c2e664b1f2cdc62be9047c3e",
+          "tests/test_cli.py": "4d51f28bb9c26b1509171b0faf6a9caeacf9e8ecceea12a7f19385d444e63fa7",
+          "tests/test_comparison.py": "65dc1d5f9325cb9ae8574335f2ae11b688f3a75683cfa6199985aad4837ef8d8",
+          "tests/test_comparison_policy.py": "f6e53f90bfb5ec59101a5747322fc038e0c276844ba65658660033cdf3d3048e",
+          "tests/test_compatibility_workflow.py": "fd4da8e9487adc842809103ce03873f0ba95c921ed5c722254c22fbb6132120f",
+          "tests/test_conda_distribution.py": "e27fb2ce60e6ea6be6d67ced66394ab916a2a287df1e7958e372e223c5af8bf8",
+          "tests/test_config.py": "356ff1b63eb0a35b8af76419de6b274d8e4766401789357b0e736d9a131f3c16",
+          "tests/test_contract_compatibility.py": "e3d3830573d46cc42423e508d24ade6231210af32a4a16659b27c99bfe0a1a29",
+          "tests/test_contracts.py": "73d9a8f75be11741af47ccdbe882132bb3fee3b71fe56a28662809f3cf3309b4",
+          "tests/test_diagnostic_ranking.py": "f65dc0c98fa881b02523413735e6ea9069e7faa19293539ab8837ec72fc4cae6",
+          "tests/test_discovery.py": "32075b575359c9efcabe99965d7b6ae37d18acc1ad11e6e0697e412478892fbe",
+          "tests/test_documentation.py": "c7dda5ac1046a270f392b20c42aef8fa909f2b0b78c6b27f607bf1f32eb7d0ee",
+          "tests/test_embedded.py": "491a56be98fd50ea061a53d2fed99270c6ba73d3adb45907f6c05564c6963122",
+          "tests/test_events.py": "80c653e72e3a7204da5180fa04e3434cca4b4834a91ccb489097172f667c104d",
+          "tests/test_exit_codes.py": "fda18570b372b608003a4d107dd4964c4c8ddd31c8106178acc350c39f619603",
+          "tests/test_github.py": "fd1341ef0d705f4c928e8885e3b122e96694b9c39df70febf0ec39fe98d36327",
+          "tests/test_inline_rules_pr_workflow.py": "d0a2676f25ceff589eabbdde014ef94c1516ea180a20bd1779c54aa72d0d4ae0",
+          "tests/test_job_logs.py": "d3cff6575c911aa1320876bb67b6ad9a11a87e008f6c7e9214425bd33fa90bc6",
+          "tests/test_logs.py": "df4416efab5e9c04c3956bc402ebd03b876d08a3be183c3c4119f6acc40a7a05",
+          "tests/test_minimum_gh_cli_workflow.py": "870217a358a582d694cf0ce2625ef0cd03e921832c3077d9f6e42fb14e89ed18",
+          "tests/test_packaging.py": "5c4d0985f234be46e9dbe3a7abd798b057ad630d812c29f2a791a338a1983051",
+          "tests/test_permission_boundary_workflow.py": "af766f4ae5392a68c434da7c63663e147d93cd725d665137195a377d75468a2a",
+          "tests/test_public_runs.py": "71f0cead59f7dc59a36cc9ea77df30f593be2882f666de893f36b25230ac100a",
+          "tests/test_publish_release_workflow.py": "25fac593aa097efad348d1a70714ca70100f1491a5152ee0e78307752316c413",
+          "tests/test_published.py": "c5bab362635442522be5bd4c2119fdc233cec8e70c2fb2c77c625e41b2841492",
+          "tests/test_published_validation_workflow.py": "0a1179ee2c09cc26fc0e6652825a5a68c58cc5d3d66a64f84a40c44f1dd9187e",
+          "tests/test_python_ci_lanes.py": "87743ed97acd8f12fbac920b9cfc62867d6d3077c533be7fac6307d4fa984108",
+          "tests/test_release_tools.py": "86e1962c0796ed8e2fcc7c7db0625ebafe19fbd339103cf533ac7c5270ac5d99",
+          "tests/test_report.py": "a5114250af7a99edd2ea1dd073eb216dc85cdeba7f0aac75a14123382154eb46",
+          "tests/test_repository_conventions.py": "141f9d94f629086a2efb9c98b25b5fe8fad8d283de45527eb45ad1c00f2a0c89",
+          "tests/test_reusable_report_workflow.py": "e4a1a60466679ff37ad3410e7910d54bec45e3a725dd62798a242e64be574204",
+          "tests/test_service.py": "2699b49baf2ad0083e5f7df9b6a377791d72fdf6a0bfd672eeb35562629e03c2",
+          "tests/test_source_version.py": "44abff8df6b6b778c86a44613916357da9a7d91c6a1162217eac7401493dae19",
+          "tests/test_sync_guide.py": "0f677b3fdf2ec09d0b5096ccd969d8b99ed4c640cad3a76e8def2f8f4e0aa759",
+          "tests/test_termination.py": "46de8c71848b99da78fc2d9e000f7d455e4b44b5324bfd511324ea86b08e70eb",
+          "tests/test_watch.py": "ce8c716ac30cfdeff06a33e2a4b18ea5f1751877c99a70b82e9333ba0586a7fe",
+          "tests/test_workflow_run_reporting.py": "ddf228e7f372e5e4a2602eb0e16ce29ff55f69775d4490d453114a9b40b6839c",
+          "tests/test_zenodo_recovery_workflow.py": "2193a1c85da77b255027c46f02ebb133f1a1b7a9c620fdd461da5da21ad7a0d9",
+          "tests/test_zenodo_verification.py": "7c27bd220d78725c43d18f0c98901197c3a0bf63f6adf74f7b04f4e3e3e6889c",
+          "tests/test_zenodo_workflow.py": "794317de60c1d0868fe21545b52fc1ce06a766e8ae169a44d51598f8670fe223"
+        },
+        "loaded": [
+          "devtools",
+          "devtools.check_distribution_inputs",
+          "devtools.installed_smoke",
+          "devtools.scripts",
+          "devtools.scripts.benchmark_capture_policies",
+          "devtools.scripts.distribution_archives",
+          "devtools.scripts.release_tools",
+          "devtools.scripts.sanitize_bundle",
+          "devtools.scripts.sync_gh_run_receptor_guide",
+          "devtools.scripts.validate_contracts",
+          "devtools.scripts.validate_public_runs",
+          "tests",
+          "tests.test_action_distribution_workflow",
+          "tests.test_action_metadata",
+          "tests.test_action_validation_workflow",
+          "tests.test_aggregation",
+          "tests.test_bundle",
+          "tests.test_bundle_resources",
+          "tests.test_capture_policy_benchmark",
+          "tests.test_capture_policy_workflow",
+          "tests.test_checks",
+          "tests.test_cli",
+          "tests.test_comparison",
+          "tests.test_comparison_policy",
+          "tests.test_compatibility_workflow",
+          "tests.test_conda_distribution",
+          "tests.test_config",
+          "tests.test_contract_compatibility",
+          "tests.test_contracts",
+          "tests.test_diagnostic_ranking",
+          "tests.test_discovery",
+          "tests.test_documentation",
+          "tests.test_embedded",
+          "tests.test_events",
+          "tests.test_exit_codes",
+          "tests.test_github",
+          "tests.test_inline_rules_pr_workflow",
+          "tests.test_job_logs",
+          "tests.test_logs",
+          "tests.test_minimum_gh_cli_workflow",
+          "tests.test_packaging",
+          "tests.test_permission_boundary_workflow",
+          "tests.test_public_runs",
+          "tests.test_publish_release_workflow",
+          "tests.test_published",
+          "tests.test_published_validation_workflow",
+          "tests.test_python_ci_lanes",
+          "tests.test_release_tools",
+          "tests.test_report",
+          "tests.test_repository_conventions",
+          "tests.test_reusable_report_workflow",
+          "tests.test_service",
+          "tests.test_source_version",
+          "tests.test_sync_guide",
+          "tests.test_termination",
+          "tests.test_watch",
+          "tests.test_workflow_run_reporting",
+          "tests.test_zenodo_recovery_workflow",
+          "tests.test_zenodo_verification",
+          "tests.test_zenodo_workflow"
+        ],
+        "test_exit_status": 0,
+        "blocked_source_path_additions": 2,
+        "bindings_removed": true
+      }
+    },
+    {
+      "artifact": {
+        "id": 12579594873,
+        "name": "installed-admin-helpers-osx-arm64-py3.14",
+        "digest": "sha256:2e55d4995097f008b197cf2d59d259cc2e96d3ce2680efa9fda47de242bc2156",
+        "size_in_bytes": 3583,
+        "expired": false
+      },
+      "report": {
+        "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "helper_files": 62,
+        "source_root_added_to_path": false,
+        "checks": 2,
+        "state": "verified-helpers",
+        "helper_sha256": {
+          "devtools/check_distribution_inputs.py": "0640d3d06a3ef409b166de8fa6e0a5ca25a59963aa682242f2b5c9f0fac9a345",
+          "devtools/installed_smoke.py": "65bb48220d463afb2676aeb916a4cb27f588473914da6c330ee3227c99c91cfb",
+          "devtools/scripts/benchmark_capture_policies.py": "617421f757b98a00b96ad54fa6b5cc621a212cbc0044a9677e4340138bc60e5a",
+          "devtools/scripts/devguide_index.py": "144660461865405ffce4f671e292bdc33fb700c35dc33e149cea7ba5512826d6",
+          "devtools/scripts/devguide_issue.py": "3121a02b2b09e8a157709c6ba3801a41814e96b20c898002ac131c45d9f9fa7c",
+          "devtools/scripts/devguide_reports.py": "50db83c969e69f3fd4dca04c9e7d1f1c89e4918b3f1c17c01ee861950396322d",
+          "devtools/scripts/distribution_archives.py": "6668a6b637cc41346d46a557d8abd8c28d370d26eb5a255c9167dff0fd7f2c48",
+          "devtools/scripts/release_tools.py": "f2073c3845537c5ae87b7724c7ef5b9b5ccf38e1792563a141af280eff87d0e5",
+          "devtools/scripts/sanitize_bundle.py": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+          "devtools/scripts/sync_gh_run_receptor_guide.py": "3dac1b889803581dcdd1b51fee32f897ec4de490bcb4787beeda9dbbd3f6bffa",
+          "devtools/scripts/validate_contracts.py": "1117a648d97fabc541b77fb6cc367aa82023fc60adccfe66ef5ec103e44ca769",
+          "devtools/scripts/validate_devguide.py": "318e8622f7a29130fc27ae912b712e1c49d7b658d8c7f5ceda979c2871949d18",
+          "devtools/scripts/validate_job_logs.py": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+          "devtools/scripts/validate_public_runs.py": "7b46c1091ef75448f8fb50b0df44ae37ef4e1820efb893c89fd968d532415b07",
+          "tests/test_action_distribution_workflow.py": "63f6da27069225e5c987340cb5f4866403570f9c06020dcffa7cc8b1113e06e4",
+          "tests/test_action_metadata.py": "25e92cff63dcfb3ae8e6bbc3b075fb1c40c08627f6403d9b6b4cc90836413d12",
+          "tests/test_action_validation_workflow.py": "11677b84a10364257762ebbc118430f9f597df0062e89376ec9ac18e295243c5",
+          "tests/test_aggregation.py": "cbf756e3a8820f1bbd28a3023c818cd18b9717192bcdf0355c29da6c9b21f459",
+          "tests/test_bundle.py": "32764eeb795a66f2afbc6cb705c08ca4785efd87db3939379d52da7db88919d1",
+          "tests/test_bundle_resources.py": "542ee412f0baa389fc1eb91d269e01de6af91280b1514161591f6064c59f12a2",
+          "tests/test_capture_policy_benchmark.py": "50881f34a2b60e13e3daae0d6a3d328f05c27feb085b90cb83a53e51319e7137",
+          "tests/test_capture_policy_workflow.py": "4fea8c9b891ef36868181422426f02ec8533878596a384688c417cd897c2f484",
+          "tests/test_checks.py": "aadee82734c1226525409f876e051e4b0967ca57c2e664b1f2cdc62be9047c3e",
+          "tests/test_cli.py": "4d51f28bb9c26b1509171b0faf6a9caeacf9e8ecceea12a7f19385d444e63fa7",
+          "tests/test_comparison.py": "65dc1d5f9325cb9ae8574335f2ae11b688f3a75683cfa6199985aad4837ef8d8",
+          "tests/test_comparison_policy.py": "f6e53f90bfb5ec59101a5747322fc038e0c276844ba65658660033cdf3d3048e",
+          "tests/test_compatibility_workflow.py": "fd4da8e9487adc842809103ce03873f0ba95c921ed5c722254c22fbb6132120f",
+          "tests/test_conda_distribution.py": "e27fb2ce60e6ea6be6d67ced66394ab916a2a287df1e7958e372e223c5af8bf8",
+          "tests/test_config.py": "356ff1b63eb0a35b8af76419de6b274d8e4766401789357b0e736d9a131f3c16",
+          "tests/test_contract_compatibility.py": "e3d3830573d46cc42423e508d24ade6231210af32a4a16659b27c99bfe0a1a29",
+          "tests/test_contracts.py": "73d9a8f75be11741af47ccdbe882132bb3fee3b71fe56a28662809f3cf3309b4",
+          "tests/test_diagnostic_ranking.py": "f65dc0c98fa881b02523413735e6ea9069e7faa19293539ab8837ec72fc4cae6",
+          "tests/test_discovery.py": "32075b575359c9efcabe99965d7b6ae37d18acc1ad11e6e0697e412478892fbe",
+          "tests/test_documentation.py": "c7dda5ac1046a270f392b20c42aef8fa909f2b0b78c6b27f607bf1f32eb7d0ee",
+          "tests/test_embedded.py": "491a56be98fd50ea061a53d2fed99270c6ba73d3adb45907f6c05564c6963122",
+          "tests/test_events.py": "80c653e72e3a7204da5180fa04e3434cca4b4834a91ccb489097172f667c104d",
+          "tests/test_exit_codes.py": "fda18570b372b608003a4d107dd4964c4c8ddd31c8106178acc350c39f619603",
+          "tests/test_github.py": "fd1341ef0d705f4c928e8885e3b122e96694b9c39df70febf0ec39fe98d36327",
+          "tests/test_inline_rules_pr_workflow.py": "d0a2676f25ceff589eabbdde014ef94c1516ea180a20bd1779c54aa72d0d4ae0",
+          "tests/test_job_logs.py": "d3cff6575c911aa1320876bb67b6ad9a11a87e008f6c7e9214425bd33fa90bc6",
+          "tests/test_logs.py": "df4416efab5e9c04c3956bc402ebd03b876d08a3be183c3c4119f6acc40a7a05",
+          "tests/test_minimum_gh_cli_workflow.py": "870217a358a582d694cf0ce2625ef0cd03e921832c3077d9f6e42fb14e89ed18",
+          "tests/test_packaging.py": "5c4d0985f234be46e9dbe3a7abd798b057ad630d812c29f2a791a338a1983051",
+          "tests/test_permission_boundary_workflow.py": "af766f4ae5392a68c434da7c63663e147d93cd725d665137195a377d75468a2a",
+          "tests/test_public_runs.py": "71f0cead59f7dc59a36cc9ea77df30f593be2882f666de893f36b25230ac100a",
+          "tests/test_publish_release_workflow.py": "25fac593aa097efad348d1a70714ca70100f1491a5152ee0e78307752316c413",
+          "tests/test_published.py": "c5bab362635442522be5bd4c2119fdc233cec8e70c2fb2c77c625e41b2841492",
+          "tests/test_published_validation_workflow.py": "0a1179ee2c09cc26fc0e6652825a5a68c58cc5d3d66a64f84a40c44f1dd9187e",
+          "tests/test_python_ci_lanes.py": "87743ed97acd8f12fbac920b9cfc62867d6d3077c533be7fac6307d4fa984108",
+          "tests/test_release_tools.py": "86e1962c0796ed8e2fcc7c7db0625ebafe19fbd339103cf533ac7c5270ac5d99",
+          "tests/test_report.py": "a5114250af7a99edd2ea1dd073eb216dc85cdeba7f0aac75a14123382154eb46",
+          "tests/test_repository_conventions.py": "141f9d94f629086a2efb9c98b25b5fe8fad8d283de45527eb45ad1c00f2a0c89",
+          "tests/test_reusable_report_workflow.py": "e4a1a60466679ff37ad3410e7910d54bec45e3a725dd62798a242e64be574204",
+          "tests/test_service.py": "2699b49baf2ad0083e5f7df9b6a377791d72fdf6a0bfd672eeb35562629e03c2",
+          "tests/test_source_version.py": "44abff8df6b6b778c86a44613916357da9a7d91c6a1162217eac7401493dae19",
+          "tests/test_sync_guide.py": "0f677b3fdf2ec09d0b5096ccd969d8b99ed4c640cad3a76e8def2f8f4e0aa759",
+          "tests/test_termination.py": "46de8c71848b99da78fc2d9e000f7d455e4b44b5324bfd511324ea86b08e70eb",
+          "tests/test_watch.py": "ce8c716ac30cfdeff06a33e2a4b18ea5f1751877c99a70b82e9333ba0586a7fe",
+          "tests/test_workflow_run_reporting.py": "ddf228e7f372e5e4a2602eb0e16ce29ff55f69775d4490d453114a9b40b6839c",
+          "tests/test_zenodo_recovery_workflow.py": "2193a1c85da77b255027c46f02ebb133f1a1b7a9c620fdd461da5da21ad7a0d9",
+          "tests/test_zenodo_verification.py": "7c27bd220d78725c43d18f0c98901197c3a0bf63f6adf74f7b04f4e3e3e6889c",
+          "tests/test_zenodo_workflow.py": "794317de60c1d0868fe21545b52fc1ce06a766e8ae169a44d51598f8670fe223"
+        },
+        "loaded": [
+          "devtools",
+          "devtools.check_distribution_inputs",
+          "devtools.installed_smoke",
+          "devtools.scripts",
+          "devtools.scripts.benchmark_capture_policies",
+          "devtools.scripts.distribution_archives",
+          "devtools.scripts.release_tools",
+          "devtools.scripts.sanitize_bundle",
+          "devtools.scripts.sync_gh_run_receptor_guide",
+          "devtools.scripts.validate_contracts",
+          "devtools.scripts.validate_public_runs",
+          "tests",
+          "tests.test_action_distribution_workflow",
+          "tests.test_action_metadata",
+          "tests.test_action_validation_workflow",
+          "tests.test_aggregation",
+          "tests.test_bundle",
+          "tests.test_bundle_resources",
+          "tests.test_capture_policy_benchmark",
+          "tests.test_capture_policy_workflow",
+          "tests.test_checks",
+          "tests.test_cli",
+          "tests.test_comparison",
+          "tests.test_comparison_policy",
+          "tests.test_compatibility_workflow",
+          "tests.test_conda_distribution",
+          "tests.test_config",
+          "tests.test_contract_compatibility",
+          "tests.test_contracts",
+          "tests.test_diagnostic_ranking",
+          "tests.test_discovery",
+          "tests.test_documentation",
+          "tests.test_embedded",
+          "tests.test_events",
+          "tests.test_exit_codes",
+          "tests.test_github",
+          "tests.test_inline_rules_pr_workflow",
+          "tests.test_job_logs",
+          "tests.test_logs",
+          "tests.test_minimum_gh_cli_workflow",
+          "tests.test_packaging",
+          "tests.test_permission_boundary_workflow",
+          "tests.test_public_runs",
+          "tests.test_publish_release_workflow",
+          "tests.test_published",
+          "tests.test_published_validation_workflow",
+          "tests.test_python_ci_lanes",
+          "tests.test_release_tools",
+          "tests.test_report",
+          "tests.test_repository_conventions",
+          "tests.test_reusable_report_workflow",
+          "tests.test_service",
+          "tests.test_source_version",
+          "tests.test_sync_guide",
+          "tests.test_termination",
+          "tests.test_watch",
+          "tests.test_workflow_run_reporting",
+          "tests.test_zenodo_recovery_workflow",
+          "tests.test_zenodo_verification",
+          "tests.test_zenodo_workflow"
+        ],
+        "test_exit_status": 0,
+        "blocked_source_path_additions": 2,
+        "bindings_removed": true
+      }
+    },
+    {
+      "artifact": {
+        "id": 12579554894,
+        "name": "installed-admin-helpers-linux-64-py3.11",
+        "digest": "sha256:14effa02e1dff6728fa22b5b0de0b955da88b22980cbe0f1ca15ce6c246bc0c8",
+        "size_in_bytes": 3583,
+        "expired": false
+      },
+      "report": {
+        "candidate_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+        "helper_files": 62,
+        "source_root_added_to_path": false,
+        "checks": 2,
+        "state": "verified-helpers",
+        "helper_sha256": {
+          "devtools/check_distribution_inputs.py": "0640d3d06a3ef409b166de8fa6e0a5ca25a59963aa682242f2b5c9f0fac9a345",
+          "devtools/installed_smoke.py": "65bb48220d463afb2676aeb916a4cb27f588473914da6c330ee3227c99c91cfb",
+          "devtools/scripts/benchmark_capture_policies.py": "617421f757b98a00b96ad54fa6b5cc621a212cbc0044a9677e4340138bc60e5a",
+          "devtools/scripts/devguide_index.py": "144660461865405ffce4f671e292bdc33fb700c35dc33e149cea7ba5512826d6",
+          "devtools/scripts/devguide_issue.py": "3121a02b2b09e8a157709c6ba3801a41814e96b20c898002ac131c45d9f9fa7c",
+          "devtools/scripts/devguide_reports.py": "50db83c969e69f3fd4dca04c9e7d1f1c89e4918b3f1c17c01ee861950396322d",
+          "devtools/scripts/distribution_archives.py": "6668a6b637cc41346d46a557d8abd8c28d370d26eb5a255c9167dff0fd7f2c48",
+          "devtools/scripts/release_tools.py": "f2073c3845537c5ae87b7724c7ef5b9b5ccf38e1792563a141af280eff87d0e5",
+          "devtools/scripts/sanitize_bundle.py": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+          "devtools/scripts/sync_gh_run_receptor_guide.py": "3dac1b889803581dcdd1b51fee32f897ec4de490bcb4787beeda9dbbd3f6bffa",
+          "devtools/scripts/validate_contracts.py": "1117a648d97fabc541b77fb6cc367aa82023fc60adccfe66ef5ec103e44ca769",
+          "devtools/scripts/validate_devguide.py": "318e8622f7a29130fc27ae912b712e1c49d7b658d8c7f5ceda979c2871949d18",
+          "devtools/scripts/validate_job_logs.py": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+          "devtools/scripts/validate_public_runs.py": "7b46c1091ef75448f8fb50b0df44ae37ef4e1820efb893c89fd968d532415b07",
+          "tests/test_action_distribution_workflow.py": "63f6da27069225e5c987340cb5f4866403570f9c06020dcffa7cc8b1113e06e4",
+          "tests/test_action_metadata.py": "25e92cff63dcfb3ae8e6bbc3b075fb1c40c08627f6403d9b6b4cc90836413d12",
+          "tests/test_action_validation_workflow.py": "11677b84a10364257762ebbc118430f9f597df0062e89376ec9ac18e295243c5",
+          "tests/test_aggregation.py": "cbf756e3a8820f1bbd28a3023c818cd18b9717192bcdf0355c29da6c9b21f459",
+          "tests/test_bundle.py": "32764eeb795a66f2afbc6cb705c08ca4785efd87db3939379d52da7db88919d1",
+          "tests/test_bundle_resources.py": "542ee412f0baa389fc1eb91d269e01de6af91280b1514161591f6064c59f12a2",
+          "tests/test_capture_policy_benchmark.py": "50881f34a2b60e13e3daae0d6a3d328f05c27feb085b90cb83a53e51319e7137",
+          "tests/test_capture_policy_workflow.py": "4fea8c9b891ef36868181422426f02ec8533878596a384688c417cd897c2f484",
+          "tests/test_checks.py": "aadee82734c1226525409f876e051e4b0967ca57c2e664b1f2cdc62be9047c3e",
+          "tests/test_cli.py": "4d51f28bb9c26b1509171b0faf6a9caeacf9e8ecceea12a7f19385d444e63fa7",
+          "tests/test_comparison.py": "65dc1d5f9325cb9ae8574335f2ae11b688f3a75683cfa6199985aad4837ef8d8",
+          "tests/test_comparison_policy.py": "f6e53f90bfb5ec59101a5747322fc038e0c276844ba65658660033cdf3d3048e",
+          "tests/test_compatibility_workflow.py": "fd4da8e9487adc842809103ce03873f0ba95c921ed5c722254c22fbb6132120f",
+          "tests/test_conda_distribution.py": "e27fb2ce60e6ea6be6d67ced66394ab916a2a287df1e7958e372e223c5af8bf8",
+          "tests/test_config.py": "356ff1b63eb0a35b8af76419de6b274d8e4766401789357b0e736d9a131f3c16",
+          "tests/test_contract_compatibility.py": "e3d3830573d46cc42423e508d24ade6231210af32a4a16659b27c99bfe0a1a29",
+          "tests/test_contracts.py": "73d9a8f75be11741af47ccdbe882132bb3fee3b71fe56a28662809f3cf3309b4",
+          "tests/test_diagnostic_ranking.py": "f65dc0c98fa881b02523413735e6ea9069e7faa19293539ab8837ec72fc4cae6",
+          "tests/test_discovery.py": "32075b575359c9efcabe99965d7b6ae37d18acc1ad11e6e0697e412478892fbe",
+          "tests/test_documentation.py": "c7dda5ac1046a270f392b20c42aef8fa909f2b0b78c6b27f607bf1f32eb7d0ee",
+          "tests/test_embedded.py": "491a56be98fd50ea061a53d2fed99270c6ba73d3adb45907f6c05564c6963122",
+          "tests/test_events.py": "80c653e72e3a7204da5180fa04e3434cca4b4834a91ccb489097172f667c104d",
+          "tests/test_exit_codes.py": "fda18570b372b608003a4d107dd4964c4c8ddd31c8106178acc350c39f619603",
+          "tests/test_github.py": "fd1341ef0d705f4c928e8885e3b122e96694b9c39df70febf0ec39fe98d36327",
+          "tests/test_inline_rules_pr_workflow.py": "d0a2676f25ceff589eabbdde014ef94c1516ea180a20bd1779c54aa72d0d4ae0",
+          "tests/test_job_logs.py": "d3cff6575c911aa1320876bb67b6ad9a11a87e008f6c7e9214425bd33fa90bc6",
+          "tests/test_logs.py": "df4416efab5e9c04c3956bc402ebd03b876d08a3be183c3c4119f6acc40a7a05",
+          "tests/test_minimum_gh_cli_workflow.py": "870217a358a582d694cf0ce2625ef0cd03e921832c3077d9f6e42fb14e89ed18",
+          "tests/test_packaging.py": "5c4d0985f234be46e9dbe3a7abd798b057ad630d812c29f2a791a338a1983051",
+          "tests/test_permission_boundary_workflow.py": "af766f4ae5392a68c434da7c63663e147d93cd725d665137195a377d75468a2a",
+          "tests/test_public_runs.py": "71f0cead59f7dc59a36cc9ea77df30f593be2882f666de893f36b25230ac100a",
+          "tests/test_publish_release_workflow.py": "25fac593aa097efad348d1a70714ca70100f1491a5152ee0e78307752316c413",
+          "tests/test_published.py": "c5bab362635442522be5bd4c2119fdc233cec8e70c2fb2c77c625e41b2841492",
+          "tests/test_published_validation_workflow.py": "0a1179ee2c09cc26fc0e6652825a5a68c58cc5d3d66a64f84a40c44f1dd9187e",
+          "tests/test_python_ci_lanes.py": "87743ed97acd8f12fbac920b9cfc62867d6d3077c533be7fac6307d4fa984108",
+          "tests/test_release_tools.py": "86e1962c0796ed8e2fcc7c7db0625ebafe19fbd339103cf533ac7c5270ac5d99",
+          "tests/test_report.py": "a5114250af7a99edd2ea1dd073eb216dc85cdeba7f0aac75a14123382154eb46",
+          "tests/test_repository_conventions.py": "141f9d94f629086a2efb9c98b25b5fe8fad8d283de45527eb45ad1c00f2a0c89",
+          "tests/test_reusable_report_workflow.py": "e4a1a60466679ff37ad3410e7910d54bec45e3a725dd62798a242e64be574204",
+          "tests/test_service.py": "2699b49baf2ad0083e5f7df9b6a377791d72fdf6a0bfd672eeb35562629e03c2",
+          "tests/test_source_version.py": "44abff8df6b6b778c86a44613916357da9a7d91c6a1162217eac7401493dae19",
+          "tests/test_sync_guide.py": "0f677b3fdf2ec09d0b5096ccd969d8b99ed4c640cad3a76e8def2f8f4e0aa759",
+          "tests/test_termination.py": "46de8c71848b99da78fc2d9e000f7d455e4b44b5324bfd511324ea86b08e70eb",
+          "tests/test_watch.py": "ce8c716ac30cfdeff06a33e2a4b18ea5f1751877c99a70b82e9333ba0586a7fe",
+          "tests/test_workflow_run_reporting.py": "ddf228e7f372e5e4a2602eb0e16ce29ff55f69775d4490d453114a9b40b6839c",
+          "tests/test_zenodo_recovery_workflow.py": "2193a1c85da77b255027c46f02ebb133f1a1b7a9c620fdd461da5da21ad7a0d9",
+          "tests/test_zenodo_verification.py": "7c27bd220d78725c43d18f0c98901197c3a0bf63f6adf74f7b04f4e3e3e6889c",
+          "tests/test_zenodo_workflow.py": "794317de60c1d0868fe21545b52fc1ce06a766e8ae169a44d51598f8670fe223"
+        },
+        "loaded": [
+          "devtools",
+          "devtools.check_distribution_inputs",
+          "devtools.installed_smoke",
+          "devtools.scripts",
+          "devtools.scripts.benchmark_capture_policies",
+          "devtools.scripts.distribution_archives",
+          "devtools.scripts.release_tools",
+          "devtools.scripts.sanitize_bundle",
+          "devtools.scripts.sync_gh_run_receptor_guide",
+          "devtools.scripts.validate_contracts",
+          "devtools.scripts.validate_public_runs",
+          "tests",
+          "tests.test_action_distribution_workflow",
+          "tests.test_action_metadata",
+          "tests.test_action_validation_workflow",
+          "tests.test_aggregation",
+          "tests.test_bundle",
+          "tests.test_bundle_resources",
+          "tests.test_capture_policy_benchmark",
+          "tests.test_capture_policy_workflow",
+          "tests.test_checks",
+          "tests.test_cli",
+          "tests.test_comparison",
+          "tests.test_comparison_policy",
+          "tests.test_compatibility_workflow",
+          "tests.test_conda_distribution",
+          "tests.test_config",
+          "tests.test_contract_compatibility",
+          "tests.test_contracts",
+          "tests.test_diagnostic_ranking",
+          "tests.test_discovery",
+          "tests.test_documentation",
+          "tests.test_embedded",
+          "tests.test_events",
+          "tests.test_exit_codes",
+          "tests.test_github",
+          "tests.test_inline_rules_pr_workflow",
+          "tests.test_job_logs",
+          "tests.test_logs",
+          "tests.test_minimum_gh_cli_workflow",
+          "tests.test_packaging",
+          "tests.test_permission_boundary_workflow",
+          "tests.test_public_runs",
+          "tests.test_publish_release_workflow",
+          "tests.test_published",
+          "tests.test_published_validation_workflow",
+          "tests.test_python_ci_lanes",
+          "tests.test_release_tools",
+          "tests.test_report",
+          "tests.test_repository_conventions",
+          "tests.test_reusable_report_workflow",
+          "tests.test_service",
+          "tests.test_source_version",
+          "tests.test_sync_guide",
+          "tests.test_termination",
+          "tests.test_watch",
+          "tests.test_workflow_run_reporting",
+          "tests.test_zenodo_recovery_workflow",
+          "tests.test_zenodo_verification",
+          "tests.test_zenodo_workflow"
+        ],
+        "test_exit_status": 0,
+        "blocked_source_path_additions": 2,
+        "bindings_removed": true
+      }
+    }
+  ],
+  "failed_qualification_runs": [
+    40143357716,
+    40144488087
+  ],
+  "local_original_archive_inspection": {
+    "artifact": "$TASK_ROOT/conda-staged/gh-run-receptor-1.3.0-py_0.tar.bz2",
+    "build_number": 0,
+    "filename": "gh-run-receptor-1.3.0-py_0.tar.bz2",
+    "package": "gh-run-receptor",
+    "route": "staged",
+    "sha256": "65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3",
+    "subdir": "noarch",
+    "version": "1.3.0"
+  },
+  "limits": [
+    "No rebuild or substitution of the original producer archive.",
+    "Promotion and independent public installation remain separately required.",
+    "Expected original producer/source and newer administrative qualification identities are kept distinct.",
+    "Administrative helper receiving is the component-owned equivalent tracked by uibcdf/molsyssuite#144."
+  ]
+}

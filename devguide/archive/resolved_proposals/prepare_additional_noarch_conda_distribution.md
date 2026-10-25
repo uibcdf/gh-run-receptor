@@ -1,9 +1,9 @@
 ---
 summary: Prepare an additional noarch Python Conda distribution with exact-file gates.
 issue: uibcdf/gh-run-receptor#60
-status: partial
+status: resolved
 opened: 2026-10-06
-closed:
+closed: 2026-10-24
 verification: measured
 area: [packaging, github]
 guard: tests/test_conda_distribution.py
@@ -27,7 +27,7 @@ assets, tags and existing evidence are not rebuilt, changed or republished.
 
 ## How
 
-[The recipe handoff](../../devtools/conda-build/README.md) owns the operational
+[The recipe handoff](../../../devtools/conda-build/README.md) owns the operational
 steps and applicability. The recipe uses `noarch: python`, actual Python bounds,
 versioningit/setuptools, the console entry point, generated version and all nine
 frozen schema files. `gh>=2.48.0` is a separate Conda runtime dependency tied to
@@ -108,7 +108,7 @@ source clone is selected explicitly for source tests; Pytest Receptor still
 imports from its existing eligible editable clone. No participating shared
 editable installation is changed. Seven known environment closure findings
 under uibcdf/molsyssuite#82 are unchanged and do not certify installed closure.
-The [sanitized preparation receipt](../evidence/conda_route_preparation_2026-10-06.json)
+The [sanitized preparation receipt](../../evidence/conda_route_preparation_2026-10-06.json)
 records test-tool versions and applicability.
 
 ```text
@@ -282,3 +282,35 @@ repair. It does not patch metadata manually, disable safety checks, alter the
 staged candidate or skip any installed gate. The setup/run-init correction,
 original producer and exact file/digest remain unchanged. A new complete native
 matrix is required before promotion; the original failed run remains evidence.
+
+
+## Verified first delivery — 2026-10-24 local / 2026-10-25 UTC
+
+The first public noarch file is delivered. Original source
+`5a48759a399a17a16d923851b32519983a836f5f`, producer 40143062622 and the 78037-byte
+`gh-run-receptor-1.3.0-py_0.tar.bz2` remain unchanged; SHA-256 is
+`65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3`.
+Installed run 40144989781, attempt 1, qualification workflow
+`08b83a0e853aff5c563ad9b19d0ddffb15e030f8`, succeeds in all twelve native
+Linux/macOS arm64/Windows × Python 3.11–3.14 cells. Every exact-file install,
+prefix/resource check, original selected test suite and final provenance recheck
+executes successfully. Digest-checked helper/source-binding artifacts retain
+original-source hashes, zero test exit, two final helper checks and owned-binding
+removal. Earlier failed runs remain separate evidence, not qualification.
+
+Promotion 40145282787 independently revalidates exact-source gates and the installed
+matrix, adds main to that same file without rebuilding, and verifies both public
+label and solver index at 2026-10-25T00:06:03Z. A separate anonymous public-file
+download matches original bytes/digest. A clean user installation from strict
+uibcdf/conda-forge channels uses Python 3.14.9 and prefix-owned gh 2.103.2; runtime
+source bytes, generated/distribution version, nine frozen schemas, fourteen corpus
+replays, six original diagnostics in all renderers/profiles, active-job/unavailable
+truth cases, bounded output, privacy and scratch cleanup pass outside source.
+
+Durable receipts: `devguide/evidence/conda_1_3_0_qualification.json` and
+`devguide/evidence/conda_1_3_0_public.json`. Normative route:
+`devguide/versioning_and_releases.md`; regression guard:
+`tests/test_conda_distribution.py`. The administrative helper compatibility route
+remains explicitly owned/reviewed under central #144; it does not leave this
+first-delivery issue incomplete. No PyPI publication or sibling pin change occurs.
+The authoritative GitHub tag/release remains separately owned by #72.

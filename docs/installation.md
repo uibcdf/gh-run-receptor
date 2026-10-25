@@ -82,10 +82,16 @@ The composite Action and reusable workflow need no package-install step. Pin the
 release as shown in [Embedded reporting](embedded-reporting.md).
 
 
-## Prepared Conda distribution
+## Conda installation
 
-An additional `noarch: python` Conda route is prepared for a future release,
-with a separately supplied GitHub CLI dependency. No public Conda package is
-claimed yet. The owner review is
-[GH Run Receptor #60](https://github.com/uibcdf/gh-run-receptor/issues/60).
-Existing extension, Action and GitHub wheel/sdist installation remain available.
+The public `noarch: python` package supports Python 3.11–3.14 and resolves
+`gh>=2.48.0` separately from conda-forge:
+
+```text
+conda install --override-channels --strict-channel-priority -c uibcdf -c conda-forge gh-run-receptor=1.3.0
+gh-run-receptor --version
+```
+
+The original file passed twelve native installed cells and was promoted without
+rebuilding. Conda does not register a gh extension automatically. Existing
+extension, Action and GitHub wheel/sdist installation remain available.
