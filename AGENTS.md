@@ -1,11 +1,23 @@
 # gh-run-receptor repository guide
 
+## Mandatory MolSysSuite instructions
+
+Read and follow `MOLSYSSUITE_GUIDE.md` before working in this repository.
+
+Within their stated scope, its common rules take precedence over this file
+and any nested `AGENTS.md`. Local instructions may refine them; deviations
+require the documented policy exception process.
+
+The synchronized guide is owned by `uibcdf/molsyssuite`. It includes the
+[reusable-tool ownership rules](MOLSYSSUITE_GUIDE.md#modular-reusable-tools)
+and [working-instruction rules](MOLSYSSUITE_GUIDE.md#durable-working-instructions).
+For work under `devguide/`, also read `devguide/AGENTS.md` and its local
+reporting protocol. Keep repository-specific instructions below.
+
+## Local working context
+
 This file defines the baseline rules for automated agents and human contributors. A
 more local `AGENTS.md` may refine these rules within its directory.
-
-Read `MOLSYSSUITE_GUIDE.md` before development. It is the synchronized, read-only
-suite-governance guide owned by `uibcdf/molsyssuite` and routes shared policies,
-cross-component feedback, and issue ownership.
 
 ## Language and documentation
 
@@ -110,63 +122,3 @@ cross-component feedback, and issue ownership.
 - `standards/GH_RUN_RECEPTOR_GUIDE.md`
 - `PYTEST_RECEPTOR_GUIDE.md` — synchronized, read-only contract for the pytest renderer
   used by this repository's test commands.
-
-## Direct pushes and scoped local validation
-
-Follow [the common checkpoint policy](MOLSYSSUITE_GUIDE.md#direct-pushes-and-validation-checkpoints)
-for authorized internal direct pushes by `dprada` and `LMMV`. Batch focused local
-commits when remote visibility is unnecessary; a permitted interim CI skip is
-conditional, never the default after every locally checked change. Retain local
-results while tested code, inputs, environment and scope remain applicable.
-Normally finish with an unskipped head and inspect its applicable CI, or explicitly
-execute and verify those exact-head gates manually. Record missing evidence,
-untested scope, owning issue and recovery route; administrative checks do not
-clear full-suite backlog. External PRs, admission and publication require all
-mandatory executed gates for the exact candidate and required installed file.
-An authorized manual qualification retains the original producer and artifact
-bytes/digest; a marker alone neither waives a gate nor disqualifies that evidence.
-
-## Release and package-publication notices
-
-For every new component release, with or without a published package, and every
-new package version/build/distribution route, open or update a release-specific
-issue in `uibcdf/molsyssuite` as part of closeout. Include exact version/tag/source,
-actual package availability and verification evidence, and ecosystem follow-up.
-Follow [the notice policy](MOLSYSSUITE_GUIDE.md#release-and-package-publication-notices).
-
-## Public release titles
-
-When preparing, publishing or intentionally editing a public GitHub Release, use
-exactly `X.Y.Z` as its title/name, matching the canonical tag and package/project
-version. Put descriptions in the body/notes. Read
-[the local release-title guide](devguide/release_titles.md) and
-[the canonical rule](MOLSYSSUITE_GUIDE.md#github-release-titles).
-
-## Modular reusable tools
-
-Before adding a feature, inspect existing tools and identify the owning module or
-component. Implement or extend independently useful operations as documented reusable
-tools in that owner, with their own contracts and tests; have consumers call them.
-Keep task-specific decisions local and report missing sibling capabilities to the
-provider with linked consumer evidence. Follow
-[MOLSYSSUITE_GUIDE.md#modular-reusable-tools](MOLSYSSUITE_GUIDE.md#modular-reusable-tools)
-for applicability, compatibility, performance and tracked exceptions.
-
-## Durable working instructions
-
-Keep technical findings in owning issues, fixes, tests and maintained guidance.
-Place only accepted lasting contributor actions in root or appropriately scoped
-instructions, following
-[the common policy](MOLSYSSUITE_GUIDE.md#durable-working-instructions).
-For work under `devguide/`, also read [devguide/AGENTS.md](devguide/AGENTS.md)
-and its local reporting protocol. Shared instruction proposals belong in
-`uibcdf/molsyssuite`; cross-MOLI contracts belong in `uibcdf/moli`.
-
-## Human-facing issue feedback
-
-Surface actionable suspected defects, inconsistencies, missing analyses and
-improvements, including uncertain or nonblocking findings. When working with a
-human, offer an owning issue at a natural pause; retain existing reporting
-authorization and respect declined/deferred disclosure. Follow
-[the accepted feedback route](MOLSYSSUITE_GUIDE.md#human-facing-issue-feedback)
-for ownership, uncertainty, privacy and exceptions.
