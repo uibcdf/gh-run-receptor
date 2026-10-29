@@ -1,5 +1,11 @@
 # gh-run-receptor developer guide
 
+**Active architecture work (2026-10-29):** #76 separates product, repository
+tooling and installed qualification, coordinated with `uibcdf/molsyssuite#144`.
+The [working report](pending_proposals/consolidate_product_tooling_and_installed_qualification.md)
+records the intended boundary and required evidence. Published 1.3.0 artifacts
+and their historical qualification remain unchanged; no new release is selected.
+
 This directory is the development checkpoint for `gh-run-receptor`. It records the
 stable product boundary, architectural decisions, rule model, and post-1.0 route.
 Documents should distinguish settled decisions from hypotheses that still require
