@@ -136,3 +136,32 @@ and frozen-contract preflight, Ruff and whitespace checks pass. The first failed
 run and local quota failure remain uncredited evidence. No publication or original
 1.3.0 file mutation occurs. Replacement receiving and adapter retirement remain
 required, not inferred from these administrative checks.
+
+
+## Build-only provider and Windows text receiving — 2026-10-29
+
+Corrected source 04f827a passes routine 40927180524, policy 40927181171,
+Conda governance 40927181295, contracts 40927337073, exits 40927342477,
+reusable 40927349219, minimum-gh 40927356037 and docs/Pages 40927362474.
+Private run 40927320067 stops before producing any file: its shell conda function
+uses the base manager, not the active conda-build plugin. The consumer now calls
+the already supported build-only Action at 8da628d with upload/github_release
+false and the exact shared noarch-publisher environment. No new Action or
+publication route is implemented; build selection stays local.
+
+Source compatibility 40927325642 has four successful Linux cells and four Windows
+failures in one legacy adapter test reading UTF-8 YAML with the platform default
+encoding; its macOS jobs are still queued when inspected. It is not full native
+qualification. Explicit UTF-8 preserves that assertion and its complete declared
+selection. Published GHR 1.3.0's --job path correctly reports the completed failed
+Windows job while retaining queued/PENDING/exit 3 for the whole workflow.
+Focused corrected guards: 34 passed / the explicit Conda-only skip; real private
+plan, owner preflight, Conda controls and Ruff pass. No private archive exists
+yet, so no producer file is rebuilt or replaced.
+
+Normal shared development editable is refreshed with --no-deps, imports from
+src, and passes nine source-version/metadata checks. An obsolete root egg-info
+created by this task's initial flat editable masked the fresh distribution
+metadata; that generated GHR-only directory was removed after checking project
+identity. Caller dependencies and sibling editables remain unchanged. This is
+normal development receiving, never archive qualification.

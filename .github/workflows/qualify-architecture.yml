@@ -32,19 +32,17 @@ jobs:
       - uses: conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb # v4
         with:
           miniforge-version: latest
-          activate-environment: builder
+          environment-file: .molsyssuite/devtools/conda-envs/noarch-publisher.yaml
+          activate-environment: noarch-publisher
           auto-activate-base: false
-          python-version: '3.14'
           channels: uibcdf,conda-forge
           channel-priority: strict
-          run-init: 'false'
+          run-init: 'true'
           remove-profiles: 'false'
       - name: Review source and private qualification inputs
         run: |
           source "$CONDA/etc/profile.d/conda.sh"
-          conda activate builder
-          conda install --yes --override-channels --strict-channel-priority -c uibcdf -c conda-forge \
-            conda-build 'pyyaml>=6,<7' 'jinja2>=3,<4' 'packaging>=24'
+          conda activate noarch-publisher
           python -m pip install --no-deps .
           python devtools/check_distribution_inputs.py --suite-root .molsyssuite
           python -m gh_run_receptor_tools.test_inventory --root .
@@ -52,7 +50,7 @@ jobs:
       - name: Freeze metadata only in the private build copy
         run: |
           source "$CONDA/etc/profile.d/conda.sh"
-          conda activate builder
+          conda activate noarch-publisher
           python - <<'PY'
           import os,shutil
           from pathlib import Path
@@ -62,25 +60,29 @@ jobs:
           python .molsyssuite/devtools/scripts/noarch_conda.py --root "$RUNNER_TEMP/candidate-source" \
             --plan devtools/conda-build/qualification_plan.toml --freeze-version
       - name: Build one nonpublishing Conda file
+        id: compilation
         env:
           MOLSYSSUITE_CONDA_VERSION: '0.0.0'
           MOLSYSSUITE_CONDA_BUILD_NUMBER: '76'
-        run: |
-          source "$CONDA/etc/profile.d/conda.sh"
-          conda activate builder
-          conda build "$RUNNER_TEMP/candidate-source/devtools/conda-build" --no-anaconda-upload \
-            --package-format 1 --override-channels -c uibcdf -c conda-forge \
-            --output-folder "$RUNNER_TEMP/conda-bld"
+        uses: uibcdf/action-build-and-upload-conda-packages@8da628d9b393e184c3bf3722708b19dcfbf7ef0a
+        with:
+          meta_yaml_dir: ${{ runner.temp }}/candidate-source/devtools/conda-build
+          upload: false
+          github_release: false
+          platform_host: true
+          platform_all: false
+          conda_build_args: --package-format 1
       - name: Inspect exact original private file
         id: file
         env:
+          BUILT_PATHS: ${{ steps.compilation.outputs.built_paths }}
           SOURCE_SHA: ${{ github.sha }}
           PROVIDER_SHA: fee3bd875e68778844c0fffc2aba26b6cea02cd6
         run: |
           source "$CONDA/etc/profile.d/conda.sh"
-          conda activate builder
+          conda activate noarch-publisher
           python .molsyssuite/devtools/scripts/noarch_conda.py --root . --plan devtools/conda-build/qualification_plan.toml \
-            --built-paths "$RUNNER_TEMP/conda-bld/noarch/gh-run-receptor-0.0.0-py_76.tar.bz2" \
+            --built-paths "$BUILT_PATHS" \
             --output "$RUNNER_TEMP/private-producer.json" --github-output "$GITHUB_OUTPUT"
           python - <<'PY'
           import hashlib,json,os
@@ -97,7 +99,7 @@ jobs:
         with:
           name: private-candidate-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
-            ${{ runner.temp }}/conda-bld/noarch/gh-run-receptor-0.0.0-py_76.tar.bz2
+            ${{ steps.compilation.outputs.built_paths }}
             ${{ runner.temp }}/private-producer.json
           if-no-files-found: error
           retention-days: 30

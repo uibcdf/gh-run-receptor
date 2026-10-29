@@ -102,7 +102,7 @@ print('verified')
 
 def test_recovery_workflow_keeps_original_artifact_and_separate_administrative_identity():
     path = ROOT / ".github/workflows/test-staged-conda.yml"
-    workflow = yaml.load(path.read_text(), Loader=yaml.BaseLoader)
+    workflow = yaml.load(path.read_text(encoding="utf-8"), Loader=yaml.BaseLoader)
     assert set(workflow["on"]) == {"workflow_dispatch"}
     assert workflow["permissions"] == {"contents": "read"}
     prepare = workflow["jobs"]["prepare"]
