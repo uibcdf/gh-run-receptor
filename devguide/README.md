@@ -7,19 +7,24 @@ and [receiving receipt](evidence/issue_76_qualification.json) retain twelve nati
 source cells and twelve same-file installed cells before adapter retirement.
 Shared provider PR uibcdf/molsyssuite#157 is merged; immutable consumer receiving
 returns to uibcdf/molsyssuite#144. Historical public 1.3.0 bytes/receipts remain
-unchanged, and no new release is selected.
+unchanged. This architecture is subsequently delivered in 1.4.0 as recorded below.
 
 **Watch clarity (2026-10-29):** #74 names completed, in-progress, queued and
 other observed job counts in the initial progress line while preserving GitHub
 run state. The [resolved record](archive/resolved_proposals/clarify_initial_watch_job_counts.md)
 and [source validation](evidence/issue_74_validation.json) retain 842 local
 passes, twelve native compatibility cells and a bounded live queued-run probe.
-The public version remains 1.3.0; this source improvement is unreleased.
+The improvement is delivered in public 1.4.0 as recorded below.
 
-**Release preparation (2026-10-29):** Maintainer-authorized 1.4.0/build 0 is
-tracked by #77 and the [delivery record](pending_proposals/publish_and_verify_gh_run_receptor_1_4_0.md).
-Exact-source CI, same-file Conda receiving, public GitHub assets and independent
-archival are pending. No 1.4.0 public delivery is claimed yet.
+**Published 1.4.0 (2026-10-29):** #74/#76 are delivered from stable tag/source
+c2d16255868df5e1f5a7eaaa72d71ac8387cef01. Twelve exact-tag source cells and
+twelve same-file installed Conda cells pass; GitHub distributions, public main/
+index, isolated public installations, the exact-tag extension and source-ZIP
+DOI 10.5281/zenodo.23780283 are independently verified. The
+[release record](archive/resolved_proposals/publish_and_verify_gh_run_receptor_1_4_0.md),
+[release guide](versioning_and_releases.md) and [public receipt](evidence/release_1_4_0_public.json)
+retain the separate administrative correction, artifact hashes and evidence
+limits. Canonical guide publication does not automatically migrate clients.
 
 This directory is the development checkpoint for `gh-run-receptor`. It records the
 stable product boundary, architectural decisions, rule model, and post-1.0 route.

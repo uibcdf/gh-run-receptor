@@ -1,0 +1,505 @@
+{
+  "schema": "gh-run-receptor.release-public@1",
+  "version": "1.4.0",
+  "source_sha": "c2d16255868df5e1f5a7eaaa72d71ac8387cef01",
+  "administrative_sha": "4cc619916b705deaf0837531b21dc9aae97f8575",
+  "tag": {
+    "name": "1.4.0",
+    "type": "lightweight commit",
+    "sha": "c2d16255868df5e1f5a7eaaa72d71ac8387cef01",
+    "moved": false
+  },
+  "github": {
+    "url": "https://github.com/uibcdf/gh-run-receptor/releases/tag/1.4.0",
+    "release_id": 428397863,
+    "name": "1.4.0",
+    "draft": false,
+    "published_at": "2026-10-29T21:09:50Z",
+    "publisher_run_id": 40955305570,
+    "independent_verification": "passed; tag/API sizes/digests/checksum manifest and bounded archive payload guards",
+    "assets": {
+      "SHA256SUMS": {
+        "bytes": 200,
+        "sha256": "d0192975c9784d342dd0df6f0ba2d27ea95703ca384df5c01bbef7c32d940245",
+        "url": "https://github.com/uibcdf/gh-run-receptor/releases/download/1.4.0/SHA256SUMS"
+      },
+      "gh_run_receptor-1.4.0-py3-none-any.whl": {
+        "bytes": 100973,
+        "sha256": "caf4e33e81d3e7fcd3438315f03b35829783fd2a17bb6f1eb797c56fe71eb1e4",
+        "url": "https://github.com/uibcdf/gh-run-receptor/releases/download/1.4.0/gh_run_receptor-1.4.0-py3-none-any.whl"
+      },
+      "gh_run_receptor-1.4.0.tar.gz": {
+        "bytes": 177790,
+        "sha256": "953416f20ae949c8999d2cccab99aac632437747f26c8b819b630b9242d64db3",
+        "url": "https://github.com/uibcdf/gh-run-receptor/releases/download/1.4.0/gh_run_receptor-1.4.0.tar.gz"
+      }
+    }
+  },
+  "wheel_installation": {
+    "version": "1.4.0",
+    "source_sha": "c2d16255868df5e1f5a7eaaa72d71ac8387cef01",
+    "profile": "independently downloaded public wheel; fresh Linux/Python 3.14.7 prefix",
+    "runtime_version": "1.4.0",
+    "metadata_version": "1.4.0",
+    "embedded_version": "1.4.0",
+    "origin_in_owned_prefix": true,
+    "runtime_python_files_equal_tag": 28,
+    "frozen_schemas_verified": 9,
+    "unshipped_tools_not_importable": true,
+    "launcher_help": "passed",
+    "launcher_version": "passed",
+    "usage_exit_status": 64
+  },
+  "extension_installation": {
+    "version": "1.4.0",
+    "source_sha": "c2d16255868df5e1f5a7eaaa72d71ac8387cef01",
+    "profile": "isolated exact-tag extension with checksum-bound minimum gh",
+    "minimum_gh": "2.48.0",
+    "gh_archive_sha256": "1c477e2562aca8679b0219569f0482f1975de76daca8ba307892c1787338a28d",
+    "extension_version": "1.4.0",
+    "help": "passed",
+    "usage_exit_status": 64,
+    "inspected_run": 40952869892,
+    "native_conclusion": "success",
+    "receptor_assessment": "PASS",
+    "caller_extension_preserved": true
+  },
+  "conda": {
+    "filename": "gh-run-receptor-1.4.0-py_0.tar.bz2",
+    "sha256": "0d04617887d8935df4197f63c99e927aefb3319b75af4e2cf1042a692f6891d3",
+    "bytes": 81914,
+    "source_sha": "c2d16255868df5e1f5a7eaaa72d71ac8387cef01",
+    "producer_workflow_sha": "4cc619916b705deaf0837531b21dc9aae97f8575",
+    "producer_run_id": 40953039390,
+    "installed_run_id": 40953626384,
+    "qualification_sha": "4cc619916b705deaf0837531b21dc9aae97f8575",
+    "promotion_run_id": 40955300448,
+    "public_verification": {
+      "checked_at": "2026-10-29T21:17:46.905715+00:00",
+      "files": [
+        {
+          "filename": "gh-run-receptor-1.4.0-py_0.tar.bz2",
+          "main_label": "verified",
+          "owner": "uibcdf",
+          "package": "gh-run-receptor",
+          "sha256": "0d04617887d8935df4197f63c99e927aefb3319b75af4e2cf1042a692f6891d3",
+          "solver_index": "verified",
+          "subdir": "noarch",
+          "url": "https://conda.anaconda.org/uibcdf/noarch/gh-run-receptor-1.4.0-py_0.tar.bz2",
+          "version": "1.4.0"
+        }
+      ],
+      "schema": "molsyssuite.public-conda@1",
+      "state": "verified"
+    },
+    "fresh_public_user": {
+      "schemas": 9,
+      "version": "1.4.0",
+      "profile": "fresh public uibcdf/main Linux/Python 3.14 installation",
+      "sha256": "0d04617887d8935df4197f63c99e927aefb3319b75af4e2cf1042a692f6891d3",
+      "url": "https://conda.anaconda.org/uibcdf/noarch/gh-run-receptor-1.4.0-py_0.tar.bz2",
+      "ordinary_public_conda_records": 25,
+      "launcher_help": "passed by bounded installed_smoke subprocess",
+      "usage_exit_status": 64,
+      "private_cache_failure": "Initial attempt exhausted temporary disk quota before transaction; removed only its own cache and retried using normal shared Conda cache without changing the active environment",
+      "python_conda_record_version": "3.14.10",
+      "external_gh_conda_record_version": "2.103.3"
+    }
+  },
+  "zenodo": {
+    "repository": "uibcdf/gh-run-receptor",
+    "tag": "1.4.0",
+    "version": "1.4.0",
+    "published_at": "2026-10-29T21:09:50Z",
+    "observed_at": "2026-10-29T21:14:45.533254+00:00",
+    "age_hours": 0.082,
+    "archive_coverage": "source-snapshot",
+    "escalation_required": false,
+    "state": "verified",
+    "record_id": 23780283,
+    "concept_doi": "10.5281/zenodo.22843377",
+    "version_doi": "10.5281/zenodo.23780283",
+    "files": [
+      {
+        "key": "uibcdf/gh-run-receptor-1.4.0.zip",
+        "size": 1072180,
+        "checksum": "md5:7592f98f31726ee12ad3b763dc73739d"
+      }
+    ],
+    "independent_zip_download": "verified",
+    "zip_sha256": "d382ed8aeb718ba3b39596a923bc103deac353bbd26fad1fab028d7601f8f701",
+    "zip_contains_candidate_src_watch": true
+  },
+  "source_verification": {
+    "full_local_passed": 842,
+    "source_conda_only_skip": 1,
+    "pretag_wheel_product_integration_passed": 649,
+    "pretag_wheel_conda_only_skip": 1,
+    "repository_tooling_separate_deselections": 193,
+    "source_matrix_run": 40951180399,
+    "exact_tag_matrix_run": 40952869892,
+    "exact_tag_action_run": 40952874839,
+    "source_gate_runs": [
+      40951027832,
+      40951028595,
+      40951028731,
+      40951027810,
+      40951185859,
+      40951190715,
+      40951195887,
+      40951200861
+    ],
+    "administrative_gate_runs": [
+      40952770982,
+      40952771368,
+      40952772141
+    ],
+    "exact_tag_jobs": [
+      {
+        "job_id": 123725288758,
+        "name": "ubuntu-latest \u00b7 Python 3.14",
+        "conclusion": "success",
+        "required_steps": [
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123725289198,
+        "name": "ubuntu-latest \u00b7 Python 3.12",
+        "conclusion": "success",
+        "required_steps": [
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123725289204,
+        "name": "windows-latest \u00b7 Python 3.13",
+        "conclusion": "success",
+        "required_steps": [
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123725289222,
+        "name": "macos-latest \u00b7 Python 3.14",
+        "conclusion": "success",
+        "required_steps": [
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123725289270,
+        "name": "ubuntu-latest \u00b7 Python 3.11",
+        "conclusion": "success",
+        "required_steps": [
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123725289273,
+        "name": "windows-latest \u00b7 Python 3.14",
+        "conclusion": "success",
+        "required_steps": [
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123725289291,
+        "name": "macos-latest \u00b7 Python 3.13",
+        "conclusion": "success",
+        "required_steps": [
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123725289301,
+        "name": "windows-latest \u00b7 Python 3.11",
+        "conclusion": "success",
+        "required_steps": [
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123725289372,
+        "name": "windows-latest \u00b7 Python 3.12",
+        "conclusion": "success",
+        "required_steps": [
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123725289388,
+        "name": "ubuntu-latest \u00b7 Python 3.13",
+        "conclusion": "success",
+        "required_steps": [
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123725289417,
+        "name": "macos-latest \u00b7 Python 3.12",
+        "conclusion": "success",
+        "required_steps": [
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123725289563,
+        "name": "macos-latest \u00b7 Python 3.11",
+        "conclusion": "success",
+        "required_steps": [
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ]
+  },
+  "uncredited_history": [
+    {
+      "run_id": 40951757275,
+      "conclusion": "failure",
+      "scope": "administrative source preflight before any build/upload",
+      "repair": "Install candidate normally before importing its contracts; original tag/source remain fixed."
+    },
+    {
+      "scope": "initial local public Conda install",
+      "result": "disk quota failure in private package cache, before transaction",
+      "repair": "Removed only the owned incomplete cache, then installed successfully with normal Conda cache; active environment unchanged."
+    }
+  ],
+  "limits": [
+    "The final public wheel was independently installed on Linux/Python 3.14.7; no claim of twelve installs of that downloaded wheel.",
+    "The exact original Conda file passed all twelve native installed cells, 650 tests per cell, before same-file public promotion.",
+    "Zenodo archives one source ZIP; its receipt does not claim the GitHub wheel/sdist are archive files.",
+    "Pre-authoritative-tag rehearsal files have distinct digests and are not labeled as the public assets.",
+    "Caller dependency-closure findings under uibcdf/molsyssuite#82 are unchanged and not credited as passing."
+  ],
+  "historical_1_3_0_changed": false
+}

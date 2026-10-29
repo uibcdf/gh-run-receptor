@@ -566,3 +566,62 @@ No sibling pins, guide copies or PyPI publication advance automatically. The
 known pytest-receptor warning remains visible under provider #4. Task-owned
 local copies remain useful through final receipt/CI/handoff, then are removed
 under the resource owner protocol; no global cache/other-session cleanup occurs.
+
+
+## Verified release 1.4.0 — 2026-10-29
+
+Lightweight tag `1.4.0` preserves product source
+`c2d16255868df5e1f5a7eaaa72d71ac8387cef01`. This minor release delivers the
+explicit initial watch job-state counts (#74) and src/runtime/tooling/shared
+qualification consolidation (#76). Python 3.11–3.14, runtime Python dependencies,
+read-only GitHub behavior, exit codes and nine frozen schemas are unchanged.
+[Public delivery](evidence/release_1_4_0_public.json) and
+[installed Conda receiving](evidence/conda_1_4_0_qualification.json) own the receipts.
+
+The candidate passes 842 local tests (one existing Conda-only source skip), all
+nine exact-source required/feature workflows and twelve source cells 40951180399.
+A private exact-tag clone builds a valid 1.4.0 wheel/sdist; its installed wheel
+passes 649 product/integration cases with the Conda-only skip and separately
+required tooling deselections. The authoritative tag is pushed only after that
+rehearsal. Exact-tag matrix 40952869892 and Action/extension 40952874839 pass.
+
+Conda producer 40953039390 builds and stages the sole 1.4.0-py_0 archive.
+Its SHA-256 is `0d04617887d8935df4197f63c99e927aefb3319b75af4e2cf1042a692f6891d3`.
+Installed 40953626384 executes 650 tests in each of twelve native cells, including
+real prefix-owned help/version commands, before/after provenance and support
+retirement. Original source C and administrative/qualification source
+`4cc619916b705deaf0837531b21dc9aae97f8575` remain distinct: the first staging
+40951757275 fails before any build/upload because administrative preflight had
+not installed the src-layout candidate. Its corrected bootstrap uses a normal
+--no-deps installation, with no source-path escape and no tag move. Promotion
+40955300448 adds main to the same file; independent public main/index and a new
+Linux/Python 3.14 public installation verify its coordinate/digest, nine schemas,
+commands and ordinary public dependency origins. An initial private-cache attempt
+failed on host quota before transaction; only owned incomplete resources were
+removed and normal Conda cache reuse succeeded without changing the active env.
+
+Draft-first publisher 40955305570 verifies the exact tag, full suite, wheel/sdist,
+draft and public release. Independent downloads repeat API size/digest, checksum,
+bounded payload and tag/source checks. The fresh public wheel is checked on
+Linux/Python 3.14.7: runtime/metadata/generated versions agree, all 28 runtime
+Python files match tag source (apart from its version-specific generated module),
+nine schemas match and unshipped tools are absent. This does not claim twelve
+independent installs of that downloaded public wheel. An isolated exact-tag
+extension also passes with the checksum-bound functional-floor gh 2.48.0,
+including a real successful metadata inspection and usage exit 64.
+
+| Asset | Bytes | SHA-256 |
+| --- | ---: | --- |
+| `SHA256SUMS` | 200 | `d0192975c9784d342dd0df6f0ba2d27ea95703ca384df5c01bbef7c32d940245` |
+| `gh_run_receptor-1.4.0-py3-none-any.whl` | 100,973 | `caf4e33e81d3e7fcd3438315f03b35829783fd2a17bb6f1eb797c56fe71eb1e4` |
+| `gh_run_receptor-1.4.0.tar.gz` | 177,790 | `953416f20ae949c8999d2cccab99aac632437747f26c8b819b630b9242d64db3` |
+
+Zenodo independently verifies version DOI
+[10.5281/zenodo.23780283](https://doi.org/10.5281/zenodo.23780283) under the
+unchanged concept DOI 10.5281/zenodo.22843377. Its inventory is one source ZIP,
+`uibcdf/gh-run-receptor-1.4.0.zip`, 1,072,180 bytes, checksum
+`md5:7592f98f31726ee12ad3b763dc73739d`. Its actual ZIP download/checksum and
+candidate src watch code were checked independently; it does not archive the
+GitHub wheel/sdist. Historical 1.3.0 files, tags, failure history and receipts are
+unchanged. Canonical 1.4.0 guide publication is separate from consumer-copy or
+pin adoption; the central notice owns that follow-up.

@@ -6,7 +6,7 @@ in `devtools/dependency_routes.toml`.
 
 ## Current scope
 
-This is an additive route with verified public 1.3.0/build-0 delivery. GitHub
+This is an additive route with verified public 1.4.0/build-0 delivery. GitHub
 extension, Action, wheel/sdist and Zenodo modes remain. PyPI is excluded. `release_plan.example.toml` is an onboarding context, **not a release
 plan**. Publication and promotion require a separately reviewed, committed
 `release_plan.toml`; the example cannot authorize them.
@@ -39,7 +39,7 @@ an inventory hash. Test/development Jinja2 and packaging extras are tools, not
 Python runtime dependencies. There are no required Python sibling source routes
 and no Conda runtime/development environment files to classify.
 
-## First release handoff
+## Maintained staged-release handoff
 
 1. The owner chooses an unused version/build and commits a real release plan
    from the example, with maintainer/date, reason and required exact-source
@@ -74,18 +74,16 @@ and no Conda runtime/development environment files to classify.
 7. Save source, producer, installed and public receipts separately; only then
    advertise a public Conda installation command and record actual delivery evidence.
 
-The installed selection keeps all package/runtime tests and administrative
-checks. Two functions in `tests/test_source_version.py` are explicitly deselected:
-`test_repository_checkout_has_a_source_version` and
-`test_source_launcher_does_not_borrow_installed_distribution_version`. They test
-unbuilt Git extension source/tag discovery, not the installed Conda payload, and
-remain mandatory in the full source compatibility gate. The pure parsing tests
-stay selected. CLI subprocess tests use Python safe-path mode to prevent the
-source cwd from replacing the installed package. The installed-only guard in
-`tests/test_conda_distribution.py` independently verifies prefix-owned `gh` and
-`gh-run-receptor` commands, the adapter's functional gh floor, generated and
-metadata versions, and exact frozen schema digests. Source-only execution
-explicitly skips this guard when no Conda package record exists.
+The maintained installed selection executes all product and integration scopes
+through the shared support @1 runner. Repository tooling executes separately in
+the complete native source matrix; its deselection is not a waived gate.
+`devtools/test_scopes.json` retains the exhaustive before/after assertion map.
+Both source-version repository checks remain mandatory tooling in that source
+matrix. Pure version parsing and installed version/launcher/resource checks run
+against the actual candidate. The Conda-only test executes in every installed
+cell and verifies actual prefix commands, generated/metadata/runtime version,
+the gh floor, help output and frozen schema digests. Source-only execution
+retains its explicit skip when no Conda package record exists.
 
 A reviewed administrative correction may run installed validation from a newer
 workflow ref. Keep `candidate_sha` bound to the original producer; use the
@@ -93,14 +91,14 @@ promotion workflow's separate `qualification_sha` only for the reviewed workflow
 identity, retaining the source-binding receipts. Never replace the producer SHA
 with the correction SHA or reconstruct a registered archive to obtain green.
 
-## Evidence limits
+## Historical feasibility evidence limits
 
 Dependency probes on Python 3.14 resolved bootstrap tools and gh on linux-64,
 osx-arm64 and win-64; the cross-solve declared macOS 14.0's virtual package.
 These were solver dry runs, not native package installations. All public
-GitHub 1.2.0 files and their original evidence remain untouched. Installed Conda
-qualification, first authorized delivery and independently verified public
-poststate are pending and owned by uibcdf/gh-run-receptor#60.
+GitHub 1.2.0 files and their original evidence remain untouched. At that feasibility checkpoint, installed qualification and first delivery
+were pending under #60; the verified 1.3.0/1.4.0 delivery records below supersede
+that pending state without relabeling those dry runs.
 
 
 ## Governance and first delivery — 2026-10-09
@@ -195,3 +193,18 @@ installation pass. See `devguide/evidence/conda_1_3_0_qualification.json`,
 `devguide/evidence/conda_1_3_0_public.json` and the release guide for exact scope.
 Historical failed matrices are not credited as qualification. #60 is resolved;
 central #144 retains the reviewed helper-interface follow-up.
+
+
+## Verified 1.4.0 delivery — 2026-10-29
+
+Source/tag c2d16255868df5e1f5a7eaaa72d71ac8387cef01 produces the original
+1.4.0-py_0 file in 40953039390, SHA-256
+0d04617887d8935df4197f63c99e927aefb3319b75af4e2cf1042a692f6891d3.
+Administrative source 4cc619916b705deaf0837531b21dc9aae97f8575 corrects bootstrap
+installation without changing that tag/product. Installed 40953626384 passes all
+twelve cells, 650 tests each, including real prefix-owned --help/--version,
+before/after provenance and shared support retirement. Promotion 40955300448
+adds main to the same file; independent public main/index and a clean public
+Linux/Python 3.14 installation pass. See the [public record](../../devguide/evidence/release_1_4_0_public.json)
+and [installed receipt](../../devguide/evidence/conda_1_4_0_qualification.json).
+Original 1.3.0 delivery and its separate failed/successful history are unchanged.

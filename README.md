@@ -21,17 +21,13 @@ can lag lightweight or `[skip ci]` pushes; it does not establish coverage of lat
 commits or scientific consumer suites. See the [coverage reporting contract](devguide/coverage_reporting.md).
 
 
-**1.4.0 preparation:** The next release candidate contains #74 and #76.
-Publication and exact-file installed qualification are pending; installation
-commands below continue to identify verified public 1.3.0 until delivery.
-
 Version 1.0 is the stable read-only contract: it uses exact workflow identities and does
-not include pattern or organization-level configuration. Version 1.3.0 is available
-from the uibcdf Conda channel. The `1.3.0` source release can inspect, watch, replay, compare, and
+not include pattern or organization-level configuration. Version 1.4.0 is available
+from the uibcdf Conda channel. The `1.4.0` source release can inspect, watch, replay, compare, and
 aggregate structured run evidence. Install the GitHub CLI extension at the exact tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 1.3.0
+gh extension install uibcdf/gh-run-receptor --pin 1.4.0
 gh run-receptor --version
 ```
 
@@ -91,7 +87,7 @@ jobs:
   report:
     runs-on: ubuntu-latest
     steps:
-      - uses: uibcdf/gh-run-receptor@1.3.0
+      - uses: uibcdf/gh-run-receptor@1.4.0
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
@@ -110,7 +106,7 @@ High-assurance consumers may pin the full release commit SHA instead of the tag.
 A small dedicated reporter can keep its full `config@1` policy beside the invocation:
 
 ```yaml
-      - uses: uibcdf/gh-run-receptor@1.3.0
+      - uses: uibcdf/gh-run-receptor@1.4.0
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
@@ -154,7 +150,7 @@ It explicitly labels the profile interpretation as published rather than indepen
 recomputed. Use `inspect SOURCE_RUN_ID` as the fallback when the artifact is absent,
 expired, or insufficient for the decision.
 
-Version `1.3.0` provides a reusable terminal reporter. A client keeps the
+Version `1.4.0` provides a reusable terminal reporter. A client keeps the
 `workflow_run` trigger and delegates the complete reporting job:
 
 ```yaml
@@ -171,7 +167,7 @@ permissions:
 
 jobs:
   report:
-    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@1.3.0
+    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@1.4.0
     with:
       run-id: ${{ github.event.workflow_run.id }}
       repository: ${{ github.repository }}
@@ -466,7 +462,7 @@ any developer, repository, or coding agent. A typical combined workflow runs
 The public `noarch: python` package resolves GitHub CLI separately:
 
 ```text
-conda install --override-channels --strict-channel-priority -c uibcdf -c conda-forge gh-run-receptor=1.3.0
+conda install --override-channels --strict-channel-priority -c uibcdf -c conda-forge gh-run-receptor=1.4.0
 gh-run-receptor --version
 ```
 
@@ -487,3 +483,14 @@ and a separately solved `gh>=2.48.0`. Its first delivery passed staging,
 twelve exact-file installed cells and unchanged-file promotion; measured receipts
 are tracked in [#60](https://github.com/uibcdf/gh-run-receptor/issues/60).
 Existing GitHub release assets, extension, Action and reusable modes remain.
+
+
+### Watch clarity and qualification in 1.4.0
+
+Release [1.4.0](https://github.com/uibcdf/gh-run-receptor/releases/tag/1.4.0)
+delivers #74's explicit initial watch counts and #76's src runtime, separate
+unshipped tools and shared installed qualification. The same Conda archive
+passes twelve native cells (650 tests each) before public promotion. All nine
+frozen schemas, Python 3.11–3.14 and the read-only product contract remain.
+[Public receipts](devguide/evidence/release_1_4_0_public.json) distinguish source,
+installed Conda, independent public wheel/extension and source-ZIP archival.

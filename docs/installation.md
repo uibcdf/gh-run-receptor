@@ -4,7 +4,7 @@
 
 | Component | Supported boundary |
 | :--- | :--- |
-| Python | Release 1.3.0: 3.11--3.14; historical release 1.0.0: 3.11--3.13 |
+| Python | Release 1.4.0: 3.11--3.14; historical release 1.0.0: 3.11--3.13 |
 | GitHub CLI | 2.48.0 or newer for network commands |
 | Operating systems | Linux, macOS Apple Silicon (arm64), and Windows |
 | GitHub host | `github.com`; alternate hostnames may be selected explicitly |
@@ -15,9 +15,11 @@ Historical release evidence retains its original scope.
 
 The exact 1.1.0 source commit passed the twelve-job hosted matrix in run 35573910621.
 Release 1.0.0 retains its nine-job Python 3.11--3.13 evidence. The public 1.1.0 wheel
-was independently installed on Python 3.14.7 outside the source checkout. Release 1.3.0
-retains that compatibility contract and adds source-preserving termination hints,
-primary failure diagnostics and explicit targeted Conda inspection.
+was independently installed on Python 3.14.7 outside the source checkout. Release 1.4.0
+retains that compatibility contract and adds explicit initial watch job counts
+and consolidated source/tooling/installed qualification. The public Conda file
+passes twelve native cells; the downloaded public wheel is independently
+verified on Linux/Python 3.14.7.
 GitHub CLI 2.48.0 is tested independently as the functional floor required for paginated
 API acquisition. Prefer the latest patched stable GitHub CLI for security maintenance.
 
@@ -27,7 +29,7 @@ API acquisition. Prefer the latest patched stable GitHub CLI for security mainte
 Python package index. Pin the release:
 
 ```bash
-gh extension install uibcdf/gh-run-receptor --pin 1.3.0
+gh extension install uibcdf/gh-run-receptor --pin 1.4.0
 gh run-receptor --version
 ```
 
@@ -36,7 +38,7 @@ install it again:
 
 ```bash
 gh extension remove gh-run-receptor
-gh extension install uibcdf/gh-run-receptor --pin 1.3.0
+gh extension install uibcdf/gh-run-receptor --pin 1.4.0
 ```
 
 High-assurance environments may pin the complete release commit instead of the tag.
@@ -63,7 +65,7 @@ installation is useful for an isolated Python environment:
 
 ```bash
 python -m pip install \
-  https://github.com/uibcdf/gh-run-receptor/releases/download/1.3.0/gh_run_receptor-1.3.0-py3-none-any.whl
+  https://github.com/uibcdf/gh-run-receptor/releases/download/1.4.0/gh_run_receptor-1.4.0-py3-none-any.whl
 gh-run-receptor --version
 ```
 
@@ -88,7 +90,7 @@ The public `noarch: python` package supports Python 3.11–3.14 and resolves
 `gh>=2.48.0` separately from conda-forge:
 
 ```text
-conda install --override-channels --strict-channel-priority -c uibcdf -c conda-forge gh-run-receptor=1.3.0
+conda install --override-channels --strict-channel-priority -c uibcdf -c conda-forge gh-run-receptor=1.4.0
 gh-run-receptor --version
 ```
 

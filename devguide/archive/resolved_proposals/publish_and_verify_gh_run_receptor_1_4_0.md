@@ -1,12 +1,12 @@
 ---
 summary: Publish and independently verify GH Run Receptor 1.4.0.
 issue: uibcdf/gh-run-receptor#77
-status: active
+status: resolved
 opened: 2026-10-29
-closed:
-verification: inspected
+closed: 2026-10-29
+verification: measured
 area: [packaging, github]
-guard:
+guard: tests/test_release_tools.py
 normative: versioning_and_releases.md
 blocked_by: []
 supersedes: []
@@ -97,3 +97,23 @@ administrative source installation, not artifact qualification or a source-path
 escape. Keep the full source SHA and tag fixed; record the newer workflow and
 qualification identities separately. All source, archive, installed, digest and
 public checks remain mandatory. The provider implementation is unchanged.
+
+
+## Verified public delivery and closeout — 2026-10-29
+
+Resolve #77. The exact tag, public GitHub wheel/sdist/checksums, same-byte
+public Conda archive, twelve installed cells (650 tests each), clean public
+wheel and Conda user prefixes, exact-tag extension/minimum gh, and independent
+Zenodo source ZIP are all verified. Versioning/release and immutable public/
+Conda receipts absorb the full source, administrative, artifact, native-step,
+provenance and archival scope. Requested #74/#76 release comments follow these
+facts; central ownership receives the canonical-guide/package handoff separately.
+No source or archive was overwritten to obtain green. Original 1.3.0 remains.
+
+The initial postpublication local full-suite run reached all 843 cases but failed
+stdout flush with host disk quota (exit 120), and a docs-prefix setup also failed
+on quota. Neither is credited as a passing final check. The already verified
+public Conda user prefix was removed through its manager, only owned incomplete
+fixtures/prefixes/downloads were removed, and shared caches were preserved. The small metadata checks are rerun successfully after cleanup. The unskipped
+final native suite/docs remain the final-head closeout gate; no product assertion
+is weakened.

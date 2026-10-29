@@ -39,6 +39,7 @@
 - [#43 — Prove replay byte determinism across temporal and filesystem contexts](prove_replay_byte_determinism_across_temporal_and_filesystem_contexts.md) (`resolved`)
 - [#32 — Publish a same-revision reusable reporting workflow](publish_a_same_revision_reusable_reporting_workflow.md) (`resolved`)
 - [#71 — Publish and independently verify the 1.2.1 patch release.](publish_and_independently_verify_the_1_2_1_patch_release.md) (`resolved`)
+- [#77 — Publish and independently verify GH Run Receptor 1.4.0.](publish_and_verify_gh_run_receptor_1_4_0.md) (`resolved`)
 - [#26 — Publish and verify reproducible GitHub releases](publish_and_verify_reproducible_github_releases.md) (`resolved`)
 - [#4 — Publish measured adoption guidance for client repositories](publish_measured_adoption_guidance_for_client_repositories.md) (`resolved`)
 - [#40 — Publish public documentation and repository identity](publish_public_documentation_and_repository_identity.md) (`resolved`)
