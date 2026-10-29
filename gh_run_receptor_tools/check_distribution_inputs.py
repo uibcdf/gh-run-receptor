@@ -72,6 +72,18 @@ def main() -> int:
         root = args.root.resolve()
         tools = checked_provider(root, args.suite_root.resolve())
         check_owner_inputs(root)
+        subprocess.run(
+            [
+                sys.executable,
+                "-B",
+                str(tools / "noarch_conda.py"),
+                "--root",
+                str(root),
+                "--plan",
+                "devtools/conda-build/qualification_plan.toml",
+            ],
+            check=True,
+        )
         if args.candidate_sha or args.version:
             plan = tomllib.loads((root / "devtools/conda-build/release_plan.toml").read_text())
             head = subprocess.check_output(

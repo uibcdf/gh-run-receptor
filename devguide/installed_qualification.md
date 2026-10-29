@@ -95,7 +95,7 @@ serial pytest and support @1 staging/cleanup. No GHR `sys.modules` binding or
 source-root interception is needed by the replacement route.
 
 `qualify-architecture.yml` is a manual, nonpublishing receiving experiment. The
-committed `devtools/qualification/plan.toml` identifies private placeholder
+committed `devtools/conda-build/qualification_plan.toml` identifies private placeholder
 version 0.0.0/build 76; this selects no public version or tag and grants no upload
 or promotion authority. It builds one Conda file, inspects its original digest,
 then installs those same bytes on Linux/macOS arm64/Windows × Python 3.11–3.14.

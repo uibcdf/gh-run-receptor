@@ -108,3 +108,31 @@ and executes twelve exact-file installed cells. No tag/public version/upload/
 promotion is authorized or performed. Complete native product, tooling and
 integration evidence remains required; the old adapter is retained until then.
 The synchronized suite guide and all historical publication receipts stay intact.
+
+
+## Private input/checkout receiving correction — 2026-10-29
+
+Source checkpoint 1d154c4 passes native routine 40924956207, policy 40924957040,
+Conda governance 40924957214 and strict docs/Pages 40924956089. Local source
+after the future-freeze regression passes 845 tests / one Conda-only skip.
+The first private dispatch 40925642094 fails source input inspection because
+inspect_recipe expects the plan alongside its owned meta.yaml; no package is
+built or registered. The separate private plan now lives beside that existing
+recipe as devtools/conda-build/qualification_plan.toml. The ordinary preflight
+and a concrete CLI regression inspect this exact plan, preventing recurrence.
+
+Compatibility dispatch 40925646904 is cancelled as obsolete before qualification;
+its cancellation is not passing evidence. The correction also preserves literal
+support bytes with LF attributes and scopes core.autocrlf=false only to provider
+checkout steps. An actual Git checkout regression retains a CRLF control and
+proves both attribute-protected helper bytes and raw provider checkout behavior.
+No global Git configuration, digest or source guard is weakened.
+
+A local focused run failed on filesystem quota, not product assertions. Removed
+only obsolete task-owned source-final pytest inputs and the specifically assigned
+pytest-1179 directory. Fixtures now exclude irrelevant bytecode caches. Corrected
+focused gate: 19 passed / the explicit Conda-only skip; real private-plan, 30-route
+and frozen-contract preflight, Ruff and whitespace checks pass. The first failed
+run and local quota failure remain uncredited evidence. No publication or original
+1.3.0 file mutation occurs. Replacement receiving and adapter retirement remain
+required, not inferred from these administrative checks.

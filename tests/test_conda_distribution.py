@@ -33,8 +33,16 @@ RESOURCES = "devtools/conda-build/resources.toml"
 
 @pytest.fixture
 def member(tmp_path):
-    shutil.copytree(ROOT / "src/gh_run_receptor", tmp_path / "src/gh_run_receptor")
-    shutil.copytree(ROOT / "gh_run_receptor_tools", tmp_path / "gh_run_receptor_tools")
+    shutil.copytree(
+        ROOT / "src/gh_run_receptor",
+        tmp_path / "src/gh_run_receptor",
+        ignore=shutil.ignore_patterns("__pycache__"),
+    )
+    shutil.copytree(
+        ROOT / "gh_run_receptor_tools",
+        tmp_path / "gh_run_receptor_tools",
+        ignore=shutil.ignore_patterns("__pycache__"),
+    )
     shutil.copytree(ROOT / "devtools/conda-build", tmp_path / "devtools/conda-build")
     shutil.copytree(ROOT / ".github/workflows", tmp_path / ".github/workflows")
     for name in ("pyproject.toml", "devtools/dependency_routes.toml"):
@@ -83,6 +91,27 @@ def test_shared_route_review_accepts_inputs_and_refuses_missing_gh(member, suite
     assert "gh>=2.48.0" in rejected.stdout + rejected.stderr
 
 
+def test_private_plan_reuses_the_owned_recipe_without_publication(suite):
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-B",
+            str(suite / "devtools/scripts/noarch_conda.py"),
+            "--root",
+            str(ROOT),
+            "--plan",
+            "devtools/conda-build/qualification_plan.toml",
+        ],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    document = json.loads(result.stdout)
+    assert document["version"] == "0.0.0"
+    assert document["build_number"] == 76
+    assert document["route"] == "staged"
+
+
 def test_shared_review_refuses_new_unclassified_workflow(member, suite):
     (member / ".github/workflows/unclassified.yml").write_text("name: New route\n")
     rejected = _audit(member, suite)
@@ -118,6 +147,7 @@ def test_windows_checkout_preserves_frozen_schema_and_reviewed_workflow_bytes(tm
     paths = [
         *sorted((ROOT / "src/gh_run_receptor/schemas").glob("*-v*.schema.json")),
         *sorted((ROOT / ".github/workflows").glob("*.y*ml")),
+        *sorted((ROOT / "gh_run_receptor_tools").glob("*.py")),
     ]
     for path in [ROOT / ".gitattributes", *paths]:
         target = source / path.relative_to(ROOT)
@@ -142,6 +172,21 @@ def test_windows_checkout_preserves_frozen_schema_and_reviewed_workflow_bytes(tm
     assert (checkout / "control.txt").read_bytes() == b"first\r\nsecond\r\n"
     for path in paths:
         assert (checkout / path.relative_to(ROOT)).read_bytes() == path.read_bytes(), path
+    raw = tmp_path / "raw-sdk-checkout"
+    raw.mkdir()
+    subprocess.run(
+        ["git", "checkout-index", "--all", f"--prefix={raw.as_posix()}/"],
+        cwd=source,
+        env=dict(
+            os.environ,
+            GIT_CONFIG_COUNT="1",
+            GIT_CONFIG_KEY_0="core.autocrlf",
+            GIT_CONFIG_VALUE_0="false",
+        ),
+        check=True,
+        capture_output=True,
+    )
+    assert (raw / "control.txt").read_bytes() == b"first\nsecond\n"
 
 
 def test_installed_schema_guard_refuses_wrong_bytes_and_missing_inventory():

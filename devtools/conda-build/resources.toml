@@ -55,7 +55,7 @@ sha256 = "a00ef7b159c4833b8846906492fd5e06c3ab964ee17d0e511fa710d60df12c2c"
 [[installed_tests.support.files]]
 source = "gh_run_receptor_tools/check_distribution_inputs.py"
 target = "gh_run_receptor_tools/check_distribution_inputs.py"
-sha256 = "0167c8601a054c37aadde997d4f57e5da9d79634816a88b29b1e7754edce68a9"
+sha256 = "2a1e57afac858666be68af01591598770404074f54176044b111b9b06a07a15d"
 
 [[installed_tests.support.files]]
 source = "gh_run_receptor_tools/devguide_index.py"
