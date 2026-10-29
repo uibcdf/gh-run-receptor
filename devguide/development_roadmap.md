@@ -1,5 +1,12 @@
 # Development roadmap
 
+**Completed maintenance (2026-10-29):** #76 consolidates runtime/tooling separation
+and installed qualification through the accepted shared provider. Twelve native
+source cells and twelve unchanged-file installed cells pass before retirement of
+the local adapter. [Installed qualification](installed_qualification.md) owns the
+three required scopes, input/provenance boundaries and future applicability.
+Historical 1.3.0 delivery is preserved; this work selects no new public release.
+
 ## Dependency order
 
 Phases are ordered by evidence and contract dependency, not by UI visibility. Phase 0

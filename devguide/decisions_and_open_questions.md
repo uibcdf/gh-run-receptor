@@ -23,6 +23,7 @@ page and retain only a concise decision record here.
 | Reporter semantics | Bounded output and fail-open reporter errors | Receptor faults do not rewrite product status |
 | Policy trust | Default-branch or explicitly trusted revision | A PR cannot self-certify with changed rules |
 | Implementation start | Python 3.11–3.13, installed `gh` transport adapter | Fast prototype without coupling the data model to transport |
+| Product/tooling qualification | `src/gh_run_receptor`, explicit-input unshipped `gh_run_receptor_tools` and shared installed support @1; three complete test scopes | #76 receives all twelve native exact-file cells before retiring the local adapter; [qualification](installed_qualification.md) owns applicability and provenance |
 | Reader selection | `human` and `llm`; automatic TTY selection | JSON remains an orthogonal output format |
 | Project license | MIT, aligned with MolSysMT and MolSysViewer | Source and distributed artifacts include `LICENSE` |
 | Live fixture ownership | Use reviewed public UIBCDF captures and manual gh-run-receptor experiments; add a separate fixture repository only when repeated live coverage justifies it | No scheduled or push-triggered failure generators; synthetic cases remain where GitHub cannot safely produce the source state |

@@ -17,6 +17,7 @@
 - [#15 — Classify and redact GitHub acquisition failures](classify_and_redact_github_acquisition_failures.md) (`resolved`)
 - [#45 — Close the timed-out corpus gate without manufactured evidence](close_the_timed_out_corpus_gate_without_manufactured_evidence.md) (`resolved`)
 - [#31 — Compare workflow runs and rerun attempts](compare_workflow_runs_and_rerun_attempts.md) (`resolved`)
+- [#76 — Separate runtime, portable tooling and complete installed qualification.](consolidate_product_tooling_and_installed_qualification.md) (`resolved`)
 - [#19 — Consume and verify published Action reports](consume_and_verify_published_action_reports.md) (`resolved`)
 - [#57 — Publish owned default-branch coverage from the existing tool suite.](default_branch_coverage_reporting.md) (`resolved`)
 - [#25 — Define and validate the minimum supported GitHub CLI](define_and_validate_the_minimum_supported_github_cli.md) (`resolved`)

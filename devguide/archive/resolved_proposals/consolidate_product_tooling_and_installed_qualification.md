@@ -1,13 +1,13 @@
 ---
 summary: Separate runtime, portable tooling and complete installed qualification.
 issue: uibcdf/gh-run-receptor#76
-status: active
+status: resolved
 opened: 2026-10-29
-closed:
-verification: inspected
+closed: 2026-10-29
+verification: measured
 area: [packaging, github]
-guard:
-normative: architecture.md
+guard: tests/test_installed_qualification.py
+normative: installed_qualification.md
 blocked_by: []
 supersedes: []
 ---
@@ -260,3 +260,34 @@ functions account as 435 active and two explicitly retired; there is no
 unaccounted function. Ruff passes 237 files, strict Sphinx passes, all nine frozen
 contracts and all 30 reviewed distribution routes pass. The existing public
 pytest renderer ResourceWarning remains visible and is not suppressed.
+
+
+The shared development GHR editable is refreshed at retirement source 7e483d7
+with --no-user --no-cache-dir --no-deps --no-build-isolation: runtime and
+distribution metadata both report 1.3.0+15.g7e483d7, origin is src and nine
+source-version/packaging checks pass. The initial sandboxed refresh could not
+write the existing prefix and attempted a read-only user destination; it failed
+without replacing the distribution. The authorized prefix-scoped refresh then
+succeeded. No caller dependency or sibling editable was installed/repaired.
+
+
+## Final native gate and decision — 2026-10-29
+
+Retirement source 7e483d7d8499956cfea0fd33ae37615daa7daacb passes all twelve
+compatibility cells in 40937173648. Each actual native job completes input
+review, the full active source suite, wheel/sdist build, wheel installation and
+outside-checkout smoke. Routine 40937131056, policy 40937131302, Conda governance
+40937131714 and strict docs/Pages 40937178397 also pass; authoritative per-step
+results are retained in evidence/issue_76_qualification.json. No queued, skipped
+or failed job receives success credit. The private receiving build skip is
+intentional original-file reuse and is reported separately from its twelve
+successful installed jobs.
+
+Decision: resolve #76. Complete product/tooling/integration evidence, received
+provider capability and direct shared-runner adoption replace the active local
+adapter. The normative qualification page and full assertion inventory absorb
+the durable boundary. Return immutable component sources, provider merge,
+original private file/digest and measured receipts to uibcdf/molsyssuite#144 for
+its owner coordination/lifecycle record. No required component/provider
+engineering remains deferred. The independent watch-summary issue #74 remains
+open; no new public release is selected.

@@ -107,6 +107,7 @@ more local `AGENTS.md` may refine these rules within its directory.
 
 - `devguide/product_and_scope.md`
 - `devguide/architecture.md`
+- `devguide/installed_qualification.md`
 - `devguide/github_evidence.md`
 - `devguide/cli_and_output_contract.md`
 - `devguide/data_contracts.md`

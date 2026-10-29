@@ -1,10 +1,13 @@
 # gh-run-receptor developer guide
 
-**Active architecture work (2026-10-29):** #76 separates product, repository
-tooling and installed qualification, coordinated with `uibcdf/molsyssuite#144`.
-The [working report](pending_proposals/consolidate_product_tooling_and_installed_qualification.md)
-records the intended boundary and required evidence. Published 1.3.0 artifacts
-and their historical qualification remain unchanged; no new release is selected.
+**Consolidated qualification (2026-10-29):** #76 separates the src runtime,
+unshipped explicit-input tooling and complete source/installed scopes. The
+[qualification contract](installed_qualification.md), [resolved record](archive/resolved_proposals/consolidate_product_tooling_and_installed_qualification.md)
+and [receiving receipt](evidence/issue_76_qualification.json) retain twelve native
+source cells and twelve same-file installed cells before adapter retirement.
+Shared provider PR uibcdf/molsyssuite#157 is merged; immutable consumer receiving
+returns to uibcdf/molsyssuite#144. Historical public 1.3.0 bytes/receipts remain
+unchanged, and no new release is selected.
 
 This directory is the development checkpoint for `gh-run-receptor`. It records the
 stable product boundary, architectural decisions, rule model, and post-1.0 route.
@@ -274,25 +277,26 @@ structured per-platform representation and a published 0.20.0 contract freeze.
 1. [Product and scope](product_and_scope.md)
 2. [Motivation and measured evidence](motivation_and_evidence.md)
 3. [Architecture](architecture.md)
-4. [GitHub evidence sources](github_evidence.md)
-5. [CLI and output contract](cli_and_output_contract.md)
-6. [Data contracts](data_contracts.md)
-7. [Rules and profiles](rules_and_profiles.md)
-8. [Embedded reporting](embedded_reporting.md)
-9. [Security](security.md)
-10. [Testing strategy](testing_strategy.md)
-11. [Development workflow](development_workflow.md)
-12. [Reporting protocol](reporting_protocol.md)
-13. [Versioning and releases](versioning_and_releases.md)
-14. [Pending bugs](pending_bugs/README.md)
-15. [Pending proposals](pending_proposals/README.md)
-16. [Decisions and open questions](decisions_and_open_questions.md)
-17. [MVP validation checkpoint](mvp_validation.md)
-18. [MolSysMT Conda pilot benchmark](benchmark_2026-09-04.md)
-19. [Watch polling and output benchmark](benchmark_watch_2026-09-19.md)
-20. [Development roadmap](development_roadmap.md)
-21. [1.0 release readiness](release_readiness_1_0.md)
-22. [Timeout and cancellation diagnosis](timeout_diagnosis.md)
+4. [Product, tooling and installed qualification](installed_qualification.md)
+5. [GitHub evidence sources](github_evidence.md)
+6. [CLI and output contract](cli_and_output_contract.md)
+7. [Data contracts](data_contracts.md)
+8. [Rules and profiles](rules_and_profiles.md)
+9. [Embedded reporting](embedded_reporting.md)
+10. [Security](security.md)
+11. [Testing strategy](testing_strategy.md)
+12. [Development workflow](development_workflow.md)
+13. [Reporting protocol](reporting_protocol.md)
+14. [Versioning and releases](versioning_and_releases.md)
+15. [Pending bugs](pending_bugs/README.md)
+16. [Pending proposals](pending_proposals/README.md)
+17. [Decisions and open questions](decisions_and_open_questions.md)
+18. [MVP validation checkpoint](mvp_validation.md)
+19. [MolSysMT Conda pilot benchmark](benchmark_2026-09-04.md)
+20. [Watch polling and output benchmark](benchmark_watch_2026-09-19.md)
+21. [Development roadmap](development_roadmap.md)
+22. [1.0 release readiness](release_readiness_1_0.md)
+23. [Timeout and cancellation diagnosis](timeout_diagnosis.md)
 
 These documents and the pending queue indexes are the current checkpoint. The
 [archive summary](archive/README.md) is the normal historical entry point. Routine
@@ -310,6 +314,7 @@ known design question; it does not mean that unimplemented behavior has been val
 | Product boundary and delivery modes | `product_and_scope.md` |
 | Origin, baseline, and prior art | `motivation_and_evidence.md` |
 | Component boundaries and data flow | `architecture.md` |
+| Product/tooling inputs, complete test scopes and installed provenance | `installed_qualification.md` |
 | GitHub endpoints, permissions, and limitations | `github_evidence.md` |
 | Native termination, annotation hints, and residual producer evidence | `timeout_diagnosis.md` |
 | Commands, verdicts, exit codes, and channels | `cli_and_output_contract.md` |
