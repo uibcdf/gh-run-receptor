@@ -155,5 +155,5 @@ reason = "Manual bounded native completed-success/failure job-log receiving duri
 
 [[workflows]]
 path = ".github/workflows/qualify-architecture.yml"
-sha256 = "197a21c41e6d48e02f4146d6c1dbfbc727abe0d466e2f76bb6b0464a6b3de6fd"
+sha256 = "8526272c4e8ea9a0ec3c914def8824da3a23d0198826142bfcfa4935b3dc63f7"
 reason = "Manual nonpublishing #76 qualification: one private exact-file Conda candidate, twelve native installed product/integration cells, shared origin/support/cleanup guards, and retained distinct source/provider/file receipts. No channel credentials or mutation."

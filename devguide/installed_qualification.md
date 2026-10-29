@@ -52,8 +52,9 @@ to MolSysSuite and is not copied into GHR.
 ## Complete execution scopes
 
 `devtools/test_scopes.json` records the baseline source, every original function,
-each original assertion/expression/digest, reviewed scope/rationale and its
-current home. Product assertions describe installed API/CLI/resources. Tooling
+each original assertion/expression/digest, original function digest and
+parameterization, reviewed scope/rationale, required native gates and current
+home. The immutable baseline commit also retains subprocess assertion bodies. Product assertions describe installed API/CLI/resources. Tooling
 assertions describe source tools/configuration. Integration assertions describe
 repository operations consuming the actual product. Mixed assertions belong to
 integration; classification is not inferred from a directory name alone.

@@ -175,3 +175,43 @@ external conda build command and export that exact prefix bin through the
 job-owned GITHUB_PATH for downstream Action steps. The official Action already
 bypasses the base shell function. No source/import guard is changed; no file
 exists to rebuild. This remains consumer environment wiring, not a new SDK API.
+
+
+## Complete development receiving — 2026-10-29
+
+Source cc801c4f9f522ae486a7a65af2b09a0cee99ebbd passes all twelve native
+compatibility jobs in 40931884229, including all four Windows minors after the
+explicit UTF-8 correction and all four actual macOS jobs. Each cell executes the
+complete source selection, builds wheel/sdist, inspects/installs the wheel and
+checks the installed command outside the checkout. Action/extension receiving
+40931889607 passes its three native OS jobs; contracts 40931894629 and strict
+docs/Pages 40931900264 pass. Later workflow-only checkpoint dd0175a passes
+routine 40934356013, policy 40934356973 and Conda governance 40934357001.
+These are development/source receipts, not installed Conda certification.
+
+The exhaustive 446-function inventory explicitly identifies the required source
+and installed native gates for each scope, retaining baseline parameterization
+and whole-function digests as well as assertion expressions. All 437 original
+functions remain traceable to the immutable baseline; no failing check is
+removed to make development receiving pass.
+
+
+## Original private file and transport correction — 2026-10-29
+
+Producer 40935030060/attempt 1 at dd0175a6816a5fe3a7e212b7246fbd7985487ea8
+successfully builds the first private file, gh-run-receptor-0.0.0-py_76.tar.bz2,
+SHA-256 c4387f0ed4f7979f6463242cc6597006de1ab456c2bbe59ada8724280cc24ae5.
+Actions artifact 12923464844 retains it and the original descriptor. Its first
+installed cells reject a missing expected file: the uploaded two-path artifact
+preserves nested parent directories. This is a failed receiving attempt, not
+product/installed success. Published GHR identifies the exact failed gate while
+preserving the whole workflow's active state.
+
+The receiving workflow can now explicitly reuse that producer run, source and
+digest, skipping the build job. A bounded two-member check binds the original
+manifest, source, provider, plan and archive digest before locating the unchanged
+file at the installer's expected path. Read-only Actions permission allows this
+same-repository download. Canonical checkout bytes preserve the original plan
+hash on Windows. Qualification/workflow identity remains the new run; product
+and test/support source remain the original committed candidate. No archive is
+rebuilt, no record is relabeled as staged/public, and no test is waived.

@@ -2,10 +2,29 @@ name: Qualify separated runtime and portable tools
 run-name: Nonpublishing architecture qualification
 on:
   workflow_dispatch:
+    inputs:
+      producer_run_id:
+        description: Reuse this original private producer run instead of building
+        type: string
+        default: ''
+      producer_attempt:
+        description: Original producer attempt
+        type: string
+        default: '1'
+      candidate_sha:
+        description: Full original product and test/support source SHA when reusing
+        type: string
+        default: ''
+      sha256:
+        description: Original private file digest when reusing
+        type: string
+        default: ''
 permissions:
   contents: read
+  actions: read
 jobs:
   build:
+    if: inputs.producer_run_id == ''
     name: Build one private candidate
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -107,6 +126,7 @@ jobs:
           retention-days: 30
   installed:
     needs: build
+    if: always() && (needs.build.result == 'success' || (needs.build.result == 'skipped' && inputs.producer_run_id != ''))
     name: installed / ${{ matrix.platform }} · Python ${{ matrix.python }}
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 45
@@ -132,23 +152,31 @@ jobs:
     env:
       COMPONENT_ROOT: ${{ github.workspace }}/component
       TOOL_ROOT: ${{ github.workspace }}/.molsyssuite
-      SHA256: ${{ needs.build.outputs.sha256 }}
+      SHA256: ${{ needs.build.outputs.sha256 || inputs.sha256 }}
+      PRODUCT_SOURCE_SHA: ${{ inputs.candidate_sha || github.sha }}
+      PRODUCER_RUN_ID: ${{ inputs.producer_run_id || github.run_id }}
+      PRODUCER_ATTEMPT: ${{ inputs.producer_run_id && inputs.producer_attempt || github.run_attempt }}
       FILENAME: gh-run-receptor-0.0.0-py_76.tar.bz2
       PLATFORM: ${{ matrix.platform }}
       PYTHON_MINOR: ${{ matrix.python }}
       GH_RECEPTOR_SUITE_ROOT: ${{ github.workspace }}/.molsyssuite
       GHR_EXPECT_INSTALLED: '1'
-      TEST_SUPPORT_CANDIDATE_SHA: ${{ github.sha }}
+      TEST_SUPPORT_CANDIDATE_SHA: ${{ inputs.candidate_sha || github.sha }}
       TEST_SUPPORT_QUALIFICATION_SHA: ${{ github.sha }}
       TEST_SUPPORT_PROVIDER_SHA: fee3bd875e68778844c0fffc2aba26b6cea02cd6
       TEST_SUPPORT_FILENAME: gh-run-receptor-0.0.0-py_76.tar.bz2
-      TEST_SUPPORT_SHA256: ${{ needs.build.outputs.sha256 }}
+      TEST_SUPPORT_SHA256: ${{ needs.build.outputs.sha256 || inputs.sha256 }}
       TEST_SUPPORT_RUN_ID: ${{ github.run_id }}
       TEST_SUPPORT_RUN_ATTEMPT: ${{ github.run_attempt }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        env:
+          GIT_CONFIG_COUNT: '1'
+          GIT_CONFIG_KEY_0: core.autocrlf
+          GIT_CONFIG_VALUE_0: 'false'
         with:
           path: component
+          ref: ${{ inputs.candidate_sha || github.sha }}
           fetch-depth: 0
           persist-credentials: false
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -163,8 +191,10 @@ jobs:
           persist-credentials: false
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
-          name: private-candidate-${{ github.run_id }}-${{ github.run_attempt }}
+          name: private-candidate-${{ inputs.producer_run_id || github.run_id }}-${{ inputs.producer_run_id && inputs.producer_attempt || github.run_attempt }}
           path: ${{ runner.temp }}/candidate
+          run-id: ${{ inputs.producer_run_id || github.run_id }}
+          github-token: ${{ github.token }}
       - uses: conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb # v4
         with:
           miniforge-version: latest
@@ -175,6 +205,45 @@ jobs:
           channel-priority: strict
           run-init: 'false'
           remove-profiles: 'false'
+      - name: Locate and bind the original private file
+        run: |
+          source "$(cygpath -u "$CONDA" 2>/dev/null || echo "$CONDA")/etc/profile.d/conda.sh"
+          conda activate installed
+          python - <<'PY'
+          import hashlib,json,os,re
+          from pathlib import Path
+          root=Path(os.environ['RUNNER_TEMP'])/'candidate'
+          files=[p for p in root.rglob('*') if p.is_file()]
+          if len(files)!=2 or any(p.is_symlink() for p in root.rglob('*')):
+              raise ValueError('Private producer must contain exactly two regular files')
+          manifests=[p for p in files if p.name=='private-producer.json']
+          archives=[p for p in files if p.name==os.environ['FILENAME']]
+          if len(manifests)!=1 or len(archives)!=1 or manifests[0].stat().st_size>65536:
+              raise ValueError('Original private producer members differ')
+          record=json.loads(manifests[0].read_text(encoding='utf-8'))
+          expected={'filename':os.environ['FILENAME'],'sha256':os.environ['SHA256'],
+              'product_source_sha':os.environ['PRODUCT_SOURCE_SHA'],
+              'provider_sha':os.environ['TEST_SUPPORT_PROVIDER_SHA'],
+              'run_id':os.environ['PRODUCER_RUN_ID'],
+              'run_attempt':os.environ['PRODUCER_ATTEMPT'],
+              'package':'gh-run-receptor','version':'0.0.0','build_number':76,'public':False}
+          if not re.fullmatch('[0-9a-f]{40}',expected['product_source_sha']) or not re.fullmatch('[0-9a-f]{64}',expected['sha256']):
+              raise ValueError('Original private identities must be full hashes')
+          if any(record.get(k)!=v for k,v in expected.items()):
+              raise ValueError('Original private producer binding differs')
+          plan=Path(os.environ['COMPONENT_ROOT'])/'devtools/conda-build/qualification_plan.toml'
+          if hashlib.sha256(plan.read_bytes()).hexdigest()!=record['plan_sha256']:
+              raise ValueError('Original private plan changed')
+          archive=archives[0]
+          if archive.stat().st_size>64*1024*1024 or hashlib.sha256(archive.read_bytes()).hexdigest()!=expected['sha256']:
+              raise ValueError('Original private file digest differs')
+          target=root/expected['filename']
+          if archive!=target:
+              target.write_bytes(archive.read_bytes())
+              archive.unlink()
+          (Path(os.environ['RUNNER_TEMP'])/'original-private-producer.json').write_text(json.dumps(record,indent=2)+'\n')
+          print('Verified original private source, run, plan and file digest')
+          PY
       - name: Repair Windows installer launcher metadata
         if: runner.os == 'Windows'
         env:
@@ -229,6 +298,7 @@ jobs:
         with:
           name: qualification-${{ matrix.platform }}-py${{ matrix.python }}
           path: |
+            ${{ runner.temp }}/original-private-producer.json
             ${{ runner.temp }}/tools.json
             ${{ runner.temp }}/installation.json
             ${{ runner.temp }}/before.json
