@@ -80,7 +80,7 @@ sha256 = "e6a1f2fdde8438750dac2d88aa1ceb7a12bb6b0cb0770935d9b3668e1669f9f8"
 [[installed_tests.support.files]]
 source = "gh_run_receptor_tools/installed_smoke.py"
 target = "gh_run_receptor_tools/installed_smoke.py"
-sha256 = "c6a2eeb10c30cc354e95f9c0fc7f90e160c593e473b84c92ba286f9fc187d767"
+sha256 = "0c4b9f3f5c5bcf2e1e6836ee9554e2a64cb13bad90037c69af9e5941a5bbf565"
 
 [[installed_tests.support.files]]
 source = "gh_run_receptor_tools/release_tools.py"

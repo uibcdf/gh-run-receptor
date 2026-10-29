@@ -16,6 +16,11 @@ and [source validation](evidence/issue_74_validation.json) retain 842 local
 passes, twelve native compatibility cells and a bounded live queued-run probe.
 The public version remains 1.3.0; this source improvement is unreleased.
 
+**Release preparation (2026-10-29):** Maintainer-authorized 1.4.0/build 0 is
+tracked by #77 and the [delivery record](pending_proposals/publish_and_verify_gh_run_receptor_1_4_0.md).
+Exact-source CI, same-file Conda receiving, public GitHub assets and independent
+archival are pending. No 1.4.0 public delivery is claimed yet.
+
 This directory is the development checkpoint for `gh-run-receptor`. It records the
 stable product boundary, architectural decisions, rule model, and post-1.0 route.
 Documents should distinguish settled decisions from hypotheses that still require

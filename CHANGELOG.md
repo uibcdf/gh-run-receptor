@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 1.4.0 - 2026-10-29
+
 - Separate the runtime under `src/gh_run_receptor` from unshipped repository
   tools and qualify installed product/integration through shared hash-bound
   support; retire the original-path adapter after complete native receiving.

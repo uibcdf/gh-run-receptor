@@ -74,6 +74,14 @@ def verify_installation(root: Path, expected: str) -> dict:
     )
     if result.stdout.strip() != expected:
         raise ValueError("Installed console launcher reports a different version")
+    subprocess.run(
+        [commands["gh-run-receptor"], "--help"],
+        cwd=root.parent,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=10,
+    )
     return dict(
         version=expected,
         origin=str(origin),

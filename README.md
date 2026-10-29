@@ -21,6 +21,10 @@ can lag lightweight or `[skip ci]` pushes; it does not establish coverage of lat
 commits or scientific consumer suites. See the [coverage reporting contract](devguide/coverage_reporting.md).
 
 
+**1.4.0 preparation:** The next release candidate contains #74 and #76.
+Publication and exact-file installed qualification are pending; installation
+commands below continue to identify verified public 1.3.0 until delivery.
+
 Version 1.0 is the stable read-only contract: it uses exact workflow identities and does
 not include pattern or organization-level configuration. Version 1.3.0 is available
 from the uibcdf Conda channel. The `1.3.0` source release can inspect, watch, replay, compare, and

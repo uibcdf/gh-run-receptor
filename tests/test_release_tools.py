@@ -22,7 +22,7 @@ from gh_run_receptor_tools.release_tools import (
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = "0.18.0"
-CURRENT_VERSION = "1.3.0"
+CURRENT_VERSION = "1.4.0"
 COMMIT = "a" * 40
 
 
