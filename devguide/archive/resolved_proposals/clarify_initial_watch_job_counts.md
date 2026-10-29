@@ -1,9 +1,9 @@
 ---
 summary: Show explicit job-state counts in the initial watch line.
 issue: uibcdf/gh-run-receptor#74
-status: active
+status: resolved
 opened: 2026-10-29
-closed:
+closed: 2026-10-29
 verification: measured
 area: [cli]
 guard: tests/test_watch.py
@@ -16,7 +16,7 @@ supersedes: []
 
 ## What and why
 
-The initial watch line currently renders jobs=completed/total. In the Sabueso
+Before this change, the initial watch line rendered jobs=completed/total. In the Sabueso
 observation recorded in uibcdf/gh-run-receptor#74, jobs=0/14 could be mistaken for
 no started jobs even while the jobs API reported active work. GitHub can retain
 run status queued while individual jobs are already in progress. This is a
@@ -86,5 +86,32 @@ The isolated declared docs profile resolves Sphinx 8.2.3 and sphinx-rtd-theme
 The canonical consumer guide remains scoped to the delivered public version;
 README, usage, CLI contract and Unreleased notes describe this source change.
 The old dated watch benchmark retains its original token measurements and is
-explicitly scoped to its historical source. Source/native CI is still pending;
-no new artifact or release is qualified by these local results.
+explicitly scoped to its historical source. At that local checkpoint native CI was pending; final receiving is recorded
+below. No new artifact or release is qualified by the local results.
+
+
+## Native receiving and decision — 2026-10-29
+
+Resolve #74 in source b84144170fe1c56fcbf4e45830e34d8f2217ff82. All twelve
+Linux/macOS/Windows × Python 3.11–3.14 compatibility jobs pass in 40941843719.
+Each job actually executes distribution-input review, the complete source suite,
+wheel/sdist build, wheel installation and outside-checkout smoke. Routine
+40941703230, policy 40941703946, Conda governance 40941704039, strict docs/Pages
+40941848863 and frozen-contract validation 40941853497 pass on the same source.
+Authoritative run/job/step facts are retained in evidence/issue_74_validation.json.
+The cancelled automatic docs run 40941703219 is uncredited; its separate
+same-source manual execution supplies the successful docs evidence.
+
+A bounded live source CLI probe observes the actual queued parent alongside
+active jobs: status=queued | jobs=completed:4,in_progress:2,queued:6,total:12.
+The observer is deliberately interrupted after its initial line and returns 130,
+with no final stdout report; the GitHub workflow continues independently. This
+verifies initial presentation, not a completed-run or release-artifact claim.
+
+The full regression module protects the new explicit counts, all original
+transition/backoff/API-budget behavior, non-success source conclusions and
+bounded unknown-state presentation. cli_and_output_contract.md absorbs the
+durable rule. No serialized schema, runtime dependency, shared provider or
+public-version selection changes. The caller's unrelated dependency findings
+remain outside this work. Query GitHub again after closing #74 to establish
+the final open-issue inventory rather than infer it from local queues.

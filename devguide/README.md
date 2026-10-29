@@ -9,6 +9,13 @@ Shared provider PR uibcdf/molsyssuite#157 is merged; immutable consumer receivin
 returns to uibcdf/molsyssuite#144. Historical public 1.3.0 bytes/receipts remain
 unchanged, and no new release is selected.
 
+**Watch clarity (2026-10-29):** #74 names completed, in-progress, queued and
+other observed job counts in the initial progress line while preserving GitHub
+run state. The [resolved record](archive/resolved_proposals/clarify_initial_watch_job_counts.md)
+and [source validation](evidence/issue_74_validation.json) retain 842 local
+passes, twelve native compatibility cells and a bounded live queued-run probe.
+The public version remains 1.3.0; this source improvement is unreleased.
+
 This directory is the development checkpoint for `gh-run-receptor`. It records the
 stable product boundary, architectural decisions, rule model, and post-1.0 route.
 Documents should distinguish settled decisions from hypotheses that still require
