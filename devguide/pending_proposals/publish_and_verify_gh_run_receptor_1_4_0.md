@@ -77,3 +77,23 @@ helper on every claimed platform/minor; source's explicit Conda-only skip does
 not provide this evidence. No shared SDK implementation is copied or changed.
 All candidate/publication commits execute CI; no skipped gate supplies release
 acceptance. Build and public receipts remain pending.
+
+
+## Administrative preflight receiving — 2026-10-29
+
+Candidate c2d16255868df5e1f5a7eaaa72d71ac8387cef01 passes all nine exact-source
+required/feature gates, including twelve source cells. A task-owned exact-tag
+clone builds valid 1.4.0 wheel/sdist; the clean installed wheel passes 649
+product/integration cases with one explicit Conda-only skip and 193 separately
+required tooling deselections. Version/import/launcher/schema/usage checks and
+shared support retirement pass. Tag 1.4.0 now identifies that source and is stable.
+
+First staging 40951757275 fails in review-inputs before its publisher job runs:
+validate_contracts imports the product, but the administrative bootstrap did not
+install the candidate after the src move. No Conda file is built or uploaded.
+Correct the stage and promotion administrative bootstrap to pip install --no-deps
+the already selected candidate before owner input review. This is normal
+administrative source installation, not artifact qualification or a source-path
+escape. Keep the full source SHA and tag fixed; record the newer workflow and
+qualification identities separately. All source, archive, installed, digest and
+public checks remain mandatory. The provider implementation is unchanged.

@@ -46,7 +46,9 @@ jobs:
         with:
           python-version: "3.14"
       - name: Bootstrap distribution checks
-        run: python -m pip install 'PyYAML>=6,<7' 'Jinja2>=3,<4' 'packaging>=24'
+        run: |
+          python -m pip install 'PyYAML>=6,<7' 'Jinja2>=3,<4' 'packaging>=24'
+          python -m pip install --no-deps .
       - name: Review the exact committed candidate inputs
         env:
           CANDIDATE_SHA: ${{ inputs.candidate_sha }}

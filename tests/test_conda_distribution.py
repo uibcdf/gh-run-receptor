@@ -333,6 +333,13 @@ def test_first_conda_publication_is_manual_and_requires_the_installed_matrix():
         assert workflow["jobs"][job]["secrets"] == {
             "ANACONDA_TOKEN": "${{ secrets.ANACONDA_UIBCDF_TOKEN }}"
         }
+        bootstrap = next(
+            step
+            for step in workflow["jobs"]["review-inputs"]["steps"]
+            if step.get("name") == "Bootstrap distribution checks"
+        )
+        assert "pip install --no-deps ." in bootstrap["run"]
+        assert "PYTHONPATH" not in bootstrap["run"]
     installed = yaml.load(
         (ROOT / ".github/workflows/test-staged-conda.yml").read_text(), Loader=yaml.BaseLoader
     )

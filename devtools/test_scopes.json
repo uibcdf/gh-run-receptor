@@ -6868,27 +6868,27 @@
           "sha256": "cbca3e38ec779af2a7d57709432b77b01263698a778a01f858204176add46c6d"
         },
         {
-          "line": 339,
+          "line": 346,
           "expression": "assert installed[\"run-name\"] == \"Installed ${{ inputs.filename }} ${{ inputs.sha256 }}\"",
           "sha256": "e013dcfbceb23d578023221d124a6e9c0b14d1aa6429744f2d2b32f44c1a492f"
         },
         {
-          "line": 340,
+          "line": 347,
           "expression": "assert set(installed[\"on\"]) == {\"workflow_dispatch\"}",
           "sha256": "02317a8424f8eab49ffb399076c92e07dc0a24f630d272b9d0c60207e6d92001"
         },
         {
-          "line": 341,
+          "line": 348,
           "expression": "assert \"secrets\" not in installed[\"jobs\"][\"installed\"]",
           "sha256": "f8eeae1afdfa0df37c4524f935527dae4d90c5d153a9ffa5050cbf38e68ed85c"
         },
         {
-          "line": 346,
+          "line": 353,
           "expression": "assert inputs[\"installed_run_id\"] == \"${{ inputs.installed_run_id }}\"",
           "sha256": "66e19b3fd9265660b36def63123fed63a6de0417a2d873ad735fbde38c81d7d3"
         },
         {
-          "line": 347,
+          "line": 354,
           "expression": "assert inputs[\"qualification_sha\"] == \"${{ inputs.qualification_sha }}\"",
           "sha256": "5cdc5e2f5c5083235140cbde607713bb6edb7ea49f953e5a179d3a5686e099c8"
         },
@@ -6911,6 +6911,16 @@
           "line": 333,
           "expression": "assert workflow[\"jobs\"][job][\"secrets\"] == {\n            \"ANACONDA_TOKEN\": \"${{ secrets.ANACONDA_UIBCDF_TOKEN }}\"\n        }",
           "sha256": "48d507be9e0286949b563213831ad7bed9eb049190e5e7351b67c77d2d08d97b"
+        },
+        {
+          "line": 341,
+          "expression": "assert \"pip install --no-deps .\" in bootstrap[\"run\"]",
+          "sha256": "1d610be20b8a1f22c0984ff2402cbd284fee3194e449e56d5dfec1ae67e148d6"
+        },
+        {
+          "line": 342,
+          "expression": "assert \"PYTHONPATH\" not in bootstrap[\"run\"]",
+          "sha256": "393ea87811abfec2042b01cd106b64c55156e77e4ad4f13b3837459d87489109"
         }
       ],
       "parameterization": [],

@@ -65,7 +65,7 @@ reason = "Manual least-privilege consumer experiment at existing Action pins; pr
 
 [[workflows]]
 path = ".github/workflows/promote-conda.yml"
-sha256 = "b9b8d4119c4514294852540386e59b46ee5d9e9d189b64ef309a5e48b75d140a"
+sha256 = "1c159588bda48720f462907bd3df97b1d418c95a2784027be6ff5db6f233d740"
 reason = "Manual owner input review then immutable shared exact-source/installed-matrix verifier and same-file label promotion; no rebuild."
 
 [[workflows]]
@@ -95,7 +95,7 @@ reason = "Read-only reusable report consumer contract; uses the shared receptor 
 
 [[workflows]]
 path = ".github/workflows/stage-conda.yml"
-sha256 = "1f92e2dd020c24d7c2f94cb19875ea2c6684a944ac6b32a1de006e4facf3b25d"
+sha256 = "976038843221d8322937d5ab6267503f51cc41f35089574abc07e1cf5ac91681"
 reason = "Manual reviewed candidate SHA/version, owner preflight and immutable shared single-file staged build; committed real plan and executed source gates required."
 
 [[workflows]]
