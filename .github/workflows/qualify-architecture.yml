@@ -37,7 +37,7 @@ jobs:
           auto-activate-base: false
           channels: uibcdf,conda-forge
           channel-priority: strict
-          run-init: 'true'
+          run-init: 'false'
           remove-profiles: 'false'
       - name: Review source and private qualification inputs
         run: |
@@ -47,6 +47,8 @@ jobs:
           python devtools/check_distribution_inputs.py --suite-root .molsyssuite
           python -m gh_run_receptor_tools.test_inventory --root .
           python .molsyssuite/devtools/scripts/noarch_conda.py --root . --plan devtools/conda-build/qualification_plan.toml
+          command conda build --version
+          python -c 'import sys; from pathlib import Path; print(Path(sys.prefix)/"bin")' >> "$GITHUB_PATH"
       - name: Freeze metadata only in the private build copy
         run: |
           source "$CONDA/etc/profile.d/conda.sh"

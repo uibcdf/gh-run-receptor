@@ -165,3 +165,13 @@ created by this task's initial flat editable masked the fresh distribution
 metadata; that generated GHR-only directory was removed after checking project
 identity. Caller dependencies and sibling editables remain unchanged. This is
 normal development receiving, never archive qualification.
+
+
+Private run 40931878568 exposes a second runner bootstrap boundary before any
+file is built: enabling setup-miniconda profile initialization fails activation
+in the login shell. Keep initialization disabled as in the earlier working
+bootstrap, explicitly activate the reviewed publisher environment, check its
+external conda build command and export that exact prefix bin through the
+job-owned GITHUB_PATH for downstream Action steps. The official Action already
+bypasses the base shell function. No source/import guard is changed; no file
+exists to rebuild. This remains consumer environment wiring, not a new SDK API.
