@@ -114,7 +114,30 @@ installation claim. Version, plan, credential confirmation and timing remain
 with the developer. Existing provider pins and original artifact evidence retain
 their own scope.
 
-## Original-file qualification recovery (#60 / MolSysSuite #144)
+## Consolidated qualification after #76
+
+Runtime code lives under `src/gh_run_receptor`; repository tooling is an
+unshipped `gh_run_receptor_tools` namespace with explicit inputs. The maintained
+`test-staged-conda.yml` invokes the accepted shared SDK at
+fee3bd875e68778844c0fffc2aba26b6cea02cd6 directly, with support @1 and separate
+candidate/test-support, workflow and provider identities. It retains exact-file
+installation, before/after installed provenance and support cleanup receipts.
+All source/tooling and installed product/integration gates remain required.
+
+Nonpublishing receiving 40935956394 passed all twelve native platform/minor
+cells, 638 executed tests each, using the original private 0.0.0/build-76 file
+from 40935030060. A transport correction reused its SHA-256 without rebuilding.
+This is architecture receiving; it selects no public version or publication.
+See [the normative boundary](../../devguide/installed_qualification.md) and
+[receipt](../../devguide/evidence/issue_76_qualification.json).
+
+## Historical original-file recovery (#60 / MolSysSuite #144)
+
+The following records the immutable 1.3.0 recovery at qualification source
+[08b83a0](https://github.com/uibcdf/gh-run-receptor/tree/08b83a0e853aff5c563ad9b19d0ddffb15e030f8).
+Its adapter and historical workflow remain available at that source. Active use
+and implementation were retired under #76 after complete replacement receiving.
+
 
 The first installed run 40143357716 exposed two administrative environment gaps:
 original tests import path-sensitive unshipped `devtools` helpers, and the older

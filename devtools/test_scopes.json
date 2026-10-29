@@ -13331,293 +13331,6 @@
         "installed-native-product-integration"
       ]
     },
-    "tests/test_installed_test_helpers.py::test_bound_helpers_preserve_original_paths_and_clean_only_owned_bindings": {
-      "scope": "tooling",
-      "reason": "Validates repository operations, configuration or source workflow evidence.",
-      "baseline_node": "tests/test_installed_test_helpers.py::test_bound_helpers_preserve_original_paths_and_clean_only_owned_bindings",
-      "baseline_assertions": [
-        {
-          "line": 99,
-          "expression": "assert result.returncode == 0, result.stdout + result.stderr",
-          "sha256": "3ffd5167d68a52cf5b0cc93b4585852f1c86f184b8426a329468054900b14e4f",
-          "scope": "tooling"
-        },
-        {
-          "line": 100,
-          "expression": "assert result.stdout.strip() == \"verified\"",
-          "sha256": "35d9212092e0c6cdabc2974750fe0177a94fc15903eefb594146a3a078759988",
-          "scope": "tooling"
-        }
-      ],
-      "minimum_assertions": 2,
-      "current_assertions": [
-        {
-          "line": 99,
-          "expression": "assert result.returncode == 0, result.stdout + result.stderr",
-          "sha256": "3ffd5167d68a52cf5b0cc93b4585852f1c86f184b8426a329468054900b14e4f"
-        },
-        {
-          "line": 100,
-          "expression": "assert result.stdout.strip() == \"verified\"",
-          "sha256": "35d9212092e0c6cdabc2974750fe0177a94fc15903eefb594146a3a078759988"
-        }
-      ],
-      "parameterization": [
-        "pytest.mark.parametrize(\n    \"mode\",\n    [\n        \"success\",\n        \"body-error\",\n        \"wrong-source\",\n        \"untracked\",\n        \"collision\",\n        \"descendant-collision\",\n        \"changed-bytes\",\n        \"escaped-module\",\n        \"changed-binding\",\n        \"source-on-path\",\n    ],\n)"
-      ],
-      "baseline_parameterization": [
-        "pytest.mark.parametrize(\n    \"mode\",\n    [\n        \"success\",\n        \"body-error\",\n        \"wrong-source\",\n        \"untracked\",\n        \"collision\",\n        \"descendant-collision\",\n        \"changed-bytes\",\n        \"escaped-module\",\n        \"changed-binding\",\n        \"source-on-path\",\n    ],\n)"
-      ],
-      "baseline_function_sha256": "499562b624391a13baad64a98ac486645a60a19d6754f3a3d2ac31cdf6c6a7d4",
-      "required_gates": [
-        "source-native-complete"
-      ]
-    },
-    "tests/test_installed_test_helpers.py::test_recovery_workflow_keeps_original_artifact_and_separate_administrative_identity": {
-      "scope": "tooling",
-      "reason": "Validates repository operations, configuration or source workflow evidence.",
-      "baseline_node": "tests/test_installed_test_helpers.py::test_recovery_workflow_keeps_original_artifact_and_separate_administrative_identity",
-      "baseline_assertions": [
-        {
-          "line": 106,
-          "expression": "assert set(workflow[\"on\"]) == {\"workflow_dispatch\"}",
-          "sha256": "0e7477711739feddc8c33ff80b6d2c28ea5769a1f0c828e6ecfa811be1467a8d",
-          "scope": "tooling"
-        },
-        {
-          "line": 107,
-          "expression": "assert workflow[\"permissions\"] == {\"contents\": \"read\"}",
-          "sha256": "64e2df2827f5b4415f65cd4afdcaaef2cb0d26b12ee05bb3c94f74c14ab904c7",
-          "scope": "tooling"
-        },
-        {
-          "line": 109,
-          "expression": "assert prepare[\"name\"] == \"installed / prepare\"",
-          "sha256": "227c2fd54bd334bb38b114c07b361b1602896315bc66e12b8b33bbd4b9ce16be",
-          "scope": "tooling"
-        },
-        {
-          "line": 110,
-          "expression": "assert \"--qualification-sha\" in json.dumps(prepare)",
-          "sha256": "bd715218e616df6a11f05ee014e45caebd1b10216250612243612c8a8797c78d",
-          "scope": "tooling"
-        },
-        {
-          "line": 112,
-          "expression": "assert job[\"name\"] == \"installed / ${{ matrix.platform }} \u00b7 Python ${{ matrix.python }}\"",
-          "sha256": "e69ddbbf525e333520bc0fad0d391921213e6275ee4777bc94e0d2195292b1ec",
-          "scope": "tooling"
-        },
-        {
-          "line": 118,
-          "expression": "assert (\"component\", \"${{ inputs.candidate_sha }}\") in checkout_refs",
-          "sha256": "ffbacbb8d3f9b5497b5cccf3546e11e17ad4b57b79de72cccd7a97c1cb8c22d1",
-          "scope": "tooling"
-        },
-        {
-          "line": 119,
-          "expression": "assert (\"qualification\", \"${{ github.sha }}\") in checkout_refs",
-          "sha256": "6088d1e2b58c651f229b7ba231f9af18af2f39c4be11d8d5dbe7ecd3d1e93ed3",
-          "scope": "tooling"
-        },
-        {
-          "line": 121,
-          "expression": "assert setup[\"with\"][\"run-init\"] == setup[\"with\"][\"remove-profiles\"] == \"false\"",
-          "sha256": "f50527fe3a9ded84f99032342a2936fd043da854d9ee92400952a30540afa93a",
-          "scope": "tooling"
-        },
-        {
-          "line": 124,
-          "expression": "assert repair[\"if\"] == \"runner.os == 'Windows'\"",
-          "sha256": "1dd8ab1b0a865137c95bb596d3982e6379b558cc60b9be47240ad3255b9034f4",
-          "scope": "tooling"
-        },
-        {
-          "line": 125,
-          "expression": "assert repair[\"env\"][\"CONDA_SAFETY_CHECKS\"] == \"enabled\"",
-          "sha256": "e1cd4266245db1fe324f0e87eca5276c232958f5133194cc749a2e1da3c4999f",
-          "scope": "tooling"
-        },
-        {
-          "line": 126,
-          "expression": "assert \"--name base --force-reinstall\" in repair[\"run\"]",
-          "sha256": "4c91f83dee732b8d669be51061875855be2292d8b6af93c7fff4c46ab79eb4e0",
-          "scope": "tooling"
-        },
-        {
-          "line": 127,
-          "expression": "assert \"conda-launchers\" in repair[\"run\"]",
-          "sha256": "aaef4d6f786b6e2eba5d112c61111dadb33faf27fefc907346e3cd4bd967735c",
-          "scope": "tooling"
-        },
-        {
-          "line": 128,
-          "expression": "assert \"installed_test_helpers.py\" in steps[\"Run installed tests\"][\"run\"]",
-          "sha256": "fb1967efff60598e840ce6422735d81b48b3770b28f2a2b68abfb9ea24025132",
-          "scope": "tooling"
-        },
-        {
-          "line": 129,
-          "expression": "assert \" verify \" in steps[\"Validate installed files\"][\"run\"]",
-          "sha256": "e4223e43411b06fb70bc336a7515a3a53171ef200762aa6aab36769751320667",
-          "scope": "tooling"
-        },
-        {
-          "line": 130,
-          "expression": "assert \" verify \" in steps[\"Recheck installed provenance after scientific tests\"][\"run\"]",
-          "sha256": "0574422a60783b700a1ee2cbefe010998a9420afe94ea257e1ec9adcd987b2bd",
-          "scope": "tooling"
-        },
-        {
-          "line": 131,
-          "expression": "assert \"--sha256\" in steps[\"Install exact artifact\"][\"run\"]",
-          "sha256": "486ee89bf1d0811665c4db568fe44743c5acd04adf17df1e4d8c60e84ab2e53b",
-          "scope": "tooling"
-        },
-        {
-          "line": 132,
-          "expression": "assert \"pip install\" not in json.dumps(job) and \"upload: true\" not in json.dumps(job)",
-          "sha256": "4459129f17c1b10f0e86c327a99148cda4230a928665e7b2bdd7e17788cc4a6a",
-          "scope": "tooling"
-        }
-      ],
-      "minimum_assertions": 17,
-      "current_assertions": [
-        {
-          "line": 106,
-          "expression": "assert set(workflow[\"on\"]) == {\"workflow_dispatch\"}",
-          "sha256": "0e7477711739feddc8c33ff80b6d2c28ea5769a1f0c828e6ecfa811be1467a8d"
-        },
-        {
-          "line": 107,
-          "expression": "assert workflow[\"permissions\"] == {\"contents\": \"read\"}",
-          "sha256": "64e2df2827f5b4415f65cd4afdcaaef2cb0d26b12ee05bb3c94f74c14ab904c7"
-        },
-        {
-          "line": 109,
-          "expression": "assert prepare[\"name\"] == \"installed / prepare\"",
-          "sha256": "227c2fd54bd334bb38b114c07b361b1602896315bc66e12b8b33bbd4b9ce16be"
-        },
-        {
-          "line": 110,
-          "expression": "assert \"--qualification-sha\" in json.dumps(prepare)",
-          "sha256": "bd715218e616df6a11f05ee014e45caebd1b10216250612243612c8a8797c78d"
-        },
-        {
-          "line": 112,
-          "expression": "assert job[\"name\"] == \"installed / ${{ matrix.platform }} \u00b7 Python ${{ matrix.python }}\"",
-          "sha256": "e69ddbbf525e333520bc0fad0d391921213e6275ee4777bc94e0d2195292b1ec"
-        },
-        {
-          "line": 118,
-          "expression": "assert (\"component\", \"${{ inputs.candidate_sha }}\") in checkout_refs",
-          "sha256": "ffbacbb8d3f9b5497b5cccf3546e11e17ad4b57b79de72cccd7a97c1cb8c22d1"
-        },
-        {
-          "line": 119,
-          "expression": "assert (\"qualification\", \"${{ github.sha }}\") in checkout_refs",
-          "sha256": "6088d1e2b58c651f229b7ba231f9af18af2f39c4be11d8d5dbe7ecd3d1e93ed3"
-        },
-        {
-          "line": 121,
-          "expression": "assert setup[\"with\"][\"run-init\"] == setup[\"with\"][\"remove-profiles\"] == \"false\"",
-          "sha256": "f50527fe3a9ded84f99032342a2936fd043da854d9ee92400952a30540afa93a"
-        },
-        {
-          "line": 124,
-          "expression": "assert repair[\"if\"] == \"runner.os == 'Windows'\"",
-          "sha256": "1dd8ab1b0a865137c95bb596d3982e6379b558cc60b9be47240ad3255b9034f4"
-        },
-        {
-          "line": 125,
-          "expression": "assert repair[\"env\"][\"CONDA_SAFETY_CHECKS\"] == \"enabled\"",
-          "sha256": "e1cd4266245db1fe324f0e87eca5276c232958f5133194cc749a2e1da3c4999f"
-        },
-        {
-          "line": 126,
-          "expression": "assert \"--name base --force-reinstall\" in repair[\"run\"]",
-          "sha256": "4c91f83dee732b8d669be51061875855be2292d8b6af93c7fff4c46ab79eb4e0"
-        },
-        {
-          "line": 127,
-          "expression": "assert \"conda-launchers\" in repair[\"run\"]",
-          "sha256": "aaef4d6f786b6e2eba5d112c61111dadb33faf27fefc907346e3cd4bd967735c"
-        },
-        {
-          "line": 128,
-          "expression": "assert \"installed_test_helpers.py\" in steps[\"Run installed tests\"][\"run\"]",
-          "sha256": "fb1967efff60598e840ce6422735d81b48b3770b28f2a2b68abfb9ea24025132"
-        },
-        {
-          "line": 129,
-          "expression": "assert \" verify \" in steps[\"Validate installed files\"][\"run\"]",
-          "sha256": "e4223e43411b06fb70bc336a7515a3a53171ef200762aa6aab36769751320667"
-        },
-        {
-          "line": 130,
-          "expression": "assert \" verify \" in steps[\"Recheck installed provenance after scientific tests\"][\"run\"]",
-          "sha256": "0574422a60783b700a1ee2cbefe010998a9420afe94ea257e1ec9adcd987b2bd"
-        },
-        {
-          "line": 131,
-          "expression": "assert \"--sha256\" in steps[\"Install exact artifact\"][\"run\"]",
-          "sha256": "486ee89bf1d0811665c4db568fe44743c5acd04adf17df1e4d8c60e84ab2e53b"
-        },
-        {
-          "line": 132,
-          "expression": "assert \"pip install\" not in json.dumps(job) and \"upload: true\" not in json.dumps(job)",
-          "sha256": "4459129f17c1b10f0e86c327a99148cda4230a928665e7b2bdd7e17788cc4a6a"
-        }
-      ],
-      "parameterization": [],
-      "baseline_parameterization": [],
-      "baseline_function_sha256": "9159ded25e43838488b22b5ba41c8d0eccab833b6c889c046c65ca5db8b8fd90",
-      "required_gates": [
-        "source-native-complete"
-      ]
-    },
-    "tests/test_installed_test_helpers.py::test_legacy_source_path_addition_is_refused_without_hiding_other_admin_paths": {
-      "scope": "tooling",
-      "reason": "Validates repository operations, configuration or source workflow evidence.",
-      "baseline_node": "tests/test_installed_test_helpers.py::test_legacy_source_path_addition_is_refused_without_hiding_other_admin_paths",
-      "baseline_assertions": [
-        {
-          "line": 153,
-          "expression": "assert value not in guarded and guarded.blocked == 1",
-          "sha256": "516b0668635a6dfb62622a8b431060f901d9d8db369d60b596bbba87c3d80a6b",
-          "scope": "tooling"
-        },
-        {
-          "line": 154,
-          "expression": "assert \"allowed\" in guarded or \"sdk-helpers\" in guarded",
-          "sha256": "d598a99054fa822ec38ea400e97002dec1d45bc3b015cd970d87049885ee0ed9",
-          "scope": "tooling"
-        }
-      ],
-      "minimum_assertions": 2,
-      "current_assertions": [
-        {
-          "line": 153,
-          "expression": "assert value not in guarded and guarded.blocked == 1",
-          "sha256": "516b0668635a6dfb62622a8b431060f901d9d8db369d60b596bbba87c3d80a6b"
-        },
-        {
-          "line": 154,
-          "expression": "assert \"allowed\" in guarded or \"sdk-helpers\" in guarded",
-          "sha256": "d598a99054fa822ec38ea400e97002dec1d45bc3b015cd970d87049885ee0ed9"
-        }
-      ],
-      "parameterization": [
-        "pytest.mark.parametrize(\"operation\", [\"insert\", \"append\", \"extend\", \"slice\", \"item\", \"iadd\"])"
-      ],
-      "baseline_parameterization": [
-        "pytest.mark.parametrize(\"operation\", [\"insert\", \"append\", \"extend\", \"slice\", \"item\", \"iadd\"])"
-      ],
-      "baseline_function_sha256": "cb506ec9328b0f2ee657e1d36309490db5428779538d8fef04be29bc88c4dd7c",
-      "required_gates": [
-        "source-native-complete"
-      ]
-    },
     "tests/test_job_logs.py::test_job_only_diagnosis_preserves_native_workflow_truth": {
       "scope": "tooling",
       "reason": "Validates repository operations, configuration or source workflow evidence.",
@@ -25017,6 +24730,229 @@
       "required_gates": [
         "source-native-complete"
       ]
+    },
+    "tests/test_installed_qualification_workflow.py::test_staged_workflow_keeps_original_artifact_and_separate_qualification_identity": {
+      "scope": "tooling",
+      "reason": "Preserves the original staged-file/workflow/qualification assertions while replacing the retired adapter with the accepted shared SDK.",
+      "baseline_node": "tests/test_installed_test_helpers.py::test_recovery_workflow_keeps_original_artifact_and_separate_administrative_identity",
+      "baseline_assertions": [
+        {
+          "line": 106,
+          "expression": "assert set(workflow[\"on\"]) == {\"workflow_dispatch\"}",
+          "sha256": "0e7477711739feddc8c33ff80b6d2c28ea5769a1f0c828e6ecfa811be1467a8d",
+          "scope": "tooling"
+        },
+        {
+          "line": 107,
+          "expression": "assert workflow[\"permissions\"] == {\"contents\": \"read\"}",
+          "sha256": "64e2df2827f5b4415f65cd4afdcaaef2cb0d26b12ee05bb3c94f74c14ab904c7",
+          "scope": "tooling"
+        },
+        {
+          "line": 109,
+          "expression": "assert prepare[\"name\"] == \"installed / prepare\"",
+          "sha256": "227c2fd54bd334bb38b114c07b361b1602896315bc66e12b8b33bbd4b9ce16be",
+          "scope": "tooling"
+        },
+        {
+          "line": 110,
+          "expression": "assert \"--qualification-sha\" in json.dumps(prepare)",
+          "sha256": "bd715218e616df6a11f05ee014e45caebd1b10216250612243612c8a8797c78d",
+          "scope": "tooling"
+        },
+        {
+          "line": 112,
+          "expression": "assert job[\"name\"] == \"installed / ${{ matrix.platform }} \u00b7 Python ${{ matrix.python }}\"",
+          "sha256": "e69ddbbf525e333520bc0fad0d391921213e6275ee4777bc94e0d2195292b1ec",
+          "scope": "tooling"
+        },
+        {
+          "line": 118,
+          "expression": "assert (\"component\", \"${{ inputs.candidate_sha }}\") in checkout_refs",
+          "sha256": "ffbacbb8d3f9b5497b5cccf3546e11e17ad4b57b79de72cccd7a97c1cb8c22d1",
+          "scope": "tooling"
+        },
+        {
+          "line": 119,
+          "expression": "assert (\"qualification\", \"${{ github.sha }}\") in checkout_refs",
+          "sha256": "6088d1e2b58c651f229b7ba231f9af18af2f39c4be11d8d5dbe7ecd3d1e93ed3",
+          "scope": "tooling"
+        },
+        {
+          "line": 121,
+          "expression": "assert setup[\"with\"][\"run-init\"] == setup[\"with\"][\"remove-profiles\"] == \"false\"",
+          "sha256": "f50527fe3a9ded84f99032342a2936fd043da854d9ee92400952a30540afa93a",
+          "scope": "tooling"
+        },
+        {
+          "line": 124,
+          "expression": "assert repair[\"if\"] == \"runner.os == 'Windows'\"",
+          "sha256": "1dd8ab1b0a865137c95bb596d3982e6379b558cc60b9be47240ad3255b9034f4",
+          "scope": "tooling"
+        },
+        {
+          "line": 125,
+          "expression": "assert repair[\"env\"][\"CONDA_SAFETY_CHECKS\"] == \"enabled\"",
+          "sha256": "e1cd4266245db1fe324f0e87eca5276c232958f5133194cc749a2e1da3c4999f",
+          "scope": "tooling"
+        },
+        {
+          "line": 126,
+          "expression": "assert \"--name base --force-reinstall\" in repair[\"run\"]",
+          "sha256": "4c91f83dee732b8d669be51061875855be2292d8b6af93c7fff4c46ab79eb4e0",
+          "scope": "tooling"
+        },
+        {
+          "line": 127,
+          "expression": "assert \"conda-launchers\" in repair[\"run\"]",
+          "sha256": "aaef4d6f786b6e2eba5d112c61111dadb33faf27fefc907346e3cd4bd967735c",
+          "scope": "tooling"
+        },
+        {
+          "line": 128,
+          "expression": "assert \"installed_test_helpers.py\" in steps[\"Run installed tests\"][\"run\"]",
+          "sha256": "fb1967efff60598e840ce6422735d81b48b3770b28f2a2b68abfb9ea24025132",
+          "scope": "tooling"
+        },
+        {
+          "line": 129,
+          "expression": "assert \" verify \" in steps[\"Validate installed files\"][\"run\"]",
+          "sha256": "e4223e43411b06fb70bc336a7515a3a53171ef200762aa6aab36769751320667",
+          "scope": "tooling"
+        },
+        {
+          "line": 130,
+          "expression": "assert \" verify \" in steps[\"Recheck installed provenance after scientific tests\"][\"run\"]",
+          "sha256": "0574422a60783b700a1ee2cbefe010998a9420afe94ea257e1ec9adcd987b2bd",
+          "scope": "tooling"
+        },
+        {
+          "line": 131,
+          "expression": "assert \"--sha256\" in steps[\"Install exact artifact\"][\"run\"]",
+          "sha256": "486ee89bf1d0811665c4db568fe44743c5acd04adf17df1e4d8c60e84ab2e53b",
+          "scope": "tooling"
+        },
+        {
+          "line": 132,
+          "expression": "assert \"pip install\" not in json.dumps(job) and \"upload: true\" not in json.dumps(job)",
+          "sha256": "4459129f17c1b10f0e86c327a99148cda4230a928665e7b2bdd7e17788cc4a6a",
+          "scope": "tooling"
+        }
+      ],
+      "minimum_assertions": 17,
+      "current_assertions": [
+        {
+          "line": 14,
+          "expression": "assert set(workflow[\"on\"]) == {\"workflow_dispatch\"}",
+          "sha256": "0e7477711739feddc8c33ff80b6d2c28ea5769a1f0c828e6ecfa811be1467a8d"
+        },
+        {
+          "line": 15,
+          "expression": "assert workflow[\"permissions\"] == {\"contents\": \"read\"}",
+          "sha256": "64e2df2827f5b4415f65cd4afdcaaef2cb0d26b12ee05bb3c94f74c14ab904c7"
+        },
+        {
+          "line": 17,
+          "expression": "assert prepare[\"name\"] == \"installed / prepare\"",
+          "sha256": "227c2fd54bd334bb38b114c07b361b1602896315bc66e12b8b33bbd4b9ce16be"
+        },
+        {
+          "line": 18,
+          "expression": "assert \"--qualification-sha\" in json.dumps(prepare)",
+          "sha256": "bd715218e616df6a11f05ee014e45caebd1b10216250612243612c8a8797c78d"
+        },
+        {
+          "line": 20,
+          "expression": "assert job[\"name\"] == \"installed / ${{ matrix.platform }} \u00b7 Python ${{ matrix.python }}\"",
+          "sha256": "e69ddbbf525e333520bc0fad0d391921213e6275ee4777bc94e0d2195292b1ec"
+        },
+        {
+          "line": 26,
+          "expression": "assert (\"component\", \"${{ inputs.candidate_sha }}\") in checkout_refs",
+          "sha256": "ffbacbb8d3f9b5497b5cccf3546e11e17ad4b57b79de72cccd7a97c1cb8c22d1"
+        },
+        {
+          "line": 27,
+          "expression": "assert (\".molsyssuite\", \"fee3bd875e68778844c0fffc2aba26b6cea02cd6\") in checkout_refs",
+          "sha256": "d1ae1cab04780a86defe1c86ab792d16b3988baed3093a34f391a3ca5ad782b9"
+        },
+        {
+          "line": 28,
+          "expression": "assert job[\"env\"][\"TEST_SUPPORT_QUALIFICATION_SHA\"] == \"${{ github.sha }}\"",
+          "sha256": "10905deefe4b8159ab91fc94551679bddf0e8f1fd37b18eb0737f728f59fb54f"
+        },
+        {
+          "line": 29,
+          "expression": "assert job[\"env\"][\"TEST_SUPPORT_CANDIDATE_SHA\"] == \"${{ inputs.candidate_sha }}\"",
+          "sha256": "3b1dac6c7d4a30f5a738f9f89d677b102cfc4ec9bc313cc1009062ecda1bdeb3"
+        },
+        {
+          "line": 31,
+          "expression": "assert setup[\"with\"][\"run-init\"] == setup[\"with\"][\"remove-profiles\"] == \"false\"",
+          "sha256": "f50527fe3a9ded84f99032342a2936fd043da854d9ee92400952a30540afa93a"
+        },
+        {
+          "line": 34,
+          "expression": "assert repair[\"if\"] == \"runner.os == 'Windows'\"",
+          "sha256": "1dd8ab1b0a865137c95bb596d3982e6379b558cc60b9be47240ad3255b9034f4"
+        },
+        {
+          "line": 35,
+          "expression": "assert repair[\"env\"][\"CONDA_SAFETY_CHECKS\"] == \"enabled\"",
+          "sha256": "e1cd4266245db1fe324f0e87eca5276c232958f5133194cc749a2e1da3c4999f"
+        },
+        {
+          "line": 36,
+          "expression": "assert \"--name base --force-reinstall\" in repair[\"run\"]",
+          "sha256": "4c91f83dee732b8d669be51061875855be2292d8b6af93c7fff4c46ab79eb4e0"
+        },
+        {
+          "line": 37,
+          "expression": "assert \"conda-launchers\" in repair[\"run\"]",
+          "sha256": "aaef4d6f786b6e2eba5d112c61111dadb33faf27fefc907346e3cd4bd967735c"
+        },
+        {
+          "line": 38,
+          "expression": "assert 'installed_noarch.py\" tests' in steps[\"Run installed tests\"][\"run\"]",
+          "sha256": "c504e0a681b53863ec414f326cafe90d4cab1da80e42c66834c7d1e5e93660fd"
+        },
+        {
+          "line": 39,
+          "expression": "assert \"installed_test_helpers.py\" not in json.dumps(workflow)",
+          "sha256": "8655ded72090641364f1a2359d650bdc01b85b1680f1defe074865ce35633c07"
+        },
+        {
+          "line": 40,
+          "expression": "assert \"installed-shared-support.json\" in steps[\"Run installed tests\"][\"run\"]",
+          "sha256": "546f43c14d08d9322d7f467a14ca16e36162c43f33ec2caf2970a8da3f1add81"
+        },
+        {
+          "line": 41,
+          "expression": "assert \" verify \" in steps[\"Validate installed files\"][\"run\"]",
+          "sha256": "e4223e43411b06fb70bc336a7515a3a53171ef200762aa6aab36769751320667"
+        },
+        {
+          "line": 42,
+          "expression": "assert \" verify \" in steps[\"Recheck installed provenance after scientific tests\"][\"run\"]",
+          "sha256": "0574422a60783b700a1ee2cbefe010998a9420afe94ea257e1ec9adcd987b2bd"
+        },
+        {
+          "line": 43,
+          "expression": "assert \"--sha256\" in steps[\"Install exact artifact\"][\"run\"]",
+          "sha256": "486ee89bf1d0811665c4db568fe44743c5acd04adf17df1e4d8c60e84ab2e53b"
+        },
+        {
+          "line": 44,
+          "expression": "assert \"pip install\" not in json.dumps(job) and \"upload: true\" not in json.dumps(job)",
+          "sha256": "4459129f17c1b10f0e86c327a99148cda4230a928665e7b2bdd7e17788cc4a6a"
+        }
+      ],
+      "parameterization": [],
+      "baseline_parameterization": [],
+      "baseline_function_sha256": "9159ded25e43838488b22b5ba41c8d0eccab833b6c889c046c65ca5db8b8fd90",
+      "required_gates": [
+        "source-native-complete"
+      ]
     }
   },
   "gates": {
@@ -25039,7 +24975,7 @@
         "tooling",
         "integration"
       ],
-      "profile": "normal editable development; includes both source-version repository checks"
+      "profile": "source-checkout tests with explicitly installed runtime; all three scopes; normal editable profile has separate local evidence"
     },
     "installed-native-product-integration": {
       "workflow": ".github/workflows/qualify-architecture.yml",
@@ -25059,7 +24995,134 @@
         "product",
         "integration"
       ],
-      "profile": "one original private Conda file; shared installed_noarch/imports/test_support @1, before/after provenance; repository tooling remains separately required"
+      "profile": "one original private Conda file; shared installed_noarch/imports/test_support @1, before/after provenance; repository tooling remains separately required",
+      "maintained_workflow": ".github/workflows/test-staged-conda.yml"
+    }
+  },
+  "retired": {
+    "tests/test_installed_test_helpers.py::test_bound_helpers_preserve_original_paths_and_clean_only_owned_bindings": {
+      "scope": "tooling",
+      "reason": "Validates repository operations, configuration or source workflow evidence.",
+      "baseline_node": "tests/test_installed_test_helpers.py::test_bound_helpers_preserve_original_paths_and_clean_only_owned_bindings",
+      "baseline_assertions": [
+        {
+          "line": 99,
+          "expression": "assert result.returncode == 0, result.stdout + result.stderr",
+          "sha256": "3ffd5167d68a52cf5b0cc93b4585852f1c86f184b8426a329468054900b14e4f",
+          "scope": "tooling"
+        },
+        {
+          "line": 100,
+          "expression": "assert result.stdout.strip() == \"verified\"",
+          "sha256": "35d9212092e0c6cdabc2974750fe0177a94fc15903eefb594146a3a078759988",
+          "scope": "tooling"
+        }
+      ],
+      "minimum_assertions": 2,
+      "current_assertions": [
+        {
+          "line": 99,
+          "expression": "assert result.returncode == 0, result.stdout + result.stderr",
+          "sha256": "3ffd5167d68a52cf5b0cc93b4585852f1c86f184b8426a329468054900b14e4f"
+        },
+        {
+          "line": 100,
+          "expression": "assert result.stdout.strip() == \"verified\"",
+          "sha256": "35d9212092e0c6cdabc2974750fe0177a94fc15903eefb594146a3a078759988"
+        }
+      ],
+      "parameterization": [
+        "pytest.mark.parametrize(\n    \"mode\",\n    [\n        \"success\",\n        \"body-error\",\n        \"wrong-source\",\n        \"untracked\",\n        \"collision\",\n        \"descendant-collision\",\n        \"changed-bytes\",\n        \"escaped-module\",\n        \"changed-binding\",\n        \"source-on-path\",\n    ],\n)"
+      ],
+      "baseline_parameterization": [
+        "pytest.mark.parametrize(\n    \"mode\",\n    [\n        \"success\",\n        \"body-error\",\n        \"wrong-source\",\n        \"untracked\",\n        \"collision\",\n        \"descendant-collision\",\n        \"changed-bytes\",\n        \"escaped-module\",\n        \"changed-binding\",\n        \"source-on-path\",\n    ],\n)"
+      ],
+      "baseline_function_sha256": "499562b624391a13baad64a98ac486645a60a19d6754f3a3d2ac31cdf6c6a7d4",
+      "required_gates": [
+        "source-native-complete"
+      ],
+      "disposition": "Retired implementation-specific adapter assertion after complete replacement native receiving, not skipped product coverage.",
+      "retired_on": "2026-10-29",
+      "receiving_run": 40935956394,
+      "receiving_sha": "4a687a3fc741531eee01808ba5294da993b4916e",
+      "successors": [
+        "tests/test_installed_qualification.py::test_shared_support_receives_portable_inputs_and_visible_failures",
+        "tests/test_installed_qualification.py::test_shared_runner_rejects_a_src_checkout_before_collection"
+      ],
+      "provider_tests": "uibcdf/molsyssuite@fee3bd875e68778844c0fffc2aba26b6cea02cd6:tests/test_installed_test_support.py; tests/test_installed_noarch.py",
+      "non_applicability": "Original generic-namespace binding/path-interceptor operations have no implementation in the replacement. Physical src separation and shared prefix/support provenance replace them; original sources, assertions, parameterization and successful 12-cell source execution remain historical evidence.",
+      "case_dispositions": {
+        "success": "Portable support is staged at its declared namespace; preserving original __file__ paths is deliberately inapplicable after tools receive explicit roots.",
+        "body-error": "Shared abort/error cleanup is exercised by the abort and cleanup-failure receiving modes and provider regressions.",
+        "wrong-source": "Shared support binds the actual selected files and checked-out source commit in every native receipt.",
+        "untracked": "Only explicit hash-bound declaration members are consumed; unrelated untracked files are deliberately outside that input set.",
+        "collision": "Shared support refuses preexisting namespace bindings; consumer collision mode executes in every installed cell.",
+        "descendant-collision": "Shared _available rejects already loaded descendants; provider regression covers this guard.",
+        "changed-bytes": "Shared input/staging hashes reject tampering; consumer tampered and changed-stage modes execute in every cell.",
+        "escaped-module": "Shared loaded-origin checks require declared staged code; provider regression and native support checks execute.",
+        "changed-binding": "Shared namespace identity checks reject a replaced package; provider regression retains this guard.",
+        "source-on-path": "The dedicated path-interceptor operation is removed. Physical src separation plus shared runtime-root provenance and the consumer src-substitution counterfactual protect the actual runtime."
+      }
+    },
+    "tests/test_installed_test_helpers.py::test_legacy_source_path_addition_is_refused_without_hiding_other_admin_paths": {
+      "scope": "tooling",
+      "reason": "Validates repository operations, configuration or source workflow evidence.",
+      "baseline_node": "tests/test_installed_test_helpers.py::test_legacy_source_path_addition_is_refused_without_hiding_other_admin_paths",
+      "baseline_assertions": [
+        {
+          "line": 153,
+          "expression": "assert value not in guarded and guarded.blocked == 1",
+          "sha256": "516b0668635a6dfb62622a8b431060f901d9d8db369d60b596bbba87c3d80a6b",
+          "scope": "tooling"
+        },
+        {
+          "line": 154,
+          "expression": "assert \"allowed\" in guarded or \"sdk-helpers\" in guarded",
+          "sha256": "d598a99054fa822ec38ea400e97002dec1d45bc3b015cd970d87049885ee0ed9",
+          "scope": "tooling"
+        }
+      ],
+      "minimum_assertions": 2,
+      "current_assertions": [
+        {
+          "line": 153,
+          "expression": "assert value not in guarded and guarded.blocked == 1",
+          "sha256": "516b0668635a6dfb62622a8b431060f901d9d8db369d60b596bbba87c3d80a6b"
+        },
+        {
+          "line": 154,
+          "expression": "assert \"allowed\" in guarded or \"sdk-helpers\" in guarded",
+          "sha256": "d598a99054fa822ec38ea400e97002dec1d45bc3b015cd970d87049885ee0ed9"
+        }
+      ],
+      "parameterization": [
+        "pytest.mark.parametrize(\"operation\", [\"insert\", \"append\", \"extend\", \"slice\", \"item\", \"iadd\"])"
+      ],
+      "baseline_parameterization": [
+        "pytest.mark.parametrize(\"operation\", [\"insert\", \"append\", \"extend\", \"slice\", \"item\", \"iadd\"])"
+      ],
+      "baseline_function_sha256": "cb506ec9328b0f2ee657e1d36309490db5428779538d8fef04be29bc88c4dd7c",
+      "required_gates": [
+        "source-native-complete"
+      ],
+      "disposition": "Retired implementation-specific adapter assertion after complete replacement native receiving, not skipped product coverage.",
+      "retired_on": "2026-10-29",
+      "receiving_run": 40935956394,
+      "receiving_sha": "4a687a3fc741531eee01808ba5294da993b4916e",
+      "successors": [
+        "tests/test_installed_qualification.py::test_shared_support_receives_portable_inputs_and_visible_failures",
+        "tests/test_installed_qualification.py::test_shared_runner_rejects_a_src_checkout_before_collection"
+      ],
+      "provider_tests": "uibcdf/molsyssuite@fee3bd875e68778844c0fffc2aba26b6cea02cd6:tests/test_installed_test_support.py; tests/test_installed_noarch.py",
+      "non_applicability": "Original generic-namespace binding/path-interceptor operations have no implementation in the replacement. Physical src separation and shared prefix/support provenance replace them; original sources, assertions, parameterization and successful 12-cell source execution remain historical evidence.",
+      "case_dispositions": {
+        "insert": "The GHR InstalledPath mutation hook is retired; there is no corresponding maintained operation. Shared prefix/loaded-root checks reject actual runtime substitution, exercised before collection in every native cell.",
+        "append": "The GHR InstalledPath mutation hook is retired; there is no corresponding maintained operation. Shared prefix/loaded-root checks reject actual runtime substitution, exercised before collection in every native cell.",
+        "extend": "The GHR InstalledPath mutation hook is retired; there is no corresponding maintained operation. Shared prefix/loaded-root checks reject actual runtime substitution, exercised before collection in every native cell.",
+        "slice": "The GHR InstalledPath mutation hook is retired; there is no corresponding maintained operation. Shared prefix/loaded-root checks reject actual runtime substitution, exercised before collection in every native cell.",
+        "item": "The GHR InstalledPath mutation hook is retired; there is no corresponding maintained operation. Shared prefix/loaded-root checks reject actual runtime substitution, exercised before collection in every native cell.",
+        "iadd": "The GHR InstalledPath mutation hook is retired; there is no corresponding maintained operation. Shared prefix/loaded-root checks reject actual runtime substitution, exercised before collection in every native cell."
+      }
     }
   }
 }

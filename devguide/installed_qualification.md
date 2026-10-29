@@ -1,8 +1,9 @@
 # Product, tooling and installed qualification
 
 Owner: uibcdf/gh-run-receptor#76; shared provider/receiving:
-uibcdf/molsyssuite#144. The structural direction is accepted; native replacement
-receiving remains provisional until its actual receipts are recorded.
+uibcdf/molsyssuite#144. Native replacement receiving is complete in run 40935956394: twelve cells,
+638 executed product/integration tests each, with the same original private file.
+The [receiving receipt](evidence/issue_76_qualification.json) records the boundary.
 
 ## Physical and import boundary
 
@@ -111,9 +112,16 @@ Support receipts preserve file hashes, loaded origins, test result and actual
 retirement. Missing/tampered inputs, changed staged bytes, source substitution,
 namespace collisions, abort and cleanup failures remain visible failures.
 
-The original-path adapter stays available only while replacement receiving is
-pending. Retire its maintained use/code after all required native scopes pass;
-retain original sources/receipts as history. Public 1.3.0 source, original Conda
+The maintained staged-file workflow calls the shared runner directly. The GHR
+original-path adapter is retired after complete native replacement receiving.
+Its two implementation-specific regression functions (sixteen cases) have an
+explicit retired inventory, original assertions and per-case successor or
+non-applicability rationale. The workflow-identity test moves to
+`test_installed_qualification_workflow.py` and retains its applicable assertions.
+Both original source-version checks remain active tooling. Historical 1.3.0
+recovery is reproducible from qualification source 08b83a0; historical producers
+retain their original tests/provider/profile and are not silently requalified by
+current development inputs. Public 1.3.0 source, original Conda
 file/hash, failed runs, qualification 08b83a0 and promotion are never rebuilt,
 replaced or relabeled as this refactor. Shared acceptance and immutable consumer
 handoff under #144 are required before coordinated closure.

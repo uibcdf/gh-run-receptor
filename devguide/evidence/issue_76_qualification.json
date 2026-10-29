@@ -1,0 +1,1403 @@
+{
+  "schema": "gh-run-receptor.issue-76-receiving@1",
+  "issue": "uibcdf/gh-run-receptor#76",
+  "public": false,
+  "product_source_sha": "dd0175a6816a5fe3a7e212b7246fbd7985487ea8",
+  "test_support_source_sha": "dd0175a6816a5fe3a7e212b7246fbd7985487ea8",
+  "qualification_sha": "4a687a3fc741531eee01808ba5294da993b4916e",
+  "provider_sha": "fee3bd875e68778844c0fffc2aba26b6cea02cd6",
+  "producer": {
+    "run_id": 40935030060,
+    "run_attempt": 1,
+    "artifact_id": 12923464844,
+    "artifact_digest": "sha256:4357a5005069520ac897211223ddc6643c1732270f1fceb97eb74b9c8d40a65c",
+    "filename": "gh-run-receptor-0.0.0-py_76.tar.bz2",
+    "sha256": "c4387f0ed4f7979f6463242cc6597006de1ab456c2bbe59ada8724280cc24ae5",
+    "version": "0.0.0",
+    "build_number": 76,
+    "plan_sha256": "2915705e973d43d19ee9b243e360166e436c232d2b0c833642715f868f4f0226"
+  },
+  "receiving": {
+    "run_id": 40935956394,
+    "run_attempt": 1,
+    "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40935956394",
+    "conclusion": "success",
+    "build_job": "skipped; original file reused",
+    "cells": [
+      {
+        "platform": "linux-64",
+        "python": "3.11",
+        "job_id": 123666454770,
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40935956394/job/123666454770",
+        "conclusion": "success",
+        "runner": "GitHub Actions 1000044304",
+        "artifact_id": 12925271447,
+        "artifact_digest": "sha256:257a2a19184de49b1328f90253b8fb41bc0eb58b8f9887da63b87efec67f7b51",
+        "artifact_sha256": "c4387f0ed4f7979f6463242cc6597006de1ab456c2bbe59ada8724280cc24ae5",
+        "before": "verified",
+        "after": "verified",
+        "origin": "local-candidate",
+        "executed_tests": 638,
+        "pytest_exit_code": 0,
+        "support_declaration_sha256": "ec479d42e6f0665db67fde8b7fd2ddb8e17311e1d1659147adaab45de73219b6",
+        "support_files": 17,
+        "support_checks": 7,
+        "imports_retired": true,
+        "resources_retired": true,
+        "receipt_files_sha256": {
+          "original-private-producer.json": "1ae243c6ee7d52867bf5c3ad627199de0d1041f442f1ed8fcc4815cf9a3fd7d2",
+          "tools.json": "1a88e6caf3d35522bf414229af837c5a4bdde7a8e10fcf3c2f62712f31f420d5",
+          "installation.json": "86beb0a228fd3a3064b55724032e2c6aaec512193732100ef27ccefa4abaead3",
+          "before.json": "5034002204ff5290856ece5a890bd92e41dbc8ee740cc6886260d4b210c847c4",
+          "support.json": "3a1c51559c8b8d60a7b0c72c984f26e5230d0a1b004493b18f7eccd0910d75e1",
+          "after.json": "5034002204ff5290856ece5a890bd92e41dbc8ee740cc6886260d4b210c847c4"
+        }
+      },
+      {
+        "platform": "linux-64",
+        "python": "3.12",
+        "job_id": 123666454830,
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40935956394/job/123666454830",
+        "conclusion": "success",
+        "runner": "GitHub Actions 1000044305",
+        "artifact_id": 12925600723,
+        "artifact_digest": "sha256:facec7909b8d2b8496d0c1129e8f5df891e62565a568566d26350079f76276d6",
+        "artifact_sha256": "c4387f0ed4f7979f6463242cc6597006de1ab456c2bbe59ada8724280cc24ae5",
+        "before": "verified",
+        "after": "verified",
+        "origin": "local-candidate",
+        "executed_tests": 638,
+        "pytest_exit_code": 0,
+        "support_declaration_sha256": "ec479d42e6f0665db67fde8b7fd2ddb8e17311e1d1659147adaab45de73219b6",
+        "support_files": 17,
+        "support_checks": 7,
+        "imports_retired": true,
+        "resources_retired": true,
+        "receipt_files_sha256": {
+          "original-private-producer.json": "1ae243c6ee7d52867bf5c3ad627199de0d1041f442f1ed8fcc4815cf9a3fd7d2",
+          "tools.json": "569ac31bd5c834bd20b0a12a76c1a1bec970f570216cdb600dd68e705b45e75d",
+          "installation.json": "500822b526878a65eb17c13c63cd4281782bbddbd03d044d6d475aeb9a187758",
+          "before.json": "701ce3c0db740df983b7176539b44cb8f08e7407a9bde8d8a9e65aaf9500d61e",
+          "support.json": "7cc2ff013b71ac8f2772a709b93b57046849d27c3ce506a6de0901157bf703eb",
+          "after.json": "701ce3c0db740df983b7176539b44cb8f08e7407a9bde8d8a9e65aaf9500d61e"
+        }
+      },
+      {
+        "platform": "linux-64",
+        "python": "3.13",
+        "job_id": 123666454510,
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40935956394/job/123666454510",
+        "conclusion": "success",
+        "runner": "GitHub Actions 1000044298",
+        "artifact_id": 12924153204,
+        "artifact_digest": "sha256:105c459ac14e6612b0526a6daba47db540b5707b9a7e6266a4b8a1da60848d3f",
+        "artifact_sha256": "c4387f0ed4f7979f6463242cc6597006de1ab456c2bbe59ada8724280cc24ae5",
+        "before": "verified",
+        "after": "verified",
+        "origin": "local-candidate",
+        "executed_tests": 638,
+        "pytest_exit_code": 0,
+        "support_declaration_sha256": "ec479d42e6f0665db67fde8b7fd2ddb8e17311e1d1659147adaab45de73219b6",
+        "support_files": 17,
+        "support_checks": 7,
+        "imports_retired": true,
+        "resources_retired": true,
+        "receipt_files_sha256": {
+          "original-private-producer.json": "1ae243c6ee7d52867bf5c3ad627199de0d1041f442f1ed8fcc4815cf9a3fd7d2",
+          "installation.json": "f8edd4337717e96e5d264ac7837baaa5e20e262b0d1b5a64c13a192cfc0ff3dd",
+          "tools.json": "37806f0bc69faff10cf71fe5714a6ebb118bb3548ce0ad7bf504b7adc46a6648",
+          "before.json": "09a7103a0d83ca9c0f70ad564b05a7412b38ae1297e7036ef7ebc7baab9e34c0",
+          "support.json": "c86f40699f81c5389483ded45b9203b4bebdcd6f08b939d353ca5248b88e46d2",
+          "after.json": "09a7103a0d83ca9c0f70ad564b05a7412b38ae1297e7036ef7ebc7baab9e34c0"
+        }
+      },
+      {
+        "platform": "linux-64",
+        "python": "3.14",
+        "job_id": 123666454385,
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40935956394/job/123666454385",
+        "conclusion": "success",
+        "runner": "GitHub Actions 1000044299",
+        "artifact_id": 12924258218,
+        "artifact_digest": "sha256:b431878867190fa8dd6fe41b966e8f9a4d09ccb6fde162ff6b1d9c057f843952",
+        "artifact_sha256": "c4387f0ed4f7979f6463242cc6597006de1ab456c2bbe59ada8724280cc24ae5",
+        "before": "verified",
+        "after": "verified",
+        "origin": "local-candidate",
+        "executed_tests": 638,
+        "pytest_exit_code": 0,
+        "support_declaration_sha256": "ec479d42e6f0665db67fde8b7fd2ddb8e17311e1d1659147adaab45de73219b6",
+        "support_files": 17,
+        "support_checks": 7,
+        "imports_retired": true,
+        "resources_retired": true,
+        "receipt_files_sha256": {
+          "original-private-producer.json": "1ae243c6ee7d52867bf5c3ad627199de0d1041f442f1ed8fcc4815cf9a3fd7d2",
+          "tools.json": "6e94db838dfc8d59e51c1368f37fb886a2add4b0d2682b1fc27f6842db196ed5",
+          "installation.json": "1ba9f5f637958aa347ebfc791b2b92652a09fad23ddf47c0833c150844b367f6",
+          "before.json": "736a75db3a1f0bcd52abf4d25ccd1c5f1ac113ae616eadc489ba70d0e8f203aa",
+          "support.json": "8866c2dac6fe8fa2f1d227ddae387b4b21822b4b76197ea4b19a0dd82dfd6e4a",
+          "after.json": "736a75db3a1f0bcd52abf4d25ccd1c5f1ac113ae616eadc489ba70d0e8f203aa"
+        }
+      },
+      {
+        "platform": "osx-arm64",
+        "python": "3.11",
+        "job_id": 123666454719,
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40935956394/job/123666454719",
+        "conclusion": "success",
+        "runner": "GitHub Actions 1000044308",
+        "artifact_id": 12925561008,
+        "artifact_digest": "sha256:911f2dc51c287f00f79344da355d0ced5a8f07a4f18c9ff3ba0ebd8624e45f90",
+        "artifact_sha256": "c4387f0ed4f7979f6463242cc6597006de1ab456c2bbe59ada8724280cc24ae5",
+        "before": "verified",
+        "after": "verified",
+        "origin": "local-candidate",
+        "executed_tests": 638,
+        "pytest_exit_code": 0,
+        "support_declaration_sha256": "ec479d42e6f0665db67fde8b7fd2ddb8e17311e1d1659147adaab45de73219b6",
+        "support_files": 17,
+        "support_checks": 7,
+        "imports_retired": true,
+        "resources_retired": true,
+        "receipt_files_sha256": {
+          "original-private-producer.json": "1ae243c6ee7d52867bf5c3ad627199de0d1041f442f1ed8fcc4815cf9a3fd7d2",
+          "tools.json": "44f7b0af844e31b25c8f9b0d3e162a221ed94cb2e0ab64e33d425040a63a95d3",
+          "installation.json": "fc7431f461141ed61c762214539cdc7c45173cde6b9126ae0572d6bd36e36d33",
+          "before.json": "262756990be04a5e6152516827971a5c65652678ca3ea2ad00cc4434e2e38d77",
+          "support.json": "ecc1747c69cda0c095475e733a74b3429ab0f81afc8d5bde448d28f7d0587117",
+          "after.json": "262756990be04a5e6152516827971a5c65652678ca3ea2ad00cc4434e2e38d77"
+        }
+      },
+      {
+        "platform": "osx-arm64",
+        "python": "3.12",
+        "job_id": 123666454905,
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40935956394/job/123666454905",
+        "conclusion": "success",
+        "runner": "GitHub Actions 1000044307",
+        "artifact_id": 12923429606,
+        "artifact_digest": "sha256:2bd77f399e98a76c36bb415f65c9d59c7a1ff75bd329df9f90dc65d441c43d3f",
+        "artifact_sha256": "c4387f0ed4f7979f6463242cc6597006de1ab456c2bbe59ada8724280cc24ae5",
+        "before": "verified",
+        "after": "verified",
+        "origin": "local-candidate",
+        "executed_tests": 638,
+        "pytest_exit_code": 0,
+        "support_declaration_sha256": "ec479d42e6f0665db67fde8b7fd2ddb8e17311e1d1659147adaab45de73219b6",
+        "support_files": 17,
+        "support_checks": 7,
+        "imports_retired": true,
+        "resources_retired": true,
+        "receipt_files_sha256": {
+          "original-private-producer.json": "1ae243c6ee7d52867bf5c3ad627199de0d1041f442f1ed8fcc4815cf9a3fd7d2",
+          "tools.json": "40357ecf37688d16f53155d72b0075cfc1b5a01e59829d51c1f766e098599bae",
+          "installation.json": "31824e92629db278fab1d992bc5c5e29649f4ef967b943934b9c09d0e04f38c6",
+          "before.json": "6855e82a48868fdcb2ead2a19aba4aeb9bfc0b0729020e0632a44d8a35f9ea33",
+          "support.json": "1294e6289b4cd38f3e5d0e6f27f64437a407f778710d2c4041f4bb68b2543083",
+          "after.json": "6855e82a48868fdcb2ead2a19aba4aeb9bfc0b0729020e0632a44d8a35f9ea33"
+        }
+      },
+      {
+        "platform": "osx-arm64",
+        "python": "3.13",
+        "job_id": 123666454395,
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40935956394/job/123666454395",
+        "conclusion": "success",
+        "runner": "GitHub Actions 1000044297",
+        "artifact_id": 12924523079,
+        "artifact_digest": "sha256:986a27aa33b3801d4756d42a1d7f33f983c0781ded2462da994afd262c2a3860",
+        "artifact_sha256": "c4387f0ed4f7979f6463242cc6597006de1ab456c2bbe59ada8724280cc24ae5",
+        "before": "verified",
+        "after": "verified",
+        "origin": "local-candidate",
+        "executed_tests": 638,
+        "pytest_exit_code": 0,
+        "support_declaration_sha256": "ec479d42e6f0665db67fde8b7fd2ddb8e17311e1d1659147adaab45de73219b6",
+        "support_files": 17,
+        "support_checks": 7,
+        "imports_retired": true,
+        "resources_retired": true,
+        "receipt_files_sha256": {
+          "tools.json": "60eb980af2edbaee639f26f2f1cecb55671eb73f218e3ad7406e107c393f7c5a",
+          "original-private-producer.json": "1ae243c6ee7d52867bf5c3ad627199de0d1041f442f1ed8fcc4815cf9a3fd7d2",
+          "before.json": "fde3f923d574f8b08f37bee1187b61d1293418abe6f08c10daa971061904eedb",
+          "installation.json": "06df714ea4ad0e0de58c8a1b6f34f6efc79bafa140382b7a04eff8c8424802a6",
+          "support.json": "173f5f9b1d2ae07292606e563db4d9c8a9441c555792df4e6574a4d5a2f9cb43",
+          "after.json": "fde3f923d574f8b08f37bee1187b61d1293418abe6f08c10daa971061904eedb"
+        }
+      },
+      {
+        "platform": "osx-arm64",
+        "python": "3.14",
+        "job_id": 123666453979,
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40935956394/job/123666453979",
+        "conclusion": "success",
+        "runner": "GitHub Actions 1000044296",
+        "artifact_id": 12925001268,
+        "artifact_digest": "sha256:59a97b48edc3c192743f2a91b4af4669aaf390ab0e7d0d6acf9929ec0c7fb7c2",
+        "artifact_sha256": "c4387f0ed4f7979f6463242cc6597006de1ab456c2bbe59ada8724280cc24ae5",
+        "before": "verified",
+        "after": "verified",
+        "origin": "local-candidate",
+        "executed_tests": 638,
+        "pytest_exit_code": 0,
+        "support_declaration_sha256": "ec479d42e6f0665db67fde8b7fd2ddb8e17311e1d1659147adaab45de73219b6",
+        "support_files": 17,
+        "support_checks": 7,
+        "imports_retired": true,
+        "resources_retired": true,
+        "receipt_files_sha256": {
+          "original-private-producer.json": "1ae243c6ee7d52867bf5c3ad627199de0d1041f442f1ed8fcc4815cf9a3fd7d2",
+          "tools.json": "420fbbe604b4538fbdfbadeeed3c73250456a9195acdb97921efa89dbcf5574d",
+          "installation.json": "e1c4490c43b1b4f366badf3bdf8fcd840532613c75f38b25f08e6dacfd45dec9",
+          "before.json": "7881c463bd0829fe593fdcf87218a0143e9c673beab01e0196e8397f33e1803e",
+          "support.json": "a9ba912f7ba67c1847c477c7976720c89ade7898025f7f953a532ce415837506",
+          "after.json": "7881c463bd0829fe593fdcf87218a0143e9c673beab01e0196e8397f33e1803e"
+        }
+      },
+      {
+        "platform": "win-64",
+        "python": "3.11",
+        "job_id": 123666454918,
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40935956394/job/123666454918",
+        "conclusion": "success",
+        "runner": "GitHub Actions 1000044301",
+        "artifact_id": 12925835373,
+        "artifact_digest": "sha256:1f7126b5f26f9bc449ff968819ab6a8f91ab87c689f49e7867a27900fd070556",
+        "artifact_sha256": "c4387f0ed4f7979f6463242cc6597006de1ab456c2bbe59ada8724280cc24ae5",
+        "before": "verified",
+        "after": "verified",
+        "origin": "local-candidate",
+        "executed_tests": 638,
+        "pytest_exit_code": 0,
+        "support_declaration_sha256": "ec479d42e6f0665db67fde8b7fd2ddb8e17311e1d1659147adaab45de73219b6",
+        "support_files": 17,
+        "support_checks": 7,
+        "imports_retired": true,
+        "resources_retired": true,
+        "receipt_files_sha256": {
+          "original-private-producer.json": "1ae243c6ee7d52867bf5c3ad627199de0d1041f442f1ed8fcc4815cf9a3fd7d2",
+          "tools.json": "c0b0112a9c63eb645b880109b8b16a9cc92b321433ba47a7fc07b3a8ba5146b3",
+          "installation.json": "4a6bcf5f67370b1f08a8bed69629c2181eeb0c34af0a2c08e685c0928d288250",
+          "before.json": "009f1a22fde0ed5257277edd5dd85485f8a72f5ad36902da174c9c4035d1b67b",
+          "support.json": "0a6a26e53acf7261474227b87954a255a99986cdf678d0021b432e6ed81b2fb6",
+          "after.json": "009f1a22fde0ed5257277edd5dd85485f8a72f5ad36902da174c9c4035d1b67b"
+        }
+      },
+      {
+        "platform": "win-64",
+        "python": "3.12",
+        "job_id": 123666454718,
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40935956394/job/123666454718",
+        "conclusion": "success",
+        "runner": "GitHub Actions 1000044302",
+        "artifact_id": 12924518561,
+        "artifact_digest": "sha256:95ccefe223f56e37a2ad0ec138febd768547f5ea8cc19ab22863e44b48594ed2",
+        "artifact_sha256": "c4387f0ed4f7979f6463242cc6597006de1ab456c2bbe59ada8724280cc24ae5",
+        "before": "verified",
+        "after": "verified",
+        "origin": "local-candidate",
+        "executed_tests": 638,
+        "pytest_exit_code": 0,
+        "support_declaration_sha256": "ec479d42e6f0665db67fde8b7fd2ddb8e17311e1d1659147adaab45de73219b6",
+        "support_files": 17,
+        "support_checks": 7,
+        "imports_retired": true,
+        "resources_retired": true,
+        "receipt_files_sha256": {
+          "original-private-producer.json": "1ae243c6ee7d52867bf5c3ad627199de0d1041f442f1ed8fcc4815cf9a3fd7d2",
+          "tools.json": "c6c44377ad79dc6baf7b49d1569ff98998a2dd1efc5546cb1549671449f911a4",
+          "installation.json": "d8be45fea198190997428d2eb3a3fa9853992c0a87827e47c5a6cc7caea41fcd",
+          "before.json": "e879c9ebfce18e94db9454238cbc610bbdd47571aaffceffd17144e0e0fc1c76",
+          "support.json": "85200021aa9aac279d0ebf2d6675055325364884ad62be83b55339656ecd360d",
+          "after.json": "e879c9ebfce18e94db9454238cbc610bbdd47571aaffceffd17144e0e0fc1c76"
+        }
+      },
+      {
+        "platform": "win-64",
+        "python": "3.13",
+        "job_id": 123666454415,
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40935956394/job/123666454415",
+        "conclusion": "success",
+        "runner": "GitHub Actions 1000044300",
+        "artifact_id": 12923619495,
+        "artifact_digest": "sha256:df2410d869ea95dd57adf0e8f06ff37faa66bd2c4dee29190693559c298eb5bd",
+        "artifact_sha256": "c4387f0ed4f7979f6463242cc6597006de1ab456c2bbe59ada8724280cc24ae5",
+        "before": "verified",
+        "after": "verified",
+        "origin": "local-candidate",
+        "executed_tests": 638,
+        "pytest_exit_code": 0,
+        "support_declaration_sha256": "ec479d42e6f0665db67fde8b7fd2ddb8e17311e1d1659147adaab45de73219b6",
+        "support_files": 17,
+        "support_checks": 7,
+        "imports_retired": true,
+        "resources_retired": true,
+        "receipt_files_sha256": {
+          "original-private-producer.json": "1ae243c6ee7d52867bf5c3ad627199de0d1041f442f1ed8fcc4815cf9a3fd7d2",
+          "tools.json": "c4d8c56d82bd506c76d64ff66be58d5bbf1a613ec81ff0a3fd30e97d159db988",
+          "installation.json": "3119f279dc0e05c8ed7139e7d9cdc14003be8f477a1fc4d4520748c03ff63a1f",
+          "before.json": "9a85f2b83d277225b3e5ff7b075ac35c336d067c3962cd04cadf1b6a09e1c669",
+          "support.json": "e6f1d00a8b2f3fe05e2362ef1dfdbfa7543da84ab689382068756f57a752b0c4",
+          "after.json": "9a85f2b83d277225b3e5ff7b075ac35c336d067c3962cd04cadf1b6a09e1c669"
+        }
+      },
+      {
+        "platform": "win-64",
+        "python": "3.14",
+        "job_id": 123666454636,
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40935956394/job/123666454636",
+        "conclusion": "success",
+        "runner": "GitHub Actions 1000044303",
+        "artifact_id": 12925815491,
+        "artifact_digest": "sha256:90df913ae40e1cadb268fe001b078cbeba2699393fc863012ea6556f8d34a973",
+        "artifact_sha256": "c4387f0ed4f7979f6463242cc6597006de1ab456c2bbe59ada8724280cc24ae5",
+        "before": "verified",
+        "after": "verified",
+        "origin": "local-candidate",
+        "executed_tests": 638,
+        "pytest_exit_code": 0,
+        "support_declaration_sha256": "ec479d42e6f0665db67fde8b7fd2ddb8e17311e1d1659147adaab45de73219b6",
+        "support_files": 17,
+        "support_checks": 7,
+        "imports_retired": true,
+        "resources_retired": true,
+        "receipt_files_sha256": {
+          "installation.json": "efc4b5eb14cad325aaa03871b5f054dcf3a29b76f8960ca45bf166d3738f3979",
+          "original-private-producer.json": "1ae243c6ee7d52867bf5c3ad627199de0d1041f442f1ed8fcc4815cf9a3fd7d2",
+          "tools.json": "67c671dfc275a2d7509ecf93a6ec248baade49b91976d6f8c99bf7dce6378687",
+          "before.json": "c91b6bb66341320ce34aed0cb9420e3af95b5ddb65bfb202fb9b196deb1513e6",
+          "support.json": "88b0dd95b1522c8d6ba15a9103a97616b31f04610c88a0042653a560a71de0d8",
+          "after.json": "c91b6bb66341320ce34aed0cb9420e3af95b5ddb65bfb202fb9b196deb1513e6"
+        }
+      }
+    ]
+  },
+  "receipt_hash_encoding": "SHA-256 of each parsed JSON record serialized with sorted keys and compact separators; archive digests cover the original ZIP bytes.",
+  "input_equivalence_after_retirement": {
+    "producer": "dd0175a6816a5fe3a7e212b7246fbd7985487ea8",
+    "runtime_tree": "unchanged",
+    "pyproject": "unchanged",
+    "recipe_and_private_plan": "unchanged",
+    "resource_and_support_declaration": "unchanged",
+    "support_files_unchanged": 17,
+    "product_integration_functions_unchanged": 333,
+    "collection_change": "Only two retired tooling functions and the migrated tooling workflow function; all product/integration assertions and parameterization unchanged.",
+    "limits": "Native installed receipts qualify the original private file and recorded test/support source. Final source CI validates retirement and its active inventory; no public artifact is requalified."
+  },
+  "source_native": {
+    "run_id": 40931884229,
+    "source_sha": "cc801c4f9f522ae486a7a65af2b09a0cee99ebbd",
+    "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40931884229",
+    "conclusion": "success",
+    "cells": [
+      {
+        "job_id": 123652168818,
+        "name": "ubuntu-latest \u00b7 Python 3.14",
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40931884229/job/123652168818",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install test and build tools",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123652169242,
+        "name": "ubuntu-latest \u00b7 Python 3.13",
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40931884229/job/123652169242",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install test and build tools",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123652169269,
+        "name": "macos-latest \u00b7 Python 3.13",
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40931884229/job/123652169269",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install test and build tools",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123652169282,
+        "name": "ubuntu-latest \u00b7 Python 3.12",
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40931884229/job/123652169282",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install test and build tools",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123652169347,
+        "name": "ubuntu-latest \u00b7 Python 3.11",
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40931884229/job/123652169347",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install test and build tools",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123652169369,
+        "name": "macos-latest \u00b7 Python 3.14",
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40931884229/job/123652169369",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install test and build tools",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123652169445,
+        "name": "windows-latest \u00b7 Python 3.11",
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40931884229/job/123652169445",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install test and build tools",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123652169464,
+        "name": "windows-latest \u00b7 Python 3.12",
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40931884229/job/123652169464",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install test and build tools",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123652169520,
+        "name": "macos-latest \u00b7 Python 3.12",
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40931884229/job/123652169520",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install test and build tools",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123652169568,
+        "name": "macos-latest \u00b7 Python 3.11",
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40931884229/job/123652169568",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install test and build tools",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123652169686,
+        "name": "windows-latest \u00b7 Python 3.14",
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40931884229/job/123652169686",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install test and build tools",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123652169722,
+        "name": "windows-latest \u00b7 Python 3.13",
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40931884229/job/123652169722",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Install test and build tools",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check distribution inputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Run the complete local suite",
+            "conclusion": "success"
+          },
+          {
+            "name": "Build wheel and source distribution",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify and install the wheel",
+            "conclusion": "success"
+          },
+          {
+            "name": "Smoke test the installed command outside the checkout",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Set up Python",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the reviewed distribution SDK",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ]
+  },
+  "action_native": {
+    "run_id": 40931889607,
+    "source_sha": "cc801c4f9f522ae486a7a65af2b09a0cee99ebbd",
+    "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40931889607",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "job_id": 123652187997,
+        "name": "ubuntu-latest",
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40931889607/job/123652187997",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Validate the GitHub CLI script extension",
+            "conclusion": "success"
+          },
+          {
+            "name": "Report a completed successful run",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify completed-run outputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Report this still-active run",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify active-run truth",
+            "conclusion": "success"
+          },
+          {
+            "name": "Report a completed failed run without failing the reporter",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify failed-source separation",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Report a completed failed run without failing the reporter",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Report this still-active run",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Report a completed successful run",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123652188472,
+        "name": "windows-latest",
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40931889607/job/123652188472",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Validate the GitHub CLI script extension",
+            "conclusion": "success"
+          },
+          {
+            "name": "Report a completed successful run",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify completed-run outputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Report this still-active run",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify active-run truth",
+            "conclusion": "success"
+          },
+          {
+            "name": "Report a completed failed run without failing the reporter",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Verify failed-source separation",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Post Report this still-active run",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Report a completed successful run",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "job_id": 123652188721,
+        "name": "macos-latest",
+        "url": "https://github.com/uibcdf/gh-run-receptor/actions/runs/40931889607/job/123652188721",
+        "conclusion": "success",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success"
+          },
+          {
+            "name": "Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Validate the GitHub CLI script extension",
+            "conclusion": "success"
+          },
+          {
+            "name": "Report a completed successful run",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify completed-run outputs",
+            "conclusion": "success"
+          },
+          {
+            "name": "Report this still-active run",
+            "conclusion": "success"
+          },
+          {
+            "name": "Verify active-run truth",
+            "conclusion": "success"
+          },
+          {
+            "name": "Report a completed failed run without failing the reporter",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Verify failed-source separation",
+            "conclusion": "skipped"
+          },
+          {
+            "name": "Post Report this still-active run",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Report a completed successful run",
+            "conclusion": "success"
+          },
+          {
+            "name": "Post Check out the exact source",
+            "conclusion": "success"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success"
+          }
+        ]
+      }
+    ]
+  },
+  "provider": {
+    "pr": "https://github.com/uibcdf/molsyssuite/pull/157",
+    "reviewed_sha": "fee3bd875e68778844c0fffc2aba26b6cea02cd6",
+    "merge_sha": "31613c2322eab767fb316c5737bf4f56cba48d6d",
+    "pr_native_run": 40919434758,
+    "merge_native_run": 40920603151,
+    "focused_local_tests_passed": 57,
+    "broad_local_limit": "562 passed, one opt-in Mamba skip, one inherited workspace dependency-closure fixture failure; native clean-environment full suite passed."
+  },
+  "failed_receiving_history": [
+    {
+      "run_id": 40925642094,
+      "conclusion": "failure",
+      "file_built": false,
+      "cause": "Private plan was not colocated with its recipe."
+    },
+    {
+      "run_id": 40927320067,
+      "conclusion": "failure",
+      "file_built": false,
+      "cause": "Shell conda function selected base environment without conda-build."
+    },
+    {
+      "run_id": 40931878568,
+      "conclusion": "failure",
+      "file_built": false,
+      "cause": "Login-profile activation bootstrap failed."
+    },
+    {
+      "run_id": 40935030060,
+      "conclusion": "failure",
+      "file_built": true,
+      "cause": "Original artifact contains nested parent directories; expected install path absent. Original file reused in successful receiving."
+    }
+  ],
+  "historical_public_1_3_0": {
+    "changed": false,
+    "producer_run": 40143062622,
+    "product_source_sha": "5a48759a399a17a16d923851b32519983a836f5f",
+    "filename": "gh-run-receptor-1.3.0-py_0.tar.bz2",
+    "sha256": "65f33b29dad70eb9e779f917e4c553d27effa4fddc2740a0260d259866746fd3",
+    "failed_installed_run": 40143357716,
+    "qualification_sha": "08b83a0e853aff5c563ad9b19d0ddffb15e030f8",
+    "qualified_run": 40144989781,
+    "promotion_run": 40145282787
+  }
+}

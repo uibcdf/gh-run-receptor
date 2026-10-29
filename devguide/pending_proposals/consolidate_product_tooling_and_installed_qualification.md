@@ -215,3 +215,48 @@ same-repository download. Canonical checkout bytes preserve the original plan
 hash on Windows. Qualification/workflow identity remains the new run; product
 and test/support source remain the original committed candidate. No archive is
 rebuilt, no record is relabeled as staged/public, and no test is waived.
+
+
+## Installed receiving and adapter retirement — 2026-10-29
+
+Run 40935956394/attempt 1 at 4a687a3fc741531eee01808ba5294da993b4916e
+passes all twelve native installed cells. Its build job is deliberately skipped:
+all cells consume the original dd0175a private file and SHA-256 recorded above.
+The original producer/test-support source, newer qualification workflow and
+accepted shared fee3bd8 provider remain distinct. All twelve Actions artifact
+digests and six JSON records per cell were downloaded and checked. Each cell
+executes 638 product/integration tests, exits zero, verifies exact installed
+files/resources/metadata/launchers before and after execution, performs seven
+support checks and reports imports_retired/resources_retired true. The ordinary
+public dependency closure and local-candidate origin remain explicit.
+
+Only after that receiving, remove active installed_test_helpers.py and its
+GHR-specific import/path interception; the maintained staged-file workflow calls
+shared installed_noarch tests/support directly. Preserve its applicable
+workflow/source/artifact assertions in a dedicated workflow test. Two legacy
+implementation-specific functions (sixteen cases) retire with complete original
+assertion/function/parameterization evidence, per-case successor or explicit
+non-applicability, and the prior successful twelve-cell source run. This removes
+no failing test and creates no new skip. The active inventory has 444 functions:
+312 product, 111 tooling and 21 integration; all 437 baseline functions remain
+traceable through active or retired records. Both source-version repository
+checks remain active tooling.
+
+The final retirement changes no product source, installed selection, support
+code/hash or product/integration function body relative to dd0175a. Reuse of
+those exact-file native receipts is limited to that unchanged execution input
+set. The final complete source gate and native compatibility validate the
+changed workflow assertions and active collection inventory separately. Public
+1.3.0 producer, file, tag, failed attempts, original qualification and promotion
+remain immutable. The central shared implementation is merged and received;
+#144 receives this immutable consumer handoff for its own coordination record.
+
+
+Local retirement gate: 830 passed / the same explicit Conda-only source skip,
+with all shared-provider receiving checks executed in the isolated normal
+editable profile. The sixteen removed cases exclusively exercise the retired
+implementation; the preserved workflow test still executes. All 437 baseline
+functions account as 435 active and two explicitly retired; there is no
+unaccounted function. Ruff passes 237 files, strict Sphinx passes, all nine frozen
+contracts and all 30 reviewed distribution routes pass. The existing public
+pytest renderer ResourceWarning remains visible and is not suppressed.

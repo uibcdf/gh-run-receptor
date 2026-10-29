@@ -100,7 +100,7 @@ reason = "Manual reviewed candidate SHA/version, owner preflight and immutable s
 
 [[workflows]]
 path = ".github/workflows/test-staged-conda.yml"
-sha256 = "f74002517712d1aab05390866baaf715b37764b3183c5217497d73f4e94427bb"
+sha256 = "def39f795b137d087c5cfd767b9f911c53b7d9752e61d0ccebd84f235fa43ada"
 reason = "Manual immutable producer SHA/file/digest qualification through the shared twelve-cell installed workflow; public dependency resolution and no publication credential."
 
 [[workflows]]

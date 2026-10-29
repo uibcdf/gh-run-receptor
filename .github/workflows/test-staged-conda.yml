@@ -27,15 +27,20 @@ jobs:
       version: ${{ steps.prepare.outputs.version }}
       build_number: ${{ steps.prepare.outputs.build_number }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: ${{ inputs.candidate_sha }}
+          fetch-depth: 0
           path: component
           persist-credentials: false
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        env:
+          GIT_CONFIG_COUNT: '1'
+          GIT_CONFIG_KEY_0: core.autocrlf
+          GIT_CONFIG_VALUE_0: 'false'
         with:
           repository: uibcdf/molsyssuite
-          ref: 6d6172d6cd00c5ac2d4ebadb71df554ec5b7fa26
+          ref: fee3bd875e68778844c0fffc2aba26b6cea02cd6
           path: .molsyssuite
           persist-credentials: false
       - uses: actions/setup-python@v5
@@ -78,22 +83,32 @@ jobs:
     defaults:
       run:
         shell: bash -el {0}
+    env:
+      GH_RECEPTOR_SUITE_ROOT: ${{ github.workspace }}/.molsyssuite
+      GHR_EXPECT_INSTALLED: '1'
+      TEST_SUPPORT_CANDIDATE_SHA: ${{ inputs.candidate_sha }}
+      TEST_SUPPORT_QUALIFICATION_SHA: ${{ github.sha }}
+      TEST_SUPPORT_PROVIDER_SHA: fee3bd875e68778844c0fffc2aba26b6cea02cd6
+      TEST_SUPPORT_FILENAME: ${{ inputs.filename }}
+      TEST_SUPPORT_SHA256: ${{ inputs.sha256 }}
+      TEST_SUPPORT_RUN_ID: ${{ github.run_id }}
+      TEST_SUPPORT_RUN_ATTEMPT: ${{ github.run_attempt }}
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ inputs.candidate_sha }}
-          path: component
-          persist-credentials: false
-      - uses: actions/checkout@v4
-        with:
-          repository: uibcdf/molsyssuite
-          ref: 6d6172d6cd00c5ac2d4ebadb71df554ec5b7fa26
-          path: .molsyssuite
-          persist-credentials: false
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
-          ref: ${{ github.sha }}
-          path: qualification
+          ref: ${{ inputs.candidate_sha }}
+          fetch-depth: 0
+          path: component
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        env:
+          GIT_CONFIG_COUNT: '1'
+          GIT_CONFIG_KEY_0: core.autocrlf
+          GIT_CONFIG_VALUE_0: 'false'
+        with:
+          repository: uibcdf/molsyssuite
+          ref: fee3bd875e68778844c0fffc2aba26b6cea02cd6
+          path: .molsyssuite
           persist-credentials: false
       - uses: conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb # v4
         with:
@@ -160,22 +175,17 @@ jobs:
           conda activate installed
           python "$TOOL_ROOT/devtools/scripts/installed_noarch.py" verify --root "$COMPONENT_ROOT" \
             --filename "$FILENAME" --sha256 "$SHA256" --directory "$RUNNER_TEMP/noarch-artifact" \
-            --platform "$PLATFORM" --python "$PYTHON"
+            --platform "$PLATFORM" --python "$PYTHON" --output "$RUNNER_TEMP/installed-before.json"
       - name: Run installed tests
         working-directory: ${{ runner.temp }}
-        # Safe-path applies to the installed test interpreter; original source helpers
-        # are bound explicitly without adding the component runtime source root.
         env:
           COMPONENT_ROOT: ${{ github.workspace }}/component
           TOOL_ROOT: ${{ github.workspace }}/.molsyssuite
-          CANDIDATE_SHA: ${{ inputs.candidate_sha }}
-          QUALIFICATION_ROOT: ${{ github.workspace }}/qualification
         run: |
           source "$(cygpath -u "$CONDA" 2>/dev/null || echo "$CONDA")/etc/profile.d/conda.sh"
           conda activate installed
-          python -P "$QUALIFICATION_ROOT/devtools/scripts/installed_test_helpers.py" \
-          --root "$COMPONENT_ROOT" --suite-root "$TOOL_ROOT" \
-          --candidate-sha "$CANDIDATE_SHA" --output "$RUNNER_TEMP/installed-admin-helpers.json"
+          python -P "$TOOL_ROOT/devtools/scripts/installed_noarch.py" tests \
+            --root "$COMPONENT_ROOT" --output "$RUNNER_TEMP/installed-shared-support.json"
       - name: Recheck installed provenance after scientific tests
         working-directory: ${{ runner.temp }}
         env:
@@ -190,7 +200,7 @@ jobs:
           conda activate installed
           python "$TOOL_ROOT/devtools/scripts/installed_noarch.py" verify --root "$COMPONENT_ROOT" \
             --filename "$FILENAME" --sha256 "$SHA256" --directory "$RUNNER_TEMP/noarch-artifact" \
-            --platform "$PLATFORM" --python "$PYTHON"
+            --platform "$PLATFORM" --python "$PYTHON" --output "$RUNNER_TEMP/installed-after.json"
       - name: Retain qualification tool evidence
         if: always()
         uses: actions/upload-artifact@v4
@@ -198,11 +208,14 @@ jobs:
           name: installed-test-tools-${{ matrix.platform }}-py${{ matrix.python }}
           path: ${{ runner.temp }}/installed-test-tools.json
           if-no-files-found: warn
-      - name: Retain administrative helper evidence
+      - name: Retain shared support and provenance evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: installed-admin-helpers-${{ matrix.platform }}-py${{ matrix.python }}
-          path: ${{ runner.temp }}/installed-admin-helpers.json
+          name: installed-shared-support-${{ matrix.platform }}-py${{ matrix.python }}
+          path: |
+            ${{ runner.temp }}/installed-shared-support.json
+            ${{ runner.temp }}/installed-before.json
+            ${{ runner.temp }}/installed-after.json
           if-no-files-found: warn
           retention-days: 30
