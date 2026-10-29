@@ -94,7 +94,8 @@ def test_watch_emits_only_changes_and_backs_off_when_unchanged():
     assert final.snapshot.reusable_terminal_jobs is True
     assert delays == [2, 3.0, 2]
     assert messages == [
-        "watch: uibcdf/molsysmt run=42 attempt=1 | status=in_progress | jobs=0/1",
+        "watch: uibcdf/molsysmt run=42 attempt=1 | status=in_progress | "
+        "jobs=completed:0,in_progress:0,queued:1,total:1",
         "job started: build (linux-64)",
         "job completed: build (linux-64) | conclusion=success",
         "run completed: conclusion=success | jobs=1/1",
@@ -219,3 +220,126 @@ def test_watch_stops_after_bounded_consecutive_errors():
         )
 
     assert sum(message.startswith("watch degraded:") for message in messages) == 2
+
+
+@pytest.mark.parametrize(
+    ("statuses", "expected_counts"),
+    [
+        (["in_progress"] * 12 + ["queued"] * 2, "completed:0,in_progress:12,queued:2,total:14"),
+        (
+            ["completed"] + ["in_progress"] * 12 + ["queued"],
+            "completed:1,in_progress:12,queued:1,total:14",
+        ),
+        ([], "completed:0,in_progress:0,queued:0,total:0"),
+        (["completed"] * 3, "completed:3,in_progress:0,queued:0,total:3"),
+        (["in_progress"] * 4, "completed:0,in_progress:4,queued:0,total:4"),
+        (["queued"] * 3, "completed:0,in_progress:0,queued:3,total:3"),
+    ],
+)
+def test_initial_watch_counts_describe_jobs_without_overriding_run_state(statuses, expected_counts):
+    initial = {
+        "run": {"status": "queued", "conclusion": None, "run_attempt": 1},
+        "jobs": {
+            "total_count": len(statuses),
+            "jobs": [
+                {
+                    "id": index,
+                    "name": f"job {index}",
+                    "status": status,
+                    "conclusion": (
+                        ["failure", "cancelled", "timed_out"][(index - 1) % 3]
+                        if status == "completed"
+                        else None
+                    ),
+                }
+                for index, status in enumerate(statuses, start=1)
+            ],
+        },
+    }
+    terminal = {
+        "run": {"status": "completed", "conclusion": "failure", "run_attempt": 1},
+        "jobs": {
+            "total_count": len(statuses),
+            "jobs": [
+                dict(
+                    job,
+                    status="completed",
+                    conclusion=job["conclusion"] or ("failure" if index == 0 else "success"),
+                )
+                for index, job in enumerate(initial["jobs"]["jobs"])
+            ],
+        },
+    }
+    messages = []
+    delays = []
+
+    result = watch_run(
+        FakeClient([initial, initial, terminal]),
+        "uibcdf/example",
+        42,
+        interval=2,
+        max_interval=10,
+        emit=messages.append,
+        sleep=delays.append,
+    )
+
+    assert messages[0] == (
+        f"watch: uibcdf/example run=42 attempt=1 | status=queued | jobs={expected_counts}"
+    )
+    assert messages.count(messages[0]) == 1
+    assert not any(message.startswith("job started:") for message in messages)
+    assert result.conclusion == terminal["run"]["conclusion"] == "failure"
+    assert result.snapshot.jobs == terminal["jobs"]
+    assert result.successful_snapshots == 3
+    assert result.successful_poll_requests == 6
+    assert delays == [2, 3.0]
+    assert len(messages[0]) < 200
+
+
+@pytest.mark.parametrize(
+    "other_status",
+    [None, "pending", "waiting", "requested", "future_state", "x" * 10000 + "\x1b[31m\n"],
+    ids=["missing", "pending", "waiting", "requested", "future", "untrusted-large"],
+)
+def test_initial_watch_counts_bound_other_states_without_changing_source_facts(other_status):
+    initial = {
+        "run": {"status": "queued", "conclusion": None, "run_attempt": 1},
+        "jobs": {
+            "total_count": 3,
+            "jobs": [
+                {"id": index, "name": f"job {index}", "status": status, "conclusion": None}
+                for index, status in enumerate(["in_progress", other_status, None], start=1)
+            ],
+        },
+    }
+    snapshot = fetch_snapshot(FakeClient([initial]), "uibcdf/example", 42)
+    terminal = {
+        "run": {"status": "completed", "conclusion": "cancelled", "run_attempt": 1},
+        "jobs": {
+            "total_count": 3,
+            "jobs": [
+                dict(job, status="completed", conclusion="cancelled")
+                for job in initial["jobs"]["jobs"]
+            ],
+        },
+    }
+    messages = []
+
+    result = watch_run(
+        FakeClient([initial, terminal]),
+        "uibcdf/example",
+        42,
+        emit=messages.append,
+        sleep=lambda _: None,
+    )
+
+    assert [job.status for job in snapshot.state.jobs] == ["in_progress", other_status, None]
+    assert snapshot.state.status == "queued"
+    assert messages[0] == (
+        "watch: uibcdf/example run=42 attempt=1 | status=queued | "
+        "jobs=completed:0,in_progress:1,queued:0,other:2,total:3"
+    )
+    assert len(messages[0]) < 200
+    assert "\x1b" not in messages[0] and "\n" not in messages[0]
+    assert result.conclusion == "cancelled"
+    assert result.successful_poll_requests == 4

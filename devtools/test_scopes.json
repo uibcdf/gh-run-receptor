@@ -23413,8 +23413,8 @@
         },
         {
           "line": 96,
-          "expression": "assert messages == [\n        \"watch: uibcdf/molsysmt run=42 attempt=1 | status=in_progress | jobs=0/1\",\n        \"job started: build (linux-64)\",\n        \"job completed: build (linux-64) | conclusion=success\",\n        \"run completed: conclusion=success | jobs=1/1\",\n    ]",
-          "sha256": "68d74a27f00fc25b2eee7cd96cae800b96efbf117c233cdc503513883cf03cf1"
+          "expression": "assert messages == [\n        \"watch: uibcdf/molsysmt run=42 attempt=1 | status=in_progress | \"\n        \"jobs=completed:0,in_progress:0,queued:1,total:1\",\n        \"job started: build (linux-64)\",\n        \"job completed: build (linux-64) | conclusion=success\",\n        \"run completed: conclusion=success | jobs=1/1\",\n    ]",
+          "sha256": "a9bc5ef62665e2ddbc0acb68c414914c6ecab57ccc9469a19b20b61e2a07f8a0"
         }
       ],
       "parameterization": [],
@@ -23464,27 +23464,27 @@
       "minimum_assertions": 5,
       "current_assertions": [
         {
-          "line": 117,
+          "line": 118,
           "expression": "assert final.conclusion == \"failure\"",
           "sha256": "97f6bee5456c17305039db11313ea025bf6e32f07ff676b8aa1220cd69f015ed"
         },
         {
-          "line": 118,
+          "line": 119,
           "expression": "assert final.successful_snapshots == 1",
           "sha256": "73ea4b73397f1831353ae94605147ad8bdf9be7d88f90aff4c4d0d18b2143061"
         },
         {
-          "line": 119,
+          "line": 120,
           "expression": "assert final.successful_poll_requests == 2",
           "sha256": "59570fc21aadecd0a5278899b67a76184ea1ac2151606005f77bf2afd15a91ae"
         },
         {
-          "line": 120,
+          "line": 121,
           "expression": "assert messages == []",
           "sha256": "f13eb3a9d576c65b4a2e67583f192e97e3da970670c308812df8a9b969272d35"
         },
         {
-          "line": 121,
+          "line": 122,
           "expression": "assert delays == []",
           "sha256": "0219a58d2353ae0b6513259b7202b429a0af06c99d9627fb42e96966864619c4"
         }
@@ -23530,22 +23530,22 @@
       "minimum_assertions": 4,
       "current_assertions": [
         {
-          "line": 128,
+          "line": 129,
           "expression": "assert state.attempt == 1",
           "sha256": "bfa254ffd2d22437cd700d0f888d1bd852169d65ac7f6db6d314fcc3e6677b51"
         },
         {
-          "line": 129,
+          "line": 130,
           "expression": "assert state.conclusion == \"failure\"",
           "sha256": "1f421c853550a92576a93bcdff6193ddcb1e426cbd66b8d1865dbcc0220ee9ef"
         },
         {
-          "line": 130,
+          "line": 131,
           "expression": "assert state.jobs[0].conclusion == \"failure\"",
           "sha256": "b7f7214f55f50b8ad32f762db2f3771ddc20600ff320a400900b8e381919316d"
         },
         {
-          "line": 131,
+          "line": 132,
           "expression": "assert snapshot.api_requests == 3",
           "sha256": "2d3bfc4230314db586ff4ef0e716dfa52446b98c434227b8c95b093b6f950dda"
         }
@@ -23585,17 +23585,17 @@
       "minimum_assertions": 3,
       "current_assertions": [
         {
-          "line": 153,
+          "line": 154,
           "expression": "assert snapshot.api_requests == 3",
           "sha256": "2d3bfc4230314db586ff4ef0e716dfa52446b98c434227b8c95b093b6f950dda"
         },
         {
-          "line": 154,
+          "line": 155,
           "expression": "assert [job.name for job in snapshot.state.jobs] == [\"first\", \"second\"]",
           "sha256": "e3c4c50644672eb2db6189de7907524eb02637eeea39610394bb0ebfb2f457c0"
         },
         {
-          "line": 139,
+          "line": 140,
           "expression": "assert paginate is True",
           "sha256": "a6b83e35d79ec4239e396d4db86c5e8d398f19c749cbe4d9c1e62f6a6f6e087d"
         }
@@ -23629,12 +23629,12 @@
       "minimum_assertions": 2,
       "current_assertions": [
         {
-          "line": 164,
+          "line": 165,
           "expression": "assert snapshot.state.terminal is True",
           "sha256": "07a38a3e1f90bb1aceccfc1e486ec40ff78a4de13800c713bfeef28264eb8f8b"
         },
         {
-          "line": 165,
+          "line": 166,
           "expression": "assert snapshot.reusable_terminal_jobs is False",
           "sha256": "ef40e02c9c796907f87978d6dc573ac36197369e441d15bfc71426b06e97a1f3"
         }
@@ -23686,27 +23686,27 @@
       "minimum_assertions": 5,
       "current_assertions": [
         {
-          "line": 184,
+          "line": 185,
           "expression": "assert messages.count(\"job completed: build (linux-64) | conclusion=success\") == 1",
           "sha256": "c07555d12140a4c97f379a2db88ef3e68e77d16c467a8e03e13dac693baa156d"
         },
         {
-          "line": 185,
+          "line": 186,
           "expression": "assert any(message.startswith(\"watch degraded: attempt=1/3\") for message in messages)",
           "sha256": "497654c5371eb3cf4f70d5ed54f3ec5f5058e50e16722077a92670278d80076d"
         },
         {
-          "line": 186,
+          "line": 187,
           "expression": "assert result.successful_snapshots == 2",
           "sha256": "ecfbc80467e022fe2576d91ca98915dd3ad27127dd106fda453c87a17e37dba1"
         },
         {
-          "line": 187,
+          "line": 188,
           "expression": "assert result.successful_poll_requests == 4",
           "sha256": "bf8a68abad472000814058508cc8ac892a5a7287fc34c50e6b0ed285949be24a"
         },
         {
-          "line": 188,
+          "line": 189,
           "expression": "assert client.run_calls == 3",
           "sha256": "511753108f409235dfda74205b716e2dcc57516cb0a961e6273b6a7a8c6de425"
         }
@@ -23734,7 +23734,7 @@
       "minimum_assertions": 1,
       "current_assertions": [
         {
-          "line": 200,
+          "line": 201,
           "expression": "assert transitions(previous, current) == [\"job discovered: build\\\\u001b[31m | status=queued\"]",
           "sha256": "2029c3838efa4cdb422d0dbc7c3c510e3d8a36344666ba32504af21a595256f5"
         }
@@ -23762,7 +23762,7 @@
       "minimum_assertions": 1,
       "current_assertions": [
         {
-          "line": 221,
+          "line": 222,
           "expression": "assert sum(message.startswith(\"watch degraded:\") for message in messages) == 2",
           "sha256": "c71670553078b1865ed4e9fae2da926713f8fb567cfb9e56d5d3e151874f1f36"
         }
@@ -24952,6 +24952,122 @@
       "baseline_function_sha256": "9159ded25e43838488b22b5ba41c8d0eccab833b6c889c046c65ca5db8b8fd90",
       "required_gates": [
         "source-native-complete"
+      ]
+    },
+    "tests/test_watch.py::test_initial_watch_counts_describe_jobs_without_overriding_run_state": {
+      "scope": "product",
+      "reason": "Initial watch progress must preserve structured source states, bounded presentation and polling/terminal semantics (#74).",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 9,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 286,
+          "expression": "assert messages[0] == (\n        f\"watch: uibcdf/example run=42 attempt=1 | status=queued | jobs={expected_counts}\"\n    )",
+          "sha256": "6b76fd9ff3cfb2e0c0b85f04e0516322e0d0835eda171cca7764edea8ac896fb"
+        },
+        {
+          "line": 289,
+          "expression": "assert messages.count(messages[0]) == 1",
+          "sha256": "350ed9d6958d742df4f59e25f163eeb98eed527a3917469372edbd287c94ed00"
+        },
+        {
+          "line": 290,
+          "expression": "assert not any(message.startswith(\"job started:\") for message in messages)",
+          "sha256": "f73eb7f4c8c3d7a66830c16e79f08ffb89167248dd0df0e78ebbe00a6a9fa0b2"
+        },
+        {
+          "line": 291,
+          "expression": "assert result.conclusion == terminal[\"run\"][\"conclusion\"] == \"failure\"",
+          "sha256": "81af1113d1c5cffe5e91a23dc356a14dec9c61503cf043fef9efc17ad3f19b76"
+        },
+        {
+          "line": 292,
+          "expression": "assert result.snapshot.jobs == terminal[\"jobs\"]",
+          "sha256": "be66a7d63a0d4379904eb15e46fe997c8a7ab5fd8d715a98132865ebcaefd7dc"
+        },
+        {
+          "line": 293,
+          "expression": "assert result.successful_snapshots == 3",
+          "sha256": "40211c6348b8e6ba8d91318ee308d25ba131f71991b3bfd4f1c41850bbb83c44"
+        },
+        {
+          "line": 294,
+          "expression": "assert result.successful_poll_requests == 6",
+          "sha256": "ac120fe8b3310822522e53e2f3768a40b5f18c80d6740fd986cea120dab197ba"
+        },
+        {
+          "line": 295,
+          "expression": "assert delays == [2, 3.0]",
+          "sha256": "f27fa9db9ae58636f7031a523f07512a480ff91e227d2a9fb1496e132c7d12fe"
+        },
+        {
+          "line": 296,
+          "expression": "assert len(messages[0]) < 200",
+          "sha256": "21bfa4504e9a2d1940df594b9e9515370a4648c58064a62aea88dc81fb66620f"
+        }
+      ],
+      "parameterization": [
+        "pytest.mark.parametrize(\n    (\"statuses\", \"expected_counts\"),\n    [\n        ([\"in_progress\"] * 12 + [\"queued\"] * 2, \"completed:0,in_progress:12,queued:2,total:14\"),\n        (\n            [\"completed\"] + [\"in_progress\"] * 12 + [\"queued\"],\n            \"completed:1,in_progress:12,queued:1,total:14\",\n        ),\n        ([], \"completed:0,in_progress:0,queued:0,total:0\"),\n        ([\"completed\"] * 3, \"completed:3,in_progress:0,queued:0,total:3\"),\n        ([\"in_progress\"] * 4, \"completed:0,in_progress:4,queued:0,total:4\"),\n        ([\"queued\"] * 3, \"completed:0,in_progress:0,queued:3,total:3\"),\n    ],\n)"
+      ]
+    },
+    "tests/test_watch.py::test_initial_watch_counts_bound_other_states_without_changing_source_facts": {
+      "scope": "product",
+      "reason": "Initial watch progress must preserve structured source states, bounded presentation and polling/terminal semantics (#74).",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 7,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 336,
+          "expression": "assert [job.status for job in snapshot.state.jobs] == [\"in_progress\", other_status, None]",
+          "sha256": "c1090f13f2a3c4a8c697b897bbdbdb45ecffaf2983750c40cbf33ee78ec9e21f"
+        },
+        {
+          "line": 337,
+          "expression": "assert snapshot.state.status == \"queued\"",
+          "sha256": "7ba179bfb6e40af22929526c2e43fd731c7dfb06acb6a60cb4bf84fef4907931"
+        },
+        {
+          "line": 338,
+          "expression": "assert messages[0] == (\n        \"watch: uibcdf/example run=42 attempt=1 | status=queued | \"\n        \"jobs=completed:0,in_progress:1,queued:0,other:2,total:3\"\n    )",
+          "sha256": "f200d0ced3cb3bd90804e5da321afeeef2bc3746d9b7ade308957b60328dc3a8"
+        },
+        {
+          "line": 342,
+          "expression": "assert len(messages[0]) < 200",
+          "sha256": "21bfa4504e9a2d1940df594b9e9515370a4648c58064a62aea88dc81fb66620f"
+        },
+        {
+          "line": 343,
+          "expression": "assert \"\\x1b\" not in messages[0] and \"\\n\" not in messages[0]",
+          "sha256": "ee743072b93b0d051dacdb860e8046b108c72db13abc22a6ba82119eb2fbee5d"
+        },
+        {
+          "line": 344,
+          "expression": "assert result.conclusion == \"cancelled\"",
+          "sha256": "bfe4b838209c66348dcb3d771c0cb8c937ca967a676b9223d01ab674b8e69463"
+        },
+        {
+          "line": 345,
+          "expression": "assert result.successful_poll_requests == 4",
+          "sha256": "bf8a68abad472000814058508cc8ac892a5a7287fc34c50e6b0ed285949be24a"
+        }
+      ],
+      "parameterization": [
+        "pytest.mark.parametrize(\n    \"other_status\",\n    [None, \"pending\", \"waiting\", \"requested\", \"future_state\", \"x\" * 10000 + \"\\x1b[31m\\n\"],\n    ids=[\"missing\", \"pending\", \"waiting\", \"requested\", \"future\", \"untrusted-large\"],\n)"
       ]
     }
   },

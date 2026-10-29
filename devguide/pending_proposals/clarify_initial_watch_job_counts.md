@@ -4,9 +4,9 @@ issue: uibcdf/gh-run-receptor#74
 status: active
 opened: 2026-10-29
 closed:
-verification: inspected
+verification: measured
 area: [cli]
-guard:
+guard: tests/test_watch.py
 normative: cli_and_output_contract.md
 blocked_by: []
 supersedes: []
@@ -31,7 +31,7 @@ conclusion; never equate completed with successful. Keep source states untouched
 Use the already acquired jobs snapshot; add no request, synthetic transition,
 status normalization, retry or polling change. Already-completed runs keep their
 single final report. The final report and serialized schemas retain their own
-contracts. This direction is provisional until its regressions execute.
+contracts. The controlled regression evidence below verifies this presentation contract.
 
 ## Verification plan
 
@@ -60,3 +60,31 @@ Inspected at source 24e5f05968b12cc4af4cfbad00d3981dd568573f, Linux,
 Python 3.14.7, pytest 9.1.1 and Ruff 0.16.5 on 2026-10-29. The original
 Sabueso observation is reported evidence; the planned regression is a controlled
 reproduction, not a newly captured historical run.
+
+
+## Local implementation receiving — 2026-10-29
+
+Before the implementation, all twelve new controlled cases fail on the compact
+completed/total display; the eight original watch cases pass. The correction
+changes only the initial line and its existing golden. Focused watch/CLI gate:
+53 passed. Complete normal shared development gate: 842 passed / the existing
+explicit Conda-only source skip, with the accepted fee3bd8 SDK present. Ruff,
+formatting, all nine frozen contracts, 30-route preflight and report validation
+pass. No assertion is removed or new skip added. The inventory has 446 active
+functions: 314 product, 111 tooling and 21 integration.
+
+The first documentation command finds Sphinx 9.1.0 in the shared development
+prefix but fails because its optional sphinx_rtd_theme is absent. This is an
+unconfigured docs profile, not product failure or passing documentation evidence.
+Validate the repository's declared docs extras in a task-owned environment; do
+not install or repair caller packages. Native gates and independent open-issue
+inventory remain required before closure.
+
+
+The isolated declared docs profile resolves Sphinx 8.2.3 and sphinx-rtd-theme
+3.1.0 and passes the strict HTML build. Shared caller packages remain unchanged.
+The canonical consumer guide remains scoped to the delivered public version;
+README, usage, CLI contract and Unreleased notes describe this source change.
+The old dated watch benchmark retains its original token measurements and is
+explicitly scoped to its historical source. Source/native CI is still pending;
+no new artifact or release is qualified by these local results.

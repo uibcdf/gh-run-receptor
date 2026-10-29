@@ -215,7 +215,10 @@ Evaluation records both correctness and economy:
 - reduction relative to competent native GitHub CLI baselines;
 - repeated-output avoided during watch mode.
 
-Watch contract tests inject both the API adapter and clock. They count every successful
+Watch contract tests inject both the API adapter and clock. Initial state-count
+regressions use controlled fourteen-job snapshots, retain queued run status
+alongside active jobs, count non-success completions, preserve unknown/missing
+states and bound initial text independently of untrusted status length. They count every successful
 jobs page, distinguish current from historical attempts, freeze the 1.5/2 backoff and
 reset behavior, bound consecutive failures, validate terminal handoff identity, and prove
 that final capture does not request terminal run/jobs evidence twice. The dated

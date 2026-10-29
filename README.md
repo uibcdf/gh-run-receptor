@@ -387,6 +387,10 @@ gh-run-receptor watch RUN_ID --repo OWNER/REPO --receptor=llm
 ```
 
 `watch` sends one initial progress line and only subsequent job/run transitions to stderr.
+The initial line names the observed job states, for example
+`jobs=completed:1,in_progress:12,queued:1,total:14`, alongside GitHub's unchanged
+run status. Completed jobs include every conclusion; other or missing job states
+add an `other:N` count.
 When the run completes, stdout receives exactly one ordinary adaptive report. Calling it
 on an already completed successful run produces only the one-line final report. Defaults
 are a deterministic 10-second poll, 1.5 backoff for unchanged state, and a 60-second

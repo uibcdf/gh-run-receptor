@@ -198,9 +198,15 @@ def watch_run(
         )
 
     completed = sum(job.status == "completed" for job in current.jobs)
+    in_progress = sum(job.status == "in_progress" for job in current.jobs)
+    queued = sum(job.status == "queued" for job in current.jobs)
+    other = len(current.jobs) - completed - in_progress - queued
+    counts = f"completed:{completed},in_progress:{in_progress},queued:{queued}"
+    if other:
+        counts += f",other:{other}"
     emit(
         f"watch: {_safe_text(repository)} run={run_id} attempt={current.attempt} | "
-        f"status={_safe_text(current.status)} | jobs={completed}/{len(current.jobs)}"
+        f"status={_safe_text(current.status)} | jobs={counts},total:{len(current.jobs)}"
     )
     delay = interval
     consecutive_errors = 0

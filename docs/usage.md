@@ -43,6 +43,11 @@ complete attempt archive contains only unsuccessful jobs.
 gh run-receptor --repo OWNER/REPO watch RUN_ID --receptor=llm
 ```
 
+The initial stderr line shows explicit job counts, for example
+`jobs=completed:1,in_progress:12,queued:1,total:14`. GitHub can still report the
+run itself as `queued` while jobs are executing. Completed counts include failed
+or cancelled jobs; `other:N` appears for missing or other job statuses.
+
 Transitions go to stderr. Unchanged snapshots are not printed. When the run becomes
 terminal, stdout receives exactly one ordinary report. The default polling interval is 10
 seconds and unchanged state backs off deterministically to at most 60 seconds. Override

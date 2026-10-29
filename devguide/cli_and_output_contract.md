@@ -137,6 +137,15 @@ new failure, run completed, or evidence acquisition degraded. It never redraws t
 whole status tree. Polling backs off for long unchanged intervals. A final report is
 rendered once.
 
+The initial line preserves GitHub's run status and names the observed job counts:
+`jobs=completed:1,in_progress:12,queued:1,total:14`. A run can remain `queued`
+while its jobs are in progress. `completed` counts status, including failed,
+cancelled and timed-out conclusions; it does not mean successful. Missing or
+other job statuses add `other:N` immediately before `total`; their original
+values remain source facts. Zero counts are explicit, including an empty list.
+These counts use the same acquired snapshot and add no request or synthetic
+start transition. An unchanged snapshot stays quiet.
+
 The stable command accepts `--interval`, `--max-interval`, `--attempt`, and the final
 capture policy. Intervals are finite and at least one second; defaults are 10 and 60
 seconds. Unchanged successful polls back off by 1.5 up to the maximum, a transition resets
@@ -151,7 +160,8 @@ checked and transferred to final capture instead of being requested twice. Workf
 artifact, producer-event, check-run, configuration, and policy-selected log evidence
 remain separate final-capture costs. See
 [the measured watch benchmark](benchmark_watch_2026-09-19.md) for the formula and native
-comparison.
+comparison. That dated token measurement predates explicit initial state counts
+and remains scoped to its recorded source.
 
 An already completed run skips the initial snapshot and transitions. Cancellation by the
 user returns 130. Live active runs `34027741137` and `35432811964` validate transition-only

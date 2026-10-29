@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+- Separate the runtime under `src/gh_run_receptor` from unshipped repository
+  tools and qualify installed product/integration through shared hash-bound
+  support; retire the original-path adapter after complete native receiving.
+- Show explicit completed, in-progress and queued job counts in the initial
+  `watch` line; include other states when present and preserve GitHub run status.
+  Completed counts include all conclusions. Polling, transitions, final reports
+  and exit semantics retain their existing contracts.
+
 ## 1.3.0 - 2026-10-24
 
 - Inspect or capture one completed job's log with `--job JOB_ID` while its
