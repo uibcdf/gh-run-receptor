@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from devtools.scripts.release_tools import main, verify_zenodo_search
+from gh_run_receptor_tools.release_tools import main, verify_zenodo_search
 
 ROOT = Path(__file__).resolve().parents[1]
 VERSION = "0.18.0"

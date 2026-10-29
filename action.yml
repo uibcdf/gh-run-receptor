@@ -75,7 +75,7 @@ runs:
       continue-on-error: ${{ inputs['strict-reporter'] != 'true' }}
       env:
         GH_TOKEN: ${{ github.token }}
-        PYTHONPATH: ${{ github.action_path }}
+        PYTHONPATH: ${{ github.action_path }}/src
         INPUT_RUN_ID: ${{ inputs['run-id'] }}
         INPUT_REPOSITORY: ${{ inputs.repository }}
         INPUT_PROFILE: ${{ inputs.profile }}

@@ -19,8 +19,13 @@ dependencies. In a disposable environment, install it with:
 python -m pip install -e '.[dev]'
 ```
 
-The package uses the same flat repository layout as MolSysMT and MolSysViewer, so commands
-and tests run from the checkout without a `PYTHONPATH` override. The expected local tools
+The product uses `src/gh_run_receptor`; install its editable before development.
+Repository operations use the unshipped `gh_run_receptor_tools` namespace. The
+measured installed collection/source-substitution failure and maintainer direction
+under #76 justify replacing the former flat layout. Tests use importlib mode;
+source tooling visibility does not make the runtime in `src` importable. See
+[installed qualification](installed_qualification.md) for the three required scopes.
+The expected local tools
 are Git, an authenticated GitHub CLI 2.48.0 or newer, Python 3.11 or newer, Ruff, pytest, and
 `pytest-receptor`.
 PyYAML is a test/development-only dependency used to validate `CITATION.cff`; it is not a

@@ -5,7 +5,6 @@ import zipfile
 
 import pytest
 
-from devtools.scripts.sanitize_bundle import _selected_evidence, sanitize
 from gh_run_receptor.bundle import (
     REQUIRED_STRUCTURED_MEMBERS,
     capture_bundle,
@@ -15,6 +14,7 @@ from gh_run_receptor.bundle import (
 )
 from gh_run_receptor.errors import BundleError
 from gh_run_receptor.events import EVENT_DOCUMENT_NAME, event_artifact_prefix
+from gh_run_receptor_tools.sanitize_bundle import _selected_evidence, sanitize
 
 
 def _write_bundle(path):

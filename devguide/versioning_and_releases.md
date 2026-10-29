@@ -7,7 +7,7 @@ static version in `pyproject.toml` or edit generated version code.
 Release tags are lightweight tags named with exactly three numeric components, for example
 `0.2.0`. On that exact commit, a build reports the tag as its package version. Commits after
 a tag report a PEP 440 development identity such as `0.1.1+2.gabc1234`; a dirty checkout
-adds `.dirty`. `gh_run_receptor/_version.py` is generated during the build and ignored by
+adds `.dirty`. `src/gh_run_receptor/_version.py` is generated during the build and ignored by
 Git. Installed metadata is preferred at runtime, with the generated file as the source-tree
 fallback.
 

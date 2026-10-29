@@ -9,9 +9,9 @@ from pathlib import Path
 import pytest
 import yaml
 
-from devtools.scripts import distribution_archives
-from devtools.scripts.distribution_archives import inspect_distribution, verify_distributions
-from devtools.scripts.release_tools import (
+from gh_run_receptor_tools import distribution_archives
+from gh_run_receptor_tools.distribution_archives import inspect_distribution, verify_distributions
+from gh_run_receptor_tools.release_tools import (
     extract_release_notes,
     prepare_citation,
     sha256,
@@ -34,7 +34,7 @@ def _payload(kind: str) -> dict[str, bytes]:
         data[name] = (
             f'__version__ = "{VERSION}"\n'.encode()
             if name.endswith("/_version.py")
-            else (ROOT / name).read_bytes()
+            else (ROOT / "src" / name).read_bytes()
         )
     metadata = (
         f"Metadata-Version: 2.4\nName: gh-run-receptor\nVersion: {VERSION}\n"
@@ -180,6 +180,7 @@ def test_release_verifier_accepts_exact_draft_and_published_assets(tmp_path):
             version=VERSION,
             commit=COMMIT,
             asset_dir=tmp_path,
+            repo=ROOT,
             state="draft",
         )
         == []
@@ -191,6 +192,7 @@ def test_release_verifier_accepts_exact_draft_and_published_assets(tmp_path):
             version=VERSION,
             commit=COMMIT,
             asset_dir=tmp_path,
+            repo=ROOT,
             state="published",
         )
         == []
@@ -212,6 +214,7 @@ def test_release_verifier_rejects_wrong_truth_identity_and_bytes(tmp_path):
         version=VERSION,
         commit=COMMIT,
         asset_dir=tmp_path,
+        repo=ROOT,
         state="published",
     )
 
@@ -275,7 +278,13 @@ def test_archive_payload_mutations_fail_even_with_matching_names_and_digests(
     write_checksum_manifest(tmp_path, VERSION)
     release = _release(tmp_path)
     errors = verify_release(
-        release, _tag_ref(), version=VERSION, commit=COMMIT, asset_dir=tmp_path, state="published"
+        release,
+        _tag_ref(),
+        version=VERSION,
+        commit=COMMIT,
+        asset_dir=tmp_path,
+        repo=ROOT,
+        state="published",
     )
     assert errors
     assert not any(

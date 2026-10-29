@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from devtools.scripts.sync_gh_run_receptor_guide import DEFAULT_REPOSITORIES, synchronize
+from gh_run_receptor_tools.sync_gh_run_receptor_guide import DEFAULT_REPOSITORIES, synchronize
 
 
 def test_default_clients_cover_the_scientific_tooling_suite():

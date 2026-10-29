@@ -50,6 +50,7 @@ dev = [
 ]
 
 [tool.setuptools.packages.find]
+where = ["src"]
 include = ["gh_run_receptor*"]
 
 [tool.setuptools.package-data]
@@ -73,10 +74,13 @@ regex = '^(?P<version>(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*))$'
 require-match = true
 
 [tool.versioningit.write]
-file = "gh_run_receptor/_version.py"
+file = "src/gh_run_receptor/_version.py"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+addopts = "--import-mode=importlib"
+pythonpath = ["."]
+markers = ["product: installed runtime behavior", "tooling: repository-only tooling", "integration: tooling with the installed product"]
 
 [tool.ruff]
 line-length = 100

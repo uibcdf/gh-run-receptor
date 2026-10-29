@@ -4,8 +4,8 @@ from pathlib import Path
 
 import pytest
 
-from devtools.scripts import validate_public_runs
-from devtools.scripts.validate_public_runs import (
+from gh_run_receptor_tools import validate_public_runs
+from gh_run_receptor_tools.validate_public_runs import (
     AcquisitionFailure,
     SemanticFailure,
     load_manifest,

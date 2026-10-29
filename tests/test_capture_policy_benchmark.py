@@ -4,7 +4,7 @@ import zipfile
 
 import pytest
 
-from devtools.scripts.benchmark_capture_policies import BenchmarkError, benchmark, main
+from gh_run_receptor_tools.benchmark_capture_policies import BenchmarkError, benchmark, main
 
 
 def _member(path, name, value):

@@ -1,3 +1,4 @@
+source_root = "src"
 import_name = "gh_run_receptor"
 version_file = "site-packages/gh_run_receptor/_version.py"
 reason = "Pure Python CLI with frozen JSON schemas; gh is a separately solved native executable, never a bundled payload."
@@ -33,8 +34,98 @@ required_steps = ["Install exact artifact", "Validate installed files", "Run ins
 
 [installed_tests]
 paths = ["tests"]
-pytest_args = ["--receptor=ci", "--deselect=tests/test_source_version.py::test_repository_checkout_has_a_source_version", "--deselect=tests/test_source_version.py::test_source_launcher_does_not_borrow_installed_distribution_version"]
+pytest_args = ["--receptor=ci", "-m", "product or integration"]
 conda_dependencies = ["jsonschema>=4.23,<5"]
+
+[installed_tests.support]
+schema = "molsyssuite.installed-test-support@1"
+namespace = "gh_run_receptor_tools"
+reason = "Portable unshipped tools and schema assertions, with explicit source/data inputs; no runtime source path or generic namespace binding."
+
+[[installed_tests.support.files]]
+source = "gh_run_receptor_tools/__init__.py"
+target = "gh_run_receptor_tools/__init__.py"
+sha256 = "77bf87fcb90135b04f8ad606003e8f862445a104fcef4c89d80ff92f937d0088"
+
+[[installed_tests.support.files]]
+source = "gh_run_receptor_tools/benchmark_capture_policies.py"
+target = "gh_run_receptor_tools/benchmark_capture_policies.py"
+sha256 = "a00ef7b159c4833b8846906492fd5e06c3ab964ee17d0e511fa710d60df12c2c"
+
+[[installed_tests.support.files]]
+source = "gh_run_receptor_tools/check_distribution_inputs.py"
+target = "gh_run_receptor_tools/check_distribution_inputs.py"
+sha256 = "0167c8601a054c37aadde997d4f57e5da9d79634816a88b29b1e7754edce68a9"
+
+[[installed_tests.support.files]]
+source = "gh_run_receptor_tools/devguide_index.py"
+target = "gh_run_receptor_tools/devguide_index.py"
+sha256 = "d008286a220fcc937e00f915afbd3fa37e2ce1a576170520228740bdc919982f"
+
+[[installed_tests.support.files]]
+source = "gh_run_receptor_tools/devguide_issue.py"
+target = "gh_run_receptor_tools/devguide_issue.py"
+sha256 = "7e92a75e6b8b94607e37a874b28faa3f71a366db3f3af529426df596929a08e8"
+
+[[installed_tests.support.files]]
+source = "gh_run_receptor_tools/devguide_reports.py"
+target = "gh_run_receptor_tools/devguide_reports.py"
+sha256 = "c9ebc42a4072dc18115c0ea37e6efafda78853791b1cca1252a05b54c17d9275"
+
+[[installed_tests.support.files]]
+source = "gh_run_receptor_tools/distribution_archives.py"
+target = "gh_run_receptor_tools/distribution_archives.py"
+sha256 = "e6a1f2fdde8438750dac2d88aa1ceb7a12bb6b0cb0770935d9b3668e1669f9f8"
+
+[[installed_tests.support.files]]
+source = "gh_run_receptor_tools/installed_smoke.py"
+target = "gh_run_receptor_tools/installed_smoke.py"
+sha256 = "c6a2eeb10c30cc354e95f9c0fc7f90e160c593e473b84c92ba286f9fc187d767"
+
+[[installed_tests.support.files]]
+source = "gh_run_receptor_tools/release_tools.py"
+target = "gh_run_receptor_tools/release_tools.py"
+sha256 = "653dba1655bd5d008b3aebd071043cea945082b8b94ba94c5f36f22a49e6669d"
+
+[[installed_tests.support.files]]
+source = "gh_run_receptor_tools/sanitize_bundle.py"
+target = "gh_run_receptor_tools/sanitize_bundle.py"
+sha256 = "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293"
+
+[[installed_tests.support.files]]
+source = "gh_run_receptor_tools/schema_validation.py"
+target = "gh_run_receptor_tools/schema_validation.py"
+sha256 = "3008337cc231144455b59c4edf73668a1b9d8ba050d8c8ec2b70bd8a3eb4db3a"
+
+[[installed_tests.support.files]]
+source = "gh_run_receptor_tools/sync_gh_run_receptor_guide.py"
+target = "gh_run_receptor_tools/sync_gh_run_receptor_guide.py"
+sha256 = "9c9001b7590ef827f51dc99074c59607514422f75b61de510e65abf2c9c83d5a"
+
+[[installed_tests.support.files]]
+source = "gh_run_receptor_tools/test_inventory.py"
+target = "gh_run_receptor_tools/test_inventory.py"
+sha256 = "23e75a060472e8069acefcc7a37ea656ad00fc70d7c15a6cc03b6dd28f9da752"
+
+[[installed_tests.support.files]]
+source = "gh_run_receptor_tools/validate_contracts.py"
+target = "gh_run_receptor_tools/validate_contracts.py"
+sha256 = "9c3eae2c09dff0d3a3ec10e47933f4ef37bf9f966739b25ecf3840e97d638883"
+
+[[installed_tests.support.files]]
+source = "gh_run_receptor_tools/validate_devguide.py"
+target = "gh_run_receptor_tools/validate_devguide.py"
+sha256 = "d561a89663668f2d46c3a7c0b75ab1bd71998bc95de5ac93b28ecfa1ba505581"
+
+[[installed_tests.support.files]]
+source = "gh_run_receptor_tools/validate_job_logs.py"
+target = "gh_run_receptor_tools/validate_job_logs.py"
+sha256 = "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387"
+
+[[installed_tests.support.files]]
+source = "gh_run_receptor_tools/validate_public_runs.py"
+target = "gh_run_receptor_tools/validate_public_runs.py"
+sha256 = "010ee776bfbfa8f5ee9804085d15fcfb2b66fbef6d4223e2e58448130bc65653"
 
 [schema_sha256]
 "aggregate-v1.schema.json" = "61c8e6fdaf04c610b1f335baac42cc8b4a0680014f16686f3a949cf7590a8b67"

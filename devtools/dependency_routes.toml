@@ -4,7 +4,7 @@ source_routes = []
 source_reason = "There are no required Python runtime providers to replace with sibling source; gh is an independently distributed external executable."
 
 [shared_tool]
-commit = "6d6172d6cd00c5ac2d4ebadb71df554ec5b7fa26"
+commit = "fee3bd875e68778844c0fffc2aba26b6cea02cd6"
 
 [[recipes]]
 path = "devtools/conda-build/meta.yaml"
@@ -25,12 +25,12 @@ reason = "Manual checkout-local gh extension and composite Action validation usi
 
 [[workflows]]
 path = ".github/workflows/compatibility.yml"
-sha256 = "bfb05ba42cce04a787c687d752bcd2e447a9a5bfcab59b35cf3794040469d2bb"
+sha256 = "d6c6e4edb57bf291a5b6a4ce27999f496521307226fe702a2baa7898e3109b70"
 reason = "Twelve Python/OS source pip-test, wheel-build/install and outside-checkout smoke cells; runs the pinned input review before tests, distinct from one-file Conda installation."
 
 [[workflows]]
 path = ".github/workflows/conda-policy.yml"
-sha256 = "996d0d8cfdd290fd6a78ab6b17585d3ae5e66162145adf7b6fd0f50bf700ac3d"
+sha256 = "5669217922941006e8278ce8211cfc9fcda19f4455f120d733b2e60efd088363"
 reason = "Read-only immutable shared Conda workflow/resource audit on push, PR and dispatch; no build or publication credential."
 
 [[workflows]]
@@ -65,12 +65,12 @@ reason = "Manual least-privilege consumer experiment at existing Action pins; pr
 
 [[workflows]]
 path = ".github/workflows/promote-conda.yml"
-sha256 = "baad0626da4e0f3b621d1ffb04400f286b7d17f9a16b29177901f3d554d76515"
+sha256 = "b9b8d4119c4514294852540386e59b46ee5d9e9d189b64ef309a5e48b75d140a"
 reason = "Manual owner input review then immutable shared exact-source/installed-matrix verifier and same-file label promotion; no rebuild."
 
 [[workflows]]
 path = ".github/workflows/publish-release.yml"
-sha256 = "cedc1c70ee37f072b9558e856ba934080bfd82ddf9dff3783c71557c9fa07b26"
+sha256 = "7b21fafa831022a794d5964356a5d7f1b630e299a4d37af09b4efeccc7ac5730"
 reason = "Retained manual exact-tag wheel/sdist and GitHub draft-first publisher; complete local suite, frozen-contract, bounded wheel/sdist payload and exact release metadata checks before upload; no Conda claim."
 
 [[workflows]]
@@ -80,12 +80,12 @@ reason = "Manual published-report/source-first consumer validation with the exis
 
 [[workflows]]
 path = ".github/workflows/python-routine.yml"
-sha256 = "c6458a8c7f665afb18a1089dc9a261f01d8eee6333b58a856467f89d3ca97d17"
+sha256 = "63a9a8cfabc5f55c0358c93f714bda261718b4b76a1bf0187abe795ac3419c1b"
 reason = "Linux/Python 3.14 source pip test extras; pinned SDK reviews all input routes before full pytest; dependent default-branch coverage publication stays separate."
 
 [[workflows]]
 path = ".github/workflows/python-weekly.yml"
-sha256 = "f2c538c206821b1aadb23d6a23e9e3b0146b329b411c62212549dc12cfa11b36"
+sha256 = "d2497e235bb9e7d5bddf8fbd2a400dfeb3d27ffe29ee73c5b3e739ff38ebe23d"
 reason = "Twelve source pip/test-extra cells over Python 3.11-3.14 and three OS; pinned SDK review before full pytest; source evidence only."
 
 [[workflows]]
@@ -95,7 +95,7 @@ reason = "Read-only reusable report consumer contract; uses the shared receptor 
 
 [[workflows]]
 path = ".github/workflows/stage-conda.yml"
-sha256 = "aa8cdec4e0c87cc5b24bd82e31cab74ad513f3e421e15fb6b229636f763008ea"
+sha256 = "1f92e2dd020c24d7c2f94cb19875ea2c6684a944ac6b32a1de006e4facf3b25d"
 reason = "Manual reviewed candidate SHA/version, owner preflight and immutable shared single-file staged build; committed real plan and executed source gates required."
 
 [[workflows]]
@@ -105,32 +105,32 @@ reason = "Manual immutable producer SHA/file/digest qualification through the sh
 
 [[workflows]]
 path = ".github/workflows/validate-aggregation.yml"
-sha256 = "b45c498864649d80d92d9d1d6449d3dd1a6448b2aeb8975daccd861bd5bb3d70"
+sha256 = "8530488e36dc5d6ec937a83635e4bcc816768f5bee2aee18f542be281bef3227"
 reason = "Targeted manual aggregation semantics and sanitized evidence checks; source-mode runtime has no required Python providers."
 
 [[workflows]]
 path = ".github/workflows/validate-capture-policy.yml"
-sha256 = "8212a51da8a9933e8c70e18777d9171e1747c07ff18a789f7a07036a2d31b165"
+sha256 = "fefcf88fa36949cd060d9d31f577b737eb41a51a490201cda7a5a78ad14eb072"
 reason = "Targeted manual offline/live capture-policy measurements; existing external gh transport, separate from an installed-file matrix."
 
 [[workflows]]
 path = ".github/workflows/validate-comparison.yml"
-sha256 = "a0942cd000006f8d093860d6380cf7542359f09ffbaa7a8b45858817581c9404"
+sha256 = "4ee935fc92781d2a7c5a101e20ec9e125ae30a40b5e87065a409a9df2fd5b110"
 reason = "Targeted manual comparison semantics on source CLI and fixtures; no Conda publishing route."
 
 [[workflows]]
 path = ".github/workflows/validate-contracts.yml"
-sha256 = "4a9d328c2d474214953f31fa2f5e2c2fca48071f0734ccd73ec4d9d2af4e0bb8"
+sha256 = "7f1de1f2747f28bb1983a04f5c7dda0d96e794cad9d873700f6e5551452f6085"
 reason = "Manual stdlib frozen-schema comparison to original immutable tags; retained exact-source release gate."
 
 [[workflows]]
 path = ".github/workflows/validate-exit-codes.yml"
-sha256 = "d3eec64ffa2c09a504ff785cf6b3b54ae1e30fd9c9c042c592d43e60a3d9dd67"
+sha256 = "5cc27d83cbd3dbe4e08dde166c21206f9146e4ab19303cc1a1062525d8e8c329"
 reason = "Targeted manual source CLI exit-code truth-table checks; safe-path subprocesses retain installed origins when applicable."
 
 [[workflows]]
 path = ".github/workflows/validate-portability.yml"
-sha256 = "d7412be5f9ecf39bd1b97f1d87dcd2d9c5bcbd2f1549c22fcf0dfad7a43a2c0c"
+sha256 = "2dfa9d7b4c9598c43a58374891342fe98610941f95b2d8054d4616780fa1bdb5"
 reason = "Manual non-UIBCDF read-only live corpus; source CLI and fixed manifest, no channel mutation."
 
 [[workflows]]
@@ -150,5 +150,10 @@ reason = "Read-only immutable shared Zenodo discovery after publication, on a fi
 
 [[workflows]]
 path = ".github/workflows/validate-job-logs.yml"
-sha256 = "246cfe83b86ddc19fae57040040d6d0c23379cd69dae17a026028d582947e045"
+sha256 = "a4a133d622bb29c6029fb82cce3c1704848d575e72b866ce7940b2b7a236d10c"
 reason = "Manual bounded native completed-success/failure job-log receiving during an active workflow; expected failed producer and successful observer stay distinct, raw evidence uses managed temporary storage and sanitized receipt retains 30 days. No channel mutation or additional Python dependencies."
+
+[[workflows]]
+path = ".github/workflows/qualify-architecture.yml"
+sha256 = "3b54e47d5104daf2a4bc0ca18df8dabb90c6ec17818aed29b7932c7f4f04c3a2"
+reason = "Manual nonpublishing #76 qualification: one private exact-file Conda candidate, twelve native installed product/integration cells, shared origin/support/cleanup guards, and retained distinct source/provider/file receipts. No channel credentials or mutation."

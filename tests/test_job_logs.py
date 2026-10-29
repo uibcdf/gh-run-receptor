@@ -7,14 +7,14 @@ from pathlib import Path
 import pytest
 import yaml
 
-from devtools.scripts.sanitize_bundle import sanitize
 from gh_run_receptor import cli, job_logs, logs
 from gh_run_receptor.bundle import capture_bundle, load_bundle
 from gh_run_receptor.errors import AcquisitionError, BundleError
 from gh_run_receptor.model import normalize_evidence
 from gh_run_receptor.report import build_report, exit_code, render_human, render_json, render_llm
 from gh_run_receptor.service import acquire_evidence
-from tests.test_contracts import _validator
+from gh_run_receptor_tools.sanitize_bundle import sanitize
+from gh_run_receptor_tools.schema_validation import validator as _validator
 
 RUN = {
     "id": 42,

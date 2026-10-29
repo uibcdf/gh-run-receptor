@@ -61,8 +61,11 @@ more local `AGENTS.md` may refine these rules within its directory.
 
 - Release 1.1.0 supports Python 3.11--3.14 as a package and CLI; older 1.0.0 artifacts
   retain their original 3.11--3.13 support boundary.
-- Keep the import package at repository root, matching the flat MolSysSuite layout; do not
-  reintroduce a `src/` directory without a measured packaging reason.
+- Keep the runtime in `src/gh_run_receptor` and unshipped repository operations in
+  `gh_run_receptor_tools`. Issue #76 records the measured flat-layout installed-import
+  failure and source-substitution boundary that justify this local layout. Install the
+  editable for development; installed qualification uses the declared shared support
+  profile and must never add `src` to the candidate's import path.
 - Use the installed `gh` command for authentication and GitHub API transport. Do not add
   a second authentication system or expose tokens through command arguments or output.
 - Keep GitHub response acquisition behind an adapter so a future standalone executable

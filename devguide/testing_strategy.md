@@ -1,5 +1,11 @@
 # Testing strategy
 
+The [installed qualification contract](installed_qualification.md) and exhaustive
+`devtools/test_scopes.json` assign every assertion to product, repository tooling
+or integration. All scopes remain required. Unknown tests or lost assertions
+fail the inventory gate; installed runtime provenance and support cleanup are
+verified through the shared runner before/after actual execution outside source.
+
 ## Objective
 
 Tests must demonstrate that the receptor preserves the meaning of a workflow while

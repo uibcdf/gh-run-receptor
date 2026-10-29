@@ -18,10 +18,14 @@ import pytest
 import yaml
 
 import gh_run_receptor
-from devtools.check_distribution_inputs import check_owner_inputs, checked_provider
-from devtools.installed_smoke import verify_commands, verify_installation, verify_schemas
 from gh_run_receptor.errors import AcquisitionError
 from gh_run_receptor.github import GitHubClient
+from gh_run_receptor_tools.check_distribution_inputs import check_owner_inputs, checked_provider
+from gh_run_receptor_tools.installed_smoke import (
+    verify_commands,
+    verify_installation,
+    verify_schemas,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 RESOURCES = "devtools/conda-build/resources.toml"
@@ -29,7 +33,8 @@ RESOURCES = "devtools/conda-build/resources.toml"
 
 @pytest.fixture
 def member(tmp_path):
-    shutil.copytree(ROOT / "gh_run_receptor", tmp_path / "gh_run_receptor")
+    shutil.copytree(ROOT / "src/gh_run_receptor", tmp_path / "src/gh_run_receptor")
+    shutil.copytree(ROOT / "gh_run_receptor_tools", tmp_path / "gh_run_receptor_tools")
     shutil.copytree(ROOT / "devtools/conda-build", tmp_path / "devtools/conda-build")
     shutil.copytree(ROOT / ".github/workflows", tmp_path / ".github/workflows")
     for name in ("pyproject.toml", "devtools/dependency_routes.toml"):
@@ -87,7 +92,7 @@ def test_shared_review_refuses_new_unclassified_workflow(member, suite):
 
 def test_owner_review_refuses_a_stale_external_floor(member):
     check_owner_inputs(member)
-    adapter = member / "gh_run_receptor/github.py"
+    adapter = member / "src/gh_run_receptor/github.py"
     adapter.write_text(
         adapter.read_text().replace(
             "MINIMUM_GH_VERSION = (2, 48, 0)", "MINIMUM_GH_VERSION = (2, 49, 0)"
@@ -98,7 +103,7 @@ def test_owner_review_refuses_a_stale_external_floor(member):
 
 
 def test_owner_review_refuses_schema_drift_even_with_the_same_filename(member):
-    path = member / "gh_run_receptor/schemas/report-v1.schema.json"
+    path = member / "src/gh_run_receptor/schemas/report-v1.schema.json"
     path.write_bytes(path.read_bytes() + b"\n")
     with pytest.raises(ValueError, match="digest differs"):
         check_owner_inputs(member)
@@ -111,7 +116,7 @@ def test_windows_checkout_preserves_frozen_schema_and_reviewed_workflow_bytes(tm
     checkout = tmp_path / "checkout"
     checkout.mkdir()
     paths = [
-        *sorted((ROOT / "gh_run_receptor/schemas").glob("*-v*.schema.json")),
+        *sorted((ROOT / "src/gh_run_receptor/schemas").glob("*-v*.schema.json")),
         *sorted((ROOT / ".github/workflows").glob("*.y*ml")),
     ]
     for path in [ROOT / ".gitattributes", *paths]:
@@ -233,7 +238,7 @@ def test_installed_external_command_guard_refuses_wrong_provenance_or_floor(
         commands["gh"] = None
     elif mode == "outside-prefix":
         commands["gh"] = str(tmp_path / "runner-gh")
-    monkeypatch.setattr("devtools.installed_smoke.shutil.which", commands.get)
+    monkeypatch.setattr("gh_run_receptor_tools.installed_smoke.shutil.which", commands.get)
 
     def run(self, arguments, *, check_cli):
         assert arguments == ["--version"] and not check_cli

@@ -28,6 +28,8 @@ test:
     - gh_run_receptor.schemas
   source_files:
     - devtools/installed_smoke.py
+    - gh_run_receptor_tools/__init__.py
+    - gh_run_receptor_tools/installed_smoke.py
     - devtools/conda-build/resources.toml
   commands:
     - python devtools/installed_smoke.py --expected-version {{ environ.get('MOLSYSSUITE_CONDA_VERSION', '0.0.0') }}

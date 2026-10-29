@@ -26,9 +26,16 @@ def parse_git_describe(value: str) -> str | None:
     return f"{version}.dirty" if dirty else version
 
 
-def version_from_source_checkout() -> str | None:
+def version_from_source_checkout(repository: Path | None = None) -> str | None:
     """Reading the nearest release tag without importing a build dependency."""
-    repository = Path(__file__).resolve().parent.parent
+    package = Path(__file__).resolve().parent
+    if repository is None:
+        if package.parent.name != "src":
+            return None
+        repository = package.parent.parent
+    repository = repository.resolve()
+    if not (repository / "pyproject.toml").is_file() or not (repository / ".git").exists():
+        return None
     try:
         result = subprocess.run(
             [

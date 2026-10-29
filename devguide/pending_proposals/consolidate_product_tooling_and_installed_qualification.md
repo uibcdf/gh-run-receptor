@@ -68,3 +68,43 @@ Planning/source inspection only. Existing SDK pin 6d6172d lacks test-support @1;
 the central handoff identifies 56fe19215b9a414c050b95a5404d3ae50909aa83 for review.
 No refactored native/installed claim is made before execution. The initial AST
 inventory is retained in the task root for complete mapping before closure.
+
+
+## Implementation checkpoint before native receiving — 2026-10-29
+
+Runtime is under src; portable operations and schema assertions use the unshipped
+component namespace. All original 437 functions are mapped with before/after
+assertions and required gates; seven new functions bring the current inventory
+to 444 functions (312 product / 111 tooling / 21 integration). Source-version
+repository checks remain tooling, and installed version provenance gains explicit
+regressions. Baseline: 831 passed / one Conda-only skip. Current complete local
+source gate: 844 passed / the same explicit skip, with all five SDK-dependent
+checks executed. Ruff, strict Sphinx, wheel/sdist build, all nine frozen schemas
+and 30-route preflight pass. The known published renderer warning remains visible.
+
+Provider PR uibcdf/molsyssuite#157 is approved by the principal maintainer and
+merged as 31613c2322eab767fb316c5737bf4f56cba48d6d, retaining reviewed source
+fee3bd875e68778844c0fffc2aba26b6cea02cd6. GHR pins that original accepted source.
+57 affected provider tests and native PR 40919434758/post-merge 40920603151
+mandatory governance/full-test steps pass. Local broad provider execution has
+562 passed, one opt-in Mamba skip and one workspace fixture failing on the seven
+known inherited caller-environment closure findings; no environment repair or
+false local full-suite credit is claimed. Native clean-environment source gates
+provide the required provider execution. An initial pytest discovery also tried
+to collect test-input fixture projects; the documented unittest discovery and
+pytest ignore of tests/fixtures preserve the actual provider check selection.
+
+The real provider gaps are source/installed coordinate mapping, explicit private
+plan selection and a nonpublishing local-file origin retaining all dependency,
+archive, prefix, resource and launcher checks. No SDK implementation is copied
+into GHR. Shared support receives original committed helper hashes and cleans its
+owned staging/imports, without the GHR binding/path adapter. Eleven local receiving
+regressions pass, including original missing-generic-import reproduction,
+missing/tampered support, collision, changed bytes, abort, visible cleanup failure
+and precollection src runtime substitution.
+
+The manual qualification workflow builds private placeholder 0.0.0/build 76 once
+and executes twelve exact-file installed cells. No tag/public version/upload/
+promotion is authorized or performed. Complete native product, tooling and
+integration evidence remains required; the old adapter is retained until then.
+The synchronized suite guide and all historical publication receipts stay intact.

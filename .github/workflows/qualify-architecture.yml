@@ -1,0 +1,226 @@
+name: Qualify separated runtime and portable tools
+run-name: Nonpublishing architecture qualification
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    name: Build one private candidate
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      sha256: ${{ steps.file.outputs.sha256 }}
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          repository: uibcdf/molsyssuite
+          ref: fee3bd875e68778844c0fffc2aba26b6cea02cd6
+          path: .molsyssuite
+          persist-credentials: false
+      - uses: conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb # v4
+        with:
+          miniforge-version: latest
+          activate-environment: builder
+          auto-activate-base: false
+          python-version: '3.14'
+          channels: uibcdf,conda-forge
+          channel-priority: strict
+          run-init: 'false'
+          remove-profiles: 'false'
+      - name: Review source and private qualification inputs
+        run: |
+          source "$CONDA/etc/profile.d/conda.sh"
+          conda activate builder
+          conda install --yes --override-channels --strict-channel-priority -c uibcdf -c conda-forge \
+            conda-build 'pyyaml>=6,<7' 'jinja2>=3,<4' 'packaging>=24'
+          python -m pip install --no-deps .
+          python devtools/check_distribution_inputs.py --suite-root .molsyssuite
+          python -m gh_run_receptor_tools.test_inventory --root .
+          python .molsyssuite/devtools/scripts/noarch_conda.py --root . --plan devtools/qualification/plan.toml
+      - name: Freeze metadata only in the private build copy
+        run: |
+          source "$CONDA/etc/profile.d/conda.sh"
+          conda activate builder
+          python - <<'PY'
+          import os,shutil
+          from pathlib import Path
+          shutil.copytree(Path.cwd(), Path(os.environ['RUNNER_TEMP'])/'candidate-source',
+              ignore=shutil.ignore_patterns('.git','.molsyssuite','dist','build','*.egg-info','__pycache__','.pytest_cache','.ruff_cache'))
+          PY
+          python .molsyssuite/devtools/scripts/noarch_conda.py --root "$RUNNER_TEMP/candidate-source" \
+            --plan devtools/qualification/plan.toml --freeze-version
+      - name: Build one nonpublishing Conda file
+        env:
+          MOLSYSSUITE_CONDA_VERSION: '0.0.0'
+          MOLSYSSUITE_CONDA_BUILD_NUMBER: '76'
+        run: |
+          source "$CONDA/etc/profile.d/conda.sh"
+          conda activate builder
+          conda build "$RUNNER_TEMP/candidate-source/devtools/conda-build" --no-anaconda-upload \
+            --package-format 1 --override-channels -c uibcdf -c conda-forge \
+            --output-folder "$RUNNER_TEMP/conda-bld"
+      - name: Inspect exact original private file
+        id: file
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+          PROVIDER_SHA: fee3bd875e68778844c0fffc2aba26b6cea02cd6
+        run: |
+          source "$CONDA/etc/profile.d/conda.sh"
+          conda activate builder
+          python .molsyssuite/devtools/scripts/noarch_conda.py --root . --plan devtools/qualification/plan.toml \
+            --built-paths "$RUNNER_TEMP/conda-bld/noarch/gh-run-receptor-0.0.0-py_76.tar.bz2" \
+            --output "$RUNNER_TEMP/private-producer.json" --github-output "$GITHUB_OUTPUT"
+          python - <<'PY'
+          import hashlib,json,os
+          from pathlib import Path
+          path=Path(os.environ['RUNNER_TEMP'])/'private-producer.json'
+          document=json.loads(path.read_text())
+          document.update(product_source_sha=os.environ['SOURCE_SHA'],provider_sha=os.environ['PROVIDER_SHA'],
+              qualification_sha=os.environ['SOURCE_SHA'],run_id=os.environ['GITHUB_RUN_ID'],
+              run_attempt=os.environ['GITHUB_RUN_ATTEMPT'],public=False,
+              plan_sha256=hashlib.sha256(Path('devtools/qualification/plan.toml').read_bytes()).hexdigest())
+          path.write_text(json.dumps(document,indent=2)+'\n')
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: private-candidate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/conda-bld/noarch/gh-run-receptor-0.0.0-py_76.tar.bz2
+            ${{ runner.temp }}/private-producer.json
+          if-no-files-found: error
+          retention-days: 30
+  installed:
+    needs: build
+    name: installed / ${{ matrix.platform }} · Python ${{ matrix.python }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {platform: linux-64, runner: ubuntu-latest, python: '3.11'}
+          - {platform: linux-64, runner: ubuntu-latest, python: '3.12'}
+          - {platform: linux-64, runner: ubuntu-latest, python: '3.13'}
+          - {platform: linux-64, runner: ubuntu-latest, python: '3.14'}
+          - {platform: osx-arm64, runner: macos-15, python: '3.11'}
+          - {platform: osx-arm64, runner: macos-15, python: '3.12'}
+          - {platform: osx-arm64, runner: macos-15, python: '3.13'}
+          - {platform: osx-arm64, runner: macos-15, python: '3.14'}
+          - {platform: win-64, runner: windows-latest, python: '3.11'}
+          - {platform: win-64, runner: windows-latest, python: '3.12'}
+          - {platform: win-64, runner: windows-latest, python: '3.13'}
+          - {platform: win-64, runner: windows-latest, python: '3.14'}
+    defaults:
+      run:
+        shell: bash -el {0}
+    env:
+      COMPONENT_ROOT: ${{ github.workspace }}/component
+      TOOL_ROOT: ${{ github.workspace }}/.molsyssuite
+      SHA256: ${{ needs.build.outputs.sha256 }}
+      FILENAME: gh-run-receptor-0.0.0-py_76.tar.bz2
+      PLATFORM: ${{ matrix.platform }}
+      PYTHON_MINOR: ${{ matrix.python }}
+      GH_RECEPTOR_SUITE_ROOT: ${{ github.workspace }}/.molsyssuite
+      GHR_EXPECT_INSTALLED: '1'
+      TEST_SUPPORT_CANDIDATE_SHA: ${{ github.sha }}
+      TEST_SUPPORT_QUALIFICATION_SHA: ${{ github.sha }}
+      TEST_SUPPORT_PROVIDER_SHA: fee3bd875e68778844c0fffc2aba26b6cea02cd6
+      TEST_SUPPORT_FILENAME: gh-run-receptor-0.0.0-py_76.tar.bz2
+      TEST_SUPPORT_SHA256: ${{ needs.build.outputs.sha256 }}
+      TEST_SUPPORT_RUN_ID: ${{ github.run_id }}
+      TEST_SUPPORT_RUN_ATTEMPT: ${{ github.run_attempt }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          path: component
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          repository: uibcdf/molsyssuite
+          ref: fee3bd875e68778844c0fffc2aba26b6cea02cd6
+          path: .molsyssuite
+          persist-credentials: false
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: private-candidate-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/candidate
+      - uses: conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb # v4
+        with:
+          miniforge-version: latest
+          activate-environment: installed
+          auto-activate-base: false
+          python-version: ${{ matrix.python }}
+          channels: uibcdf,conda-forge
+          channel-priority: strict
+          run-init: 'false'
+          remove-profiles: 'false'
+      - name: Repair Windows installer launcher metadata
+        if: runner.os == 'Windows'
+        env:
+          CONDA_SAFETY_CHECKS: enabled
+        run: |
+          source "$(cygpath -u "$CONDA" 2>/dev/null || echo "$CONDA")/etc/profile.d/conda.sh"
+          conda activate installed
+          conda install --yes --name base --force-reinstall --override-channels -c conda-forge conda-launchers
+      - name: Install declared test tools
+        run: |
+          source "$(cygpath -u "$CONDA" 2>/dev/null || echo "$CONDA")/etc/profile.d/conda.sh"
+          conda activate installed
+          conda install --yes --override-channels --strict-channel-priority -c uibcdf -c conda-forge \
+            'pyyaml>=6,<7' 'jinja2>=3,<4' 'packaging>=24'
+          python "$TOOL_ROOT/devtools/scripts/installed_noarch.py" tools --root "$COMPONENT_ROOT" \
+            --plan devtools/qualification/plan.toml --python "$PYTHON_MINOR" --output "$RUNNER_TEMP/tools.json"
+      - name: Install exact artifact
+        run: |
+          source "$(cygpath -u "$CONDA" 2>/dev/null || echo "$CONDA")/etc/profile.d/conda.sh"
+          conda activate installed
+          python "$TOOL_ROOT/devtools/scripts/installed_noarch.py" install --root "$COMPONENT_ROOT" \
+            --plan devtools/qualification/plan.toml --local-file --filename "$FILENAME" \
+            --sha256 "$SHA256" --python "$PYTHON_MINOR" --directory "$RUNNER_TEMP/candidate" \
+            --output "$RUNNER_TEMP/installation.json"
+      - name: Validate installed files
+        working-directory: ${{ runner.temp }}
+        run: |
+          source "$(cygpath -u "$CONDA" 2>/dev/null || echo "$CONDA")/etc/profile.d/conda.sh"
+          conda activate installed
+          python -P "$TOOL_ROOT/devtools/scripts/installed_noarch.py" verify --root "$COMPONENT_ROOT" \
+            --plan devtools/qualification/plan.toml --local-file --filename "$FILENAME" --sha256 "$SHA256" \
+            --directory "$RUNNER_TEMP/candidate" --platform "$PLATFORM" --python "$PYTHON_MINOR" \
+            --output "$RUNNER_TEMP/before.json"
+      - name: Run installed tests
+        working-directory: ${{ runner.temp }}
+        run: |
+          source "$(cygpath -u "$CONDA" 2>/dev/null || echo "$CONDA")/etc/profile.d/conda.sh"
+          conda activate installed
+          python -P "$TOOL_ROOT/devtools/scripts/installed_noarch.py" tests --root "$COMPONENT_ROOT" \
+            --plan devtools/qualification/plan.toml --output "$RUNNER_TEMP/support.json"
+      - name: Recheck installed provenance after scientific tests
+        working-directory: ${{ runner.temp }}
+        run: |
+          source "$(cygpath -u "$CONDA" 2>/dev/null || echo "$CONDA")/etc/profile.d/conda.sh"
+          conda activate installed
+          python -P "$TOOL_ROOT/devtools/scripts/installed_noarch.py" verify --root "$COMPONENT_ROOT" \
+            --plan devtools/qualification/plan.toml --local-file --filename "$FILENAME" --sha256 "$SHA256" \
+            --directory "$RUNNER_TEMP/candidate" --platform "$PLATFORM" --python "$PYTHON_MINOR" \
+            --output "$RUNNER_TEMP/after.json"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: qualification-${{ matrix.platform }}-py${{ matrix.python }}
+          path: |
+            ${{ runner.temp }}/tools.json
+            ${{ runner.temp }}/installation.json
+            ${{ runner.temp }}/before.json
+            ${{ runner.temp }}/support.json
+            ${{ runner.temp }}/after.json
+          if-no-files-found: warn
+          retention-days: 30

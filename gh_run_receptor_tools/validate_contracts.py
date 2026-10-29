@@ -1,0 +1,171 @@
+#!/usr/bin/env python3
+"""Validating the frozen serialized-contract baseline."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import subprocess
+import sys
+from collections.abc import Callable, Sequence
+from pathlib import Path
+
+from gh_run_receptor.contracts import (
+    CONTRACTS,
+    MIGRATIONS,
+    SCHEMA_BASELINE_TAG,
+    schema_id,
+)
+
+Runner = Callable[..., subprocess.CompletedProcess[bytes]]
+VERSION_TAG = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+$")
+FLAT_SCHEMA_FREEZES = frozenset({"0.18.0", "0.19.0", "0.20.0", "0.21.0"})
+
+
+def _baseline_bytes(
+    root: Path, tag: str, relative: Path, runner: Runner
+) -> tuple[bytes | None, str | None]:
+    # Existing resources keep their original publishing paths. A future first
+    # freeze belongs to the current src layout, without relabeling old bytes.
+    if tag not in FLAT_SCHEMA_FREEZES:
+        relative = Path("src") / relative
+    result = runner(
+        ["git", "show", f"{tag}:{relative.as_posix()}"],
+        cwd=root,
+        capture_output=True,
+        check=False,
+    )
+    if result.returncode:
+        detail = result.stderr.decode("utf-8", errors="replace").splitlines()
+        return None, detail[-1][:240] if detail else "git show failed"
+    return result.stdout, None
+
+
+def validate_contracts(
+    root: Path,
+    *,
+    baseline_tag: str = SCHEMA_BASELINE_TAG,
+    candidate_tag: str | None = None,
+    runner: Runner = subprocess.run,
+) -> list[str]:
+    """Returning contract registry, schema, migration, and baseline errors."""
+
+    errors: list[str] = []
+    if candidate_tag is not None:
+        if not VERSION_TAG.fullmatch(candidate_tag):
+            return ["candidate tag must use X.Y.Z without a prefix"]
+        if candidate_tag == baseline_tag:
+            return ["candidate tag must differ from its published baseline"]
+        tag_result = runner(
+            ["git", "tag", "--list", candidate_tag],
+            cwd=root,
+            capture_output=True,
+            check=False,
+        )
+        if tag_result.returncode:
+            return [f"cannot determine whether candidate tag {candidate_tag} exists"]
+        if tag_result.stdout.strip():
+            return [f"candidate tag {candidate_tag} already exists; use normal validation"]
+    schema_root = root / "src/gh_run_receptor/schemas"
+    registered = {schema.resource for spec in CONTRACTS.values() for schema in spec.schemas}
+    discovered = {path.name for path in schema_root.glob("*-v*.schema.json")}
+    if discovered != registered:
+        errors.append(
+            "registered schema resources disagree with package files: "
+            f"registered={sorted(registered)!r} files={sorted(discovered)!r}"
+        )
+
+    for kind, spec in CONTRACTS.items():
+        if spec.current_version not in spec.readable_versions:
+            errors.append(f"{kind} current version is not readable")
+        schema_versions = {schema.version for schema in spec.schemas}
+        if len(schema_versions) != len(spec.schemas):
+            errors.append(f"{kind} contains duplicate schema versions")
+        if not spec.readable_versions <= schema_versions:
+            errors.append(f"{kind} readable versions lack packaged schemas")
+        for version in range(1, spec.current_version):
+            if version in spec.readable_versions and (kind, version) not in MIGRATIONS:
+                errors.append(f"{kind} readable version {version} has no forward migration")
+        for schema in spec.schemas:
+            path = schema_root / schema.resource
+            relative = Path("gh_run_receptor/schemas") / schema.resource
+            relative_text = relative.as_posix()
+            try:
+                raw = path.read_bytes()
+                payload = json.loads(raw)
+            except (OSError, json.JSONDecodeError) as exc:
+                errors.append(f"{schema.resource} cannot be read as JSON: {exc}")
+                continue
+            expected_identifier = schema_id(kind, schema.version)
+            if payload.get("title") != expected_identifier:
+                errors.append(f"{schema.resource} title disagrees with registry")
+            schema_property = payload.get("properties", {}).get("schema", {})
+            if schema_property.get("const") != expected_identifier:
+                errors.append(f"{schema.resource} schema const disagrees with registry")
+            expected_id = f"https://uibcdf.org/gh-run-receptor/schemas/{schema.resource}"
+            if payload.get("$id") != expected_id:
+                errors.append(f"{schema.resource} $id disagrees with resource path")
+
+            if schema.frozen_since is None:
+                if candidate_tag is not None:
+                    errors.append(f"{relative_text} is not frozen for candidate {candidate_tag}")
+                continue
+            if candidate_tag is not None and schema.frozen_since == candidate_tag:
+                prior, _ = _baseline_bytes(root, baseline_tag, relative, runner)
+                if prior is not None:
+                    errors.append(
+                        f"{relative_text} existed in {baseline_tag} and cannot be newly frozen "
+                        f"in {candidate_tag}"
+                    )
+                continue
+            baseline, detail = _baseline_bytes(root, schema.frozen_since, relative, runner)
+            if baseline is None:
+                errors.append(f"cannot read {relative_text} from {schema.frozen_since}: {detail}")
+            elif baseline != raw:
+                errors.append(
+                    f"{relative_text} changed after frozen baseline {schema.frozen_since}"
+                )
+    frozen_tags = {
+        schema.frozen_since
+        for spec in CONTRACTS.values()
+        for schema in spec.schemas
+        if schema.frozen_since is not None
+    }
+    if baseline_tag not in frozen_tags:
+        errors.append(f"required baseline {baseline_tag!r} is not registered")
+    if candidate_tag is not None and candidate_tag not in frozen_tags:
+        errors.append(f"candidate freeze {candidate_tag!r} is not registered")
+    return errors
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--root", type=Path, default=Path.cwd())
+    parser.add_argument("--baseline", default=SCHEMA_BASELINE_TAG)
+    parser.add_argument(
+        "--candidate",
+        help="pre-tag release being prepared; must not exist and may freeze only new resources",
+    )
+    args = parser.parse_args(argv)
+    errors = validate_contracts(
+        args.root.resolve(),
+        baseline_tag=args.baseline,
+        candidate_tag=args.candidate,
+    )
+    if errors:
+        for error in errors:
+            print(f"Contract compatibility: FAIL — {error}", file=sys.stderr)
+        return 1
+    frozen = sum(
+        schema.frozen_since is not None for spec in CONTRACTS.values() for schema in spec.schemas
+    )
+    print(
+        f"Contract compatibility: PASS — contracts={len(CONTRACTS)} "
+        f"frozen={frozen} baseline={args.baseline}"
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

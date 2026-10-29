@@ -38,7 +38,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           repository: uibcdf/molsyssuite
-          ref: 6d6172d6cd00c5ac2d4ebadb71df554ec5b7fa26
+          ref: fee3bd875e68778844c0fffc2aba26b6cea02cd6
           path: .molsyssuite
           persist-credentials: false
 

@@ -4,33 +4,16 @@ from __future__ import annotations
 
 import copy
 import json
-from importlib.resources import files
 from pathlib import Path
 
 import pytest
-from jsonschema import Draft202012Validator
-from referencing import Registry, Resource
 
 from gh_run_receptor.bundle import load_bundle
-from gh_run_receptor.contracts import CONTRACTS
 from gh_run_receptor.model import normalize_evidence
 from gh_run_receptor.report import build_report, exit_code, render_json, render_llm
+from gh_run_receptor_tools.schema_validation import validator as _validator
 
 FIXTURES = Path(__file__).parent / "fixtures"
-
-
-def _schema(name: str) -> dict:
-    resource = files("gh_run_receptor.schemas").joinpath(name)
-    return json.loads(resource.read_text(encoding="utf-8"))
-
-
-def _validator(name: str) -> Draft202012Validator:
-    registry = Registry()
-    for spec in CONTRACTS.values():
-        for item in spec.schemas:
-            schema = _schema(item.resource)
-            registry = registry.with_resource(schema["$id"], Resource.from_contents(schema))
-    return Draft202012Validator(_schema(name), registry=registry)
 
 
 def _corpus():

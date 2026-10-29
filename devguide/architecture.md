@@ -155,6 +155,14 @@ derived rather than a replacement for GitHub status or conclusion.
 
 ## Architectural decision gates
 
+Under #76, runtime source is isolated in `src/gh_run_receptor`; unshipped local
+operations use the dedicated `gh_run_receptor_tools` namespace and explicit
+repository/data/output inputs. Product, repository-tooling and integration
+assertions have exhaustive independent execution scopes. See
+[installed qualification](installed_qualification.md) for source/installed
+profiles, the shared support boundary, measured motivation and provisional
+receiving state. This source organization changes no serialized contract.
+
 The initial core is Python 3.11 through 3.13 and uses an installed `gh` command behind a
 transport adapter. Distribution of the stable Action, pattern engine, and watch polling
 policy remain evidence-dependent. Their defaults, owners, and gates are recorded in

@@ -6,8 +6,6 @@ from pathlib import Path
 
 import pytest
 
-from devtools.scripts import validate_contracts as contract_validation
-from devtools.scripts.validate_contracts import validate_contracts
 from gh_run_receptor.cli import main
 from gh_run_receptor.contracts import (
     CONTRACTS,
@@ -18,6 +16,8 @@ from gh_run_receptor.contracts import (
     upgrade_contract,
 )
 from gh_run_receptor.errors import ContractError
+from gh_run_receptor_tools import validate_contracts as contract_validation
+from gh_run_receptor_tools.validate_contracts import validate_contracts
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW = ROOT / ".github/workflows/validate-contracts.yml"
@@ -145,7 +145,7 @@ def _baseline_runner(command, **kwargs):
     assert command[:2] == ["git", "show"]
     assert kwargs["capture_output"] is True and kwargs["check"] is False
     _, relative = command[2].split(":", 1)
-    path = ROOT / relative
+    path = ROOT / "src" / relative
     if not path.is_file():
         return subprocess.CompletedProcess(command, 1, b"", b"missing baseline")
     return subprocess.CompletedProcess(command, 0, path.read_bytes(), b"")
@@ -166,13 +166,50 @@ _PUBLISHED_019_RESOURCES = {
 _PUBLISHED_020_RESOURCES = {*_PUBLISHED_019_RESOURCES, "events-v1.schema.json"}
 
 
+def test_frozen_resource_paths_follow_publishing_layout(tmp_path):
+    def git(*arguments):
+        return subprocess.run(
+            [
+                "git",
+                "-c",
+                "user.name=Qualification fixture",
+                "-c",
+                "user.email=fixture@example.invalid",
+                *arguments,
+            ],
+            cwd=tmp_path,
+            check=True,
+            capture_output=True,
+        )
+
+    git("init")
+    relative = Path("gh_run_receptor/schemas/control.json")
+    old = tmp_path / relative
+    old.parent.mkdir(parents=True)
+    old.write_bytes(b"frozen bytes\n")
+    git("add", ".")
+    git("commit", "-m", "Controlled flat source")
+    git("tag", "0.21.0")
+    new = tmp_path / "src" / relative
+    new.parent.mkdir(parents=True)
+    old.rename(new)
+    git("add", ".")
+    git("commit", "-m", "Controlled src source")
+    git("tag", "1.4.0")
+
+    for tag in ("0.21.0", "1.4.0"):
+        raw, error = contract_validation._baseline_bytes(tmp_path, tag, relative, subprocess.run)
+        assert error is None
+        assert raw == b"frozen bytes\n"
+
+
 def _candidate_runner(command, **kwargs):
     assert kwargs["capture_output"] is True and kwargs["check"] is False
     if command[:3] == ["git", "tag", "--list"]:
         return subprocess.CompletedProcess(command, 0, b"", b"")
     assert command[:2] == ["git", "show"]
     tag, relative = command[2].split(":", 1)
-    path = ROOT / relative
+    path = ROOT / "src" / relative
     if tag == "0.18.0" and path.name in _PUBLISHED_018_RESOURCES:
         return subprocess.CompletedProcess(command, 0, path.read_bytes(), b"")
     if tag == "0.19.0" and path.name in _PUBLISHED_019_RESOURCES:
@@ -277,8 +314,8 @@ def test_candidate_gate_rejects_relabeling_a_published_resource(monkeypatch):
 
 
 def test_baseline_gate_detects_in_place_change_and_unregistered_schema(tmp_path):
-    package = tmp_path / "gh_run_receptor"
-    shutil.copytree(ROOT / "gh_run_receptor/schemas", package / "schemas")
+    package = tmp_path / "src/gh_run_receptor"
+    shutil.copytree(ROOT / "src/gh_run_receptor/schemas", package / "schemas")
 
     assert validate_contracts(tmp_path, runner=_baseline_runner) == []
 

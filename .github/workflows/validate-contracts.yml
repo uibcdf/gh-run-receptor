@@ -18,5 +18,7 @@ jobs:
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
         with:
           python-version: "3.13"
+      - name: Install the identified runtime for source tooling
+        run: python -m pip install --no-deps .
       - name: Compare registered contracts with published baselines
         run: python devtools/scripts/validate_contracts.py --baseline 0.21.0

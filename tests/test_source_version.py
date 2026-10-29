@@ -5,6 +5,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+from gh_run_receptor import source_version
 from gh_run_receptor.source_version import parse_git_describe, version_from_source_checkout
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,15 +24,36 @@ def test_unrecognized_tag_is_not_reported_as_a_version():
     assert parse_git_describe("release-0.2.0-1-g1234abc") is None
 
 
+def test_installed_layout_never_borrows_a_parent_git_repository(tmp_path, monkeypatch):
+    monkeypatch.setattr(
+        source_version,
+        "__file__",
+        str(tmp_path / "site-packages/gh_run_receptor/source_version.py"),
+    )
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError("An installed prefix must not probe Git")
+
+    monkeypatch.setattr(source_version.subprocess, "run", forbidden)
+    assert version_from_source_checkout() is None
+
+
+def test_src_name_alone_is_not_a_source_checkout(tmp_path, monkeypatch):
+    monkeypatch.setattr(
+        source_version, "__file__", str(tmp_path / "src/gh_run_receptor/source_version.py")
+    )
+    assert version_from_source_checkout() is None
+
+
 def test_repository_checkout_has_a_source_version():
-    version = version_from_source_checkout()
+    version = version_from_source_checkout(ROOT)
 
     assert version is not None
     assert re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+(?:\+[0-9]+\.g[0-9a-f]+(?:\.dirty)?)?", version)
 
 
 def test_source_launcher_does_not_borrow_installed_distribution_version():
-    expected = version_from_source_checkout()
+    expected = version_from_source_checkout(ROOT)
 
     result = subprocess.run(
         [sys.executable, str(ROOT / "gh-run-receptor"), "--version"],
