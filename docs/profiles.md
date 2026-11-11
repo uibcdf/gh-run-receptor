@@ -74,3 +74,33 @@ a future dedicated structured source.
 
 Select `generic` and inspect natively when no profile represents the visible evidence
 faithfully.
+
+
+## Diagnosing acquisition and inconsistent metadata
+
+The following improvements are prepared for candidate 1.5.0; public 1.4.0
+retains its original diagnostic behavior until the new release is delivered.
+
+Failed-job summaries retain specific Conda transport, micromamba binary and
+missing artifact-download messages before later cleanup or empty-upload
+diagnostics. Source log locators remain available; later context does not prove
+a causal relationship. Independent cleanup/upload failures remain visible.
+
+A successful workflow can have contradictory child step metadata in GitHub's
+response. The report preserves the successful run conclusion while warning that
+terminal step qualification is unknown, with affected counts and source
+pointers. Preserve the first capture and request a separate fresh observation:
+
+```bash
+gh-run-receptor inspect RUN_ID --repo OWNER/REPO --attempt ATTEMPT \
+  --capture metadata --output fresh-observation --receptor llm
+```
+
+Use a new output directory and compare native selected-attempt job/step evidence.
+Logs and a later coherent response are separate evidence; they do not replace
+missing original step conclusions.
+
+For cancelled jobs with no steps, exact linked annotations may expose unverified
+hosted-runner acquisition or macOS arm64 capacity hints. Repeated capacity
+notices are shown once. Capacity notices and absent steps never prove the cause
+of cancellation, and all native conclusions and exit codes remain unchanged.
