@@ -1,10 +1,10 @@
 ---
 summary: Review and confirm runtime dependency minimum policy adoption.
 issue: uibcdf/gh-run-receptor#79
-status: active
+status: resolved
 opened: 2026-11-11
-closed:
-verification: inspected
+closed: 2026-11-11
+verification: measured
 area: [governance]
 guard: tests/test_conda_distribution.py
 normative: runtime_dependency_review.md
@@ -50,3 +50,29 @@ separate #79/#80 owner-review receipt in devguide/evidence.
 Exact-source native and source/installed publication gates remain pending under
 #84. This record does not claim a new delivered version or completed consumer
 adoption. Historical source/package facts remain unchanged.
+
+
+## Exact-source acceptance and disposition — 2026-11-11
+
+Resolved at product/documentation candidate
+54a21ddb2d7488fef823cd490ca7d274fd4c6f54. All nine source workflows pass with
+independent native run/job/required-step verification: routine 43119661027,
+twelve-cell compatibility 43119743508, policy 43119661383, Conda governance
+43119661689, strict docs/Pages 43119660906, frozen contracts 43119747698,
+three-OS Action 43119752174, exit codes 43119755988 and reusable distribution
+43119760036. The linked evidence receipts retain full native job/step inventories.
+
+A local exact-tag wheel/sdist rehearsal passes archive inspection and isolated
+version/import/resource/command checks. Shared installed support executes 731
+product/integration tests with one honest Conda-only skip and 193 separately
+required tooling deselections; all tooling has the twelve-cell source credit
+above. Imported support/resources retire successfully. The first wheel rehearsal
+lacked the required SDK path and failed eight tests; the corrected declared input
+passes against the unchanged wheel. No artifact rebuild or test weakening
+provided this receiving. The local renderer is published Pytest Receptor 1.1.0
+with --receptor=llm; the native installed descriptor retains --receptor=ci.
+
+This closes implementation/review, not publication. #84 retains the required
+original-file Conda native receiving, public channels/files, exact-tag extension
+and independent archival gates. Central advance notice is
+uibcdf/molsyssuite#191; consumer adoption is separately owned.

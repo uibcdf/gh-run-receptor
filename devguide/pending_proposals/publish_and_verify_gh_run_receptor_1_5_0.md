@@ -74,3 +74,23 @@ and artifact verification as work completes. Never credit an administrative
 preflight, a failed bootstrap, a missing tool or a source suite as public-file
 installed receiving. Review and clean only concluded task-owned resources at
 closeout, after sanitized evidence is durably published.
+
+
+## Source receiving and exact-tag rehearsal — 2026-11-11
+
+Candidate 54a21ddb2d7488fef823cd490ca7d274fd4c6f54 passes all nine exact-source
+workflows, including twelve native source cells. Native job and committed required
+step conclusions are independently verified after published 1.4.0 inspection.
+The isolated exact-tag wheel/sdist pass archive inspection; the clean wheel
+prefix has a clean pip check, runtime/metadata/generated version 1.5.0, nine
+frozen schemas and successful version/help/usage/import-origin checks. Shared
+installed selection executes 731 tests (one Conda-record-only skip, 193 separately
+received tooling deselections), with support imports/resources retired. The first
+rehearsal failed eight tests because the required SDK input was missing; the same
+wheel passes after restoring that input. Local proof is not a public wheel digest
+or the native Conda matrix. The two issue receipts retain exact evidence.
+
+Owner reviews #79/#80 and source implementation #78/#81/#82/#83 are resolved;
+explicit Review completed confirmations and central links follow the published
+archive checkpoint. Central advance/release-specific notice: MolSysSuite #191.
+No public 1.5.0 tag or package is claimed at this checkpoint.

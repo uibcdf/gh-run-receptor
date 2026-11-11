@@ -18,6 +18,8 @@
 - [#62 — Retain the failed Qt assertion instead of captured DBus stderr.](pytest_qt_assertion_hidden_by_dbus.md) (`resolved`)
 - [#66 — Retain failed pytest-receptor groups ahead of warnings or generic exits.](pytest_receptor_groups_hidden_by_secondary_messages.md) (`resolved`)
 - [#36 — Release wheel verification can import the checkout](release_wheel_verification_can_import_the_checkout.md) (`resolved`)
+- [#81 — Retain primary Conda acquisition failures before later cleanup diagnostics.](retain_conda_transport_failures_before_cleanup.md) (`resolved`)
+- [#83 — Retain missing artifact diagnostics before empty evidence uploads.](retain_missing_artifact_before_empty_upload.md) (`resolved`)
 - [#3 — Script extension reports an unknown source version](script_extension_reports_an_unknown_source_version.md) (`resolved`)
 - [#54 — Targeted Conda dispatch is misclassified by the full matrix rule](targeted_dispatch_misclassified_by_full_matrix.md) (`resolved`)
 - [#51 — A tolerated job failure disappears from the LLM report](tolerated_failure_disappears_from_llm_report.md) (`resolved`)

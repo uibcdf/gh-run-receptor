@@ -12,6 +12,7 @@
 - [#55 — Review MolSysSuite Python ecosystem policy in GH Run Receptor](adopt_inherited_python_ecosystem_tooling_in_gh_run_receptor.md) (`resolved`)
 - [#22 — Adopt the shared MolSysSuite policy and Ruff quality gate](adopt_molsyssuite_policy_v1.md) (`resolved`)
 - [#1 — Adopt MolSysSuite repository lifecycle and packaging conventions](adopt_molsyssuite_repository_lifecycle_and_packaging_conventions.md) (`resolved`)
+- [#80 — Review the delivered Conda provider and shared publisher adoption.](adopt_reviewed_conda_provider_v2_3.md) (`resolved`)
 - [#52 — Adopt the MOLI and MolSysSuite Python CI lane contract](adopt_the_moli_and_molsyssuite_python_ci_lane_contract.md) (`resolved`)
 - [#38 — Aggregate multiple workflow runs without merging source truth](aggregate_multiple_workflow_runs_without_merging_source_truth.md) (`resolved`)
 - [#74 — Show explicit job-state counts in the initial watch line.](clarify_initial_watch_job_counts.md) (`resolved`)
@@ -46,7 +47,9 @@
 - [#48 — Publish the frozen 1.0.0 stable contract](publish_the_frozen_1_0_0_stable_contract.md) (`resolved`)
 - [#72 — Qualify and publish the 1.3.0 release across GitHub and Conda.](qualify_and_publish_the_1_3_0_release_across_github_and_conda.md) (`resolved`)
 - [#65 — Review release resource ownership while retaining the broader lifecycle follow-up.](review_release_resource_ownership.md) (`resolved`)
+- [#79 — Review and confirm runtime dependency minimum policy adoption.](review_runtime_minimum_dependency_policy.md) (`resolved`)
 - [#23 — Secure inline Action rules and permission boundaries](secure_inline_action_rules_and_permission_boundaries.md) (`resolved`)
+- [#82 — Expose bounded job-linked hosted-runner acquisition hints.](show_hosted_runner_acquisition_annotation_hints.md) (`resolved`)
 - [#39 — Stabilize the CLI exit-code contract before 1.0](stabilize_the_cli_exit_code_contract_before_1_0.md) (`resolved`)
 - [#7 — Support Conda noarch package workflows](support_conda_noarch_package_workflows.md) (`resolved`)
 - [#35 — Support Conda workflows with an action-internal platform matrix](support_conda_workflows_with_an_action_internal_platform_matrix.md) (`resolved`)
@@ -54,4 +57,5 @@
 - [#28 — Validate portability outside UIBCDF](validate_portability_outside_uibcdf.md) (`resolved`)
 - [#18 — Validate terminal reporting through workflow_run](validate_terminal_reporting_through_workflow_run.md) (`resolved`)
 - [#16 — Validate the Python CLI across supported platforms](validate_the_python_cli_across_supported_platforms.md) (`resolved`)
+- [#78 — Surface contradictory child step metadata without replacing terminal job truth.](warn_on_nonterminal_steps_in_completed_jobs.md) (`resolved`)
 <!-- /generated -->

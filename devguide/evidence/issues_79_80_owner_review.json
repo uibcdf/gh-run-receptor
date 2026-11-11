@@ -115,5 +115,2032 @@
     "Native source and original-file installed/public receiving remain required for a later release.",
     "Shared development pip check has twelve unrelated pre-existing findings; no clean global dependency closure is claimed.",
     "First SDK pytest invocation from the component root failed collection due to the wrong tooling namespace; it is not credited. The corrected invocation from the task-owned SDK root passed."
-  ]
+  ],
+  "received_source": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+  "native_source_acceptance": [
+    {
+      "run_id": 43119760036,
+      "run_attempt": 1,
+      "workflow": ".github/workflows/validate-reusable-report.yml",
+      "event": "workflow_dispatch",
+      "head_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 130856927042,
+          "name": "report / Report the completed source run",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build the terminal source report",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Build the terminal source report",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 130857313363,
+          "name": "verify",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify durable called-workflow outputs",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify same-revision Action provenance",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": 43119755988,
+      "run_attempt": 1,
+      "workflow": ".github/workflows/validate-exit-codes.yml",
+      "event": "workflow_dispatch",
+      "head_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 130856911243,
+          "name": "validate",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install the identified runtime for source tooling",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Exercise every reproducible console category",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "number": 10,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 11,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": 43119752174,
+      "run_attempt": 1,
+      "workflow": ".github/workflows/action-validation.yml",
+      "event": "workflow_dispatch",
+      "head_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 130856899550,
+          "name": "macos-latest",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the exact source",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Validate the GitHub CLI script extension",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Report a completed successful run",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify completed-run outputs",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Report this still-active run",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify active-run truth",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Report a completed failed run without failing the reporter",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Verify failed-source separation",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Report this still-active run",
+              "number": 16,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Report a completed successful run",
+              "number": 17,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the exact source",
+              "number": 18,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 19,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 130856900004,
+          "name": "windows-latest",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the exact source",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Validate the GitHub CLI script extension",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Report a completed successful run",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify completed-run outputs",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Report this still-active run",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify active-run truth",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Report a completed failed run without failing the reporter",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Verify failed-source separation",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "skipped"
+            },
+            {
+              "name": "Post Report this still-active run",
+              "number": 16,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Report a completed successful run",
+              "number": 17,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the exact source",
+              "number": 18,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 19,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 130856900048,
+          "name": "ubuntu-latest",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the exact source",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Validate the GitHub CLI script extension",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Report a completed successful run",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify completed-run outputs",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Report this still-active run",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify active-run truth",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Report a completed failed run without failing the reporter",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify failed-source separation",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Report a completed failed run without failing the reporter",
+              "number": 15,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Report this still-active run",
+              "number": 16,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Report a completed successful run",
+              "number": 17,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the exact source",
+              "number": 18,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 19,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": 43119747698,
+      "run_attempt": 1,
+      "workflow": ".github/workflows/validate-contracts.yml",
+      "event": "workflow_dispatch",
+      "head_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 130856882117,
+          "name": "validate",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install the identified runtime for source tooling",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Compare registered contracts with published baselines",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "number": 10,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 11,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": 43119743508,
+      "run_attempt": 1,
+      "workflow": ".github/workflows/compatibility.yml",
+      "event": "workflow_dispatch",
+      "head_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 130856867967,
+          "name": "macos-latest \u00b7 Python 3.13",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the exact source",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "number": 10,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Set up Python",
+              "number": 18,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the reviewed distribution SDK",
+              "number": 19,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the exact source",
+              "number": 20,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 21,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 130856868220,
+          "name": "macos-latest \u00b7 Python 3.11",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the exact source",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "number": 10,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Set up Python",
+              "number": 18,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the reviewed distribution SDK",
+              "number": 19,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the exact source",
+              "number": 20,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 21,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 130856868241,
+          "name": "macos-latest \u00b7 Python 3.14",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the exact source",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "number": 10,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Set up Python",
+              "number": 18,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the reviewed distribution SDK",
+              "number": 19,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the exact source",
+              "number": 20,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 21,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 130856868248,
+          "name": "ubuntu-latest \u00b7 Python 3.14",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the exact source",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "number": 10,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Set up Python",
+              "number": 18,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the reviewed distribution SDK",
+              "number": 19,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the exact source",
+              "number": 20,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 21,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 130856868251,
+          "name": "macos-latest \u00b7 Python 3.12",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the exact source",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "number": 10,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Set up Python",
+              "number": 18,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the reviewed distribution SDK",
+              "number": 19,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the exact source",
+              "number": 20,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 21,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 130856868259,
+          "name": "ubuntu-latest \u00b7 Python 3.11",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the exact source",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "number": 10,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Set up Python",
+              "number": 18,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the reviewed distribution SDK",
+              "number": 19,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the exact source",
+              "number": 20,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 21,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 130856868267,
+          "name": "windows-latest \u00b7 Python 3.12",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the exact source",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "number": 10,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Set up Python",
+              "number": 18,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the reviewed distribution SDK",
+              "number": 19,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the exact source",
+              "number": 20,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 21,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 130856868277,
+          "name": "windows-latest \u00b7 Python 3.14",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the exact source",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "number": 10,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Set up Python",
+              "number": 18,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the reviewed distribution SDK",
+              "number": 19,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the exact source",
+              "number": 20,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 21,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 130856868293,
+          "name": "windows-latest \u00b7 Python 3.11",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the exact source",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "number": 10,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Set up Python",
+              "number": 18,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the reviewed distribution SDK",
+              "number": 19,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the exact source",
+              "number": 20,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 21,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 130856868321,
+          "name": "windows-latest \u00b7 Python 3.13",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the exact source",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "number": 10,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Set up Python",
+              "number": 18,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the reviewed distribution SDK",
+              "number": 19,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the exact source",
+              "number": 20,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 21,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 130856868343,
+          "name": "ubuntu-latest \u00b7 Python 3.12",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the exact source",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "number": 10,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Set up Python",
+              "number": 18,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the reviewed distribution SDK",
+              "number": 19,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the exact source",
+              "number": 20,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 21,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 130856868373,
+          "name": "ubuntu-latest \u00b7 Python 3.13",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the exact source",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install test and build tools",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete local suite",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build wheel and source distribution",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify and install the wheel",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test the installed command outside the checkout",
+              "number": 10,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Set up Python",
+              "number": 18,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the reviewed distribution SDK",
+              "number": 19,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the exact source",
+              "number": 20,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 21,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": 43119661383,
+      "run_attempt": 1,
+      "workflow": ".github/workflows/molsyssuite-policy.yml",
+      "event": "push",
+      "head_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 130856582156,
+          "name": "policy / conformance",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out member repository",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up policy Python",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out MolSysSuite policy",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check repository conformance",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install the policy Ruff version",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check Python lint and imports",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check Python formatting",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out MolSysSuite policy",
+              "number": 14,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Set up policy Python",
+              "number": 15,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out member repository",
+              "number": 16,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 17,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": 43119660906,
+      "run_attempt": 1,
+      "workflow": ".github/workflows/docs.yml",
+      "event": "push",
+      "head_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 130856581095,
+          "name": "build-docs",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install documentation dependencies",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build strict HTML documentation",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Upload Pages artifact",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97",
+              "number": 11,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+              "number": 12,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 13,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 130856786090,
+          "name": "deploy-docs",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Deploy to GitHub Pages",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": 43119661689,
+      "run_attempt": 1,
+      "workflow": ".github/workflows/conda-policy.yml",
+      "event": "push",
+      "head_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 130856583146,
+          "name": "policy / check",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/setup-python@v5",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run python -m pip install --disable-pip-version-check PyYAML==6.0.3 'Jinja2>=3,<4' 'packaging>=24'",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check publication workflow controls",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check declared noarch recipe and resources without building",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/setup-python@v5",
+              "number": 12,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "number": 13,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "number": 14,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 15,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "run_id": 43119661027,
+      "run_attempt": 1,
+      "workflow": ".github/workflows/python-routine.yml",
+      "event": "push",
+      "head_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+      "conclusion": "success",
+      "jobs": [
+        {
+          "id": 130856581203,
+          "name": "Linux Python 3.14",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the exact source",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check out the reviewed distribution SDK",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Python",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install package and test tools",
+              "number": 5,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check distribution inputs",
+              "number": 6,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run the complete package suite",
+              "number": 7,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Retain the measured coverage XML",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Set up Python",
+              "number": 14,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the reviewed distribution SDK",
+              "number": 15,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Check out the exact source",
+              "number": 16,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 17,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "id": 130856870801,
+          "name": "Publish default-branch coverage",
+          "conclusion": "success",
+          "steps": [
+            {
+              "name": "Set up job",
+              "number": 1,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/checkout@v4",
+              "number": 2,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Run actions/download-artifact@v4",
+              "number": 3,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Upload the measured report to Codecov",
+              "number": 4,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Run actions/checkout@v4",
+              "number": 8,
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "number": 9,
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pretag_wheel_rehearsal": {
+    "version": "1.5.0",
+    "candidate_source": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+    "tag_scope": "temporary local tag in a task-owned clone; authoritative tag not created",
+    "python": "3.14.7",
+    "host": "Linux",
+    "runtime_origin": "isolated wheel prefix",
+    "runtime_metadata_generated_version": "1.5.0",
+    "schemas_verified": 9,
+    "unshipped_namespace_importable": false,
+    "commands": {
+      "--version": {
+        "exit": 0,
+        "output_bytes": 6
+      },
+      "--help": {
+        "exit": 0,
+        "output_bytes": 1811
+      },
+      "invalid-command": {
+        "exit": 64,
+        "output_bytes": 604
+      }
+    },
+    "assets": [
+      {
+        "filename": "gh_run_receptor-1.5.0-py3-none-any.whl",
+        "bytes": 102156,
+        "sha256": "5c9bdc8ad327c0717eff71a793ce11a68f14c7951520b3618b4bfcc74b851535"
+      },
+      {
+        "filename": "gh_run_receptor-1.5.0.tar.gz",
+        "bytes": 184370,
+        "sha256": "41508dfbc0f9b8b43f3880810063c5915a462415c9f33432421d5d2943d482a9"
+      }
+    ],
+    "selected_tests": {
+      "passed": 731,
+      "skipped": 1,
+      "deselected": 193,
+      "skip_scope": "Conda-record-only smoke; later real Conda matrix must execute it",
+      "renderer": "published pytest-receptor 1.1.0 --receptor=llm; selection otherwise unchanged from committed product or integration",
+      "provider": "95f693be10c9205ab9b912cb53453710a207bf45",
+      "imports_retired": true,
+      "resources_retired": true
+    },
+    "initial_uncredited_rehearsal": "8 tests failed because the required GH_RECEPTOR_SUITE_ROOT input was absent; same wheel, declared SDK input restored, no test weakened or artifact rebuilt",
+    "scope": "local exact-tag rehearsal only; not public asset digest or cross-platform installed acceptance"
+  }
 }
