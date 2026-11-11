@@ -12,6 +12,13 @@ _EXECUTION_LIMIT = re.compile(
     r"The job has exceeded the maximum execution time of "
     r"(?P<limit>(?:[0-9]{1,6}h)?(?:[0-9]{1,6}m)?[0-9]{1,6}s)\.?"
 )
+_RUNNER_NOT_ACQUIRED = (
+    "The job was not acquired by Runner of type hosted even after multiple attempts"
+)
+_MACOS_CAPACITY = (
+    "Due to capacity constraints, jobs targeting macOS arm64 runners "
+    "may experience longer queue times."
+)
 
 
 def termination_diagnostics(model: dict[str, Any]) -> dict[str, Any] | None:
@@ -54,18 +61,39 @@ def termination_diagnostics(model: dict[str, Any]) -> dict[str, Any] | None:
                 and state in {"complete", "partial"}
             )
             if identity_matches:
+                seen_hints = set()
                 for annotation in check["annotations"]:
                     match = _EXECUTION_LIMIT.fullmatch(annotation["message"])
+                    kind = None
+                    message = ""
                     if annotation["level"] == "failure" and match is not None:
+                        kind = "job_execution_limit"
+                        message = f"job execution limit reported ({match.group('limit')})"
+                    elif not job["steps"]:
+                        if (
+                            annotation["level"] == "failure"
+                            and annotation["message"] == _RUNNER_NOT_ACQUIRED
+                        ):
+                            kind = "hosted_runner_acquisition"
+                            message = "hosted runner acquisition failure reported"
+                        elif (
+                            annotation["level"] == "notice"
+                            and annotation["message"] == _MACOS_CAPACITY
+                        ):
+                            kind = "hosted_runner_capacity"
+                            message = (
+                                "macOS arm64 capacity notice reports potentially longer queues"
+                            )
+                    if kind is not None and kind not in seen_hints:
+                        seen_hints.add(kind)
                         hints.append(
                             {
-                                "kind": "job_execution_limit",
+                                "kind": kind,
                                 "verification": "diagnostic_hint",
-                                "message": f"job execution limit reported ({match.group('limit')})",
+                                "message": message,
                                 "source": annotation["source"],
                             }
                         )
-                        break
             elif state in {"complete", "partial"}:
                 state = "invalid"
         jobs.append(

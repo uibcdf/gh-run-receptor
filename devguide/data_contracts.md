@@ -461,3 +461,23 @@ rejection rules are normative in
 [GitHub evidence](github_evidence.md#explicit-completed-job-logs-130-candidate).
 Consumers without support retain unknown optional data, but do not gain a claim
 that they diagnose these logs. Default attempt evidence remains unchanged.
+
+
+## Additive terminal-step consistency observations
+
+A completed job containing an explicitly nonterminal step status or a null step
+conclusion retains every original field. The model/report adds
+`completeness.terminal_steps = partial`, source-referenced unknown entries with
+kind `github.step.terminal_state`, and one bounded warning with affected job/step
+counts and an original `jobs.json` pointer. A missing historical status with a
+known terminal conclusion is not itself a contradictory observation.
+
+These use existing v1 extension points; all nine frozen schema files remain
+byte-identical. `bundle_complete` and `evidence_sufficient` retain their captured
+evidence meaning. GitHub's terminal job/run conclusion remains authoritative;
+`PASS` does not qualify unknown child step observations as successful. Coherent
+terminal observations produce no additional warning/partial dimension.
+
+The existing optional termination `hints` list also admits the two hosted-runner
+diagnostic kinds documented in timeout diagnosis. No mandatory field, source
+meaning, producer requirement or exit-code mapping changes.

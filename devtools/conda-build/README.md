@@ -208,3 +208,18 @@ adds main to the same file; independent public main/index and a clean public
 Linux/Python 3.14 installation pass. See the [public record](../../devguide/evidence/release_1_4_0_public.json)
 and [installed receipt](../../devguide/evidence/conda_1_4_0_qualification.json).
 Original 1.3.0 delivery and its separate failed/successful history are unchanged.
+
+
+## Provider v2.3.0 owner review — 2026-11-11
+
+Issue #80 adopts delivered MolSysSuite source
+95f693be10c9205ab9b912cb53453710a207bf45 for the current shared publisher,
+separate promotion, checks and installed operator bindings. The external action
+source is 87c70b1443d5f22d738ee3ddf812bdbe0152f6c2 (v2.3.0). Source-resource
+mapping, support @1 and installed verification implementations are byte-identical
+to the previous fee3bd8 SDK; only reviewed build/upload/promotion action pins
+change in these shared publication workflows. The workflow digest inventory is
+updated after review. Original source/file/digests, separate qualification
+identity, installed gate, same-byte promotion and independent public receiving
+remain mandatory. Historical 1.3.0/1.4.0 receipts and SDK identities are unchanged.
+Provider fixtures and input review do not claim a new real publication.

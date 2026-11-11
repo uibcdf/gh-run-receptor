@@ -1,0 +1,163 @@
+{
+  "schema": "gh-run-receptor.issue-diagnostics-validation@1",
+  "date": "2026-11-11",
+  "issues": [
+    78,
+    81,
+    82,
+    83
+  ],
+  "source_identity": "Reviewed working-tree file digests before the implementation commit; native exact-commit and new-release acceptance are pending.",
+  "product_input_sha256": {
+    "src/gh_run_receptor/bundle.py": "ed984f3e8e0fef171c82451201968b0536d39ae717c7a19e210701fe90ec5a5e",
+    "src/gh_run_receptor/logs.py": "b4c4d957e9ef84a03b5240998c031fffc3505eec299526ecb89cdfe96be3d364",
+    "src/gh_run_receptor/model.py": "b1b21fcfed794ce603299da363d91e6d78604e2d2b79b18ae64bfcab70843ed0",
+    "src/gh_run_receptor/report.py": "1135df787d4a06d69164e686e62fa0ec495f701e945221270917d10e98beb5d4",
+    "src/gh_run_receptor/termination.py": "5a5bcb6a54a62e2688958d362653e54aa2b3225d5c15b3ee2b3da67819a643de"
+  },
+  "baseline": {
+    "operator": "published GitHub 1.4.0 wheel",
+    "wheel_sha256": "caf4e33e81d3e7fcd3438315f03b35829783fd2a17bb6f1eb797c56fe71eb1e4",
+    "new_guard_subset_before_later_boundaries_goldens": "43 failed / 22 passed against unchanged public wheel; failures detect the requested source semantics, not an invented product result",
+    "existing_selected_baseline": "149 passed"
+  },
+  "local": {
+    "host": "Linux",
+    "python": "3.14.7",
+    "pytest_receptor": "published 1.1.0 in a task-owned prefix",
+    "ruff": "0.16.5",
+    "suite": "924 passed / one explicit Conda-only source skip",
+    "source_functions": 465,
+    "source_scopes": {
+      "product": 332,
+      "tooling": 111,
+      "integration": 22
+    },
+    "frozen_schemas": "9/9 unchanged",
+    "distribution_routes": "30 reviewed against immutable SDK 95f693be10c9205ab9b912cb53453710a207bf45",
+    "strict_docs": "Sphinx 8.2.3, MyST 4.0.1, theme 3.1.0; strict HTML passes"
+  },
+  "acquisition_controls": [
+    {
+      "name": "smonitor-index-126990339650",
+      "repository": "uibcdf/smonitor",
+      "run_id": 41949664799,
+      "attempt": 1,
+      "head_sha": "82dad5a7e26e0fba712e30657a6739188d770d79",
+      "job_id": 126990339650,
+      "source_status": "completed",
+      "source_conclusion": "failure",
+      "original_job_log_sha256": "cb1cc276654227bcc5318b6d4d0d9556d16d9401eb1fa7ce134dc210a72af5d7",
+      "before_exit": 1,
+      "after_exit": 1,
+      "retained_original_capture": "unchanged owner-controlled temporary evidence; only reviewed scalar projections and selected lines are committed"
+    },
+    {
+      "name": "smonitor-package-126990339754",
+      "repository": "uibcdf/smonitor",
+      "run_id": 41949664770,
+      "attempt": 1,
+      "head_sha": "82dad5a7e26e0fba712e30657a6739188d770d79",
+      "job_id": 126990339754,
+      "source_status": "completed",
+      "source_conclusion": "failure",
+      "original_job_log_sha256": "5cd429138f9f453a0eee4682f8972a389c3fac1261debef2013b2fd91c0f22a0",
+      "before_exit": 1,
+      "after_exit": 1,
+      "retained_original_capture": "unchanged owner-controlled temporary evidence; only reviewed scalar projections and selected lines are committed"
+    },
+    {
+      "name": "sabueso-binary-127312995193",
+      "repository": "uibcdf/sabueso",
+      "run_id": 42047120046,
+      "attempt": 1,
+      "head_sha": "2be4358d12a5f38ffccdf0cb85fd36750802a95d",
+      "job_id": 127312995193,
+      "source_status": "completed",
+      "source_conclusion": "failure",
+      "original_job_log_sha256": "9afbb09dec62234712dc6f0420c3a375b2d0e85c8e80161d3b09639c97b8e1f4",
+      "before_exit": 1,
+      "after_exit": 1,
+      "retained_original_capture": "unchanged owner-controlled temporary evidence; only reviewed scalar projections and selected lines are committed"
+    },
+    {
+      "name": "docking-timeout",
+      "repository": "uibcdf/dockingmt",
+      "run_id": 42976065511,
+      "attempt": 1,
+      "head_sha": "1030a29025914e01dff09e5fc606ec73b90f4cd9",
+      "job_id": 130375676929,
+      "source_status": "completed",
+      "source_conclusion": "failure",
+      "original_job_log_sha256": "4788168b7655344a3d06a0356f3953491e6494ad28b15f39fbcf1585f9452d60",
+      "before_exit": 1,
+      "after_exit": 1,
+      "retained_original_capture": "unchanged owner-controlled temporary evidence; only reviewed scalar projections and selected lines are committed"
+    },
+    {
+      "name": "docking-artifact",
+      "repository": "uibcdf/dockingmt",
+      "run_id": 42976065511,
+      "attempt": 2,
+      "head_sha": "1030a29025914e01dff09e5fc606ec73b90f4cd9",
+      "job_id": 130629684966,
+      "source_status": "completed",
+      "source_conclusion": "failure",
+      "original_job_log_sha256": "818281122c66a1c6cfe019d082ed8c4b5065088f52de4237fbf1c2733ae13b48",
+      "before_exit": 1,
+      "after_exit": 1,
+      "retained_original_capture": "unchanged owner-controlled temporary evidence; only reviewed scalar projections and selected lines are committed"
+    }
+  ],
+  "step_consistency": {
+    "original_public_report": "https://github.com/uibcdf/gh-run-receptor/issues/78",
+    "original_reported_steps": 32,
+    "original_example_job_id": 124219196265,
+    "original_example_step_number": 9,
+    "guard_fixture_provenance": "Explicit narrow transcription of the original public scalar example, not a recovered original bundle; 1000-step bounds cases are synthetic.",
+    "fresh_2026_11_11_control": {
+      "run_id": 41101439965,
+      "attempt": 1,
+      "head_sha": "6f94043a342e4bc53b42dd48531a19c5ba331824",
+      "contradictory_steps": 0,
+      "conclusion": "success",
+      "exit": 0
+    },
+    "causal_disposition": "Later coherent upstream observation; no proven cache corruption or source-test failure.",
+    "guarded_routes": [
+      "fresh inspect",
+      "watch terminal handoff",
+      "offline replay"
+    ],
+    "new_additive_evidence": "partial terminal_steps, source-referenced unknown entries and a bounded warning; source conclusions and byte-capture completeness remain unchanged"
+  },
+  "runner_control": {
+    "repository": "uibcdf/pharmacophoremt",
+    "run_id": 42656135375,
+    "attempt": 1,
+    "head_sha": "af408e7007e27b88d049a09b6cc8ad11db5e8594",
+    "check_suite_id": 115531713232,
+    "original_job_and_check_id": 129295013298,
+    "original_annotation_count": 4,
+    "source_conclusion": "failure",
+    "job_conclusion": "cancelled",
+    "cause": "unknown",
+    "before_annotations": "not_requested: suite default latest-only inventory returned later attempt checks",
+    "after_annotations": "complete",
+    "after_exit": 1,
+    "after_filter": "all check-suite runs retained; hints linked only to the unique original selected job, SHA, suite, state and available attempt",
+    "retained_hints": [
+      "hosted_runner_acquisition",
+      "hosted_runner_capacity"
+    ],
+    "raw_notices": 3,
+    "rendered_capacity_hints": 1
+  },
+  "limitations": [
+    "No original #78 byte capsule was recovered; a clearly labeled original scalar transcription and current coherent control are distinct.",
+    "Full and job-only reader semantic tests cover the same reviewed source fragments; live raw captures were not committed.",
+    "The initial full-suite run found four real guard mismatches; old solver context behavior was preserved and the additive unknown-kind guard was explicitly extended before the complete passing rerun.",
+    "The first strict docs setup lacked the declared theme; no pass was credited until declared tools were installed into the task prefix and strict HTML completed.",
+    "No tag, public package, installed native matrix or consumer adoption is certified by this local receipt."
+  ]
+}

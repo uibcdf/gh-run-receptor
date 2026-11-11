@@ -439,3 +439,20 @@ uses the saved scope and performs no network requests. See
 [GitHub evidence](github_evidence.md#explicit-completed-job-logs-130-candidate)
 for identity, cache, bounds and availability contracts. Native/installed delivery
 is provisional under #68 until its measured receipts are recorded.
+
+
+## Terminal jobs with contradictory child metadata
+
+A compact successful summary still prints a bounded warning when completed jobs
+retain explicitly nonterminal or null-conclusion steps. Human and JSON reports
+retain the same observation and source pointers. Counts describe observations,
+not failed tests. A complete byte capture does not certify complete terminal
+step evidence, and the source run conclusion and exit code are unchanged.
+
+To investigate a suspected transient response, make one explicit fresh capture
+into a separate, previously absent `--output` directory, preserving the original
+run, attempt and source. Compare the native selected-attempt jobs and exact job
+response, then inspect its native logs as separate evidence. Retain both
+observations. A later coherent response does not rewrite the original capture;
+passing log text does not fill in unknown step conclusions. There is no new
+automatic polling/retry loop or extra request on ordinary report rendering.

@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
+## 1.5.0 - 2026-11-11
+
+- Retain initial Conda index/package transport errors and missing micromamba
+  release/platform binaries before later setup-cleanup diagnostics, using
+  bounded fatal evidence and original source locations (#81).
+- Identify missing artifact downloads before a later empty evidence upload,
+  retaining independent upload failures and authoritative run outcomes (#83).
+- Warn when terminal jobs contain nonterminal or null-conclusion steps, with
+  affected counts and source pointers; preserve job/run truth and expose the
+  unknown terminal-step qualification in inspect, watch and replay (#78).
+- Show source-linked hosted-runner acquisition and macOS ARM64 capacity hints
+  with unknown cancellation cause; deduplicate notices and acquire original
+  selected-job annotations after later workflow attempts (#82).
+- Confirm the stdlib-only Python runtime and inclusive external gh floor under
+  the shared minimum dependency policy, preserving separate build/test/docs
+  constraints (#79).
+- Adopt the reviewed Conda v2.3.0 shared publisher and separate promotion SDK,
+  preserving original-file identity and all source/installed/public gates (#80).
+
 ## 1.4.0 - 2026-10-29
 
 - Separate the runtime under `src/gh_run_receptor` from unshipped repository

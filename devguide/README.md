@@ -289,6 +289,12 @@ documentation, Conda, release, configuration, and Action contracts are initial v
 slices, not their complete stable forms. Action-internal native matrices now have a hosted
 structured per-platform representation and a published 0.20.0 contract freeze.
 
+**Active owner work (2026-11-11):** #78–#83 cover source-preserving diagnostic/
+consistency improvements, hosted-runner hints, runtime dependency review and
+reviewed Conda provider adoption. Publication remains 1.4.0 until a separately
+qualified new candidate is delivered. See the pending queue indexes and
+[runtime minimum dependency review](runtime_dependency_review.md).
+
 ## Reading order
 
 1. [Product and scope](product_and_scope.md)

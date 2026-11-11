@@ -277,3 +277,15 @@ no terminal output and the existing byte-limit/child/partial-file cleanup rules.
 
 Primary sources: [gh 2.97 API implementation](https://github.com/cli/cli/blob/v2.97.0/pkg/cmd/api/api.go)
 and [upstream terminal-output advisory](https://github.com/cli/cli/security/advisories/GHSA-3m3g-3wcr-px46).
+
+
+## Original check identity after reruns
+
+Check-suite acquisition requests `filter=all` with the ordinary bounded paginated
+transport. GitHub's default latest-only check inventory can hide an original
+selected-attempt job after a later retry succeeds on the same source. Retain all
+returned source checks; annotations are still requested only for uniquely linked
+selected terminal jobs. Check ID, same repository, SHA, suite, job state and
+available run/attempt identities must agree. A newer successful check cannot
+supply an earlier cancelled job's hints. The existing annotation request/count/
+byte limits remain; no new endpoint, authentication or write permission is added.

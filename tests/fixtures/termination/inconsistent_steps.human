@@ -1,0 +1,20 @@
+gh-run-receptor: PASS
+
+Repository:  uibcdf/sabueso
+Workflow:    .github/workflows/ci.yml
+Run:         41101439965 (attempt 1)
+GitHub:      status=completed, conclusion=success
+Evidence:    complete
+Profile:     ci
+
+Jobs (1)
+  success             ?  Offline tests (windows-latest, Python 3.13)
+
+Artifacts (0)
+  None
+
+CI roles
+  test         1 jobs (success=1)
+
+Warnings
+  terminal step metadata inconsistent: jobs=1 steps=1; terminal step qualification unknown; evidence: jobs.json:/jobs/0/steps/0; refresh into a separate bundle and verify native job/step evidence

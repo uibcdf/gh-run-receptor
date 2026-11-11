@@ -1,0 +1,11 @@
+FAIL conclusion=failure status=completed | uibcdf/pharmacophoremt | run=42656135375 attempt=1 | profile=ci
+workflow: .github/workflows/CI.yaml | jobs: 1 (cancelled=1)
+non-success groups (1, 1 jobs):
+- Test on macos-15, Python 3.11 | cancelled
+ci roles: test=1(cancelled:1)
+artifacts: none
+run: https://github.com/uibcdf/pharmacophoremt/actions/runs/42656135375
+termination: source=failure cause=unknown
+- Test on macos-15, Python 3.11 | cancelled cause=unknown annotations=complete
+  hint (unverified): hosted runner acquisition failure reported | evidence: checks.json:/check_runs/0/annotations/0
+  hint (unverified): macOS arm64 capacity notice reports potentially longer queues | evidence: checks.json:/check_runs/0/annotations/1

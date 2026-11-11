@@ -144,3 +144,23 @@ goldens and bounded matrices. `tests/test_checks.py` protects malformed, truncat
 unknown-field and exact count/byte/character boundaries and the 50-request budget.
 The relevant closure guard is the termination module: removing linked hints or
 promoting them to verified timeout fails its original-run and truth-table assertions.
+
+
+## Hosted-runner acquisition annotations
+
+In addition to execution-limit wording, exact source-linked annotations can
+produce `hosted_runner_acquisition` and `hosted_runner_capacity` diagnostic hints.
+A failure annotation must report that the hosted runner was not acquired after
+multiple attempts. The recognized macOS arm64 capacity notice is displayed once
+per job even if repeated, with its first original annotation pointer. These
+hints require a terminal cancellation/timeout job with no captured steps and
+the same unique check identity guards as execution-limit hints.
+
+The capacity notice may appear alone: it reports potentially longer queues, not
+the cause of cancellation. Neither hint changes `cause=unknown` for cancellation,
+GitHub conclusions, requested annotation completeness or process status.
+`runner_id=0`, missing steps, generic timeout prose or a mismatched check do not
+supply a hint. Partial annotation evidence stays partial; absent, invalid or
+unavailable annotations cannot silently become complete. Raw normalized
+annotations remain available, including repeated notices. Text renders at most
+three distinct hints per job under the existing bounded job inventory.

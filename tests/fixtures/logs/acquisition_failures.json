@@ -1,0 +1,1098 @@
+{
+  "cases": [
+    {
+      "name": "smonitor-index-126990339650",
+      "provenance": "Reviewed scalar source facts and selected original log lines, independently captured with published 1.4.0 on 2026-11-11. Omitted lines are blank-padded only by the fixture helper.",
+      "source": {
+        "repository": "uibcdf/smonitor",
+        "run_id": 41949664799,
+        "run_attempt": 1,
+        "head_sha": "82dad5a7e26e0fba712e30657a6739188d770d79"
+      },
+      "job": {
+        "id": 126990339650,
+        "name": "Test on ubuntu-latest, Python 3.14",
+        "status": "completed",
+        "conclusion": "failure",
+        "steps": [
+          {
+            "completed_at": "2026-11-05T01:36:46Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "started_at": "2026-11-05T01:36:45Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:36:47Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 2,
+            "started_at": "2026-11-05T01:36:46Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:36:47Z",
+            "conclusion": "success",
+            "name": "Additional info about the build",
+            "number": 3,
+            "started_at": "2026-11-05T01:36:47Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:36:48Z",
+            "conclusion": "success",
+            "name": "Check out reviewed distribution tools",
+            "number": 4,
+            "started_at": "2026-11-05T01:36:47Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:36:48Z",
+            "conclusion": "success",
+            "name": "Set up Python",
+            "number": 5,
+            "started_at": "2026-11-05T01:36:48Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:11Z",
+            "conclusion": "failure",
+            "name": "Setup conda env",
+            "number": 6,
+            "started_at": "2026-11-05T01:36:48Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:11Z",
+            "conclusion": "skipped",
+            "name": "Info conda",
+            "number": 7,
+            "started_at": "2026-11-05T01:39:11Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:11Z",
+            "conclusion": "skipped",
+            "name": "Check distribution inputs",
+            "number": 8,
+            "started_at": "2026-11-05T01:39:11Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:11Z",
+            "conclusion": "skipped",
+            "name": "Install package",
+            "number": 9,
+            "started_at": "2026-11-05T01:39:11Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:11Z",
+            "conclusion": "skipped",
+            "name": "Test import module",
+            "number": 10,
+            "started_at": "2026-11-05T01:39:11Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:11Z",
+            "conclusion": "skipped",
+            "name": "Run linter",
+            "number": 11,
+            "started_at": "2026-11-05T01:39:11Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:11Z",
+            "conclusion": "skipped",
+            "name": "Run tests",
+            "number": 12,
+            "started_at": "2026-11-05T01:39:11Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:11Z",
+            "conclusion": "skipped",
+            "name": "Check coverage",
+            "number": 13,
+            "started_at": "2026-11-05T01:39:11Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:11Z",
+            "conclusion": "skipped",
+            "name": "Enforce branch coverage floor",
+            "number": 14,
+            "started_at": "2026-11-05T01:39:11Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:11Z",
+            "conclusion": "skipped",
+            "name": "Upload coverage reports to Codecov",
+            "number": 15,
+            "started_at": "2026-11-05T01:39:11Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:11Z",
+            "conclusion": "skipped",
+            "name": "Upload test results to Codecov",
+            "number": 16,
+            "started_at": "2026-11-05T01:39:11Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:11Z",
+            "conclusion": "failure",
+            "name": "Post Setup conda env",
+            "number": 29,
+            "started_at": "2026-11-05T01:39:11Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:11Z",
+            "conclusion": "skipped",
+            "name": "Post Set up Python",
+            "number": 30,
+            "started_at": "2026-11-05T01:39:11Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:11Z",
+            "conclusion": "success",
+            "name": "Post Check out reviewed distribution tools",
+            "number": 31,
+            "started_at": "2026-11-05T01:39:11Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:12Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 32,
+            "started_at": "2026-11-05T01:39:11Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:12Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 33,
+            "started_at": "2026-11-05T01:39:12Z",
+            "status": "completed"
+          }
+        ]
+      },
+      "lines": [
+        {
+          "line": 376,
+          "text": "2026-11-05T01:39:11.5730141Z critical libmamba Multiple errors occurred:"
+        },
+        {
+          "line": 377,
+          "text": "2026-11-05T01:39:11.5731289Z     Download error (28) Timeout was reached [https://conda.anaconda.org/uibcdf/noarch/repodata.json.zst]"
+        },
+        {
+          "line": 378,
+          "text": "2026-11-05T01:39:11.5732701Z     Operation too slow. Less than 30 bytes/sec transferred the last 60 seconds"
+        },
+        {
+          "line": 390,
+          "text": "2026-11-05T01:39:11.7456367Z ##[error]ENOENT: no such file or directory, lstat '/home/runner/work/_temp/setup-micromamba/micromamba-shell'"
+        }
+      ],
+      "expected_kind": "conda_download",
+      "expected_identity": "repodata.json.zst"
+    },
+    {
+      "name": "smonitor-package-126990339754",
+      "provenance": "Reviewed scalar source facts and selected original log lines, independently captured with published 1.4.0 on 2026-11-11. Omitted lines are blank-padded only by the fixture helper.",
+      "source": {
+        "repository": "uibcdf/smonitor",
+        "run_id": 41949664770,
+        "run_attempt": 1,
+        "head_sha": "82dad5a7e26e0fba712e30657a6739188d770d79"
+      },
+      "job": {
+        "id": 126990339754,
+        "name": "qa",
+        "status": "completed",
+        "conclusion": "failure",
+        "steps": [
+          {
+            "completed_at": "2026-11-05T01:36:38Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "started_at": "2026-11-05T01:36:37Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:36:39Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 2,
+            "started_at": "2026-11-05T01:36:38Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:36:40Z",
+            "conclusion": "success",
+            "name": "Check out reviewed distribution tools",
+            "number": 3,
+            "started_at": "2026-11-05T01:36:39Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:36:40Z",
+            "conclusion": "success",
+            "name": "Set up Python",
+            "number": 4,
+            "started_at": "2026-11-05T01:36:40Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:50Z",
+            "conclusion": "failure",
+            "name": "Setup conda env",
+            "number": 5,
+            "started_at": "2026-11-05T01:36:40Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:50Z",
+            "conclusion": "skipped",
+            "name": "Check distribution inputs",
+            "number": 6,
+            "started_at": "2026-11-05T01:39:50Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:50Z",
+            "conclusion": "skipped",
+            "name": "Install package",
+            "number": 7,
+            "started_at": "2026-11-05T01:39:50Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:50Z",
+            "conclusion": "skipped",
+            "name": "Run lint",
+            "number": 8,
+            "started_at": "2026-11-05T01:39:50Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:50Z",
+            "conclusion": "skipped",
+            "name": "Run tests (default profile)",
+            "number": 9,
+            "started_at": "2026-11-05T01:39:50Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:50Z",
+            "conclusion": "skipped",
+            "name": "Run strict schema smoke (qa profile)",
+            "number": 10,
+            "started_at": "2026-11-05T01:39:50Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:50Z",
+            "conclusion": "skipped",
+            "name": "Build package artifacts (sdist/wheel)",
+            "number": 11,
+            "started_at": "2026-11-05T01:39:50Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:50Z",
+            "conclusion": "skipped",
+            "name": "Verify license bytes and wheel rebuilt from sdist",
+            "number": 12,
+            "started_at": "2026-11-05T01:39:50Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:50Z",
+            "conclusion": "skipped",
+            "name": "Smoke install from wheel + CLI",
+            "number": 13,
+            "started_at": "2026-11-05T01:39:50Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:50Z",
+            "conclusion": "failure",
+            "name": "Post Setup conda env",
+            "number": 23,
+            "started_at": "2026-11-05T01:39:50Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:50Z",
+            "conclusion": "skipped",
+            "name": "Post Set up Python",
+            "number": 24,
+            "started_at": "2026-11-05T01:39:50Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:51Z",
+            "conclusion": "success",
+            "name": "Post Check out reviewed distribution tools",
+            "number": 25,
+            "started_at": "2026-11-05T01:39:50Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:51Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 26,
+            "started_at": "2026-11-05T01:39:51Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T01:39:51Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 27,
+            "started_at": "2026-11-05T01:39:51Z",
+            "status": "completed"
+          }
+        ]
+      },
+      "lines": [
+        {
+          "line": 472,
+          "text": "2026-11-05T01:38:50.5885938Z warning  libmamba Download error (28) Timeout was reached [https://conda.anaconda.org/uibcdf/noarch/pytest-receptor-1.2.0-py_0.tar.bz2]"
+        },
+        {
+          "line": 473,
+          "text": "2026-11-05T01:38:50.5886732Z     Operation too slow. Less than 30 bytes/sec transferred the last 60 seconds"
+        },
+        {
+          "line": 474,
+          "text": "2026-11-05T01:39:50.6555344Z warning  libmamba Download error (28) Timeout was reached [https://conda.anaconda.org/uibcdf/noarch/pytest-receptor-1.2.0-py_0.tar.bz2]"
+        },
+        {
+          "line": 475,
+          "text": "2026-11-05T01:39:50.6556156Z     Operation too slow. Less than 30 bytes/sec transferred the last 60 seconds"
+        },
+        {
+          "line": 476,
+          "text": "2026-11-05T01:39:50.6582168Z critical libmamba Download error (28) Timeout was reached [https://conda.anaconda.org/uibcdf/noarch/pytest-receptor-1.2.0-py_0.tar.bz2]"
+        },
+        {
+          "line": 477,
+          "text": "2026-11-05T01:39:50.6583289Z     Operation too slow. Less than 30 bytes/sec transferred the last 60 seconds"
+        },
+        {
+          "line": 483,
+          "text": "2026-11-05T01:39:50.8246759Z ##[error]ENOENT: no such file or directory, lstat '/home/runner/work/_temp/setup-micromamba/micromamba-shell'"
+        }
+      ],
+      "expected_kind": "conda_download",
+      "expected_identity": "pytest-receptor-1.2.0-py_0.tar.bz2"
+    },
+    {
+      "name": "sabueso-binary-127312995193",
+      "provenance": "Reviewed scalar source facts and selected original log lines, independently captured with published 1.4.0 on 2026-11-11. Omitted lines are blank-padded only by the fixture helper.",
+      "source": {
+        "repository": "uibcdf/sabueso",
+        "run_id": 42047120046,
+        "run_attempt": 1,
+        "head_sha": "2be4358d12a5f38ffccdf0cb85fd36750802a95d"
+      },
+      "job": {
+        "id": 127312995193,
+        "name": "Ackredit public-package pilot (Python 3.11)",
+        "status": "completed",
+        "conclusion": "failure",
+        "steps": [
+          {
+            "completed_at": "2026-11-05T14:39:33Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "started_at": "2026-11-05T14:39:32Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T14:39:36Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 2,
+            "started_at": "2026-11-05T14:39:33Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T14:39:37Z",
+            "conclusion": "failure",
+            "name": "Run mamba-org/setup-micromamba@v3.2.1",
+            "number": 3,
+            "started_at": "2026-11-05T14:39:36Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T14:39:37Z",
+            "conclusion": "skipped",
+            "name": "Install the consumer with the public provider",
+            "number": 4,
+            "started_at": "2026-11-05T14:39:37Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T14:39:37Z",
+            "conclusion": "skipped",
+            "name": "Verify installed imports outside both checkouts",
+            "number": 5,
+            "started_at": "2026-11-05T14:39:37Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T14:39:37Z",
+            "conclusion": "skipped",
+            "name": "Exercise the installed required provider and consumer",
+            "number": 6,
+            "started_at": "2026-11-05T14:39:37Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T14:39:37Z",
+            "conclusion": "skipped",
+            "name": "Run the public offline workflow",
+            "number": 7,
+            "started_at": "2026-11-05T14:39:37Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T14:39:37Z",
+            "conclusion": "failure",
+            "name": "Post Run mamba-org/setup-micromamba@v3.2.1",
+            "number": 13,
+            "started_at": "2026-11-05T14:39:37Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T14:39:38Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 14,
+            "started_at": "2026-11-05T14:39:37Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-05T14:39:38Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 15,
+            "started_at": "2026-11-05T14:39:38Z",
+            "status": "completed"
+          }
+        ]
+      },
+      "lines": [
+        {
+          "line": 151,
+          "text": "2026-11-05T14:39:37.7174824Z ##[error]Could not find a micromamba binary for release 2.10.0-0 on platform linux-64."
+        },
+        {
+          "line": 154,
+          "text": "2026-11-05T14:39:37.8246467Z ##[error]Unexpected end of JSON input"
+        }
+      ],
+      "expected_kind": "conda_download",
+      "expected_identity": "2.10.0-0 on platform linux-64"
+    },
+    {
+      "name": "docking-timeout",
+      "provenance": "Reviewed scalar source facts and selected original log lines, independently captured with published 1.4.0 on 2026-11-11. Omitted lines are blank-padded only by the fixture helper.",
+      "source": {
+        "repository": "uibcdf/dockingmt",
+        "run_id": 42976065511,
+        "run_attempt": 1,
+        "head_sha": "1030a29025914e01dff09e5fc606ec73b90f4cd9"
+      },
+      "job": {
+        "id": 130375676929,
+        "name": "Current 0.1.0 installed, Python 3.13",
+        "status": "completed",
+        "conclusion": "failure",
+        "steps": [
+          {
+            "completed_at": "2026-11-11T07:29:08Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "started_at": "2026-11-11T07:29:07Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:29:12Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 2,
+            "started_at": "2026-11-11T07:29:08Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:29:16Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 3,
+            "started_at": "2026-11-11T07:29:12Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:29:17Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 4,
+            "started_at": "2026-11-11T07:29:16Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:29:33Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 5,
+            "started_at": "2026-11-11T07:29:17Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:29:44Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 6,
+            "started_at": "2026-11-11T07:29:33Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:29:46Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 7,
+            "started_at": "2026-11-11T07:29:44Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:29:46Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 8,
+            "started_at": "2026-11-11T07:29:46Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:29:48Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 9,
+            "started_at": "2026-11-11T07:29:47Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:29:49Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 10,
+            "started_at": "2026-11-11T07:29:48Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:29:50Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 11,
+            "started_at": "2026-11-11T07:29:49Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:29:51Z",
+            "conclusion": "success",
+            "name": "Run actions/download-artifact@v4",
+            "number": 12,
+            "started_at": "2026-11-11T07:29:50Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:29:51Z",
+            "conclusion": "success",
+            "name": "Prepare owned scratch and record host allocation",
+            "number": 13,
+            "started_at": "2026-11-11T07:29:51Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:32:01Z",
+            "conclusion": "failure",
+            "name": "Setup micromamba",
+            "number": 14,
+            "started_at": "2026-11-11T07:29:51Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:32:01Z",
+            "conclusion": "skipped",
+            "name": "Build and install the exact sibling sources and same-run consumer",
+            "number": 15,
+            "started_at": "2026-11-11T07:32:01Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:32:01Z",
+            "conclusion": "skipped",
+            "name": "Verify declared source context and complete installed bounds",
+            "number": 16,
+            "started_at": "2026-11-11T07:32:01Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:32:01Z",
+            "conclusion": "skipped",
+            "name": "Receive the original explicit H5MSM 1.0 client under both policies",
+            "number": 17,
+            "started_at": "2026-11-11T07:32:01Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:32:01Z",
+            "conclusion": "skipped",
+            "name": "Run the complete candidate installed selection",
+            "number": 18,
+            "started_at": "2026-11-11T07:32:01Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:32:01Z",
+            "conclusion": "skipped",
+            "name": "Retain actual environment and build observations",
+            "number": 19,
+            "started_at": "2026-11-11T07:32:01Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:32:01Z",
+            "conclusion": "success",
+            "name": "Retain installed evidence including unsuccessful attempts",
+            "number": 20,
+            "started_at": "2026-11-11T07:32:01Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:32:02Z",
+            "conclusion": "failure",
+            "name": "Post Setup micromamba",
+            "number": 30,
+            "started_at": "2026-11-11T07:32:01Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:32:02Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 31,
+            "started_at": "2026-11-11T07:32:02Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:32:02Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 32,
+            "started_at": "2026-11-11T07:32:02Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:32:02Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 33,
+            "started_at": "2026-11-11T07:32:02Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:32:02Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 34,
+            "started_at": "2026-11-11T07:32:02Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:32:03Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 35,
+            "started_at": "2026-11-11T07:32:02Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:32:03Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 36,
+            "started_at": "2026-11-11T07:32:03Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:32:03Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 37,
+            "started_at": "2026-11-11T07:32:03Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:32:03Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 38,
+            "started_at": "2026-11-11T07:32:03Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:32:03Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 39,
+            "started_at": "2026-11-11T07:32:03Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:32:04Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 40,
+            "started_at": "2026-11-11T07:32:03Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T07:32:04Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 41,
+            "started_at": "2026-11-11T07:32:04Z",
+            "status": "completed"
+          }
+        ]
+      },
+      "lines": [
+        {
+          "line": 2319,
+          "text": "2026-11-11T07:32:01.0286921Z warning  libmamba Download error (28) Timeout was reached [https://conda.anaconda.org/uibcdf/noarch/py-mmcif-1.1.1-py_0.tar.bz2]"
+        },
+        {
+          "line": 2320,
+          "text": "2026-11-11T07:32:01.0288327Z     Operation too slow. Less than 30 bytes/sec transferred the last 60 seconds"
+        },
+        {
+          "line": 2321,
+          "text": "2026-11-11T07:32:01.0289715Z warning  libmamba Download error (28) Timeout was reached [https://conda.anaconda.org/uibcdf/noarch/pyunitwizard-0.29.4-py_0.tar.bz2]"
+        },
+        {
+          "line": 2322,
+          "text": "2026-11-11T07:32:01.0291039Z     Operation too slow. Less than 30 bytes/sec transferred the last 60 seconds"
+        },
+        {
+          "line": 2323,
+          "text": "2026-11-11T07:32:01.0339571Z critical libmamba Download error (28) Timeout was reached [https://conda.anaconda.org/uibcdf/noarch/pyunitwizard-0.29.4-py_0.tar.bz2]"
+        },
+        {
+          "line": 2324,
+          "text": "2026-11-11T07:32:01.0340776Z     Operation too slow. Less than 30 bytes/sec transferred the last 60 seconds"
+        },
+        {
+          "line": 2379,
+          "text": "2026-11-11T07:32:02.1114912Z ##[error]ENOENT: no such file or directory, lstat '/home/runner/work/_temp/setup-micromamba/micromamba-shell'"
+        }
+      ],
+      "expected_kind": "conda_download",
+      "expected_identity": "py-mmcif-1.1.1-py_0.tar.bz2"
+    },
+    {
+      "name": "docking-artifact",
+      "provenance": "Reviewed scalar source facts and selected original log lines, independently captured with published 1.4.0 on 2026-11-11. Omitted lines are blank-padded only by the fixture helper.",
+      "source": {
+        "repository": "uibcdf/dockingmt",
+        "run_id": 42976065511,
+        "run_attempt": 2,
+        "head_sha": "1030a29025914e01dff09e5fc606ec73b90f4cd9"
+      },
+      "job": {
+        "id": 130629684966,
+        "name": "Current 0.1.0 installed, Python 3.13",
+        "status": "completed",
+        "conclusion": "failure",
+        "steps": [
+          {
+            "completed_at": "2026-11-11T16:25:56Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "started_at": "2026-11-11T16:25:54Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:00Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 2,
+            "started_at": "2026-11-11T16:25:56Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:03Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 3,
+            "started_at": "2026-11-11T16:26:00Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:04Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 4,
+            "started_at": "2026-11-11T16:26:03Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:21Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 5,
+            "started_at": "2026-11-11T16:26:04Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:33Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 6,
+            "started_at": "2026-11-11T16:26:21Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:34Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 7,
+            "started_at": "2026-11-11T16:26:33Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:35Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 8,
+            "started_at": "2026-11-11T16:26:34Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:36Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 9,
+            "started_at": "2026-11-11T16:26:35Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:37Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 10,
+            "started_at": "2026-11-11T16:26:36Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:38Z",
+            "conclusion": "success",
+            "name": "Run actions/checkout@v6",
+            "number": 11,
+            "started_at": "2026-11-11T16:26:37Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:38Z",
+            "conclusion": "failure",
+            "name": "Run actions/download-artifact@v4",
+            "number": 12,
+            "started_at": "2026-11-11T16:26:38Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:38Z",
+            "conclusion": "skipped",
+            "name": "Prepare owned scratch and record host allocation",
+            "number": 13,
+            "started_at": "2026-11-11T16:26:38Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:38Z",
+            "conclusion": "skipped",
+            "name": "Setup micromamba",
+            "number": 14,
+            "started_at": "2026-11-11T16:26:38Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:38Z",
+            "conclusion": "skipped",
+            "name": "Build and install the exact sibling sources and same-run consumer",
+            "number": 15,
+            "started_at": "2026-11-11T16:26:38Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:38Z",
+            "conclusion": "skipped",
+            "name": "Verify declared source context and complete installed bounds",
+            "number": 16,
+            "started_at": "2026-11-11T16:26:38Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:38Z",
+            "conclusion": "skipped",
+            "name": "Receive the original explicit H5MSM 1.0 client under both policies",
+            "number": 17,
+            "started_at": "2026-11-11T16:26:38Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:38Z",
+            "conclusion": "skipped",
+            "name": "Run the complete candidate installed selection",
+            "number": 18,
+            "started_at": "2026-11-11T16:26:38Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:38Z",
+            "conclusion": "skipped",
+            "name": "Retain actual environment and build observations",
+            "number": 19,
+            "started_at": "2026-11-11T16:26:38Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:38Z",
+            "conclusion": "failure",
+            "name": "Retain installed evidence including unsuccessful attempts",
+            "number": 20,
+            "started_at": "2026-11-11T16:26:38Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:38Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 31,
+            "started_at": "2026-11-11T16:26:38Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:39Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 32,
+            "started_at": "2026-11-11T16:26:38Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:39Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 33,
+            "started_at": "2026-11-11T16:26:39Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:39Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 34,
+            "started_at": "2026-11-11T16:26:39Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:39Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 35,
+            "started_at": "2026-11-11T16:26:39Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:39Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 36,
+            "started_at": "2026-11-11T16:26:39Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:40Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 37,
+            "started_at": "2026-11-11T16:26:39Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:40Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 38,
+            "started_at": "2026-11-11T16:26:40Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:40Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 39,
+            "started_at": "2026-11-11T16:26:40Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:40Z",
+            "conclusion": "success",
+            "name": "Post Run actions/checkout@v6",
+            "number": 40,
+            "started_at": "2026-11-11T16:26:40Z",
+            "status": "completed"
+          },
+          {
+            "completed_at": "2026-11-11T16:26:40Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 41,
+            "started_at": "2026-11-11T16:26:40Z",
+            "status": "completed"
+          }
+        ]
+      },
+      "lines": [
+        {
+          "line": 1888,
+          "text": "2026-11-11T16:26:38.5506799Z ##[error]Unable to download artifact(s): Artifact not found for name: current-source-0.1.0-wheel-42976065511-2"
+        },
+        {
+          "line": 1928,
+          "text": "2026-11-11T16:26:38.7393053Z ##[error]No files were found with the provided path: .molsyssuite/current-0.1.0-hosted/evidence/"
+        }
+      ],
+      "expected_kind": "artifact_download",
+      "expected_identity": "current-source-0.1.0-wheel-42976065511-2"
+    }
+  ]
+}

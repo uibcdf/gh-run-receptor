@@ -312,3 +312,23 @@ Configuration documents carry `schema_version`. Unknown major versions fail vali
 unknown fields in a supported version are errors by default so misspellings cannot weaken
 a gate. Migrations are explicit and testable. Stable releases document supported schema
 versions and a deprecation window.
+
+
+## Primary acquisition failures and later diagnostics
+
+For failed jobs, narrow libmamba download-error records identify transport failure
+only with a critical libmamba download or a `Multiple errors occurred` block
+within 128 original lines. A recoverable warning alone does not outrank a later
+independent filesystem failure. The first transport record within that window
+retains its original locator and URL. A micromamba missing release/platform
+binary diagnostic is also eligible; it does not prove the binary is globally
+absent. An explicit artifact-download/not-found message retains the requested
+artifact name rather than selecting a subsequent empty evidence upload.
+
+These candidates use the shared archive and plain job-log reader. At most three
+later diagnostic records within 128 lines are retained as context, each with
+its own original locator. Context is not proof that one error caused another.
+Standalone upload, filesystem and JSON errors retain their own classification;
+unknown or truncated input never supplies an invented artifact or transport
+diagnosis. Existing Python/pytest/solver priority and context remain unchanged.
+All derived messages use the existing redaction, line and output bounds.

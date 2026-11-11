@@ -918,7 +918,7 @@ def _termination_lines(report: dict[str, Any]) -> list[str]:
             f"cause={_safe_text(job['cause'])} "
             f"annotations={_safe_text(job['annotation_evidence'])}"
         )
-        for hint in job["hints"][:1]:
+        for hint in job["hints"][:3]:
             source = hint["source"]
             lines.append(
                 f"  hint (unverified): {_safe_text(hint['message'])} | evidence: "
@@ -1035,6 +1035,7 @@ def _render_llm_body(report: dict[str, Any]) -> str:
             )
             fields.append(f"non_success_jobs={non_success_count}")
         non_success.extend(_termination_lines(report))
+        non_success.extend(f"warning: {_safe_text(warning)}" for warning in report["warnings"][:5])
         return " | ".join(fields) + "\n" + ("\n".join(non_success) + "\n" if non_success else "")
 
     if receptor["profile"] == "docs":

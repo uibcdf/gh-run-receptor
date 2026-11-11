@@ -45,7 +45,7 @@ jobs:
           GIT_CONFIG_VALUE_0: 'false'
         with:
           repository: uibcdf/molsyssuite
-          ref: fee3bd875e68778844c0fffc2aba26b6cea02cd6
+          ref: 95f693be10c9205ab9b912cb53453710a207bf45
           path: .molsyssuite
           persist-credentials: false
       - uses: conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb # v4
@@ -98,7 +98,7 @@ jobs:
         env:
           BUILT_PATHS: ${{ steps.compilation.outputs.built_paths }}
           SOURCE_SHA: ${{ github.sha }}
-          PROVIDER_SHA: fee3bd875e68778844c0fffc2aba26b6cea02cd6
+          PROVIDER_SHA: 95f693be10c9205ab9b912cb53453710a207bf45
         run: |
           source "$CONDA/etc/profile.d/conda.sh"
           conda activate noarch-publisher
@@ -163,7 +163,7 @@ jobs:
       GHR_EXPECT_INSTALLED: '1'
       TEST_SUPPORT_CANDIDATE_SHA: ${{ inputs.candidate_sha || github.sha }}
       TEST_SUPPORT_QUALIFICATION_SHA: ${{ github.sha }}
-      TEST_SUPPORT_PROVIDER_SHA: fee3bd875e68778844c0fffc2aba26b6cea02cd6
+      TEST_SUPPORT_PROVIDER_SHA: 95f693be10c9205ab9b912cb53453710a207bf45
       TEST_SUPPORT_FILENAME: gh-run-receptor-0.0.0-py_76.tar.bz2
       TEST_SUPPORT_SHA256: ${{ needs.build.outputs.sha256 || inputs.sha256 }}
       TEST_SUPPORT_RUN_ID: ${{ github.run_id }}
@@ -186,7 +186,7 @@ jobs:
           GIT_CONFIG_VALUE_0: 'false'
         with:
           repository: uibcdf/molsyssuite
-          ref: fee3bd875e68778844c0fffc2aba26b6cea02cd6
+          ref: 95f693be10c9205ab9b912cb53453710a207bf45
           path: .molsyssuite
           persist-credentials: false
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4

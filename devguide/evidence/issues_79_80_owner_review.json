@@ -1,0 +1,119 @@
+{
+  "schema": "gh-run-receptor.owner-review@1",
+  "date": "2026-11-11",
+  "issues": [
+    79,
+    80
+  ],
+  "inspected_base_source": "08bad8de95a70c31ea5f0c25b10d83d7457932d1",
+  "input_scope": "Reviewed current owner bytes before implementation commit; hashes are stable input identities, not an assertion that the dirty tree was an immutable release.",
+  "input_sha256": {
+    "pyproject.toml": "ce170ab6061681b0ab860b694f4861b1cc5af8bef10e1b94404e2560a0a9ffa0",
+    "devtools/conda-build/meta.yaml": "dad4dced044d6d8a87706d66f535318d892b0367d639f40c1c28ca8504ee80bb",
+    "devtools/conda-build/resources.toml": "2734eeb661712e5d61efc55b66651a6d9ace574e077de4ed59165311885a2aff",
+    "devtools/conda-build/build.sh": "da3fcc8564bb780c240a1708cb38fad88dbcb6814118e5391b651f85179e41a6",
+    "devtools/dependency_routes.toml": "2caeb0fde4d3a5eba0b2095018be2d3376385ca21eca6793dc7f301a12838076",
+    "gh-run-receptor": "ed41bd70fa1ffcd42ba7c2aab47509e8914d834540952e3a329e71ded6ee5086",
+    "action.yml": "81d931a1ab27b814e7494ea363c3ec912888344ea17e820064ba74b5857f588b",
+    ".github/workflows/reusable-report.yml": "61192b7dc1dd7a7820144ed39390fa3528650afea0246e554195e0135b6b888d",
+    "src/gh_run_receptor/github.py": "fe8ab9a9c6c7d9c4e8efda4924cb8d882c81ee317dc128d0bbc6fc4ec1deb579"
+  },
+  "runtime_policy": {
+    "python_required_providers": [],
+    "optional_runtime_provider_groups": [],
+    "development_only_groups": [
+      "test",
+      "docs",
+      "dev"
+    ],
+    "external_runtime_floor": "gh>=2.48.0",
+    "floor_api": "gh api --paginate --slurp",
+    "separately_governed_python_range": ">=3.11,<3.15",
+    "runtime_import_nonstdlib_roots": [],
+    "disposition": "complies-without-runtime-declaration-changes",
+    "review_trigger": "new runtime/optional provider, maintained acquisition route, consumed gh API or Python support boundary"
+  },
+  "provider_adoption": {
+    "old_sdk": "fee3bd875e68778844c0fffc2aba26b6cea02cd6",
+    "new_sdk": "95f693be10c9205ab9b912cb53453710a207bf45",
+    "external_action_version": "2.3.0",
+    "external_action_source": "87c70b1443d5f22d738ee3ddf812bdbe0152f6c2",
+    "identical_shared_operations": [
+      {
+        "path": "devtools/scripts/noarch_conda.py",
+        "sha256": "27ccce65d08b6076cd9a30eb288079c348d8c3e190b5ffc0a6ad47c10fd238f1",
+        "state": "byte-identical"
+      },
+      {
+        "path": "devtools/scripts/installed_noarch.py",
+        "sha256": "3f34a46cab45f6987fc33da3a3d7f82178f395ea0980ac5b46b1d9b64ebffe57",
+        "state": "byte-identical"
+      },
+      {
+        "path": "devtools/scripts/installed_test_support.py",
+        "sha256": "11ae22606546b62f28536a7a4126e2bc25d676d55bc3b92d74b56e7094e0cf87",
+        "state": "byte-identical"
+      },
+      {
+        "path": "devtools/scripts/verify_installed_matrix.py",
+        "sha256": "83be50c5eca8e10de9117c62ddb7b350450815768324e3da31001637d41276c1",
+        "state": "byte-identical"
+      },
+      {
+        "path": "devtools/scripts/qualify_noarch_install.py",
+        "sha256": "6af19d887b26e7486088d6f9a7239144ccd0f674f9771279a14a4afbd24c568e",
+        "state": "byte-identical"
+      },
+      {
+        "path": "devtools/scripts/installed_imports.py",
+        "sha256": "ff23458015bb7ce83bc3eea36571c4294bed09fff948e8eb6d9bcb3a0615fa3c",
+        "state": "byte-identical"
+      },
+      {
+        "path": "devtools/scripts/installed_test_dependencies.py",
+        "sha256": "4383b94ae7638d945e913b1f34055bd28214513feb5925ff6060d23aa94c76d8",
+        "state": "byte-identical"
+      },
+      {
+        "path": "devtools/scripts/dependency_routes.py",
+        "sha256": "873751a152174a4020b5f2d59fd4385890035d820c6dfd4defd331a08ce19a14",
+        "state": "byte-identical"
+      },
+      {
+        "path": "devtools/scripts/noarch_release.py",
+        "sha256": "631b0bbc3f8ad916cef04e5a0b538dc8e4432a3537d74868e9341df071daa053",
+        "state": "byte-identical"
+      },
+      {
+        "path": "devtools/scripts/verify_public_conda.py",
+        "sha256": "bb743343ec7a58659b90e6cbae1a06380c7fd8e2328b1b7c11c85e52fc890567",
+        "state": "byte-identical"
+      }
+    ],
+    "affected_shared_workflows": [
+      ".github/workflows/publish-noarch-conda.yaml",
+      ".github/workflows/promote-noarch-conda.yaml"
+    ],
+    "shared_workflow_diff": "four action bindings change; build, exact upload and separate promotion inputs/triggers/gates/credentials remain unchanged",
+    "caller_scope": "all active owner SDK publisher/promotion/check/installed/operator bindings explicitly reviewed and kept consistent; no sibling worktree edits",
+    "historical_receipts": "immutable and unchanged"
+  },
+  "local_checks": [
+    {
+      "name": "shared exact-byte source/resource and 30-route input review",
+      "result": "pass",
+      "scope": "owner inputs; not publication"
+    },
+    {
+      "name": "shared SDK conda release contract tests",
+      "result": "28 passed",
+      "scope": "offline admin gate contracts, not installed/public artifacts"
+    }
+  ],
+  "limitations": [
+    "No package publication or tag move is performed by these two reviews.",
+    "Native source and original-file installed/public receiving remain required for a later release.",
+    "Shared development pip check has twelve unrelated pre-existing findings; no clean global dependency closure is claimed.",
+    "First SDK pytest invocation from the component root failed collection due to the wrong tooling namespace; it is not credited. The corrected invocation from the task-owned SDK root passed."
+  ]
+}

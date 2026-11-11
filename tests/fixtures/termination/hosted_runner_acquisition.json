@@ -1,0 +1,58 @@
+{
+  "provenance": "Public exact original check and annotations read directly on 2026-11-11; current suite default/latest check inventory omits this original job after a rerun. Narrow reviewed projection, not an original complete bundle.",
+  "repository": "uibcdf/pharmacophoremt",
+  "run": {
+    "id": 42656135375,
+    "run_attempt": 1,
+    "head_sha": "af408e7007e27b88d049a09b6cc8ad11db5e8594",
+    "check_suite_id": 115531713232,
+    "status": "completed",
+    "conclusion": "failure",
+    "html_url": "https://github.com/uibcdf/pharmacophoremt/actions/runs/42656135375"
+  },
+  "job": {
+    "id": 129295013298,
+    "name": "Test on macos-15, Python 3.11",
+    "run_id": 42656135375,
+    "run_attempt": 1,
+    "head_sha": "af408e7007e27b88d049a09b6cc8ad11db5e8594",
+    "status": "completed",
+    "conclusion": "cancelled",
+    "steps": [],
+    "check_run_url": "https://api.github.com/repos/uibcdf/pharmacophoremt/check-runs/129295013298"
+  },
+  "check": {
+    "id": 129295013298,
+    "head_sha": "af408e7007e27b88d049a09b6cc8ad11db5e8594",
+    "check_suite": {
+      "id": 115531713232
+    },
+    "status": "completed",
+    "conclusion": "cancelled",
+    "output": {
+      "title": null,
+      "summary": null,
+      "text": null,
+      "annotations_count": 4,
+      "annotations_url": "https://api.github.com/repos/uibcdf/pharmacophoremt/check-runs/129295013298/annotations"
+    }
+  },
+  "annotations": [
+    {
+      "annotation_level": "failure",
+      "message": "The job was not acquired by Runner of type hosted even after multiple attempts"
+    },
+    {
+      "annotation_level": "notice",
+      "message": "Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times."
+    },
+    {
+      "annotation_level": "notice",
+      "message": "Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times."
+    },
+    {
+      "annotation_level": "notice",
+      "message": "Due to capacity constraints, jobs targeting macOS arm64 runners may experience longer queue times."
+    }
+  ]
+}

@@ -24,7 +24,7 @@ def test_staged_workflow_keeps_original_artifact_and_separate_qualification_iden
         if s.get("uses", "").startswith("actions/checkout@")
     ]
     assert ("component", "${{ inputs.candidate_sha }}") in checkout_refs
-    assert (".molsyssuite", "fee3bd875e68778844c0fffc2aba26b6cea02cd6") in checkout_refs
+    assert (".molsyssuite", "95f693be10c9205ab9b912cb53453710a207bf45") in checkout_refs
     assert job["env"]["TEST_SUPPORT_QUALIFICATION_SHA"] == "${{ github.sha }}"
     assert job["env"]["TEST_SUPPORT_CANDIDATE_SHA"] == "${{ inputs.candidate_sha }}"
     setup = next(s for s in job["steps"] if "setup-miniconda@" in s.get("uses", ""))

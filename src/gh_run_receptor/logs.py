@@ -42,6 +42,17 @@ _PYTEST_GROUP = re.compile(r"^\[[1-9][0-9]*\]\s+([\w.]+)\s*\|\s+[1-9][0-9]* test
 _PYTEST_LOCATION = re.compile(r"^((?:[A-Za-z]:)?[^:<>|\r\n]+\.py):([1-9][0-9]*)$")
 _PYTEST_NODE = re.compile(r"^\S+\.py::\S+$")
 _CURL_FAILURE = re.compile(r"^curl:\s+\([1-9][0-9]{0,2}\)\s+\S")
+_CONDA_DOWNLOAD = re.compile(
+    r"^(?:(?:warning|critical|error)\s+libmamba\s+|libmamba\s+)?"
+    r"Download error \([1-9][0-9]{0,2}\)\s+\S",
+    re.IGNORECASE,
+)
+_MICROMAMBA_BINARY = re.compile(
+    r"^Could not find a micromamba binary for release \S+ on platform [A-Za-z0-9_-]+\.?$"
+)
+_MISSING_ARTIFACT = re.compile(
+    r"^Unable to download artifact\(s\): Artifact not found for name:\s+\S"
+)
 _REJECTED_DIAGNOSTIC = re.compile(r"^[A-Za-z][A-Za-z0-9 ._/-]{0,79} rejected:\s+\S")
 _PYTHON_FRAME = re.compile(r'^\s+File "([^"]+)", line (\d+)')
 _PYTHON_EXCEPTION = re.compile(r"^([A-Za-z_][\w.]*(?:Error|Exception)):\s+\S")
@@ -72,6 +83,12 @@ class Candidate:
 
 def _retain_candidate(candidates: dict[str, Candidate], candidate: Candidate) -> None:
     old = candidates.get(candidate.kind)
+    if (
+        old is not None
+        and candidate.kind in {"conda_download", "artifact_download"}
+        and old.priority == candidate.priority
+    ):
+        return
     if old is None or (candidate.priority, candidate.line) >= (old.priority, old.line):
         candidates[candidate.kind] = candidate
 
@@ -147,6 +164,11 @@ def _clean_line(raw: bytes) -> str:
 
 
 def _candidate(message: str, line: int) -> Candidate | None:
+    diagnostic = message.removeprefix("##[error]").strip()
+    if _CONDA_DOWNLOAD.match(diagnostic) or _MICROMAMBA_BINARY.fullmatch(diagnostic):
+        return Candidate(110, line, "conda_download", diagnostic)
+    if _MISSING_ARTIFACT.match(diagnostic):
+        return Candidate(110, line, "artifact_download", diagnostic)
     if _CURL_FAILURE.match(message):
         return Candidate(110, line, "download_error", message)
     if match := _PYTEST_FAILED.match(message):
@@ -241,8 +263,13 @@ def _job_occurrence(stream: Any, job: dict[str, Any], member: str) -> dict[str, 
     solver_start: int | None = None
     solver_packages: list[str] = []
     solver_line: int | None = None
+    transport_start: Candidate | None = None
+    transport_failure_line: int | None = None
     for line_number, raw in _bounded_lines(stream):
         message = _clean_line(raw)
+        diagnostic = message.removeprefix("##[error]").strip()
+        if re.fullmatch(r"critical\s+libmamba\s+Multiple errors occurred:", diagnostic):
+            transport_failure_line = line_number
         if message == "Traceback (most recent call last):":
             traceback_line = line_number
             traceback_frame = None
@@ -301,7 +328,16 @@ def _job_occurrence(stream: Any, job: dict[str, Any], member: str) -> dict[str, 
                 ),
             )
         if candidate := _candidate(message, line_number):
-            _retain_candidate(candidates, candidate)
+            if candidate.kind == "conda_download" and _CONDA_DOWNLOAD.match(diagnostic):
+                if transport_start is None or line_number - transport_start.line > MAX_SOLVER_LINES:
+                    transport_start = candidate
+                if re.match(r"critical\s+libmamba\s+Download error", diagnostic) or (
+                    transport_failure_line is not None
+                    and line_number - transport_failure_line <= MAX_SOLVER_LINES
+                ):
+                    _retain_candidate(candidates, transport_start)
+            else:
+                _retain_candidate(candidates, candidate)
             if (
                 candidate.kind == "exit_code"
                 and previous is not None
@@ -327,13 +363,19 @@ def _job_occurrence(stream: Any, job: dict[str, Any], member: str) -> dict[str, 
     safe_message = _safe_cause(best.message)
     normalized = _normalized(safe_message)
     context = list(best.context)
-    later = candidates.get("missing_file")
-    if (
-        best.kind in {"download_error", "conda_solver"}
-        and later is not None
-        and 0 < later.line - best.line <= MAX_SOLVER_LINES
-    ):
-        context.append(Candidate(0, later.line, "later diagnostic", later.message))
+    if best.kind in {"download_error", "conda_solver", "conda_download", "artifact_download"}:
+        later_kinds = (
+            {"missing_file", "github_error", "error", "python_import"}
+            if best.kind in {"conda_download", "artifact_download"}
+            else {"missing_file"}
+        )
+        for later in sorted(candidates.values(), key=lambda item: item.line):
+            if (
+                later.kind in later_kinds
+                and 0 < later.line - best.line <= MAX_SOLVER_LINES
+                and later.message != best.message
+            ):
+                context.append(Candidate(0, later.line, "later diagnostic", later.message))
     return {
         "job_id": job.get("id"),
         "job_name": job.get("name"),

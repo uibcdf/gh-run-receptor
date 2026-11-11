@@ -129,3 +129,25 @@ handoff under #144 are required before coordinated closure.
 Design references: [PyPA source layout](https://packaging.python.org/en/latest/discussions/src-layout-vs-flat-layout/),
 [pytest integration practices](https://docs.pytest.org/en/stable/explanation/goodpractices.html)
 and [pytest import modes](https://docs.pytest.org/en/stable/explanation/pythonpath.html).
+
+
+## 2026-11-11 diagnostic receiving scopes
+
+Issues #78/#81/#82/#83 add reviewed source-state/annotation/acquisition guards.
+The active inventory now covers 465 functions: 332 product, 111 tooling and
+22 integration. All 437 baseline functions retain their existing accounted
+disposition and both source-version checks remain active tooling. The new CLI
+inspect/watch/offline replay test is integration; source-independent parsers,
+models, rendering, fixtures and bounded semantic guards are product. No shared
+support namespace expansion or source runtime exposure is introduced. The
+[diagnostic validation receipt](evidence/issues_78_81_82_83_validation.json)
+separates local source and original public observations from pending new-file
+qualification under #84.
+
+Current owner SDK/operator bindings are reviewed at MolSysSuite
+95f693be10c9205ab9b912cb53453710a207bf45 under #80. The ten shared source/resource/
+installed verification operations retain identical bytes from fee3bd8; reviewed
+external v2.3.0 build/exact-upload/promotion bindings change separately. Keep
+source/resource mapping, hash-bound support, candidate/workflow/provider
+identities and every original-file/public verification gate described above.
+Historical producer receipts retain their original provider identities.

@@ -4,7 +4,7 @@ source_routes = []
 source_reason = "There are no required Python runtime providers to replace with sibling source; gh is an independently distributed external executable."
 
 [shared_tool]
-commit = "fee3bd875e68778844c0fffc2aba26b6cea02cd6"
+commit = "95f693be10c9205ab9b912cb53453710a207bf45"
 
 [[recipes]]
 path = "devtools/conda-build/meta.yaml"
@@ -25,12 +25,12 @@ reason = "Manual checkout-local gh extension and composite Action validation usi
 
 [[workflows]]
 path = ".github/workflows/compatibility.yml"
-sha256 = "d6c6e4edb57bf291a5b6a4ce27999f496521307226fe702a2baa7898e3109b70"
+sha256 = "03f1ca2ca7bae4b034117015d51d43c1d0fcb3a958f2a6642c0813c6986549cf"
 reason = "Twelve Python/OS source pip-test, wheel-build/install and outside-checkout smoke cells; runs the pinned input review before tests, distinct from one-file Conda installation."
 
 [[workflows]]
 path = ".github/workflows/conda-policy.yml"
-sha256 = "5669217922941006e8278ce8211cfc9fcda19f4455f120d733b2e60efd088363"
+sha256 = "a2c574f9fd2074c99841ba371d3223395169e6dc5b65ca5b6308b002ddd0fd8e"
 reason = "Read-only immutable shared Conda workflow/resource audit on push, PR and dispatch; no build or publication credential."
 
 [[workflows]]
@@ -65,12 +65,12 @@ reason = "Manual least-privilege consumer experiment at existing Action pins; pr
 
 [[workflows]]
 path = ".github/workflows/promote-conda.yml"
-sha256 = "1c159588bda48720f462907bd3df97b1d418c95a2784027be6ff5db6f233d740"
+sha256 = "0a1a5cb53822b362d78fde0603e3b50c6a5c9d9610ad37f8f406e79a3a4df4bf"
 reason = "Manual owner input review then immutable shared exact-source/installed-matrix verifier and same-file label promotion; no rebuild."
 
 [[workflows]]
 path = ".github/workflows/publish-release.yml"
-sha256 = "7b21fafa831022a794d5964356a5d7f1b630e299a4d37af09b4efeccc7ac5730"
+sha256 = "0be2bc0ee54cf06ebbea95eb6bca16600679559134fb2898ef4cfef2c147bae5"
 reason = "Retained manual exact-tag wheel/sdist and GitHub draft-first publisher; complete local suite, frozen-contract, bounded wheel/sdist payload and exact release metadata checks before upload; no Conda claim."
 
 [[workflows]]
@@ -80,12 +80,12 @@ reason = "Manual published-report/source-first consumer validation with the exis
 
 [[workflows]]
 path = ".github/workflows/python-routine.yml"
-sha256 = "63a9a8cfabc5f55c0358c93f714bda261718b4b76a1bf0187abe795ac3419c1b"
+sha256 = "244404707d829ae48c498b70af785c6ae57ac24aaeeb1c23a6236d2456ff11ad"
 reason = "Linux/Python 3.14 source pip test extras; pinned SDK reviews all input routes before full pytest; dependent default-branch coverage publication stays separate."
 
 [[workflows]]
 path = ".github/workflows/python-weekly.yml"
-sha256 = "d2497e235bb9e7d5bddf8fbd2a400dfeb3d27ffe29ee73c5b3e739ff38ebe23d"
+sha256 = "9d0a0197baca24d899667e0837823f43be33631b9995f94827a09f99f2dcde9c"
 reason = "Twelve source pip/test-extra cells over Python 3.11-3.14 and three OS; pinned SDK review before full pytest; source evidence only."
 
 [[workflows]]
@@ -95,12 +95,12 @@ reason = "Read-only reusable report consumer contract; uses the shared receptor 
 
 [[workflows]]
 path = ".github/workflows/stage-conda.yml"
-sha256 = "976038843221d8322937d5ab6267503f51cc41f35089574abc07e1cf5ac91681"
+sha256 = "02af2b5c8dcf81ab3a899b397260dc5bf567987d7db7a5ceda967db44ae36cd7"
 reason = "Manual reviewed candidate SHA/version, owner preflight and immutable shared single-file staged build; committed real plan and executed source gates required."
 
 [[workflows]]
 path = ".github/workflows/test-staged-conda.yml"
-sha256 = "def39f795b137d087c5cfd767b9f911c53b7d9752e61d0ccebd84f235fa43ada"
+sha256 = "7beb49d890209440e34da1ea40ec1864d39755c9feeb6cfae824d663cd5b8bc9"
 reason = "Manual immutable producer SHA/file/digest qualification through the shared twelve-cell installed workflow; public dependency resolution and no publication credential."
 
 [[workflows]]
@@ -155,5 +155,5 @@ reason = "Manual bounded native completed-success/failure job-log receiving duri
 
 [[workflows]]
 path = ".github/workflows/qualify-architecture.yml"
-sha256 = "8526272c4e8ea9a0ec3c914def8824da3a23d0198826142bfcfa4935b3dc63f7"
+sha256 = "497e38e42c8d6493d99d6d6b2ce8de5cb17ea3aeddbdfb7d18045f45cc753fbc"
 reason = "Manual nonpublishing #76 qualification: one private exact-file Conda candidate, twelve native installed product/integration cells, shared origin/support/cleanup guards, and retained distinct source/provider/file receipts. No channel credentials or mutation."

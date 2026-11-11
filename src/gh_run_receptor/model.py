@@ -152,6 +152,8 @@ def normalize_evidence(manifest: dict[str, Any], evidence: dict[str, Any]) -> di
     jobs = []
     counts: dict[str, int] = {}
     unknowns = []
+    inconsistent_steps = []
+    inconsistent_jobs = set()
     for index, job in enumerate(jobs_source):
         status = job.get("status")
         conclusion = job.get("conclusion")
@@ -195,6 +197,18 @@ def normalize_evidence(manifest: dict[str, Any], evidence: dict[str, Any]) -> di
                 "source": source,
             }
             steps.append(normalized_step)
+            if status == "completed" and (
+                (step_status is not None and step_status != "completed") or step_conclusion is None
+            ):
+                inconsistent_jobs.add(index)
+                inconsistent_steps.append(source["json_pointer"])
+                unknowns.append(
+                    {
+                        "kind": "github.step.terminal_state",
+                        "value": "terminal job contains nonterminal or unknown step state",
+                        "source": source,
+                    }
+                )
             if step_status is not None and step_status not in KNOWN_STATUSES:
                 unknowns.append(
                     {
@@ -227,6 +241,17 @@ def normalize_evidence(manifest: dict[str, Any], evidence: dict[str, Any]) -> di
                 "url": job.get("html_url"),
                 "source": {"member": "jobs.json", "json_pointer": f"/jobs/{index}"},
             }
+        )
+
+    if inconsistent_steps:
+        completeness["terminal_steps"] = "partial"
+        warnings.insert(
+            0,
+            f"terminal step metadata inconsistent: jobs={len(inconsistent_jobs)} "
+            f"steps={len(inconsistent_steps)}; terminal step qualification unknown; "
+            "evidence: jobs.json:"
+            + inconsistent_steps[0]
+            + "; refresh into a separate bundle and verify native job/step evidence",
         )
 
     for normalized_job, source_job in zip(jobs, jobs_source, strict=True):

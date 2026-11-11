@@ -276,7 +276,7 @@ def capture_bundle(
         check_suite_id = run.get("check_suite_id")
         if check_suite_id:
             checks_payload = client.json(
-                f"/repos/{repository}/check-suites/{check_suite_id}/check-runs?per_page=100",
+                f"/repos/{repository}/check-suites/{check_suite_id}/check-runs?per_page=100&filter=all",
                 paginate=True,
             )
             checks = merge_pages(checks_payload, "check_runs")

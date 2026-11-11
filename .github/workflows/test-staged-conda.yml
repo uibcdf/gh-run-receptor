@@ -40,7 +40,7 @@ jobs:
           GIT_CONFIG_VALUE_0: 'false'
         with:
           repository: uibcdf/molsyssuite
-          ref: fee3bd875e68778844c0fffc2aba26b6cea02cd6
+          ref: 95f693be10c9205ab9b912cb53453710a207bf45
           path: .molsyssuite
           persist-credentials: false
       - uses: actions/setup-python@v5
@@ -88,7 +88,7 @@ jobs:
       GHR_EXPECT_INSTALLED: '1'
       TEST_SUPPORT_CANDIDATE_SHA: ${{ inputs.candidate_sha }}
       TEST_SUPPORT_QUALIFICATION_SHA: ${{ github.sha }}
-      TEST_SUPPORT_PROVIDER_SHA: fee3bd875e68778844c0fffc2aba26b6cea02cd6
+      TEST_SUPPORT_PROVIDER_SHA: 95f693be10c9205ab9b912cb53453710a207bf45
       TEST_SUPPORT_FILENAME: ${{ inputs.filename }}
       TEST_SUPPORT_SHA256: ${{ inputs.sha256 }}
       TEST_SUPPORT_RUN_ID: ${{ github.run_id }}
@@ -107,7 +107,7 @@ jobs:
           GIT_CONFIG_VALUE_0: 'false'
         with:
           repository: uibcdf/molsyssuite
-          ref: fee3bd875e68778844c0fffc2aba26b6cea02cd6
+          ref: 95f693be10c9205ab9b912cb53453710a207bf45
           path: .molsyssuite
           persist-credentials: false
       - uses: conda-incubator/setup-miniconda@be893c923ea9cf1cf7cd510fbdde27c7e18cbdcb # v4

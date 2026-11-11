@@ -955,6 +955,7 @@ def test_unknown_step_state_is_preserved_with_source_reference():
     report = build_report(_manifest(), evidence, profile="docs")
 
     assert [item["kind"] for item in report["unknowns"]] == [
+        "github.step.terminal_state",
         "github.step.status",
         "github.step.conclusion",
     ]

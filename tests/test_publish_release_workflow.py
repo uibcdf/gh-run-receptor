@@ -33,7 +33,7 @@ def test_release_workflow_checks_exact_tag_before_building():
     assert 'git rev-list -n 1 "$RELEASE_TAG"' in source
     assert "python -m pytest --receptor=ci" in source
     assert "validate_contracts.py --baseline 0.21.0" in source
-    assert "ref: fee3bd875e68778844c0fffc2aba26b6cea02cd6" in source
+    assert "ref: 95f693be10c9205ab9b912cb53453710a207bf45" in source
     preflight = source.index(
         "python devtools/check_distribution_inputs.py --suite-root .molsyssuite"
     )

@@ -16195,8 +16195,8 @@
         },
         {
           "line": 36,
-          "expression": "assert \"ref: fee3bd875e68778844c0fffc2aba26b6cea02cd6\" in source",
-          "sha256": "97878724e20373de53645f607c7bcc83c289a5cedbc065b3aab8238d2037e923"
+          "expression": "assert \"ref: 95f693be10c9205ab9b912cb53453710a207bf45\" in source",
+          "sha256": "8474f926e8d7294712f5153c8d595c17bd167850ad06eccb2ae48cd93ac2f055"
         },
         {
           "line": 40,
@@ -20495,8 +20495,8 @@
       "current_assertions": [
         {
           "line": 957,
-          "expression": "assert [item[\"kind\"] for item in report[\"unknowns\"]] == [\n        \"github.step.status\",\n        \"github.step.conclusion\",\n    ]",
-          "sha256": "c25ab135950b57a0d9f4a02dd4739475dd98051c1196b7669ebd7ccd27ffb235"
+          "expression": "assert [item[\"kind\"] for item in report[\"unknowns\"]] == [\n        \"github.step.terminal_state\",\n        \"github.step.status\",\n        \"github.step.conclusion\",\n    ]",
+          "sha256": "d871023c5e95802c217a0cd3d14a900c2a2629ee4071680fec18aa70b6c221a9"
         }
       ],
       "parameterization": [],
@@ -20600,72 +20600,72 @@
       "minimum_assertions": 14,
       "current_assertions": [
         {
-          "line": 1009,
+          "line": 1010,
           "expression": "assert report[\"subject\"][\"event\"] == \"push\"",
           "sha256": "f8a84ea9c96600804b2657ae3287cd273bef19532feedb1f69e6c3d6436f8066"
         },
         {
-          "line": 1010,
+          "line": 1011,
           "expression": "assert report[\"subject\"][\"head_ref\"] == \"0.20.1\"",
           "sha256": "cd819b1e171a2f36bd7851e89a46ad1f0eb7862d01ed863f6dd2fbb89c992b72"
         },
         {
-          "line": 1011,
+          "line": 1012,
           "expression": "assert report[\"subject\"][\"head_sha\"] == \"abc\"",
           "sha256": "4d53bd7acc5a45db359de28ed5936ac0c323b709a6de14820945987938888035"
         },
         {
-          "line": 1012,
+          "line": 1013,
           "expression": "assert report[\"matrix\"][\"identity\"][\"tag_verification\"] == \"not_observed\"",
           "sha256": "aaecfa52751dedddf397655f2587b03b7e351926a545bf2195362f1008dc89aa"
         },
         {
-          "line": 1013,
+          "line": 1014,
           "expression": "assert phases[\"identity\"][\"counts\"] == {\"success\": 1}",
           "sha256": "c4052841852a037fce1f65cf645bef5301ec9fd184df4496a44dfdea26741ad7"
         },
         {
-          "line": 1014,
+          "line": 1015,
           "expression": "assert phases[\"package\"][\"counts\"] == {\"failure\": 1}",
           "sha256": "b4ab2cdf589870acc073feb70384db4600f643e0ee989df63c1305c007b18257"
         },
         {
-          "line": 1015,
+          "line": 1016,
           "expression": "assert phases[\"publish\"][\"counts\"] == {\"skipped\": 1}",
           "sha256": "6ece1e3897e2db8bd6720a94f3f0eba6f908bf3c526dea51c89c869473f83d16"
         },
         {
-          "line": 1016,
+          "line": 1017,
           "expression": "assert phases[\"setup\"][\"counts\"] == {\"success\": 1}",
           "sha256": "7b5ecc61d93816c351974463340bbca9ff457260c443b06547a12b080e4aca9a"
         },
         {
-          "line": 1017,
+          "line": 1018,
           "expression": "assert sum(len(phase[\"evidence\"]) for phase in phases.values()) == 4",
           "sha256": "a20590d4425e15222a68c03c127a3924ab7ef7deb49d9a5c1241ebe4f6df2da1"
         },
         {
-          "line": 1018,
+          "line": 1019,
           "expression": "assert report[\"matrix\"][\"verification\"] == {\n        \"registry\": \"not_observed\",\n        \"archive\": \"not_observed\",\n    }",
           "sha256": "99444dc7034c02a68cd3c230ec74365d91b3e0fb91c6fa1ba543952f521f4e41"
         },
         {
-          "line": 1022,
+          "line": 1023,
           "expression": "assert report[\"receptor\"][\"assessment\"] == \"FAIL\"",
           "sha256": "49921607f934eeb292895c9935c393c1f72863c95479538ee4107f334f874099"
         },
         {
-          "line": 1024,
+          "line": 1025,
           "expression": "assert \"event=push ref=0.20.1\" in rendered",
           "sha256": "53924fffa8e82222acf3dc85f68d6ec8310716b0801b3276f6c3381f11197c54"
         },
         {
-          "line": 1025,
+          "line": 1026,
           "expression": "assert \"failed=Build runtime bundle\" in rendered",
           "sha256": "45e343d916dae845e2bdde479cb97fadc507290d5dd2d524f1e27d7f8dc4612a"
         },
         {
-          "line": 1026,
+          "line": 1027,
           "expression": "assert \"publish=skipped\" in rendered",
           "sha256": "98621adf54631f543a3b9dd108004299f3196a21390c95599bc76a51ee9a6a09"
         }
@@ -20723,32 +20723,32 @@
       "minimum_assertions": 6,
       "current_assertions": [
         {
-          "line": 1033,
+          "line": 1034,
           "expression": "assert report[\"receptor\"][\"assessment\"] == \"PASS\"",
           "sha256": "e0957ac3c1b55c9861d739df72ce2b735565a4045259d34adb47991d07676c1f"
         },
         {
-          "line": 1034,
+          "line": 1035,
           "expression": "assert report[\"matrix\"][\"verification\"][\"registry\"] == \"step_success\"",
           "sha256": "61e39963551cb8a5120bd12fa752b1abcfb1514f04fbae69a45327fb81295231"
         },
         {
-          "line": 1035,
+          "line": 1036,
           "expression": "assert report[\"matrix\"][\"identity\"][\"tag_verification\"] == \"not_observed\"",
           "sha256": "aaecfa52751dedddf397655f2587b03b7e351926a545bf2195362f1008dc89aa"
         },
         {
-          "line": 1036,
+          "line": 1037,
           "expression": "assert \"registry=step_success\" in rendered",
           "sha256": "37e41b6ad945f3bbcb71cdb9048b1bc0c719c8ace73696719f2a00eda661eb7f"
         },
         {
-          "line": 1037,
+          "line": 1038,
           "expression": "assert \"sha=abc\" in rendered",
           "sha256": "dc4cfbc971e13dcccbc1708c91351cbe92c8c76aae5753ddafaea08063c4fe68"
         },
         {
-          "line": 1038,
+          "line": 1039,
           "expression": "assert \"tag=unverified\" in rendered",
           "sha256": "18a31f0054e02f0d17ad7cb1838b1cff8df58da7f8e9f4cb19c3917fb9901305"
         }
@@ -20788,17 +20788,17 @@
       "minimum_assertions": 3,
       "current_assertions": [
         {
-          "line": 1048,
+          "line": 1049,
           "expression": "assert report[\"github\"][\"conclusion\"] == \"failure\"",
           "sha256": "7700224f7bf1cef91382b31372603ef275bd215e7e34f903126325cc0e80837e"
         },
         {
-          "line": 1049,
+          "line": 1050,
           "expression": "assert report[\"receptor\"][\"assessment\"] == \"PARTIAL\"",
           "sha256": "04995f3ae99f38fa99719c6252aaf0e1e01d7a5dc2f166e907524b1aeb264dc7"
         },
         {
-          "line": 1050,
+          "line": 1051,
           "expression": "assert exit_code(report) == 1",
           "sha256": "03ed8a1083466663c4696e8585634a10eda7187ef2a939fa42ab38cde8f52bc5"
         }
@@ -20844,22 +20844,22 @@
       "minimum_assertions": 4,
       "current_assertions": [
         {
-          "line": 1067,
+          "line": 1068,
           "expression": "assert report[\"receptor\"][\"assessment\"] == \"FAIL\"",
           "sha256": "49921607f934eeb292895c9935c393c1f72863c95479538ee4107f334f874099"
         },
         {
-          "line": 1068,
+          "line": 1069,
           "expression": "assert phases[0][\"name\"] == \"gate+package+publish\"",
           "sha256": "e7fdad046712943821e5c365f26251c6b3312246be575db4b995d1ee62298e88"
         },
         {
-          "line": 1069,
+          "line": 1070,
           "expression": "assert phases[0][\"evidence\"][0][\"facets\"] == [\"gate\", \"package\", \"publish\"]",
           "sha256": "42a5bb5e329f86e9e0ab9e5a7d5e7a99f4a427932762c9b76c8fd743d363860b"
         },
         {
-          "line": 1070,
+          "line": 1071,
           "expression": "assert sum(len(phase[\"evidence\"]) for phase in phases) == 1",
           "sha256": "779ea1fc4943ec303ee9b9e824339e4df645679ffbc60c8231502896920539dd"
         }
@@ -20899,17 +20899,17 @@
       "minimum_assertions": 3,
       "current_assertions": [
         {
-          "line": 1086,
+          "line": 1087,
           "expression": "assert report[\"matrix\"][\"phases\"][0][\"name\"] == \"gate+archive\"",
           "sha256": "b07222fa25d88632eca35f69a9761d849900852ec9b09526c2659db4d76e5037"
         },
         {
-          "line": 1087,
+          "line": 1088,
           "expression": "assert report[\"matrix\"][\"verification\"] == {\n        \"registry\": \"not_observed\",\n        \"archive\": \"step_success\",\n    }",
           "sha256": "9c20da94e694c2b20793919152e0b6474e8e4a2c42a5ee7672830de32f514c99"
         },
         {
-          "line": 1091,
+          "line": 1092,
           "expression": "assert report[\"matrix\"][\"identity\"][\"tag_verification\"] == \"not_observed\"",
           "sha256": "aaecfa52751dedddf397655f2587b03b7e351926a545bf2195362f1008dc89aa"
         }
@@ -20949,17 +20949,17 @@
       "minimum_assertions": 3,
       "current_assertions": [
         {
-          "line": 1100,
+          "line": 1101,
           "expression": "assert report[\"matrix\"][\"phases\"][0][\"name\"] == \"publish\"",
           "sha256": "c1255d522270a1e31a2ca04a6f322512c0a188b18370b9942524603ddf5589d8"
         },
         {
-          "line": 1101,
+          "line": 1102,
           "expression": "assert report[\"matrix\"][\"phases\"][0][\"evidence\"][0][\"kind\"] == \"job\"",
           "sha256": "e2d2eeb57908a4eeaf2ca8c1738bf2b81479577b4c300a8acacc8c5e926a469a"
         },
         {
-          "line": 1102,
+          "line": 1103,
           "expression": "assert report[\"matrix\"][\"verification\"][\"registry\"] == \"not_observed\"",
           "sha256": "994a6af7c8f76566c6172d83397cceab9c94fb41475c9992bd82205b5f1f7eae"
         }
@@ -20993,12 +20993,12 @@
       "minimum_assertions": 2,
       "current_assertions": [
         {
-          "line": 1106,
+          "line": 1107,
           "expression": "assert set(RELEASE_CLAIM_AUTHORITIES) == {\n        \"event\",\n        \"head_ref\",\n        \"head_sha\",\n        \"phase_state\",\n        \"tag_verification\",\n        \"registry_delivery\",\n        \"github_release_delivery\",\n        \"archive_delivery\",\n        \"actions_artifact_inventory\",\n        \"external_delivery\",\n    }",
           "sha256": "da0d0e9a090193d684c7ae0423ed86b8de43b6d9adfd36bf302bbe2a3b52250a"
         },
         {
-          "line": 1118,
+          "line": 1119,
           "expression": "assert {\n        key: authority.maximum_assertion for key, authority in RELEASE_CLAIM_AUTHORITIES.items()\n    } == {\n        \"event\": \"observed_source_fact\",\n        \"head_ref\": \"observed_source_fact\",\n        \"head_sha\": \"observed_source_fact\",\n        \"phase_state\": \"presentation_facet_with_source_state\",\n        \"tag_verification\": \"not_observed\",\n        \"registry_delivery\": \"step_success\",\n        \"github_release_delivery\": \"not_observed\",\n        \"archive_delivery\": \"step_success\",\n        \"actions_artifact_inventory\": \"observed_inventory_only\",\n        \"external_delivery\": \"not_observed\",\n    }",
           "sha256": "37b6ce2038254fafab4bb2ea417ba82c1f094bc5567c7301aa033a5993d1e15a"
         }
@@ -21062,37 +21062,37 @@
       "minimum_assertions": 7,
       "current_assertions": [
         {
-          "line": 1166,
+          "line": 1167,
           "expression": "assert report[\"matrix\"][\"identity\"][\"tag_verification\"] == \"not_observed\"",
           "sha256": "aaecfa52751dedddf397655f2587b03b7e351926a545bf2195362f1008dc89aa"
         },
         {
-          "line": 1167,
+          "line": 1168,
           "expression": "assert report[\"matrix\"][\"verification\"] == {\n        \"registry\": \"step_success\",\n        \"archive\": \"step_success\",\n    }",
           "sha256": "6a6668bb4a93fe6d48b416a017301d237aa22a6f00ff7a0c32c966a33b6319ce"
         },
         {
-          "line": 1171,
+          "line": 1172,
           "expression": "assert release_external_delivery_state() == \"not_observed\"",
           "sha256": "082d021e1b42cd14b15b0c5f180b7edf6f4f1bcac9b2a7d8897de7b8a083405d"
         },
         {
-          "line": 1172,
+          "line": 1173,
           "expression": "assert \"tag=unverified\" in rendered",
           "sha256": "18a31f0054e02f0d17ad7cb1838b1cff8df58da7f8e9f4cb19c3917fb9901305"
         },
         {
-          "line": 1173,
+          "line": 1174,
           "expression": "assert \"registry=step_success\" in rendered",
           "sha256": "37e41b6ad945f3bbcb71cdb9048b1bc0c719c8ace73696719f2a00eda661eb7f"
         },
         {
-          "line": 1174,
+          "line": 1175,
           "expression": "assert \"archive=step_success\" in rendered",
           "sha256": "180f7fe099198da544ab040a26a27cc036e30556e1c25138fc19a129db08dab6"
         },
         {
-          "line": 1175,
+          "line": 1176,
           "expression": "assert \"external=verified\" not in rendered",
           "sha256": "145884fc2e119d86c5941b3864daab08831faa19ef2deb285b216e47b60688f6"
         }
@@ -24883,8 +24883,8 @@
         },
         {
           "line": 27,
-          "expression": "assert (\".molsyssuite\", \"fee3bd875e68778844c0fffc2aba26b6cea02cd6\") in checkout_refs",
-          "sha256": "d1ae1cab04780a86defe1c86ab792d16b3988baed3093a34f391a3ca5ad782b9"
+          "expression": "assert (\".molsyssuite\", \"95f693be10c9205ab9b912cb53453710a207bf45\") in checkout_refs",
+          "sha256": "9a919b67283b26a173a6a8db9d5bf2da06398720bdeab28e867c11e2f39f9c90"
         },
         {
           "line": 28,
@@ -25079,6 +25079,761 @@
       "parameterization": [
         "pytest.mark.parametrize(\n    \"other_status\",\n    [None, \"pending\", \"waiting\", \"requested\", \"future_state\", \"x\" * 10000 + \"\\x1b[31m\\n\"],\n    ids=[\"missing\", \"pending\", \"waiting\", \"requested\", \"future\", \"untrusted-large\"],\n)"
       ]
+    },
+    "tests/test_acquisition_diagnostics.py::test_original_acquisition_failure_precedes_secondary_context_in_both_log_routes": {
+      "scope": "product",
+      "reason": "Reviewed #81/#83: original source truth, diagnostic evidence, bounded/adversarial presentation and offline replay against actual runtime; source tools only construct/validate inputs.",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 9,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 53,
+          "expression": "assert warnings == targeted_warnings == []",
+          "sha256": "fe6314760c0e32b3e350ca9d0a082f8856cf195ef81124da56cf881ec616514b"
+        },
+        {
+          "line": 54,
+          "expression": "assert report[\"causes\"] == causes",
+          "sha256": "3e2d56d24fe2b092d2a0db8ee9af49aa0946eb8435d52a16171b9e8a376850e6"
+        },
+        {
+          "line": 55,
+          "expression": "assert causes[0][\"kind\"] == targeted[0][\"kind\"] == case[\"expected_kind\"]",
+          "sha256": "583356219b68eba0e88a40b18d78ab45d8fea7564ded2a40e07da904bbb2e948"
+        },
+        {
+          "line": 56,
+          "expression": "assert case[\"expected_identity\"] in causes[0][\"message\"]",
+          "sha256": "493be1b2570e57ee14f04096e08d73724e6ff48b4864182d437e047f44d25c37"
+        },
+        {
+          "line": 59,
+          "expression": "assert occurrence[\"job_id\"] == case[\"job\"][\"id\"]",
+          "sha256": "7c341509e1340cf5c82756f84f7290d144bd66c9429627da444d891f0851c2ac"
+        },
+        {
+          "line": 60,
+          "expression": "assert occurrence[\"line\"] in {item[\"line\"] for item in case[\"lines\"]}",
+          "sha256": "74cd898e2566494148c94dde98887888f956594a035164ae9cc6e5ec8265e907"
+        },
+        {
+          "line": 61,
+          "expression": "assert any(c[\"kind\"] == \"later diagnostic\" for c in occurrence[\"context\"])",
+          "sha256": "c5311992650b8ed8a97c03ca0db565ee059722c4a7ef0997bf03edfe66cd9b86"
+        },
+        {
+          "line": 62,
+          "expression": "assert all(c[\"line\"] > occurrence[\"line\"] for c in occurrence[\"context\"])",
+          "sha256": "74dd01ebe3fbe17f2367b3cdf0d69e73872afcc8e4f621549662e89a7f57ca2b"
+        },
+        {
+          "line": 63,
+          "expression": "assert len(occurrence[\"context\"]) <= 3",
+          "sha256": "aab363c601cc931ee0639a9c584892177d421c84535ba2f1a097fa7f8d0c2931"
+        }
+      ],
+      "parameterization": [
+        "pytest.mark.parametrize(\"case\", CASES, ids=lambda c: c[\"name\"])"
+      ]
+    },
+    "tests/test_acquisition_diagnostics.py::test_acquisition_reports_preserve_native_failure_and_bounded_rendering": {
+      "scope": "product",
+      "reason": "Reviewed #81/#83: original source truth, diagnostic evidence, bounded/adversarial presentation and offline replay against actual runtime; source tools only construct/validate inputs.",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 5,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 70,
+          "expression": "assert report[\"github\"] == {\"status\": \"completed\", \"conclusion\": \"failure\"}",
+          "sha256": "7014585eacbd3f3f730030a7aed838ab00c3096d64c42db01a2ea44505a9d026"
+        },
+        {
+          "line": 71,
+          "expression": "assert exit_code(report) == 1",
+          "sha256": "03ed8a1083466663c4696e8585634a10eda7187ef2a939fa42ab38cde8f52bc5"
+        },
+        {
+          "line": 74,
+          "expression": "assert case[\"expected_identity\"] in text",
+          "sha256": "5a80eb1afc055b31cf714df2e9583d948682cf43ad745766fac4d031362edb5f"
+        },
+        {
+          "line": 75,
+          "expression": "assert text == render(_report(tmp_path, case, profile))",
+          "sha256": "ffceb10d44ba4ff8d9e4a39dd1d0c091b135a7ca6defd79f49cddcf8b37dd601"
+        },
+        {
+          "line": 76,
+          "expression": "assert len(text.encode()) < (30_000 if render is render_json else 8_000)",
+          "sha256": "8540ca05b97da38b4ef292ebb400a14655cb37125d7a88c127c7c80b84abb4bc"
+        }
+      ],
+      "parameterization": [
+        "pytest.mark.parametrize(\"profile\", [\"generic\", \"ci\", \"docs\"])",
+        "pytest.mark.parametrize(\"case\", CASES, ids=lambda c: c[\"name\"])"
+      ]
+    },
+    "tests/test_acquisition_diagnostics.py::test_independent_cleanup_and_malformed_acquisition_text_are_not_reclassified": {
+      "scope": "product",
+      "reason": "Reviewed #81/#83: original source truth, diagnostic evidence, bounded/adversarial presentation and offline replay against actual runtime; source tools only construct/validate inputs.",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 2,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 95,
+          "expression": "assert occurrence[\"kind\"] == kind",
+          "sha256": "6d929af8ee5be440eb595424c89148c4a5864404a0a3d32ad1ea2681c0440c49"
+        },
+        {
+          "line": 96,
+          "expression": "assert \"context\" not in occurrence",
+          "sha256": "193c13d0fe2917b60e5633684f07933b2194e16d1623ea6b0a2b907164ec4290"
+        }
+      ],
+      "parameterization": [
+        "pytest.mark.parametrize(\n    \"body,kind\",\n    [\n        (\"##[error]No files were found with the provided path: evidence/\", \"github_error\"),\n        (\"##[error]ENOENT: no such file or directory, lstat 'independent-file'\", \"missing_file\"),\n        (\"##[error]Unexpected end of JSON input\", \"github_error\"),\n        (\"Download error (0) successful\", \"exit_code\"),\n        (\"Download error (not-a-code) unknown\", \"exit_code\"),\n        (\"Download error (28)\", \"exit_code\"),\n        (\"Unable to download artifact(s): Artifact not found for name:\", \"exit_code\"),\n        (\"Downloaded artifact successfully\", \"exit_code\"),\n    ],\n)"
+      ]
+    },
+    "tests/test_acquisition_diagnostics.py::test_acquisition_context_window_retains_original_locators": {
+      "scope": "product",
+      "reason": "Reviewed #81/#83: original source truth, diagnostic evidence, bounded/adversarial presentation and offline replay against actual runtime; source tools only construct/validate inputs.",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 5,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 107,
+          "expression": "assert item[\"kind\"] == \"artifact_download\"",
+          "sha256": "0dc5da9bc605f00b3801b4dd50fa514b6be97fb1199c6c9530cca01f05456835"
+        },
+        {
+          "line": 108,
+          "expression": "assert item[\"line\"] == 1",
+          "sha256": "ec1c9b396f376ef652d63ab89bd929afe765a6ce6b97cc7affdee6abc09ff780"
+        },
+        {
+          "line": 109,
+          "expression": "assert len(item.get(\"context\", [])) == count",
+          "sha256": "ac93295602b0d11db8a9a3b211a3e72aad0b58cd51025df86fe9034baaed6778"
+        },
+        {
+          "line": 111,
+          "expression": "assert item[\"context\"][0][\"line\"] == distance + 1",
+          "sha256": "5a80563d23b6995576e9a05067ea09240bd0aacffb75538c4f633ff7962713bf"
+        },
+        {
+          "line": 112,
+          "expression": "assert item[\"context\"][0][\"member\"] == \"job-1.log\"",
+          "sha256": "411f57be2326c0060ba6f2d468507285e23ae8fa43cd9f9dfadaaf6a8ee27f71"
+        }
+      ],
+      "parameterization": [
+        "pytest.mark.parametrize(\"distance,count\", [(128, 1), (129, 0)])"
+      ]
+    },
+    "tests/test_acquisition_diagnostics.py::test_acquisition_messages_are_redacted_bounded_and_cannot_forge_source_truth": {
+      "scope": "product",
+      "reason": "Reviewed #81/#83: original source truth, diagnostic evidence, bounded/adversarial presentation and offline replay against actual runtime; source tools only construct/validate inputs.",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 6,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 125,
+          "expression": "assert item[\"kind\"] == \"artifact_download\"",
+          "sha256": "0dc5da9bc605f00b3801b4dd50fa514b6be97fb1199c6c9530cca01f05456835"
+        },
+        {
+          "line": 126,
+          "expression": "assert token not in json.dumps(item)",
+          "sha256": "693851e7521c0abc0cfea38f4823cc2e03e59a1bb773215805ca60534ad9057f"
+        },
+        {
+          "line": 127,
+          "expression": "assert \"TOKEN=secret\" not in json.dumps(item)",
+          "sha256": "0ee35e313525f100f22bdc2a3076c398b4781c5683b9878a4646a8ed36ea2728"
+        },
+        {
+          "line": 128,
+          "expression": "assert \"[REDACTED]\" in item[\"message\"]",
+          "sha256": "9c75595c09fb8a17471126cb383dced1f0f257a260d0ced3eb13f8e4ff57e82d"
+        },
+        {
+          "line": 129,
+          "expression": "assert len(item[\"message\"]) <= 500",
+          "sha256": "59001283ac1dbb603e326b8ca30e0ff8dd8f968c1e4373c3df2a21344625ae7f"
+        },
+        {
+          "line": 130,
+          "expression": "assert len(item[\"context\"][0][\"message\"]) <= 500",
+          "sha256": "0258e3c5e812249030015793b5d6453d7db7976438e557038f0d79ca2442162b"
+        }
+      ],
+      "parameterization": []
+    },
+    "tests/test_metadata_consistency.py::test_step_observation_consistency_preserves_source_truth": {
+      "scope": "product",
+      "reason": "Reviewed #78: original source truth, diagnostic evidence, bounded/adversarial presentation and offline replay against actual runtime; source tools only construct/validate inputs.",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 10,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 73,
+          "expression": "assert evidence == original",
+          "sha256": "0e34cafd7a18faa8b9bbbc57fa15447b3a72c4baa3d17c1131202a7647ba3f22"
+        },
+        {
+          "line": 74,
+          "expression": "assert model[\"jobs\"][0][\"steps\"][0][\"status\"] == status",
+          "sha256": "48e57b2638d97cae7d98d852585caa476a28eb42b3d6998a5105d65fed5ed844"
+        },
+        {
+          "line": 75,
+          "expression": "assert model[\"jobs\"][0][\"steps\"][0][\"conclusion\"] == conclusion",
+          "sha256": "4930a4caf07eca4f3994b89aa9c9e6ca903fd499acc81abcca9ca241991c5d36"
+        },
+        {
+          "line": 76,
+          "expression": "assert report[\"github\"] == {\"status\": \"completed\", \"conclusion\": \"success\"}",
+          "sha256": "96fba733c2111572c0824c379aff990bff4b5a42bc2efefcb566e1ace6f6913e"
+        },
+        {
+          "line": 77,
+          "expression": "assert report[\"receptor\"][\"assessment\"] == \"PASS\"",
+          "sha256": "e0957ac3c1b55c9861d739df72ce2b735565a4045259d34adb47991d07676c1f"
+        },
+        {
+          "line": 78,
+          "expression": "assert exit_code(report) == 0",
+          "sha256": "431815d7a4c9284c52841b6aaac8d05c08385e910888cd8902adb057ee7c150d"
+        },
+        {
+          "line": 79,
+          "expression": "assert model[\"bundle_complete\"] is True",
+          "sha256": "f98bb47a9091df6863184eb3ca7bfa0c6dbd5ad35859848f9a84a70026d346b6"
+        },
+        {
+          "line": 80,
+          "expression": "assert (report[\"completeness\"].get(\"terminal_steps\") == \"partial\") == contradiction",
+          "sha256": "e587ded9af59beec0cb145dbcff777bbd0f274f6983a7b6245cbedbf0a3de4d1"
+        },
+        {
+          "line": 83,
+          "expression": "assert (\"terminal step metadata inconsistent\" in text) == contradiction",
+          "sha256": "5d15b7c42cc3f2fd417641d763d0e870da4007251efaa574f6ad7be44648fb40"
+        },
+        {
+          "line": 84,
+          "expression": "assert len(text.encode()) < 8_000",
+          "sha256": "4e33ee25286850ae5042cb77735c2f7e712ca7bc5ce42fa48b2cbeb2b75c2ca1"
+        }
+      ],
+      "parameterization": [
+        "pytest.mark.parametrize(\n    \"status,conclusion,contradiction\",\n    [\n        (\"in_progress\", None, True),\n        (\"queued\", None, True),\n        (\"pending\", None, True),\n        (\"completed\", None, True),\n        (None, None, True),\n        (\"future-state\", \"success\", True),\n        (\"completed\", \"success\", False),\n        (\"completed\", \"skipped\", False),\n        (None, \"success\", False),\n    ],\n)"
+      ]
+    },
+    "tests/test_metadata_consistency.py::test_nonterminal_jobs_do_not_claim_terminal_child_inconsistency": {
+      "scope": "product",
+      "reason": "Reviewed #78: original source truth, diagnostic evidence, bounded/adversarial presentation and offline replay against actual runtime; source tools only construct/validate inputs.",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 3,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 93,
+          "expression": "assert \"terminal_steps\" not in report[\"completeness\"]",
+          "sha256": "b3b7b2427f806b79a768046bfc29f831bb6d6afbbd0d3a62d5ff96d677ca9a7a"
+        },
+        {
+          "line": 94,
+          "expression": "assert report[\"warnings\"] == []",
+          "sha256": "3b3dc3c9c7e1e57f7bdbabd56a2b8d786d8eed5cca21918f5b5187c6218d5ddd"
+        },
+        {
+          "line": 95,
+          "expression": "assert report[\"jobs\"][0][\"status\"] == job_status",
+          "sha256": "1254f10ad03d645ce71df7e69d71252527930a229bd3e3ba7c83a9339db38699"
+        }
+      ],
+      "parameterization": [
+        "pytest.mark.parametrize(\"job_status\", [\"queued\", \"in_progress\"])"
+      ]
+    },
+    "tests/test_metadata_consistency.py::test_child_warning_counts_and_original_pointers_remain_bounded_with_hostile_names": {
+      "scope": "product",
+      "reason": "Reviewed #78: original source truth, diagnostic evidence, bounded/adversarial presentation and offline replay against actual runtime; source tools only construct/validate inputs.",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 7,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 104,
+          "expression": "assert len(report[\"unknowns\"]) == 1_000",
+          "sha256": "db8f95da1ad43e01eee362dab85f7b6e3fb7a166014841769beac03fa32778ce"
+        },
+        {
+          "line": 105,
+          "expression": "assert report[\"unknowns\"][-1][\"source\"][\"json_pointer\"] == \"/jobs/0/steps/999\"",
+          "sha256": "2833f9cb46c1a748acd128f4ce79befb5efc3a30e486860832e320febefd1b9b"
+        },
+        {
+          "line": 106,
+          "expression": "assert \"jobs=1 steps=1000\" in report[\"warnings\"][0]",
+          "sha256": "efea781187ab291f6a69b5ad204c678f2e57d518edd05e741853da7099f034ec"
+        },
+        {
+          "line": 107,
+          "expression": "assert \"jobs.json:/jobs/0/steps/0\" in render_llm(report)",
+          "sha256": "6649ae5489a6f0c37afb889d6654e75dc6d47ef4782e527db6582668b3ac1747"
+        },
+        {
+          "line": 108,
+          "expression": "assert \"qualification unknown\" in render_llm(report)",
+          "sha256": "13dcaf39f6478f140554796dd5c5d3bbe3a656d34c6d449791a6c61088665d91"
+        },
+        {
+          "line": 109,
+          "expression": "assert len(render_llm(report).encode()) < 2_000",
+          "sha256": "be6ddd9baa00183507c3b30b72a522d5d517316b47f85b393b79862eabaa5f04"
+        },
+        {
+          "line": 112,
+          "expression": "assert \"\\x1b\" not in text and \"\\u202e\" not in text",
+          "sha256": "a83d4c56724cde3dbbc2eaf78b943af2bbdfaeb1f33f78d54d56e45c1b97bfb5"
+        }
+      ],
+      "parameterization": []
+    },
+    "tests/test_metadata_consistency.py::test_inspect_and_watch_terminal_handoff_replay_the_same_consistency_warning": {
+      "scope": "integration",
+      "reason": "Reviewed #78: original source truth, diagnostic evidence, bounded/adversarial presentation and offline replay against actual runtime; source tools only construct/validate inputs.",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 5,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 167,
+          "expression": "assert code == 0",
+          "sha256": "8cfb1c1b5001ad98551bcdc236ea205174326a93613cfbadead01a05f04cb265"
+        },
+        {
+          "line": 168,
+          "expression": "assert \"terminal step metadata inconsistent\" in first.out",
+          "sha256": "4b3fb04bb72f056a1a1522f62e8fa3e76e07006d7b31f3aeabcb845db1aaf7e3"
+        },
+        {
+          "line": 169,
+          "expression": "assert \"jobs.json:/jobs/0/steps/0\" in first.out",
+          "sha256": "bd1fd3f1648e4b60da2a0638f349e94b47788fdce54327a1c457ebe63c50152e"
+        },
+        {
+          "line": 170,
+          "expression": "assert cli.main([\"replay\", str(destination), \"--receptor\", \"llm\"]) == 0",
+          "sha256": "f572f16a353e6e01924568639ef0b451d3a4ffcb8b02ddde6c5914d09d32ce20"
+        },
+        {
+          "line": 171,
+          "expression": "assert capsys.readouterr().out == first.out",
+          "sha256": "2c35da7c8d1c33ed5a11a269577cdbc00e0aad316a875f10214591783b625902"
+        }
+      ],
+      "parameterization": [
+        "pytest.mark.parametrize(\"command\", [\"inspect\", \"watch\"])"
+      ]
+    },
+    "tests/test_runner_hints.py::test_authentic_runner_acquisition_hints_are_deduplicated_without_causal_inference": {
+      "scope": "product",
+      "reason": "Reviewed #82: original source truth, diagnostic evidence, bounded/adversarial presentation and offline replay against actual runtime; source tools only construct/validate inputs.",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 11,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 48,
+          "expression": "assert evidence == original",
+          "sha256": "0e34cafd7a18faa8b9bbbc57fa15447b3a72c4baa3d17c1131202a7647ba3f22"
+        },
+        {
+          "line": 49,
+          "expression": "assert report[\"github\"][\"conclusion\"] == \"failure\"",
+          "sha256": "7700224f7bf1cef91382b31372603ef275bd215e7e34f903126325cc0e80837e"
+        },
+        {
+          "line": 50,
+          "expression": "assert exit_code(report) == 1",
+          "sha256": "03ed8a1083466663c4696e8585634a10eda7187ef2a939fa42ab38cde8f52bc5"
+        },
+        {
+          "line": 51,
+          "expression": "assert job[\"cause\"] == report[\"termination\"][\"cause\"] == \"unknown\"",
+          "sha256": "c978874fefc8a90d1cda43d99e945532fd71b4078854efe1f6feb4d70b5c311e"
+        },
+        {
+          "line": 52,
+          "expression": "assert [h[\"kind\"] for h in job[\"hints\"]] == [\n        \"hosted_runner_acquisition\",\n        \"hosted_runner_capacity\",\n    ]",
+          "sha256": "f0c51083f06f6712c40528b8e28cc572323cc9b62cf291d7cb540f75ab4aa0ca"
+        },
+        {
+          "line": 56,
+          "expression": "assert [h[\"source\"][\"json_pointer\"] for h in job[\"hints\"]] == [\n        \"/check_runs/0/annotations/0\",\n        \"/check_runs/0/annotations/1\",\n    ]",
+          "sha256": "a38a7583c20c3f8d267bfe08d69ef926e0e5623f065c4f1a927fde7b9cc63989"
+        },
+        {
+          "line": 66,
+          "expression": "assert len(json.loads(render_json(report))[\"checks\"][0][\"annotations\"]) == 4",
+          "sha256": "01c5fa9bfc4ffb103a23124edf8bc6f95b385c92c3edda396689cb429491ed06"
+        },
+        {
+          "line": 62,
+          "expression": "assert text.count(\"hint (unverified): hosted runner acquisition failure reported\") == 1",
+          "sha256": "d3bed125bfc7fee0ae888a35e82c68b68969d3074564def79b300a8f64dd7fe0"
+        },
+        {
+          "line": 63,
+          "expression": "assert text.count(\"macOS arm64 capacity notice\") == 1",
+          "sha256": "f3f7e6c62f0af01c9c018f14a8e80c7eabf63a11c9e5ba0c49e94dd852aa79f5"
+        },
+        {
+          "line": 64,
+          "expression": "assert \"cause=unknown\" in text",
+          "sha256": "47fe18f3c385e98cfc3bf5cdf1b8701fc1141aca3f32c84c2519005db1f1dfb9"
+        },
+        {
+          "line": 65,
+          "expression": "assert len(text.encode()) < 6_000",
+          "sha256": "85e2c40452f857dbf84bf9c8cf4bddffb088f4f029efd180617dc03b76c2a1d8"
+        }
+      ],
+      "parameterization": [
+        "pytest.mark.parametrize(\"profile\", [\"generic\", \"ci\", \"docs\", \"conda\", \"release\"])"
+      ]
+    },
+    "tests/test_runner_hints.py::test_missing_ambiguous_or_unlinked_runner_evidence_never_proves_cause": {
+      "scope": "product",
+      "reason": "Reviewed #82: original source truth, diagnostic evidence, bounded/adversarial presentation and offline replay against actual runtime; source tools only construct/validate inputs.",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 4,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 113,
+          "expression": "assert [h[\"kind\"] for h in hints] == expected",
+          "sha256": "d61554e5350d91252f99508c7a11d77962cfc29ba92bdbb25710ca43dc54a754"
+        },
+        {
+          "line": 114,
+          "expression": "assert report[\"termination\"][\"jobs\"][0][\"cause\"] == \"unknown\"",
+          "sha256": "bb97c5ff6560509cccc6b45b75e23f0e364d6dff99e6c3b79fdb9fddd417cde4"
+        },
+        {
+          "line": 115,
+          "expression": "assert report[\"github\"][\"conclusion\"] == \"failure\"",
+          "sha256": "7700224f7bf1cef91382b31372603ef275bd215e7e34f903126325cc0e80837e"
+        },
+        {
+          "line": 116,
+          "expression": "assert exit_code(report) == (4 if change in {\"partial\", \"unavailable\"} else 1)",
+          "sha256": "b4d8b65fcccc31744de419f12bf91b31d96ffbd60ef0ffec0010a87984ca7e6f"
+        }
+      ],
+      "parameterization": [
+        "pytest.mark.parametrize(\n    \"change,expected\",\n    [\n        (\"notice-only\", [\"hosted_runner_capacity\"]),\n        (\"has-steps\", []),\n        (\"wrong-level\", [\"hosted_runner_capacity\"]),\n        (\"wrong-sha\", []),\n        (\"wrong-suite\", []),\n        (\"wrong-attempt\", []),\n        (\"unavailable\", []),\n        (\"partial\", [\"hosted_runner_acquisition\", \"hosted_runner_capacity\"]),\n        (\"truncated\", [\"hosted_runner_capacity\"]),\n        (\"hostile\", [\"hosted_runner_capacity\"]),\n        (\"no-annotations\", []),\n    ],\n)"
+      ]
+    },
+    "tests/test_runner_hints.py::test_malformed_annotation_messages_fail_before_hint_interpretation": {
+      "scope": "product",
+      "reason": "Reviewed #82: original source truth, diagnostic evidence, bounded/adversarial presentation and offline replay against actual runtime; source tools only construct/validate inputs.",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 0,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [],
+      "parameterization": [
+        "pytest.mark.parametrize(\"message\", [None, 17, \"x\" * 4097])"
+      ]
+    },
+    "tests/test_runner_hints.py::test_original_check_capture_after_rerun_uses_all_checks_and_exact_job_linkage": {
+      "scope": "product",
+      "reason": "Reviewed #82: original source truth, diagnostic evidence, bounded/adversarial presentation and offline replay against actual runtime; source tools only construct/validate inputs.",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 6,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 172,
+          "expression": "assert len(report[\"termination\"][\"jobs\"][0][\"hints\"]) == 2",
+          "sha256": "e7f1e8ec8b2d7aa9a6705ab4d7af028329cdc8f42c5f5c12ea9b2fff3843115d"
+        },
+        {
+          "line": 173,
+          "expression": "assert len(report[\"checks\"]) == 2",
+          "sha256": "5450be4d1ffc12e17ac6b1d7d330c7c1d56f866568cc99d68617c207af7cc28f"
+        },
+        {
+          "line": 174,
+          "expression": "assert sum(\"/annotations?\" in s for s in requested) == 1",
+          "sha256": "6e3674a2d6042f1c42f92d08323d7ea5fdd8aed573b4dd807a30985b5e1c5076"
+        },
+        {
+          "line": 175,
+          "expression": "assert any(\"filter=all\" in s for s in requested)",
+          "sha256": "b79ca3d80dc0e0dc996c5dc001e6eb50fa92d925cba44fedd1ce63b1d7e42a37"
+        },
+        {
+          "line": 176,
+          "expression": "assert report[\"termination\"][\"jobs\"][0][\"annotation_evidence\"] == \"complete\"",
+          "sha256": "5c58adf2370b63ccffced99d61cc7ccbca82b1f190ec9d366a8c833d513d250b"
+        },
+        {
+          "line": 177,
+          "expression": "assert exit_code(report) == 1",
+          "sha256": "03ed8a1083466663c4696e8585634a10eda7187ef2a939fa42ab38cde8f52bc5"
+        }
+      ],
+      "parameterization": []
+    },
+    "tests/test_acquisition_diagnostics.py::test_nested_conda_transport_needs_a_bounded_fatal_context": {
+      "scope": "product",
+      "reason": "Reviewed #78/#81/#82/#83: installed runtime source-state parity, bounded parser semantics, original evidence locators or deterministic golden rendering.",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 1,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 142,
+          "expression": "assert item[\"kind\"] == kind",
+          "sha256": "e5b2cb5a3547aac3734c9df836f1db5aee03b83ba53a6dd2b6b2540d6510bd5a"
+        }
+      ],
+      "parameterization": [
+        "pytest.mark.parametrize(\"distance,kind\", [(128, \"conda_download\"), (129, \"missing_file\")])"
+      ]
+    },
+    "tests/test_acquisition_diagnostics.py::test_recoverable_download_warning_does_not_hide_an_independent_filesystem_failure": {
+      "scope": "product",
+      "reason": "Reviewed #78/#81/#82/#83: installed runtime source-state parity, bounded parser semantics, original evidence locators or deterministic golden rendering.",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 2,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 152,
+          "expression": "assert item[\"kind\"] == \"missing_file\"",
+          "sha256": "7c6e8fdc04360ad7cbb787f11943a36fbea036728e9b7d7e8087da46f7fde8c9"
+        },
+        {
+          "line": 153,
+          "expression": "assert \"independent-file\" in item[\"message\"]",
+          "sha256": "389b70eb724375c0743d06833f16b05fe3daad9a26753dc38538f70f726e4bd5"
+        }
+      ],
+      "parameterization": []
+    },
+    "tests/test_acquisition_diagnostics.py::test_primary_acquisition_diagnostics_never_replace_workflow_source_state": {
+      "scope": "product",
+      "reason": "Reviewed #78/#81/#82/#83: installed runtime source-state parity, bounded parser semantics, original evidence locators or deterministic golden rendering.",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 3,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 188,
+          "expression": "assert report[\"github\"] == {\"status\": status, \"conclusion\": conclusion}",
+          "sha256": "5b97f73db95671d46e950e1f97543e8e7f4886d5b2cb220fa9132d36292a3490"
+        },
+        {
+          "line": 189,
+          "expression": "assert report[\"causes\"][0][\"kind\"] == \"artifact_download\"",
+          "sha256": "3eba849c763d1e9d8da75613d77ff10c1018c21fe1921e749b9d277bcb8355c0"
+        },
+        {
+          "line": 190,
+          "expression": "assert exit_code(report) == code",
+          "sha256": "16f50f6edbb624f30157ef90bc0b199ebc74f5720adc0e078c1997b35de2b082"
+        }
+      ],
+      "parameterization": [
+        "pytest.mark.parametrize(\n    \"status,conclusion,code\",\n    [\n        (\"completed\", \"failure\", 1),\n        (\"completed\", \"success\", 0),\n        (\"completed\", \"cancelled\", 2),\n        (\"completed\", \"timed_out\", 2),\n        (\"completed\", \"future-conclusion\", 2),\n        (\"in_progress\", None, 3),\n        (\"queued\", None, 3),\n    ],\n)"
+      ]
+    },
+    "tests/test_acquisition_diagnostics.py::test_acquisition_text_matches_reviewed_golden_reports": {
+      "scope": "product",
+      "reason": "Reviewed #78/#81/#82/#83: installed runtime source-state parity, bounded parser semantics, original evidence locators or deterministic golden rendering.",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 2,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 197,
+          "expression": "assert render_llm(report) == expected[\"llm\"]",
+          "sha256": "c5c8c0a66910e11a29c5d394ef910dd33412a3831d450e3250f4186e0ff5e133"
+        },
+        {
+          "line": 198,
+          "expression": "assert render_human(report) == expected[\"human\"]",
+          "sha256": "1cabee6cb54dfbb133ed1ceeb4a722eba525aadc80e74c900794a7ed16d141d0"
+        }
+      ],
+      "parameterization": [
+        "pytest.mark.parametrize(\"case\", CASES, ids=lambda c: c[\"name\"])"
+      ]
+    },
+    "tests/test_metadata_consistency.py::test_child_consistency_warning_matches_reviewed_golden_reports": {
+      "scope": "product",
+      "reason": "Reviewed #78/#81/#82/#83: installed runtime source-state parity, bounded parser semantics, original evidence locators or deterministic golden rendering.",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 2,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 178,
+          "expression": "assert render_llm(report) == (root / \"inconsistent_steps.llm\").read_text()",
+          "sha256": "6aae739e8950a79937aa16e6b97230e3a8e3dfa7fa29637d006f14ce9b585b49"
+        },
+        {
+          "line": 179,
+          "expression": "assert render_human(report) == (root / \"inconsistent_steps.human\").read_text()",
+          "sha256": "cf90ab6695c5694976a10039e0aafa9e3d017c109d6dab7fb2c9aca712542968"
+        }
+      ],
+      "parameterization": []
+    },
+    "tests/test_runner_hints.py::test_hosted_runner_hints_match_reviewed_golden_reports": {
+      "scope": "product",
+      "reason": "Reviewed #78/#81/#82/#83: installed runtime source-state parity, bounded parser semantics, original evidence locators or deterministic golden rendering.",
+      "baseline_node": null,
+      "baseline_assertions": [],
+      "minimum_assertions": 2,
+      "baseline_parameterization": [],
+      "baseline_function_sha256": null,
+      "required_gates": [
+        "source-native-complete",
+        "installed-native-product-integration"
+      ],
+      "current_assertions": [
+        {
+          "line": 184,
+          "expression": "assert render_llm(report) == (root / \"hosted_runner_acquisition.llm\").read_text()",
+          "sha256": "9fdbbbe8ddae71de33c457e39195934a0ecaa02ec01c3e9886b47a84ebd8d737"
+        },
+        {
+          "line": 185,
+          "expression": "assert render_human(report) == (root / \"hosted_runner_acquisition.human\").read_text()",
+          "sha256": "fe1d122d1af6ef1755601e62816ee8e2ba8e1d3347210d5255f2649d8b2999ea"
+        }
+      ],
+      "parameterization": []
     }
   },
   "gates": {
