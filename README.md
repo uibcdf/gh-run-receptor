@@ -22,12 +22,12 @@ commits or scientific consumer suites. See the [coverage reporting contract](dev
 
 
 Version 1.0 is the stable read-only contract: it uses exact workflow identities and does
-not include pattern or organization-level configuration. Version 1.4.0 is available
-from the uibcdf Conda channel. The `1.4.0` source release can inspect, watch, replay, compare, and
+not include pattern or organization-level configuration. Version 1.5.0 is available
+from the uibcdf Conda channel. The `1.5.0` source release can inspect, watch, replay, compare, and
 aggregate structured run evidence. Install the GitHub CLI extension at the exact tag:
 
 ```text
-gh extension install uibcdf/gh-run-receptor --pin 1.4.0
+gh extension install uibcdf/gh-run-receptor --pin 1.5.0
 gh run-receptor --version
 ```
 
@@ -87,7 +87,7 @@ jobs:
   report:
     runs-on: ubuntu-latest
     steps:
-      - uses: uibcdf/gh-run-receptor@1.4.0
+      - uses: uibcdf/gh-run-receptor@1.5.0
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
@@ -106,7 +106,7 @@ High-assurance consumers may pin the full release commit SHA instead of the tag.
 A small dedicated reporter can keep its full `config@1` policy beside the invocation:
 
 ```yaml
-      - uses: uibcdf/gh-run-receptor@1.4.0
+      - uses: uibcdf/gh-run-receptor@1.5.0
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
@@ -150,7 +150,7 @@ It explicitly labels the profile interpretation as published rather than indepen
 recomputed. Use `inspect SOURCE_RUN_ID` as the fallback when the artifact is absent,
 expired, or insufficient for the decision.
 
-Version `1.4.0` provides a reusable terminal reporter. A client keeps the
+Version `1.5.0` provides a reusable terminal reporter. A client keeps the
 `workflow_run` trigger and delegates the complete reporting job:
 
 ```yaml
@@ -167,7 +167,7 @@ permissions:
 
 jobs:
   report:
-    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@1.4.0
+    uses: uibcdf/gh-run-receptor/.github/workflows/reusable-report.yml@1.5.0
     with:
       run-id: ${{ github.event.workflow_run.id }}
       repository: ${{ github.repository }}
@@ -462,12 +462,12 @@ any developer, repository, or coding agent. A typical combined workflow runs
 The public `noarch: python` package resolves GitHub CLI separately:
 
 ```text
-conda install --override-channels --strict-channel-priority -c uibcdf -c conda-forge gh-run-receptor=1.4.0
+conda install --override-channels --strict-channel-priority -c uibcdf -c conda-forge gh-run-receptor=1.5.0
 gh-run-receptor --version
 ```
 
 The same original file passed twelve native installed cells before public promotion.
-See [delivery evidence](devguide/evidence/conda_1_3_0_public.json).
+See [delivery evidence](devguide/evidence/release_1_5_0_public.json).
 Existing extension, Action and GitHub wheel/sdist installation remain available.
 
 ### Completed-job logs and Conda delivery in 1.3.0
@@ -484,6 +484,18 @@ twelve exact-file installed cells and unchanged-file promotion; measured receipt
 are tracked in [#60](https://github.com/uibcdf/gh-run-receptor/issues/60).
 Existing GitHub release assets, extension, Action and reusable modes remain.
 
+
+### Source-preserving diagnostics in 1.5.0
+
+Release [1.5.0](https://github.com/uibcdf/gh-run-receptor/releases/tag/1.5.0)
+delivers #78–#83: primary Conda/artifact acquisition diagnostics, visible
+terminal-step consistency warnings, deduplicated hosted-runner hints and reviewed
+dependency/publisher adoption. GitHub source conclusions, process codes, Python
+3.11–3.14 and all nine frozen serialized schemas remain unchanged. The original
+Conda file passed 732 tests in each of twelve native cells before same-byte
+promotion; public GitHub assets, Conda, extension and source ZIP are independently
+verified. [Public receipts](devguide/evidence/release_1_5_0_public.json) retain
+exact source/file identities and the limits of each verification.
 
 ### Watch clarity and qualification in 1.4.0
 

@@ -6,7 +6,7 @@ in `devtools/dependency_routes.toml`.
 
 ## Current scope
 
-This is an additive route with verified public 1.4.0/build-0 delivery. GitHub
+This is an additive route with verified public 1.5.0/build-0 delivery. GitHub
 extension, Action, wheel/sdist and Zenodo modes remain. PyPI is excluded. `release_plan.example.toml` is an onboarding context, **not a release
 plan**. Publication and promotion require a separately reviewed, committed
 `release_plan.toml`; the example cannot authorize them.
@@ -223,3 +223,17 @@ updated after review. Original source/file/digests, separate qualification
 identity, installed gate, same-byte promotion and independent public receiving
 remain mandatory. Historical 1.3.0/1.4.0 receipts and SDK identities are unchanged.
 Provider fixtures and input review do not claim a new real publication.
+
+
+## Verified 1.5.0 delivery — 2026-11-11
+
+Original source 54a21dd / administrative workflow b533910 / SDK 95f693b built
+once in 43121437889: gh-run-receptor-1.5.0-py_0.tar.bz2, SHA-256
+d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca.
+All twelve actual installed cells pass in 43122309080, 732 tests per cell, with
+before/after provenance, seven support checks and namespace/resource retirement.
+Same-byte promotion 43123212187, independent public main/index/download and a
+normal clean user installation pass. The final user installation uses ordinary
+cache-filesystem hardlinks after a temporary-filesystem quota rollback; shared
+caches and original bytes remain unchanged. See the new public/qualification
+receipts and versioning guide; historical identities above retain their scope.

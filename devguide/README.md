@@ -1,5 +1,16 @@
 # gh-run-receptor developer guide
 
+**Published 1.5.0 (2026-11-11):** #78–#83 are resolved and delivered from
+immutable tag/source 54a21ddb2d7488fef823cd490ca7d274fd4c6f54. Nine source
+workflows, twelve native source cells and twelve same-file installed cells
+(732 tests each) pass. Public GitHub assets, normal Conda main/index and clean
+user installation, exact-tag extension/minimum gh and source-ZIP DOI
+10.5281/zenodo.24148257 are independently verified. The
+[public receipt](evidence/release_1_5_0_public.json),
+[Conda qualification](evidence/conda_1_5_0_qualification.json) and
+[release guide](versioning_and_releases.md) retain exact identities and scope.
+Central receiving is uibcdf/molsyssuite#191; no consumer migration is implied.
+
 **Consolidated qualification (2026-10-29):** #76 separates the src runtime,
 unshipped explicit-input tooling and complete source/installed scopes. The
 [qualification contract](installed_qualification.md), [resolved record](archive/resolved_proposals/consolidate_product_tooling_and_installed_qualification.md)
@@ -294,8 +305,8 @@ received on source 54a21dd through nine workflows, including twelve native sourc
 cells. Source-preserving diagnostics, consistency warnings, runner hints and
 reviewed dependency/publisher adoption retain the existing truth contracts.
 The two evidence receipts and archive indexes retain the acceptance scope. #84
-owns the pending 1.5.0 exact-file installed/public delivery. Published baseline
-remains 1.4.0. See [runtime minimum review](runtime_dependency_review.md).
+owns the subsequently verified 1.5.0 exact-file installed/public delivery.
+The published checkpoint and receipt above retain that acceptance. See [runtime minimum review](runtime_dependency_review.md).
 
 ## Reading order
 

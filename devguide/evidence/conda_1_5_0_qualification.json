@@ -1,0 +1,2677 @@
+{
+  "schema": "gh-run-receptor.conda-qualification@1",
+  "version": "1.5.0",
+  "candidate_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+  "qualification_sha": "b53391064350cee6860c69e166ae0d6e8208f49e",
+  "provider_sha": "95f693be10c9205ab9b912cb53453710a207bf45",
+  "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+  "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+  "producer_run": 43121437889,
+  "native_matrix": {
+    "schema": "molsyssuite.installed-matrix@1",
+    "state": "verified",
+    "run_id": 43122309080,
+    "run_attempt": 1,
+    "candidate_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+    "workflow": ".github/workflows/test-staged-conda.yml",
+    "title": "Installed gh-run-receptor-1.5.0-py_0.tar.bz2 d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+    "jobs": [
+      {
+        "kind": "prepare",
+        "name": "installed / prepare",
+        "job_id": 130865553273,
+        "conclusion": "success"
+      },
+      {
+        "kind": "installed",
+        "platform": "linux-64",
+        "python": "3.14",
+        "name": "installed / linux-64 \u00b7 Python 3.14",
+        "job_id": 130865643457,
+        "conclusion": "success"
+      },
+      {
+        "kind": "installed",
+        "platform": "linux-64",
+        "python": "3.11",
+        "name": "installed / linux-64 \u00b7 Python 3.11",
+        "job_id": 130865643470,
+        "conclusion": "success"
+      },
+      {
+        "kind": "installed",
+        "platform": "osx-arm64",
+        "python": "3.11",
+        "name": "installed / osx-arm64 \u00b7 Python 3.11",
+        "job_id": 130865643480,
+        "conclusion": "success"
+      },
+      {
+        "kind": "installed",
+        "platform": "linux-64",
+        "python": "3.12",
+        "name": "installed / linux-64 \u00b7 Python 3.12",
+        "job_id": 130865643485,
+        "conclusion": "success"
+      },
+      {
+        "kind": "installed",
+        "platform": "osx-arm64",
+        "python": "3.13",
+        "name": "installed / osx-arm64 \u00b7 Python 3.13",
+        "job_id": 130865643490,
+        "conclusion": "success"
+      },
+      {
+        "kind": "installed",
+        "platform": "osx-arm64",
+        "python": "3.14",
+        "name": "installed / osx-arm64 \u00b7 Python 3.14",
+        "job_id": 130865643491,
+        "conclusion": "success"
+      },
+      {
+        "kind": "installed",
+        "platform": "linux-64",
+        "python": "3.13",
+        "name": "installed / linux-64 \u00b7 Python 3.13",
+        "job_id": 130865643495,
+        "conclusion": "success"
+      },
+      {
+        "kind": "installed",
+        "platform": "win-64",
+        "python": "3.12",
+        "name": "installed / win-64 \u00b7 Python 3.12",
+        "job_id": 130865643509,
+        "conclusion": "success"
+      },
+      {
+        "kind": "installed",
+        "platform": "osx-arm64",
+        "python": "3.12",
+        "name": "installed / osx-arm64 \u00b7 Python 3.12",
+        "job_id": 130865643516,
+        "conclusion": "success"
+      },
+      {
+        "kind": "installed",
+        "platform": "win-64",
+        "python": "3.11",
+        "name": "installed / win-64 \u00b7 Python 3.11",
+        "job_id": 130865643536,
+        "conclusion": "success"
+      },
+      {
+        "kind": "installed",
+        "platform": "win-64",
+        "python": "3.13",
+        "name": "installed / win-64 \u00b7 Python 3.13",
+        "job_id": 130865643556,
+        "conclusion": "success"
+      },
+      {
+        "kind": "installed",
+        "platform": "win-64",
+        "python": "3.14",
+        "name": "installed / win-64 \u00b7 Python 3.14",
+        "job_id": 130865643560,
+        "conclusion": "success"
+      }
+    ],
+    "checked_at": "2026-11-11T23:49:55.319323+00:00",
+    "qualification_sha": "b53391064350cee6860c69e166ae0d6e8208f49e",
+    "source_binding": {
+      "build_number": 0,
+      "candidate_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+      "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+      "matrix": "{\"include\": [{\"platform\": \"linux-64\", \"python\": \"3.11\", \"runner\": \"ubuntu-latest\"}, {\"platform\": \"linux-64\", \"python\": \"3.12\", \"runner\": \"ubuntu-latest\"}, {\"platform\": \"linux-64\", \"python\": \"3.13\", \"runner\": \"ubuntu-latest\"}, {\"platform\": \"linux-64\", \"python\": \"3.14\", \"runner\": \"ubuntu-latest\"}, {\"platform\": \"osx-arm64\", \"python\": \"3.11\", \"runner\": \"macos-15\"}, {\"platform\": \"osx-arm64\", \"python\": \"3.12\", \"runner\": \"macos-15\"}, {\"platform\": \"osx-arm64\", \"python\": \"3.13\", \"runner\": \"macos-15\"}, {\"platform\": \"osx-arm64\", \"python\": \"3.14\", \"runner\": \"macos-15\"}, {\"platform\": \"win-64\", \"python\": \"3.11\", \"runner\": \"windows-latest\"}, {\"platform\": \"win-64\", \"python\": \"3.12\", \"runner\": \"windows-latest\"}, {\"platform\": \"win-64\", \"python\": \"3.13\", \"runner\": \"windows-latest\"}, {\"platform\": \"win-64\", \"python\": \"3.14\", \"runner\": \"windows-latest\"}]}",
+      "package": "gh-run-receptor",
+      "profile": "{\"platforms\": [\"linux-64\", \"osx-arm64\", \"win-64\"], \"python_versions\": [\"3.11\", \"3.12\", \"3.13\", \"3.14\"], \"prepare_job\": \"installed / prepare\", \"required_steps\": [\"Install exact artifact\", \"Validate installed files\", \"Run installed tests\", \"Recheck installed provenance after scientific tests\"], \"job_template\": \"installed / {platform} \\u00b7 Python {python}\"}",
+      "qualification_sha": "b53391064350cee6860c69e166ae0d6e8208f49e",
+      "run_attempt": 1,
+      "run_id": 43122309080,
+      "schema": "molsyssuite.installed-source@1",
+      "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+      "title": "Installed gh-run-receptor-1.5.0-py_0.tar.bz2 d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+      "version": "1.5.0",
+      "workflow": ".github/workflows/test-staged-conda.yml"
+    }
+  },
+  "source_binding_artifact": {
+    "id": 13900863946,
+    "name": "installed-source-binding-43122309080-1",
+    "digest": "sha256:f7970c9f705588907b4a4591a3acf4f160b4026fe4cdea055117ec391b8c90a0",
+    "size_in_bytes": 817,
+    "workflow_run": {
+      "id": 43122309080,
+      "repository_id": 1357047998,
+      "head_repository_id": 1357047998,
+      "head_branch": "main",
+      "head_sha": "b53391064350cee6860c69e166ae0d6e8208f49e"
+    }
+  },
+  "cells": [
+    {
+      "platform": "linux-64",
+      "python": "3.11",
+      "native_artifact": {
+        "id": 13901008772,
+        "name": "installed-shared-support-linux-64-py3.11",
+        "digest": "sha256:740dfbc3ee96e8679a979f7f3e0fa91084a2299997c71bb795665fae5d6733b7",
+        "size_in_bytes": 2866,
+        "workflow_run": {
+          "id": 43122309080,
+          "repository_id": 1357047998,
+          "head_repository_id": 1357047998,
+          "head_branch": "main",
+          "head_sha": "b53391064350cee6860c69e166ae0d6e8208f49e"
+        }
+      },
+      "tests": 732,
+      "pytest_exit_code": 0,
+      "before": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "linux-64",
+        "python": "3.11",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "after": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "linux-64",
+        "python": "3.11",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "shared_support": {
+        "binding": {
+          "context": {
+            "candidate_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+            "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+            "provider_sha": "95f693be10c9205ab9b912cb53453710a207bf45",
+            "qualification_sha": "b53391064350cee6860c69e166ae0d6e8208f49e",
+            "run_attempt": 1,
+            "run_id": 43122309080,
+            "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca"
+          },
+          "provider_state": "verified-commit-and-runner-files",
+          "scope": "artifact/qualification/run labels are caller context; not artifact verification",
+          "source_state": "verified-commit-and-selected-files"
+        },
+        "bytes": 100998,
+        "checks": 7,
+        "declaration_sha256": "6e60c30e9c05c6d7383935261a11acc97f229754847e9d6ebde4fc3ccc05a525",
+        "executed_tests": 732,
+        "files": [
+          {
+            "bytes": 73,
+            "kind": "code",
+            "sha256": "77bf87fcb90135b04f8ad606003e8f862445a104fcef4c89d80ff92f937d0088",
+            "source": "gh_run_receptor_tools/__init__.py",
+            "target": "gh_run_receptor_tools/__init__.py"
+          },
+          {
+            "bytes": 11038,
+            "kind": "code",
+            "sha256": "a00ef7b159c4833b8846906492fd5e06c3ab964ee17d0e511fa710d60df12c2c",
+            "source": "gh_run_receptor_tools/benchmark_capture_policies.py",
+            "target": "gh_run_receptor_tools/benchmark_capture_policies.py"
+          },
+          {
+            "bytes": 6154,
+            "kind": "code",
+            "sha256": "2a1e57afac858666be68af01591598770404074f54176044b111b9b06a07a15d",
+            "source": "gh_run_receptor_tools/check_distribution_inputs.py",
+            "target": "gh_run_receptor_tools/check_distribution_inputs.py"
+          },
+          {
+            "bytes": 1965,
+            "kind": "code",
+            "sha256": "d008286a220fcc937e00f915afbd3fa37e2ce1a576170520228740bdc919982f",
+            "source": "gh_run_receptor_tools/devguide_index.py",
+            "target": "gh_run_receptor_tools/devguide_index.py"
+          },
+          {
+            "bytes": 6272,
+            "kind": "code",
+            "sha256": "7e92a75e6b8b94607e37a874b28faa3f71a366db3f3af529426df596929a08e8",
+            "source": "gh_run_receptor_tools/devguide_issue.py",
+            "target": "gh_run_receptor_tools/devguide_issue.py"
+          },
+          {
+            "bytes": 7297,
+            "kind": "code",
+            "sha256": "c9ebc42a4072dc18115c0ea37e6efafda78853791b1cca1252a05b54c17d9275",
+            "source": "gh_run_receptor_tools/devguide_reports.py",
+            "target": "gh_run_receptor_tools/devguide_reports.py"
+          },
+          {
+            "bytes": 8719,
+            "kind": "code",
+            "sha256": "e6a1f2fdde8438750dac2d88aa1ceb7a12bb6b0cb0770935d9b3668e1669f9f8",
+            "source": "gh_run_receptor_tools/distribution_archives.py",
+            "target": "gh_run_receptor_tools/distribution_archives.py"
+          },
+          {
+            "bytes": 3812,
+            "kind": "code",
+            "sha256": "0c4b9f3f5c5bcf2e1e6836ee9554e2a64cb13bad90037c69af9e5941a5bbf565",
+            "source": "gh_run_receptor_tools/installed_smoke.py",
+            "target": "gh_run_receptor_tools/installed_smoke.py"
+          },
+          {
+            "bytes": 18251,
+            "kind": "code",
+            "sha256": "653dba1655bd5d008b3aebd071043cea945082b8b94ba94c5f36f22a49e6669d",
+            "source": "gh_run_receptor_tools/release_tools.py",
+            "target": "gh_run_receptor_tools/release_tools.py"
+          },
+          {
+            "bytes": 7813,
+            "kind": "code",
+            "sha256": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+            "source": "gh_run_receptor_tools/sanitize_bundle.py",
+            "target": "gh_run_receptor_tools/sanitize_bundle.py"
+          },
+          {
+            "bytes": 742,
+            "kind": "code",
+            "sha256": "3008337cc231144455b59c4edf73668a1b9d8ba050d8c8ec2b70bd8a3eb4db3a",
+            "source": "gh_run_receptor_tools/schema_validation.py",
+            "target": "gh_run_receptor_tools/schema_validation.py"
+          },
+          {
+            "bytes": 2234,
+            "kind": "code",
+            "sha256": "9c9001b7590ef827f51dc99074c59607514422f75b61de510e65abf2c9c83d5a",
+            "source": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py",
+            "target": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py"
+          },
+          {
+            "bytes": 4076,
+            "kind": "code",
+            "sha256": "23e75a060472e8069acefcc7a37ea656ad00fc70d7c15a6cc03b6dd28f9da752",
+            "source": "gh_run_receptor_tools/test_inventory.py",
+            "target": "gh_run_receptor_tools/test_inventory.py"
+          },
+          {
+            "bytes": 7127,
+            "kind": "code",
+            "sha256": "9c3eae2c09dff0d3a3ec10e47933f4ef37bf9f966739b25ecf3840e97d638883",
+            "source": "gh_run_receptor_tools/validate_contracts.py",
+            "target": "gh_run_receptor_tools/validate_contracts.py"
+          },
+          {
+            "bytes": 947,
+            "kind": "code",
+            "sha256": "d561a89663668f2d46c3a7c0b75ab1bd71998bc95de5ac93b28ecfa1ba505581",
+            "source": "gh_run_receptor_tools/validate_devguide.py",
+            "target": "gh_run_receptor_tools/validate_devguide.py"
+          },
+          {
+            "bytes": 4736,
+            "kind": "code",
+            "sha256": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+            "source": "gh_run_receptor_tools/validate_job_logs.py",
+            "target": "gh_run_receptor_tools/validate_job_logs.py"
+          },
+          {
+            "bytes": 9742,
+            "kind": "code",
+            "sha256": "010ee776bfbfa8f5ee9804085d15fcfb2b66fbef6d4223e2e58448130bc65653",
+            "source": "gh_run_receptor_tools/validate_public_runs.py",
+            "target": "gh_run_receptor_tools/validate_public_runs.py"
+          }
+        ],
+        "imports_retired": true,
+        "loaded": [
+          "gh_run_receptor_tools",
+          "gh_run_receptor_tools.benchmark_capture_policies",
+          "gh_run_receptor_tools.check_distribution_inputs",
+          "gh_run_receptor_tools.devguide_reports",
+          "gh_run_receptor_tools.distribution_archives",
+          "gh_run_receptor_tools.installed_smoke",
+          "gh_run_receptor_tools.release_tools",
+          "gh_run_receptor_tools.sanitize_bundle",
+          "gh_run_receptor_tools.schema_validation",
+          "gh_run_receptor_tools.sync_gh_run_receptor_guide",
+          "gh_run_receptor_tools.test_inventory",
+          "gh_run_receptor_tools.validate_contracts",
+          "gh_run_receptor_tools.validate_public_runs"
+        ],
+        "namespace": "gh_run_receptor_tools",
+        "provider_files_sha256": {
+          "devtools/scripts/installed_imports.py": "ff23458015bb7ce83bc3eea36571c4294bed09fff948e8eb6d9bcb3a0615fa3c",
+          "devtools/scripts/installed_noarch.py": "3f34a46cab45f6987fc33da3a3d7f82178f395ea0980ac5b46b1d9b64ebffe57",
+          "devtools/scripts/installed_test_support.py": "11ae22606546b62f28536a7a4126e2bc25d676d55bc3b92d74b56e7094e0cf87"
+        },
+        "pytest_exit_code": 0,
+        "reason": "Portable unshipped tools and schema assertions, with explicit source/data inputs; no runtime source path or generic namespace binding.",
+        "resources_retired": true,
+        "schema": "molsyssuite.installed-test-support@1",
+        "scope": "unshipped test support; no installed/scientific/public artifact qualification",
+        "state": "verified-support"
+      }
+    },
+    {
+      "platform": "linux-64",
+      "python": "3.12",
+      "native_artifact": {
+        "id": 13901910274,
+        "name": "installed-shared-support-linux-64-py3.12",
+        "digest": "sha256:79fe7ebd2bd0fe1270a038c5e05fb0766f7c8a99aff60a7738b7bc7ea66177b7",
+        "size_in_bytes": 2866,
+        "workflow_run": {
+          "id": 43122309080,
+          "repository_id": 1357047998,
+          "head_repository_id": 1357047998,
+          "head_branch": "main",
+          "head_sha": "b53391064350cee6860c69e166ae0d6e8208f49e"
+        }
+      },
+      "tests": 732,
+      "pytest_exit_code": 0,
+      "before": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "linux-64",
+        "python": "3.12",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "after": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "linux-64",
+        "python": "3.12",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "shared_support": {
+        "binding": {
+          "context": {
+            "candidate_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+            "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+            "provider_sha": "95f693be10c9205ab9b912cb53453710a207bf45",
+            "qualification_sha": "b53391064350cee6860c69e166ae0d6e8208f49e",
+            "run_attempt": 1,
+            "run_id": 43122309080,
+            "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca"
+          },
+          "provider_state": "verified-commit-and-runner-files",
+          "scope": "artifact/qualification/run labels are caller context; not artifact verification",
+          "source_state": "verified-commit-and-selected-files"
+        },
+        "bytes": 100998,
+        "checks": 7,
+        "declaration_sha256": "6e60c30e9c05c6d7383935261a11acc97f229754847e9d6ebde4fc3ccc05a525",
+        "executed_tests": 732,
+        "files": [
+          {
+            "bytes": 73,
+            "kind": "code",
+            "sha256": "77bf87fcb90135b04f8ad606003e8f862445a104fcef4c89d80ff92f937d0088",
+            "source": "gh_run_receptor_tools/__init__.py",
+            "target": "gh_run_receptor_tools/__init__.py"
+          },
+          {
+            "bytes": 11038,
+            "kind": "code",
+            "sha256": "a00ef7b159c4833b8846906492fd5e06c3ab964ee17d0e511fa710d60df12c2c",
+            "source": "gh_run_receptor_tools/benchmark_capture_policies.py",
+            "target": "gh_run_receptor_tools/benchmark_capture_policies.py"
+          },
+          {
+            "bytes": 6154,
+            "kind": "code",
+            "sha256": "2a1e57afac858666be68af01591598770404074f54176044b111b9b06a07a15d",
+            "source": "gh_run_receptor_tools/check_distribution_inputs.py",
+            "target": "gh_run_receptor_tools/check_distribution_inputs.py"
+          },
+          {
+            "bytes": 1965,
+            "kind": "code",
+            "sha256": "d008286a220fcc937e00f915afbd3fa37e2ce1a576170520228740bdc919982f",
+            "source": "gh_run_receptor_tools/devguide_index.py",
+            "target": "gh_run_receptor_tools/devguide_index.py"
+          },
+          {
+            "bytes": 6272,
+            "kind": "code",
+            "sha256": "7e92a75e6b8b94607e37a874b28faa3f71a366db3f3af529426df596929a08e8",
+            "source": "gh_run_receptor_tools/devguide_issue.py",
+            "target": "gh_run_receptor_tools/devguide_issue.py"
+          },
+          {
+            "bytes": 7297,
+            "kind": "code",
+            "sha256": "c9ebc42a4072dc18115c0ea37e6efafda78853791b1cca1252a05b54c17d9275",
+            "source": "gh_run_receptor_tools/devguide_reports.py",
+            "target": "gh_run_receptor_tools/devguide_reports.py"
+          },
+          {
+            "bytes": 8719,
+            "kind": "code",
+            "sha256": "e6a1f2fdde8438750dac2d88aa1ceb7a12bb6b0cb0770935d9b3668e1669f9f8",
+            "source": "gh_run_receptor_tools/distribution_archives.py",
+            "target": "gh_run_receptor_tools/distribution_archives.py"
+          },
+          {
+            "bytes": 3812,
+            "kind": "code",
+            "sha256": "0c4b9f3f5c5bcf2e1e6836ee9554e2a64cb13bad90037c69af9e5941a5bbf565",
+            "source": "gh_run_receptor_tools/installed_smoke.py",
+            "target": "gh_run_receptor_tools/installed_smoke.py"
+          },
+          {
+            "bytes": 18251,
+            "kind": "code",
+            "sha256": "653dba1655bd5d008b3aebd071043cea945082b8b94ba94c5f36f22a49e6669d",
+            "source": "gh_run_receptor_tools/release_tools.py",
+            "target": "gh_run_receptor_tools/release_tools.py"
+          },
+          {
+            "bytes": 7813,
+            "kind": "code",
+            "sha256": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+            "source": "gh_run_receptor_tools/sanitize_bundle.py",
+            "target": "gh_run_receptor_tools/sanitize_bundle.py"
+          },
+          {
+            "bytes": 742,
+            "kind": "code",
+            "sha256": "3008337cc231144455b59c4edf73668a1b9d8ba050d8c8ec2b70bd8a3eb4db3a",
+            "source": "gh_run_receptor_tools/schema_validation.py",
+            "target": "gh_run_receptor_tools/schema_validation.py"
+          },
+          {
+            "bytes": 2234,
+            "kind": "code",
+            "sha256": "9c9001b7590ef827f51dc99074c59607514422f75b61de510e65abf2c9c83d5a",
+            "source": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py",
+            "target": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py"
+          },
+          {
+            "bytes": 4076,
+            "kind": "code",
+            "sha256": "23e75a060472e8069acefcc7a37ea656ad00fc70d7c15a6cc03b6dd28f9da752",
+            "source": "gh_run_receptor_tools/test_inventory.py",
+            "target": "gh_run_receptor_tools/test_inventory.py"
+          },
+          {
+            "bytes": 7127,
+            "kind": "code",
+            "sha256": "9c3eae2c09dff0d3a3ec10e47933f4ef37bf9f966739b25ecf3840e97d638883",
+            "source": "gh_run_receptor_tools/validate_contracts.py",
+            "target": "gh_run_receptor_tools/validate_contracts.py"
+          },
+          {
+            "bytes": 947,
+            "kind": "code",
+            "sha256": "d561a89663668f2d46c3a7c0b75ab1bd71998bc95de5ac93b28ecfa1ba505581",
+            "source": "gh_run_receptor_tools/validate_devguide.py",
+            "target": "gh_run_receptor_tools/validate_devguide.py"
+          },
+          {
+            "bytes": 4736,
+            "kind": "code",
+            "sha256": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+            "source": "gh_run_receptor_tools/validate_job_logs.py",
+            "target": "gh_run_receptor_tools/validate_job_logs.py"
+          },
+          {
+            "bytes": 9742,
+            "kind": "code",
+            "sha256": "010ee776bfbfa8f5ee9804085d15fcfb2b66fbef6d4223e2e58448130bc65653",
+            "source": "gh_run_receptor_tools/validate_public_runs.py",
+            "target": "gh_run_receptor_tools/validate_public_runs.py"
+          }
+        ],
+        "imports_retired": true,
+        "loaded": [
+          "gh_run_receptor_tools",
+          "gh_run_receptor_tools.benchmark_capture_policies",
+          "gh_run_receptor_tools.check_distribution_inputs",
+          "gh_run_receptor_tools.devguide_reports",
+          "gh_run_receptor_tools.distribution_archives",
+          "gh_run_receptor_tools.installed_smoke",
+          "gh_run_receptor_tools.release_tools",
+          "gh_run_receptor_tools.sanitize_bundle",
+          "gh_run_receptor_tools.schema_validation",
+          "gh_run_receptor_tools.sync_gh_run_receptor_guide",
+          "gh_run_receptor_tools.test_inventory",
+          "gh_run_receptor_tools.validate_contracts",
+          "gh_run_receptor_tools.validate_public_runs"
+        ],
+        "namespace": "gh_run_receptor_tools",
+        "provider_files_sha256": {
+          "devtools/scripts/installed_imports.py": "ff23458015bb7ce83bc3eea36571c4294bed09fff948e8eb6d9bcb3a0615fa3c",
+          "devtools/scripts/installed_noarch.py": "3f34a46cab45f6987fc33da3a3d7f82178f395ea0980ac5b46b1d9b64ebffe57",
+          "devtools/scripts/installed_test_support.py": "11ae22606546b62f28536a7a4126e2bc25d676d55bc3b92d74b56e7094e0cf87"
+        },
+        "pytest_exit_code": 0,
+        "reason": "Portable unshipped tools and schema assertions, with explicit source/data inputs; no runtime source path or generic namespace binding.",
+        "resources_retired": true,
+        "schema": "molsyssuite.installed-test-support@1",
+        "scope": "unshipped test support; no installed/scientific/public artifact qualification",
+        "state": "verified-support"
+      }
+    },
+    {
+      "platform": "linux-64",
+      "python": "3.13",
+      "native_artifact": {
+        "id": 13901127799,
+        "name": "installed-shared-support-linux-64-py3.13",
+        "digest": "sha256:5e8872a8db47482a4f515b3dcf563133c19be2bb8fba1eb78da1f02b94d56e58",
+        "size_in_bytes": 2868,
+        "workflow_run": {
+          "id": 43122309080,
+          "repository_id": 1357047998,
+          "head_repository_id": 1357047998,
+          "head_branch": "main",
+          "head_sha": "b53391064350cee6860c69e166ae0d6e8208f49e"
+        }
+      },
+      "tests": 732,
+      "pytest_exit_code": 0,
+      "before": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "linux-64",
+        "python": "3.13",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "after": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "linux-64",
+        "python": "3.13",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "shared_support": {
+        "binding": {
+          "context": {
+            "candidate_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+            "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+            "provider_sha": "95f693be10c9205ab9b912cb53453710a207bf45",
+            "qualification_sha": "b53391064350cee6860c69e166ae0d6e8208f49e",
+            "run_attempt": 1,
+            "run_id": 43122309080,
+            "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca"
+          },
+          "provider_state": "verified-commit-and-runner-files",
+          "scope": "artifact/qualification/run labels are caller context; not artifact verification",
+          "source_state": "verified-commit-and-selected-files"
+        },
+        "bytes": 100998,
+        "checks": 7,
+        "declaration_sha256": "6e60c30e9c05c6d7383935261a11acc97f229754847e9d6ebde4fc3ccc05a525",
+        "executed_tests": 732,
+        "files": [
+          {
+            "bytes": 73,
+            "kind": "code",
+            "sha256": "77bf87fcb90135b04f8ad606003e8f862445a104fcef4c89d80ff92f937d0088",
+            "source": "gh_run_receptor_tools/__init__.py",
+            "target": "gh_run_receptor_tools/__init__.py"
+          },
+          {
+            "bytes": 11038,
+            "kind": "code",
+            "sha256": "a00ef7b159c4833b8846906492fd5e06c3ab964ee17d0e511fa710d60df12c2c",
+            "source": "gh_run_receptor_tools/benchmark_capture_policies.py",
+            "target": "gh_run_receptor_tools/benchmark_capture_policies.py"
+          },
+          {
+            "bytes": 6154,
+            "kind": "code",
+            "sha256": "2a1e57afac858666be68af01591598770404074f54176044b111b9b06a07a15d",
+            "source": "gh_run_receptor_tools/check_distribution_inputs.py",
+            "target": "gh_run_receptor_tools/check_distribution_inputs.py"
+          },
+          {
+            "bytes": 1965,
+            "kind": "code",
+            "sha256": "d008286a220fcc937e00f915afbd3fa37e2ce1a576170520228740bdc919982f",
+            "source": "gh_run_receptor_tools/devguide_index.py",
+            "target": "gh_run_receptor_tools/devguide_index.py"
+          },
+          {
+            "bytes": 6272,
+            "kind": "code",
+            "sha256": "7e92a75e6b8b94607e37a874b28faa3f71a366db3f3af529426df596929a08e8",
+            "source": "gh_run_receptor_tools/devguide_issue.py",
+            "target": "gh_run_receptor_tools/devguide_issue.py"
+          },
+          {
+            "bytes": 7297,
+            "kind": "code",
+            "sha256": "c9ebc42a4072dc18115c0ea37e6efafda78853791b1cca1252a05b54c17d9275",
+            "source": "gh_run_receptor_tools/devguide_reports.py",
+            "target": "gh_run_receptor_tools/devguide_reports.py"
+          },
+          {
+            "bytes": 8719,
+            "kind": "code",
+            "sha256": "e6a1f2fdde8438750dac2d88aa1ceb7a12bb6b0cb0770935d9b3668e1669f9f8",
+            "source": "gh_run_receptor_tools/distribution_archives.py",
+            "target": "gh_run_receptor_tools/distribution_archives.py"
+          },
+          {
+            "bytes": 3812,
+            "kind": "code",
+            "sha256": "0c4b9f3f5c5bcf2e1e6836ee9554e2a64cb13bad90037c69af9e5941a5bbf565",
+            "source": "gh_run_receptor_tools/installed_smoke.py",
+            "target": "gh_run_receptor_tools/installed_smoke.py"
+          },
+          {
+            "bytes": 18251,
+            "kind": "code",
+            "sha256": "653dba1655bd5d008b3aebd071043cea945082b8b94ba94c5f36f22a49e6669d",
+            "source": "gh_run_receptor_tools/release_tools.py",
+            "target": "gh_run_receptor_tools/release_tools.py"
+          },
+          {
+            "bytes": 7813,
+            "kind": "code",
+            "sha256": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+            "source": "gh_run_receptor_tools/sanitize_bundle.py",
+            "target": "gh_run_receptor_tools/sanitize_bundle.py"
+          },
+          {
+            "bytes": 742,
+            "kind": "code",
+            "sha256": "3008337cc231144455b59c4edf73668a1b9d8ba050d8c8ec2b70bd8a3eb4db3a",
+            "source": "gh_run_receptor_tools/schema_validation.py",
+            "target": "gh_run_receptor_tools/schema_validation.py"
+          },
+          {
+            "bytes": 2234,
+            "kind": "code",
+            "sha256": "9c9001b7590ef827f51dc99074c59607514422f75b61de510e65abf2c9c83d5a",
+            "source": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py",
+            "target": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py"
+          },
+          {
+            "bytes": 4076,
+            "kind": "code",
+            "sha256": "23e75a060472e8069acefcc7a37ea656ad00fc70d7c15a6cc03b6dd28f9da752",
+            "source": "gh_run_receptor_tools/test_inventory.py",
+            "target": "gh_run_receptor_tools/test_inventory.py"
+          },
+          {
+            "bytes": 7127,
+            "kind": "code",
+            "sha256": "9c3eae2c09dff0d3a3ec10e47933f4ef37bf9f966739b25ecf3840e97d638883",
+            "source": "gh_run_receptor_tools/validate_contracts.py",
+            "target": "gh_run_receptor_tools/validate_contracts.py"
+          },
+          {
+            "bytes": 947,
+            "kind": "code",
+            "sha256": "d561a89663668f2d46c3a7c0b75ab1bd71998bc95de5ac93b28ecfa1ba505581",
+            "source": "gh_run_receptor_tools/validate_devguide.py",
+            "target": "gh_run_receptor_tools/validate_devguide.py"
+          },
+          {
+            "bytes": 4736,
+            "kind": "code",
+            "sha256": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+            "source": "gh_run_receptor_tools/validate_job_logs.py",
+            "target": "gh_run_receptor_tools/validate_job_logs.py"
+          },
+          {
+            "bytes": 9742,
+            "kind": "code",
+            "sha256": "010ee776bfbfa8f5ee9804085d15fcfb2b66fbef6d4223e2e58448130bc65653",
+            "source": "gh_run_receptor_tools/validate_public_runs.py",
+            "target": "gh_run_receptor_tools/validate_public_runs.py"
+          }
+        ],
+        "imports_retired": true,
+        "loaded": [
+          "gh_run_receptor_tools",
+          "gh_run_receptor_tools.benchmark_capture_policies",
+          "gh_run_receptor_tools.check_distribution_inputs",
+          "gh_run_receptor_tools.devguide_reports",
+          "gh_run_receptor_tools.distribution_archives",
+          "gh_run_receptor_tools.installed_smoke",
+          "gh_run_receptor_tools.release_tools",
+          "gh_run_receptor_tools.sanitize_bundle",
+          "gh_run_receptor_tools.schema_validation",
+          "gh_run_receptor_tools.sync_gh_run_receptor_guide",
+          "gh_run_receptor_tools.test_inventory",
+          "gh_run_receptor_tools.validate_contracts",
+          "gh_run_receptor_tools.validate_public_runs"
+        ],
+        "namespace": "gh_run_receptor_tools",
+        "provider_files_sha256": {
+          "devtools/scripts/installed_imports.py": "ff23458015bb7ce83bc3eea36571c4294bed09fff948e8eb6d9bcb3a0615fa3c",
+          "devtools/scripts/installed_noarch.py": "3f34a46cab45f6987fc33da3a3d7f82178f395ea0980ac5b46b1d9b64ebffe57",
+          "devtools/scripts/installed_test_support.py": "11ae22606546b62f28536a7a4126e2bc25d676d55bc3b92d74b56e7094e0cf87"
+        },
+        "pytest_exit_code": 0,
+        "reason": "Portable unshipped tools and schema assertions, with explicit source/data inputs; no runtime source path or generic namespace binding.",
+        "resources_retired": true,
+        "schema": "molsyssuite.installed-test-support@1",
+        "scope": "unshipped test support; no installed/scientific/public artifact qualification",
+        "state": "verified-support"
+      }
+    },
+    {
+      "platform": "linux-64",
+      "python": "3.14",
+      "native_artifact": {
+        "id": 13900508647,
+        "name": "installed-shared-support-linux-64-py3.14",
+        "digest": "sha256:05e74b41b93a7244c876d84e8af82763187b2949c5491950d799192dd4299566",
+        "size_in_bytes": 2867,
+        "workflow_run": {
+          "id": 43122309080,
+          "repository_id": 1357047998,
+          "head_repository_id": 1357047998,
+          "head_branch": "main",
+          "head_sha": "b53391064350cee6860c69e166ae0d6e8208f49e"
+        }
+      },
+      "tests": 732,
+      "pytest_exit_code": 0,
+      "before": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "linux-64",
+        "python": "3.14",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "after": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "linux-64",
+        "python": "3.14",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "shared_support": {
+        "binding": {
+          "context": {
+            "candidate_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+            "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+            "provider_sha": "95f693be10c9205ab9b912cb53453710a207bf45",
+            "qualification_sha": "b53391064350cee6860c69e166ae0d6e8208f49e",
+            "run_attempt": 1,
+            "run_id": 43122309080,
+            "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca"
+          },
+          "provider_state": "verified-commit-and-runner-files",
+          "scope": "artifact/qualification/run labels are caller context; not artifact verification",
+          "source_state": "verified-commit-and-selected-files"
+        },
+        "bytes": 100998,
+        "checks": 7,
+        "declaration_sha256": "6e60c30e9c05c6d7383935261a11acc97f229754847e9d6ebde4fc3ccc05a525",
+        "executed_tests": 732,
+        "files": [
+          {
+            "bytes": 73,
+            "kind": "code",
+            "sha256": "77bf87fcb90135b04f8ad606003e8f862445a104fcef4c89d80ff92f937d0088",
+            "source": "gh_run_receptor_tools/__init__.py",
+            "target": "gh_run_receptor_tools/__init__.py"
+          },
+          {
+            "bytes": 11038,
+            "kind": "code",
+            "sha256": "a00ef7b159c4833b8846906492fd5e06c3ab964ee17d0e511fa710d60df12c2c",
+            "source": "gh_run_receptor_tools/benchmark_capture_policies.py",
+            "target": "gh_run_receptor_tools/benchmark_capture_policies.py"
+          },
+          {
+            "bytes": 6154,
+            "kind": "code",
+            "sha256": "2a1e57afac858666be68af01591598770404074f54176044b111b9b06a07a15d",
+            "source": "gh_run_receptor_tools/check_distribution_inputs.py",
+            "target": "gh_run_receptor_tools/check_distribution_inputs.py"
+          },
+          {
+            "bytes": 1965,
+            "kind": "code",
+            "sha256": "d008286a220fcc937e00f915afbd3fa37e2ce1a576170520228740bdc919982f",
+            "source": "gh_run_receptor_tools/devguide_index.py",
+            "target": "gh_run_receptor_tools/devguide_index.py"
+          },
+          {
+            "bytes": 6272,
+            "kind": "code",
+            "sha256": "7e92a75e6b8b94607e37a874b28faa3f71a366db3f3af529426df596929a08e8",
+            "source": "gh_run_receptor_tools/devguide_issue.py",
+            "target": "gh_run_receptor_tools/devguide_issue.py"
+          },
+          {
+            "bytes": 7297,
+            "kind": "code",
+            "sha256": "c9ebc42a4072dc18115c0ea37e6efafda78853791b1cca1252a05b54c17d9275",
+            "source": "gh_run_receptor_tools/devguide_reports.py",
+            "target": "gh_run_receptor_tools/devguide_reports.py"
+          },
+          {
+            "bytes": 8719,
+            "kind": "code",
+            "sha256": "e6a1f2fdde8438750dac2d88aa1ceb7a12bb6b0cb0770935d9b3668e1669f9f8",
+            "source": "gh_run_receptor_tools/distribution_archives.py",
+            "target": "gh_run_receptor_tools/distribution_archives.py"
+          },
+          {
+            "bytes": 3812,
+            "kind": "code",
+            "sha256": "0c4b9f3f5c5bcf2e1e6836ee9554e2a64cb13bad90037c69af9e5941a5bbf565",
+            "source": "gh_run_receptor_tools/installed_smoke.py",
+            "target": "gh_run_receptor_tools/installed_smoke.py"
+          },
+          {
+            "bytes": 18251,
+            "kind": "code",
+            "sha256": "653dba1655bd5d008b3aebd071043cea945082b8b94ba94c5f36f22a49e6669d",
+            "source": "gh_run_receptor_tools/release_tools.py",
+            "target": "gh_run_receptor_tools/release_tools.py"
+          },
+          {
+            "bytes": 7813,
+            "kind": "code",
+            "sha256": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+            "source": "gh_run_receptor_tools/sanitize_bundle.py",
+            "target": "gh_run_receptor_tools/sanitize_bundle.py"
+          },
+          {
+            "bytes": 742,
+            "kind": "code",
+            "sha256": "3008337cc231144455b59c4edf73668a1b9d8ba050d8c8ec2b70bd8a3eb4db3a",
+            "source": "gh_run_receptor_tools/schema_validation.py",
+            "target": "gh_run_receptor_tools/schema_validation.py"
+          },
+          {
+            "bytes": 2234,
+            "kind": "code",
+            "sha256": "9c9001b7590ef827f51dc99074c59607514422f75b61de510e65abf2c9c83d5a",
+            "source": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py",
+            "target": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py"
+          },
+          {
+            "bytes": 4076,
+            "kind": "code",
+            "sha256": "23e75a060472e8069acefcc7a37ea656ad00fc70d7c15a6cc03b6dd28f9da752",
+            "source": "gh_run_receptor_tools/test_inventory.py",
+            "target": "gh_run_receptor_tools/test_inventory.py"
+          },
+          {
+            "bytes": 7127,
+            "kind": "code",
+            "sha256": "9c3eae2c09dff0d3a3ec10e47933f4ef37bf9f966739b25ecf3840e97d638883",
+            "source": "gh_run_receptor_tools/validate_contracts.py",
+            "target": "gh_run_receptor_tools/validate_contracts.py"
+          },
+          {
+            "bytes": 947,
+            "kind": "code",
+            "sha256": "d561a89663668f2d46c3a7c0b75ab1bd71998bc95de5ac93b28ecfa1ba505581",
+            "source": "gh_run_receptor_tools/validate_devguide.py",
+            "target": "gh_run_receptor_tools/validate_devguide.py"
+          },
+          {
+            "bytes": 4736,
+            "kind": "code",
+            "sha256": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+            "source": "gh_run_receptor_tools/validate_job_logs.py",
+            "target": "gh_run_receptor_tools/validate_job_logs.py"
+          },
+          {
+            "bytes": 9742,
+            "kind": "code",
+            "sha256": "010ee776bfbfa8f5ee9804085d15fcfb2b66fbef6d4223e2e58448130bc65653",
+            "source": "gh_run_receptor_tools/validate_public_runs.py",
+            "target": "gh_run_receptor_tools/validate_public_runs.py"
+          }
+        ],
+        "imports_retired": true,
+        "loaded": [
+          "gh_run_receptor_tools",
+          "gh_run_receptor_tools.benchmark_capture_policies",
+          "gh_run_receptor_tools.check_distribution_inputs",
+          "gh_run_receptor_tools.devguide_reports",
+          "gh_run_receptor_tools.distribution_archives",
+          "gh_run_receptor_tools.installed_smoke",
+          "gh_run_receptor_tools.release_tools",
+          "gh_run_receptor_tools.sanitize_bundle",
+          "gh_run_receptor_tools.schema_validation",
+          "gh_run_receptor_tools.sync_gh_run_receptor_guide",
+          "gh_run_receptor_tools.test_inventory",
+          "gh_run_receptor_tools.validate_contracts",
+          "gh_run_receptor_tools.validate_public_runs"
+        ],
+        "namespace": "gh_run_receptor_tools",
+        "provider_files_sha256": {
+          "devtools/scripts/installed_imports.py": "ff23458015bb7ce83bc3eea36571c4294bed09fff948e8eb6d9bcb3a0615fa3c",
+          "devtools/scripts/installed_noarch.py": "3f34a46cab45f6987fc33da3a3d7f82178f395ea0980ac5b46b1d9b64ebffe57",
+          "devtools/scripts/installed_test_support.py": "11ae22606546b62f28536a7a4126e2bc25d676d55bc3b92d74b56e7094e0cf87"
+        },
+        "pytest_exit_code": 0,
+        "reason": "Portable unshipped tools and schema assertions, with explicit source/data inputs; no runtime source path or generic namespace binding.",
+        "resources_retired": true,
+        "schema": "molsyssuite.installed-test-support@1",
+        "scope": "unshipped test support; no installed/scientific/public artifact qualification",
+        "state": "verified-support"
+      }
+    },
+    {
+      "platform": "osx-arm64",
+      "python": "3.11",
+      "native_artifact": {
+        "id": 13901617307,
+        "name": "installed-shared-support-osx-arm64-py3.11",
+        "digest": "sha256:d91b423f108f3c1c1d0868be50dee07ffa25ea68b1ca37f8706f41331c4fae5c",
+        "size_in_bytes": 2915,
+        "workflow_run": {
+          "id": 43122309080,
+          "repository_id": 1357047998,
+          "head_repository_id": 1357047998,
+          "head_branch": "main",
+          "head_sha": "b53391064350cee6860c69e166ae0d6e8208f49e"
+        }
+      },
+      "tests": 732,
+      "pytest_exit_code": 0,
+      "before": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "osx-arm64",
+        "python": "3.11",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "after": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "osx-arm64",
+        "python": "3.11",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "shared_support": {
+        "binding": {
+          "context": {
+            "candidate_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+            "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+            "provider_sha": "95f693be10c9205ab9b912cb53453710a207bf45",
+            "qualification_sha": "b53391064350cee6860c69e166ae0d6e8208f49e",
+            "run_attempt": 1,
+            "run_id": 43122309080,
+            "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca"
+          },
+          "provider_state": "verified-commit-and-runner-files",
+          "scope": "artifact/qualification/run labels are caller context; not artifact verification",
+          "source_state": "verified-commit-and-selected-files"
+        },
+        "bytes": 100998,
+        "checks": 7,
+        "declaration_sha256": "6e60c30e9c05c6d7383935261a11acc97f229754847e9d6ebde4fc3ccc05a525",
+        "executed_tests": 732,
+        "files": [
+          {
+            "bytes": 73,
+            "kind": "code",
+            "sha256": "77bf87fcb90135b04f8ad606003e8f862445a104fcef4c89d80ff92f937d0088",
+            "source": "gh_run_receptor_tools/__init__.py",
+            "target": "gh_run_receptor_tools/__init__.py"
+          },
+          {
+            "bytes": 11038,
+            "kind": "code",
+            "sha256": "a00ef7b159c4833b8846906492fd5e06c3ab964ee17d0e511fa710d60df12c2c",
+            "source": "gh_run_receptor_tools/benchmark_capture_policies.py",
+            "target": "gh_run_receptor_tools/benchmark_capture_policies.py"
+          },
+          {
+            "bytes": 6154,
+            "kind": "code",
+            "sha256": "2a1e57afac858666be68af01591598770404074f54176044b111b9b06a07a15d",
+            "source": "gh_run_receptor_tools/check_distribution_inputs.py",
+            "target": "gh_run_receptor_tools/check_distribution_inputs.py"
+          },
+          {
+            "bytes": 1965,
+            "kind": "code",
+            "sha256": "d008286a220fcc937e00f915afbd3fa37e2ce1a576170520228740bdc919982f",
+            "source": "gh_run_receptor_tools/devguide_index.py",
+            "target": "gh_run_receptor_tools/devguide_index.py"
+          },
+          {
+            "bytes": 6272,
+            "kind": "code",
+            "sha256": "7e92a75e6b8b94607e37a874b28faa3f71a366db3f3af529426df596929a08e8",
+            "source": "gh_run_receptor_tools/devguide_issue.py",
+            "target": "gh_run_receptor_tools/devguide_issue.py"
+          },
+          {
+            "bytes": 7297,
+            "kind": "code",
+            "sha256": "c9ebc42a4072dc18115c0ea37e6efafda78853791b1cca1252a05b54c17d9275",
+            "source": "gh_run_receptor_tools/devguide_reports.py",
+            "target": "gh_run_receptor_tools/devguide_reports.py"
+          },
+          {
+            "bytes": 8719,
+            "kind": "code",
+            "sha256": "e6a1f2fdde8438750dac2d88aa1ceb7a12bb6b0cb0770935d9b3668e1669f9f8",
+            "source": "gh_run_receptor_tools/distribution_archives.py",
+            "target": "gh_run_receptor_tools/distribution_archives.py"
+          },
+          {
+            "bytes": 3812,
+            "kind": "code",
+            "sha256": "0c4b9f3f5c5bcf2e1e6836ee9554e2a64cb13bad90037c69af9e5941a5bbf565",
+            "source": "gh_run_receptor_tools/installed_smoke.py",
+            "target": "gh_run_receptor_tools/installed_smoke.py"
+          },
+          {
+            "bytes": 18251,
+            "kind": "code",
+            "sha256": "653dba1655bd5d008b3aebd071043cea945082b8b94ba94c5f36f22a49e6669d",
+            "source": "gh_run_receptor_tools/release_tools.py",
+            "target": "gh_run_receptor_tools/release_tools.py"
+          },
+          {
+            "bytes": 7813,
+            "kind": "code",
+            "sha256": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+            "source": "gh_run_receptor_tools/sanitize_bundle.py",
+            "target": "gh_run_receptor_tools/sanitize_bundle.py"
+          },
+          {
+            "bytes": 742,
+            "kind": "code",
+            "sha256": "3008337cc231144455b59c4edf73668a1b9d8ba050d8c8ec2b70bd8a3eb4db3a",
+            "source": "gh_run_receptor_tools/schema_validation.py",
+            "target": "gh_run_receptor_tools/schema_validation.py"
+          },
+          {
+            "bytes": 2234,
+            "kind": "code",
+            "sha256": "9c9001b7590ef827f51dc99074c59607514422f75b61de510e65abf2c9c83d5a",
+            "source": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py",
+            "target": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py"
+          },
+          {
+            "bytes": 4076,
+            "kind": "code",
+            "sha256": "23e75a060472e8069acefcc7a37ea656ad00fc70d7c15a6cc03b6dd28f9da752",
+            "source": "gh_run_receptor_tools/test_inventory.py",
+            "target": "gh_run_receptor_tools/test_inventory.py"
+          },
+          {
+            "bytes": 7127,
+            "kind": "code",
+            "sha256": "9c3eae2c09dff0d3a3ec10e47933f4ef37bf9f966739b25ecf3840e97d638883",
+            "source": "gh_run_receptor_tools/validate_contracts.py",
+            "target": "gh_run_receptor_tools/validate_contracts.py"
+          },
+          {
+            "bytes": 947,
+            "kind": "code",
+            "sha256": "d561a89663668f2d46c3a7c0b75ab1bd71998bc95de5ac93b28ecfa1ba505581",
+            "source": "gh_run_receptor_tools/validate_devguide.py",
+            "target": "gh_run_receptor_tools/validate_devguide.py"
+          },
+          {
+            "bytes": 4736,
+            "kind": "code",
+            "sha256": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+            "source": "gh_run_receptor_tools/validate_job_logs.py",
+            "target": "gh_run_receptor_tools/validate_job_logs.py"
+          },
+          {
+            "bytes": 9742,
+            "kind": "code",
+            "sha256": "010ee776bfbfa8f5ee9804085d15fcfb2b66fbef6d4223e2e58448130bc65653",
+            "source": "gh_run_receptor_tools/validate_public_runs.py",
+            "target": "gh_run_receptor_tools/validate_public_runs.py"
+          }
+        ],
+        "imports_retired": true,
+        "loaded": [
+          "gh_run_receptor_tools",
+          "gh_run_receptor_tools.benchmark_capture_policies",
+          "gh_run_receptor_tools.check_distribution_inputs",
+          "gh_run_receptor_tools.devguide_reports",
+          "gh_run_receptor_tools.distribution_archives",
+          "gh_run_receptor_tools.installed_smoke",
+          "gh_run_receptor_tools.release_tools",
+          "gh_run_receptor_tools.sanitize_bundle",
+          "gh_run_receptor_tools.schema_validation",
+          "gh_run_receptor_tools.sync_gh_run_receptor_guide",
+          "gh_run_receptor_tools.test_inventory",
+          "gh_run_receptor_tools.validate_contracts",
+          "gh_run_receptor_tools.validate_public_runs"
+        ],
+        "namespace": "gh_run_receptor_tools",
+        "provider_files_sha256": {
+          "devtools/scripts/installed_imports.py": "ff23458015bb7ce83bc3eea36571c4294bed09fff948e8eb6d9bcb3a0615fa3c",
+          "devtools/scripts/installed_noarch.py": "3f34a46cab45f6987fc33da3a3d7f82178f395ea0980ac5b46b1d9b64ebffe57",
+          "devtools/scripts/installed_test_support.py": "11ae22606546b62f28536a7a4126e2bc25d676d55bc3b92d74b56e7094e0cf87"
+        },
+        "pytest_exit_code": 0,
+        "reason": "Portable unshipped tools and schema assertions, with explicit source/data inputs; no runtime source path or generic namespace binding.",
+        "resources_retired": true,
+        "schema": "molsyssuite.installed-test-support@1",
+        "scope": "unshipped test support; no installed/scientific/public artifact qualification",
+        "state": "verified-support"
+      }
+    },
+    {
+      "platform": "osx-arm64",
+      "python": "3.12",
+      "native_artifact": {
+        "id": 13901427617,
+        "name": "installed-shared-support-osx-arm64-py3.12",
+        "digest": "sha256:b9bf596de66b124cf128139466ba098cef455855709f2027dc917265614ea169",
+        "size_in_bytes": 2915,
+        "workflow_run": {
+          "id": 43122309080,
+          "repository_id": 1357047998,
+          "head_repository_id": 1357047998,
+          "head_branch": "main",
+          "head_sha": "b53391064350cee6860c69e166ae0d6e8208f49e"
+        }
+      },
+      "tests": 732,
+      "pytest_exit_code": 0,
+      "before": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "osx-arm64",
+        "python": "3.12",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "after": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "osx-arm64",
+        "python": "3.12",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "shared_support": {
+        "binding": {
+          "context": {
+            "candidate_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+            "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+            "provider_sha": "95f693be10c9205ab9b912cb53453710a207bf45",
+            "qualification_sha": "b53391064350cee6860c69e166ae0d6e8208f49e",
+            "run_attempt": 1,
+            "run_id": 43122309080,
+            "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca"
+          },
+          "provider_state": "verified-commit-and-runner-files",
+          "scope": "artifact/qualification/run labels are caller context; not artifact verification",
+          "source_state": "verified-commit-and-selected-files"
+        },
+        "bytes": 100998,
+        "checks": 7,
+        "declaration_sha256": "6e60c30e9c05c6d7383935261a11acc97f229754847e9d6ebde4fc3ccc05a525",
+        "executed_tests": 732,
+        "files": [
+          {
+            "bytes": 73,
+            "kind": "code",
+            "sha256": "77bf87fcb90135b04f8ad606003e8f862445a104fcef4c89d80ff92f937d0088",
+            "source": "gh_run_receptor_tools/__init__.py",
+            "target": "gh_run_receptor_tools/__init__.py"
+          },
+          {
+            "bytes": 11038,
+            "kind": "code",
+            "sha256": "a00ef7b159c4833b8846906492fd5e06c3ab964ee17d0e511fa710d60df12c2c",
+            "source": "gh_run_receptor_tools/benchmark_capture_policies.py",
+            "target": "gh_run_receptor_tools/benchmark_capture_policies.py"
+          },
+          {
+            "bytes": 6154,
+            "kind": "code",
+            "sha256": "2a1e57afac858666be68af01591598770404074f54176044b111b9b06a07a15d",
+            "source": "gh_run_receptor_tools/check_distribution_inputs.py",
+            "target": "gh_run_receptor_tools/check_distribution_inputs.py"
+          },
+          {
+            "bytes": 1965,
+            "kind": "code",
+            "sha256": "d008286a220fcc937e00f915afbd3fa37e2ce1a576170520228740bdc919982f",
+            "source": "gh_run_receptor_tools/devguide_index.py",
+            "target": "gh_run_receptor_tools/devguide_index.py"
+          },
+          {
+            "bytes": 6272,
+            "kind": "code",
+            "sha256": "7e92a75e6b8b94607e37a874b28faa3f71a366db3f3af529426df596929a08e8",
+            "source": "gh_run_receptor_tools/devguide_issue.py",
+            "target": "gh_run_receptor_tools/devguide_issue.py"
+          },
+          {
+            "bytes": 7297,
+            "kind": "code",
+            "sha256": "c9ebc42a4072dc18115c0ea37e6efafda78853791b1cca1252a05b54c17d9275",
+            "source": "gh_run_receptor_tools/devguide_reports.py",
+            "target": "gh_run_receptor_tools/devguide_reports.py"
+          },
+          {
+            "bytes": 8719,
+            "kind": "code",
+            "sha256": "e6a1f2fdde8438750dac2d88aa1ceb7a12bb6b0cb0770935d9b3668e1669f9f8",
+            "source": "gh_run_receptor_tools/distribution_archives.py",
+            "target": "gh_run_receptor_tools/distribution_archives.py"
+          },
+          {
+            "bytes": 3812,
+            "kind": "code",
+            "sha256": "0c4b9f3f5c5bcf2e1e6836ee9554e2a64cb13bad90037c69af9e5941a5bbf565",
+            "source": "gh_run_receptor_tools/installed_smoke.py",
+            "target": "gh_run_receptor_tools/installed_smoke.py"
+          },
+          {
+            "bytes": 18251,
+            "kind": "code",
+            "sha256": "653dba1655bd5d008b3aebd071043cea945082b8b94ba94c5f36f22a49e6669d",
+            "source": "gh_run_receptor_tools/release_tools.py",
+            "target": "gh_run_receptor_tools/release_tools.py"
+          },
+          {
+            "bytes": 7813,
+            "kind": "code",
+            "sha256": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+            "source": "gh_run_receptor_tools/sanitize_bundle.py",
+            "target": "gh_run_receptor_tools/sanitize_bundle.py"
+          },
+          {
+            "bytes": 742,
+            "kind": "code",
+            "sha256": "3008337cc231144455b59c4edf73668a1b9d8ba050d8c8ec2b70bd8a3eb4db3a",
+            "source": "gh_run_receptor_tools/schema_validation.py",
+            "target": "gh_run_receptor_tools/schema_validation.py"
+          },
+          {
+            "bytes": 2234,
+            "kind": "code",
+            "sha256": "9c9001b7590ef827f51dc99074c59607514422f75b61de510e65abf2c9c83d5a",
+            "source": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py",
+            "target": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py"
+          },
+          {
+            "bytes": 4076,
+            "kind": "code",
+            "sha256": "23e75a060472e8069acefcc7a37ea656ad00fc70d7c15a6cc03b6dd28f9da752",
+            "source": "gh_run_receptor_tools/test_inventory.py",
+            "target": "gh_run_receptor_tools/test_inventory.py"
+          },
+          {
+            "bytes": 7127,
+            "kind": "code",
+            "sha256": "9c3eae2c09dff0d3a3ec10e47933f4ef37bf9f966739b25ecf3840e97d638883",
+            "source": "gh_run_receptor_tools/validate_contracts.py",
+            "target": "gh_run_receptor_tools/validate_contracts.py"
+          },
+          {
+            "bytes": 947,
+            "kind": "code",
+            "sha256": "d561a89663668f2d46c3a7c0b75ab1bd71998bc95de5ac93b28ecfa1ba505581",
+            "source": "gh_run_receptor_tools/validate_devguide.py",
+            "target": "gh_run_receptor_tools/validate_devguide.py"
+          },
+          {
+            "bytes": 4736,
+            "kind": "code",
+            "sha256": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+            "source": "gh_run_receptor_tools/validate_job_logs.py",
+            "target": "gh_run_receptor_tools/validate_job_logs.py"
+          },
+          {
+            "bytes": 9742,
+            "kind": "code",
+            "sha256": "010ee776bfbfa8f5ee9804085d15fcfb2b66fbef6d4223e2e58448130bc65653",
+            "source": "gh_run_receptor_tools/validate_public_runs.py",
+            "target": "gh_run_receptor_tools/validate_public_runs.py"
+          }
+        ],
+        "imports_retired": true,
+        "loaded": [
+          "gh_run_receptor_tools",
+          "gh_run_receptor_tools.benchmark_capture_policies",
+          "gh_run_receptor_tools.check_distribution_inputs",
+          "gh_run_receptor_tools.devguide_reports",
+          "gh_run_receptor_tools.distribution_archives",
+          "gh_run_receptor_tools.installed_smoke",
+          "gh_run_receptor_tools.release_tools",
+          "gh_run_receptor_tools.sanitize_bundle",
+          "gh_run_receptor_tools.schema_validation",
+          "gh_run_receptor_tools.sync_gh_run_receptor_guide",
+          "gh_run_receptor_tools.test_inventory",
+          "gh_run_receptor_tools.validate_contracts",
+          "gh_run_receptor_tools.validate_public_runs"
+        ],
+        "namespace": "gh_run_receptor_tools",
+        "provider_files_sha256": {
+          "devtools/scripts/installed_imports.py": "ff23458015bb7ce83bc3eea36571c4294bed09fff948e8eb6d9bcb3a0615fa3c",
+          "devtools/scripts/installed_noarch.py": "3f34a46cab45f6987fc33da3a3d7f82178f395ea0980ac5b46b1d9b64ebffe57",
+          "devtools/scripts/installed_test_support.py": "11ae22606546b62f28536a7a4126e2bc25d676d55bc3b92d74b56e7094e0cf87"
+        },
+        "pytest_exit_code": 0,
+        "reason": "Portable unshipped tools and schema assertions, with explicit source/data inputs; no runtime source path or generic namespace binding.",
+        "resources_retired": true,
+        "schema": "molsyssuite.installed-test-support@1",
+        "scope": "unshipped test support; no installed/scientific/public artifact qualification",
+        "state": "verified-support"
+      }
+    },
+    {
+      "platform": "osx-arm64",
+      "python": "3.13",
+      "native_artifact": {
+        "id": 13901227305,
+        "name": "installed-shared-support-osx-arm64-py3.13",
+        "digest": "sha256:208d940afcdc40c1c3d85fd7c88f339d3f7653d91329aed0aa6396a085b7cedf",
+        "size_in_bytes": 2916,
+        "workflow_run": {
+          "id": 43122309080,
+          "repository_id": 1357047998,
+          "head_repository_id": 1357047998,
+          "head_branch": "main",
+          "head_sha": "b53391064350cee6860c69e166ae0d6e8208f49e"
+        }
+      },
+      "tests": 732,
+      "pytest_exit_code": 0,
+      "before": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "osx-arm64",
+        "python": "3.13",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "after": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "osx-arm64",
+        "python": "3.13",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "shared_support": {
+        "binding": {
+          "context": {
+            "candidate_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+            "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+            "provider_sha": "95f693be10c9205ab9b912cb53453710a207bf45",
+            "qualification_sha": "b53391064350cee6860c69e166ae0d6e8208f49e",
+            "run_attempt": 1,
+            "run_id": 43122309080,
+            "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca"
+          },
+          "provider_state": "verified-commit-and-runner-files",
+          "scope": "artifact/qualification/run labels are caller context; not artifact verification",
+          "source_state": "verified-commit-and-selected-files"
+        },
+        "bytes": 100998,
+        "checks": 7,
+        "declaration_sha256": "6e60c30e9c05c6d7383935261a11acc97f229754847e9d6ebde4fc3ccc05a525",
+        "executed_tests": 732,
+        "files": [
+          {
+            "bytes": 73,
+            "kind": "code",
+            "sha256": "77bf87fcb90135b04f8ad606003e8f862445a104fcef4c89d80ff92f937d0088",
+            "source": "gh_run_receptor_tools/__init__.py",
+            "target": "gh_run_receptor_tools/__init__.py"
+          },
+          {
+            "bytes": 11038,
+            "kind": "code",
+            "sha256": "a00ef7b159c4833b8846906492fd5e06c3ab964ee17d0e511fa710d60df12c2c",
+            "source": "gh_run_receptor_tools/benchmark_capture_policies.py",
+            "target": "gh_run_receptor_tools/benchmark_capture_policies.py"
+          },
+          {
+            "bytes": 6154,
+            "kind": "code",
+            "sha256": "2a1e57afac858666be68af01591598770404074f54176044b111b9b06a07a15d",
+            "source": "gh_run_receptor_tools/check_distribution_inputs.py",
+            "target": "gh_run_receptor_tools/check_distribution_inputs.py"
+          },
+          {
+            "bytes": 1965,
+            "kind": "code",
+            "sha256": "d008286a220fcc937e00f915afbd3fa37e2ce1a576170520228740bdc919982f",
+            "source": "gh_run_receptor_tools/devguide_index.py",
+            "target": "gh_run_receptor_tools/devguide_index.py"
+          },
+          {
+            "bytes": 6272,
+            "kind": "code",
+            "sha256": "7e92a75e6b8b94607e37a874b28faa3f71a366db3f3af529426df596929a08e8",
+            "source": "gh_run_receptor_tools/devguide_issue.py",
+            "target": "gh_run_receptor_tools/devguide_issue.py"
+          },
+          {
+            "bytes": 7297,
+            "kind": "code",
+            "sha256": "c9ebc42a4072dc18115c0ea37e6efafda78853791b1cca1252a05b54c17d9275",
+            "source": "gh_run_receptor_tools/devguide_reports.py",
+            "target": "gh_run_receptor_tools/devguide_reports.py"
+          },
+          {
+            "bytes": 8719,
+            "kind": "code",
+            "sha256": "e6a1f2fdde8438750dac2d88aa1ceb7a12bb6b0cb0770935d9b3668e1669f9f8",
+            "source": "gh_run_receptor_tools/distribution_archives.py",
+            "target": "gh_run_receptor_tools/distribution_archives.py"
+          },
+          {
+            "bytes": 3812,
+            "kind": "code",
+            "sha256": "0c4b9f3f5c5bcf2e1e6836ee9554e2a64cb13bad90037c69af9e5941a5bbf565",
+            "source": "gh_run_receptor_tools/installed_smoke.py",
+            "target": "gh_run_receptor_tools/installed_smoke.py"
+          },
+          {
+            "bytes": 18251,
+            "kind": "code",
+            "sha256": "653dba1655bd5d008b3aebd071043cea945082b8b94ba94c5f36f22a49e6669d",
+            "source": "gh_run_receptor_tools/release_tools.py",
+            "target": "gh_run_receptor_tools/release_tools.py"
+          },
+          {
+            "bytes": 7813,
+            "kind": "code",
+            "sha256": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+            "source": "gh_run_receptor_tools/sanitize_bundle.py",
+            "target": "gh_run_receptor_tools/sanitize_bundle.py"
+          },
+          {
+            "bytes": 742,
+            "kind": "code",
+            "sha256": "3008337cc231144455b59c4edf73668a1b9d8ba050d8c8ec2b70bd8a3eb4db3a",
+            "source": "gh_run_receptor_tools/schema_validation.py",
+            "target": "gh_run_receptor_tools/schema_validation.py"
+          },
+          {
+            "bytes": 2234,
+            "kind": "code",
+            "sha256": "9c9001b7590ef827f51dc99074c59607514422f75b61de510e65abf2c9c83d5a",
+            "source": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py",
+            "target": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py"
+          },
+          {
+            "bytes": 4076,
+            "kind": "code",
+            "sha256": "23e75a060472e8069acefcc7a37ea656ad00fc70d7c15a6cc03b6dd28f9da752",
+            "source": "gh_run_receptor_tools/test_inventory.py",
+            "target": "gh_run_receptor_tools/test_inventory.py"
+          },
+          {
+            "bytes": 7127,
+            "kind": "code",
+            "sha256": "9c3eae2c09dff0d3a3ec10e47933f4ef37bf9f966739b25ecf3840e97d638883",
+            "source": "gh_run_receptor_tools/validate_contracts.py",
+            "target": "gh_run_receptor_tools/validate_contracts.py"
+          },
+          {
+            "bytes": 947,
+            "kind": "code",
+            "sha256": "d561a89663668f2d46c3a7c0b75ab1bd71998bc95de5ac93b28ecfa1ba505581",
+            "source": "gh_run_receptor_tools/validate_devguide.py",
+            "target": "gh_run_receptor_tools/validate_devguide.py"
+          },
+          {
+            "bytes": 4736,
+            "kind": "code",
+            "sha256": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+            "source": "gh_run_receptor_tools/validate_job_logs.py",
+            "target": "gh_run_receptor_tools/validate_job_logs.py"
+          },
+          {
+            "bytes": 9742,
+            "kind": "code",
+            "sha256": "010ee776bfbfa8f5ee9804085d15fcfb2b66fbef6d4223e2e58448130bc65653",
+            "source": "gh_run_receptor_tools/validate_public_runs.py",
+            "target": "gh_run_receptor_tools/validate_public_runs.py"
+          }
+        ],
+        "imports_retired": true,
+        "loaded": [
+          "gh_run_receptor_tools",
+          "gh_run_receptor_tools.benchmark_capture_policies",
+          "gh_run_receptor_tools.check_distribution_inputs",
+          "gh_run_receptor_tools.devguide_reports",
+          "gh_run_receptor_tools.distribution_archives",
+          "gh_run_receptor_tools.installed_smoke",
+          "gh_run_receptor_tools.release_tools",
+          "gh_run_receptor_tools.sanitize_bundle",
+          "gh_run_receptor_tools.schema_validation",
+          "gh_run_receptor_tools.sync_gh_run_receptor_guide",
+          "gh_run_receptor_tools.test_inventory",
+          "gh_run_receptor_tools.validate_contracts",
+          "gh_run_receptor_tools.validate_public_runs"
+        ],
+        "namespace": "gh_run_receptor_tools",
+        "provider_files_sha256": {
+          "devtools/scripts/installed_imports.py": "ff23458015bb7ce83bc3eea36571c4294bed09fff948e8eb6d9bcb3a0615fa3c",
+          "devtools/scripts/installed_noarch.py": "3f34a46cab45f6987fc33da3a3d7f82178f395ea0980ac5b46b1d9b64ebffe57",
+          "devtools/scripts/installed_test_support.py": "11ae22606546b62f28536a7a4126e2bc25d676d55bc3b92d74b56e7094e0cf87"
+        },
+        "pytest_exit_code": 0,
+        "reason": "Portable unshipped tools and schema assertions, with explicit source/data inputs; no runtime source path or generic namespace binding.",
+        "resources_retired": true,
+        "schema": "molsyssuite.installed-test-support@1",
+        "scope": "unshipped test support; no installed/scientific/public artifact qualification",
+        "state": "verified-support"
+      }
+    },
+    {
+      "platform": "osx-arm64",
+      "python": "3.14",
+      "native_artifact": {
+        "id": 13901417786,
+        "name": "installed-shared-support-osx-arm64-py3.14",
+        "digest": "sha256:da57c2a1e653e341820eedd67b1cbd0b71ae06499f7fd52b3d3c5ee0eb54617e",
+        "size_in_bytes": 2913,
+        "workflow_run": {
+          "id": 43122309080,
+          "repository_id": 1357047998,
+          "head_repository_id": 1357047998,
+          "head_branch": "main",
+          "head_sha": "b53391064350cee6860c69e166ae0d6e8208f49e"
+        }
+      },
+      "tests": 732,
+      "pytest_exit_code": 0,
+      "before": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "osx-arm64",
+        "python": "3.14",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "after": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "osx-arm64",
+        "python": "3.14",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "shared_support": {
+        "binding": {
+          "context": {
+            "candidate_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+            "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+            "provider_sha": "95f693be10c9205ab9b912cb53453710a207bf45",
+            "qualification_sha": "b53391064350cee6860c69e166ae0d6e8208f49e",
+            "run_attempt": 1,
+            "run_id": 43122309080,
+            "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca"
+          },
+          "provider_state": "verified-commit-and-runner-files",
+          "scope": "artifact/qualification/run labels are caller context; not artifact verification",
+          "source_state": "verified-commit-and-selected-files"
+        },
+        "bytes": 100998,
+        "checks": 7,
+        "declaration_sha256": "6e60c30e9c05c6d7383935261a11acc97f229754847e9d6ebde4fc3ccc05a525",
+        "executed_tests": 732,
+        "files": [
+          {
+            "bytes": 73,
+            "kind": "code",
+            "sha256": "77bf87fcb90135b04f8ad606003e8f862445a104fcef4c89d80ff92f937d0088",
+            "source": "gh_run_receptor_tools/__init__.py",
+            "target": "gh_run_receptor_tools/__init__.py"
+          },
+          {
+            "bytes": 11038,
+            "kind": "code",
+            "sha256": "a00ef7b159c4833b8846906492fd5e06c3ab964ee17d0e511fa710d60df12c2c",
+            "source": "gh_run_receptor_tools/benchmark_capture_policies.py",
+            "target": "gh_run_receptor_tools/benchmark_capture_policies.py"
+          },
+          {
+            "bytes": 6154,
+            "kind": "code",
+            "sha256": "2a1e57afac858666be68af01591598770404074f54176044b111b9b06a07a15d",
+            "source": "gh_run_receptor_tools/check_distribution_inputs.py",
+            "target": "gh_run_receptor_tools/check_distribution_inputs.py"
+          },
+          {
+            "bytes": 1965,
+            "kind": "code",
+            "sha256": "d008286a220fcc937e00f915afbd3fa37e2ce1a576170520228740bdc919982f",
+            "source": "gh_run_receptor_tools/devguide_index.py",
+            "target": "gh_run_receptor_tools/devguide_index.py"
+          },
+          {
+            "bytes": 6272,
+            "kind": "code",
+            "sha256": "7e92a75e6b8b94607e37a874b28faa3f71a366db3f3af529426df596929a08e8",
+            "source": "gh_run_receptor_tools/devguide_issue.py",
+            "target": "gh_run_receptor_tools/devguide_issue.py"
+          },
+          {
+            "bytes": 7297,
+            "kind": "code",
+            "sha256": "c9ebc42a4072dc18115c0ea37e6efafda78853791b1cca1252a05b54c17d9275",
+            "source": "gh_run_receptor_tools/devguide_reports.py",
+            "target": "gh_run_receptor_tools/devguide_reports.py"
+          },
+          {
+            "bytes": 8719,
+            "kind": "code",
+            "sha256": "e6a1f2fdde8438750dac2d88aa1ceb7a12bb6b0cb0770935d9b3668e1669f9f8",
+            "source": "gh_run_receptor_tools/distribution_archives.py",
+            "target": "gh_run_receptor_tools/distribution_archives.py"
+          },
+          {
+            "bytes": 3812,
+            "kind": "code",
+            "sha256": "0c4b9f3f5c5bcf2e1e6836ee9554e2a64cb13bad90037c69af9e5941a5bbf565",
+            "source": "gh_run_receptor_tools/installed_smoke.py",
+            "target": "gh_run_receptor_tools/installed_smoke.py"
+          },
+          {
+            "bytes": 18251,
+            "kind": "code",
+            "sha256": "653dba1655bd5d008b3aebd071043cea945082b8b94ba94c5f36f22a49e6669d",
+            "source": "gh_run_receptor_tools/release_tools.py",
+            "target": "gh_run_receptor_tools/release_tools.py"
+          },
+          {
+            "bytes": 7813,
+            "kind": "code",
+            "sha256": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+            "source": "gh_run_receptor_tools/sanitize_bundle.py",
+            "target": "gh_run_receptor_tools/sanitize_bundle.py"
+          },
+          {
+            "bytes": 742,
+            "kind": "code",
+            "sha256": "3008337cc231144455b59c4edf73668a1b9d8ba050d8c8ec2b70bd8a3eb4db3a",
+            "source": "gh_run_receptor_tools/schema_validation.py",
+            "target": "gh_run_receptor_tools/schema_validation.py"
+          },
+          {
+            "bytes": 2234,
+            "kind": "code",
+            "sha256": "9c9001b7590ef827f51dc99074c59607514422f75b61de510e65abf2c9c83d5a",
+            "source": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py",
+            "target": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py"
+          },
+          {
+            "bytes": 4076,
+            "kind": "code",
+            "sha256": "23e75a060472e8069acefcc7a37ea656ad00fc70d7c15a6cc03b6dd28f9da752",
+            "source": "gh_run_receptor_tools/test_inventory.py",
+            "target": "gh_run_receptor_tools/test_inventory.py"
+          },
+          {
+            "bytes": 7127,
+            "kind": "code",
+            "sha256": "9c3eae2c09dff0d3a3ec10e47933f4ef37bf9f966739b25ecf3840e97d638883",
+            "source": "gh_run_receptor_tools/validate_contracts.py",
+            "target": "gh_run_receptor_tools/validate_contracts.py"
+          },
+          {
+            "bytes": 947,
+            "kind": "code",
+            "sha256": "d561a89663668f2d46c3a7c0b75ab1bd71998bc95de5ac93b28ecfa1ba505581",
+            "source": "gh_run_receptor_tools/validate_devguide.py",
+            "target": "gh_run_receptor_tools/validate_devguide.py"
+          },
+          {
+            "bytes": 4736,
+            "kind": "code",
+            "sha256": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+            "source": "gh_run_receptor_tools/validate_job_logs.py",
+            "target": "gh_run_receptor_tools/validate_job_logs.py"
+          },
+          {
+            "bytes": 9742,
+            "kind": "code",
+            "sha256": "010ee776bfbfa8f5ee9804085d15fcfb2b66fbef6d4223e2e58448130bc65653",
+            "source": "gh_run_receptor_tools/validate_public_runs.py",
+            "target": "gh_run_receptor_tools/validate_public_runs.py"
+          }
+        ],
+        "imports_retired": true,
+        "loaded": [
+          "gh_run_receptor_tools",
+          "gh_run_receptor_tools.benchmark_capture_policies",
+          "gh_run_receptor_tools.check_distribution_inputs",
+          "gh_run_receptor_tools.devguide_reports",
+          "gh_run_receptor_tools.distribution_archives",
+          "gh_run_receptor_tools.installed_smoke",
+          "gh_run_receptor_tools.release_tools",
+          "gh_run_receptor_tools.sanitize_bundle",
+          "gh_run_receptor_tools.schema_validation",
+          "gh_run_receptor_tools.sync_gh_run_receptor_guide",
+          "gh_run_receptor_tools.test_inventory",
+          "gh_run_receptor_tools.validate_contracts",
+          "gh_run_receptor_tools.validate_public_runs"
+        ],
+        "namespace": "gh_run_receptor_tools",
+        "provider_files_sha256": {
+          "devtools/scripts/installed_imports.py": "ff23458015bb7ce83bc3eea36571c4294bed09fff948e8eb6d9bcb3a0615fa3c",
+          "devtools/scripts/installed_noarch.py": "3f34a46cab45f6987fc33da3a3d7f82178f395ea0980ac5b46b1d9b64ebffe57",
+          "devtools/scripts/installed_test_support.py": "11ae22606546b62f28536a7a4126e2bc25d676d55bc3b92d74b56e7094e0cf87"
+        },
+        "pytest_exit_code": 0,
+        "reason": "Portable unshipped tools and schema assertions, with explicit source/data inputs; no runtime source path or generic namespace binding.",
+        "resources_retired": true,
+        "schema": "molsyssuite.installed-test-support@1",
+        "scope": "unshipped test support; no installed/scientific/public artifact qualification",
+        "state": "verified-support"
+      }
+    },
+    {
+      "platform": "win-64",
+      "python": "3.11",
+      "native_artifact": {
+        "id": 13901347144,
+        "name": "installed-shared-support-win-64-py3.11",
+        "digest": "sha256:e76c2a09c0be00773e8d0e78f0d2080841b66fdd4e97edd3bda9f9486a2f0b19",
+        "size_in_bytes": 2909,
+        "workflow_run": {
+          "id": 43122309080,
+          "repository_id": 1357047998,
+          "head_repository_id": 1357047998,
+          "head_branch": "main",
+          "head_sha": "b53391064350cee6860c69e166ae0d6e8208f49e"
+        }
+      },
+      "tests": 732,
+      "pytest_exit_code": 0,
+      "before": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "win-64",
+        "python": "3.11",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "after": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "win-64",
+        "python": "3.11",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "shared_support": {
+        "binding": {
+          "context": {
+            "candidate_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+            "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+            "provider_sha": "95f693be10c9205ab9b912cb53453710a207bf45",
+            "qualification_sha": "b53391064350cee6860c69e166ae0d6e8208f49e",
+            "run_attempt": 1,
+            "run_id": 43122309080,
+            "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca"
+          },
+          "provider_state": "verified-commit-and-runner-files",
+          "scope": "artifact/qualification/run labels are caller context; not artifact verification",
+          "source_state": "verified-commit-and-selected-files"
+        },
+        "bytes": 100998,
+        "checks": 7,
+        "declaration_sha256": "6e60c30e9c05c6d7383935261a11acc97f229754847e9d6ebde4fc3ccc05a525",
+        "executed_tests": 732,
+        "files": [
+          {
+            "bytes": 73,
+            "kind": "code",
+            "sha256": "77bf87fcb90135b04f8ad606003e8f862445a104fcef4c89d80ff92f937d0088",
+            "source": "gh_run_receptor_tools/__init__.py",
+            "target": "gh_run_receptor_tools/__init__.py"
+          },
+          {
+            "bytes": 11038,
+            "kind": "code",
+            "sha256": "a00ef7b159c4833b8846906492fd5e06c3ab964ee17d0e511fa710d60df12c2c",
+            "source": "gh_run_receptor_tools/benchmark_capture_policies.py",
+            "target": "gh_run_receptor_tools/benchmark_capture_policies.py"
+          },
+          {
+            "bytes": 6154,
+            "kind": "code",
+            "sha256": "2a1e57afac858666be68af01591598770404074f54176044b111b9b06a07a15d",
+            "source": "gh_run_receptor_tools/check_distribution_inputs.py",
+            "target": "gh_run_receptor_tools/check_distribution_inputs.py"
+          },
+          {
+            "bytes": 1965,
+            "kind": "code",
+            "sha256": "d008286a220fcc937e00f915afbd3fa37e2ce1a576170520228740bdc919982f",
+            "source": "gh_run_receptor_tools/devguide_index.py",
+            "target": "gh_run_receptor_tools/devguide_index.py"
+          },
+          {
+            "bytes": 6272,
+            "kind": "code",
+            "sha256": "7e92a75e6b8b94607e37a874b28faa3f71a366db3f3af529426df596929a08e8",
+            "source": "gh_run_receptor_tools/devguide_issue.py",
+            "target": "gh_run_receptor_tools/devguide_issue.py"
+          },
+          {
+            "bytes": 7297,
+            "kind": "code",
+            "sha256": "c9ebc42a4072dc18115c0ea37e6efafda78853791b1cca1252a05b54c17d9275",
+            "source": "gh_run_receptor_tools/devguide_reports.py",
+            "target": "gh_run_receptor_tools/devguide_reports.py"
+          },
+          {
+            "bytes": 8719,
+            "kind": "code",
+            "sha256": "e6a1f2fdde8438750dac2d88aa1ceb7a12bb6b0cb0770935d9b3668e1669f9f8",
+            "source": "gh_run_receptor_tools/distribution_archives.py",
+            "target": "gh_run_receptor_tools/distribution_archives.py"
+          },
+          {
+            "bytes": 3812,
+            "kind": "code",
+            "sha256": "0c4b9f3f5c5bcf2e1e6836ee9554e2a64cb13bad90037c69af9e5941a5bbf565",
+            "source": "gh_run_receptor_tools/installed_smoke.py",
+            "target": "gh_run_receptor_tools/installed_smoke.py"
+          },
+          {
+            "bytes": 18251,
+            "kind": "code",
+            "sha256": "653dba1655bd5d008b3aebd071043cea945082b8b94ba94c5f36f22a49e6669d",
+            "source": "gh_run_receptor_tools/release_tools.py",
+            "target": "gh_run_receptor_tools/release_tools.py"
+          },
+          {
+            "bytes": 7813,
+            "kind": "code",
+            "sha256": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+            "source": "gh_run_receptor_tools/sanitize_bundle.py",
+            "target": "gh_run_receptor_tools/sanitize_bundle.py"
+          },
+          {
+            "bytes": 742,
+            "kind": "code",
+            "sha256": "3008337cc231144455b59c4edf73668a1b9d8ba050d8c8ec2b70bd8a3eb4db3a",
+            "source": "gh_run_receptor_tools/schema_validation.py",
+            "target": "gh_run_receptor_tools/schema_validation.py"
+          },
+          {
+            "bytes": 2234,
+            "kind": "code",
+            "sha256": "9c9001b7590ef827f51dc99074c59607514422f75b61de510e65abf2c9c83d5a",
+            "source": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py",
+            "target": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py"
+          },
+          {
+            "bytes": 4076,
+            "kind": "code",
+            "sha256": "23e75a060472e8069acefcc7a37ea656ad00fc70d7c15a6cc03b6dd28f9da752",
+            "source": "gh_run_receptor_tools/test_inventory.py",
+            "target": "gh_run_receptor_tools/test_inventory.py"
+          },
+          {
+            "bytes": 7127,
+            "kind": "code",
+            "sha256": "9c3eae2c09dff0d3a3ec10e47933f4ef37bf9f966739b25ecf3840e97d638883",
+            "source": "gh_run_receptor_tools/validate_contracts.py",
+            "target": "gh_run_receptor_tools/validate_contracts.py"
+          },
+          {
+            "bytes": 947,
+            "kind": "code",
+            "sha256": "d561a89663668f2d46c3a7c0b75ab1bd71998bc95de5ac93b28ecfa1ba505581",
+            "source": "gh_run_receptor_tools/validate_devguide.py",
+            "target": "gh_run_receptor_tools/validate_devguide.py"
+          },
+          {
+            "bytes": 4736,
+            "kind": "code",
+            "sha256": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+            "source": "gh_run_receptor_tools/validate_job_logs.py",
+            "target": "gh_run_receptor_tools/validate_job_logs.py"
+          },
+          {
+            "bytes": 9742,
+            "kind": "code",
+            "sha256": "010ee776bfbfa8f5ee9804085d15fcfb2b66fbef6d4223e2e58448130bc65653",
+            "source": "gh_run_receptor_tools/validate_public_runs.py",
+            "target": "gh_run_receptor_tools/validate_public_runs.py"
+          }
+        ],
+        "imports_retired": true,
+        "loaded": [
+          "gh_run_receptor_tools",
+          "gh_run_receptor_tools.benchmark_capture_policies",
+          "gh_run_receptor_tools.check_distribution_inputs",
+          "gh_run_receptor_tools.devguide_reports",
+          "gh_run_receptor_tools.distribution_archives",
+          "gh_run_receptor_tools.installed_smoke",
+          "gh_run_receptor_tools.release_tools",
+          "gh_run_receptor_tools.sanitize_bundle",
+          "gh_run_receptor_tools.schema_validation",
+          "gh_run_receptor_tools.sync_gh_run_receptor_guide",
+          "gh_run_receptor_tools.test_inventory",
+          "gh_run_receptor_tools.validate_contracts",
+          "gh_run_receptor_tools.validate_public_runs"
+        ],
+        "namespace": "gh_run_receptor_tools",
+        "provider_files_sha256": {
+          "devtools/scripts/installed_imports.py": "ff23458015bb7ce83bc3eea36571c4294bed09fff948e8eb6d9bcb3a0615fa3c",
+          "devtools/scripts/installed_noarch.py": "3f34a46cab45f6987fc33da3a3d7f82178f395ea0980ac5b46b1d9b64ebffe57",
+          "devtools/scripts/installed_test_support.py": "11ae22606546b62f28536a7a4126e2bc25d676d55bc3b92d74b56e7094e0cf87"
+        },
+        "pytest_exit_code": 0,
+        "reason": "Portable unshipped tools and schema assertions, with explicit source/data inputs; no runtime source path or generic namespace binding.",
+        "resources_retired": true,
+        "schema": "molsyssuite.installed-test-support@1",
+        "scope": "unshipped test support; no installed/scientific/public artifact qualification",
+        "state": "verified-support"
+      }
+    },
+    {
+      "platform": "win-64",
+      "python": "3.12",
+      "native_artifact": {
+        "id": 13901915412,
+        "name": "installed-shared-support-win-64-py3.12",
+        "digest": "sha256:29deb2470124db59dad8e515b4a190a203389b0a1c87153c802338109759c7c0",
+        "size_in_bytes": 2905,
+        "workflow_run": {
+          "id": 43122309080,
+          "repository_id": 1357047998,
+          "head_repository_id": 1357047998,
+          "head_branch": "main",
+          "head_sha": "b53391064350cee6860c69e166ae0d6e8208f49e"
+        }
+      },
+      "tests": 732,
+      "pytest_exit_code": 0,
+      "before": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "win-64",
+        "python": "3.12",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "after": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "win-64",
+        "python": "3.12",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "shared_support": {
+        "binding": {
+          "context": {
+            "candidate_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+            "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+            "provider_sha": "95f693be10c9205ab9b912cb53453710a207bf45",
+            "qualification_sha": "b53391064350cee6860c69e166ae0d6e8208f49e",
+            "run_attempt": 1,
+            "run_id": 43122309080,
+            "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca"
+          },
+          "provider_state": "verified-commit-and-runner-files",
+          "scope": "artifact/qualification/run labels are caller context; not artifact verification",
+          "source_state": "verified-commit-and-selected-files"
+        },
+        "bytes": 100998,
+        "checks": 7,
+        "declaration_sha256": "6e60c30e9c05c6d7383935261a11acc97f229754847e9d6ebde4fc3ccc05a525",
+        "executed_tests": 732,
+        "files": [
+          {
+            "bytes": 73,
+            "kind": "code",
+            "sha256": "77bf87fcb90135b04f8ad606003e8f862445a104fcef4c89d80ff92f937d0088",
+            "source": "gh_run_receptor_tools/__init__.py",
+            "target": "gh_run_receptor_tools/__init__.py"
+          },
+          {
+            "bytes": 11038,
+            "kind": "code",
+            "sha256": "a00ef7b159c4833b8846906492fd5e06c3ab964ee17d0e511fa710d60df12c2c",
+            "source": "gh_run_receptor_tools/benchmark_capture_policies.py",
+            "target": "gh_run_receptor_tools/benchmark_capture_policies.py"
+          },
+          {
+            "bytes": 6154,
+            "kind": "code",
+            "sha256": "2a1e57afac858666be68af01591598770404074f54176044b111b9b06a07a15d",
+            "source": "gh_run_receptor_tools/check_distribution_inputs.py",
+            "target": "gh_run_receptor_tools/check_distribution_inputs.py"
+          },
+          {
+            "bytes": 1965,
+            "kind": "code",
+            "sha256": "d008286a220fcc937e00f915afbd3fa37e2ce1a576170520228740bdc919982f",
+            "source": "gh_run_receptor_tools/devguide_index.py",
+            "target": "gh_run_receptor_tools/devguide_index.py"
+          },
+          {
+            "bytes": 6272,
+            "kind": "code",
+            "sha256": "7e92a75e6b8b94607e37a874b28faa3f71a366db3f3af529426df596929a08e8",
+            "source": "gh_run_receptor_tools/devguide_issue.py",
+            "target": "gh_run_receptor_tools/devguide_issue.py"
+          },
+          {
+            "bytes": 7297,
+            "kind": "code",
+            "sha256": "c9ebc42a4072dc18115c0ea37e6efafda78853791b1cca1252a05b54c17d9275",
+            "source": "gh_run_receptor_tools/devguide_reports.py",
+            "target": "gh_run_receptor_tools/devguide_reports.py"
+          },
+          {
+            "bytes": 8719,
+            "kind": "code",
+            "sha256": "e6a1f2fdde8438750dac2d88aa1ceb7a12bb6b0cb0770935d9b3668e1669f9f8",
+            "source": "gh_run_receptor_tools/distribution_archives.py",
+            "target": "gh_run_receptor_tools/distribution_archives.py"
+          },
+          {
+            "bytes": 3812,
+            "kind": "code",
+            "sha256": "0c4b9f3f5c5bcf2e1e6836ee9554e2a64cb13bad90037c69af9e5941a5bbf565",
+            "source": "gh_run_receptor_tools/installed_smoke.py",
+            "target": "gh_run_receptor_tools/installed_smoke.py"
+          },
+          {
+            "bytes": 18251,
+            "kind": "code",
+            "sha256": "653dba1655bd5d008b3aebd071043cea945082b8b94ba94c5f36f22a49e6669d",
+            "source": "gh_run_receptor_tools/release_tools.py",
+            "target": "gh_run_receptor_tools/release_tools.py"
+          },
+          {
+            "bytes": 7813,
+            "kind": "code",
+            "sha256": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+            "source": "gh_run_receptor_tools/sanitize_bundle.py",
+            "target": "gh_run_receptor_tools/sanitize_bundle.py"
+          },
+          {
+            "bytes": 742,
+            "kind": "code",
+            "sha256": "3008337cc231144455b59c4edf73668a1b9d8ba050d8c8ec2b70bd8a3eb4db3a",
+            "source": "gh_run_receptor_tools/schema_validation.py",
+            "target": "gh_run_receptor_tools/schema_validation.py"
+          },
+          {
+            "bytes": 2234,
+            "kind": "code",
+            "sha256": "9c9001b7590ef827f51dc99074c59607514422f75b61de510e65abf2c9c83d5a",
+            "source": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py",
+            "target": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py"
+          },
+          {
+            "bytes": 4076,
+            "kind": "code",
+            "sha256": "23e75a060472e8069acefcc7a37ea656ad00fc70d7c15a6cc03b6dd28f9da752",
+            "source": "gh_run_receptor_tools/test_inventory.py",
+            "target": "gh_run_receptor_tools/test_inventory.py"
+          },
+          {
+            "bytes": 7127,
+            "kind": "code",
+            "sha256": "9c3eae2c09dff0d3a3ec10e47933f4ef37bf9f966739b25ecf3840e97d638883",
+            "source": "gh_run_receptor_tools/validate_contracts.py",
+            "target": "gh_run_receptor_tools/validate_contracts.py"
+          },
+          {
+            "bytes": 947,
+            "kind": "code",
+            "sha256": "d561a89663668f2d46c3a7c0b75ab1bd71998bc95de5ac93b28ecfa1ba505581",
+            "source": "gh_run_receptor_tools/validate_devguide.py",
+            "target": "gh_run_receptor_tools/validate_devguide.py"
+          },
+          {
+            "bytes": 4736,
+            "kind": "code",
+            "sha256": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+            "source": "gh_run_receptor_tools/validate_job_logs.py",
+            "target": "gh_run_receptor_tools/validate_job_logs.py"
+          },
+          {
+            "bytes": 9742,
+            "kind": "code",
+            "sha256": "010ee776bfbfa8f5ee9804085d15fcfb2b66fbef6d4223e2e58448130bc65653",
+            "source": "gh_run_receptor_tools/validate_public_runs.py",
+            "target": "gh_run_receptor_tools/validate_public_runs.py"
+          }
+        ],
+        "imports_retired": true,
+        "loaded": [
+          "gh_run_receptor_tools",
+          "gh_run_receptor_tools.benchmark_capture_policies",
+          "gh_run_receptor_tools.check_distribution_inputs",
+          "gh_run_receptor_tools.devguide_reports",
+          "gh_run_receptor_tools.distribution_archives",
+          "gh_run_receptor_tools.installed_smoke",
+          "gh_run_receptor_tools.release_tools",
+          "gh_run_receptor_tools.sanitize_bundle",
+          "gh_run_receptor_tools.schema_validation",
+          "gh_run_receptor_tools.sync_gh_run_receptor_guide",
+          "gh_run_receptor_tools.test_inventory",
+          "gh_run_receptor_tools.validate_contracts",
+          "gh_run_receptor_tools.validate_public_runs"
+        ],
+        "namespace": "gh_run_receptor_tools",
+        "provider_files_sha256": {
+          "devtools/scripts/installed_imports.py": "ff23458015bb7ce83bc3eea36571c4294bed09fff948e8eb6d9bcb3a0615fa3c",
+          "devtools/scripts/installed_noarch.py": "3f34a46cab45f6987fc33da3a3d7f82178f395ea0980ac5b46b1d9b64ebffe57",
+          "devtools/scripts/installed_test_support.py": "11ae22606546b62f28536a7a4126e2bc25d676d55bc3b92d74b56e7094e0cf87"
+        },
+        "pytest_exit_code": 0,
+        "reason": "Portable unshipped tools and schema assertions, with explicit source/data inputs; no runtime source path or generic namespace binding.",
+        "resources_retired": true,
+        "schema": "molsyssuite.installed-test-support@1",
+        "scope": "unshipped test support; no installed/scientific/public artifact qualification",
+        "state": "verified-support"
+      }
+    },
+    {
+      "platform": "win-64",
+      "python": "3.13",
+      "native_artifact": {
+        "id": 13900439156,
+        "name": "installed-shared-support-win-64-py3.13",
+        "digest": "sha256:5b3e6b6ec4e7cd4a7a27784ace4e60896c79b3807f162b562c5f7383b0eedf11",
+        "size_in_bytes": 2908,
+        "workflow_run": {
+          "id": 43122309080,
+          "repository_id": 1357047998,
+          "head_repository_id": 1357047998,
+          "head_branch": "main",
+          "head_sha": "b53391064350cee6860c69e166ae0d6e8208f49e"
+        }
+      },
+      "tests": 732,
+      "pytest_exit_code": 0,
+      "before": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "win-64",
+        "python": "3.13",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "after": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "win-64",
+        "python": "3.13",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "shared_support": {
+        "binding": {
+          "context": {
+            "candidate_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+            "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+            "provider_sha": "95f693be10c9205ab9b912cb53453710a207bf45",
+            "qualification_sha": "b53391064350cee6860c69e166ae0d6e8208f49e",
+            "run_attempt": 1,
+            "run_id": 43122309080,
+            "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca"
+          },
+          "provider_state": "verified-commit-and-runner-files",
+          "scope": "artifact/qualification/run labels are caller context; not artifact verification",
+          "source_state": "verified-commit-and-selected-files"
+        },
+        "bytes": 100998,
+        "checks": 7,
+        "declaration_sha256": "6e60c30e9c05c6d7383935261a11acc97f229754847e9d6ebde4fc3ccc05a525",
+        "executed_tests": 732,
+        "files": [
+          {
+            "bytes": 73,
+            "kind": "code",
+            "sha256": "77bf87fcb90135b04f8ad606003e8f862445a104fcef4c89d80ff92f937d0088",
+            "source": "gh_run_receptor_tools/__init__.py",
+            "target": "gh_run_receptor_tools/__init__.py"
+          },
+          {
+            "bytes": 11038,
+            "kind": "code",
+            "sha256": "a00ef7b159c4833b8846906492fd5e06c3ab964ee17d0e511fa710d60df12c2c",
+            "source": "gh_run_receptor_tools/benchmark_capture_policies.py",
+            "target": "gh_run_receptor_tools/benchmark_capture_policies.py"
+          },
+          {
+            "bytes": 6154,
+            "kind": "code",
+            "sha256": "2a1e57afac858666be68af01591598770404074f54176044b111b9b06a07a15d",
+            "source": "gh_run_receptor_tools/check_distribution_inputs.py",
+            "target": "gh_run_receptor_tools/check_distribution_inputs.py"
+          },
+          {
+            "bytes": 1965,
+            "kind": "code",
+            "sha256": "d008286a220fcc937e00f915afbd3fa37e2ce1a576170520228740bdc919982f",
+            "source": "gh_run_receptor_tools/devguide_index.py",
+            "target": "gh_run_receptor_tools/devguide_index.py"
+          },
+          {
+            "bytes": 6272,
+            "kind": "code",
+            "sha256": "7e92a75e6b8b94607e37a874b28faa3f71a366db3f3af529426df596929a08e8",
+            "source": "gh_run_receptor_tools/devguide_issue.py",
+            "target": "gh_run_receptor_tools/devguide_issue.py"
+          },
+          {
+            "bytes": 7297,
+            "kind": "code",
+            "sha256": "c9ebc42a4072dc18115c0ea37e6efafda78853791b1cca1252a05b54c17d9275",
+            "source": "gh_run_receptor_tools/devguide_reports.py",
+            "target": "gh_run_receptor_tools/devguide_reports.py"
+          },
+          {
+            "bytes": 8719,
+            "kind": "code",
+            "sha256": "e6a1f2fdde8438750dac2d88aa1ceb7a12bb6b0cb0770935d9b3668e1669f9f8",
+            "source": "gh_run_receptor_tools/distribution_archives.py",
+            "target": "gh_run_receptor_tools/distribution_archives.py"
+          },
+          {
+            "bytes": 3812,
+            "kind": "code",
+            "sha256": "0c4b9f3f5c5bcf2e1e6836ee9554e2a64cb13bad90037c69af9e5941a5bbf565",
+            "source": "gh_run_receptor_tools/installed_smoke.py",
+            "target": "gh_run_receptor_tools/installed_smoke.py"
+          },
+          {
+            "bytes": 18251,
+            "kind": "code",
+            "sha256": "653dba1655bd5d008b3aebd071043cea945082b8b94ba94c5f36f22a49e6669d",
+            "source": "gh_run_receptor_tools/release_tools.py",
+            "target": "gh_run_receptor_tools/release_tools.py"
+          },
+          {
+            "bytes": 7813,
+            "kind": "code",
+            "sha256": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+            "source": "gh_run_receptor_tools/sanitize_bundle.py",
+            "target": "gh_run_receptor_tools/sanitize_bundle.py"
+          },
+          {
+            "bytes": 742,
+            "kind": "code",
+            "sha256": "3008337cc231144455b59c4edf73668a1b9d8ba050d8c8ec2b70bd8a3eb4db3a",
+            "source": "gh_run_receptor_tools/schema_validation.py",
+            "target": "gh_run_receptor_tools/schema_validation.py"
+          },
+          {
+            "bytes": 2234,
+            "kind": "code",
+            "sha256": "9c9001b7590ef827f51dc99074c59607514422f75b61de510e65abf2c9c83d5a",
+            "source": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py",
+            "target": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py"
+          },
+          {
+            "bytes": 4076,
+            "kind": "code",
+            "sha256": "23e75a060472e8069acefcc7a37ea656ad00fc70d7c15a6cc03b6dd28f9da752",
+            "source": "gh_run_receptor_tools/test_inventory.py",
+            "target": "gh_run_receptor_tools/test_inventory.py"
+          },
+          {
+            "bytes": 7127,
+            "kind": "code",
+            "sha256": "9c3eae2c09dff0d3a3ec10e47933f4ef37bf9f966739b25ecf3840e97d638883",
+            "source": "gh_run_receptor_tools/validate_contracts.py",
+            "target": "gh_run_receptor_tools/validate_contracts.py"
+          },
+          {
+            "bytes": 947,
+            "kind": "code",
+            "sha256": "d561a89663668f2d46c3a7c0b75ab1bd71998bc95de5ac93b28ecfa1ba505581",
+            "source": "gh_run_receptor_tools/validate_devguide.py",
+            "target": "gh_run_receptor_tools/validate_devguide.py"
+          },
+          {
+            "bytes": 4736,
+            "kind": "code",
+            "sha256": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+            "source": "gh_run_receptor_tools/validate_job_logs.py",
+            "target": "gh_run_receptor_tools/validate_job_logs.py"
+          },
+          {
+            "bytes": 9742,
+            "kind": "code",
+            "sha256": "010ee776bfbfa8f5ee9804085d15fcfb2b66fbef6d4223e2e58448130bc65653",
+            "source": "gh_run_receptor_tools/validate_public_runs.py",
+            "target": "gh_run_receptor_tools/validate_public_runs.py"
+          }
+        ],
+        "imports_retired": true,
+        "loaded": [
+          "gh_run_receptor_tools",
+          "gh_run_receptor_tools.benchmark_capture_policies",
+          "gh_run_receptor_tools.check_distribution_inputs",
+          "gh_run_receptor_tools.devguide_reports",
+          "gh_run_receptor_tools.distribution_archives",
+          "gh_run_receptor_tools.installed_smoke",
+          "gh_run_receptor_tools.release_tools",
+          "gh_run_receptor_tools.sanitize_bundle",
+          "gh_run_receptor_tools.schema_validation",
+          "gh_run_receptor_tools.sync_gh_run_receptor_guide",
+          "gh_run_receptor_tools.test_inventory",
+          "gh_run_receptor_tools.validate_contracts",
+          "gh_run_receptor_tools.validate_public_runs"
+        ],
+        "namespace": "gh_run_receptor_tools",
+        "provider_files_sha256": {
+          "devtools/scripts/installed_imports.py": "ff23458015bb7ce83bc3eea36571c4294bed09fff948e8eb6d9bcb3a0615fa3c",
+          "devtools/scripts/installed_noarch.py": "3f34a46cab45f6987fc33da3a3d7f82178f395ea0980ac5b46b1d9b64ebffe57",
+          "devtools/scripts/installed_test_support.py": "11ae22606546b62f28536a7a4126e2bc25d676d55bc3b92d74b56e7094e0cf87"
+        },
+        "pytest_exit_code": 0,
+        "reason": "Portable unshipped tools and schema assertions, with explicit source/data inputs; no runtime source path or generic namespace binding.",
+        "resources_retired": true,
+        "schema": "molsyssuite.installed-test-support@1",
+        "scope": "unshipped test support; no installed/scientific/public artifact qualification",
+        "state": "verified-support"
+      }
+    },
+    {
+      "platform": "win-64",
+      "python": "3.14",
+      "native_artifact": {
+        "id": 13901431932,
+        "name": "installed-shared-support-win-64-py3.14",
+        "digest": "sha256:02915040a84bb28b71d45ef8f422a1847274bf1aebdbfd77438f427c245e5a18",
+        "size_in_bytes": 2905,
+        "workflow_run": {
+          "id": 43122309080,
+          "repository_id": 1357047998,
+          "head_repository_id": 1357047998,
+          "head_branch": "main",
+          "head_sha": "b53391064350cee6860c69e166ae0d6e8208f49e"
+        }
+      },
+      "tests": 732,
+      "pytest_exit_code": 0,
+      "before": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "win-64",
+        "python": "3.14",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "after": {
+        "artifact_origin": "staged-file",
+        "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+        "package": "gh-run-receptor",
+        "platform": "win-64",
+        "python": "3.14",
+        "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca",
+        "state": "verified",
+        "subdir": "noarch",
+        "version": "1.5.0"
+      },
+      "shared_support": {
+        "binding": {
+          "context": {
+            "candidate_sha": "54a21ddb2d7488fef823cd490ca7d274fd4c6f54",
+            "filename": "gh-run-receptor-1.5.0-py_0.tar.bz2",
+            "provider_sha": "95f693be10c9205ab9b912cb53453710a207bf45",
+            "qualification_sha": "b53391064350cee6860c69e166ae0d6e8208f49e",
+            "run_attempt": 1,
+            "run_id": 43122309080,
+            "sha256": "d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca"
+          },
+          "provider_state": "verified-commit-and-runner-files",
+          "scope": "artifact/qualification/run labels are caller context; not artifact verification",
+          "source_state": "verified-commit-and-selected-files"
+        },
+        "bytes": 100998,
+        "checks": 7,
+        "declaration_sha256": "6e60c30e9c05c6d7383935261a11acc97f229754847e9d6ebde4fc3ccc05a525",
+        "executed_tests": 732,
+        "files": [
+          {
+            "bytes": 73,
+            "kind": "code",
+            "sha256": "77bf87fcb90135b04f8ad606003e8f862445a104fcef4c89d80ff92f937d0088",
+            "source": "gh_run_receptor_tools/__init__.py",
+            "target": "gh_run_receptor_tools/__init__.py"
+          },
+          {
+            "bytes": 11038,
+            "kind": "code",
+            "sha256": "a00ef7b159c4833b8846906492fd5e06c3ab964ee17d0e511fa710d60df12c2c",
+            "source": "gh_run_receptor_tools/benchmark_capture_policies.py",
+            "target": "gh_run_receptor_tools/benchmark_capture_policies.py"
+          },
+          {
+            "bytes": 6154,
+            "kind": "code",
+            "sha256": "2a1e57afac858666be68af01591598770404074f54176044b111b9b06a07a15d",
+            "source": "gh_run_receptor_tools/check_distribution_inputs.py",
+            "target": "gh_run_receptor_tools/check_distribution_inputs.py"
+          },
+          {
+            "bytes": 1965,
+            "kind": "code",
+            "sha256": "d008286a220fcc937e00f915afbd3fa37e2ce1a576170520228740bdc919982f",
+            "source": "gh_run_receptor_tools/devguide_index.py",
+            "target": "gh_run_receptor_tools/devguide_index.py"
+          },
+          {
+            "bytes": 6272,
+            "kind": "code",
+            "sha256": "7e92a75e6b8b94607e37a874b28faa3f71a366db3f3af529426df596929a08e8",
+            "source": "gh_run_receptor_tools/devguide_issue.py",
+            "target": "gh_run_receptor_tools/devguide_issue.py"
+          },
+          {
+            "bytes": 7297,
+            "kind": "code",
+            "sha256": "c9ebc42a4072dc18115c0ea37e6efafda78853791b1cca1252a05b54c17d9275",
+            "source": "gh_run_receptor_tools/devguide_reports.py",
+            "target": "gh_run_receptor_tools/devguide_reports.py"
+          },
+          {
+            "bytes": 8719,
+            "kind": "code",
+            "sha256": "e6a1f2fdde8438750dac2d88aa1ceb7a12bb6b0cb0770935d9b3668e1669f9f8",
+            "source": "gh_run_receptor_tools/distribution_archives.py",
+            "target": "gh_run_receptor_tools/distribution_archives.py"
+          },
+          {
+            "bytes": 3812,
+            "kind": "code",
+            "sha256": "0c4b9f3f5c5bcf2e1e6836ee9554e2a64cb13bad90037c69af9e5941a5bbf565",
+            "source": "gh_run_receptor_tools/installed_smoke.py",
+            "target": "gh_run_receptor_tools/installed_smoke.py"
+          },
+          {
+            "bytes": 18251,
+            "kind": "code",
+            "sha256": "653dba1655bd5d008b3aebd071043cea945082b8b94ba94c5f36f22a49e6669d",
+            "source": "gh_run_receptor_tools/release_tools.py",
+            "target": "gh_run_receptor_tools/release_tools.py"
+          },
+          {
+            "bytes": 7813,
+            "kind": "code",
+            "sha256": "fc323bcb15818191d86ae1a1d684ed8ee485e37193cb8ecfa0c01cf2bca44293",
+            "source": "gh_run_receptor_tools/sanitize_bundle.py",
+            "target": "gh_run_receptor_tools/sanitize_bundle.py"
+          },
+          {
+            "bytes": 742,
+            "kind": "code",
+            "sha256": "3008337cc231144455b59c4edf73668a1b9d8ba050d8c8ec2b70bd8a3eb4db3a",
+            "source": "gh_run_receptor_tools/schema_validation.py",
+            "target": "gh_run_receptor_tools/schema_validation.py"
+          },
+          {
+            "bytes": 2234,
+            "kind": "code",
+            "sha256": "9c9001b7590ef827f51dc99074c59607514422f75b61de510e65abf2c9c83d5a",
+            "source": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py",
+            "target": "gh_run_receptor_tools/sync_gh_run_receptor_guide.py"
+          },
+          {
+            "bytes": 4076,
+            "kind": "code",
+            "sha256": "23e75a060472e8069acefcc7a37ea656ad00fc70d7c15a6cc03b6dd28f9da752",
+            "source": "gh_run_receptor_tools/test_inventory.py",
+            "target": "gh_run_receptor_tools/test_inventory.py"
+          },
+          {
+            "bytes": 7127,
+            "kind": "code",
+            "sha256": "9c3eae2c09dff0d3a3ec10e47933f4ef37bf9f966739b25ecf3840e97d638883",
+            "source": "gh_run_receptor_tools/validate_contracts.py",
+            "target": "gh_run_receptor_tools/validate_contracts.py"
+          },
+          {
+            "bytes": 947,
+            "kind": "code",
+            "sha256": "d561a89663668f2d46c3a7c0b75ab1bd71998bc95de5ac93b28ecfa1ba505581",
+            "source": "gh_run_receptor_tools/validate_devguide.py",
+            "target": "gh_run_receptor_tools/validate_devguide.py"
+          },
+          {
+            "bytes": 4736,
+            "kind": "code",
+            "sha256": "acd97a1d6a463312f5189c241eaa1c50826fef2950066bef2fa894d6036af387",
+            "source": "gh_run_receptor_tools/validate_job_logs.py",
+            "target": "gh_run_receptor_tools/validate_job_logs.py"
+          },
+          {
+            "bytes": 9742,
+            "kind": "code",
+            "sha256": "010ee776bfbfa8f5ee9804085d15fcfb2b66fbef6d4223e2e58448130bc65653",
+            "source": "gh_run_receptor_tools/validate_public_runs.py",
+            "target": "gh_run_receptor_tools/validate_public_runs.py"
+          }
+        ],
+        "imports_retired": true,
+        "loaded": [
+          "gh_run_receptor_tools",
+          "gh_run_receptor_tools.benchmark_capture_policies",
+          "gh_run_receptor_tools.check_distribution_inputs",
+          "gh_run_receptor_tools.devguide_reports",
+          "gh_run_receptor_tools.distribution_archives",
+          "gh_run_receptor_tools.installed_smoke",
+          "gh_run_receptor_tools.release_tools",
+          "gh_run_receptor_tools.sanitize_bundle",
+          "gh_run_receptor_tools.schema_validation",
+          "gh_run_receptor_tools.sync_gh_run_receptor_guide",
+          "gh_run_receptor_tools.test_inventory",
+          "gh_run_receptor_tools.validate_contracts",
+          "gh_run_receptor_tools.validate_public_runs"
+        ],
+        "namespace": "gh_run_receptor_tools",
+        "provider_files_sha256": {
+          "devtools/scripts/installed_imports.py": "ff23458015bb7ce83bc3eea36571c4294bed09fff948e8eb6d9bcb3a0615fa3c",
+          "devtools/scripts/installed_noarch.py": "3f34a46cab45f6987fc33da3a3d7f82178f395ea0980ac5b46b1d9b64ebffe57",
+          "devtools/scripts/installed_test_support.py": "11ae22606546b62f28536a7a4126e2bc25d676d55bc3b92d74b56e7094e0cf87"
+        },
+        "pytest_exit_code": 0,
+        "reason": "Portable unshipped tools and schema assertions, with explicit source/data inputs; no runtime source path or generic namespace binding.",
+        "resources_retired": true,
+        "schema": "molsyssuite.installed-test-support@1",
+        "scope": "unshipped test support; no installed/scientific/public artifact qualification",
+        "state": "verified-support"
+      }
+    }
+  ],
+  "scope": "Twelve actual native installed cells against the same original staged archive; all 732 product/integration tests execute per cell, seven shared support checks and before/after artifact/runtime/resources verified. Tooling has separate exact-source native acceptance. Not yet public promotion."
+}

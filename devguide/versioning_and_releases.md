@@ -625,3 +625,99 @@ candidate src watch code were checked independently; it does not archive the
 GitHub wheel/sdist. Historical 1.3.0 files, tags, failure history and receipts are
 unchanged. Canonical 1.4.0 guide publication is separate from consumer-copy or
 pin adoption; the central notice owns that follow-up.
+
+
+## Verified release 1.5.0 — 2026-11-11
+
+Lightweight tag `1.5.0` identifies product source
+`54a21ddb2d7488fef823cd490ca7d274fd4c6f54`. Issues #78–#83 are resolved before
+publication: initial Conda/artifact acquisition failures remain visible before
+later diagnostics, terminal child-state inconsistencies are warned without
+changing run/job truth, original hosted-runner annotations supply explicitly
+unverified hints, and runtime/publisher policy reviews are complete. All nine
+frozen schema files, Python 3.11–3.14, the stdlib-only runtime, external gh floor
+and process-status mapping remain. Shared SDK is reviewed source
+`95f693be10c9205ab9b912cb53453710a207bf45`; external Conda action is v2.3.0
+`87c70b1443d5f22d738ee3ddf812bdbe0152f6c2`. Historical releases retain their
+original source, files, failed attempts, qualification and SDK identities.
+
+The [public receipt](evidence/release_1_5_0_public.json) and
+[original-file qualification](evidence/conda_1_5_0_qualification.json) own complete
+native run/attempt/job/step, archive, digest, origin and scope evidence. Source
+receiving passes nine workflows, including twelve native source cells in
+43119743508, with 924 local passes and one explicit Conda-only source skip.
+All 465 functions remain scoped: 332 product, 111 tooling, 22 integration; the
+437-function original baseline retains its complete disposition. After public
+tag creation, exact-tag routine 43123211502 and both governance workflows also
+pass. This is not mislabeled as twelve public-wheel installations.
+
+A task-owned clone's temporary exact tag builds inspected wheel/sdist before
+authoritative tag creation. A clean isolated wheel executes the shared installed
+selection: 731 passes, one Conda-record-only skip, 193 separately received tooling
+deselections, verified prefix/runtime/resources and support retirement. The first
+rehearsal lacked its declared SDK input and failed eight tests; corrected input
+passes against the same wheel. Only the local renderer changes to --receptor=llm;
+native installed execution retains the committed CI renderer and selection.
+
+Original Conda file `gh-run-receptor-1.5.0-py_0.tar.bz2`, SHA-256
+`d2684bde9ff51c5c9b12a5f79f2beab5288c69af984ce1d92c0ced39bc4246ca`, is built
+once and staged in 43121437889. Administrative workflow source
+`b53391064350cee6860c69e166ae0d6e8208f49e` remains distinct from the original
+product source. Installed run 43122309080 verifies all twelve Linux/macOS ARM64/
+Windows × Python 3.11–3.14 cells against those same bytes: 732 executed tests per
+cell, seven shared support checks, before/after installed file/runtime/resource
+verification, and actual import/resource retirement. Thirteen native jobs, the
+source binding and twelve digest-verified per-cell receipt ZIPs pass the shared
+matrix verifier and independent receipt checks. Promotion 43123212187 adds the
+normal public label to the same file; no rebuild or replacement supplies credit.
+
+Independent public main-label/download/solver-index verification passes. A normal
+public-channel user installation contains 25 records, Python 3.14.10 and gh 2.103.3,
+the exact public main URL/build/digest, prefix-owned commands, all nine schemas,
+matching runtime/generated/metadata 1.5.0, successful version/help and usage 64.
+The initial client did not see the new version until bounded metadata freshness
+revalidation; a subsequent temporary-filesystem transaction rolled back on host
+quota. Only concluded task resources were removed. The invalid zero-record
+prefix was unregistered through the manager API after normal manager removal
+refused it; the ordinary default public solve/install then succeeds on the
+repository/cache filesystem with normal hardlinks. No shared cache purge, source
+substitution, dependency relaxation or replacement artifact is used. The first
+smoke's caller PATH correctly failed the prefix-gh guard; the actual prefix PATH
+and isolated imports pass. The verified user environment is removed through
+Conda after evidence retention. None of the failed rehearsals is passing credit.
+
+Draft-first exact-tag GitHub publication 43123215913 passes. Public release
+[1.5.0](https://github.com/uibcdf/gh-run-receptor/releases/tag/1.5.0), published
+2026-11-11T23:54:05Z, contains exactly these independently downloaded assets:
+
+| Asset | Bytes | SHA-256 |
+| --- | ---: | --- |
+| `gh_run_receptor-1.5.0-py3-none-any.whl` | 102154 | `f966682ca13a960dd0d0fdfc5fc2aa66f13b960b5f6429d7274ec57820acdd08` |
+| `gh_run_receptor-1.5.0.tar.gz` | 183973 | `63f48acdb1bb3c2a2d140704d5606594158467555f389398d589808964c808d1` |
+| `SHA256SUMS` | 200 | `95e5ef770d2da555f3e6a4b6b3cdae4e411650767d045324d4e9f0b85a0aadd3` |
+
+Independent release verification checks exact tag/source, metadata, API size/
+digest, checksum manifest, bounded wheel/sdist contents and frozen schemas.
+A fresh public-wheel prefix on Linux/Python 3.14.7 verifies 28 tracked runtime
+Python files against the tag, generated version separately, all nine schemas,
+namespace exclusion, actual command help/version/usage and three original
+failure controls. An isolated extension resolves to the public exact tag/source
+and passes help/version/usage and the original #83 attempt 2 acquisition failure
+with checksum-bound gh 2.48.0. The caller's existing extension remains intact.
+
+Zenodo verification 43123675753 reports actual `verified` state, version DOI
+[10.5281/zenodo.24148257](https://doi.org/10.5281/zenodo.24148257), unchanged
+concept DOI 10.5281/zenodo.22843377. Independent API/download checks confirm
+exactly one `uibcdf/gh-run-receptor-1.5.0.zip`, 1130501 bytes,
+MD5 `0ec496d770bb907833cd6d3b8853c2fd`, SHA-256
+`3ffa2609550550708fc023c53d797ca5e1204a334fc4813d9f079b701b266dd9`. Its ZIP
+comment and every one of 442 tracked Git blobs match the exact source. This is
+a source snapshot; the GitHub wheel/sdist are not claimed as Zenodo assets.
+
+The canonical consumer guide and current installation pins are updated only
+after observed delivery. MolSysSuite #191 receives the exact guide revision/hash,
+public artifact/native evidence and separately owned registry/consumer work.
+Explicit runtime and publisher review confirmations link back to central #137
+and #87. No consumer guide copy/pin, sibling worktree or registry record is
+automatically changed. Final unskipped closeout-head CI is inspected before
+closing #84 and its result is recorded in that public closure.

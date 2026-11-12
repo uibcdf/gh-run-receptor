@@ -78,8 +78,7 @@ faithfully.
 
 ## Diagnosing acquisition and inconsistent metadata
 
-The following improvements are prepared for candidate 1.5.0; public 1.4.0
-retains its original diagnostic behavior until the new release is delivered.
+The following improvements are delivered in public release 1.5.0.
 
 Failed-job summaries retain specific Conda transport, micromamba binary and
 missing artifact-download messages before later cleanup or empty-upload
